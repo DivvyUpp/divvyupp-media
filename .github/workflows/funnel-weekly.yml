@@ -1,0 +1,63 @@
+name: Funnel weekly fetch
+
+# Pulls last week's DivvyUpp funnel (instagram + all sources) from the read-only
+# export endpoint before the Monday Reels run (07:34 ET), and commits it to
+# funnel/. Spec: DivvyUpp/divvyupp .spec-workflow/specs/read-only-funnel-export.
+on:
+  schedule:
+    - cron: "40 10 * * 1" # 05:40 EST / 06:40 EDT, Mondays
+  workflow_dispatch:
+    inputs:
+      from:
+        description: "Custom start date YYYY-MM-DD (leave blank for last Mon-Sun ET)"
+        required: false
+      to:
+        description: "Custom end date YYYY-MM-DD"
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: funnel-weekly
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Test fetch script
+        run: |
+          pip install -q pytest
+          cd scripts && python -m pytest -q test_fetch_funnel.py
+
+      - name: Fetch funnel
+        env:
+          FUNNEL_EXPORT_TOKEN: ${{ secrets.FUNNEL_EXPORT_TOKEN }}
+          FUNNEL_API_BASE: ${{ vars.FUNNEL_API_BASE }}
+          FROM_DATE: ${{ github.event.inputs.from }}
+          TO_DATE: ${{ github.event.inputs.to }}
+        run: |
+          if [ -n "$FUNNEL_EXPORT_TOKEN" ]; then echo "::add-mask::$FUNNEL_EXPORT_TOKEN"; fi
+          python scripts/fetch_funnel.py
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add funnel/
+          if git diff --cached --quiet; then
+            echo "No funnel changes to commit"
+            exit 0
+          fi
+          git commit -m "funnel: weekly export $(date -u +%F)"
+          if ! git push; then
+            git pull --rebase
+            git push
+          fi

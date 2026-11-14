@@ -29,19 +29,29 @@ with a mortgage and kids who earn well but have nothing left at month end.
    `get_fields`: `media_id, media_views, media_reach, media_reel_skip_rate, media_reel_avg_watch_time,
    media_shares, media_saved, media_reel_total_interactions`, a date range wide enough to include the post).
    Fill the matching rows in `experiment-log.csv` (avg watch in seconds).
-3. Decide: the main signal is **skip rate (lower is better)** then **average watch time**. With little data,
+3. Read the funnel. The GitHub Action `Funnel weekly fetch` writes last Monday–Sunday (ET) to
+   `funnel/<ISO-year>-W<ISO-week>.json` at 06:40 ET. Open the newest file whose `from`/`to` cover last
+   week. If it is missing or older than last week, say **"funnel data unavailable"** in the report and do
+   not guess any numbers. Otherwise, from `instagram.days[]` (one row per day, `stages` gives the order of
+   `reach`), take per day: landing (`ig_visits`), `get_started_clicked` (`get_started`), `signed_up`
+   (`signups`) and `bank_linked` (`bank_links`). Write them into `experiment-log.csv` on the row of the
+   Reel posted that day (`posted_date`), and show the week as Reel views → Instagram visits → Get started
+   → sign-ups → bank connected. Remember older Reels also drive traffic: attribution is by day, not per
+   Reel. Use `all_sources` only for context (e.g. total sign-ups this week).
+4. Decide: the main signal is **skip rate (lower is better)** then **average watch time**; sign-ups and
+   Get started from step 3 are the business result and win ties. With little data,
    say so plainly rather than over-reading one post. Write a short `decision` for last week's rows
    (keep / kill / iterate) and why.
-4. Write **5 new hook specs** in `hooks/<YYYY-MM-DD>-<a..e>.json` (format in `pipeline/make_reel.py`).
+5. Write **5 new hook specs** in `hooks/<YYYY-MM-DD>-<a..e>.json` (format in `pipeline/make_reel.py`).
    Each tests one idea against the current best (pain question, founder result, guarantee-first,
    "before you spend", no-budget). Keep text short enough for 1-4 big lines.
-5. Check each with `python3 pipeline/make_reel.py hooks/<id>.json --check` and look at the still; then render
+6. Check each with `python3 pipeline/make_reel.py hooks/<id>.json --check` and look at the still; then render
    all 5 (`python3 pipeline/make_reel.py hooks/<id>.json`).
-6. Add queue entries with `"status": "pending_review"`, a caption per video (same structure as the first
+7. Add queue entries with `"status": "pending_review"`, a caption per video (same structure as the first
    post), and proposed `post_date`s, one per day Tuesday to Saturday of this week, posted around 7pm ET.
-7. Send Srini the 5 videos (SendUserFile) plus a short note: last week's numbers in one line each, what each
+8. Send Srini the 5 videos (SendUserFile) plus a short note: last week's numbers in one line each (Reel stats plus the funnel from step 3), what each
    new hook tests, and the proposed captions and dates. Ask him to approve, reject or edit each.
-8. When he replies: apply edits (re-render if the hook changed and send it again), set approved entries to
+9. When he replies: apply edits (re-render if the hook changed and send it again), set approved entries to
    `"approved"`, drop rejected ones, then commit and push `hooks/`, approved `reels/`, `queue.json` and
    `experiment-log.csv`. Confirm one Pages link loads before finishing.
 
