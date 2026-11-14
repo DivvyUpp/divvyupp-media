@@ -1,0 +1,52 @@
+# DivvyUpp Reels loop: playbook for scheduled runs
+
+This repo is the memory of the weekly content loop. Scheduled Claude runs read this file first.
+Videos are served publicly by GitHub Pages at `https://srinivasraov.github.io/divvyupp-media/<path>`.
+
+## Ground rules (never break these)
+- **Nothing is posted to Instagram unless its queue entry has `"status": "approved"`**, set only after Srini
+  watched the actual video and said yes in chat. Videos awaiting review are sent to him as files and are
+  **not pushed to this public repo** until approved.
+- Post only through the Windsor.ai for Social Media connector: connector `instagram`, account `17841422626862357`
+  (@getdivvyupp), action `create_video_post`, `share_to_feed: true`.
+- At most one post per day. If anything fails, stop and tell Srini; do not retry a publish blindly (check with
+  Windsor `get_data` for a media created today before any retry, so nothing posts twice).
+- Brand: warm off-white background, orange #E04A1A, near-black #15100F, Plus Jakarta Sans. Voice: Kokoro `af_heart`.
+- No competitor names, no maths equations on screen, no invented testimonials. The founder figure is
+  "about $1,000 a month" saved; don't inflate it.
+
+## The offer and message (what every Reel sells)
+Fixed bills stay fixed. What's left is flexible money. DivvyUpp has you save first (you choose the amount),
+then gives a daily and weekly guide for the rest that adjusts when you overspend, before you spend, not after.
+No budgeting homework: it sorts transactions into fixed or flexible automatically. 90-day guarantee: save more,
+spend less, or both, or the subscription is refunded up to $30 (terms apply). Audience: two-income households
+with a mortgage and kids who earn well but have nothing left at month end.
+
+## Monday run: plan and produce
+1. `bash pipeline/setup.sh` (once per machine).
+2. Pull stats for every `posted` queue entry through Windsor `get_data` (connector `instagram`, fields from
+   `get_fields`: `media_id, media_views, media_reach, media_reel_skip_rate, media_reel_avg_watch_time,
+   media_shares, media_saved, media_reel_total_interactions`, a date range wide enough to include the post).
+   Fill the matching rows in `experiment-log.csv` (avg watch in seconds).
+3. Decide: the main signal is **skip rate (lower is better)** then **average watch time**. With little data,
+   say so plainly rather than over-reading one post. Write a short `decision` for last week's rows
+   (keep / kill / iterate) and why.
+4. Write **5 new hook specs** in `hooks/<YYYY-MM-DD>-<a..e>.json` (format in `pipeline/make_reel.py`).
+   Each tests one idea against the current best (pain question, founder result, guarantee-first,
+   "before you spend", no-budget). Keep text short enough for 1-4 big lines.
+5. Check each with `python3 pipeline/make_reel.py hooks/<id>.json --check` and look at the still; then render
+   all 5 (`python3 pipeline/make_reel.py hooks/<id>.json`).
+6. Add queue entries with `"status": "pending_review"`, a caption per video (same structure as the first
+   post), and proposed `post_date`s, one per day starting Tuesday, 7pm ET.
+7. Send Srini the 5 videos (SendUserFile) plus a short note: last week's numbers in one line each, what each
+   new hook tests, and the proposed captions and dates. Ask him to approve, reject or edit each.
+8. When he replies: apply edits (re-render if the hook changed and send it again), set approved entries to
+   `"approved"`, drop rejected ones, then commit and push `hooks/`, approved `reels/`, `queue.json` and
+   `experiment-log.csv`. Confirm one Pages link loads before finishing.
+
+## Daily run: post one approved Reel
+1. Read `queue.json`. Find the first entry with `"status": "approved"` and `post_date` equal to today (ET).
+   If none, finish silently.
+2. Publish it with Windsor `create_video_post` (video_url = Pages URL of `file`, caption from the entry).
+3. Set `"status": "posted"` and `media_id`, add a row to `experiment-log.csv`, commit and push.
+4. Send Srini one line: what posted and its link (`media_permalink` via `get_data` if available).
