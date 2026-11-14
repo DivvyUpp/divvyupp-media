@@ -39,8 +39,8 @@ def opener_from(responses, seen=None):
     return _open
 
 
-BODY_IG = {"timezone": "America/New_York", "source_filter": "instagram", "days": []}
-BODY_ALL = {"timezone": "America/New_York", "source_filter": None, "days": []}
+BODY_IG = {"generated_at": "2026-11-16T10:40:01Z", "timezone": "America/New_York", "source_filter": "instagram", "days": []}
+BODY_ALL = {"generated_at": "2026-11-16T10:40:02Z", "timezone": "America/New_York", "source_filter": None, "days": []}
 ENV = {"FUNNEL_EXPORT_TOKEN": TOKEN}
 MONDAY = dt.date(2026, 11, 16)
 NOW = dt.datetime(2026, 11, 16, 10, 40, tzinfo=dt.timezone.utc)
@@ -98,7 +98,9 @@ def test_unchanged_content_is_not_rewritten(tmp_path, capsys):
     p = tmp_path / "funnel" / "2026-W46.json"
     before = p.read_text()
     later = NOW + dt.timedelta(hours=1)
-    rc = ff.run(ENV, str(tmp_path), MONDAY, opener_from([BODY_IG, BODY_ALL]), sleep=lambda s: None, now=later)
+    # The API stamps a fresh generated_at on every response; same numbers => unchanged.
+    ig2, all2 = dict(BODY_IG, generated_at="2026-11-16T11:40:01Z"), dict(BODY_ALL, generated_at="2026-11-16T11:40:02Z")
+    rc = ff.run(ENV, str(tmp_path), MONDAY, opener_from([ig2, all2]), sleep=lambda s: None, now=later)
     assert rc == 0 and p.read_text() == before
     assert "unchanged" in capsys.readouterr().out
 
@@ -118,3 +120,19 @@ def test_custom_range_writes_custom_file(tmp_path):
 def test_bad_configuration_fails_without_requests(tmp_path, env):
     rc = ff.run(env, str(tmp_path), MONDAY, opener_from([]), sleep=lambda s: None, now=NOW)
     assert rc == 1
+
+
+def test_changed_numbers_are_rewritten(tmp_path):
+    ff.run(ENV, str(tmp_path), MONDAY, opener_from([BODY_IG, BODY_ALL]), sleep=lambda s: None, now=NOW)
+    changed = dict(BODY_IG, days=[{"date": "2026-11-09", "sources": []}])
+    rc = ff.run(ENV, str(tmp_path), MONDAY, opener_from([changed, BODY_ALL]), sleep=lambda s: None, now=NOW)
+    assert rc == 0
+    assert json.loads((tmp_path / "funnel" / "2026-W46.json").read_text())["instagram"]["days"]
+
+
+def test_non_json_200_fails_cleanly(tmp_path, capsys):
+    def _open(req, timeout):
+        return FakeResp(b"<html>oops</html>")
+    rc = ff.run(ENV, str(tmp_path), MONDAY, _open, sleep=lambda s: None, now=NOW)
+    assert rc == 1
+    assert "not JSON" in capsys.readouterr().err

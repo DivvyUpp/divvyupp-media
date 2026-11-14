@@ -62,7 +62,11 @@ def fetch(base, token, start, end, source=None, opener=urllib.request.urlopen, s
     for attempt in range(MAX_RETRIES + 1):
         try:
             with opener(req, timeout=TIMEOUT_S) as resp:
-                return json.loads(resp.read().decode("utf-8"))
+                body = resp.read()
+            try:
+                return json.loads(body.decode("utf-8"))
+            except (UnicodeDecodeError, ValueError):
+                raise FetchError(f"{source or 'all sources'}: response was not JSON") from None
         except urllib.error.HTTPError as e:
             retryable = e.code == 429 or e.code >= 500
             if not retryable or attempt == MAX_RETRIES:
@@ -73,6 +77,16 @@ def fetch(base, token, start, end, source=None, opener=urllib.request.urlopen, s
                 raise FetchError(f"{source or 'all sources'}: network error ({type(e).__name__})") from None
             sleep(float(2 ** attempt))
     raise FetchError("unreachable")  # pragma: no cover
+
+
+def comparable(doc):
+    """The doc minus timestamps that change on every fetch (ours and the API's),
+    so an identical week of numbers is recognised as unchanged."""
+    out = {k: v for k, v in doc.items() if k != "fetched_at"}
+    for key in ("instagram", "all_sources"):
+        if isinstance(out.get(key), dict):
+            out[key] = {k: v for k, v in out[key].items() if k != "generated_at"}
+    return out
 
 
 def run(env, root, today, opener=urllib.request.urlopen, sleep=time.sleep, now=None):
@@ -114,7 +128,7 @@ def run(env, root, today, opener=urllib.request.urlopen, sleep=time.sleep, now=N
     if os.path.exists(path):
         with open(path, encoding="utf-8") as fh:
             old = json.load(fh)
-        if {k: v for k, v in old.items() if k != "fetched_at"} == {k: v for k, v in doc.items() if k != "fetched_at"}:
+        if comparable(old) == comparable(doc):
             print(f"{path} unchanged")
             return 0
     with open(path, "w", encoding="utf-8") as fh:

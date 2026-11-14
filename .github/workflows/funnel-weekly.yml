@@ -48,6 +48,9 @@ jobs:
           python scripts/fetch_funnel.py
 
       - name: Commit
+        env:
+          FROM_DATE: ${{ github.event.inputs.from }}
+          TO_DATE: ${{ github.event.inputs.to }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -56,7 +59,12 @@ jobs:
             echo "No funnel changes to commit"
             exit 0
           fi
-          git commit -m "funnel: weekly export $(date -u +%F)"
+          if [ -n "$FROM_DATE" ]; then
+            MSG="funnel: custom export $FROM_DATE to $TO_DATE"
+          else
+            MSG="funnel: weekly export $(date -u +%F)"
+          fi
+          git commit -m "$MSG"
           if ! git push; then
             git pull --rebase
             git push
