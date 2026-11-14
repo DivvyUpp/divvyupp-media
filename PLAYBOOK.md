@@ -1,7 +1,7 @@
 # DivvyUpp Reels loop: playbook for scheduled runs
 
 This repo is the memory of the weekly content loop. Scheduled Claude runs read this file first.
-Videos are served publicly by GitHub Pages at `https://srinivasraov.github.io/divvyupp-media/<path>`.
+Videos are served publicly by GitHub Pages at `https://divvyupp.github.io/divvyupp-media/<path>`.
 
 ## Ground rules (never break these)
 - **Nothing is posted to Instagram unless its queue entry has `"status": "approved"`**, set only after Srini
