@@ -9,7 +9,8 @@ Videos are served publicly by GitHub Pages at `https://srinivasraov.github.io/di
   **not pushed to this public repo** until approved.
 - Post only through the Windsor.ai for Social Media connector: connector `instagram`, account `17841422626862357`
   (@getdivvyupp), action `create_video_post`, `share_to_feed: true`.
-- At most one post per day. If anything fails, stop and tell Srini; do not retry a publish blindly (check with
+- @getdivvyupp is the single main account for all DivvyUpp content (the personal @srinithinks account is retired).
+- Cadence: 5 Reels a week, Tuesday to Saturday, one per day. At most one post per day. If anything fails, stop and tell Srini; do not retry a publish blindly (check with
   Windsor `get_data` for a media created today before any retry, so nothing posts twice).
 - Brand: warm off-white background, orange #E04A1A, near-black #15100F, Plus Jakarta Sans. Voice: Kokoro `af_heart`.
 - No competitor names, no maths equations on screen, no invented testimonials. The founder figure is
@@ -37,7 +38,7 @@ with a mortgage and kids who earn well but have nothing left at month end.
 5. Check each with `python3 pipeline/make_reel.py hooks/<id>.json --check` and look at the still; then render
    all 5 (`python3 pipeline/make_reel.py hooks/<id>.json`).
 6. Add queue entries with `"status": "pending_review"`, a caption per video (same structure as the first
-   post), and proposed `post_date`s, one per day starting Tuesday, 7pm ET.
+   post), and proposed `post_date`s, one per day Tuesday to Saturday of this week, posted around 7pm ET.
 7. Send Srini the 5 videos (SendUserFile) plus a short note: last week's numbers in one line each, what each
    new hook tests, and the proposed captions and dates. Ask him to approve, reject or edit each.
 8. When he replies: apply edits (re-render if the hook changed and send it again), set approved entries to
