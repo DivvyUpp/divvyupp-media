@@ -30,7 +30,7 @@ with a mortgage and kids who earn well but have nothing left at month end.
    media_shares, media_saved, media_reel_total_interactions`, a date range wide enough to include the post).
    Fill the matching rows in `experiment-log.csv` (avg watch in seconds).
 3. Read the funnel. The GitHub Action `Funnel weekly fetch` writes last Monday–Sunday (ET) to
-   `funnel/<ISO-year>-W<ISO-week>.json` at 06:40 ET. Open the newest file whose `from`/`to` cover last
+   `funnel/<ISO-year>-W<ISO-week>.json` at 6am ET. Open the newest file whose `from`/`to` cover last
    week. If it is missing or older than last week, say **"funnel data unavailable"** in the report and do
    not guess any numbers. Otherwise, from `instagram.days[]` (one row per day, `stages` gives the order of
    `reach`), take per day: landing (`ig_visits`), `get_started_clicked` (`get_started`), `signed_up`
@@ -54,7 +54,7 @@ with a mortgage and kids who earn well but have nothing left at month end.
 6. Check each with `python3 pipeline/make_reel.py hooks/<id>.json --check` and look at the still; then render
    all 5 (`python3 pipeline/make_reel.py hooks/<id>.json`).
 7. Add queue entries with `"status": "pending_review"`, a caption per video (same structure as the first
-   post), and proposed `post_date`s, one per day Tuesday to Saturday of this week, posted around 7pm ET.
+   post), and proposed `post_date`s, one per day Tuesday to Saturday of this week, posted at 7pm ET.
 8. Send Srini the 5 videos (SendUserFile) plus a short note: last week's numbers in one line each (Reel stats plus the funnel from step 3), then a short actual-vs-target scorecard from step 3b, what each
    new hook tests, and the proposed captions and dates. Ask him to approve, reject or edit each.
 9. When he replies: apply edits (re-render if the hook changed and send it again), set approved entries to

@@ -1,11 +1,11 @@
 name: Funnel weekly fetch
 
 # Pulls last week's DivvyUpp funnel (instagram + all sources) from the read-only
-# export endpoint before the Monday Reels run (07:34 ET), and commits it to
+# export endpoint before the Monday Reels run (08:00 ET), and commits it to
 # funnel/. Spec: DivvyUpp/divvyupp .spec-workflow/specs/read-only-funnel-export.
 on:
   schedule:
-    - cron: "40 10 * * 1" # 05:40 EST / 06:40 EDT, Mondays
+    - cron: "0 11 * * 1" # 06:00 EST / 07:00 EDT, Mondays
   workflow_dispatch:
     inputs:
       from:
