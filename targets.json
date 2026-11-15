@@ -1,0 +1,141 @@
+{
+  "_about": [
+    "Weekly targets set with Srini on 2026-11-14. Compare each Monday report's actuals against the row for last week.",
+    "Basis: accounts under 5K followers average ~300 views per Reel; ~1% of viewers visit (estimate); fintech landing pages convert ~4.6%; small-account skip rate ~65.5%.",
+    "ig_visits = Instagram-attributed landing visits. signups/bank_links count all sources, because the 3-month goal (25-50 active households, 10-20 paying by mid-Feb) needs other channels too (communities, comparison pages, referrals, App Store).",
+    "Milestones: month 1 (to W50) ~70 IG visits, ~6 signups, ~3 bank links; month 3 (to 2027-W06) ~30 bank-linked households and ~15 paying.",
+    "Targets are a yardstick, not a promise. Change them only with Srini's agreement, and note why in the change."
+  ],
+  "weeks": [
+    {
+      "week": "2026-W47",
+      "reels_posted": 5,
+      "avg_views_per_reel": 300,
+      "skip_rate_pct_max": 65,
+      "ig_visits": 10,
+      "signups_all_sources": 1,
+      "bank_links_all_sources": 0,
+      "paying_customers_cumulative": 0
+    },
+    {
+      "week": "2026-W48",
+      "reels_posted": 5,
+      "avg_views_per_reel": 350,
+      "skip_rate_pct_max": 65,
+      "ig_visits": 15,
+      "signups_all_sources": 1,
+      "bank_links_all_sources": 1,
+      "paying_customers_cumulative": 0
+    },
+    {
+      "week": "2026-W49",
+      "reels_posted": 5,
+      "avg_views_per_reel": 400,
+      "skip_rate_pct_max": 65,
+      "ig_visits": 20,
+      "signups_all_sources": 2,
+      "bank_links_all_sources": 1,
+      "paying_customers_cumulative": 0
+    },
+    {
+      "week": "2026-W50",
+      "reels_posted": 5,
+      "avg_views_per_reel": 450,
+      "skip_rate_pct_max": 65,
+      "ig_visits": 25,
+      "signups_all_sources": 2,
+      "bank_links_all_sources": 1,
+      "paying_customers_cumulative": 1
+    },
+    {
+      "week": "2026-W51",
+      "reels_posted": 5,
+      "avg_views_per_reel": 500,
+      "skip_rate_pct_max": 65,
+      "ig_visits": 30,
+      "signups_all_sources": 3,
+      "bank_links_all_sources": 2,
+      "paying_customers_cumulative": 2
+    },
+    {
+      "week": "2026-W52",
+      "reels_posted": 5,
+      "avg_views_per_reel": 550,
+      "skip_rate_pct_max": 65,
+      "ig_visits": 35,
+      "signups_all_sources": 3,
+      "bank_links_all_sources": 2,
+      "paying_customers_cumulative": 3
+    },
+    {
+      "week": "2026-W53",
+      "reels_posted": 5,
+      "avg_views_per_reel": 600,
+      "skip_rate_pct_max": 65,
+      "ig_visits": 40,
+      "signups_all_sources": 4,
+      "bank_links_all_sources": 2,
+      "paying_customers_cumulative": 5
+    },
+    {
+      "week": "2027-W01",
+      "reels_posted": 5,
+      "avg_views_per_reel": 650,
+      "skip_rate_pct_max": 65,
+      "ig_visits": 45,
+      "signups_all_sources": 4,
+      "bank_links_all_sources": 3,
+      "paying_customers_cumulative": 7
+    },
+    {
+      "week": "2027-W02",
+      "reels_posted": 5,
+      "avg_views_per_reel": 700,
+      "skip_rate_pct_max": 65,
+      "ig_visits": 50,
+      "signups_all_sources": 5,
+      "bank_links_all_sources": 3,
+      "paying_customers_cumulative": 9
+    },
+    {
+      "week": "2027-W03",
+      "reels_posted": 5,
+      "avg_views_per_reel": 750,
+      "skip_rate_pct_max": 65,
+      "ig_visits": 55,
+      "signups_all_sources": 5,
+      "bank_links_all_sources": 3,
+      "paying_customers_cumulative": 11
+    },
+    {
+      "week": "2027-W04",
+      "reels_posted": 5,
+      "avg_views_per_reel": 800,
+      "skip_rate_pct_max": 65,
+      "ig_visits": 60,
+      "signups_all_sources": 6,
+      "bank_links_all_sources": 4,
+      "paying_customers_cumulative": 13
+    },
+    {
+      "week": "2027-W05",
+      "reels_posted": 5,
+      "avg_views_per_reel": 850,
+      "skip_rate_pct_max": 65,
+      "ig_visits": 65,
+      "signups_all_sources": 6,
+      "bank_links_all_sources": 4,
+      "paying_customers_cumulative": 15
+    },
+    {
+      "week": "2027-W06",
+      "reels_posted": 5,
+      "avg_views_per_reel": 900,
+      "skip_rate_pct_max": 65,
+      "ig_visits": 70,
+      "signups_all_sources": 7,
+      "bank_links_all_sources": 4,
+      "paying_customers_cumulative": 15
+    }
+  ]
+}

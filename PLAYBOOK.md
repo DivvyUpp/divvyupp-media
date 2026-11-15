@@ -38,6 +38,12 @@ with a mortgage and kids who earn well but have nothing left at month end.
    Reel posted that day (`posted_date`), and show the week as Reel views → Instagram visits → Get started
    → sign-ups → bank connected. Remember older Reels also drive traffic: attribution is by day, not per
    Reel. Use `all_sources` only for context (e.g. total sign-ups this week).
+3b. Compare against targets. Find last week's row in `targets.json` (match `week` to the funnel file's
+   ISO week). For each metric show actual vs target and mark it **ahead**, **on track** (within ±20%) or
+   **behind**; also show running totals vs the month-1 and month-3 milestones in `_about`. Weeks before the
+   first row: say "no target yet". If a metric is behind two weeks running, propose one concrete change for
+   it (a hook idea, caption/CTA, landing page, or another channel) in the note to Srini. Never edit
+   `targets.json` without Srini's explicit agreement.
 4. Decide: the main signal is **skip rate (lower is better)** then **average watch time**; sign-ups and
    Get started from step 3 are the business result and win ties. With little data,
    say so plainly rather than over-reading one post. Write a short `decision` for last week's rows
@@ -49,7 +55,7 @@ with a mortgage and kids who earn well but have nothing left at month end.
    all 5 (`python3 pipeline/make_reel.py hooks/<id>.json`).
 7. Add queue entries with `"status": "pending_review"`, a caption per video (same structure as the first
    post), and proposed `post_date`s, one per day Tuesday to Saturday of this week, posted around 7pm ET.
-8. Send Srini the 5 videos (SendUserFile) plus a short note: last week's numbers in one line each (Reel stats plus the funnel from step 3), what each
+8. Send Srini the 5 videos (SendUserFile) plus a short note: last week's numbers in one line each (Reel stats plus the funnel from step 3), then a short actual-vs-target scorecard from step 3b, what each
    new hook tests, and the proposed captions and dates. Ask him to approve, reject or edit each.
 9. When he replies: apply edits (re-render if the hook changed and send it again), set approved entries to
    `"approved"`, drop rejected ones, then commit and push `hooks/`, approved `reels/`, `queue.json` and
