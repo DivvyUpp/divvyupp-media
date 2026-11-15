@@ -1,0 +1,69 @@
+{
+ "id": "2026-11-15-a",
+ "format": "story",
+ "character_voice": "af_heart",
+ "hook": {
+  "small": "Good salary.",
+  "lines": [
+   [
+    "Nothing left",
+    "ink"
+   ],
+   [
+    "at month end.",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "You earn a good salary.",
+   "And every month, nothing is left at the end."
+  ]
+ },
+ "guide": {
+  "title": [
+   [
+    "Then a daily guide",
+    "ink"
+   ],
+   [
+    "for the $2,000.",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "Then, for the two thousand you spend, you get a daily and a weekly number.",
+   "Overspend on a dinner out, and the rest of your week adjusts.",
+   "So you know before you spend, not after."
+  ],
+  "week": 466,
+  "today": 66,
+  "spend_label": "Dinner out",
+  "spend": 120,
+  "tomorrow": 57
+ },
+ "payoff": {
+  "title": [
+   [
+    "All three.",
+    "ink"
+   ],
+   [
+    "Every month.",
+    "orange"
+   ]
+  ],
+  "checks": [
+   "Bills paid",
+   "$1,000 saved",
+   "Guilt-free spending"
+  ],
+  "narration": [
+   "Your bills get paid.",
+   "Your savings stay saved.",
+   "And you spend the rest, guilt-free.",
+   "That's how our founder saves about a thousand dollars a month."
+  ]
+ },
+ "music": true,
+ "character": "c"
+}

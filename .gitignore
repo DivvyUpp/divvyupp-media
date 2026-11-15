@@ -1,2 +1,3 @@
 pipeline/.cache/
-reels/*_check.jpg
+reels/*_check*.jpg
+pipeline/__pycache__/

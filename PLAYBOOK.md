@@ -23,6 +23,27 @@ No budgeting homework: it sorts transactions into fixed or flexible automaticall
 spend less, or both, or the subscription is refunded up to $30 (terms apply). Audience: two-income households
 with a mortgage and kids who earn well but have nothing left at month end.
 
+## Story Reels and presenter characters (agreed with Srini 2026-11-15)
+A story Reel tells the whole loop, not just a hook: pain → save first (approved body, part 1) → the daily/weekly
+guide for the rest that adjusts when you overspend → payoff (bills paid, savings kept, guilt-free spending) →
+guarantee + CTA (body, part 2). Render with `python3 pipeline/make_story_reel.py hooks/<id>.json` (spec format in
+that file; `--check` writes one still per scene). Keep it under 60s. Example: `hooks/2026-11-15-a.json`.
+Rules for every presenter character, current or new:
+- Drawn in `pipeline/characters.py` as SVG in the same flat editorial style as presenters A–E: head and
+  shoulders, real proportions (short neck, broad shoulders), soft shading, believable outfit for the audience
+  (mid-30s to early-40s working parent). Presenter **C** is the current pick; reuse it before inventing a new one.
+- **Only the face moves.** No hands or arm gestures (tried, looked bad). Small idle bob and natural blinks only.
+- **Lip-sync from phoneme timings**, never from loudness. Mouth shapes are the soft visemes in
+  `characters.py` (lip-coloured edge, at most a sliver of teeth). Never a wide toothy grin: it read as angry.
+- Mood: worried in the pain hook (corners slightly down, brows up in the middle), neutral in the guide,
+  happy in the payoff.
+- Voice: Kokoro `af_heart` for both presenter and narrator.
+- A presenter is not the founder and not a customer: she speaks to the viewer ("you"). The founder result is
+  stated as the founder's ("our founder saves about $1,000 a month"). No name tags.
+- Light background music (`pipeline/music.py`, synthesised, no licensing) sits under the voice and ducks
+  while anyone speaks.
+- When adding a character, show Srini a lineup still (resting and talking) before rendering any video.
+
 ## Monday run: plan and produce
 1. `bash pipeline/setup.sh` (once per machine).
 2. Pull stats for every `posted` queue entry through Windsor `get_data` (connector `instagram`, fields from
