@@ -6,20 +6,77 @@
  "music": true,
  "hook": {
   "small": "It's the 28th.",
-  "lines": [["Your app finally", "ink"], ["says you overspent.", "orange"]],
-  "narration": ["It's the twenty-eighth.", "Your budgeting app finally tells you that you overspent.", "Thanks. A little late."]
+  "lines": [
+   [
+    "Your app finally",
+    "ink"
+   ],
+   [
+    "says you overspent.",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "It's the twenty-eighth.",
+   "Your budgeting app finally tells you that you overspent.",
+   [
+    "Oh. Thanks.",
+    0.82
+   ],
+   [
+    "Super helpful.",
+    0.85
+   ]
+  ],
+  "aside": {
+   "text": "Thanks. Super helpful.",
+   "cue": 2
+  }
  },
  "guide": {
-  "title": [["DivvyUpp tells you", "ink"], ["before you spend.", "orange"]],
-  "narration": ["DivvyUpp gives you a daily and a weekly number for what's left to spend.",
-                "Overspend on a dinner out, and tomorrow adjusts right away.",
-                "So you find out before you spend, not on the twenty-eighth."],
-  "week": 466, "today": 66, "spend_label": "Dinner out", "spend": 120, "tomorrow": 57
+  "title": [
+   [
+    "DivvyUpp tells you",
+    "ink"
+   ],
+   [
+    "before you spend.",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "You set your savings first. Then DivvyUpp gives you a daily and a weekly number for the rest.",
+   "Overspend on a dinner out, and tomorrow adjusts right away.",
+   "So you find out before you spend, not on the twenty-eighth."
+  ],
+  "week": 466,
+  "today": 66,
+  "spend_label": "Dinner out",
+  "spend": 120,
+  "tomorrow": 57
  },
  "payoff": {
-  "title": [["No surprises", "ink"], ["on the 28th.", "orange"]],
-  "checks": ["Bills paid", "$1,000 saved", "Guilt-free spending"],
-  "narration": ["Your bills get paid.", "Your savings stay saved.", "And you spend the rest, guilt-free.",
-                "No surprises at the end of the month."]
- }
+  "title": [
+   [
+    "No surprises",
+    "ink"
+   ],
+   [
+    "on the 28th.",
+    "orange"
+   ]
+  ],
+  "checks": [
+   "Bills paid",
+   "$1,000 saved",
+   "Guilt-free spending"
+  ],
+  "narration": [
+   "Your bills get paid.",
+   "Your savings stay saved.",
+   "And you spend the rest, guilt-free.",
+   "No surprises at the end of the month."
+  ]
+ },
+ "skip_flip": true
 }

@@ -106,7 +106,10 @@ def _mouth(c, m, mood):
     """m: a viseme name (rest, M, A, E, O, U, F, S, L) or a legacy openness level 0-3."""
     if not isinstance(m, str): m = "rest" if m <= 0 else ("S", "E", "A")[min(2, int(m) - 1)]
     lip = c["lip"]; dark = "#5A2420"; y = 328
-    cd = {"happy": -4, "neutral": -1.5, "worried": 3}[mood]          # corner lift (negative = smile)
+    cd = {"happy": -4, "neutral": -1.5, "worried": 3, "unimpressed": 0.5}[mood]          # corner lift (negative = smile)
+    if m in ("rest", "M") and mood == "unimpressed":   # one-sided smirk
+        return f'<path d="M276,{y+2} Q296,{y+5} 324,{y-5}" stroke="{dark}" stroke-width="4" fill="none" stroke-linecap="round"/>' \
+               f'<path d="M286,{y+7} Q300,{y+13} 314,{y+5} Q300,{y+8} 286,{y+7}Z" fill="{lip}" opacity=".85"/>'
     if m in ("rest", "M"):
         w = 24 if m == "rest" else 21; sag = 4 if m == "rest" else 1
         return f'<path d="M{300-w},{y+cd} Q300,{y+sag-cd*0.6} {300+w},{y+cd}" stroke="{dark}" stroke-width="4" fill="none" stroke-linecap="round"/>' \
@@ -135,11 +138,14 @@ def _eyes(c, blink, mood):
              f'<circle cx="{ex+1}" cy="246" r="9.5" fill="{c["iris"]}"/><circle cx="{ex+1}" cy="246" r="5" fill="{ink}"/>' \
              f'<circle cx="{ex+4}" cy="242" r="2.6" fill="#FFFFFF"/>' \
              f'<path d="M{ex-19},244 C{ex-10},230 {ex+10},230 {ex+19},243" stroke="{ink}" stroke-width="4" fill="none" stroke-linecap="round"/>'
+        if mood == "unimpressed":   # heavy upper lids: deadpan, "thanks, super helpful"
+            s += f'<path d="M{ex-21},232 L{ex+21},232 L{ex+21},245 C{ex+10},242 {ex-10},242 {ex-21},245Z" fill="{c["skin"]}"/>' \
+                 f'<path d="M{ex-20},245 C{ex-10},241 {ex+10},241 {ex+20},245" stroke="{ink}" stroke-width="4.5" fill="none" stroke-linecap="round"/>'
         if c["sex"] == "f":
             o = 1 if ex > 300 else -1
             s += f'<path d="M{ex+o*17},240 L{ex+o*25},234" stroke="{ink}" stroke-width="3.5" stroke-linecap="round"/>'
     # brows
-    lift = {"worried": 1, "neutral": 0, "happy": -0.5}[mood]
+    lift = {"worried": 1, "neutral": 0, "happy": -0.5, "unimpressed": -0.6}[mood]
     bw = 7 if c["sex"] == "m" else 5.5
     for ex, o in ((258, -1), (342, 1)):
         ox, oy = ex + o * 24, 216 + 3 * lift            # outer end

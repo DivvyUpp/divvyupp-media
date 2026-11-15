@@ -41,7 +41,8 @@ def narrate(sentences, voice, out_wav):
     k = Kokoro(timed if os.path.exists(timed) else os.path.join(CACHE, "kokoro.onnx"), os.path.join(CACHE, "voices.bin"))
     parts, cues, phon, t, sr = [], [], [], 0.0, 24000
     for i, s in enumerate(sentences):
-        a, sr, tm = k.create_timed(s, voice=voice, speed=1.0, lang="en-us"); p = 0.35 if i < len(sentences) - 1 else 0.0
+        s, spd = (s[0], s[1]) if isinstance(s, list) else (s, 1.0)      # ["text", speed] slows a line for delivery
+        a, sr, tm = k.create_timed(s, voice=voice, speed=spd, lang="en-us"); p = 0.35 if i < len(sentences) - 1 else 0.0
         cues.append(LEAD + t); phon += [(LEAD + t + x.start, LEAD + t + x.end, x.phoneme) for x in tm]
         parts += [a, np.zeros(int(sr * p))]; t += len(a) / sr + p
     audio = np.concatenate(parts); sf.write(out_wav, audio, sr)
@@ -106,7 +107,14 @@ def hook_scene(fr, t, sp, cues, mouth, spec):
     if sp.get("small"):
         fr.text((W / 2, y), sp["small"], font("b", 66), INK, appear(t, cues[0]), anchor="ma"); y += 130
     title_lines(fr, sp["lines"], y, t, cues[0] + 0.5, 104)
-    character(fr.layer, W / 2, 820, 1150, t, mouth, "worried", appear(t, 0.15) * fr.g, spec["character"])
+    aside = sp.get("aside")               # {"text": "...", "cue": n}: a deadpan aside chip; the face turns unimpressed
+    mood = "worried"
+    if aside and aside["cue"] < len(cues):
+        k2 = appear(t, cues[aside["cue"]], 0.35); mood = "unimpressed" if k2 > 0.3 else mood
+        f = font("xb", 46); tw = fr.tl(aside["text"], f); ay = y + 2 * 118 + 40
+        fr.rrect([W / 2 - tw / 2 - 36, ay, W / 2 + tw / 2 + 36, ay + 88], 44, INK, k2)
+        fr.text((W / 2, ay + 44), aside["text"], f, WHITE, k2, anchor="mm", dy=0)
+    character(fr.layer, W / 2, 820, 1150, t, mouth, mood, appear(t, 0.15) * fr.g, spec["character"])
     if spec.get("name_tag"):
         f = font("b", 30); tw = fr.tl(spec["name_tag"], f); kk = appear(t, 0.8)
         fr.rrect([W / 2 - tw / 2 - 28, 1680, W / 2 + tw / 2 + 28, 1744], 32, WHITE, kk)
@@ -202,18 +210,19 @@ def main():
         print("check frames written"); return
     body, sr = sf.read(os.path.join(HERE, "assets", "body_audio.flac"))
     hook_v, hook_a, _ = render_segment("hook", spec, tmp, bg)
-    b1_v, b1_d = body_part(tmp, 0, BODY_SPLIT, "body1")
+    skip_flip = spec.get("skip_flip", False)   # true: go straight from the hook to the guide
+    b1_v, b1_d = (None, 0) if skip_flip else body_part(tmp, 0, BODY_SPLIT, "body1")
     guide_v, guide_a, _ = render_segment("guide", spec, tmp, bg)
     pay_v, pay_a, _ = render_segment("payoff", spec, tmp, bg)
     b2_v, b2_d = body_part(tmp, BODY_SPLIT, None, "body2")
     cut = int(round(BODY_SPLIT * sr)); b1_a = body[:cut]; b2_a = body[cut:]
     def fit(a, d): n = int(round(d * sr)); return np.pad(a, (0, max(0, n - len(a))))[:n]
-    audio = np.concatenate([hook_a * 0.95, fit(b1_a, b1_d), guide_a * 0.95, pay_a * 0.95, fit(b2_a, b2_d)])
+    audio = np.concatenate([hook_a * 0.95] + ([] if skip_flip else [fit(b1_a, b1_d)]) + [guide_a * 0.95, pay_a * 0.95, fit(b2_a, b2_d)])
     if spec.get("music", True):
         from music import mix_under
         audio = mix_under(audio, sr)
     sf.write(os.path.join(tmp, "full.wav"), audio, sr)
-    open(os.path.join(tmp, "list.txt"), "w").write("".join(f"file '{v}'\n" for v in (hook_v, b1_v, guide_v, pay_v, b2_v)))
+    open(os.path.join(tmp, "list.txt"), "w").write("".join(f"file '{v}'\n" for v in (hook_v, b1_v, guide_v, pay_v, b2_v) if v))
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", os.path.join(tmp, "list.txt"), "-c", "copy", os.path.join(tmp, "v.mp4")], check=True)
     out = os.path.join(ROOT, "reels", rid + ".mp4"); part = out + ".part.mp4"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", os.path.join(tmp, "v.mp4"), "-i", os.path.join(tmp, "full.wav"), "-map", "0:v", "-map", "1:a",
