@@ -114,6 +114,8 @@ def hook_scene(fr, t, sp, cues, mouth, spec):
         f = font("xb", 46); tw = fr.tl(aside["text"], f); ay = y + 2 * 118 + 40
         fr.rrect([W / 2 - tw / 2 - 36, ay, W / 2 + tw / 2 + 36, ay + 88], 44, INK, k2)
         fr.text((W / 2, ay + 44), aside["text"], f, WHITE, k2, anchor="mm", dy=0)
+    turn = sp.get("turn_cue")             # sentence index where she turns from the pain to the fix
+    if turn is not None and turn < len(cues) and t >= cues[turn] - 0.1: mood = "neutral"
     character(fr.layer, W / 2, 820, 1150, t, mouth, mood, appear(t, 0.15) * fr.g, spec["character"])
     if spec.get("name_tag"):
         f = font("b", 30); tw = fr.tl(spec["name_tag"], f); kk = appear(t, 0.8)

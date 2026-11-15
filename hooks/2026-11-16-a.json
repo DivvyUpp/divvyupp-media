@@ -26,12 +26,14 @@
    [
     "Super helpful.",
     0.85
-   ]
+   ],
+   "DivvyUpp is different."
   ],
   "aside": {
    "text": "Thanks. Super helpful.",
    "cue": 2
-  }
+  },
+  "turn_cue": 4
  },
  "guide": {
   "title": [
@@ -45,7 +47,7 @@
    ]
   ],
   "narration": [
-   "You set your savings first. Then DivvyUpp gives you a daily and a weekly number for the rest.",
+   "Then you get a daily and a weekly number for what's left to spend.",
    "Overspend on a dinner out, and tomorrow adjusts right away.",
    "So you find out before you spend, not on the twenty-eighth."
   ],
@@ -78,5 +80,5 @@
    "No surprises at the end of the month."
   ]
  },
- "skip_flip": true
+ "skip_flip": false
 }
