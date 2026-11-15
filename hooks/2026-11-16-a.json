@@ -1,4 +1,25 @@
-{"id": "2026-11-16-a",
- "lines": [["Most apps show", "ink"], ["what you spent.", "ink"], ["This tells you", "orange"], ["before you spend.", "orange"]],
- "narration": ["Most money apps show you what you already spent.", "This one tells you before you spend."],
- "chart": false}
+{
+ "id": "2026-11-16-a",
+ "format": "story",
+ "character": "c",
+ "character_voice": "af_heart",
+ "music": true,
+ "hook": {
+  "small": "It's the 28th.",
+  "lines": [["Your app finally", "ink"], ["says you overspent.", "orange"]],
+  "narration": ["It's the twenty-eighth.", "Your budgeting app finally tells you that you overspent.", "Thanks. A little late."]
+ },
+ "guide": {
+  "title": [["DivvyUpp tells you", "ink"], ["before you spend.", "orange"]],
+  "narration": ["DivvyUpp gives you a daily and a weekly number for what's left to spend.",
+                "Overspend on a dinner out, and tomorrow adjusts right away.",
+                "So you find out before you spend, not on the twenty-eighth."],
+  "week": 466, "today": 66, "spend_label": "Dinner out", "spend": 120, "tomorrow": 57
+ },
+ "payoff": {
+  "title": [["No surprises", "ink"], ["on the 28th.", "orange"]],
+  "checks": ["Bills paid", "$1,000 saved", "Guilt-free spending"],
+  "narration": ["Your bills get paid.", "Your savings stay saved.", "And you spend the rest, guilt-free.",
+                "No surprises at the end of the month."]
+ }
+}

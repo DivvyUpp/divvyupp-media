@@ -95,6 +95,7 @@ def check_icon(fr, x, y, r, k, col=GREEN):
     fr.line([(x - r * 0.45, y + r * 0.02), (x - r * 0.1, y + r * 0.38), (x + r * 0.5, y - r * 0.35)], WHITE + (fr.a(k),), r * 0.22)
 
 def title_lines(fr, lines, y, t, start, size=88):
+    size = min(size, min(size * 940 / max(fr.tl(s, font("xb", size)), 1) for s, _ in lines))   # fit 940px
     for i, (s, c) in enumerate(lines):
         fr.text((W / 2, y + i * size * 1.14), s, font("xb", size), COL.get(c, INK), appear(t, start + i * 0.25), anchor="ma")
 
