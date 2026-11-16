@@ -43,7 +43,7 @@ def bed(seconds, sr=24000, seed=3):
 
 def mix_under(voice, sr, under_speech=0.45):
     """Return voice + bed, with the bed ducked to `under_speech` of its level while the voice is active."""
-    m = bed(len(voice) / sr, sr)
+    m = bed(len(voice) / sr, sr); m = np.pad(m, (0, max(0, len(voice) - len(m))))[:len(voice)]   # exact length (float rounding)
     w = int(0.25 * sr); loud = np.convolve(np.abs(voice), np.ones(w) / w, "same")
     active = np.clip(loud / 0.02, 0, 1)
     sm = int(0.4 * sr); active = np.convolve(active, np.ones(sm) / sm, "same")

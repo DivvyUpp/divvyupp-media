@@ -20,7 +20,8 @@ Spec (JSON):
              tomorrow: one sentence per spend after the first guide sentence, tomorrow re-adjusts after each)},
   "payoff": {"title": [["...", "ink"|"orange"], ...], "checks": ["...", "...", "..."], "narration": ["..."]},
   "plan":   {"title": [...], "narration": [one sentence per row], "rows": [{"label": "Income", "amount": 8600, "tag": "Checked against your bank"},
-             {"label": "Fixed bills", ...}, {"label": "Savings", ...}, {"label": "Safe-to-spend", ...}]}
+             {"label": "Fixed bills", ...}, {"label": "Savings", ...}, {"label": "Safe-to-spend", ...},
+             optional 5th: {"label": "Flexible spending lately", "amount": 2650, "tag": "From your bank history", "bar": false}]}
              (optional: the four numbers, shown after the hook in place of the "flips the order" body section)
 }
 Run pipeline/setup.sh once per machine first.
@@ -247,12 +248,13 @@ def plan_scene(fr, t, sp, cues, mouth, spec):
     logo(fr, W / 2, 150, 70, appear(t, 0.2))
     title_lines(fr, sp["title"], 290, t, 0.3, 84)
     rows = sp["rows"]; total = rows[0]["amount"]; x0, x1, by = 110, W - 110, 540
-    cols = [INK, (150, 140, 136), ORANGE, GREEN]
+    cols = [INK, (150, 140, 136), ORANGE, GREEN, RED]      # a 5th row (e.g. "Flexible spending lately", "bar": false) is red
     k0 = appear(t, cues[0] if cues else 0.6)
     fr.rrect([x0, by, x1, by + 56], 28, (240, 232, 228), appear(t, 0.6))
     # segments for rows 1.. (fixed, savings, safe-to-spend) replace the full income bar as each is named
     xs = x0
     for i, r in enumerate(rows[1:], 1):
+        if r.get("bar") is False: continue
         ki = appear(t, cues[i] if i < len(cues) else 2.0 + i, 0.5)
         wseg = (x1 - x0) * r["amount"] / total
         if ki > 0: fr.rrect([xs, by, xs + wseg * ki, by + 56], 28 if i in (1, len(rows) - 1) else 6, cols[i], ki)
