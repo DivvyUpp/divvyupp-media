@@ -17,7 +17,10 @@ Spec (JSON):
              "week": 460, "today": 66, "spend_label": "Dinner out", "spend": 120, "tomorrow": 52,
              "spends": [{"label": "...", "amount": 112, "tomorrow": 55}, ...] (optional, replaces spend_label/spend/
              tomorrow: one sentence per spend after the first guide sentence, tomorrow re-adjusts after each)},
-  "payoff": {"title": [["...", "ink"|"orange"], ...], "checks": ["...", "...", "..."], "narration": ["..."]}
+  "payoff": {"title": [["...", "ink"|"orange"], ...], "checks": ["...", "...", "..."], "narration": ["..."]},
+  "plan":   {"title": [...], "narration": [one sentence per row], "rows": [{"label": "Income", "amount": 8600, "tag": "Checked against your bank"},
+             {"label": "Fixed bills", ...}, {"label": "Savings", ...}, {"label": "Safe-to-spend", ...}]}
+             (optional: the four numbers, shown after the hook in place of the "flips the order" body section)
 }
 Run pipeline/setup.sh once per machine first.
 """
@@ -184,7 +187,37 @@ def payoff_scene(fr, t, sp, cues, mouth, spec):
         fr.text((290, y + i * 150 + 60), s, font("xb", 52), INK, k, anchor="lm", dy=0)
     character(fr.layer, W / 2, 1080, 1000, t, mouth, "happy", appear(t, 0.3) * fr.g, spec["character"])
 
-SCENES = {"hook": hook_scene, "guide": guide_scene, "payoff": payoff_scene}
+def plan_scene(fr, t, sp, cues, mouth, spec):
+    """The four numbers: income and fixed bills (checked against bank history), savings (you pick),
+    safe-to-spend (what's left). One stacked bar fills segment by segment; no arithmetic on screen."""
+    logo(fr, W / 2, 150, 70, appear(t, 0.2))
+    title_lines(fr, sp["title"], 290, t, 0.3, 84)
+    rows = sp["rows"]; total = rows[0]["amount"]; x0, x1, by = 110, W - 110, 540
+    cols = [INK, (150, 140, 136), ORANGE, GREEN]
+    k0 = appear(t, cues[0] if cues else 0.6)
+    fr.rrect([x0, by, x1, by + 56], 28, (240, 232, 228), appear(t, 0.6))
+    # segments for rows 1.. (fixed, savings, safe-to-spend) replace the full income bar as each is named
+    xs = x0
+    for i, r in enumerate(rows[1:], 1):
+        ki = appear(t, cues[i] if i < len(cues) else 2.0 + i, 0.5)
+        wseg = (x1 - x0) * r["amount"] / total
+        if ki > 0: fr.rrect([xs, by, xs + wseg * ki, by + 56], 28 if i in (1, len(rows) - 1) else 6, cols[i], ki)
+        xs += wseg
+    if k0 > 0 and appear(t, cues[1] if len(cues) > 1 else 9) < 0.05:
+        fr.rrect([x0, by, x0 + (x1 - x0) * k0, by + 56], 28, cols[0], k0)
+    y = by + 110
+    for i, r in enumerate(rows):
+        ki = appear(t, cues[i] if i < len(cues) else 2.0 + i)
+        if ki <= 0: continue
+        fr.rrect([x0, y, x1, y + 120], 36, WHITE, ki)
+        fr.ellipse([(x0 + 40) , (y + 46), (x0 + 68), (y + 74)] , cols[i] + (fr.a(ki),))
+        fr.text((x0 + 95, y + 30), r["label"], font("xb", 42), INK, ki, dy=0)
+        fr.text((x0 + 95, y + 82), r.get("tag", ""), font("b", 26), GREEN if "bank" in r.get("tag", "") else GREY, ki, dy=0)
+        fr.text((x1 - 40, y + 60), f"${r['amount']:,}", font("xb", 52), cols[i] if i else INK, ki, anchor="rm", dy=0)
+        y += 140
+    character(fr.layer, W / 2, 1300 + 120, 780, t, mouth, "neutral", appear(t, 0.3) * fr.g, spec["character"])
+
+SCENES = {"hook": hook_scene, "plan": plan_scene, "guide": guide_scene, "payoff": payoff_scene}
 
 def render_segment(name, spec, tmp, bg, check_dir=None):
     sp = spec[name]; voice = spec.get("character_voice", "af_heart")
@@ -220,23 +253,24 @@ def main():
     os.makedirs(os.path.join(ROOT, "reels"), exist_ok=True); tmp = os.path.join(CACHE, "tmp_" + rid); os.makedirs(tmp, exist_ok=True)
     bg = make_bg()
     if check:
-        for name in ("hook", "guide", "payoff"): render_segment(name, spec, tmp, bg, os.path.join(ROOT, "reels"))
+        for name in ("hook", "plan", "guide", "payoff") if "plan" in spec else ("hook", "guide", "payoff"): render_segment(name, spec, tmp, bg, os.path.join(ROOT, "reels"))
         print("check frames written"); return
     body, sr = sf.read(os.path.join(HERE, "assets", "body_audio.flac"))
     hook_v, hook_a, _ = render_segment("hook", spec, tmp, bg)
-    skip_flip = spec.get("skip_flip", False)   # true: go straight from the hook to the guide
+    skip_flip = spec.get("skip_flip", False) or "plan" in spec   # true: go straight from the hook to the guide
+    plan_v, plan_a = render_segment("plan", spec, tmp, bg)[:2] if "plan" in spec else (None, None)
     b1_v, b1_d = (None, 0) if skip_flip else body_part(tmp, 0, BODY_SPLIT, "body1")
     guide_v, guide_a, _ = render_segment("guide", spec, tmp, bg)
     pay_v, pay_a, _ = render_segment("payoff", spec, tmp, bg)
     b2_v, b2_d = body_part(tmp, BODY_SPLIT, None, "body2")
     cut = int(round(BODY_SPLIT * sr)); b1_a = body[:cut]; b2_a = body[cut:]
     def fit(a, d): n = int(round(d * sr)); return np.pad(a, (0, max(0, n - len(a))))[:n]
-    audio = np.concatenate([hook_a * 0.95] + ([] if skip_flip else [fit(b1_a, b1_d)]) + [guide_a * 0.95, pay_a * 0.95, fit(b2_a, b2_d)])
+    audio = np.concatenate([hook_a * 0.95] + ([plan_a * 0.95] if plan_v else []) + ([] if skip_flip else [fit(b1_a, b1_d)]) + [guide_a * 0.95, pay_a * 0.95, fit(b2_a, b2_d)])
     if spec.get("music", True):
         from music import mix_under
         audio = mix_under(audio, sr)
     sf.write(os.path.join(tmp, "full.wav"), audio, sr)
-    open(os.path.join(tmp, "list.txt"), "w").write("".join(f"file '{v}'\n" for v in (hook_v, b1_v, guide_v, pay_v, b2_v) if v))
+    open(os.path.join(tmp, "list.txt"), "w").write("".join(f"file '{v}'\n" for v in (hook_v, plan_v, b1_v, guide_v, pay_v, b2_v) if v))
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", os.path.join(tmp, "list.txt"), "-c", "copy", os.path.join(tmp, "v.mp4")], check=True)
     out = os.path.join(ROOT, "reels", rid + ".mp4"); part = out + ".part.mp4"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", os.path.join(tmp, "v.mp4"), "-i", os.path.join(tmp, "full.wav"), "-map", "0:v", "-map", "1:a",

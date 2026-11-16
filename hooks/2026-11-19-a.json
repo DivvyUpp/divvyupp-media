@@ -32,12 +32,12 @@
     "ink"
    ],
    [
-    "for the rest.",
+    "for safe-to-spend.",
     "orange"
    ]
   ],
   "narration": [
-   "The rest gets a daily and a weekly number.",
+   "Your safe-to-spend money gets a daily and a weekly number.",
    "A car repair, a hundred and sixty. Tomorrow: forty-seven.",
    "Then takeout, forty-five. Tomorrow: thirty-six.",
    "Before you spend, not after."
@@ -79,5 +79,45 @@
    "And the week still works."
   ]
  },
- "skip_flip": false
+ "skip_flip": false,
+ "plan": {
+  "title": [
+   [
+    "Four numbers.",
+    "ink"
+   ],
+   [
+    "That's the plan.",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "It starts with your income,",
+   "and your fixed bills, both checked against your bank history.",
+   "Then you pick what to save.",
+   "What's left is your safe-to-spend money."
+  ],
+  "rows": [
+   {
+    "label": "Income",
+    "amount": 8600,
+    "tag": "Checked against your bank"
+   },
+   {
+    "label": "Fixed bills",
+    "amount": 5500,
+    "tag": "Checked against your bank"
+   },
+   {
+    "label": "Savings",
+    "amount": 1000,
+    "tag": "You pick the amount"
+   },
+   {
+    "label": "Safe-to-spend",
+    "amount": 2100,
+    "tag": "About $490 a week"
+   }
+  ]
+ }
 }
