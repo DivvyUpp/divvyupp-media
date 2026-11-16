@@ -301,7 +301,7 @@ ENDING = {
     "guarantee": {"narration": ["Try DivvyUpp for ninety days.",
                                 "If you don't save more or spend less, we refund your subscription, up to thirty dollars.",
                                 "Terms apply."]},
-    "cta": {"narration": ["[warm] Save first. Then spend with confidence.", "DivvyUpp dot com."]},
+    "cta": {"narration": ["[warm] Save first. Then spend with confidence.", "Try it at divvyupp dot com."]},
 }
 
 def guarantee_scene(fr, t, sp, cues, mouth, spec):

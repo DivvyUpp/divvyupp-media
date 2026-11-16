@@ -5,7 +5,7 @@ name: Funnel weekly fetch
 # funnel/. Spec: DivvyUpp/divvyupp .spec-workflow/specs/read-only-funnel-export.
 on:
   schedule:
-    - cron: "0 11 * * 1" # 06:00 EST / 07:00 EDT, Mondays
+    - cron: "37 10 * * 1" # 05:37 EST / 06:37 EDT, Mondays (off the hour: GitHub drops/delays top-of-hour schedules under load)
   workflow_dispatch:
     inputs:
       from:
