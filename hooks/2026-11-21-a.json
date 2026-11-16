@@ -5,7 +5,7 @@
  "character_voice": "elevenlabs:cjVigY5qzO86Huf0OWal:eleven_v3",
  "music": true,
  "hook": {
-  "small": "Two incomes. Mortgage. Kids.",
+  "small": "Two incomes. Over $100K a year.",
   "lines": [
    [
     "Still nothing left",
@@ -17,8 +17,8 @@
    ]
   ],
   "narration": [
-   "[warm] Two incomes. A mortgage. Kids.",
-   "[sighs] And somehow, still nothing left before payday?",
+   "[warm] You've got two incomes, and together you bring in over a hundred thousand a year.",
+   "[frustrated] But after the mortgage, the bills, and everyday living, there's nothing left before your next payday.",
    "[reassuring] You're not alone. One study found forty-four percent of people earning over a hundred thousand dollars live paycheck to paycheck.",
    "The fix isn't earning more. It's the order you spend in."
   ],
