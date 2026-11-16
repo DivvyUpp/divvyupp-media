@@ -1,0 +1,127 @@
+{
+ "id": "raccoon-demo",
+ "format": "story",
+ "character": "raccoon_soft3d",
+ "character_voice": "elevenlabs:Myb1gsDenT3mlMlj7vib:eleven_v3",
+ "music": true,
+ "hook": {
+  "small": "I've seen your bank history.",
+  "lines": [
+   [
+    "We need",
+    "ink"
+   ],
+   [
+    "to talk.",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "[deadpan] I've seen your bank history.",
+   "[sarcastic] Four coffees, two takeouts, and a quick little online order. On a Tuesday.",
+   "[smug] Relax. I'm a raccoon. I know exactly where money disappears to.",
+   "And DivvyUpp makes it stop disappearing."
+  ],
+  "moods": [
+   "unimpressed",
+   "unimpressed",
+   "happy",
+   "neutral"
+  ]
+ },
+ "plan": {
+  "title": [
+   [
+    "Four numbers.",
+    "ink"
+   ],
+   [
+    "That's the plan.",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "[matter-of-fact] Here's how it works. Your income,",
+   "and your fixed bills. Both checked against your bank, so no fibbing.",
+   "You pick what to save. It comes out first.",
+   "[smug] What's left is your safe-to-spend. The fun money."
+  ],
+  "rows": [
+   {
+    "label": "Income",
+    "amount": 8600,
+    "tag": "Checked against your bank"
+   },
+   {
+    "label": "Fixed bills",
+    "amount": 5500,
+    "tag": "Checked against your bank"
+   },
+   {
+    "label": "Savings",
+    "amount": 1000,
+    "tag": "You pick the amount"
+   },
+   {
+    "label": "Safe-to-spend",
+    "amount": 2100,
+    "tag": "About $490 a week"
+   }
+  ]
+ },
+ "guide": {
+  "title": [
+   [
+    "Then a daily guide",
+    "ink"
+   ],
+   [
+    "for the fun money.",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "Your safe-to-spend gets a daily and a weekly number. Today, seventy dollars.",
+   "[unimpressed] Then you buy concert tickets. A hundred and forty dollars, so you're seventy over for today. Fine. DivvyUpp spreads that across the rest of your week, and tomorrow adjusts to fifty-two.",
+   "Then takeout. Again. Thirty-eight dollars. Tomorrow adjusts to forty-three, and the week still works. [smug] You're welcome."
+  ],
+  "week": 490,
+  "today": 70,
+  "spends": [
+   {
+    "label": "Concert tickets",
+    "amount": 140,
+    "tomorrow": 52
+   },
+   {
+    "label": "Takeout (again)",
+    "amount": 38,
+    "tomorrow": 43
+   }
+  ]
+ },
+ "payoff": {
+  "title": [
+   [
+    "Bills paid.",
+    "ink"
+   ],
+   [
+    "Savings untouched.",
+    "orange"
+   ]
+  ],
+  "checks": [
+   "Bills paid",
+   "Savings kept",
+   "Still went to the concert"
+  ],
+  "narration": [
+   "[smug] Bills paid.",
+   "Savings kept.",
+   "And you still went to the concert. [laughs] I'm basically a genius."
+  ]
+ },
+ "skip_flip": true,
+ "ending": "rendered"
+}
