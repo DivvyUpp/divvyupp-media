@@ -2,7 +2,7 @@
  "id": "raccoon-demo",
  "format": "story",
  "character": "raccoon_soft3d",
- "character_voice": "elevenlabs:Myb1gsDenT3mlMlj7vib:eleven_v3",
+ "character_voice": "elevenlabs:loY1uopAz31XyhAEhNSa:eleven_v3",
  "music": true,
  "hook": {
   "small": "I've seen your bank history.",
@@ -17,16 +17,16 @@
    ]
   ],
   "narration": [
-   "[deadpan] I've seen your bank history.",
-   "[sarcastic] Four coffees, two takeouts, and a quick little online order. On a Tuesday.",
-   "[smug] Relax. I'm a raccoon. I know exactly where money disappears to.",
-   "And DivvyUpp makes it stop disappearing."
+   "[excited] Whoa, whoa, whoa. I've seen your bank history!",
+   "[laughs] Four coffees, two takeouts, AND a quick little online order? On a TUESDAY?",
+   "[smug] Relax, pal. I'm a raccoon. I know exactly where money disappears to.",
+   "[excited] And DivvyUpp makes it stop disappearing!"
   ],
   "moods": [
-   "unimpressed",
+   "happy",
    "unimpressed",
    "happy",
-   "neutral"
+   "happy"
   ]
  },
  "plan": {
@@ -41,10 +41,10 @@
    ]
   ],
   "narration": [
-   "[matter-of-fact] Here's how it works. Your income,",
-   "and your fixed bills. Both checked against your bank, so no fibbing.",
-   "You pick what to save. It comes out first.",
-   "[smug] What's left is your safe-to-spend. The fun money."
+   "[excited] Okay, here's the deal. Your income,",
+   "and your fixed bills. Both checked against your bank, so no fibbing!",
+   "You pick what to save. It comes out first. Boom.",
+   "[smug] What's left is your safe-to-spend. The fun money!"
   ],
   "rows": [
    {
@@ -81,9 +81,9 @@
    ]
   ],
   "narration": [
-   "Your safe-to-spend gets a daily and a weekly number. Today, seventy dollars.",
-   "[unimpressed] Then you buy concert tickets. A hundred and forty dollars, so you're seventy over for today. Fine. DivvyUpp spreads that across the rest of your week, and tomorrow adjusts to fifty-two.",
-   "Then takeout. Again. Thirty-eight dollars. Tomorrow adjusts to forty-three, and the week still works. [smug] You're welcome."
+   "Your safe-to-spend gets a daily and a weekly number. Today? Seventy bucks.",
+   "[gasps] Then you buy concert tickets. A hundred and forty dollars! So you're seventy over for today. [laughs] Eh, fine. DivvyUpp spreads that across the rest of your week, and tomorrow adjusts to fifty-two.",
+   "Then takeout. AGAIN. Thirty-eight dollars. Tomorrow adjusts to forty-three, and the week still works. [smug] You're welcome."
   ],
   "week": 490,
   "today": 70,
@@ -117,11 +117,24 @@
    "Still went to the concert"
   ],
   "narration": [
-   "[smug] Bills paid.",
-   "Savings kept.",
+   "[excited] Bills paid!",
+   "Savings kept!",
    "And you still went to the concert. [laughs] I'm basically a genius."
   ]
  },
  "skip_flip": true,
- "ending": "rendered"
+ "ending": "rendered",
+ "guarantee": {
+  "narration": [
+   "[excited] Try DivvyUpp for ninety days.",
+   "If you don't save more or spend less, we refund your subscription, up to thirty dollars.",
+   "Terms apply. Obviously."
+  ]
+ },
+ "cta": {
+  "narration": [
+   "[smug] Save first. Then spend with confidence.",
+   "Try it at divvyupp dot com!"
+  ]
+ }
 }
