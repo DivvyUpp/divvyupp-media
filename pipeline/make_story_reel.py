@@ -162,7 +162,8 @@ def hook_scene(fr, t, sp, cues, mouth, spec):
     logo(fr, W / 2, 150, 70, appear(t, 0.2))
     y = 330
     if sp.get("small"):
-        fr.text((W / 2, y), sp["small"], font("b", 66), INK, appear(t, cues[0]), anchor="ma"); y += 130
+        fs = min(66, 66 * 900 / max(fr.tl(sp["small"], font("b", 66)), 1))     # keep the small line off the edges
+        fr.text((W / 2, y), sp["small"], font("b", fs), INK, appear(t, cues[0]), anchor="ma"); y += 130
     title_lines(fr, sp["lines"], y, t, cues[0] + 0.5, 104)
     aside = sp.get("aside")               # {"text": "...", "cue": n}: a deadpan aside chip; the face turns unimpressed
     mood = "worried"
@@ -175,17 +176,18 @@ def hook_scene(fr, t, sp, cues, mouth, spec):
     if st:
         c0 = cues[st.get("cue", 1)] if st.get("cue", 1) < len(cues) else 2.0
         kc = appear(t, c0, 0.4); cx0, cx1, cy = 110, W - 110, y + len(sp["lines"]) * 118 + 30
-        fr.rrect([cx0, cy, cx1, cy + 300], 36, WHITE, kc)
+        unit = st.get("unit", "$"); ch_ = 120 + len(st["rows"]) * 95
+        fr.rrect([cx0, cy, cx1, cy + ch_], 36, WHITE, kc)
         fr.text((cx0 + 40, cy + 30), st["title"].upper(), font("b", 26), GREY, kc, dy=0)
-        mx = max(a for _, a in st["rows"])
+        mx = st.get("max") or max(a for _, a in st["rows"])
         for j, (lab, amt) in enumerate(st["rows"]):
             kj = appear(t, c0 + 0.6 + j * 1.6, 0.6); ry = cy + 85 + j * 95
             fr.text((cx0 + 40, ry), lab, font("b", 30), INK, kc, dy=0)
             bw = (cx1 - cx0 - 250) * amt / mx * kj
-            col = GREY if j == 0 else RED
+            col = st.get("color") and RED or (GREY if j == 0 else RED)
             if kj > 0: fr.rrect([cx0 + 40, ry + 42, cx0 + 40 + max(bw, 24), ry + 72], 15, col, kc)
-            fr.text((cx1 - 40, ry + 22), f"${amt}", font("xb", 52), col, kj, anchor="ra", dy=0)
-        fr.text((W / 2, cy + 315), st["source"], font("m", 24), GREY, kc, anchor="ma", dy=0)
+            fr.text((cx1 - 40, ry + 22), f"{amt}%" if unit == "%" else f"${amt}", font("xb", 52), col, kj, anchor="ra", dy=0)
+        fr.text((W / 2, cy + ch_ + 15), st["source"], font("m", 24), GREY, kc, anchor="ma", dy=0)
     turn = sp.get("turn_cue")             # sentence index where she turns from the pain to the fix
     if turn is not None and turn < len(cues) and t >= cues[turn] - 0.1: mood = "neutral"
     moods = sp.get("moods")               # optional per-sentence moods, e.g. ["neutral", "worried", "neutral"]

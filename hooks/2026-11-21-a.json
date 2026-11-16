@@ -1,5 +1,141 @@
-{"id": "2026-11-21-a",
- "small": "Two incomes. Mortgage. Kids.",
- "lines": [["And still", "ink"], ["nothing left", "ink"], ["before payday?", "orange"]],
- "narration": ["Two incomes. A mortgage. Kids.", "And still nothing left before payday?"],
- "chart": true}
+{
+ "id": "2026-11-21-a",
+ "format": "story",
+ "character": "e",
+ "character_voice": "elevenlabs:cjVigY5qzO86Huf0OWal:eleven_v3",
+ "music": true,
+ "hook": {
+  "small": "Two incomes. Mortgage. Kids.",
+  "lines": [
+   [
+    "Still nothing left",
+    "ink"
+   ],
+   [
+    "before payday?",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "[warm] Two incomes. A mortgage. Kids.",
+   "[sighs] And somehow, still nothing left before payday?",
+   "[reassuring] You're not alone. One study found forty-four percent of people earning over a hundred thousand dollars live paycheck to paycheck.",
+   "The fix isn't earning more. It's the order you spend in."
+  ],
+  "moods": [
+   "neutral",
+   "worried",
+   "neutral",
+   "neutral"
+  ],
+  "stat": {
+   "title": "Earning over $100K a year",
+   "rows": [
+    [
+     "Living paycheck to paycheck",
+     44
+    ]
+   ],
+   "unit": "%",
+   "max": 100,
+   "color": "red",
+   "source": "PYMNTS Intelligence & LendingClub, survey of 3,648 US consumers, Sept 2023",
+   "cue": 2
+  }
+ },
+ "plan": {
+  "title": [
+   [
+    "Four numbers.",
+    "ink"
+   ],
+   [
+    "That's the plan.",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "[warm] It starts with your household income,",
+   "and your fixed bills, both checked against your bank history.",
+   "Then you pick what to save.",
+   "[satisfied] What's left is your safe-to-spend money."
+  ],
+  "rows": [
+   {
+    "label": "Household income",
+    "amount": 11400,
+    "tag": "Checked against your bank"
+   },
+   {
+    "label": "Fixed bills",
+    "amount": 7600,
+    "tag": "Checked against your bank"
+   },
+   {
+    "label": "Savings",
+    "amount": 1200,
+    "tag": "You pick the amount"
+   },
+   {
+    "label": "Safe-to-spend",
+    "amount": 2600,
+    "tag": "About $600 a week"
+   }
+  ]
+ },
+ "guide": {
+  "title": [
+   [
+    "Then a daily guide",
+    "ink"
+   ],
+   [
+    "for safe-to-spend.",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "Your safe-to-spend money gets a daily and a weekly number. Today, that's eighty-six dollars.",
+   "Then it's back-to-school shopping. A hundred and eighty dollars, so you're ninety-four over for today. [reassuring] DivvyUpp spreads that across the rest of your week, and tomorrow adjusts to sixty-two.",
+   "[cheerful] And it's pizza night. Forty-five more. Tomorrow adjusts again, to fifty, and the week still works."
+  ],
+  "week": 600,
+  "today": 86,
+  "spends": [
+   {
+    "label": "Back-to-school shopping",
+    "amount": 180,
+    "tomorrow": 62
+   },
+   {
+    "label": "Pizza night",
+    "amount": 45,
+    "tomorrow": 50
+   }
+  ]
+ },
+ "payoff": {
+  "title": [
+   [
+    "Payday to payday.",
+    "ink"
+   ],
+   [
+    "Nothing missing.",
+    "orange"
+   ]
+  ],
+  "checks": [
+   "Bills paid",
+   "Savings kept",
+   "Family covered"
+  ],
+  "narration": [
+   "[happy] Bills paid.",
+   "Savings kept.",
+   "[warm] And the family's covered, right up to payday."
+  ]
+ },
+ "skip_flip": true,
+ "ending": "rendered"
+}
