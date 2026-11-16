@@ -2,7 +2,7 @@
  "id": "2026-11-18-a",
  "format": "story",
  "character": "c",
- "character_voice": "af_heart",
+ "character_voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
  "music": true,
  "hook": {
   "small": "Save more or spend less.",
@@ -17,8 +17,8 @@
    ]
   ],
   "narration": [
-   "What if a money app had to prove it works?",
-   "Ninety days. If you don't save more or spend less, we refund your subscription."
+   "[curious] What if a money app had to prove it works?",
+   "[confident] Ninety days. If you don't save more or spend less, we refund your subscription."
   ],
   "moods": [
    "neutral",
@@ -32,14 +32,14 @@
     "ink"
    ],
    [
-    "for the rest.",
+    "for safe-to-spend.",
     "orange"
    ]
   ],
   "narration": [
-   "The rest gets a daily and a weekly number.",
-   "Your kid's birthday party, a hundred and twenty. Tomorrow adjusts to sixty-three.",
-   "Then a school trip, forty-five. Tomorrow: fifty-one.",
+   "Your safe-to-spend money gets a daily and a weekly number. Today, that's seventy-four dollars.",
+   "Then it's your kid's birthday party. A hundred and twenty dollars, so you're forty-six over for today. [reassuring] DivvyUpp spreads that across the rest of your week, and tomorrow adjusts to sixty-three.",
+   "[light laugh] Then there's a school trip. Forty-five more. Tomorrow adjusts again, to fifty-one, and your week still works.",
    "You know before you spend, not after."
   ],
   "week": 520,
@@ -74,10 +74,51 @@
    "No guilt"
   ],
   "narration": [
-   "Bills paid.",
+   "[happy] Bills paid.",
    "Savings kept.",
    "The party happened, guilt-free."
   ]
  },
- "skip_flip": false
+ "skip_flip": true,
+ "ending": "rendered",
+ "plan": {
+  "title": [
+   [
+    "Four numbers.",
+    "ink"
+   ],
+   [
+    "That's the plan.",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "[warm] It starts with your income,",
+   "and your fixed bills, both checked against your bank history.",
+   "Then you pick what to save.",
+   "[satisfied] What's left is your safe-to-spend money."
+  ],
+  "rows": [
+   {
+    "label": "Income",
+    "amount": 9200,
+    "tag": "Checked against your bank"
+   },
+   {
+    "label": "Fixed bills",
+    "amount": 5970,
+    "tag": "Checked against your bank"
+   },
+   {
+    "label": "Savings",
+    "amount": 1000,
+    "tag": "You pick the amount"
+   },
+   {
+    "label": "Safe-to-spend",
+    "amount": 2230,
+    "tag": "About $520 a week"
+   }
+  ]
+ }
 }

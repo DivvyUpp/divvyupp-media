@@ -2,7 +2,7 @@
  "id": "2026-11-16-a",
  "format": "story",
  "character": "c",
- "character_voice": "af_heart",
+ "character_voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
  "music": true,
  "hook": {
   "small": "It's the 28th.",
@@ -17,17 +17,11 @@
    ]
   ],
   "narration": [
-   "It's the twenty-eighth.",
+   "[frustrated] It's the twenty-eighth.",
    "Your budgeting app finally tells you that you overspent.",
-   [
-    "Oh. Thanks.",
-    0.82
-   ],
-   [
-    "Super helpful.",
-    0.85
-   ],
-   "DivvyUpp is different."
+   "[sarcastic] Oh. Thanks.",
+   "[deadpan] Super helpful.",
+   "[upbeat] DivvyUpp is different."
   ],
   "aside": {
    "text": "Thanks. Super helpful.",
@@ -47,15 +41,19 @@
    ]
   ],
   "narration": [
-   "Then you get a daily and a weekly number for what's left to spend.",
-   "Overspend on a dinner out, and tomorrow adjusts right away.",
+   "Your safe-to-spend money gets a daily and a weekly number. Today, that's sixty-six dollars.",
+   "[sighs] Then dinner out comes to a hundred and twenty dollars, so you're fifty-four over for today. [reassuring] DivvyUpp spreads that across the rest of your week, and tomorrow adjusts to fifty-seven.",
    "So you find out before you spend, not on the twenty-eighth."
   ],
   "week": 466,
   "today": 66,
-  "spend_label": "Dinner out",
-  "spend": 120,
-  "tomorrow": 57
+  "spends": [
+   {
+    "label": "Dinner out",
+    "amount": 120,
+    "tomorrow": 57
+   }
+  ]
  },
  "payoff": {
   "title": [
@@ -74,11 +72,52 @@
    "Guilt-free spending"
   ],
   "narration": [
-   "Your bills get paid.",
+   "[happy] Your bills get paid.",
    "Your savings stay saved.",
    "And you spend the rest, guilt-free.",
-   "No surprises at the end of the month."
+   "[warm] No surprises at the end of the month."
   ]
  },
- "skip_flip": false
+ "skip_flip": true,
+ "ending": "rendered",
+ "plan": {
+  "title": [
+   [
+    "Four numbers.",
+    "ink"
+   ],
+   [
+    "That's the plan.",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "[warm] It starts with your income,",
+   "and your fixed bills, both checked against your bank history.",
+   "Then you pick what to save.",
+   "[satisfied] What's left is your safe-to-spend money."
+  ],
+  "rows": [
+   {
+    "label": "Income",
+    "amount": 8600,
+    "tag": "Checked against your bank"
+   },
+   {
+    "label": "Fixed bills",
+    "amount": 5600,
+    "tag": "Checked against your bank"
+   },
+   {
+    "label": "Savings",
+    "amount": 1000,
+    "tag": "You pick the amount"
+   },
+   {
+    "label": "Safe-to-spend",
+    "amount": 2000,
+    "tag": "About $466 a week"
+   }
+  ]
+ }
 }

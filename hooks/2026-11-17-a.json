@@ -2,7 +2,7 @@
  "id": "2026-11-17-a",
  "format": "story",
  "character": "c",
- "character_voice": "af_heart",
+ "character_voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
  "music": true,
  "hook": {
   "small": "Built for our founder first.",
@@ -17,9 +17,9 @@
    ]
   ],
   "narration": [
-   "Our founder saves about a thousand dollars a month with DivvyUpp.",
-   "He makes good money, but every month, there was nothing to show for it.",
-   "So he built DivvyUpp to fix his own problem. Bills first. Save first. Then a daily guide for the rest."
+   "[proud] Our founder saves about a thousand dollars a month with DivvyUpp.",
+   "[sighs] He makes good money, but every month, there was nothing to show for it.",
+   "[determined] So he built DivvyUpp to fix his own problem. Bills first. Save first. Then a daily guide for the rest."
   ],
   "moods": [
    "neutral",
@@ -39,9 +39,9 @@
    ]
   ],
   "narration": [
-   "Your spending money gets a daily and a weekly number.",
-   "An extra grocery run: a hundred and twelve dollars. Tomorrow adjusts to fifty-five.",
-   "Then an online order, ninety dollars. Tomorrow adjusts again, to thirty-three.",
+   "Your spending money gets a daily and a weekly number. Today, that's sixty-six dollars.",
+   "[sighs] Then an extra grocery run comes to a hundred and twelve dollars, so you're forty-six over for today. [reassuring] DivvyUpp spreads that across the rest of your week, and tomorrow adjusts to fifty-five.",
+   "Later, an online order lands. Ninety dollars. Tomorrow adjusts again, to thirty-three, [cheerful] and your week still works.",
    "You know before you spend, not after."
   ],
   "week": 466,
@@ -76,10 +76,11 @@
    "Bills paid"
   ],
   "narration": [
-   "One big day didn't touch your savings.",
+   "[happy] One big day didn't touch your savings.",
    "The rest of the week adjusted to cover it.",
    "And your bills still got paid."
   ]
  },
- "skip_flip": true
+ "skip_flip": true,
+ "ending": "rendered"
 }
