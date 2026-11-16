@@ -2,7 +2,7 @@
  "id": "2026-11-19-a",
  "format": "story",
  "character": "c",
- "character_voice": "af_heart",
+ "character_voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
  "music": true,
  "hook": {
   "small": "Hate budgeting? Good.",
@@ -17,8 +17,8 @@
    ]
   ],
   "narration": [
-   "Hate budgeting? Good.",
-   "No spreadsheets. No categories. DivvyUpp sorts every transaction into fixed or flexible for you."
+   "[playful] Hate budgeting? [short pause] Good!",
+   "[excited] No spreadsheets. No categories. DivvyUpp sorts every transaction into fixed or flexible... for you."
   ],
   "moods": [
    "happy",
@@ -38,8 +38,8 @@
   ],
   "narration": [
    "Your safe-to-spend money gets a daily and a weekly number. Today, that's seventy dollars.",
-   "Then your car needs a repair. That's a hundred and sixty dollars, so you're ninety over for today. DivvyUpp spreads that across the rest of your week, and tomorrow adjusts to forty-seven.",
-   "Later, you order takeout for forty-five dollars. Tomorrow adjusts again, to thirty-six, and your week still works.",
+   "[sighs] Then your car needs a repair. That's a hundred and sixty dollars, so you're ninety over for today. [reassuring] DivvyUpp spreads that across the rest of your week, and tomorrow adjusts to forty-seven.",
+   "Later, you order takeout for forty-five dollars. Tomorrow adjusts again, to thirty-six, [cheerful] and your week still works.",
    "You know before you spend, not after."
   ],
   "week": 490,
@@ -74,7 +74,7 @@
    "Week adjusted"
   ],
   "narration": [
-   "Nothing to set up.",
+   "[happy] Nothing to set up.",
    "Savings kept.",
    "And the week still works."
   ]
@@ -92,10 +92,10 @@
    ]
   ],
   "narration": [
-   "It starts with your income,",
+   "[warm] It starts with your income,",
    "and your fixed bills, both checked against your bank history.",
    "Then you pick what to save.",
-   "What's left is your safe-to-spend money."
+   "[satisfied] What's left is your safe-to-spend money."
   ],
   "rows": [
    {

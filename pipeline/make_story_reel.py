@@ -10,7 +10,8 @@ Usage:  python3 pipeline/make_story_reel.py hooks/<id>.json          -> reels/<i
 Spec (JSON):
 {
   "id": "2026-11-15-a", "format": "story",
-  "character": "c" (presenter id from characters.py), "character_voice": "af_heart", "name_tag": "" (optional),
+  "character": "c" (presenter id from characters.py), "character_voice": "af_heart" (Kokoro) or
+  "elevenlabs:<voice_id>[:<model_id>]" (ElevenLabs, default model eleven_v3; needs ELEVENLABS_API_KEY), "name_tag": "" (optional),
   "hook":   {"small": "...", "lines": [["...", "ink"|"orange"], ...], "narration": ["..."],
              "moods": ["neutral", "worried", ...] (optional, one per sentence; default worried until turn_cue)},
   "guide":  {"title": [["...", "ink"|"orange"], ...], "narration": ["..."],
@@ -37,7 +38,56 @@ SKIN = (198, 136, 98); SKIN_D = (170, 110, 78); HAIR = (38, 28, 24); SHIRT = ORA
 RED = (200, 40, 30); GREEN = (30, 140, 80); CARD_BG = (255, 255, 255)
 
 # ---------- voice + mouth envelope ----------
+LETTER_PHONEME = {**{c: "a" for c in "a"}, **{c: "e" for c in "eiy"}, **{c: "o" for c in "o"}, **{c: "u" for c in "uw"},
+                  **{c: "m" for c in "mbp"}, **{c: "f" for c in "fv"}, **{c: "l" for c in "ltdn"}, **{c: "s" for c in "szcgkhjqxr"}}
+
+def _el_key():
+    k = os.environ.get("ELEVENLABS_API_KEY")
+    if not k:
+        f = os.path.expanduser("~/.secrets/elevenlabs_key")
+        if os.path.exists(f): k = open(f).read().strip()
+    if not k: sys.exit("ElevenLabs voice requested but no ELEVENLABS_API_KEY (or ~/.secrets/elevenlabs_key)")
+    return k
+
+def narrate_elevenlabs(sentences, voice, out_wav):
+    """voice = "elevenlabs:<voice_id>[:<model_id>]". One request for the whole segment so the delivery flows;
+    sentences may carry v3 audio tags like [excited]. Returns the same shape as narrate(): sentence cues come from the
+    character timings, and letters stand in for phonemes for the lip-sync. Responses are cached by text+voice+model."""
+    import base64, hashlib, urllib.request, soundfile as sf
+    parts = voice.split(":"); vid = parts[1]; model = parts[2] if len(parts) > 2 else "eleven_v3"
+    texts = [x[0] if isinstance(x, list) else x for x in sentences]
+    text = " ".join(texts); starts, pos = [], 0
+    for x in texts: starts.append(pos); pos += len(x) + 1
+    os.makedirs(os.path.join(CACHE, "eleven"), exist_ok=True)
+    h = hashlib.sha256(f"{vid}|{model}|{text}".encode()).hexdigest()[:20]; cf = os.path.join(CACHE, "eleven", h + ".json")
+    if os.path.exists(cf): r = json.load(open(cf))
+    else:
+        req = urllib.request.Request(f"https://api.elevenlabs.io/v1/text-to-speech/{vid}/with-timestamps?output_format=mp3_44100_128",
+                                     data=json.dumps({"text": text, "model_id": model}).encode(),
+                                     headers={"xi-api-key": _el_key(), "Content-Type": "application/json"})
+        r = json.load(urllib.request.urlopen(req, timeout=300)); json.dump(r, open(cf, "w"))
+    mp3 = os.path.join(os.path.dirname(out_wav), h + ".mp3"); open(mp3, "wb").write(base64.b64decode(r["audio_base64"]))
+    sr = 24000
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", mp3, "-ac", "1", "-ar", str(sr), out_wav], check=True)
+    audio, _ = sf.read(out_wav)
+    al = r["alignment"]; ch, st, en = al["characters"], al["character_start_times_seconds"], al["character_end_times_seconds"]
+    in_tag, phon = False, []
+    for c, a, b in zip(ch, st, en):
+        if c == "[": in_tag = True
+        if not in_tag: phon.append((LEAD + a, LEAD + b, LETTER_PHONEME.get(c.lower(), " ")))
+        if c == "]": in_tag = False
+    def first_spoken(i):                 # time of the first spoken letter at or after char index i (skips tags)
+        tag = False
+        for j in range(i, len(ch)):
+            if ch[j] == "[": tag = True
+            elif ch[j] == "]": tag = False
+            elif not tag and ch[j].isalnum(): return st[j]
+        return st[-1]
+    cues = [LEAD + first_spoken(i) for i in starts]
+    return len(audio) / sr, cues, sr, audio, phon
+
 def narrate(sentences, voice, out_wav):
+    if voice.startswith("elevenlabs:"): return narrate_elevenlabs(sentences, voice, out_wav)
     """Speak each sentence; return duration, sentence cues, sample rate, audio and phoneme timings
     [(start, end, phoneme)] in reel seconds (LEAD included). Uses kokoro-timed.onnx (built by setup.sh),
     the same model with its per-phoneme durations exposed, so the mouth follows the actual speech."""
