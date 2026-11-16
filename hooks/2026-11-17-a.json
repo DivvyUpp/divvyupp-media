@@ -1,5 +1,71 @@
-{"id": "2026-11-17-a",
- "small": "Nothing left at month end?",
- "lines": [["Our founder now", "ink"], ["saves about", "ink"], ["$1,000 a month.", "orange"]],
- "narration": ["Nothing left at the end of the month?", "Our founder was there too. Now our founder saves about a thousand dollars a month."],
- "chart": false}
+{
+ "id": "2026-11-17-a",
+ "format": "story",
+ "character": "c",
+ "character_voice": "af_heart",
+ "music": true,
+ "hook": {
+  "small": "Nothing left at month end?",
+  "lines": [
+   [
+    "Our founder now saves",
+    "ink"
+   ],
+   [
+    "about $1,000 a month.",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "Good salary, and still nothing left at the end of the month?",
+   "Our founder was there too. Now our founder saves about a thousand dollars a month.",
+   "Here's what changed."
+  ],
+  "turn_cue": 1
+ },
+ "guide": {
+  "title": [
+   [
+    "Then a daily guide",
+    "ink"
+   ],
+   [
+    "for the rest.",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "Then you get a daily and a weekly number for what's left to spend.",
+   "Overspend on a dinner out, and the rest of your week adjusts.",
+   "So you know before you spend."
+  ],
+  "week": 466,
+  "today": 66,
+  "spend_label": "Dinner out",
+  "spend": 120,
+  "tomorrow": 57
+ },
+ "payoff": {
+  "title": [
+   [
+    "Same order.",
+    "ink"
+   ],
+   [
+    "Every month.",
+    "orange"
+   ]
+  ],
+  "checks": [
+   "Bills paid",
+   "$1,000 saved",
+   "Guilt-free spending"
+  ],
+  "narration": [
+   "Your bills get paid.",
+   "Your savings stay saved.",
+   "And you spend the rest, guilt-free."
+  ]
+ },
+ "skip_flip": false
+}
