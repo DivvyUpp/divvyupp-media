@@ -131,6 +131,8 @@ def one_take(spec, names, tmp):
         clip = audio[int(a0 * sr):int(a1 * sr)]
         loud = np.where(np.abs(clip) > 0.01)[0]                       # trim trailing silence, keep a short tail
         if len(loud): clip = clip[:min(len(clip), loud[-1] + int(0.25 * sr))]
+        fl = min(len(clip) // 4, int(0.03 * sr))                       # short fades: no clicks at the cut points
+        if fl: clip = clip.copy(); clip[:fl] *= np.linspace(0, 1, fl); clip[-fl:] *= np.linspace(1, 0, fl)
         cues = [LEAD + first_spoken(i) - a0 for i in sent_starts[k]]
         lo = sent_starts[k][0]; hi = sent_starts[k + 1][0] if k + 1 < len(segs) else len(ch)
         in_tag, phon = False, []
@@ -400,14 +402,18 @@ def cta_scene(fr, t, sp, cues, mouth, spec):
 SCENES = {"hook": hook_scene, "plan": plan_scene, "guide": guide_scene, "payoff": payoff_scene,
           "guarantee": guarantee_scene, "cta": cta_scene}
 
-def render_segment(name, spec, tmp, bg, check_dir=None):
+XFADE = 0.3   # seconds of dissolve between scenes (no dip to an empty background)
+
+def render_segment(name, spec, tmp, bg, check_dir=None, last=False):
     sp = spec[name]; voice = spec.get("character_voice", "af_heart")
     wav = os.path.join(tmp, f"{name}.wav")
     dur, cues, sr, audio, phon = narrate(sp["narration"], voice, wav)
     total = LEAD + dur + TAIL; n = round(total * FPS); env = mouth_env(audio, sr, total)
     vis = viseme_track(phon, n) if phon else None
     def draw(f):
-        tt = f / FPS; fr = Frame(bg, tt, total); SCENES[name](fr, tt, sp, cues, vis[min(f, n - 1)] if vis else env[min(f, n - 1)], spec); return fr.img()
+        tt = f / FPS; fr = Frame(bg, tt, total)
+        fr.g = min(min(1.0, tt / 0.35) if name == "hook" else 1.0, min(1.0, (total - tt) / 0.35) if last else 1.0)   # fade only at the very start/end
+        SCENES[name](fr, tt, sp, cues, vis[min(f, n - 1)] if vis else env[min(f, n - 1)], spec); return fr.img()
     if check_dir:
         f = next((i for i, v in enumerate(vis or []) if v in ("A", "E")), int((total - 1.0) * FPS)); draw(f).save(os.path.join(check_dir, f"{spec['id']}_check_{name}.jpg"), quality=85)
         return None
@@ -443,28 +449,34 @@ def main():
         for name in [n for n in ("hook", "plan", "guide", "payoff", "guarantee", "cta") if n in spec]: render_segment(name, spec, tmp, bg, os.path.join(ROOT, "reels"))
         print("check frames written"); return
     body, sr = sf.read(os.path.join(HERE, "assets", "body_audio.flac"))
-    hook_v, hook_a, _ = render_segment("hook", spec, tmp, bg)
+    rendered_end = spec.get("ending") == "rendered"   # same-voice guarantee + CTA instead of the old body part 2
     skip_flip = spec.get("skip_flip", False) or "plan" in spec   # true: go straight from the hook to the guide
-    plan_v, plan_a = render_segment("plan", spec, tmp, bg)[:2] if "plan" in spec else (None, None)
-    b1_v, b1_d = (None, 0) if skip_flip else body_part(tmp, 0, BODY_SPLIT, "body1")
-    guide_v, guide_a, _ = render_segment("guide", spec, tmp, bg)
-    pay_v, pay_a, _ = render_segment("payoff", spec, tmp, bg)
-    rendered_end = spec.get("ending") == "rendered"   # Jessica-voiced guarantee + CTA instead of the old body part 2
-    if rendered_end:
-        for name in ("guarantee", "cta"): spec.setdefault(name, ENDING[name])
-        g_v, g_a, _ = render_segment("guarantee", spec, tmp, bg); c_v, c_a, _ = render_segment("cta", spec, tmp, bg)
-        b2_v, b2_d = None, 0
-    else:
-        b2_v, b2_d = body_part(tmp, BODY_SPLIT, None, "body2")
     cut = int(round(BODY_SPLIT * sr)); b1_a = body[:cut]; b2_a = body[cut:]
     def fit(a, d): n = int(round(d * sr)); return np.pad(a, (0, max(0, n - len(a))))[:n]
-    audio = np.concatenate([hook_a * 0.95] + ([plan_a * 0.95] if plan_v else []) + ([] if skip_flip else [fit(b1_a, b1_d)]) + [guide_a * 0.95, pay_a * 0.95] + ([g_a * 0.95, c_a * 0.95] if rendered_end else [fit(b2_a, b2_d)]))
+    order = ["hook"] + (["plan"] if "plan" in spec else []) + ([] if skip_flip else ["body1"]) + ["guide", "payoff"] + \
+            (["guarantee", "cta"] if rendered_end else ["body2"])
+    clips = []                                           # (video path, audio aligned to the clip's frames)
+    for i, name in enumerate(order):
+        if name == "body1": v, d = body_part(tmp, 0, BODY_SPLIT, "body1"); clips.append((v, fit(b1_a, d)))
+        elif name == "body2": v, d = body_part(tmp, BODY_SPLIT, None, "body2"); clips.append((v, fit(b2_a, d)))
+        else: v, a, _ = render_segment(name, spec, tmp, bg, last=(i == len(order) - 1)); clips.append((v, a * 0.95))
+    # audio: overlap-add each join by XFADE (the overlap is the silent tail/lead of the scenes, so speech never collides)
+    X = int(XFADE * sr); audio = clips[0][1].copy()
+    for _, a in clips[1:]:
+        ramp = np.linspace(0, 1, X); head = a[:X] * ramp; audio[-X:] = audio[-X:] * (1 - ramp) + head
+        audio = np.concatenate([audio, a[X:]])
     if spec.get("music", True):
         from music import mix_under
         audio = mix_under(audio, sr)
     sf.write(os.path.join(tmp, "full.wav"), audio, sr)
-    open(os.path.join(tmp, "list.txt"), "w").write("".join(f"file '{v}'\n" for v in (hook_v, plan_v, b1_v, guide_v, pay_v) + ((g_v, c_v) if rendered_end else (b2_v,)) if v))
-    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", os.path.join(tmp, "list.txt"), "-c", "copy", os.path.join(tmp, "v.mp4")], check=True)
+    # video: dissolve between scenes with xfade; offsets follow the same overlap as the audio
+    durs = [len(a) / sr for _, a in clips]; inputs = []; fc = []; prev = "0:v"; t = durs[0]
+    for v, _ in clips: inputs += ["-i", v]
+    for i in range(1, len(clips)):
+        off = t - XFADE; lab = f"x{i}"
+        fc.append(f"[{prev}][{i}:v]xfade=transition=fade:duration={XFADE}:offset={off:.4f}[{lab}]"); prev = lab; t = off + durs[i]
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error"] + inputs + ["-filter_complex", ";".join(f"[{i}:v]fps={FPS},settb=AVTB,setpts=PTS-STARTPTS[s{i}]" for i in range(len(clips))).replace("", "") if False else ";".join(fc),
+                    "-map", f"[{prev}]", "-r", str(FPS), "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p", os.path.join(tmp, "v.mp4")], check=True)
     out = os.path.join(ROOT, "reels", rid + ".mp4"); part = out + ".part.mp4"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", os.path.join(tmp, "v.mp4"), "-i", os.path.join(tmp, "full.wav"), "-map", "0:v", "-map", "1:a",
                     "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", part], check=True)
