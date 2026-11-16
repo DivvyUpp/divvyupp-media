@@ -8,24 +8,35 @@
   "small": "Quick question:",
   "lines": [
    [
-    "What do you really",
+    "What do you really spend?",
     "ink"
-   ],
-   [
-    "spend each month?",
-    "orange"
    ]
   ],
   "narration": [
    "[curious] Quick question. How much do you actually spend on the flexible stuff every month?",
-   "[chuckles] Most of us guess low.",
+   "[knowing] Most of us guess low. In one survey, people guessed eighty-six dollars a month, on subscriptions alone. The real number was two hundred and nineteen.",
    "[reassuring] DivvyUpp checks your bank history, so you know for sure."
   ],
   "moods": [
    "neutral",
-   "happy",
-   "neutral"
-  ]
+   "neutral",
+   "happy"
+  ],
+  "stat": {
+   "title": "Monthly subscriptions alone",
+   "rows": [
+    [
+     "What people guessed",
+     86
+    ],
+    [
+     "What they actually spent",
+     219
+    ]
+   ],
+   "source": "C+R Research survey of 1,000 consumers, 2022",
+   "cue": 1
+  }
  },
  "plan": {
   "title": [
@@ -87,7 +98,7 @@
   ],
   "narration": [
    "Your safe-to-spend money gets a daily and a weekly number. Today, seventy dollars.",
-   "[sighs] Then the kids need new soccer gear. That's ninety-five dollars, so you're twenty-five over for today. [reassuring] DivvyUpp spreads that across the rest of your week, and tomorrow adjusts to sixty-three.",
+   "[cheerful] Then the kids need new soccer gear. That's ninety-five dollars, so you're twenty-five over for today. [reassuring] DivvyUpp spreads that across the rest of your week, and tomorrow adjusts to sixty-three.",
    "Later, a pharmacy run. Forty-eight dollars. Tomorrow adjusts again, to fifty-one, [warm] and the week still works."
   ],
   "week": 490,
@@ -122,9 +133,9 @@
    "Bills paid"
   ],
   "narration": [
-   "[satisfied] Your flexible spending stays in bounds.",
-   "Your savings stay put.",
-   "[happy] And your bills still get paid."
+   "[satisfied] Spending in bounds.",
+   "Savings kept.",
+   "[happy] Bills paid."
   ]
  },
  "skip_flip": true,

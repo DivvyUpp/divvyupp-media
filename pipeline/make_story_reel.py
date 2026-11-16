@@ -171,11 +171,27 @@ def hook_scene(fr, t, sp, cues, mouth, spec):
         f = font("xb", 46); tw = fr.tl(aside["text"], f); ay = y + 2 * 118 + 40
         fr.rrect([W / 2 - tw / 2 - 36, ay, W / 2 + tw / 2 + 36, ay + 88], 44, INK, k2)
         fr.text((W / 2, ay + 44), aside["text"], f, WHITE, k2, anchor="mm", dy=0)
+    st = sp.get("stat")                  # {"title", "rows": [[label, amount], [label, amount]], "source", "cue"}: guess vs actual
+    if st:
+        c0 = cues[st.get("cue", 1)] if st.get("cue", 1) < len(cues) else 2.0
+        kc = appear(t, c0, 0.4); cx0, cx1, cy = 110, W - 110, y + len(sp["lines"]) * 118 + 30
+        fr.rrect([cx0, cy, cx1, cy + 300], 36, WHITE, kc)
+        fr.text((cx0 + 40, cy + 30), st["title"].upper(), font("b", 26), GREY, kc, dy=0)
+        mx = max(a for _, a in st["rows"])
+        for j, (lab, amt) in enumerate(st["rows"]):
+            kj = appear(t, c0 + 0.6 + j * 1.6, 0.6); ry = cy + 85 + j * 95
+            fr.text((cx0 + 40, ry), lab, font("b", 30), INK, kc, dy=0)
+            bw = (cx1 - cx0 - 250) * amt / mx * kj
+            col = GREY if j == 0 else RED
+            if kj > 0: fr.rrect([cx0 + 40, ry + 42, cx0 + 40 + max(bw, 24), ry + 72], 15, col, kc)
+            fr.text((cx1 - 40, ry + 22), f"${amt}", font("xb", 52), col, kj, anchor="ra", dy=0)
+        fr.text((W / 2, cy + 315), st["source"], font("m", 24), GREY, kc, anchor="ma", dy=0)
     turn = sp.get("turn_cue")             # sentence index where she turns from the pain to the fix
     if turn is not None and turn < len(cues) and t >= cues[turn] - 0.1: mood = "neutral"
     moods = sp.get("moods")               # optional per-sentence moods, e.g. ["neutral", "worried", "neutral"]
     if moods: mood = moods[min(len(moods) - 1, max([i for i, c in enumerate(cues) if t >= c - 0.1] or [0]))]
-    character(fr.layer, W / 2, 820, 1150, t, mouth, mood, appear(t, 0.15) * fr.g, spec["character"])
+    ctop, ch = (1010, 1000) if st else (820, 1150)          # make room for a stat card
+    character(fr.layer, W / 2, ctop, ch, t, mouth, mood, appear(t, 0.15) * fr.g, spec["character"])
     if spec.get("name_tag"):
         f = font("b", 30); tw = fr.tl(spec["name_tag"], f); kk = appear(t, 0.8)
         fr.rrect([W / 2 - tw / 2 - 28, 1680, W / 2 + tw / 2 + 28, 1744], 32, WHITE, kk)
@@ -251,16 +267,21 @@ def plan_scene(fr, t, sp, cues, mouth, spec):
     cols = [INK, (150, 140, 136), ORANGE, GREEN, RED]      # a 5th row (e.g. "Flexible spending lately", "bar": false) is red
     k0 = appear(t, cues[0] if cues else 0.6)
     fr.rrect([x0, by, x1, by + 56], 28, (240, 232, 228), appear(t, 0.6))
-    # segments for rows 1.. (fixed, savings, safe-to-spend) replace the full income bar as each is named
+    # segments are plain rectangles drawn on their own layer, then clipped to one rounded bar so they join cleanly
+    seg = Image.new("RGBA", fr.layer.size, (0, 0, 0, 0)); sd = ImageDraw.Draw(seg)
+    k1 = appear(t, cues[1] if len(cues) > 1 else 9)
+    if k0 > 0 and k1 < 1:                                        # income fills the bar, then hands over to the split
+        sd.rectangle([x0 * S, by * S, (x0 + (x1 - x0) * k0) * S, (by + 56) * S], fill=cols[0] + (int(fr.a(k0) * (1 - k1)),))
     xs = x0
     for i, r in enumerate(rows[1:], 1):
         if r.get("bar") is False: continue
         ki = appear(t, cues[i] if i < len(cues) else 2.0 + i, 0.5)
         wseg = (x1 - x0) * r["amount"] / total
-        if ki > 0: fr.rrect([xs, by, xs + wseg * ki, by + 56], 28 if i in (1, len(rows) - 1) else 6, cols[i], ki)
+        if ki > 0: sd.rectangle([xs * S, by * S, (xs + wseg * ki) * S + 1, (by + 56) * S], fill=cols[i] + (fr.a(ki),))
         xs += wseg
-    if k0 > 0 and appear(t, cues[1] if len(cues) > 1 else 9) < 0.05:
-        fr.rrect([x0, by, x0 + (x1 - x0) * k0, by + 56], 28, cols[0], k0)
+    mask = Image.new("L", fr.layer.size, 0); ImageDraw.Draw(mask).rounded_rectangle([x0 * S, by * S, x1 * S, (by + 56) * S], 28 * S, fill=255)
+    seg.putalpha(Image.fromarray(np.minimum(np.asarray(seg.split()[3]), np.asarray(mask))))
+    fr.layer.alpha_composite(seg)
     y = by + 110
     for i, r in enumerate(rows):
         ki = appear(t, cues[i] if i < len(cues) else 2.0 + i)
@@ -278,7 +299,7 @@ ENDING = {
     "guarantee": {"narration": ["Try DivvyUpp for ninety days.",
                                 "If you don't save more or spend less, we refund your subscription, up to thirty dollars.",
                                 "Terms apply."]},
-    "cta": {"narration": ["[warm] Save first. Then spend with confidence.", "Try it at divvyupp dot com."]},
+    "cta": {"narration": ["[warm] Save first. Then spend with confidence.", "DivvyUpp dot com."]},
 }
 
 def guarantee_scene(fr, t, sp, cues, mouth, spec):
