@@ -19,13 +19,11 @@
   "narration": [
    "[excited] Whoa, whoa, whoa. I've seen your bank history!",
    "[laughs] Four coffees, two takeouts, AND a quick little online order? On a TUESDAY?",
-   "[smug] Relax, pal. I'm a raccoon. I know exactly where money disappears to.",
-   "[excited] And DivvyUpp makes it stop disappearing!"
+   "[smug] Relax, pal. I'm a raccoon. I know exactly where money disappears to."
   ],
   "moods": [
    "happy",
    "unimpressed",
-   "happy",
    "happy"
   ]
  },
@@ -82,8 +80,8 @@
   ],
   "narration": [
    "Your safe-to-spend gets a daily and a weekly number. Today? Seventy bucks.",
-   "[gasps] Then you buy concert tickets. A hundred and forty dollars! So you're seventy over for today. [laughs] Eh, fine. DivvyUpp spreads that across the rest of your week, and tomorrow adjusts to fifty-two.",
-   "Then takeout. AGAIN. Thirty-eight dollars. Tomorrow adjusts to forty-three, and the week still works. [smug] You're welcome."
+   "[gasps] Then you buy concert tickets. A hundred and forty bucks! You're seventy over for today. [laughs] Eh, fine. DivvyUpp spreads it across your week, and tomorrow adjusts to fifty-two.",
+   "Then takeout. AGAIN. Thirty-eight bucks. Tomorrow adjusts to forty-three. Week still works. [smug] You're welcome."
   ],
   "week": 490,
   "today": 70,
