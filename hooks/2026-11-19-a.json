@@ -37,10 +37,10 @@
    ]
   ],
   "narration": [
-   "Your safe-to-spend money gets a daily and a weekly number.",
-   "A car repair, a hundred and sixty. Tomorrow: forty-seven.",
-   "Then takeout, forty-five. Tomorrow: thirty-six.",
-   "Before you spend, not after."
+   "Your safe-to-spend money gets a daily and a weekly number. Today, that's seventy dollars.",
+   "Then your car needs a repair. That's a hundred and sixty dollars, so you're ninety over for today. DivvyUpp spreads that across the rest of your week, and tomorrow adjusts to forty-seven.",
+   "Later, you order takeout for forty-five dollars. Tomorrow adjusts again, to thirty-six, and your week still works.",
+   "You know before you spend, not after."
   ],
   "week": 490,
   "today": 70,

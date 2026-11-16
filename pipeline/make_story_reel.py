@@ -142,7 +142,11 @@ def guide_scene(fr, t, sp, cues, mouth, spec):
     # one or more spends, each on its own sentence (cues[1], cues[2], ...); tomorrow re-adjusts after each
     spends = sp.get("spends") or [{"label": sp["spend_label"], "amount": sp["spend"], "tomorrow": sp["tomorrow"]}]
     sk = [appear(t, cues[1 + i] if 1 + i < len(cues) else 3.0 + 2 * i, 0.4) for i in range(len(spends))]
-    ak = [appear(t, (cues[1 + i] if 1 + i < len(cues) else 3.0 + 2 * i) + 1.4, 0.5) for i in range(len(spends))]
+    def adj_at(i):                        # tomorrow updates near the end of that spend's sentence (when it's said)
+        st = cues[1 + i] if 1 + i < len(cues) else 3.0 + 2 * i
+        nx = cues[2 + i] if 2 + i < len(cues) else None
+        return max(st + 1.4, nx - 1.8) if nx is not None and sp.get("spends") else st + 1.4
+    ak = [appear(t, adj_at(i), 0.5) for i in range(len(spends))]
     ov_k = sk[0]; spent = sum(x["amount"] for x, k2 in zip(spends, sk) if k2 > 0.5)
     fr.text((x0 + 50, y0 + 50), "THIS WEEK", font("b", 28), GREY, k, dy=0)
     fr.text((x1 - 50, y0 + 38), f"${sp['week']:,}", font("xb", 52), INK, k, anchor="ra", dy=0)
