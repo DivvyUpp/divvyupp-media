@@ -1,5 +1,83 @@
-{"id": "2026-11-19-a",
- "small": "Most money apps tell you after.",
- "lines": [["Know what", "ink"], ["you can spend", "ink"], ["before you", "orange"], ["spend it.", "orange"]],
- "narration": ["Most money apps tell you what you spent. After.", "What if you knew what you could spend, before you spend it?"],
- "chart": false}
+{
+ "id": "2026-11-19-a",
+ "format": "story",
+ "character": "c",
+ "character_voice": "af_heart",
+ "music": true,
+ "hook": {
+  "small": "Hate budgeting? Good.",
+  "lines": [
+   [
+    "You don't need",
+    "ink"
+   ],
+   [
+    "a budget.",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "Hate budgeting? Good.",
+   "No spreadsheets. No categories. DivvyUpp sorts every transaction into fixed or flexible for you."
+  ],
+  "moods": [
+   "happy",
+   "neutral"
+  ]
+ },
+ "guide": {
+  "title": [
+   [
+    "Then a daily guide",
+    "ink"
+   ],
+   [
+    "for the rest.",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "The rest gets a daily and a weekly number.",
+   "A car repair, a hundred and sixty. Tomorrow: forty-seven.",
+   "Then takeout, forty-five. Tomorrow: thirty-six.",
+   "Before you spend, not after."
+  ],
+  "week": 490,
+  "today": 70,
+  "spends": [
+   {
+    "label": "Car repair",
+    "amount": 160,
+    "tomorrow": 47
+   },
+   {
+    "label": "Takeout night",
+    "amount": 45,
+    "tomorrow": 36
+   }
+  ]
+ },
+ "payoff": {
+  "title": [
+   [
+    "No spreadsheet.",
+    "ink"
+   ],
+   [
+    "No guilt.",
+    "orange"
+   ]
+  ],
+  "checks": [
+   "Sorted for you",
+   "Savings kept",
+   "Week adjusted"
+  ],
+  "narration": [
+   "Nothing to set up.",
+   "Savings kept.",
+   "And the week still works."
+  ]
+ },
+ "skip_flip": false
+}
