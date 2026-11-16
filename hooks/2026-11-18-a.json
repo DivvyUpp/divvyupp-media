@@ -1,5 +1,1 @@
-{"id": "2026-11-18-a",
- "small": "Try this for 90 days.",
- "lines": [["Save more.", "ink"], ["Spend less.", "ink"], ["Or we refund", "orange"], ["your subscription.", "orange"]],
- "narration": ["Try this for ninety days.", "Save more, spend less, or both. Or we refund your subscription."],
- "chart": false}
+{"id": "2026-11-18-a", "small": "Try this for 90 days.", "lines": [["Save more.", "ink"], ["Spend less.", "ink"], ["Or we refund", "orange"], ["your subscription.", "orange"]], "narration": ["Try this for ninety days.", "If you don't save more or spend less, we refund your subscription."], "chart": false}
