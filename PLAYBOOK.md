@@ -38,7 +38,12 @@ that file; `--check` writes one still per scene). Keep it under 90s (Srini prefe
 Current template (approved 2026-11-16), copy `hooks/2026-11-19-a.json`:
 - hook → **four-numbers `plan` scene** (income and fixed bills checked against bank history, savings you pick,
   safe-to-spend; replaces the old "flips the order" body section, `skip_flip: true`) → guide with **two `spends`**
-  → payoff → `"ending": "rendered"` (guarantee + CTA in the same voice, new guarantee wording).
+  → payoff → `"ending": "rendered"` (guarantee + CTA in the same voice, new guarantee wording; the CTA line is
+  "Save first. Then spend with confidence. Try it at divvyupp dot com.", which Srini prefers to the bare URL).
+- Optional data-backed `stat` card in the hook (guess vs actual, or a %), only from a real, checked source shown
+  on screen (e.g. C+R Research 2022: subscriptions guessed $86 vs actual $219; PYMNTS/LendingClub Sept 2023: 44% of
+  >$100K earners live paycheck to paycheck). Never invent a statistic.
+- Delivery tags must fit the moment: no [sighs] on things people are happy to buy (kids' gear, a party).
 - Guide lines are full, clear sentences, e.g. "Then your car needs a repair. That's a hundred and sixty dollars, so
   you're ninety over for today. DivvyUpp spreads that across the rest of your week, and tomorrow adjusts to
   forty-seven." Never clipped ("Tomorrow: forty-seven"). Moderate examples: tomorrow drops by about half, not to
@@ -46,7 +51,8 @@ Current template (approved 2026-11-16), copy `hooks/2026-11-19-a.json`:
 - Each Reel needs its own example, numbers and payoff line; don't repeat the previous days' storyline.
 - Founder story (stated by Srini, true, he can show the activity): he makes good money but had nothing to show for it
   at month end, built DivvyUpp to fix his own problem, and now saves about $1,000 a month with it.
-- Presenters: C (female) speaks Tue-Thu style Reels; E (male) needs a male ElevenLabs voice (being chosen 2026-11-16).
+- Presenters and voices: C (female) = Jessica `cgSgspJ2msm6clMCkdW9`; E (male) = Eric `cjVigY5qzO86Huf0OWal`
+  (`"character_voice": "elevenlabs:cjVigY5qzO86Huf0OWal:eleven_v3"`). Week of 2026-11-16: C on Mon-Thu, E on Fri-Sat.
 Rules for every presenter character, current or new:
 - Drawn in `pipeline/characters.py` as SVG in the same flat editorial style as presenters A–E: head and
   shoulders, real proportions (short neck, broad shoulders), soft shading, believable outfit for the audience
@@ -70,9 +76,10 @@ Rules for every presenter character, current or new:
    media_shares, media_saved, media_reel_total_interactions`, a date range wide enough to include the post).
    Fill the matching rows in `experiment-log.csv` (avg watch in seconds).
 3. Read the funnel. The GitHub Action `Funnel weekly fetch` writes last Monday–Sunday (ET) to
-   `funnel/<ISO-year>-W<ISO-week>.json` at 6am ET. Open the newest file whose `from`/`to` cover last
-   week. If it is missing or older than last week, say **"funnel data unavailable"** in the report and do
-   not guess any numbers. Otherwise, from `instagram.days[]` (one row per day, `stages` gives the order of
+   `funnel/<ISO-year>-W<ISO-week>.json` at about 5:37am ET. Open the newest file whose `from`/`to` cover last
+   week. If it is missing (GitHub sometimes skips scheduled runs; it did on 2026-11-16), trigger the workflow by
+   hand (GitHub `actions_run_trigger`, `run_workflow`, `funnel-weekly.yml` on `main`), wait for it and pull. Only if
+   that also fails say **"funnel data unavailable"** in the report, say why, and do not guess any numbers. Otherwise, from `instagram.days[]` (one row per day, `stages` gives the order of
    `reach`), take per day: landing (`ig_visits`), `get_started_clicked` (`get_started`), `signed_up`
    (`signups`) and `bank_linked` (`bank_links`). Write them into `experiment-log.csv` on the row of the
    Reel posted that day (`posted_date`), and show the week as Reel views → Instagram visits → Get started
