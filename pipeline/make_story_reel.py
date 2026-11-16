@@ -11,7 +11,8 @@ Spec (JSON):
 {
   "id": "2026-11-15-a", "format": "story",
   "character": "c" (presenter id from characters.py), "character_voice": "af_heart", "name_tag": "" (optional),
-  "hook":   {"small": "...", "lines": [["...", "ink"|"orange"], ...], "narration": ["..."]},
+  "hook":   {"small": "...", "lines": [["...", "ink"|"orange"], ...], "narration": ["..."],
+             "moods": ["neutral", "worried", ...] (optional, one per sentence; default worried until turn_cue)},
   "guide":  {"title": [["...", "ink"|"orange"], ...], "narration": ["..."],
              "week": 460, "today": 66, "spend_label": "Dinner out", "spend": 120, "tomorrow": 52},
   "payoff": {"title": [["...", "ink"|"orange"], ...], "checks": ["...", "...", "..."], "narration": ["..."]}
@@ -116,6 +117,8 @@ def hook_scene(fr, t, sp, cues, mouth, spec):
         fr.text((W / 2, ay + 44), aside["text"], f, WHITE, k2, anchor="mm", dy=0)
     turn = sp.get("turn_cue")             # sentence index where she turns from the pain to the fix
     if turn is not None and turn < len(cues) and t >= cues[turn] - 0.1: mood = "neutral"
+    moods = sp.get("moods")               # optional per-sentence moods, e.g. ["neutral", "worried", "neutral"]
+    if moods: mood = moods[min(len(moods) - 1, max([i for i, c in enumerate(cues) if t >= c - 0.1] or [0]))]
     character(fr.layer, W / 2, 820, 1150, t, mouth, mood, appear(t, 0.15) * fr.g, spec["character"])
     if spec.get("name_tag"):
         f = font("b", 30); tw = fr.tl(spec["name_tag"], f); kk = appear(t, 0.8)

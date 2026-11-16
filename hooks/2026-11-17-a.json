@@ -5,23 +5,27 @@
  "character_voice": "af_heart",
  "music": true,
  "hook": {
-  "small": "Nothing left at month end?",
+  "small": "Built for our founder first.",
   "lines": [
    [
-    "Our founder now saves",
+    "Now saving about",
     "ink"
    ],
    [
-    "about $1,000 a month.",
+    "$1,000 a month.",
     "orange"
    ]
   ],
   "narration": [
-   "Good salary, and still nothing left at the end of the month?",
-   "Our founder was there too. Now our founder saves about a thousand dollars a month.",
-   "Here's what changed."
+   "Our founder saves about a thousand dollars a month with DivvyUpp.",
+   "He makes good money, but at the end of every month, there was nothing to show for it.",
+   "So he built DivvyUpp to fix his own problem. Bills first. Save first. Then a daily guide for the rest."
   ],
-  "turn_cue": 1
+  "moods": [
+   "neutral",
+   "worried",
+   "neutral"
+  ]
  },
  "guide": {
   "title": [
@@ -35,37 +39,37 @@
    ]
   ],
   "narration": [
-   "Then you get a daily and a weekly number for what's left to spend.",
-   "Overspend on a dinner out, and the rest of your week adjusts.",
-   "So you know before you spend."
+   "Your spending money gets a daily and a weekly number.",
+   "Say an extra grocery run and a big online order land on the same day. Three hundred and ten dollars.",
+   "Tomorrow drops to six dollars, so the week still works. You know before you spend."
   ],
   "week": 466,
   "today": 66,
-  "spend_label": "Dinner out",
-  "spend": 120,
-  "tomorrow": 57
+  "spend_label": "Groceries + online order",
+  "spend": 310,
+  "tomorrow": 6
  },
  "payoff": {
   "title": [
    [
-    "Same order.",
+    "One big day.",
     "ink"
    ],
    [
-    "Every month.",
+    "Nothing broke.",
     "orange"
    ]
   ],
   "checks": [
-   "Bills paid",
-   "$1,000 saved",
-   "Guilt-free spending"
+   "Savings untouched",
+   "Week adjusted",
+   "Bills paid"
   ],
   "narration": [
-   "Your bills get paid.",
-   "Your savings stay saved.",
-   "And you spend the rest, guilt-free."
+   "One big day didn't touch your savings.",
+   "The rest of the week adjusted to cover it.",
+   "And your bills still got paid."
   ]
  },
- "skip_flip": false
+ "skip_flip": true
 }
