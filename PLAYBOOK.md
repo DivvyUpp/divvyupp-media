@@ -17,7 +17,9 @@ Videos are served publicly by GitHub Pages at `https://divvyupp.github.io/divvyu
   spec value `"character_voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3"`. Direct the delivery with v3 audio tags
   ([playful], [sighs], [reassuring], [happy]...). Kokoro `af_heart` sounded flat and is retired for Reels.
   The API key comes from env `ELEVENLABS_API_KEY` (or `~/.secrets/elevenlabs_key`); never commit it. If the key is
-  missing or `api.elevenlabs.io` is blocked, stop and tell Srini; do not fall back to Kokoro.
+  missing, ask Srini (SendUserMessage + PushNotification) to paste the key in the session, save it to
+  `~/.secrets/elevenlabs_key` (chmod 600, outside the repo) and carry on. If `api.elevenlabs.io` is blocked, stop and
+  tell Srini to add it under Settings → Capabilities → Allowed websites. Never fall back to Kokoro.
 - Guarantee wording (agreed 2026-11-16): "If you don't save more or spend less in 90 days, we refund your subscription,
   up to $30. Terms apply." Never "or both", never "save more and spend less".
 - No competitor names, no maths equations on screen, no invented testimonials. The founder figure is
