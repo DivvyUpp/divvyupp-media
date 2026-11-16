@@ -39,10 +39,10 @@
    ]
   ],
   "narration": [
-   "[excited] Okay, here's the deal. Your income,",
-   "and your fixed bills. Both checked against your bank, so no fibbing!",
-   "You pick what to save. It comes out first. Boom.",
-   "[smug] What's left is your safe-to-spend. The fun money!"
+   "[excited] Here's the deal. Your income,",
+   "your fixed bills, both bank-checked.",
+   "Savings, which you pick, come out first.",
+   "[smug] The rest is your fun money."
   ],
   "rows": [
    {
@@ -79,9 +79,9 @@
    ]
   ],
   "narration": [
-   "Your safe-to-spend gets a daily and a weekly number. Today? Seventy bucks.",
-   "[gasps] Then you buy concert tickets. A hundred and forty bucks! You're seventy over for today. [laughs] Eh, fine. DivvyUpp spreads it across your week, and tomorrow adjusts to fifty-two.",
-   "Then takeout. AGAIN. Thirty-eight bucks. Tomorrow adjusts to forty-three. Week still works. [smug] You're welcome."
+   "You get a daily and a weekly number. Today? Seventy bucks.",
+   "[gasps] Concert tickets. A hundred and forty bucks! Seventy over for today. DivvyUpp spreads it across your week, and tomorrow adjusts to fifty-two.",
+   "Then takeout. AGAIN. Thirty-eight bucks. Tomorrow drops to forty-three. [smug] You're welcome."
   ],
   "week": 490,
   "today": 70,

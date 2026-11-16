@@ -11,7 +11,8 @@ Spec (JSON):
 {
   "id": "2026-11-15-a", "format": "story",
   "character": "c" (presenter id from characters.py), "character_voice": "af_heart" (Kokoro) or
-  "elevenlabs:<voice_id>[:<model_id>]" (ElevenLabs, default model eleven_v3; needs ELEVENLABS_API_KEY), "name_tag": "" (optional),
+  "elevenlabs:<voice_id>[:<model_id>]" (ElevenLabs, default model eleven_v3; needs ELEVENLABS_API_KEY; the whole Reel
+  is voiced in one take and cut per scene so the voice stays consistent, "one_take": false to disable), "name_tag": "" (optional),
   "hook":   {"small": "...", "lines": [["...", "ink"|"orange"], ...], "narration": ["..."],
              "moods": ["neutral", "worried", ...] (optional, one per sentence; default worried until turn_cue)},
   "guide":  {"title": [["...", "ink"|"orange"], ...], "narration": ["..."],
@@ -87,7 +88,64 @@ def narrate_elevenlabs(sentences, voice, out_wav):
     cues = [LEAD + first_spoken(i) for i in starts]
     return len(audio) / sr, cues, sr, audio, phon
 
+ONE_TAKE = {}   # tuple(sentence texts) -> (audio, cues, phon) for segments cut from a single whole-Reel take
+
+def _el_request(vid, model, text):
+    import hashlib, urllib.request
+    body = {"text": text, "model_id": model, "voice_settings": {"stability": 0.5}}
+    os.makedirs(os.path.join(CACHE, "eleven"), exist_ok=True)
+    h = hashlib.sha256(json.dumps(body, sort_keys=True).encode() + vid.encode()).hexdigest()[:20]; cf = os.path.join(CACHE, "eleven", h + ".json")
+    if os.path.exists(cf): return h, json.load(open(cf))
+    req = urllib.request.Request(f"https://api.elevenlabs.io/v1/text-to-speech/{vid}/with-timestamps?output_format=mp3_44100_128",
+                                 data=json.dumps(body).encode(), headers={"xi-api-key": _el_key(), "Content-Type": "application/json"})
+    r = json.load(urllib.request.urlopen(req, timeout=300)); json.dump(r, open(cf, "w")); return h, r
+
+def one_take(spec, names, tmp):
+    """Voice the whole Reel in ONE ElevenLabs request and cut it into segments, so the voice can't drift between
+    scenes (separate v3 requests can come back sounding like different takes). Fills ONE_TAKE."""
+    import base64, soundfile as sf
+    parts = spec["character_voice"].split(":"); vid = parts[1]; model = parts[2] if len(parts) > 2 else "eleven_v3"
+    segs = [[x[0] if isinstance(x, list) else x for x in spec[n]["narration"]] for n in names]
+    text, sent_starts, pos = "", [], 0
+    for sents in segs:
+        ss = []
+        for x in sents: ss.append(pos); text += x + " "; pos += len(x) + 1
+        sent_starts.append(ss)
+    text = text.strip()
+    h, r = _el_request(vid, model, text)
+    mp3 = os.path.join(tmp, "onetake_" + h + ".mp3"); open(mp3, "wb").write(base64.b64decode(r["audio_base64"]))
+    wav = os.path.join(tmp, "onetake.wav"); sr = 24000
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", mp3, "-ac", "1", "-ar", str(sr), wav], check=True)
+    audio, _ = sf.read(wav)
+    al = r["alignment"]; ch, st, en = al["characters"], al["character_start_times_seconds"], al["character_end_times_seconds"]
+    def first_spoken(i):
+        tag = False
+        for j in range(i, len(ch)):
+            if ch[j] == "[": tag = True
+            elif ch[j] == "]": tag = False
+            elif not tag and ch[j].isalnum(): return st[j]
+        return st[-1]
+    seg_t = [first_spoken(ss[0]) for ss in sent_starts] + [len(audio) / sr + 0.15]
+    for k, sents in enumerate(segs):
+        a0 = max(0.0, seg_t[k] - 0.06); a1 = seg_t[k + 1] - 0.12
+        clip = audio[int(a0 * sr):int(a1 * sr)]
+        loud = np.where(np.abs(clip) > 0.01)[0]                       # trim trailing silence, keep a short tail
+        if len(loud): clip = clip[:min(len(clip), loud[-1] + int(0.25 * sr))]
+        cues = [LEAD + first_spoken(i) - a0 for i in sent_starts[k]]
+        lo = sent_starts[k][0]; hi = sent_starts[k + 1][0] if k + 1 < len(segs) else len(ch)
+        in_tag, phon = False, []
+        for c, a, b in zip(ch[lo:hi], st[lo:hi], en[lo:hi]):
+            if c == "[": in_tag = True
+            if not in_tag: phon.append((LEAD + a - a0, LEAD + b - a0, LETTER_PHONEME.get(c.lower(), " ")))
+            if c == "]": in_tag = False
+        ONE_TAKE[tuple(sents)] = (clip, cues, phon)
+
 def narrate(sentences, voice, out_wav):
+    key = tuple(x[0] if isinstance(x, list) else x for x in sentences)
+    if key in ONE_TAKE:
+        import soundfile as sf
+        audio, cues, phon = ONE_TAKE[key]; sf.write(out_wav, audio, 24000)
+        return len(audio) / 24000, cues, 24000, audio, phon
     if voice.startswith("elevenlabs:"): return narrate_elevenlabs(sentences, voice, out_wav)
     """Speak each sentence; return duration, sentence cues, sample rate, audio and phoneme timings
     [(start, end, phoneme)] in reel seconds (LEAD included). Uses kokoro-timed.onnx (built by setup.sh),
@@ -375,6 +433,10 @@ def main():
     spec = json.load(open(spec_path)); rid = spec["id"]
     os.makedirs(os.path.join(ROOT, "reels"), exist_ok=True); tmp = os.path.join(CACHE, "tmp_" + rid); os.makedirs(tmp, exist_ok=True)
     bg = make_bg()
+    if spec.get("ending") == "rendered":
+        for name in ("guarantee", "cta"): spec.setdefault(name, ENDING[name])
+    if spec.get("character_voice", "").startswith("elevenlabs:") and spec.get("one_take", True):
+        one_take(spec, [n for n in ("hook", "plan", "guide", "payoff", "guarantee", "cta") if n in spec], tmp)
     if check:
         if spec.get("ending") == "rendered":
             for name in ("guarantee", "cta"): spec.setdefault(name, ENDING[name])
