@@ -271,7 +271,49 @@ def plan_scene(fr, t, sp, cues, mouth, spec):
         y += 140
     character(fr.layer, W / 2, 1300 + 120, 780, t, mouth, "neutral", appear(t, 0.3) * fr.g, spec["character"])
 
-SCENES = {"hook": hook_scene, "plan": plan_scene, "guide": guide_scene, "payoff": payoff_scene}
+# ---------- rendered ending (replaces body part 2 when "ending": "rendered") ----------
+ENDING = {
+    "guarantee": {"narration": ["Try DivvyUpp for ninety days.",
+                                "If you don't save more or spend less, we refund your subscription, up to thirty dollars.",
+                                "Terms apply."]},
+    "cta": {"narration": ["[warm] Save first. Then spend with confidence.", "Try it at divvyupp dot com."]},
+}
+
+def guarantee_scene(fr, t, sp, cues, mouth, spec):
+    logo(fr, W / 2, 150, 70, appear(t, 0.2))
+    k = appear(t, 0.3, 0.6); cx, cy, r = W / 2, 560, 250 * (0.85 + 0.15 * k)
+    if k > 0:
+        fr.ellipse([cx - r - 18, cy - r - 18, cx + r + 18, cy + r + 18], (250, 222, 210) + (fr.a(k),))
+        fr.ellipse([cx - r, cy - r, cx + r, cy + r], ORANGE + (fr.a(k),))
+        fr.d.ellipse([(cx - r + 22) * S, (cy - r + 22) * S, (cx + r - 22) * S, (cy + r - 22) * S], outline=(255, 255, 255, int(fr.a(k) * 0.55)), width=4 * S)
+        fr.text((cx, cy - 40), "90", font("xb", 200), WHITE, k, anchor="mm", dy=0)
+        fr.text((cx, cy + 92), "DAY", font("xb", 52), WHITE, k, anchor="mm", dy=0)
+        fr.text((cx, cy + 140), "GUARANTEE", font("xb", 32), WHITE, k, anchor="mm", dy=0)
+    c = lambda i, d=9.0: cues[i] if i < len(cues) else d
+    fr.text((W / 2, 900), "Use DivvyUpp for 90 days.", font("b", 54), INK, appear(t, c(0)), anchor="ma")
+    fr.text((W / 2, 1000), "If you don't save more", font("xb", 58), INK, appear(t, c(1)), anchor="ma")
+    fr.text((W / 2, 1072), "or spend less,", font("xb", 58), ORANGE, appear(t, c(1) + 0.3), anchor="ma")
+    fr.text((W / 2, 1172), "we refund your subscription,", font("b", 50), INK, appear(t, c(1) + 1.6), anchor="ma")
+    fr.text((W / 2, 1236), "up to $30.", font("b", 50), INK, appear(t, c(1) + 1.9), anchor="ma")
+    fr.text((W / 2, 1340), "Terms apply. See divvyupp.com for details.", font("m", 26), GREY, appear(t, c(2)), anchor="ma")
+
+def cta_scene(fr, t, sp, cues, mouth, spec):
+    c = lambda i, d=9.0: cues[i] if i < len(cues) else d
+    fr.text((W / 2, 520), "Save first.", font("xb", 96), INK, appear(t, c(0)), anchor="ma")
+    fr.text((W / 2, 630), "Then spend with", font("xb", 72), ORANGE, appear(t, c(0) + 0.7), anchor="ma")
+    fr.text((W / 2, 714), "confidence.", font("xb", 72), ORANGE, appear(t, c(0) + 0.9), anchor="ma")
+    k = appear(t, c(1) - 0.2)
+    logo(fr, W / 2, 860, 110, k)
+    fr.text((W / 2, 1020), "divvyupp.com", font("b", 46), INK, k, anchor="ma")
+    k2 = appear(t, c(1) + 0.5)
+    fr.rrect([200, 1130, W - 200, 1240], 55, ORANGE, k2)
+    fr.text((W / 2, 1185), "Try the 90-day guarantee", font("xb", 40), WHITE, k2, anchor="mm", dy=0)
+    k3 = appear(t, c(1) + 0.8)
+    fr.rrect([200, 1270, W - 200, 1370], 50, (255, 238, 230), k3)
+    fr.text((W / 2, 1320), "Try live demo, no signup", font("b", 36), ORANGE, k3, anchor="mm", dy=0)
+
+SCENES = {"hook": hook_scene, "plan": plan_scene, "guide": guide_scene, "payoff": payoff_scene,
+          "guarantee": guarantee_scene, "cta": cta_scene}
 
 def render_segment(name, spec, tmp, bg, check_dir=None):
     sp = spec[name]; voice = spec.get("character_voice", "af_heart")
@@ -307,7 +349,9 @@ def main():
     os.makedirs(os.path.join(ROOT, "reels"), exist_ok=True); tmp = os.path.join(CACHE, "tmp_" + rid); os.makedirs(tmp, exist_ok=True)
     bg = make_bg()
     if check:
-        for name in ("hook", "plan", "guide", "payoff") if "plan" in spec else ("hook", "guide", "payoff"): render_segment(name, spec, tmp, bg, os.path.join(ROOT, "reels"))
+        if spec.get("ending") == "rendered":
+            for name in ("guarantee", "cta"): spec.setdefault(name, ENDING[name])
+        for name in [n for n in ("hook", "plan", "guide", "payoff", "guarantee", "cta") if n in spec]: render_segment(name, spec, tmp, bg, os.path.join(ROOT, "reels"))
         print("check frames written"); return
     body, sr = sf.read(os.path.join(HERE, "assets", "body_audio.flac"))
     hook_v, hook_a, _ = render_segment("hook", spec, tmp, bg)
@@ -316,15 +360,21 @@ def main():
     b1_v, b1_d = (None, 0) if skip_flip else body_part(tmp, 0, BODY_SPLIT, "body1")
     guide_v, guide_a, _ = render_segment("guide", spec, tmp, bg)
     pay_v, pay_a, _ = render_segment("payoff", spec, tmp, bg)
-    b2_v, b2_d = body_part(tmp, BODY_SPLIT, None, "body2")
+    rendered_end = spec.get("ending") == "rendered"   # Jessica-voiced guarantee + CTA instead of the old body part 2
+    if rendered_end:
+        for name in ("guarantee", "cta"): spec.setdefault(name, ENDING[name])
+        g_v, g_a, _ = render_segment("guarantee", spec, tmp, bg); c_v, c_a, _ = render_segment("cta", spec, tmp, bg)
+        b2_v, b2_d = None, 0
+    else:
+        b2_v, b2_d = body_part(tmp, BODY_SPLIT, None, "body2")
     cut = int(round(BODY_SPLIT * sr)); b1_a = body[:cut]; b2_a = body[cut:]
     def fit(a, d): n = int(round(d * sr)); return np.pad(a, (0, max(0, n - len(a))))[:n]
-    audio = np.concatenate([hook_a * 0.95] + ([plan_a * 0.95] if plan_v else []) + ([] if skip_flip else [fit(b1_a, b1_d)]) + [guide_a * 0.95, pay_a * 0.95, fit(b2_a, b2_d)])
+    audio = np.concatenate([hook_a * 0.95] + ([plan_a * 0.95] if plan_v else []) + ([] if skip_flip else [fit(b1_a, b1_d)]) + [guide_a * 0.95, pay_a * 0.95] + ([g_a * 0.95, c_a * 0.95] if rendered_end else [fit(b2_a, b2_d)]))
     if spec.get("music", True):
         from music import mix_under
         audio = mix_under(audio, sr)
     sf.write(os.path.join(tmp, "full.wav"), audio, sr)
-    open(os.path.join(tmp, "list.txt"), "w").write("".join(f"file '{v}'\n" for v in (hook_v, plan_v, b1_v, guide_v, pay_v, b2_v) if v))
+    open(os.path.join(tmp, "list.txt"), "w").write("".join(f"file '{v}'\n" for v in (hook_v, plan_v, b1_v, guide_v, pay_v) + ((g_v, c_v) if rendered_end else (b2_v,)) if v))
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", os.path.join(tmp, "list.txt"), "-c", "copy", os.path.join(tmp, "v.mp4")], check=True)
     out = os.path.join(ROOT, "reels", rid + ".mp4"); part = out + ".part.mp4"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", os.path.join(tmp, "v.mp4"), "-i", os.path.join(tmp, "full.wav"), "-map", "0:v", "-map", "1:a",
