@@ -14,7 +14,9 @@ Spec (JSON):
   "hook":   {"small": "...", "lines": [["...", "ink"|"orange"], ...], "narration": ["..."],
              "moods": ["neutral", "worried", ...] (optional, one per sentence; default worried until turn_cue)},
   "guide":  {"title": [["...", "ink"|"orange"], ...], "narration": ["..."],
-             "week": 460, "today": 66, "spend_label": "Dinner out", "spend": 120, "tomorrow": 52},
+             "week": 460, "today": 66, "spend_label": "Dinner out", "spend": 120, "tomorrow": 52,
+             "spends": [{"label": "...", "amount": 112, "tomorrow": 55}, ...] (optional, replaces spend_label/spend/
+             tomorrow: one sentence per spend after the first guide sentence, tomorrow re-adjusts after each)},
   "payoff": {"title": [["...", "ink"|"orange"], ...], "checks": ["...", "...", "..."], "narration": ["..."]}
 }
 Run pipeline/setup.sh once per machine first.
@@ -130,37 +132,44 @@ def guide_scene(fr, t, sp, cues, mouth, spec):
     title_lines(fr, sp["title"], 290, t, 0.3, 84)
     # card
     k = appear(t, 0.6); x0, x1, y0 = 110, W - 110, 540
+    ch_n = len(sp.get("spends") or [0]); card_h = 600 + (ch_n - 1) * 96
     if k > 0:
-        fr.rrect([x0 + 6, y0 + 10, x1 + 6, y0 + 610], 44, (230, 215, 208), k * 0.6)
-        fr.rrect([x0, y0, x1, y0 + 600], 44, CARD_BG, k)
-    ov = cues[1] if len(cues) > 1 else 3.0          # overspend moment = 2nd sentence
-    ov_k = appear(t, ov, 0.4); adj_k = appear(t, ov + 1.4, 0.5)
+        fr.rrect([x0 + 6, y0 + 10, x1 + 6, y0 + card_h + 10], 44, (230, 215, 208), k * 0.6)
+        fr.rrect([x0, y0, x1, y0 + card_h], 44, CARD_BG, k)
+    # one or more spends, each on its own sentence (cues[1], cues[2], ...); tomorrow re-adjusts after each
+    spends = sp.get("spends") or [{"label": sp["spend_label"], "amount": sp["spend"], "tomorrow": sp["tomorrow"]}]
+    sk = [appear(t, cues[1 + i] if 1 + i < len(cues) else 3.0 + 2 * i, 0.4) for i in range(len(spends))]
+    ak = [appear(t, (cues[1 + i] if 1 + i < len(cues) else 3.0 + 2 * i) + 1.4, 0.5) for i in range(len(spends))]
+    ov_k = sk[0]; spent = sum(x["amount"] for x, k2 in zip(spends, sk) if k2 > 0.5)
     fr.text((x0 + 50, y0 + 50), "THIS WEEK", font("b", 28), GREY, k, dy=0)
     fr.text((x1 - 50, y0 + 38), f"${sp['week']:,}", font("xb", 52), INK, k, anchor="ra", dy=0)
-    used = 0.35 + 0.26 * ov_k
+    used = 0.35 + sum(0.26 / len(spends) * k2 for k2 in sk)
     fr.rrect([x0 + 50, y0 + 120, x1 - 50, y0 + 150], 15, (240, 232, 228), k)
     fr.rrect([x0 + 50, y0 + 120, x0 + 50 + (x1 - x0 - 100) * used, y0 + 150], 15, ORANGE if ov_k < 0.5 else RED, k)
-    # today / tomorrow tiles
     ty = y0 + 200
     fr.rrect([x0 + 50, ty, W / 2 - 15, ty + 220], 30, (255, 243, 237), k)
     fr.text((x0 + 80, ty + 30), "TODAY", font("b", 26), GREY, k, dy=0)
     today_col = INK if ov_k < 0.5 else RED
     fr.text((x0 + 80, ty + 80), f"${sp['today']}", font("xb", 84), today_col, k, dy=0)
-    if ov_k > 0: fr.text((x0 + 80, ty + 182), f"${sp['spend'] - sp['today']} over", font("b", 26), RED, ov_k, dy=0)
+    if ov_k > 0 and spent > sp["today"]: fr.text((x0 + 80, ty + 182), f"${spent - sp['today']} over", font("b", 26), RED, ov_k, dy=0)
     fr.rrect([W / 2 + 15, ty, x1 - 50, ty + 220], 30, (255, 243, 237), k)
     fr.text((W / 2 + 45, ty + 30), "TOMORROW", font("b", 26), GREY, k, dy=0)
-    if adj_k > 0:
-        fr.text((W / 2 + 45, ty + 80), f"${sp['tomorrow']}", font("xb", 84), ORANGE, adj_k)
-        fr.text((W / 2 + 45, ty + 182), "adjusted", font("b", 26), ORANGE, adj_k, dy=0)
+    last = max([i for i, a in enumerate(ak) if a > 0] or [-1])
+    if last >= 0:
+        fr.text((W / 2 + 45, ty + 80), f"${spends[last]['tomorrow']}", font("xb", 84), ORANGE, ak[last])
+        fr.text((W / 2 + 45, ty + 182), "adjusted", font("b", 26), ORANGE, ak[0], dy=0)
     else:
         fr.text((W / 2 + 45, ty + 80), f"${sp['today']}", font("xb", 84), INK, k * (1 - ov_k * 0.6))
-    # overspend chip
-    cy = y0 + 470
-    fr.rrect([x0 + 50, cy, x1 - 50, cy + 90], 45, (253, 232, 228), ov_k)
-    fr.text((x0 + 90, cy + 45), sp["spend_label"], font("b", 36), INK, ov_k, anchor="lm", dy=0)
-    fr.text((x1 - 90, cy + 45), f"${sp['spend']}", font("xb", 40), RED, ov_k, anchor="rm", dy=0)
-    if len(cues) > 2:
-        fr.text((W / 2, 1215), "Before you spend. Not after.", font("xb", 50), ORANGE, appear(t, cues[2]), anchor="ma")
+    # spend chips, stacked
+    n = len(spends); ch = 90 if n == 1 else 80; gap = 16
+    for i, x in enumerate(spends):
+        cy = y0 + 470 + i * (ch + gap)
+        fr.rrect([x0 + 50, cy, x1 - 50, cy + ch], ch / 2, (253, 232, 228), sk[i])
+        fr.text((x0 + 90, cy + ch / 2), x["label"], font("b", 34), INK, sk[i], anchor="lm", dy=0)
+        fr.text((x1 - 90, cy + ch / 2), f"${x['amount']}", font("xb", 38), RED, sk[i], anchor="rm", dy=0)
+    tag = 1 + len(spends)
+    if len(cues) > tag:
+        fr.text((W / 2, 1215 + (n - 1) * (ch + gap)), "Before you spend. Not after.", font("xb", 50), ORANGE, appear(t, cues[tag]), anchor="ma")
     character(fr.layer, W / 2, 1300, 900, t, mouth, "neutral", appear(t, 0.3) * fr.g, spec["character"])
 
 def payoff_scene(fr, t, sp, cues, mouth, spec):

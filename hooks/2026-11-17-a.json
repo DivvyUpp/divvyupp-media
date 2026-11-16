@@ -18,7 +18,7 @@
   ],
   "narration": [
    "Our founder saves about a thousand dollars a month with DivvyUpp.",
-   "He makes good money, but at the end of every month, there was nothing to show for it.",
+   "He makes good money, but every month, there was nothing to show for it.",
    "So he built DivvyUpp to fix his own problem. Bills first. Save first. Then a daily guide for the rest."
   ],
   "moods": [
@@ -40,14 +40,24 @@
   ],
   "narration": [
    "Your spending money gets a daily and a weekly number.",
-   "Say an extra grocery run and a big online order land on the same day. Three hundred and ten dollars.",
-   "Tomorrow drops to six dollars, so the week still works. You know before you spend."
+   "An extra grocery run: a hundred and twelve dollars. Tomorrow adjusts to fifty-five.",
+   "Then an online order, ninety dollars. Tomorrow adjusts again, to thirty-three.",
+   "You know before you spend, not after."
   ],
   "week": 466,
   "today": 66,
-  "spend_label": "Groceries + online order",
-  "spend": 310,
-  "tomorrow": 6
+  "spends": [
+   {
+    "label": "Extra grocery run",
+    "amount": 112,
+    "tomorrow": 55
+   },
+   {
+    "label": "Online order",
+    "amount": 90,
+    "tomorrow": 33
+   }
+  ]
  },
  "payoff": {
   "title": [
