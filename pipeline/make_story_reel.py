@@ -125,29 +125,37 @@ def one_take(spec, names, tmp):
             elif ch[j] == "]": tag = False
             elif not tag and ch[j].isalnum(): return st[j]
         return st[-1]
-    seg_t = [first_spoken(ss[0]) for ss in sent_starts] + [len(audio) / sr + 0.15]
-    for k, sents in enumerate(segs):
-        a0 = max(0.0, seg_t[k] - 0.06); a1 = seg_t[k + 1] - 0.12
-        clip = audio[int(a0 * sr):int(a1 * sr)]
-        loud = np.where(np.abs(clip) > 0.01)[0]                       # trim trailing silence, keep a short tail
-        if len(loud): clip = clip[:min(len(clip), loud[-1] + int(0.25 * sr))]
-        fl = min(len(clip) // 4, int(0.03 * sr))                       # short fades: no clicks at the cut points
-        if fl: clip = clip.copy(); clip[:fl] *= np.linspace(0, 1, fl); clip[-fl:] *= np.linspace(1, 0, fl)
-        cues = [LEAD + first_spoken(i) - a0 for i in sent_starts[k]]
+    def last_spoken(lo, hi):
+        tag, t = False, None
+        for j in range(lo, hi):
+            if ch[j] == "[": tag = True
+            elif ch[j] == "]": tag = False
+            elif not tag and ch[j].isalnum(): t = en[j]
+        return t
+    # The soundtrack is the take itself, never cut: LEAD of quiet before, TAIL after. Scene boundaries sit in the
+    # middle of the take's own pauses, and each scene's video is exactly as long as its stretch of the take.
+    full = np.concatenate([np.zeros(int(LEAD * sr)), audio, np.zeros(int(TAIL * sr))])
+    bounds = [0.0]
+    for k in range(1, len(segs)):
+        lo, hi = sent_starts[k - 1][0], sent_starts[k][0]
+        e = last_spoken(lo, hi); b0 = first_spoken(hi)
+        bounds.append(LEAD + ((e + b0) / 2 if e is not None else b0 - 0.2))
+    bounds.append(len(full) / sr)
+    fb = [round(t * FPS) for t in bounds]
+    plan = {"audio": full, "sr": sr, "names": names, "frames": {}}
+    for k, (name, sents) in enumerate(zip(names, segs)):
+        t0 = fb[k] / FPS
+        cues = [LEAD + first_spoken(i) - t0 for i in sent_starts[k]]
         lo = sent_starts[k][0]; hi = sent_starts[k + 1][0] if k + 1 < len(segs) else len(ch)
         in_tag, phon = False, []
-        for c, a, b in zip(ch[lo:hi], st[lo:hi], en[lo:hi]):
+        for c, a_, b_ in zip(ch[lo:hi], st[lo:hi], en[lo:hi]):
             if c == "[": in_tag = True
-            if not in_tag: phon.append((LEAD + a - a0, LEAD + b - a0, LETTER_PHONEME.get(c.lower(), " ")))
+            if not in_tag: phon.append((LEAD + a_ - t0, LEAD + b_ - t0, LETTER_PHONEME.get(c.lower(), " ")))
             if c == "]": in_tag = False
-        ONE_TAKE[tuple(sents)] = (clip, cues, phon)
+        plan["frames"][name] = (fb[k], fb[k + 1], cues, phon)
+    ONE_TAKE["plan"] = plan
 
 def narrate(sentences, voice, out_wav):
-    key = tuple(x[0] if isinstance(x, list) else x for x in sentences)
-    if key in ONE_TAKE:
-        import soundfile as sf
-        audio, cues, phon = ONE_TAKE[key]; sf.write(out_wav, audio, 24000)
-        return len(audio) / 24000, cues, 24000, audio, phon
     if voice.startswith("elevenlabs:"): return narrate_elevenlabs(sentences, voice, out_wav)
     """Speak each sentence; return duration, sentence cues, sample rate, audio and phoneme timings
     [(start, end, phoneme)] in reel seconds (LEAD included). Uses kokoro-timed.onnx (built by setup.sh),
@@ -406,9 +414,16 @@ XFADE = 0.3   # seconds of dissolve between scenes (no dip to an empty backgroun
 
 def render_segment(name, spec, tmp, bg, check_dir=None, last=False):
     sp = spec[name]; voice = spec.get("character_voice", "af_heart")
-    wav = os.path.join(tmp, f"{name}.wav")
-    dur, cues, sr, audio, phon = narrate(sp["narration"], voice, wav)
-    total = LEAD + dur + TAIL; n = round(total * FPS); env = mouth_env(audio, sr, total)
+    plan = ONE_TAKE.get("plan")
+    if plan and name in plan["frames"]:
+        f0, f1, cues, phon = plan["frames"][name]; sr = plan["sr"]
+        n = (f1 - f0) + (0 if last else round(XFADE * FPS))            # run on through the dissolve into the next scene
+        total = n / FPS; audio = plan["audio"][int(f0 / FPS * sr):int((f0 / FPS + total) * sr)]
+        env = mouth_env(np.concatenate([np.zeros(int(LEAD * sr)), audio]), sr, total)
+    else:
+        wav = os.path.join(tmp, f"{name}.wav")
+        dur, cues, sr, audio, phon = narrate(sp["narration"], voice, wav)
+        total = LEAD + dur + TAIL; n = round(total * FPS); env = mouth_env(audio, sr, total)
     vis = viseme_track(phon, n) if phon else None
     def draw(f):
         tt = f / FPS; fr = Frame(bg, tt, total)
@@ -460,6 +475,24 @@ def main():
         if name == "body1": v, d = body_part(tmp, 0, BODY_SPLIT, "body1"); clips.append((v, fit(b1_a, d)))
         elif name == "body2": v, d = body_part(tmp, BODY_SPLIT, None, "body2"); clips.append((v, fit(b2_a, d)))
         else: v, a, _ = render_segment(name, spec, tmp, bg, last=(i == len(order) - 1)); clips.append((v, a * 0.95))
+    plan = ONE_TAKE.get("plan")
+    if plan and [n for n in order if n in plan["frames"]] == order:
+        audio = plan["audio"] * 0.95                                    # the uncut take: no audio edits at all
+        starts = [plan["frames"][n][0] / FPS for n in order]
+        if spec.get("music", True):
+            from music import mix_under
+            audio = mix_under(audio, sr)
+        sf.write(os.path.join(tmp, "full.wav"), audio, sr)
+        inputs, fc, prev = [], [], "0:v"
+        for v, _ in clips: inputs += ["-i", v]
+        for i in range(1, len(clips)):
+            fc.append(f"[{prev}][{i}:v]xfade=transition=fade:duration={XFADE}:offset={starts[i]:.4f}[x{i}]"); prev = f"x{i}"
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error"] + inputs + ["-filter_complex", ";".join(fc), "-map", f"[{prev}]", "-r", str(FPS),
+                        "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p", os.path.join(tmp, "v.mp4")], check=True)
+        out = os.path.join(ROOT, "reels", rid + ".mp4"); part = out + ".part.mp4"
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", os.path.join(tmp, "v.mp4"), "-i", os.path.join(tmp, "full.wav"), "-map", "0:v", "-map", "1:a",
+                        "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-shortest", "-movflags", "+faststart", part], check=True)
+        os.replace(part, out); print("wrote", out); return
     # audio: overlap-add each join by XFADE (the overlap is the silent tail/lead of the scenes, so speech never collides)
     X = int(XFADE * sr); audio = clips[0][1].copy()
     for _, a in clips[1:]:
