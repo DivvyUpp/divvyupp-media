@@ -26,6 +26,10 @@ ANIMALS = {
                     outfit="tweed", top="#C8562C", top_d="#A44423", tweed_fleck="#E58A5E", tie="#2E3A4F", cap="#C8562C", cap_line="#2E3A4F"),
     "raccoon_fluffy": dict(label="Fluffy raccoon", fur="#9EA1A8", fur_d="#7D8088", fur_dd="#5F626B", light="#F2F0EC",
                     belly="#C9CBCF", nose="#26232A", iris="#5A3A1E"),
+    "raccoon_soft3d": dict(label="Soft 3D", fur="#A2A5AC", fur_d="#7D8088", light="#F4F2EE", nose="#1E1C22", iris="#6B4423",
+                    style="soft3d"),
+    "raccoon_anime": dict(label="Anime", fur="#A6A9B1", fur_d="#7F828B", light="#F7F5F2", nose="#1E1C22", iris="#7A4A22",
+                    style="anime"),
     "capybara": dict(label="Capybara", fur="#B07E55", fur_d="#94653F", light="#C99A70", nose="#4A3326", iris="#2C1D14",
                      outfit="tee", top="#3F5E58", top_d="#314B46"),
     "otter": dict(label="Otter", fur="#8A5D3B", fur_d="#6F4829", light="#EBD6B8", nose="#2B1E18", iris="#2A1A12",
@@ -327,7 +331,118 @@ def raccoon_fluffy(c, m, blink, mood):
     s += _mouth(c, m, mood, 300, 404, 1.3)
     return s
 
-DRAW = {"raccoon_fluffy": raccoon_fluffy, "raccoon_tweed": raccoon_tweed, "raccoon_orange": raccoon_tweed, "koala": koala, "llama": llama, "raccoon": raccoon, "capybara": capybara, "otter": otter}
+
+def _fur_strands(cx, cy, rx, ry, a0, a1, n, length, col, width=5, op=0.9, seed=1):
+    """Short tapered fur strokes poking outward from an ellipse edge (gives the soft-3D fur its texture)."""
+    import random
+    rnd = random.Random(seed); out = ""
+    for i in range(n):
+        a = math.radians(a0 + (a1 - a0) * (i + rnd.random() * 0.6) / n)
+        x, y = cx + rx * math.cos(a), cy + ry * math.sin(a)
+        L = length * (0.6 + 0.6 * rnd.random()); bend = (rnd.random() - 0.5) * 0.6
+        x2, y2 = x + L * math.cos(a + bend), y + L * math.sin(a + bend)
+        qx, qy = x + L * 0.5 * math.cos(a - bend), y + L * 0.5 * math.sin(a - bend)
+        out += f'<path d="M{x:.1f},{y:.1f} Q{qx:.1f},{qy:.1f} {x2:.1f},{y2:.1f}" stroke="{col}" stroke-width="{width*(0.6+0.5*rnd.random()):.1f}" stroke-linecap="round" fill="none" opacity="{op}"/>'
+    return out
+
+def _eye_big(c, cx, cy, r, blink, mood, lidcol, outline=None):
+    ink = "#121014"
+    if blink:
+        return f'<path d="M{cx-r},{cy+2} C{cx-r*0.4},{cy+r*0.5} {cx+r*0.4},{cy+r*0.5} {cx+r},{cy+2}" stroke="{ink}" stroke-width="{r*0.2}" fill="none" stroke-linecap="round"/>'
+    gid = f"ir{int(cx)}"
+    s = (f'<defs><radialGradient id="{gid}" cx=".5" cy=".62" r=".6"><stop offset="0" stop-color="#E7A35C"/>'
+         f'<stop offset=".55" stop-color="{c["iris"]}"/><stop offset="1" stop-color="#2A160A"/></radialGradient></defs>')
+    s += f'<ellipse cx="{cx}" cy="{cy}" rx="{r}" ry="{r*1.08}" fill="{ink}"/>'
+    s += f'<ellipse cx="{cx}" cy="{cy+r*0.06}" rx="{r*0.82}" ry="{r*0.9}" fill="url(#{gid})"/>'
+    s += f'<ellipse cx="{cx}" cy="{cy+r*0.08}" rx="{r*0.42}" ry="{r*0.48}" fill="{ink}"/>'
+    s += f'<ellipse cx="{cx+r*0.32}" cy="{cy-r*0.4}" rx="{r*0.3}" ry="{r*0.24}" fill="#FFFFFF"/>'
+    s += f'<circle cx="{cx-r*0.36}" cy="{cy+r*0.42}" r="{r*0.13}" fill="#FFFFFF" opacity=".85"/>'
+    if outline: s += f'<ellipse cx="{cx}" cy="{cy}" rx="{r}" ry="{r*1.08}" fill="none" stroke="{outline}" stroke-width="4"/>'
+    lid = {"unimpressed": 0.52, "happy": 0.0}.get(mood, 0.0)
+    clip = f'<clipPath id="ec{int(cx)}"><ellipse cx="{cx}" cy="{cy}" rx="{r+1}" ry="{r*1.08+1}"/></clipPath>'
+    if lid:
+        y = cy - r * 1.08 + 2 * r * 1.08 * lid
+        s += clip + f'<g clip-path="url(#ec{int(cx)})"><path d="M{cx-r-4},{cy-r*1.2} L{cx+r+4},{cy-r*1.2} L{cx+r+4},{y} C{cx+r*0.4},{y-r*0.1} {cx-r*0.4},{y-r*0.1} {cx-r-4},{y}Z" fill="{lidcol}"/></g>'
+        s += f'<path d="M{cx-r+2},{y} C{cx-r*0.4},{y-r*0.1} {cx+r*0.4},{y-r*0.1} {cx+r-2},{y}" stroke="{ink}" stroke-width="{r*0.16}" fill="none" stroke-linecap="round"/>'
+    if mood == "happy":
+        s += clip + f'<g clip-path="url(#ec{int(cx)})"><path d="M{cx-r-4},{cy+r*0.7} C{cx-r*0.3},{cy+r*0.3} {cx+r*0.3},{cy+r*0.3} {cx+r+4},{cy+r*0.7} L{cx+r+4},{cy+r*1.2} L{cx-r-4},{cy+r*1.2}Z" fill="{lidcol}"/></g>'
+    return s
+
+def raccoon_styled(c, m, blink, mood):
+    """Puffy raccoon in a 'soft3d' (gradients, fur strands, glossy eyes) or 'anime' (cel shading, ink outline) style."""
+    st = c["style"]; f, fd, lt = c["fur"], c["fur_d"], c["light"]; ol = "#2B2A30" if st == "anime" else None
+    sw = 6
+    g = ""
+    if st == "soft3d":
+        g += ('<defs>'
+              '<radialGradient id="hd" cx=".42" cy=".32" r=".75"><stop offset="0" stop-color="#C9CCD2"/><stop offset=".55" stop-color="#9DA0A8"/><stop offset="1" stop-color="#5E616A"/></radialGradient>'
+              '<radialGradient id="bd" cx=".4" cy=".2" r=".9"><stop offset="0" stop-color="#C2C5CB"/><stop offset=".6" stop-color="#959AA2"/><stop offset="1" stop-color="#5A5D66"/></radialGradient>'
+              '<radialGradient id="bl2" cx=".45" cy=".3" r=".8"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#C9CBCF"/></radialGradient>'
+              '<radialGradient id="mk" cx=".5" cy=".3" r=".8"><stop offset="0" stop-color="#4A4B54"/><stop offset="1" stop-color="#17161B"/></radialGradient>'
+              '<radialGradient id="mz" cx=".45" cy=".35" r=".75"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".7" stop-color="#ECE9E4"/><stop offset="1" stop-color="#C8C4BE"/></radialGradient>'
+              '<radialGradient id="ns" cx=".4" cy=".3" r=".8"><stop offset="0" stop-color="#4E4A52"/><stop offset="1" stop-color="#121014"/></radialGradient>'
+              '<radialGradient id="ao" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#000" stop-opacity=".35"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>'
+              '<radialGradient id="ear" cx=".5" cy=".7" r=".7"><stop offset="0" stop-color="#E9B3A6"/><stop offset="1" stop-color="#9C7E7A"/></radialGradient>'
+              '</defs>')
+        g = g.replace('<stop offset=".6" stop-color="#959AA2"/>', '<stop offset=".6" stop-color="#959AA2"/>')
+        HEAD, BODY, BELLY, MASK, MUZ, NOSE, EAR = "url(#hd)", "url(#bd)", "url(#bl2)", "url(#mk)", "url(#mz)", "url(#ns)", "url(#ear)"
+    else:
+        HEAD, BODY, BELLY, MASK, MUZ, NOSE, EAR = f, f, lt, "#2A2930", lt, c["nose"], "#E7A79A"
+    stroke = f' stroke="{ol}" stroke-width="{sw}" stroke-linejoin="round"' if ol else ""
+    s = g
+    # body
+    body = f'{_fluff(300, 700, 262, 262, 26, 0.05, 180, 360, False)} L562,720 L38,720Z'
+    s += f'<path d="{body}" fill="{BODY}"{stroke}/>'
+    if st == "anime":   # cel shadow on the right side of the body
+        s += f'<clipPath id="bc"><path d="{body}"/></clipPath><g clip-path="url(#bc)"><path d="M380,470 C440,520 520,600 600,720 L600,470Z" fill="{fd}"/></g>'
+        s += f'<path d="{body}" fill="none"{stroke}/>'
+    belly = f'{_fluff(300, 740, 136, 240, 16, 0.05, 180, 360, False)} L436,740 L164,740Z'
+    s += f'<path d="{belly}" fill="{BELLY}"/>'
+    if st == "soft3d":
+        s += _fur_strands(300, 700, 258, 258, 185, 355, 90, 11, "#B4B7BE", 4, .7, 3)
+        s += _fur_strands(300, 740, 134, 238, 195, 345, 40, 9, "#FFFFFF", 3.5, .6, 4)
+        s += '<ellipse cx="300" cy="452" rx="170" ry="34" fill="url(#ao)"/>'     # head shadow on body
+    # ears
+    for x, o in ((176, -1), (424, 1)):
+        ear = f"M{x-o*46},226 C{x-o*44},156 {x-o*8},104 {x+o*14},100 C{x+o*42},104 {x+o*64},164 {x+o*60},236Z"
+        s += f'<path d="{ear}" fill="{fd if st == "anime" else HEAD}"{stroke}/>'
+        s += f'<path d="M{x-o*26},214 C{x-o*22},164 {x-o*2},128 {x+o*14},126 C{x+o*32},130 {x+o*44},170 {x+o*42},222Z" fill="{lt}"/>'
+        s += f'<path d="M{x-o*12},208 C{x-o*8},176 {x+o*4},152 {x+o*14},152 C{x+o*26},156 {x+o*32},182 {x+o*30},212Z" fill="{EAR}"/>'
+    # head + cheek ruffs
+    head = _fluff(300, 300, 194, 154, 36, 0.055)
+    for o in (-1, 1):
+        ruff = f"M{300+o*150},296 L{300+o*226},330 L{300+o*180},344 L{300+o*218},376 L{300+o*162},378 L{300+o*190},412 L{300+o*118},394Z"
+        s += f'<path d="{ruff}" fill="{HEAD}"{stroke}/>'
+        s += f'<path d="M{300+o*150},328 L{300+o*198},348 L{300+o*162},358 L{300+o*188},384 L{300+o*140},382Z" fill="{lt}"/>'
+    s += f'<path d="{head}" fill="{HEAD}"{stroke}/>'
+    if st == "anime":
+        s += f'<clipPath id="hc"><path d="{head}"/></clipPath><g clip-path="url(#hc)"><path d="M380,150 C460,220 500,320 470,460 L620,460 L620,150Z" fill="{fd}" opacity=".85"/></g>'
+        s += f'<path d="{head}" fill="none"{stroke}/>'
+        s += '<path d="M190,236 C200,190 240,168 270,164" stroke="#FFFFFF" stroke-width="8" fill="none" stroke-linecap="round" opacity=".55"/>'
+    else:
+        s += _fur_strands(300, 300, 190, 150, 195, 345, 70, 10, "#BDC0C6", 4, .75, 7)
+        s += _fur_strands(300, 300, 190, 150, 20, 160, 50, 9, "#6E717A", 4, .6, 8)
+        s += '<path d="M176,250 C186,196 232,162 290,152" stroke="#FFFFFF" stroke-width="10" fill="none" stroke-linecap="round" opacity=".35"/>'
+    s += f'<path d="M300,166 L289,250 L311,250Z" fill="{fd}"/>'
+    by = 226
+    s += f'<path d="M166,{by+20} C196,{by-24} 262,{by-24} 292,{by+2} C262,{by-6} 210,{by} 166,{by+20}Z" fill="{lt}"/><path d="M434,{by+20} C404,{by-24} 338,{by-24} 308,{by+2} C338,{by-6} 390,{by} 434,{by+20}Z" fill="{lt}"/>'
+    mask = ("M146,292 C156,238 222,230 262,250 C282,260 292,268 300,268 C308,268 318,260 338,250 C378,230 444,238 454,292 "
+            "C460,330 420,344 376,334 C344,326 322,312 300,312 C278,312 256,326 224,334 C180,344 140,330 146,292Z")
+    s += f'<path d="{mask}" fill="{MASK}"/>'
+    muz = "M222,352 C210,314 390,314 378,352 C398,410 352,446 300,448 C248,446 202,410 222,352Z"
+    s += f'<path d="{muz}" fill="{MUZ}"{stroke if st == "anime" else ""}/>'
+    s += _brows(c, 226, 374, by + 2, 34, mood, lt, 11)
+    s += _eye_big(c, 226, 286, 27, blink, mood, "#2A2930", ol) + _eye_big(c, 374, 286, 27, blink, mood, "#2A2930", ol)
+    s += f'<path d="M270,352 C270,336 330,336 330,352 C330,372 312,380 300,380 C288,380 270,372 270,352Z" fill="{NOSE}"/>'
+    s += '<ellipse cx="289" cy="346" rx="11" ry="5" fill="#FFFFFF" opacity=".55"/>'
+    if st == "anime":
+        s += "".join(f'<path d="M{x},372 l-8,12" stroke="#E9806E" stroke-width="4" stroke-linecap="round"/>' for x in (190, 202, 214, 386, 398, 410))
+    else:
+        s += _blush(196, 404, 372, 30)
+    s += _mouth(c, m, mood, 300, 408, 1.3)
+    return s
+
+DRAW = {"raccoon_soft3d": raccoon_styled, "raccoon_anime": raccoon_styled, "raccoon_fluffy": raccoon_fluffy, "raccoon_tweed": raccoon_tweed, "raccoon_orange": raccoon_tweed, "koala": koala, "llama": llama, "raccoon": raccoon, "capybara": capybara, "otter": otter}
 
 def svg(name, mouth=0, blink=False, mood="neutral"):
     c = dict(ANIMALS[name])
