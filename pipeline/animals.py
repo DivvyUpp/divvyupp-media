@@ -20,6 +20,10 @@ ANIMALS = {
                   outfit="scarf", top="#E04A1A", top_d="#B93A12", lashes=True),
     "raccoon": dict(label="Raccoon", fur="#9A9CA3", fur_d="#7C7E86", light="#F1EFEA", nose="#26232A", iris="#5A3A1E",
                     outfit="denim", top="#5D7FA6", top_d="#4A6A8F"),
+    "raccoon_tweed": dict(label="Brown tweed", fur="#9A9CA3", fur_d="#7C7E86", light="#F1EFEA", nose="#26232A", iris="#5A3A1E",
+                    outfit="tweed", top="#7A5A40", top_d="#5E4430", tweed_fleck="#A88466", tie="#E04A1A", cap="#8B6A4E", cap_line="#E04A1A"),
+    "raccoon_orange": dict(label="Orange tweed", fur="#9A9CA3", fur_d="#7C7E86", light="#F1EFEA", nose="#26232A", iris="#5A3A1E",
+                    outfit="tweed", top="#C8562C", top_d="#A44423", tweed_fleck="#E58A5E", tie="#2E3A4F", cap="#C8562C", cap_line="#2E3A4F"),
     "capybara": dict(label="Capybara", fur="#B07E55", fur_d="#94653F", light="#C99A70", nose="#4A3326", iris="#2C1D14",
                      outfit="tee", top="#3F5E58", top_d="#314B46"),
     "otter": dict(label="Otter", fur="#8A5D3B", fur_d="#6F4829", light="#EBD6B8", nose="#2B1E18", iris="#2A1A12",
@@ -47,6 +51,20 @@ def _shoulders(c):
         base += (f'<path d="M232,500 L300,600 L368,500 L352,500 L300,572 L248,500Z" fill="#F1EFEA"/>'
                  f'<path d="M232,500 L196,560 L250,560 L300,600Z" fill="{td}"/><path d="M368,500 L404,560 L350,560 L300,600Z" fill="{td}"/>'
                  f'<path d="M150,640 L230,640 M370,640 L450,640" stroke="#E8B04A" stroke-width="4" stroke-dasharray="8 7"/>')
+    elif o == "tweed":
+        tf, tie = c["tweed_fleck"], c["tie"]
+        base = (f'<defs><pattern id="hb" width="16" height="16" patternUnits="userSpaceOnUse">'
+                f'<path d="M0,16 L8,0 M8,16 L16,0" stroke="{tf}" stroke-width="2" opacity=".55"/>'
+                f'<path d="M0,0 L8,16 M8,0 L16,16" stroke="{td}" stroke-width="1.5" opacity=".35"/></pattern></defs>' + base +
+                f'<path d="M70,720 C70,600 150,520 240,500 L360,500 C450,520 530,600 530,720Z" fill="url(#hb)"/>'
+                f'<path d="M244,500 L300,560 L356,500Z" fill="#F7F3EE"/>'                                     # shirt
+                f'<path d="M244,500 L268,530 L300,552 L282,512Z" fill="#FFFFFF"/><path d="M356,500 L332,530 L300,552 L318,512Z" fill="#FFFFFF"/>'
+                f'<path d="M232,500 L300,640 L276,720 L196,720 L204,560 Z" fill="{td}"/><path d="M368,500 L300,640 L324,720 L404,720 L396,560 Z" fill="{td}"/>'
+                f'<path d="M232,500 L300,640 L276,720 L196,720 L204,560 Z" fill="url(#hb)"/><path d="M368,500 L300,640 L324,720 L404,720 L396,560 Z" fill="url(#hb)"/>'
+                f'<path d="M232,500 L206,566 L250,580 Z" fill="{t}"/><path d="M368,500 L394,566 L350,580 Z" fill="{t}"/>'   # lapel notches
+                f'<path d="M300,560 L262,540 C254,552 254,576 262,588 L300,568 L338,588 C346,576 346,552 338,540Z" fill="{tie}"/>'
+                f'<rect x="290" y="554" width="20" height="20" rx="6" fill="{tie}"/><path d="M291,556 L309,572" stroke="#000" stroke-opacity=".15" stroke-width="3"/>'
+                f'<path d="M412,620 L452,616 L448,640 L414,642Z" fill="{tie}"/><path d="M416,622 L430,606 L438,622 L446,610" stroke="{tie}" stroke-width="5" fill="none" stroke-linejoin="round"/>')
     elif o == "tee":
         base += f'<path d="M240,500 C256,536 344,536 360,500 L346,500 C330,522 270,522 254,500Z" fill="{td}"/>'
     elif o == "vest":
@@ -179,7 +197,7 @@ def raccoon(c, m, blink, mood):
     s += (f'<path d="M168,274 C180,232 226,226 262,244 C282,254 292,262 300,262 C308,262 318,254 338,244 C374,226 420,232 432,274 '
           f'C436,306 404,320 368,312 C340,306 320,296 300,296 C280,296 260,306 232,312 C196,320 164,306 168,274Z" fill="#2A272D"/>')
     s += f'<path d="M238,330 C230,300 370,300 362,330 C380,380 340,420 300,422 C260,420 220,380 238,330Z" fill="{lt}"/>'
-    s += _brows(c, 230, 370, 214, 30, mood, lt, 9)
+    s += _brows(c, 230, 370, c.get("brow_y", 214), 30, mood, lt, 9)
     s += _eye(c, 230, 272, 20, blink, mood) + _eye(c, 370, 272, 20, blink, mood)
     s += f'<ellipse cx="300" cy="338" rx="26" ry="18" fill="{c["nose"]}"/><ellipse cx="292" cy="332" rx="8" ry="4" fill="#FFFFFF" opacity=".35"/>'
     s += _mouth(c, m, mood, 300, 386, 1.3)
@@ -225,7 +243,29 @@ def otter(c, m, blink, mood):
     s += _mouth(c, m, mood, 300, 382, 1.3)
     return s
 
-DRAW = {"koala": koala, "llama": llama, "raccoon": raccoon, "capybara": capybara, "otter": otter}
+def _deerstalker(c):
+    cap, ln = c["cap"], c["cap_line"]
+    chk = (f'<defs><pattern id="ck" width="28" height="28" patternUnits="userSpaceOnUse">'
+           f'<rect width="28" height="28" fill="{cap}"/><path d="M0,14 H28 M14,0 V28" stroke="{ln}" stroke-width="3" opacity=".75"/>'
+           f'<path d="M0,5 H28 M5,0 V28" stroke="#FFFFFF" stroke-width="1.5" opacity=".25"/></pattern></defs>')
+    crown = "M182,200 C182,118 236,84 300,84 C364,84 418,118 418,200 C380,186 220,186 182,200Z"
+    s = chk + f'<path d="M166,204 C200,236 250,240 300,232 C250,226 210,214 186,196Z" fill="{cap}"/>'                  # back peak (left side)
+    s += f'<path d="M434,204 C400,236 350,240 300,232 C350,226 390,214 414,196Z" fill="{cap}"/>'
+    s += f'<path d="{crown}" fill="url(#ck)"/><path d="{crown}" fill="#000" opacity=".06"/>'
+    s += f'<path d="M300,86 L300,190" stroke="#000" stroke-opacity=".12" stroke-width="3"/>'
+    s += f'<path d="M206,198 C240,234 360,234 394,198 C392,214 382,222 370,226 C330,240 270,240 230,226 C218,222 208,214 206,198Z" fill="url(#ck)"/>'  # front peak
+    s += f'<path d="M206,198 C240,234 360,234 394,198 C392,214 382,222 370,226 C330,240 270,240 230,226 C218,222 208,214 206,198Z" fill="#000" opacity=".12"/>'
+    s += f'<path d="M230,104 C250,92 270,90 284,96" stroke="{cap}" stroke-width="10" fill="none" stroke-linecap="round"/>' \
+         f'<path d="M316,96 C330,90 350,92 370,104" stroke="{cap}" stroke-width="10" fill="none" stroke-linecap="round"/>'
+    s += f'<path d="M300,84 C286,66 270,66 270,78 C270,88 288,88 300,84 C312,88 330,88 330,78 C330,66 314,66 300,84Z" fill="{ln}"/><circle cx="300" cy="84" r="7" fill="{ln}"/>'
+    return s
+
+def raccoon_tweed(c, m, blink, mood):
+    c["brow_y"] = 232
+    s = raccoon(c, m, blink, mood)
+    return s + '<g transform="translate(300,0) scale(1.1,1.04) translate(-300,-12)">' + _deerstalker(c) + '</g>' 
+
+DRAW = {"raccoon_tweed": raccoon_tweed, "raccoon_orange": raccoon_tweed, "koala": koala, "llama": llama, "raccoon": raccoon, "capybara": capybara, "otter": otter}
 
 def svg(name, mouth=0, blink=False, mood="neutral"):
     c = dict(ANIMALS[name])
