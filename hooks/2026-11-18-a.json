@@ -1,1 +1,83 @@
-{"id": "2026-11-18-a", "small": "Try this for 90 days.", "lines": [["Save more.", "ink"], ["Spend less.", "ink"], ["Or we refund", "orange"], ["your subscription.", "orange"]], "narration": ["Try this for ninety days.", "If you don't save more or spend less, we refund your subscription."], "chart": false}
+{
+ "id": "2026-11-18-a",
+ "format": "story",
+ "character": "c",
+ "character_voice": "af_heart",
+ "music": true,
+ "hook": {
+  "small": "Save more or spend less.",
+  "lines": [
+   [
+    "Or we refund",
+    "ink"
+   ],
+   [
+    "your subscription.",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "What if a money app had to prove it works?",
+   "Ninety days. If you don't save more or spend less, we refund your subscription."
+  ],
+  "moods": [
+   "neutral",
+   "happy"
+  ]
+ },
+ "guide": {
+  "title": [
+   [
+    "Then a daily guide",
+    "ink"
+   ],
+   [
+    "for the rest.",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "The rest gets a daily and a weekly number.",
+   "Your kid's birthday party, a hundred and twenty. Tomorrow adjusts to sixty-three.",
+   "Then a school trip, forty-five. Tomorrow: fifty-one.",
+   "You know before you spend, not after."
+  ],
+  "week": 520,
+  "today": 74,
+  "spends": [
+   {
+    "label": "Birthday party",
+    "amount": 120,
+    "tomorrow": 63
+   },
+   {
+    "label": "School trip",
+    "amount": 45,
+    "tomorrow": 51
+   }
+  ]
+ },
+ "payoff": {
+  "title": [
+   [
+    "The party happened.",
+    "ink"
+   ],
+   [
+    "Savings didn't move.",
+    "orange"
+   ]
+  ],
+  "checks": [
+   "Bills paid",
+   "Savings kept",
+   "No guilt"
+  ],
+  "narration": [
+   "Bills paid.",
+   "Savings kept.",
+   "The party happened, guilt-free."
+  ]
+ },
+ "skip_flip": false
+}
