@@ -12,7 +12,14 @@ Videos are served publicly by GitHub Pages at `https://divvyupp.github.io/divvyu
 - @getdivvyupp is the single main account for all DivvyUpp content (the personal @srinithinks account is retired).
 - Cadence: 5 Reels a week, Tuesday to Saturday, one per day. At most one post per day. If anything fails, stop and tell Srini; do not retry a publish blindly (check with
   Windsor `get_data` for a media created today before any retry, so nothing posts twice).
-- Brand: warm off-white background, orange #E04A1A, near-black #15100F, Plus Jakarta Sans. Voice: Kokoro `af_heart`.
+- Brand: warm off-white background, orange #E04A1A, near-black #15100F, Plus Jakarta Sans.
+- Voice (agreed with Srini 2026-11-16): ElevenLabs, model `eleven_v3`, **Jessica** (`cgSgspJ2msm6clMCkdW9`) for presenter C,
+  spec value `"character_voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3"`. Direct the delivery with v3 audio tags
+  ([playful], [sighs], [reassuring], [happy]...). Kokoro `af_heart` sounded flat and is retired for Reels.
+  The API key comes from env `ELEVENLABS_API_KEY` (or `~/.secrets/elevenlabs_key`); never commit it. If the key is
+  missing or `api.elevenlabs.io` is blocked, stop and tell Srini; do not fall back to Kokoro.
+- Guarantee wording (agreed 2026-11-16): "If you don't save more or spend less in 90 days, we refund your subscription,
+  up to $30. Terms apply." Never "or both", never "save more and spend less".
 - No competitor names, no maths equations on screen, no invented testimonials. The founder figure is
   "about $1,000 a month" saved; don't inflate it.
 
@@ -27,7 +34,19 @@ with a mortgage and kids who earn well but have nothing left at month end.
 A story Reel tells the whole loop, not just a hook: pain → save first (approved body, part 1) → the daily/weekly
 guide for the rest that adjusts when you overspend → payoff (bills paid, savings kept, guilt-free spending) →
 guarantee + CTA (body, part 2). Render with `python3 pipeline/make_story_reel.py hooks/<id>.json` (spec format in
-that file; `--check` writes one still per scene). Keep it under 60s. Example: `hooks/2026-11-15-a.json`.
+that file; `--check` writes one still per scene). Keep it under 90s (Srini prefers clarity over a 60s cap).
+Current template (approved 2026-11-16), copy `hooks/2026-11-19-a.json`:
+- hook → **four-numbers `plan` scene** (income and fixed bills checked against bank history, savings you pick,
+  safe-to-spend; replaces the old "flips the order" body section, `skip_flip: true`) → guide with **two `spends`**
+  → payoff → `"ending": "rendered"` (guarantee + CTA in the same voice, new guarantee wording).
+- Guide lines are full, clear sentences, e.g. "Then your car needs a repair. That's a hundred and sixty dollars, so
+  you're ninety over for today. DivvyUpp spreads that across the rest of your week, and tomorrow adjusts to
+  forty-seven." Never clipped ("Tomorrow: forty-seven"). Moderate examples: tomorrow drops by about half, not to
+  near zero. Use everyday spends (grocery run, online order, kid's birthday party, car repair); no brand names.
+- Each Reel needs its own example, numbers and payoff line; don't repeat the previous days' storyline.
+- Founder story (stated by Srini, true, he can show the activity): he makes good money but had nothing to show for it
+  at month end, built DivvyUpp to fix his own problem, and now saves about $1,000 a month with it.
+- Presenters: C (female) speaks Tue-Thu style Reels; E (male) needs a male ElevenLabs voice (being chosen 2026-11-16).
 Rules for every presenter character, current or new:
 - Drawn in `pipeline/characters.py` as SVG in the same flat editorial style as presenters A–E: head and
   shoulders, real proportions (short neck, broad shoulders), soft shading, believable outfit for the audience
@@ -69,11 +88,11 @@ Rules for every presenter character, current or new:
    Get started from step 3 are the business result and win ties. With little data,
    say so plainly rather than over-reading one post. Write a short `decision` for last week's rows
    (keep / kill / iterate) and why.
-5. Write **5 new hook specs** in `hooks/<YYYY-MM-DD>-<a..e>.json` (format in `pipeline/make_reel.py`).
-   Each tests one idea against the current best (pain question, founder result, guarantee-first,
-   "before you spend", no-budget). Keep text short enough for 1-4 big lines.
-6. Check each with `python3 pipeline/make_reel.py hooks/<id>.json --check` and look at the still; then render
-   all 5 (`python3 pipeline/make_reel.py hooks/<id>.json`).
+5. Write **5 new story Reel specs** in `hooks/<YYYY-MM-DD>-a.json` (one per day Tue-Sat) using the story template
+   above and `pipeline/make_story_reel.py`, NOT the old text-only `make_reel.py`. Each tests one idea (pain question,
+   founder result, guarantee-first, before-you-spend, no-budget, audience call-out, flexible-spending reality check).
+6. Check each with `python3 pipeline/make_story_reel.py hooks/<id>.json --check` and look at every still; then render.
+   Srini reviews one day at a time if he asks to; keep unapproved videos out of the repo (scratch folder).
 7. Add queue entries with `"status": "pending_review"`, a caption per video (same structure as the first
    post), and proposed `post_date`s, one per day Tuesday to Saturday of this week, posted at 7pm ET.
 8. Send Srini the 5 videos (SendUserFile) plus a short note: last week's numbers in one line each (Reel stats plus the funnel from step 3), then a short actual-vs-target scorecard from step 3b, what each
