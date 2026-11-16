@@ -24,6 +24,8 @@ ANIMALS = {
                     outfit="tweed", top="#7A5A40", top_d="#5E4430", tweed_fleck="#A88466", tie="#E04A1A", cap="#8B6A4E", cap_line="#E04A1A"),
     "raccoon_orange": dict(label="Orange tweed", fur="#9A9CA3", fur_d="#7C7E86", light="#F1EFEA", nose="#26232A", iris="#5A3A1E",
                     outfit="tweed", top="#C8562C", top_d="#A44423", tweed_fleck="#E58A5E", tie="#2E3A4F", cap="#C8562C", cap_line="#2E3A4F"),
+    "raccoon_fluffy": dict(label="Fluffy raccoon", fur="#9EA1A8", fur_d="#7D8088", fur_dd="#5F626B", light="#F2F0EC",
+                    belly="#C9CBCF", nose="#26232A", iris="#5A3A1E"),
     "capybara": dict(label="Capybara", fur="#B07E55", fur_d="#94653F", light="#C99A70", nose="#4A3326", iris="#2C1D14",
                      outfit="tee", top="#3F5E58", top_d="#314B46"),
     "otter": dict(label="Otter", fur="#8A5D3B", fur_d="#6F4829", light="#EBD6B8", nose="#2B1E18", iris="#2A1A12",
@@ -265,7 +267,67 @@ def raccoon_tweed(c, m, blink, mood):
     s = raccoon(c, m, blink, mood)
     return s + '<g transform="translate(300,0) scale(1.1,1.04) translate(-300,-12)">' + _deerstalker(c) + '</g>' 
 
-DRAW = {"raccoon_tweed": raccoon_tweed, "raccoon_orange": raccoon_tweed, "koala": koala, "llama": llama, "raccoon": raccoon, "capybara": capybara, "otter": otter}
+import math
+def _fluff(cx, cy, rx, ry, n=28, amp=0.07, a0=0.0, a1=360.0, close=True, jitter=0.0):
+    """Scalloped (furry) outline around an ellipse arc: each bump is a quadratic curve bulging outward."""
+    pts = []
+    for i in range(n + 1):
+        a = math.radians(a0 + (a1 - a0) * i / n); pts.append((cx + rx * math.cos(a), cy + ry * math.sin(a)))
+    d = f"M{pts[0][0]:.1f},{pts[0][1]:.1f} "
+    for i in range(n):
+        (x0, y0), (x1, y1) = pts[i], pts[i + 1]
+        am = math.radians(a0 + (a1 - a0) * (i + 0.5) / n); k = 1 + amp * (1 + (jitter if i % 2 else 0))
+        qx, qy = cx + rx * k * math.cos(am), cy + ry * k * math.sin(am)
+        d += f"Q{qx:.1f},{qy:.1f} {x1:.1f},{y1:.1f} "
+    return d + ("Z" if close else "")
+
+def raccoon_fluffy(c, m, blink, mood):
+    f, fd, fdd, lt, bl = c["fur"], c["fur_d"], c["fur_dd"], c["light"], c["belly"]; c["lidfill"] = "#2A272D"
+    s = ""
+    # big ringed tail: overlapping fluffy discs along a curve, banded light/dark
+    pts = []
+    for i in range(23):
+        u = i / 22; x = (1-u)**2*430 + 2*(1-u)*u*560 + u*u*500; y = (1-u)**2*720 + 2*(1-u)*u*500 + u*u*300
+        pts.append((x, y, 52 - 18 * u))
+    for i, (x, y, r) in enumerate(pts):
+        col = "#3A3B42" if (i // 3) % 2 else fd
+        s += f'<path d="{_fluff(x, y, r, r, 12, 0.09)}" fill="{col}"/>'
+    s += f'<path d="{_fluff(pts[-1][0], pts[-1][1]-6, 30, 30, 12, 0.1)}" fill="#3A3B42"/>'
+    # big fluffy body
+    s += f'<path d="{_fluff(300, 700, 270, 260, 30, 0.05, 180, 360, False)} L570,720 L30,720Z" fill="{f}"/>'
+    s += f'<path d="{_fluff(300, 740, 140, 250, 18, 0.05, 180, 360, False)} L440,740 L160,740Z" fill="{bl}"/>'
+    s += "".join(f'<path d="M{x},{y} c4,10 10,16 18,18" stroke="#FFFFFF" stroke-width="4" fill="none" stroke-linecap="round" opacity=".45"/>'
+                 for x, y in ((236, 540), (330, 556), (268, 620), (356, 640), (216, 668)))
+    s += "".join(f'<path d="M{x},{y} c-6,10 -14,16 -24,18" stroke="{fd}" stroke-width="4" fill="none" stroke-linecap="round" opacity=".55"/>'
+                 for x, y in ((110, 620), (150, 560), (500, 640), (90, 690)))
+    s += f'<path d="{_fluff(300, 700, 270, 260, 30, 0.05, 200, 250, False)}" stroke="#FFFFFF" stroke-opacity=".18" stroke-width="10" fill="none"/>'
+    # ears
+    for x, o in ((178, -1), (422, 1)):
+        s += f'<path d="M{x-o*44},214 C{x-o*40},150 {x-o*6},104 {x+o*14},100 C{x+o*40},104 {x+o*60},160 {x+o*58},226Z" fill="{fd}"/>'
+        s += f'<path d="M{x-o*28},206 C{x-o*24},160 {x-o*2},124 {x+o*14},122 C{x+o*32},126 {x+o*44},166 {x+o*42},214Z" fill="{lt}"/>'
+        s += f'<path d="M{x-o*14},200 C{x-o*10},170 {x+o*4},146 {x+o*14},146 C{x+o*26},150 {x+o*32},176 {x+o*30},206Z" fill="{fdd}"/>'
+    # head with cheek ruffs
+    s += f'<path d="{_fluff(300, 300, 190, 150, 34, 0.06)}" fill="{f}"/>'
+    for o in (-1, 1):   # cheek ruffs
+        s += f'<path d="M{300+o*150},300 L{300+o*222},334 L{300+o*176},346 L{300+o*214},376 L{300+o*160},378 L{300+o*186},410 L{300+o*120},392Z" fill="{f}"/>'
+        s += f'<path d="M{300+o*150},330 L{300+o*196},350 L{300+o*160},360 L{300+o*186},384 L{300+o*140},380Z" fill="{lt}"/>'
+    s += f'<ellipse cx="300" cy="300" rx="190" ry="150" fill="url(#sh)"/>'
+    s += f'<path d="M300,168 L290,252 L310,252Z" fill="{fd}"/>'
+    s += "".join(f'<path d="M{x},{y} q6,-12 12,0" stroke="{fd}" stroke-width="4" fill="none" stroke-linecap="round" opacity=".5"/>' for x, y in ((240, 186), (348, 186), (270, 172), (318, 172)))
+    # white brows + mask
+    by = 226
+    s += f'<path d="M168,{by+20} C196,{by-22} 260,{by-22} 290,{by+2} C262,{by-6} 210,{by} 168,{by+20}Z" fill="{lt}"/><path d="M432,{by+20} C404,{by-22} 340,{by-22} 310,{by+2} C338,{by-6} 390,{by} 432,{by+20}Z" fill="{lt}"/>'
+    s += (f'<path d="M150,290 C160,240 222,232 262,252 C282,262 292,270 300,270 C308,270 318,262 338,252 C378,232 440,240 450,290 '
+          f'C456,326 418,340 376,330 C344,322 322,308 300,308 C278,308 256,322 224,330 C182,340 144,326 150,290Z" fill="#2A272D"/>')
+    s += f'<path d="M226,350 C214,316 386,316 374,350 C394,404 350,440 300,442 C250,440 206,404 226,350Z" fill="{lt}"/>'
+    s += _brows(c, 226, 374, by + 2, 32, mood, lt, 10)
+    s += _eye(c, 228, 284, 23, blink, mood) + _eye(c, 372, 284, 23, blink, mood)
+    s += f'<path d="M272,350 C272,336 328,336 328,350 C328,368 312,376 300,376 C288,376 272,368 272,350Z" fill="{c["nose"]}"/><ellipse cx="290" cy="345" rx="9" ry="4.5" fill="#FFFFFF" opacity=".35"/>'
+    s += _blush(196, 404, 360, 28)
+    s += _mouth(c, m, mood, 300, 404, 1.3)
+    return s
+
+DRAW = {"raccoon_fluffy": raccoon_fluffy, "raccoon_tweed": raccoon_tweed, "raccoon_orange": raccoon_tweed, "koala": koala, "llama": llama, "raccoon": raccoon, "capybara": capybara, "otter": otter}
 
 def svg(name, mouth=0, blink=False, mood="neutral"):
     c = dict(ANIMALS[name])
