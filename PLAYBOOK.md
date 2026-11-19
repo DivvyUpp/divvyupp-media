@@ -56,7 +56,7 @@ Current template (approved 2026-11-16), copy `hooks/2026-11-19-a.json`:
 - Mascot (agreed with Srini 2026-11-16): the **raccoon**, named **Dollar Bill** (written out as "Dollar Bill", never "$Bill"; agreed 2026-11-19), soft-3D plush style (`"character": "raccoon_soft3d"` from
   `pipeline/animals.py`), voiced by **Valf** (`"character_voice": "elevenlabs:loY1uopAz31XyhAEhNSa:eleven_v3"`): upbeat,
   snarky, animated, never deadpan. Our own character: never imitate a film character or actor. The snark is aimed at
-  spending habits, never at the viewer; he still lets you enjoy things. Voice several seeded takes and keep the one closest to `pipeline/assets/voices/raccoon_reference.wav` (the approved Valf read; v3 takes can drift higher/younger). Keep his scripts ~20% shorter than the human
+  spending habits, never at the viewer; he still lets you enjoy things. Lock his voice with `"voice_prefix"`: the take opens with the reference demo's first lines ("Whoa, whoa, whoa. I've seen your bank history! ... On a TUESDAY? ... I know exactly where money disappears to."), which are then cut off, so v3 settles into the approved character (Srini confirmed 2026-11-19 this matches; picking takes by pitch alone did not). Reference audio: `pipeline/assets/voices/raccoon_reference.wav`. Never clone a library voice. Keep his scripts ~20% shorter than the human
   presenters' (energetic delivery runs long). Reference spec: `hooks/raccoon-demo.json`. How many raccoon Reels per
   week is still to be agreed with Srini; propose a split and compare skip rate and watch time against the humans.
 - ElevenLabs Reels are voiced in one take that becomes the uncut soundtrack; scenes change in its natural pauses.
@@ -123,3 +123,9 @@ Rules for every presenter character, current or new:
 2. Publish it with Windsor `create_video_post` (video_url = Pages URL of `file`, caption from the entry).
 3. Set `"status": "posted"` and `media_id`, add a row to `experiment-log.csv`, commit and push.
 4. Send Srini one line: what posted and its link (`media_permalink` via `get_data` if available).
+
+## How-it-works explainer (landing page)
+`python3 pipeline/make_explainer.py hooks/how-it-works-raccoon.json` renders the 1080p landscape explainer: Dollar Bill
+on the left, app screens redrawn in the current brand (`pipeline/screens.py`, never the old blue screens) in a phone on
+the right, captions, one uncut voice take. Approved 2026-11-19: `reels/how-it-works-dollar-bill.mp4`. No founder name;
+CTA is the free beta ("go to divvyupp dot com and tap Get Started, free during the beta, no card required").
