@@ -165,8 +165,6 @@
    ]
   }
  ],
- "caption_replace": {
-  "Dollar Bill": "$Bill"
- },
- "takes": 3
+ "takes": 5,
+ "voice_reference": "pipeline/assets/voices/raccoon_reference.wav"
 }

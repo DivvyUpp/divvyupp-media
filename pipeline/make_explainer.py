@@ -52,12 +52,17 @@ def screen_mask():
     m = Image.new("L", (SW_, SH_), 0); ImageDraw.Draw(m).rounded_rectangle([0, 0, SW_ - 1, SH_ - 1], 58, fill=255); return m
 
 # ---------- voice ----------
-def pitch_range(mp3_bytes, tmp):
-    """5th-95th percentile pitch spread in semitones: a simple liveliness score for a voice take."""
+def voice_print(path):
     import librosa, warnings; warnings.filterwarnings("ignore")
+    y, sr = librosa.load(path, sr=16000, duration=40)
+    f0, _, _ = librosa.pyin(y, fmin=80, fmax=500, sr=sr); f0 = f0[~np.isnan(f0)]
+    return librosa.feature.mfcc(y=y, sr=sr, n_mfcc=20).mean(1), float(np.median(f0))
+
+def voice_distance(mp3_bytes, ref, tmp):
+    """How far a take sounds from the approved reference: pitch (the main giveaway) plus overall timbre."""
     f = os.path.join(tmp, "score.mp3"); open(f, "wb").write(mp3_bytes)
-    y, sr = librosa.load(f, sr=16000); f0, _, _ = librosa.pyin(y, fmin=80, fmax=500, sr=sr); f0 = f0[~np.isnan(f0)]
-    st = 12 * np.log2(f0 / np.median(f0)); return float(np.percentile(st, 95) - np.percentile(st, 5))
+    m, f0 = voice_print(f)
+    return abs(12 * np.log2(f0 / ref[1])) * 4 + float(np.linalg.norm(m - ref[0])) / 10
 
 def one_take(spec, tmp):
     import base64, soundfile as sf
@@ -66,14 +71,15 @@ def one_take(spec, tmp):
     sents = [s for b in spec["beats"] for s in b["sentences"]]
     text, starts, pos = "", [], 0
     for s in sents: starts.append(pos); text += s["text"] + " "; pos += len(s["text"]) + 1
-    # v3 delivery varies from take to take: voice N takes (seeds) and keep the liveliest (widest pitch range), so the
-    # character always sounds like his energetic self rather than a flat read.
+    # v3 delivery varies from take to take (pitch, age, energy). Voice N seeded takes and keep the one that sounds
+    # most like the approved reference recording of this character (spec "voice_reference").
+    ref = voice_print(os.path.join(ROOT, spec["voice_reference"])) if spec.get("voice_reference") else None
     best = None
     for seed in range(1, int(spec.get("takes", 1)) + 1):
         h_, r_ = _el_request(vid, model, text.strip(), seed=seed if spec.get("takes", 1) > 1 else None)
-        score = pitch_range(base64.b64decode(r_["audio_base64"]), tmp)
-        print(f"take {seed}: pitch range {score:.1f} semitones")
-        if best is None or score > best[0]: best = (score, h_, r_)
+        score = voice_distance(base64.b64decode(r_["audio_base64"]), ref, tmp) if ref else 0
+        print(f"take {seed}: distance from reference {score:.1f}")
+        if best is None or score < best[0]: best = (score, h_, r_)
     _, h, r = best
     mp3 = os.path.join(tmp, h + ".mp3"); open(mp3, "wb").write(base64.b64decode(r["audio_base64"]))
     wav = os.path.join(tmp, "take.wav"); sr = 24000

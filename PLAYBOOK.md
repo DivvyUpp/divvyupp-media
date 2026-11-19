@@ -53,10 +53,10 @@ Current template (approved 2026-11-16), copy `hooks/2026-11-19-a.json`:
 - Each Reel needs its own example, numbers and payoff line; don't repeat the previous days' storyline.
 - Founder story (stated by Srini, true, he can show the activity): he makes good money but had nothing to show for it
   at month end, built DivvyUpp to fix his own problem, and now saves about $1,000 a month with it.
-- Mascot (agreed with Srini 2026-11-16): the **raccoon**, named **$Bill** (said "Dollar Bill", written "$Bill"; agreed 2026-11-19), soft-3D plush style (`"character": "raccoon_soft3d"` from
+- Mascot (agreed with Srini 2026-11-16): the **raccoon**, named **Dollar Bill** (written out as "Dollar Bill", never "$Bill"; agreed 2026-11-19), soft-3D plush style (`"character": "raccoon_soft3d"` from
   `pipeline/animals.py`), voiced by **Valf** (`"character_voice": "elevenlabs:loY1uopAz31XyhAEhNSa:eleven_v3"`): upbeat,
   snarky, animated, never deadpan. Our own character: never imitate a film character or actor. The snark is aimed at
-  spending habits, never at the viewer; he still lets you enjoy things. Keep his scripts ~20% shorter than the human
+  spending habits, never at the viewer; he still lets you enjoy things. Voice several seeded takes and keep the one closest to `pipeline/assets/voices/raccoon_reference.wav` (the approved Valf read; v3 takes can drift higher/younger). Keep his scripts ~20% shorter than the human
   presenters' (energetic delivery runs long). Reference spec: `hooks/raccoon-demo.json`. How many raccoon Reels per
   week is still to be agreed with Srini; propose a split and compare skip rate and watch time against the humans.
 - ElevenLabs Reels are voiced in one take that becomes the uncut soundtrack; scenes change in its natural pauses.
