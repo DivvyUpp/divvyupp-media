@@ -90,9 +90,10 @@ def narrate_elevenlabs(sentences, voice, out_wav):
 
 ONE_TAKE = {}   # tuple(sentence texts) -> (audio, cues, phon) for segments cut from a single whole-Reel take
 
-def _el_request(vid, model, text):
+def _el_request(vid, model, text, seed=None):
     import hashlib, urllib.request
     body = {"text": text, "model_id": model, "voice_settings": {"stability": 0.5}}
+    if seed is not None: body["seed"] = seed
     os.makedirs(os.path.join(CACHE, "eleven"), exist_ok=True)
     h = hashlib.sha256(json.dumps(body, sort_keys=True).encode() + vid.encode()).hexdigest()[:20]; cf = os.path.join(CACHE, "eleven", h + ".json")
     if os.path.exists(cf): return h, json.load(open(cf))

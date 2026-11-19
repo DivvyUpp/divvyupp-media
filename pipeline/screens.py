@@ -81,16 +81,21 @@ def dashboard(c, tab):
     nav(c, 0)
 
 def report(c):
-    status_bar(c)
-    c.text((20, 66), "October report", 800, 24, fill=(70, 70, 76))
-    c.text((20, 100), "Most budgeting apps, a month too late", 500, 12.5, fill=GREY)
-    c.rr([16, 128, 374, 252], 20, fill=(240, 238, 240))
-    c.text((32, 146), "You spent", 600, 13, fill=GREY); c.text((32, 166), "$4,212", 800, 40, fill=(70, 70, 76))
-    c.rr([32, 220, 196, 242], 11, fill=RED_T); c.text((114, 231), "$612 over budget", 700, 12, fill=RED, anchor="mm")
-    for i, (lab, pct) in enumerate((("Dining out", 1.42), ("Shopping", 1.21), ("Groceries", 1.08), ("Entertainment", 0.9), ("Transport", 0.74))):
-        y = 280 + i * 62; c.text((20, y), lab, 700, 14, fill=(70, 70, 76)); c.text((370, y), f"{int(pct * 100)}%", 800, 14, fill=RED if pct > 1 else GREY, anchor="ra")
-        c.rr([20, y + 24, 370, y + 34], 5, fill=(232, 230, 232)); c.rr([20, y + 24, 20 + 350 * min(pct, 1.0), y + 34], 5, fill=RED if pct > 1 else (170, 168, 176))
-    c.rr([90, 600, 300, 650], 25, outline=RED, width=3); c.text((195, 625), "TOO LATE", 800, 22, fill=RED, anchor="mm")
+    """A generic budgeting app's lock-screen notification that arrives after the month is over."""
+    c.d.rectangle(c.P(0, 0, 390, c.h), fill=(54, 58, 72))
+    for i in range(40):                                              # soft vertical gradient
+        c.d.rectangle(c.P(0, c.h * i / 40, 390, c.h * (i + 1) / 40), fill=(54 + i, 58 + i, 72 + i))
+    status_bar_light = lambda: None
+    c.text((195, 96), "Saturday, November 1", 600, 16, fill=(235, 235, 240), anchor="mm")
+    c.text((195, 160), "9:41", 700, 76, fill=WHITE, anchor="mm")
+    c.rr([16, 250, 374, 360], 22, fill=(248, 247, 250))
+    c.rr([32, 266, 56, 290], 6, fill=(150, 150, 160)); c.text((66, 278), "BUDGET APP", 700, 12, fill=GREY, anchor="lm")
+    c.text((358, 278), "now", 500, 12, fill=GREY, anchor="rm")
+    c.text((32, 308), "Your October recap is ready", 800, 15, anchor="lm")
+    c.text((32, 334), "You overspent by $612 last month.", 600, 14, fill=RED, anchor="lm")
+    c.rr([95, 420, 295, 480], 30, outline=(255, 120, 110), width=3)
+    c.text((195, 450), "A MONTH TOO LATE", 800, 17, fill=(255, 150, 140), anchor="mm")
+    c.text((195, 520), "The money is already gone.", 600, 15, fill=(220, 220, 228), anchor="mm")
 
 def plan(c, step):
     app_header(c, "Your plan")
@@ -156,14 +161,12 @@ def ask(c, amount=None, what=None, result=None):
 
 def cta(c):
     status_bar(c)
-    logo(c, 155, 190, 80); c.text((195, 310), "DivvyUpp", 800, 30, anchor="mm")
-    c.text((195, 352), "Know what you can spend today.", 600, 15, fill=GREY, anchor="mm")
-    c.text((195, 374), "Hit your savings goal tomorrow.", 600, 15, fill=GREY, anchor="mm")
-    c.rr([28, 430, 362, 560], 22, fill=TINT)
-    c.text((195, 462), "GET EARLY ACCESS", 800, 12, fill=ORANGE, anchor="mm")
-    c.text((195, 500), "srini@divvyupp.com", 800, 22, anchor="mm")
-    c.text((195, 534), "Email Srini, our founder", 600, 13, fill=GREY, anchor="mm")
-    c.text((195, 610), "Free during beta · No card needed", 600, 13, fill=GREY, anchor="mm")
+    logo(c, 155, 170, 80); c.text((195, 290), "DivvyUpp", 800, 30, anchor="mm")
+    c.text((195, 330), "Know what you can spend today.", 600, 15, fill=GREY, anchor="mm")
+    c.text((195, 352), "Hit your savings goal tomorrow.", 600, 15, fill=GREY, anchor="mm")
+    c.rr([28, 400, 362, 470], 20, fill=TINT); c.text((195, 435), "divvyupp.com", 800, 26, anchor="mm")
+    c.rr([28, 490, 362, 546], 28, fill=ORANGE); c.text((195, 518), "Get Started", 800, 18, fill=WHITE, anchor="mm")
+    c.text((195, 580), "Free during beta · No card needed", 700, 14, fill=GREEN, anchor="mm")
 
 SCREENS = {
     "report": report, "dashboard_today": lambda c: dashboard(c, 0), "dashboard_week": lambda c: dashboard(c, 1),
