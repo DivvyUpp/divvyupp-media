@@ -53,7 +53,7 @@ Current template (approved 2026-11-16), copy `hooks/2026-11-19-a.json`:
 - Each Reel needs its own example, numbers and payoff line; don't repeat the previous days' storyline.
 - Founder story (stated by Srini, true, he can show the activity): he makes good money but had nothing to show for it
   at month end, built DivvyUpp to fix his own problem, and now saves about $1,000 a month with it.
-- Mascot (agreed with Srini 2026-11-16): the **raccoon**, soft-3D plush style (`"character": "raccoon_soft3d"` from
+- Mascot (agreed with Srini 2026-11-16): the **raccoon**, named **$Bill** (said "Dollar Bill", written "$Bill"; agreed 2026-11-19), soft-3D plush style (`"character": "raccoon_soft3d"` from
   `pipeline/animals.py`), voiced by **Valf** (`"character_voice": "elevenlabs:loY1uopAz31XyhAEhNSa:eleven_v3"`): upbeat,
   snarky, animated, never deadpan. Our own character: never imitate a film character or actor. The snark is aimed at
   spending habits, never at the viewer; he still lets you enjoy things. Keep his scripts ~20% shorter than the human

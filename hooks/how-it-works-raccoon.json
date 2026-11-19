@@ -1,0 +1,171 @@
+{
+ "id": "how-it-works-raccoon",
+ "character": "raccoon_soft3d",
+ "character_voice": "elevenlabs:loY1uopAz31XyhAEhNSa:eleven_v3",
+ "music": true,
+ "beats": [
+  {
+   "screen": "report",
+   "sentences": [
+    {
+     "text": "[scoffs] Most budgeting apps tell you how you spent your money last month.",
+     "mood": "unimpressed"
+    },
+    {
+     "text": "Thanks, pal. Little late for that!",
+     "mood": "unimpressed"
+    }
+   ]
+  },
+  {
+   "screen": "dashboard_today",
+   "sentences": [
+    {
+     "text": "[excited] Hey! I'm Dollar Bill, DivvyUpp's resident raccoon.",
+     "mood": "happy"
+    },
+    {
+     "text": "Our founder, Srini, built DivvyUpp to fix exactly that."
+    },
+    {
+     "text": "No report cards. It's like a GPS for your money."
+    },
+    {
+     "text": "It tells you what's safe to spend today, before you spend it."
+    }
+   ]
+  },
+  {
+   "screen": "plan_1",
+   "sentences": [
+    {
+     "text": "Here's the deal. It starts with your monthly income,",
+     "mood": "neutral"
+    },
+    {
+     "text": "and your fixed bills. Rent, mortgage, car payment, the stuff you can't skip.",
+     "screen": "plan_2"
+    },
+    {
+     "text": "What's left is your flexible money.",
+     "screen": "plan_3"
+    },
+    {
+     "text": "Some you save, the rest you spend. [excited] Alright, let's divvy it up!",
+     "screen": "plan_4",
+     "mood": "happy"
+    }
+   ]
+  },
+  {
+   "screen": "dashboard_today",
+   "sentences": [
+    {
+     "text": "Tell DivvyUpp your monthly savings goal, and it works out your safe-to-spend for today,",
+     "mood": "neutral"
+    },
+    {
+     "text": "this week,",
+     "screen": "dashboard_week"
+    },
+    {
+     "text": "and this month.",
+     "screen": "dashboard_month"
+    },
+    {
+     "text": "[confident] Stay inside those numbers, and you hit your goal. Every. Single. Month.",
+     "screen": "dashboard_today",
+     "mood": "happy"
+    }
+   ]
+  },
+  {
+   "screen": "ask_blank",
+   "sentences": [
+    {
+     "text": "Not sure about a purchase? Just ask.",
+     "mood": "neutral"
+    },
+    {
+     "text": "Can I spend sixty bucks on dinner?",
+     "screen": "ask_60"
+    },
+    {
+     "text": "DivvyUpp checks your budget, your balance, and your upcoming bills.",
+     "screen": "ask_60_check"
+    },
+    {
+     "text": "[cheerful] Go for it. You can afford it.",
+     "screen": "ask_60_yes",
+     "mood": "happy"
+    }
+   ]
+  },
+  {
+   "screen": "ask_250",
+   "sentences": [
+    {
+     "text": "Two-fifty?",
+     "mood": "neutral"
+    },
+    {
+     "text": "Over today's budget, but it still fits this week.",
+     "screen": "ask_250_yes"
+    },
+    {
+     "text": "[smug] Fine. You can have it.",
+     "mood": "happy"
+    }
+   ]
+  },
+  {
+   "screen": "ask_6000",
+   "sentences": [
+    {
+     "text": "A six-thousand-dollar dream vacation?",
+     "mood": "unimpressed"
+    },
+    {
+     "text": "[laughs] Nope.",
+     "screen": "ask_6000_no",
+     "mood": "happy"
+    },
+    {
+     "text": "Your bills due this week wouldn't get paid, and your checking account would be toast.",
+     "mood": "unimpressed"
+    }
+   ]
+  },
+  {
+   "screen": "dashboard_today",
+   "sentences": [
+    {
+     "text": "That's DivvyUpp in a nutshell.",
+     "mood": "happy"
+    },
+    {
+     "text": "Know exactly what you can spend today, so you still hit your savings goal tomorrow."
+    }
+   ]
+  },
+  {
+   "screen": "cta",
+   "sentences": [
+    {
+     "text": "Struggle to stick to a budget?",
+     "mood": "neutral"
+    },
+    {
+     "text": "Email our founder, Srini, at srini at divvyupp dot com for early access."
+    },
+    {
+     "text": "[smug] Tell him Dollar Bill sent you.",
+     "mood": "happy"
+    }
+   ]
+  }
+ ],
+ "caption_replace": {
+  "Dollar Bill": "$Bill"
+ }
+}
