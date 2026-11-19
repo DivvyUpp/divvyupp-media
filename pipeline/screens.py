@@ -51,11 +51,11 @@ def nav(c, active=0):
         c.rr([x - 9, y + 14, x + 9, y + 30], 4, outline=col, width=2)
         c.text((x, y + 44), lab, 700, 11, fill=col, anchor="ma")
 
-def dashboard(c, tab):
+def dashboard(c, tab, update=False):
     app_header(c)
     c.circle(26, 120, 6, ORANGE); c.text((38, 120), "6 day streak", 700, 13, anchor="lm")
     c.text((370, 120), "in bank", 500, 12, fill=GREY, anchor="rm")
-    c.text((370 - c.d.textlength("in bank", font=c.f(500, 12)) / c.k - 5, 120), "$6,400.00", 800, 13, anchor="rm")
+    c.text((370 - c.d.textlength("in bank", font=c.f(500, 12)) / c.k - 5, 120), "$6,394.60" if update else "$6,400.00", 800, 13, anchor="rm")
     c.rr([16, 140, 374, 420], 24, fill=TINT)
     c.rr([30, 154, 360, 192], 19, fill=WHITE)
     labs = ("Today", "This Week", "This Month")
@@ -64,11 +64,11 @@ def dashboard(c, tab):
         if i == tab: c.rr([x0, 156, x0 + 107, 190], 17, fill=ORANGE)
         c.text((x0 + 53.5, 173), lab, 700, 13, fill=WHITE if i == tab else GREY, anchor="mm")
     c.text((195, 218), ("SAFE TO SPEND TODAY", "SAFE TO SPEND THIS WEEK", "SAFE TO SPEND THIS MONTH")[tab], 800, 12, fill=ORANGE, anchor="mm")
-    c.text((195, 268), ("$86.66", "$476.97", "$2,549.65")[tab], 800, 52, anchor="mm")
+    c.text((195, 268), (("$81.26", "$471.57", "$2,544.25") if update else ("$86.66", "$476.97", "$2,549.65"))[tab], 800, 52, anchor="mm")
     c.circle(42, 318, 8, GREEN); c.line([(38, 318), (41, 321), (46, 314)], WHITE, 2)
     c.text((58, 318), "On track to save your $1,200/month goal", 600, 12.5, fill=GREEN, anchor="lm")
     c.rr([32, 346, 358, 396], 25, fill=ORANGE); c.text((195, 371), "Can I spend?", 800, 16, fill=WHITE, anchor="mm")
-    for i, (lab, val, sub, frac) in enumerate((("Spent so far", "$0", "of $86.66 today", 0.0), ("Saved so far", "$300", "of $1,200 this month", 0.25))):
+    for i, (lab, val, sub, frac) in enumerate((("Spent so far", "$5.40" if update else "$0", "of $86.66 today", 0.06 if update else 0.0), ("Saved so far", "$300", "of $1,200 this month", 0.25))):
         x = 16 + i * 183; c.rr([x, 436, x + 175, 540], 18, fill=WHITE, outline=LINE, width=1)
         c.text((x + 14, 452), lab, 600, 12, fill=GREY); c.text((x + 14, 470), val, 800, 24, fill=INK if i == 0 else ORANGE)
         c.text((x + 14, 504), sub, 500, 11, fill=GREY)
@@ -78,6 +78,11 @@ def dashboard(c, tab):
     for i, (n_, d_, a_) in enumerate((("Mortgage", "Due Dec 1", "$2,850.00"), ("Car payment", "Due Dec 3", "$480.00"), ("Electric & gas", "Due Dec 6", "$210.00"))):
         y = 594 + i * 58; c.rr([16, y, 374, y + 50], 14, fill=WHITE, outline=LINE, width=1)
         c.text((32, y + 17), n_, 700, 13.5); c.text((32, y + 35), d_, 500, 11, fill=GREY); c.text((358, y + 25), a_, 800, 13.5, anchor="rm")
+    if update:   # a transaction just came in; every number above has already moved
+        c.rr([22, 548, 368, 610], 18, fill=INK)
+        c.circle(52, 579, 15, ORANGE); c.text((52, 579), "$", 800, 15, fill=WHITE, anchor="mm")
+        c.text((78, 568), "Coffee shop  -$5.40", 800, 14, fill=WHITE, anchor="lm")
+        c.text((78, 590), "Just now · Today, week and month updated", 500, 11.5, fill=(220, 210, 205), anchor="lm")
     nav(c, 0)
 
 def report(c):
@@ -162,8 +167,7 @@ def ask(c, amount=None, what=None, result=None):
 def cta(c):
     status_bar(c)
     logo(c, 155, 170, 80); c.text((195, 290), "DivvyUpp", 800, 30, anchor="mm")
-    c.text((195, 330), "Know what you can spend today.", 600, 15, fill=GREY, anchor="mm")
-    c.text((195, 352), "Hit your savings goal tomorrow.", 600, 15, fill=GREY, anchor="mm")
+    c.text((195, 336), "Save more. Spend less.", 800, 20, fill=ORANGE, anchor="mm")
     c.rr([28, 400, 362, 470], 20, fill=TINT); c.text((195, 435), "divvyupp.com", 800, 26, anchor="mm")
     c.rr([28, 490, 362, 546], 28, fill=ORANGE); c.text((195, 518), "Get Started", 800, 18, fill=WHITE, anchor="mm")
     c.text((195, 580), "Free during beta · No card needed", 700, 14, fill=GREEN, anchor="mm")
@@ -171,6 +175,7 @@ def cta(c):
 SCREENS = {
     "report": report, "dashboard_today": lambda c: dashboard(c, 0), "dashboard_week": lambda c: dashboard(c, 1),
     "dashboard_month": lambda c: dashboard(c, 2),
+    "dashboard_update": lambda c: dashboard(c, 0, update=True),
     "plan_1": lambda c: plan(c, 1), "plan_2": lambda c: plan(c, 2), "plan_3": lambda c: plan(c, 3), "plan_4": lambda c: plan(c, 4),
     "ask_blank": lambda c: ask(c), "ask_60": lambda c: ask(c, "$60", "Dinner out"),
     "ask_60_check": lambda c: ask(c, "$60", "Dinner out", "checking"), "ask_60_yes": lambda c: ask(c, "$60", "Dinner out", "yes"),

@@ -73,8 +73,11 @@
      "screen": "dashboard_month"
     },
     {
+     "text": "[excited] And here's the best part: DivvyUpp updates all three numbers as your money moves, every time a transaction hits your account.",
+     "screen": "dashboard_update"
+    },
+    {
      "text": "[confident] Stay inside those numbers, and you hit your goal. Every. Single. Month.",
-     "screen": "dashboard_today",
      "mood": "happy"
     }
    ]
