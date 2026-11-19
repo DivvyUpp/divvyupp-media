@@ -165,6 +165,7 @@
    ]
   }
  ],
- "takes": 5,
- "voice_reference": "pipeline/assets/voices/raccoon_reference.wav"
+ "takes": 4,
+ "voice_reference": "pipeline/assets/voices/raccoon_reference.wav",
+ "voice_prefix": "[excited] Whoa, whoa, whoa. I've seen your bank history! [laughs] Four coffees, two takeouts, AND a quick little online order? On a TUESDAY? [smug] Relax, pal. I'm a raccoon. I know exactly where money disappears to."
 }

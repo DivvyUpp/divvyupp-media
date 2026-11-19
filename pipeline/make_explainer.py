@@ -69,7 +69,10 @@ def one_take(spec, tmp):
     from make_story_reel import _el_request
     parts = spec["character_voice"].split(":"); vid = parts[1]; model = parts[2] if len(parts) > 2 else "eleven_v3"
     sents = [s for b in spec["beats"] for s in b["sentences"]]
-    text, starts, pos = "", [], 0
+    # "voice_prefix": the opening lines of the approved reference recording, voiced first in the same take so the model
+    # settles into the same character, then cut off. Everything after the cut is one continuous, untouched recording.
+    prefix = spec.get("voice_prefix", "")
+    text, starts, pos = (prefix + " " if prefix else ""), [], (len(prefix) + 1 if prefix else 0)
     for s in sents: starts.append(pos); text += s["text"] + " "; pos += len(s["text"]) + 1
     # v3 delivery varies from take to take (pitch, age, energy). Voice N seeded takes and keep the one that sounds
     # most like the approved reference recording of this character (spec "voice_reference").
@@ -86,6 +89,17 @@ def one_take(spec, tmp):
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", mp3, "-ac", "1", "-ar", str(sr), wav], check=True)
     audio, _ = sf.read(wav)
     al = r["alignment"]; ch, st, en = al["characters"], al["character_start_times_seconds"], al["character_end_times_seconds"]
+    if prefix:
+        tag, last_end, first_start = False, 0.0, None
+        for j, c in enumerate(ch):
+            if c == "[": tag = True
+            elif c == "]": tag = False
+            elif not tag and c.isalnum():
+                if j < len(prefix): last_end = en[j]
+                elif first_start is None: first_start = st[j]
+        cut = last_end + 0.6 * (first_start - last_end)               # in the pause, just before the script starts
+        audio = audio[int(cut * sr):].copy(); fl = int(0.04 * sr); audio[:fl] *= np.linspace(0, 1, fl)
+        st = [t - cut for t in st]; en = [t - cut for t in en]
     return sents, starts, (ch, st, en), audio, sr
 
 def words_of(sent_text, start, ch, st):
