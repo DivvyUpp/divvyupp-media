@@ -26,6 +26,19 @@ our own data. Until then it is a candidate bet in `backlog.md`.
    beating that account's own typical views by **3x or more** (compare against 5–10 of its recent posts; write the
    numbers down: post views, account median, ratio, date, link). Our own numbers count too: a Reel or TikTok of
    Srini's with 100+ views. An idea without this is listed under "Ideas needing proof", not ranked as a bet.
+   `research/watchlist.csv` holds two lists (Srini, 2026-11-20). **niche**: personal-finance, household-money and
+   fintech accounts, used for the passes below. **format_teacher**: people who test and teach what works on
+   Instagram and short-form generally (Chris Chung, Instagram @creators and others). They keep us out of a
+   finance-only silo: a format they teach or show working is a candidate idea, which then goes through the Kill pass
+   (3+ accounts at 3x+, in any niche) before it's ranked. Their own claims are graded B or C, never A.
+   Two passes every run, over the niche accounts in `research/watchlist.csv` (add relevant personal-finance, household
+   money and fintech accounts as you find them; record each one's typical views and where the number came from):
+   **Mine**: read the accounts' outlier posts, group them into formats, and keep formats with 3+ accounts at 3x+.
+   **Kill**: test each unproven idea in `backlog.md` against the same data; fewer than 3 accounts means it stays
+   "needs proof", and say whether that's because the format failed or because the data wasn't there.
+   Proven = 3 accounts at 3x+ within 90 days on short-form; supported = 3 accounts at 3x+ within 12 months on any
+   format (proposed tiers, 2026-11-20, pending Srini). Data sources so far: OutlierKit channel pages (YouTube) and
+   screenshots Srini sends.
    Prefer formats where the payoff is held until the end and differs by viewer (e.g. a number per age or income
    bracket), since they hold watch time and get sent to the friend it fits.
 5. **Write `research/<YYYY-MM-DD>.md`**: the question, 3–6 findings (each with link, grade, one line on how it
