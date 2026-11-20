@@ -31,4 +31,5 @@ These feed the same signals but aren't Reel bets, so they aren't scored.
   parent/friend group chats gives it real first viewers who watch and send.
 - **Make the profile worth following.** One-line bio for the audience (two-income families, "know what's safe to
   spend today"), and pin 3 Reels: what DivvyUpp is, the founder story, and Dollar Bill.
-- **Reply to every comment** in the first hour; replies keep a Reel's early test group engaged.
+- **Reply to every comment.** Comments aren't one of the three named signals, but a reply gives a stranger a reason to
+  come back (opinion, untested).
