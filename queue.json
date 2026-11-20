@@ -110,13 +110,15 @@
   {
     "id": "2026-11-20-same-10k-v12",
     "kind": "main",
-    "status": "approved",
+    "status": "posted",
     "post_date": "2026-11-20",
     "file": "reels/2026-11-20-same-10k-v12.mp4",
     "caption": "Same $10K a month. After 5 years, Jessica has $90,000 saved. John has $22,800. Which one are you?\n\nJessica saves $1,500 on payday, then spends from a daily safe-to-spend number ($100 a day, $700 a week). John spends first and saves what's left: $380 this month.\n\nSave first. Then spend what's safe.\n\n$380 is 3.8% of $10K, the US average saving rate (BEA, Sept 2026). No investment growth assumed. Jessica and John are illustrative examples, not real customers.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio → divvyupp.com\n\n#personalfinance #savingmoney #moneytips #payyourselffirst #budgeting",
     "hypothesis": "hypotheses/2026-11-21.md",
     "format": "split",
-    "approved_note": "Srini: 'go ahead and post version 12' (2026-11-20 ~6:40pm ET)"
+    "approved_note": "Srini: 'go ahead and post version 12' (2026-11-20 ~6:40pm ET)",
+    "media_id": "18125518024938049",
+    "posted_note": "Posted by hand ~6:42pm ET 2026-11-20"
   },
   {
     "id": "2026-11-21-a",
