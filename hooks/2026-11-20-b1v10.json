@@ -1,0 +1,174 @@
+{
+ "id": "2026-11-20-b1v10",
+ "character_voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "music": true,
+ "sentences": [
+  "[curious] Same ten thousand dollars a month.",
+  "After five years, Jessica has ninety thousand saved. John has twenty-two thousand eight hundred.",
+  "Which one are you?",
+  "Both start with ten thousand.",
+  "Jessica moves fifteen hundred to savings on payday.",
+  "Both pay fifty-five hundred in bills.",
+  "That leaves Jessica three thousand. About a hundred a day, or seven hundred a week, that's safe to spend.",
+  "John has forty-five hundred, and no idea what's safe to spend today.",
+  "Groceries, takeout, online orders. It all feels fine.",
+  "Jessica spends twenty-eight hundred and stays inside her number.",
+  "At month end, John has saved three hundred and eighty dollars. Jessica saved fifteen hundred, with two hundred left over.",
+  "[emphatic] Same income. So what's the difference?",
+  "Save first. Then spend what's safe. Try it at divvyupp dot com."
+ ],
+ "band": {
+  "lines": [
+   [
+    "Same $10K a month.",
+    "white"
+   ],
+   [
+    "Which one are you?",
+    "orange"
+   ]
+  ],
+  "until": 11,
+  "after": [
+   [
+    "Same income.",
+    "white"
+   ],
+   [
+    "What's the difference?",
+    "orange"
+   ]
+  ]
+ },
+ "halves": [
+  {
+   "person": "/tmp/claude-0/-home-claude-divvyupp-media/74ed1848-df42-5466-b139-90751a5f3198/scratchpad/runway/her.png",
+   "tint": [
+    228,
+    243,
+    233
+   ],
+   "tag": "Jessica · saves first",
+   "tag_color": "green",
+   "blocks": [
+    {
+     "label": "Income",
+     "value": "$10,000",
+     "at": 3
+    },
+    {
+     "label": "Saved on payday",
+     "value": "$1,500",
+     "at": 4,
+     "style": "good"
+    },
+    {
+     "label": "Bills",
+     "value": "−$5,500",
+     "at": 5,
+     "style": "minus"
+    },
+    {
+     "label": "Safe to spend",
+     "value": "$3,000",
+     "sub": "$100/day · $700/week",
+     "sub_color": "green",
+     "at": 6
+    },
+    {
+     "label": "Spent",
+     "value": "−$2,800",
+     "at": 9,
+     "style": "minus"
+    },
+    {
+     "label": "Month end",
+     "value": "Saved $1,500 + $200 left",
+     "at": 10,
+     "delay": 2.6,
+     "style": "good",
+     "big": true
+    }
+   ],
+   "badge": {
+    "text": "$90,000 in 5 years",
+    "color": "green",
+    "at": 1,
+    "word": "Jessica"
+   }
+  },
+  {
+   "person": "/tmp/claude-0/-home-claude-divvyupp-media/74ed1848-df42-5466-b139-90751a5f3198/scratchpad/runway/him.png",
+   "tint": [
+    250,
+    231,
+    227
+   ],
+   "tag": "John · saves what's left",
+   "tag_color": "red",
+   "blocks": [
+    {
+     "label": "Income",
+     "value": "$10,000",
+     "at": 3
+    },
+    {
+     "label": "Bills",
+     "value": "−$5,500",
+     "at": 5,
+     "style": "minus"
+    },
+    {
+     "label": "Left to spend",
+     "value": "$4,500",
+     "sub": "No daily number",
+     "sub_color": "red",
+     "at": 7
+    },
+    {
+     "label": "Groceries, takeout, more",
+     "value": "−$4,120",
+     "at": 8,
+     "style": "minus"
+    },
+    {
+     "label": "Month end",
+     "value": "Saved $380",
+     "at": 10,
+     "style": "bad",
+     "big": true
+    }
+   ],
+   "badge": {
+    "text": "$22,800 in 5 years",
+    "color": "red",
+    "at": 1,
+    "word": "John"
+   }
+  }
+ ],
+ "note": {
+  "text": "$380 = 3.8%, US average saving rate (BEA, Sept 2026). No growth assumed.",
+  "at": 10
+ },
+ "cta_at": 12,
+ "cta_lines": [
+  [
+   "Save first.",
+   "ink"
+  ],
+  [
+   "Then spend",
+   "ink"
+  ],
+  [
+   "what's safe.",
+   "orange"
+  ]
+ ],
+ "speed": 1.12,
+ "max_gap": 0.32,
+ "keep_gap": {
+  "12": 0.75
+ }
+}

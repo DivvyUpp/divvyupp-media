@@ -80,7 +80,7 @@ def block(fr, x, y, w, h, b, k, age=9.0, pop=True):
         scol = COLS.get(b.get("sub_color", "green"), GREEN)
         fr.text((x + w - 22 * sc, y + h - 18 * sc), b["sub"], font("xb", fit(fr, b["sub"], "xb", min(30, h * 0.3), w * 0.55)), scol, k, anchor="rd", dy=0)
 
-def tighten(audio, sr, ch, st, en, starts, max_gap=0.32, speed=1.0):
+def tighten(audio, sr, ch, st, en, starts, max_gap=0.32, speed=1.0, keep_gap=None):
     """Shorten pauses between sentences to max_gap and speed the take up (pitch kept, ffmpeg atempo); the character
     timings are remapped so the visuals stay in sync. Returns audio, st, en."""
     cuts = []
@@ -88,7 +88,8 @@ def tighten(audio, sr, ch, st, en, starts, max_gap=0.32, speed=1.0):
     for k in range(1, len(starts)):
         a = max((en[j] for j in range(starts[k - 1], starts[k]) if spoken(j)), default=None)
         b = next((st[j] for j in range(starts[k], len(ch)) if spoken(j)), None)
-        if a is not None and b is not None and b - a > max_gap: cuts.append((a + max_gap / 2, b - max_gap / 2))
+        g = (keep_gap or {}).get(str(k), max_gap)          # a longer pause kept before sentence k, e.g. before the answer
+        if a is not None and b is not None and b - a > g: cuts.append((a + g / 2, b - g / 2))
     def remap(t): return t - sum(min(max(t - c0, 0), c1 - c0) for c0, c1 in cuts)
     keep, prev = [], 0
     for c0, c1 in cuts: keep.append(audio[int(prev * sr):int(c0 * sr)]); prev = c1
@@ -115,7 +116,7 @@ def main():
     spec["beats"] = [{"sentences": [{"text": s} for s in spec["sentences"]]}]
     sents, starts, (ch, st, en), audio, sr = one_take(spec, tmp)
     if spec.get("speed", 1.0) != 1.0 or spec.get("max_gap"):
-        audio, st, en = tighten(audio, sr, ch, st, en, starts, spec.get("max_gap", 0.32), spec.get("speed", 1.0))
+        audio, st, en = tighten(audio, sr, ch, st, en, starts, spec.get("max_gap", 0.32), spec.get("speed", 1.0), spec.get("keep_gap"))
     def first_spoken(i):
         tag = False
         for j in range(i, len(ch)):
@@ -126,14 +127,19 @@ def main():
     cues = [LEAD + first_spoken(i) for i in starts]
     total = LEAD + len(audio) / sr + TAIL; n = round(total * FPS)
     bg = bg_for(spec); cta_t = cues[spec["cta_at"]] - 0.2 if spec.get("cta_at") is not None else total + 1
-    def cue(i, d=0.0): return cues[min(i, len(cues) - 1)] - 0.12 + d
+    def cue(i, d=0.0, word=None):
+        if word:                                   # time the given word is spoken inside sentence i
+            text = "".join(ch); lo = starts[i]; hi = starts[i + 1] if i + 1 < len(starts) else len(ch)
+            j = text.find(word, lo, hi)
+            if j >= 0: return LEAD + st[j] - 0.12 + d
+        return cues[min(i, len(cues) - 1)] - 0.12 + d
     def draw(f):
         t = f / FPS; fr = Frame(bg, t, total); fr.g = min(1.0, (total - t) / 0.35)
         if t >= cta_t:
             fr.bg = Image.new("RGBA", (W * S, H * S), (255, 250, 247, 255)); v_cta(fr, t - cta_t, {"lines": spec.get("cta_lines")}, [])
             return fr.img()
         for i, h in enumerate(spec["halves"]):
-            r0, r1 = (SAFE_TOP, MID - BAND // 2 - 14) if i == 0 else (MID + BAND // 2 + 14, SAFE_BOT - (62 if spec.get("note") else 0))
+            r0, r1 = (SAFE_TOP, MID - BAND // 2 - 14) if i == 0 else (MID + BAND // 2 + 30, SAFE_BOT - (62 if spec.get("note") else 0))
             # person on the right; may run into the covered areas (no text there)
             if i == 0: pb, ph = MID - BAND // 2, MID - BAND // 2 - SAFE_TOP - 80    # head starts below the tag/badge row
             else: pb, ph = H, min(790, H - (MID + BAND // 2) - 20)
@@ -144,7 +150,7 @@ def main():
             fr.rrect([SAFE_L, r0, SAFE_L + tw + 44, r0 + 58], 29, col, 1); fr.text((SAFE_L + 22, r0 + 29), h["tag"], tf, WHITE, 1, anchor="lm", dy=0)
             bd = h.get("badge")
             if bd:
-                t_in = cue(bd["at"], bd.get("delay", 0.0)); k = appear(t, t_in, 0.15); bx0 = SAFE_L + tw + 64
+                t_in = cue(bd["at"], bd.get("delay", 0.0), bd.get("word")); k = appear(t, t_in, 0.15); bx0 = SAFE_L + tw + 64
                 age = t - t_in; sc = 0.82 + 0.18 * _back(age / 0.32)
                 if 0.32 < age < 0.95: sc *= 1 + 0.06 * _math.sin(_math.pi * (age - 0.32) / 0.63)
                 bf = font("xb", fit(fr, bd["text"], "xb", 36, TEXT_R - bx0 - 40) * sc); bwid = fr.tl(bd["text"], bf)
@@ -190,7 +196,7 @@ def main():
     if spec.get("clicks", True):
         tk = click(sr, spec.get("click_gain", 0.06))
         times = [cue(b["at"], b.get("delay", 0.0)) for h in spec["halves"] for b in h["blocks"]] + \
-                [cue(h["badge"]["at"], h["badge"].get("delay", 0.0)) for h in spec["halves"] if h.get("badge")]
+                [cue(h["badge"]["at"], h["badge"].get("delay", 0.0), h["badge"].get("word")) for h in spec["halves"] if h.get("badge")]
         for tt in times:
             i0 = int(max(tt, 0) * sr)
             if i0 < len(full): full[i0:i0 + len(tk)] += tk[:len(full) - i0]
