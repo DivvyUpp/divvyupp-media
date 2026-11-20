@@ -15,6 +15,12 @@ None yet. No Reel has reached 100 views, so every result so far is inconclusive.
 - All 8 Reels to date share one story template (60–90 s: pain → four numbers → guide → payoff → guarantee). The
   template itself has never been tested against another format.
 
+## Update 2026-11-20
+- Reach is still the limit: the 2026-11-16 to 11-19 Reels got 3–12 views each; 3 followers; 2 non-follower views on
+  2026-11-19; 0 Instagram landings on 2026-11-19. All inconclusive. 2026-11-15-a has grown to 31 views (skip 90.3%).
+- Every Reel so far opens on a blank screen with the presenter fading in; text appears ~0.7s in (execution, not yet
+  tested; trial 2026-11-20-t1 tests the fix).
+
 ## Open questions (ranked)
 1. What opening keeps a stranger past 3 seconds?
 2. Does a shorter cut keep more viewers to the end without losing clarity?

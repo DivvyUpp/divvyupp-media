@@ -13,7 +13,7 @@ Spec (JSON):
   "character": "c" (presenter id from characters.py), "character_voice": "af_heart" (Kokoro) or
   "elevenlabs:<voice_id>[:<model_id>]" (ElevenLabs, default model eleven_v3; needs ELEVENLABS_API_KEY; the whole Reel
   is voiced in one take and cut per scene so the voice stays consistent, "one_take": false to disable), "name_tag": "" (optional),
-  "hook":   {"small": "...", "lines": [["...", "ink"|"orange"], ...], "narration": ["..."],
+  "hook":   {"small": "...", "instant": true (optional: text + presenter on screen from frame 1, no fade-in), "lines": [["...", "ink"|"orange"], ...], "narration": ["..."],
              "moods": ["neutral", "worried", ...] (optional, one per sentence; default worried until turn_cue)},
   "guide":  {"title": [["...", "ink"|"orange"], ...], "narration": ["..."],
              "week": 460, "today": 66, "spend_label": "Dinner out", "spend": 120, "tomorrow": 52,
@@ -230,12 +230,13 @@ def title_lines(fr, lines, y, t, start, size=88):
 
 # ---------- scenes ----------
 def hook_scene(fr, t, sp, cues, mouth, spec):
-    logo(fr, W / 2, 150, 70, appear(t, 0.2))
+    inst = sp.get("instant", False)       # true: logo, text and presenter are fully on screen from the first frame
+    logo(fr, W / 2, 150, 70, appear(t, -1 if inst else 0.2))
     y = 330
     if sp.get("small"):
         fs = min(66, 66 * 900 / max(fr.tl(sp["small"], font("b", 66)), 1))     # keep the small line off the edges
-        fr.text((W / 2, y), sp["small"], font("b", fs), INK, appear(t, cues[0]), anchor="ma"); y += 130
-    title_lines(fr, sp["lines"], y, t, cues[0] + 0.5, 104)
+        fr.text((W / 2, y), sp["small"], font("b", fs), INK, appear(t, -1 if inst else cues[0]), anchor="ma"); y += 130
+    title_lines(fr, sp["lines"], y, t, -1 if inst else cues[0] + 0.5, 104)
     aside = sp.get("aside")               # {"text": "...", "cue": n}: a deadpan aside chip; the face turns unimpressed
     mood = "worried"
     if aside and aside["cue"] < len(cues):
@@ -264,7 +265,7 @@ def hook_scene(fr, t, sp, cues, mouth, spec):
     moods = sp.get("moods")               # optional per-sentence moods, e.g. ["neutral", "worried", "neutral"]
     if moods: mood = moods[min(len(moods) - 1, max([i for i, c in enumerate(cues) if t >= c - 0.1] or [0]))]
     ctop, ch = (1010, 1000) if st else (820, 1150)          # make room for a stat card
-    character(fr.layer, W / 2, ctop, ch, t, mouth, mood, appear(t, 0.15) * fr.g, spec["character"])
+    character(fr.layer, W / 2, ctop, ch, t, mouth, mood, appear(t, -1 if inst else 0.15) * fr.g, spec["character"])
     if spec.get("name_tag"):
         f = font("b", 30); tw = fr.tl(spec["name_tag"], f); kk = appear(t, 0.8)
         fr.rrect([W / 2 - tw / 2 - 28, 1680, W / 2 + tw / 2 + 28, 1744], 32, WHITE, kk)
@@ -428,7 +429,7 @@ def render_segment(name, spec, tmp, bg, check_dir=None, last=False):
     vis = viseme_track(phon, n) if phon else None
     def draw(f):
         tt = f / FPS; fr = Frame(bg, tt, total)
-        fr.g = min(min(1.0, tt / 0.35) if name == "hook" else 1.0, min(1.0, (total - tt) / 0.35) if last else 1.0)   # fade only at the very start/end
+        fr.g = min(min(1.0, tt / 0.35) if name == "hook" and not sp.get("instant") else 1.0, min(1.0, (total - tt) / 0.35) if last else 1.0)   # fade only at the very start/end
         SCENES[name](fr, tt, sp, cues, vis[min(f, n - 1)] if vis else env[min(f, n - 1)], spec); return fr.img()
     if check_dir:
         f = next((i for i, v in enumerate(vis or []) if v in ("A", "E")), int((total - 1.0) * FPS)); draw(f).save(os.path.join(check_dir, f"{spec['id']}_check_{name}.jpg"), quality=85)
