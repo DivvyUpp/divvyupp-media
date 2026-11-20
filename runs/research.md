@@ -26,7 +26,10 @@ our own data. Until then it is a candidate bet in `backlog.md`.
    beating that account's own typical views by **3x or more** (compare against 5–10 of its recent posts; write the
    numbers down: post views, account median, ratio, date, link). Our own numbers count too: a Reel or TikTok of
    Srini's with 100+ views. An idea without this is listed under "Ideas needing proof", not ranked as a bet.
-   `research/watchlist.csv` holds two lists (Srini, 2026-11-20). **niche**: personal-finance, household-money and
+   `research/watchlist.csv` (readable version: `research/watchlist.md`, with the **entry bar** every account must meet)
+   holds three lists (Srini, 2026-11-20): niche, fintech_brand and format_teacher. Add accounts only if they meet the
+   bar, and log any you check and leave out. Vet with `python3 scripts/vet_channels.py --names ...` (search costs
+   100 of the 10,000 daily API units; lookups by handle are nearly free). **niche**: personal-finance, household-money and
    fintech accounts, used for the passes below. **format_teacher**: people who test and teach what works on
    Instagram and short-form generally (Chris Chung, Instagram @creators and others). They keep us out of a
    finance-only silo: a format they teach or show working is a candidate idea, which then goes through the Kill pass

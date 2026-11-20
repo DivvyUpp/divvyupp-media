@@ -1,17 +1,28 @@
-list,account,platform,handle,topic_fit,data_source,median_views,median_source,last_checked,notes
-niche,Humphrey Yang,YouTube,@humphrey,personal finance US,https://outlierkit.com/channel/humphrey,232000,OutlierKit recent median (page 2026-08-29),2026-11-20,51% of views from Shorts; also big on TikTok/Instagram
-niche,Your Rich BFF (Vivian Tu),YouTube,yourrichbff,personal finance US; couples/parents topics,https://outlierkit.com/channel/yourrichbff,18000,OutlierKit recent median (page 2026-08-23),2026-11-20,98% Shorts per OutlierKit; Instagram @yourrichbff
-niche,Nischa,YouTube,nischa,personal finance (UK-born; US/global audience),https://outlierkit.com/channel/nischa,,OutlierKit shows lifetime avg 550.5K only; multiples are OutlierKit's,2026-11-20,mostly long-form
-niche,Graham Stephan,YouTube,grahamstephan,money news/housing US,https://outlierkit.com/channel/grahamstephan,,lifetime avg 870.7K; multiples are OutlierKit's,2026-11-20,news-driven; poor fit for evergreen formats
-niche,Erika Kullberg,YouTube,erika2,consumer money US,https://outlierkit.com/channel/erika2,,lifetime avg 941.7K; top videos only (no recent outliers),2026-11-20,data mostly 3-6 years old: do not count toward the 90-day bar
-niche,Mark Tilbury,YouTube,marktilbury,money/side hustles (UK),https://outlierkit.com/channel/marktilbury,2000000,OutlierKit recent median (page 2026-11-07),2026-11-20,UK and teen/side-hustle skew; weak fit
-niche,Caleb Hammer,YouTube,,budgets/debt US (Financial Audit),,,,,no OutlierKit page found yet
-niche,The Money Guy Show,YouTube,,personal finance US,,,,,no OutlierKit page found yet
-niche,Rachel Cruze,YouTube,,budgeting/household US,,,,,no OutlierKit page found yet
-niche,Tori Dunlap (Her First $100K),YouTube,,personal finance US,,,,,no OutlierKit page found yet
-format_teacher,Chris Chung,Instagram,@iamchrischung,"short-form growth: Trial Reels, speed to value, borrowed formats",https://maxtornow.podbean.com/e/309-100k-followers-in-5-weeks-trial-reels-speed-to-value-viral-formats-with-chris-chung/,,,2026-11-20,named by Srini; claims are B/C until checked
-format_teacher,Instagram @creators,Instagram,@creators,official Instagram guidance on Reels,,,,,platform guidance = A
-format_teacher,Kallaway,Instagram/TikTok,@kallaway,short-form hooks and scripting,,,,,handle to verify
-format_teacher,Jenny Hoyos,YouTube Shorts,@jennyhoyos,"Shorts formats, hooks, retention",,,,,handle to verify
-format_teacher,Paddy Galloway,YouTube,@paddygalloway,"video strategy, data on formats",,,,,handle to verify
-format_teacher,Brock Johnson,Instagram,@brockjohnson,Instagram growth and Reels tactics,,,,,handle to verify
+list,account,org,platform,handle,url,subscribers,country,shorts_last_90d,median_short_views,why_in,last_checked
+niche,Humphrey Yang,independent,YouTube,@humphrey,https://www.youtube.com/@humphrey,2100000,US,38,80724,money explainers with data; US,2026-11-20
+niche,Your Rich BFF (Vivian Tu),independent,YouTube,@yourrichbff,https://www.youtube.com/@yourrichbff,1300000,,45,18590,"money news for your wallet, couples/parents topics; US",2026-11-20
+niche,Graham Stephan,independent,YouTube,@grahamstephan,https://www.youtube.com/@grahamstephan,5180000,US,32,36833,"reacts to money advice, rankings; US",2026-11-20
+niche,Caleb Hammer,independent,YouTube,@calebhammer,https://www.youtube.com/@calebhammer,4110000,US,44,591089,budget audits of real households; US,2026-11-20
+niche,The Money Guy Show,independent,YouTube,@moneyguyshow,https://www.youtube.com/@moneyguyshow,711000,US,35,24319,household wealth building; US,2026-11-20
+niche,Rachel Cruze,Ramsey Solutions,YouTube,@rachelcruze,https://www.youtube.com/@rachelcruze,650000,US,50,48087,"household money, moms, spending; US",2026-11-20
+niche,The Ramsey Show Highlights,Ramsey Solutions,YouTube,@theramseyshow,https://www.youtube.com/@theramseyshow,4600000,US,19,94897,call-in money problems of couples/families; US,2026-11-20
+niche,The Ramsey Show (episodes),Ramsey Solutions,YouTube,@theramseyshowepisodes,https://www.youtube.com/@theramseyshowepisodes,1200000,US,29,31377,"same show, separate channel; US",2026-11-20
+niche,George Kamel,Ramsey Solutions,YouTube,@georgekamel,https://www.youtube.com/@georgekamel,622000,US,34,15014,"consumer spending, debt; US",2026-11-20
+niche,Ramit Sethi,independent,YouTube,@ramitsethi,https://www.youtube.com/@ramitsethi,1150000,US,39,9929,"couples and money, rich-life spending; US",2026-11-20
+niche,Anthony O'Neal (The Table With AO),independent,YouTube,@anthonyoneal,https://www.youtube.com/@anthonyoneal,1130000,US,34,2708,"debt, holiday spending, family money; US",2026-11-20
+niche,Clark Howard,independent,YouTube,@clark,https://www.youtube.com/@clark,208000,US,28,2691,"consumer money, saving; US",2026-11-20
+niche,The Budget Mom,independent,YouTube,@thebudgetmom,https://www.youtube.com/@thebudgetmom,280000,US,33,6213,household budgeting for families; US,2026-11-20
+niche,Budget Treasures,independent,YouTube,@budgettreasures,https://www.youtube.com/@budgettreasures,77600,US,27,1457,cash-envelope budgeting challenges; US,2026-11-20
+niche,Bradley on a Budget,independent,YouTube,@bradleyonabudget,https://www.youtube.com/@bradleyonabudget,272000,,49,313349,"frugal living, no-spend challenges",2026-11-20
+niche,Mrs Dow Jones (Haley Sacks),independent,YouTube,@mrsdowjones,https://www.youtube.com/@mrsdowjones,63800,US,39,2199,money news and pop culture; US,2026-11-20
+niche,CNBC Make It,NBCUniversal,YouTube,@cnbcmakeit,https://www.youtube.com/@cnbcmakeit,2010000,US,37,4789,money and life stories (media); US,2026-11-20
+fintech_brand,NerdWallet,NerdWallet,YouTube,@nerdwallet,https://www.youtube.com/@nerdwallet,306000,US,34,2021,money app/media brand; couples money series; US,2026-11-20
+fintech_brand,SoFi,SoFi,YouTube,@sofi,https://www.youtube.com/@sofi,257000,US,46,825,fintech brand; savings explainers; US,2026-11-20
+fintech_brand,Chime,Chime,YouTube,@chime,https://www.youtube.com/@chime,52500,US,43,701,"fintech brand; budgeting explainers, celebrity skits; US",2026-11-20
+format_teacher,Jenny Hoyos,independent,YouTube,@jennyhoyos,https://www.youtube.com/@jennyhoyos,12400000,US,44,338762,tests and teaches YouTube Shorts formats with her own numbers,2026-11-20
+format_teacher,Jade Beason,independent,YouTube,@jadebeason,https://www.youtube.com/@jadebeason,316000,GB,28,1757,creator coach on short-form content (UK),2026-11-20
+format_teacher,Brock Johnson (Build Your Tribe),independent,YouTube,@buildyourtribepodcast,https://www.youtube.com/@buildyourtribepodcast,118000,US,30,408,Instagram growth coach,2026-11-20
+format_teacher,Chris Chung,independent,Instagram,@iamchrischung,https://www.instagram.com/iamchrischung/,,,,,"teaches Trial Reels, speed to value, borrowed formats (named by Srini); Instagram only, no YouTube Shorts to measure",
+format_teacher,Instagram @creators,Meta,Instagram,@creators,https://www.instagram.com/creators/,,,,,official Instagram guidance (grade A),
+format_teacher,Paddy Galloway,independent,YouTube,@paddygalloway8780,https://www.youtube.com/@paddygalloway8780,533000,IE,0,,"YouTube strategist, publishes format data; long-form only",
+format_teacher,Kallaway,independent,Instagram/TikTok,@kallaway,https://www.instagram.com/kallaway/,,,,,teaches short-form hooks and scripting; YouTube channel has no Shorts to measure,
