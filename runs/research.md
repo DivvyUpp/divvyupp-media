@@ -21,6 +21,13 @@ our own data. Until then it is a candidate bet in `backlog.md`.
    - data: studies or platform numbers on watch time, skip rate, shares.
 4. **Grade the evidence** for each finding: A = platform data or a controlled test with numbers; B = a creator's
    claim with their own numbers; C = opinion. Paraphrase in your own words; at most one short quote per source.
+   **Proof bar for a format or tactic (set by Srini 2026-11-20): an idea is not a bet until it has data.** A format
+   counts as proven when we can show **at least 3 unrelated accounts** posting it **in the last 90 days**, each post
+   beating that account's own typical views by **3x or more** (compare against 5–10 of its recent posts; write the
+   numbers down: post views, account median, ratio, date, link). Our own numbers count too: a Reel or TikTok of
+   Srini's with 100+ views. An idea without this is listed under "Ideas needing proof", not ranked as a bet.
+   Prefer formats where the payoff is held until the end and differs by viewer (e.g. a number per age or income
+   bracket), since they hold watch time and get sent to the friend it fits.
 5. **Write `research/<YYYY-MM-DD>.md`**: the question, 3–6 findings (each with link, grade, one line on how it
    applies to DivvyUpp), and what you could not access.
 6. **Add 1–3 bets to `backlog.md`** in hypothesis-card shape (see `PLAYBOOK.md`), each citing today's brief. Score
