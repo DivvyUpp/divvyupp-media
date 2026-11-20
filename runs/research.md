@@ -37,8 +37,10 @@ our own data. Until then it is a candidate bet in `backlog.md`.
    **Kill**: test each unproven idea in `backlog.md` against the same data; fewer than 3 accounts means it stays
    "needs proof", and say whether that's because the format failed or because the data wasn't there.
    Proven = 3 accounts at 3x+ within 90 days on short-form; supported = 3 accounts at 3x+ within 12 months on any
-   format (proposed tiers, 2026-11-20, pending Srini). Data sources so far: OutlierKit channel pages (YouTube) and
-   screenshots Srini sends.
+   format (proposed tiers, 2026-11-20, pending Srini). Data sources: **YouTube Data API** (Srini chose it 2026-11-20) for each watchlist
+   channel's Shorts (views, publish date), key from env `YOUTUBE_API_KEY`, never committed; host `www.googleapis.com`
+   must be allowed. If the key or host is missing, say so in the brief and fall back to OutlierKit pages. Shorts are
+   a proxy for Reels (audiences may differ), so Shorts-only evidence is graded B until one of our Reels confirms it.
    Prefer formats where the payoff is held until the end and differs by viewer (e.g. a number per age or income
    bracket), since they hold watch time and get sent to the friend it fits.
 5. **Write `research/<YYYY-MM-DD>.md`**: the question, 3–6 findings (each with link, grade, one line on how it
