@@ -1,0 +1,144 @@
+{
+ "id": "2026-11-20-t1",
+ "format": "story",
+ "character": "e",
+ "character_voice": "elevenlabs:cjVigY5qzO86Huf0OWal:eleven_v3",
+ "music": true,
+ "hook": {
+  "small": "Quick question:",
+  "lines": [
+   [
+    "What do you really spend?",
+    "ink"
+   ]
+  ],
+  "narration": [
+   "[curious] Quick question. How much do you actually spend on the flexible stuff every month?",
+   "[knowing] Most of us guess low. In one survey, people guessed eighty-six dollars a month, on subscriptions alone. The real number was two hundred and nineteen.",
+   "[reassuring] DivvyUpp checks your bank history, so you know for sure."
+  ],
+  "moods": [
+   "neutral",
+   "neutral",
+   "happy"
+  ],
+  "stat": {
+   "title": "Monthly subscriptions alone",
+   "rows": [
+    [
+     "What people guessed",
+     86
+    ],
+    [
+     "What they actually spent",
+     219
+    ]
+   ],
+   "source": "C+R Research survey of 1,000 consumers, 2022",
+   "cue": 1
+  },
+  "instant": true
+ },
+ "plan": {
+  "title": [
+   [
+    "Four numbers.",
+    "ink"
+   ],
+   [
+    "Plus a reality check.",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "[warm] It starts with your income,",
+   "and your fixed bills, both checked against your bank history.",
+   "Then you pick what to save.",
+   "What's left is your safe-to-spend money.",
+   "[gently] And the reality check: what you've actually been spending on flexible stuff. About five hundred and fifty more."
+  ],
+  "rows": [
+   {
+    "label": "Income",
+    "amount": 8600,
+    "tag": "Checked against your bank"
+   },
+   {
+    "label": "Fixed bills",
+    "amount": 5500,
+    "tag": "Checked against your bank"
+   },
+   {
+    "label": "Savings",
+    "amount": 1000,
+    "tag": "You pick the amount"
+   },
+   {
+    "label": "Safe-to-spend",
+    "amount": 2100,
+    "tag": "About $490 a week"
+   },
+   {
+    "label": "Flexible spending lately",
+    "amount": 2650,
+    "tag": "From your bank history",
+    "bar": false
+   }
+  ]
+ },
+ "guide": {
+  "title": [
+   [
+    "Then a daily guide",
+    "ink"
+   ],
+   [
+    "to rein it in.",
+    "orange"
+   ]
+  ],
+  "narration": [
+   "Your safe-to-spend money gets a daily and a weekly number. Today, seventy dollars.",
+   "[cheerful] Then the kids need new soccer gear. That's ninety-five dollars, so you're twenty-five over for today. [reassuring] DivvyUpp spreads that across the rest of your week, and tomorrow adjusts to sixty-three.",
+   "Later, a pharmacy run. Forty-eight dollars. Tomorrow adjusts again, to fifty-one, [warm] and the week still works."
+  ],
+  "week": 490,
+  "today": 70,
+  "spends": [
+   {
+    "label": "Kids' soccer gear",
+    "amount": 95,
+    "tomorrow": 63
+   },
+   {
+    "label": "Pharmacy run",
+    "amount": 48,
+    "tomorrow": 51
+   }
+  ]
+ },
+ "payoff": {
+  "title": [
+   [
+    "Reined in.",
+    "ink"
+   ],
+   [
+    "No spreadsheet.",
+    "orange"
+   ]
+  ],
+  "checks": [
+   "Spending in bounds",
+   "Savings kept",
+   "Bills paid"
+  ],
+  "narration": [
+   "[satisfied] Spending in bounds.",
+   "Savings kept.",
+   "[happy] Bills paid."
+  ]
+ },
+ "skip_flip": true,
+ "ending": "rendered"
+}
