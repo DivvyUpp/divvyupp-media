@@ -23,14 +23,20 @@ from make_story_reel import LEAD, TAIL
 from make_explainer import one_take
 from make_beat_reel import v_cta, fit, mark, GREEN, RED
 
-HALF = H // 2; BAND = 150
+HALF = H // 2; BAND = 130
+# Instagram Reels UI covers the top ~250 px (Reels header, camera), the bottom ~420 px (username, caption, audio) and a
+# ~150 px button rail on the right from about y=1000 down. All text and blocks stay inside this box; only background
+# and the people run into the covered areas.
+SAFE_TOP, SAFE_BOT, SAFE_L, TEXT_R = 260, H - 420, 60, W - 170
+MID = (SAFE_TOP + SAFE_BOT) // 2
 COLS = {"green": GREEN, "red": RED, "orange": ORANGE, "white": WHITE, "ink": INK}
 
 def bg_for(spec):
     bg = Image.new("RGBA", (W * S, H * S), (255, 250, 247, 255))
     for i, h in enumerate(spec["halves"]):
         tint = tuple(h.get("tint", (245, 240, 236)))
-        bg.paste(Image.new("RGBA", (W * S, HALF * S), tint + (255,)), (0, i * HALF * S))
+        y0, y1 = (0, MID) if i == 0 else (MID, H)
+        bg.paste(Image.new("RGBA", (W * S, (y1 - y0) * S), tint + (255,)), (0, y0 * S))
     return bg
 
 _P = {}
@@ -48,14 +54,14 @@ def block(fr, x, y, w, h, b, k):
     fill = {"good": GREEN, "bad": RED}.get(st, WHITE)
     txt = WHITE if st in ("good", "bad") else INK
     fr.rrect([x, y, x + w, y + h], 24, fill, k)
-    lab_f = font("b", 26 if not b.get("big") else 28); val_size = 46 if not b.get("big") else 58
-    fr.text((x + 24, y + 16), b["label"].upper(), lab_f, (WHITE if st in ("good", "bad") else GREY), k, dy=8)
+    lab_f = font("b", min(26, h * 0.25)); val_size = min(58, h * (0.40 if not b.get("big") else 0.46))
+    fr.text((x + 22, y + h * 0.10), b["label"].upper(), lab_f, (WHITE if st in ("good", "bad") else GREY), k, dy=8)
     vcol = txt if st != "minus" else RED
-    fr.text((x + 24, y + h - 14), b["value"], font("xb", fit(fr, b["value"], "xb", val_size, w - 48)), vcol, k, anchor="ld", dy=8)
+    fr.text((x + 22, y + h - h * 0.12), b["value"], font("xb", fit(fr, b["value"], "xb", val_size, w - 48)), vcol, k, anchor="ld", dy=8)
     if b.get("mark"): mark(fr, x + w - 40, y + h / 2, 22, b["mark"], k)
     if b.get("sub"):                     # short right-aligned note on the value row, e.g. "$100/day · $700/week"
         sc = COLS.get(b.get("sub_color", "green"), GREEN)
-        fr.text((x + w - 22, y + h - 18), b["sub"], font("xb", fit(fr, b["sub"], "xb", 30, w * 0.55)), sc, k, anchor="rd", dy=8)
+        fr.text((x + w - 22, y + h - 18), b["sub"], font("xb", fit(fr, b["sub"], "xb", min(30, h * 0.3), w * 0.55)), sc, k, anchor="rd", dy=8)
 
 def main():
     import soundfile as sf
@@ -80,45 +86,51 @@ def main():
             fr.bg = Image.new("RGBA", (W * S, H * S), (255, 250, 247, 255)); v_cta(fr, t - cta_t, {}, [])
             return fr.img()
         for i, h in enumerate(spec["halves"]):
-            y0 = i * HALF
-            # person on the right, bottom-aligned in the half, slow push-in
-            top_y = y0 + (0 if i == 0 else BAND // 2); bot_y = y0 + HALF - (BAND // 2 if i == 0 else 0)
-            p = person(h["person"], int((bot_y - top_y) * 0.96 * S * (1 + 0.03 * t / total)))
-            fr.layer.alpha_composite(p, (max(W * S - p.width + int(40 * S), int(W * 0.40 * S)), bot_y * S - p.height))
-            # tag
-            tf = font("xb", 30); tw = fr.tl(h["tag"], tf); ty = y0 + (28 if i == 0 else BAND // 2 + 24)
-            col = COLS.get(h.get("tag_color", "ink"), INK)
-            fr.rrect([40, ty, 40 + tw + 44, ty + 58], 29, col, 1); fr.text((62, ty + 29), h["tag"], tf, WHITE, 1, anchor="lm", dy=0)
-            # blocks
-            bx, bw = 40, 510; top = ty + 78; bottom = y0 + HALF - (BAND // 2 if i == 0 else 0) - (16 if i == 0 else 70)
-            nb = len(h["blocks"]); gap = 10; nbig = sum(1 for b in h["blocks"] if b.get("big"))
-            bh = min(118, (bottom - top - gap * (nb - 1)) / (nb + 0.18 * nbig))
-            yy = top
-            for b in h["blocks"]:
-                hh = bh * (1.18 if b.get("big") else 1.0)
-                block(fr, bx, yy, bw, hh, b, appear(t, cue(b["at"], b.get("delay", 0.0)), 0.35))
-                yy += hh + gap
+            r0, r1 = (SAFE_TOP, MID - BAND // 2 - 14) if i == 0 else (MID + BAND // 2 + 14, SAFE_BOT - (62 if spec.get("note") else 0))
+            # person on the right; may run into the covered areas (no text there)
+            if i == 0: pb, ph = MID - BAND // 2, MID - BAND // 2 - 40
+            else: pb, ph = H, min(880, H - (MID + BAND // 2) - 20)
+            p = person(h["person"], int(ph * S * (1 + 0.03 * t / total)))
+            fr.layer.alpha_composite(p, (max(W * S - p.width + int(40 * S), int(W * 0.46 * S)), pb * S - p.height))
+            # tag + result badge on one row at the top of the safe region
+            tf = font("xb", 30); tw = fr.tl(h["tag"], tf); col = COLS.get(h.get("tag_color", "ink"), INK)
+            fr.rrect([SAFE_L, r0, SAFE_L + tw + 44, r0 + 58], 29, col, 1); fr.text((SAFE_L + 22, r0 + 29), h["tag"], tf, WHITE, 1, anchor="lm", dy=0)
             bd = h.get("badge")
             if bd:
-                k = appear(t, cue(bd["at"], bd.get("delay", 0.0)), 0.4); bf = font("xb", 44); bwid = fr.tl(bd["text"], bf)
-                by = y0 + HALF - (BAND // 2 if i == 0 else 0) - 110
-                fr.rrect([W - bwid - 100, by, W - 40, by + 84], 42, COLS.get(bd["color"], INK), k)
-                fr.text((W - 70 - bwid / 2 - 0, by + 42), bd["text"], bf, WHITE, k, anchor="mm", dy=0)
-        # centre band
-        fr.rrect([0, HALF - BAND // 2, W, HALF + BAND // 2], 0, INK, 1)
+                k = appear(t, cue(bd["at"], bd.get("delay", 0.0)), 0.4); bx0 = SAFE_L + tw + 64
+                bf = font("xb", fit(fr, bd["text"], "xb", 36, TEXT_R - bx0 - 40)); bwid = fr.tl(bd["text"], bf)
+                fr.rrect([bx0, r0, bx0 + bwid + 40, r0 + 58], 29, WHITE, k)
+                fr.text((bx0 + 20, r0 + 29), bd["text"], bf, COLS.get(bd["color"], INK), k, anchor="lm", dy=0)
+            # blocks
+            bx, bw = SAFE_L, 500; top = r0 + 72; bottom = r1
+            nb = len(h["blocks"]); gap = 8; nbig = sum(1 for b in h["blocks"] if b.get("big"))
+            bh = min(110, (bottom - top - gap * (nb - 1)) / (nb + 0.2 * nbig))
+            yy = top
+            for b in h["blocks"]:
+                hh = bh * (1.2 if b.get("big") else 1.0)
+                block(fr, bx, yy, bw, hh, b, appear(t, cue(b["at"], b.get("delay", 0.0)), 0.35))
+                yy += hh + gap
+        # centre band (full width as a stripe; text inside the safe width)
+        fr.rrect([0, MID - BAND // 2, W, MID + BAND // 2], 0, INK, 1)
         band = spec["band"]; lines = band["lines"] if t < cue(band.get("until", 99)) else band.get("after", band["lines"])
-        size = min(fit(fr, s_, "xb", 58, 1000) for s_, _ in lines)
-        yy = HALF - (len(lines) * size * 1.12) / 2 + size * 0.05
+        size = min(fit(fr, s_, "xb", 52, TEXT_R - SAFE_L) for s_, _ in lines)
+        yy = MID - (len(lines) * size * 1.12) / 2 + size * 0.05
         for s_, c in lines:
             fr.text((W / 2, yy), s_, font("xb", size), COLS.get(c, WHITE), 1, anchor="ma", dy=0); yy += size * 1.12
         nt = spec.get("note")
         if nt:
             from make_beat_reel import wrap
-            for j, l in enumerate(wrap(fr, nt["text"], "m", 22, 500)[:2]):
-                fr.text((42, H - 58 + j * 28), l, font("m", 22), GREY, appear(t, cue(nt["at"])), dy=0)
+            from make_beat_reel import wrap
+            for j, l in enumerate(wrap(fr, nt["text"], "b", 22, 500)[:2]):
+                fr.text((SAFE_L, SAFE_BOT - 54 + j * 28), l, font("b", 22), INK, appear(t, cue(nt["at"])), dy=0)
         return fr.img()
     if check:
         for j, tt in enumerate([0.1] + [c + 1.0 for c in cues]):
+            if tt < total and "--zones" in sys.argv:
+                from PIL import ImageDraw
+                im = draw(int(tt * FPS)).convert("RGBA"); ov = Image.new("RGBA", im.size, (0, 0, 0, 0)); d = ImageDraw.Draw(ov)
+                for r in ([0, 0, W, 250], [0, H - 420, W, H], [W - 150, 1000, W, H - 420]): d.rectangle(r, fill=(255, 0, 0, 80))
+                Image.alpha_composite(im, ov).convert("RGB").save(os.path.join(ROOT, "reels", f"{rid}_zones_{j}.jpg"), quality=85)
             if tt < total: draw(int(tt * FPS)).save(os.path.join(ROOT, "reels", f"{rid}_check_{j}.jpg"), quality=85)
         print("check frames written"); return
     full = np.concatenate([np.zeros(int(LEAD * sr)), audio, np.zeros(int(TAIL * sr))]) * 0.95
