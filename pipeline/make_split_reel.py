@@ -52,6 +52,10 @@ def block(fr, x, y, w, h, b, k):
     fr.text((x + 24, y + 16), b["label"].upper(), lab_f, (WHITE if st in ("good", "bad") else GREY), k, dy=8)
     vcol = txt if st != "minus" else RED
     fr.text((x + 24, y + h - 14), b["value"], font("xb", fit(fr, b["value"], "xb", val_size, w - 48)), vcol, k, anchor="ld", dy=8)
+    if b.get("mark"): mark(fr, x + w - 40, y + h / 2, 22, b["mark"], k)
+    if b.get("sub"):                     # short right-aligned note on the value row, e.g. "$100/day · $700/week"
+        sc = COLS.get(b.get("sub_color", "green"), GREEN)
+        fr.text((x + w - 22, y + h - 18), b["sub"], font("xb", fit(fr, b["sub"], "xb", 30, w * 0.55)), sc, k, anchor="rd", dy=8)
 
 def main():
     import soundfile as sf
