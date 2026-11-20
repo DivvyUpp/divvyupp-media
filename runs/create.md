@@ -54,7 +54,10 @@ money headlines first; skip it if nothing touches household spending. Each Reel 
 unless the card says otherwise.
 
 ## 5. Script workshop
-1. For each Reel, write **5 hook candidates** that follow the format's pattern. Score each against the script checklist in `PLAYBOOK.md`. Drop any
+1. For each Reel, write **6–8 hook candidates** that follow the format's pattern, then a **hook review**: two
+   subagents, each in a different viewer persona from the target audience, see only the lines and mark each STOP or
+   SCROLL with the question it raises. Keep a hook only if both stop. What stops viewers so far: a moment they're in,
+   or something they can check against themselves tonight (`research/hook-review-2026-11-20.md`). Score each against the script checklist in `PLAYBOOK.md`. Drop any
    that repeat the last 5 Reels.
 2. Write the **best 2 as full scripts**.
 3. Run a **cold review**: start a subagent that sees only the script and the `--check` stills (not the card or

@@ -1,8 +1,92 @@
-# Reel ideas built on the proven formats (2026-11-20, v2: hook and payoff)
+# Reel ideas v3 (2026-11-20): hooks picked by a cold review
 
-The **format** (what the Reel is about) comes from the outliers in [research/2026-11-20.md](2026-11-20.md): 3+
-unrelated accounts at 3x+ their median on Shorts in the last 90 days. The **structure** (how it keeps people
-watching) comes from Chris Chung's five retention devices (format teacher, grade B until our own data backs them):
+**What changed from v2:** Srini found the v2 hooks weak. I wrote 23 hook lines across the four formats and had two
+independent reviewers judge each one STOP or SCROLL, in character as our viewer (two-income parents scrolling at
+9:40pm, not looking for money advice). They saw only the lines. Both picked the same winner in every group.
+
+**What stopped them:** a moment they're in right now (a balance on a date, the fourth takeout), or something they can
+check against themselves tonight. **What got scrolled:** big totals ("costing you $84,000"), "the average couple",
+"this is for you", news-ticker numbers, and teasers that hide what "this" is.
+
+| Line | Reviewer 1 | Reviewer 2 |
+|---|---|---|
+| A1 "Do you and your partner say 'we're fine'? On $150K, that's costing you about $84,000." | SCROLL | SCROLL |
+| A2 "Same $150K income. After 5 years, one couple has $112,500 saved. The other has $28,500." | STOP | SCROLL |
+| **A3 "Two people earning $150K together. $212 left on the 24th. Neither of them knows where it went."** | **STOP (best)** | **STOP (best)** |
+| A5 "Saying 'we're fine' is costing the average couple $16,800 a year." | SCROLL | SCROLL |
+| A8 "Save first or save what's left? On $150K, the wrong one costs you $84,000 in 5 years." | STOP | STOP (weak) |
+| B1 "If you're 40 and earn $100K, you should have $300,000 saved. Here's every age." | STOP | STOP (weak) |
+| B3 "44% of people earning over $100K live paycheck to paycheck. Here's how to tell if it's you." | STOP | STOP |
+| **B4 "You think you spend $86 a month on subscriptions. The average person spends $219."** | **STOP (best)** | **STOP (best)** |
+| **C3 "Whoa. Fourth takeout this week? Okay, we need rules."** (Dollar Bill) | **STOP (best)** | **STOP (best)** |
+| C2 "Spending rules I will die on. The last one makes money people mad." | SCROLL | STOP (weak) |
+| **D3 "Thanksgiving dinner is up 6%. The turkey is up 10%. Here's the move that protects your January."** | **STOP (best)** | **STOP (best)** |
+| D2 "Holiday spending is up 5.5%. About half is you paying more for the same stuff." | SCROLL | SCROLL |
+All 23 lines and both reviews: `research/hook-review-2026-11-20.md`. This is a proxy, not data: the posted Reels'
+3-second hold is the real test.
+
+---
+
+## The four Reels (one per format)
+
+### 1. "$212 on the 24th" (couple money)
+- **Hook (0–2 s, on screen and voiced):** "Two people earning $150K together. $212 left on the 24th. Neither of them
+  knows where it went."
+- **What they stay for:** where did it go?
+- **Beats:** not the mortgage, not one big splurge. It went on dozens of small spends that each felt fine, because
+  neither of them knew what was safe to spend that day.
+- **Rehook (R1, the cost):** "Here's what that habit costs. The average household saves about 4% (BEA, Sept 2026).
+  The guideline is 15% (Fidelity). On $150K, that gap is about $84,000 over five years."
+- **Payoff (answers the hook):** "It went in the gap between what you spent and what was safe. Close it: save
+  first on payday, then one daily number you both see. Next month, the 24th looks different."
+- Presenter C. The $84,000 sits in the middle, where it explains the stakes, not in the hook, where both reviewers
+  scrolled past it.
+
+### 2. "$86 vs $219" (how do you compare)
+- **Hook:** "You think you spend $86 a month on subscriptions. The average person spends $219." Source on screen:
+  C+R Research, 2022.
+- **What they stay for:** am I the $219 person?
+- **Beats:** three places they hide: the free trial that quietly renewed, the yearly ones you forgot, the ones on
+  the other person's card.
+- **Rehook (R5):** "But cancelling won't stick unless you see them before they renew."
+- **Payoff:** "Tonight: open your bank app, search 'monthly', add them up. Then give them a line in your weekly
+  number, so they stop sneaking up on you." Presenter E.
+
+### 3. "Fourth takeout this week?" (rules, Dollar Bill)
+- **Hook:** "Whoa. Fourth takeout this week? Okay. We need rules." (Valf voice, the approved voice prefix)
+- **What they stay for:** the rules.
+- **Beats:** 1. "Savings leaves the day you get paid. Not 'if there's some left.'" 2. "One daily number. Not a
+  40-line budget." 3. "Overspent today? Tomorrow pays. Not your savings."
+- **Rehook:** "And rule four? You're gonna like rule four."
+- **Payoff (R3):** "Takeout's allowed. It's in the plan. Just save first." Script ~20% shorter than the presenters'.
+
+### 4. "The move that protects your January" (money news)
+- **Hook:** "Thanksgiving dinner is up 6%. The turkey is up 10%. Here's the move that protects your January."
+  Source card: American Farm Bureau, Nov 18, 2026 ($58.63 for 10).
+- **What they stay for:** the move.
+- **Beats:** the dinner isn't the problem; Black Friday is two days later, then December.
+- **Rehook (R5):** "But this only works if you do it before Thursday."
+- **Payoff:** "Tonight, give the whole holiday week one number. Move January's savings out first. Then spend
+  inside the number." Presenter C. Post by Nov 24.
+
+### Next in line (both reviewers stopped)
+- B3 "44% of people earning over $100K live paycheck to paycheck. Here's how to tell if it's you." (PYMNTS/LendingClub,
+  Sept 2023)
+- B1 "If you're 40 and earn $100K, you should have $300,000 saved. Here's every age." (Srini's 722-view format;
+  this opening beat the chart-title version with both reviewers)
+- A8 "Save first or save what's left? On $150K, the wrong one costs you $84,000 in 5 years."
+
+### Figures used (all checked or flagged)
+- 3.8% personal saving rate, Sept 2026: BEA, as reported by Fortune (Nov 16, 2026). Check BEA before render.
+- 15% savings guideline: Fidelity (15% of pre-tax income, including any employer match).
+- $84,000 = (15% − 3.8%) × $150,000 × 5 years, no growth assumed. $112,500 vs $28,500 = 15% vs 3.8% of $150,000 for
+  5 years.
+- $86 vs $219: C+R Research, 2022 (already approved in `PLAYBOOK.md`). 44%: PYMNTS/LendingClub, Sept 2023 (approved).
+- $58.63, +6%, turkey +10%: American Farm Bureau Federation, Nov 18, 2026.
+
+---
+
+# v2 (superseded): device definitions kept for reference
 
 | # | Device | What keeps them watching |
 |---|---|---|
@@ -16,143 +100,3 @@ The top outlier titles already use these: "Was Life Actually More Affordable in 
 behind financially... here's some data on why" (R3/R1, 4.1x), "Her Husband Said He'd Loan Her Money For Groceries"
 (a scene that makes you wait for the judgement, 8.5x).
 
-**Every Reel below states four things:**
-- **Hook (0–2 s):** the first line, the same words on screen and in the voice. It raises one specific question.
-- **What they stay for:** that question, in one line.
-- **Rehook (middle):** one of R2–R5, placed where people usually drop (about 40% through).
-- **Payoff (last 5–8 s):** the answer to exactly that question. No bait: if the hook promises it, the Reel delivers it.
-
-Length 30–50 s. Sources on screen for every figure. No real people, no invented testimonials, no competitor names.
-
----
-
-## Format 1: Couple money conflict
-
-**1a. "We're fine" (R3 + R2)**
-- **Hook:** *"'We're fine' is the most expensive thing couples say about money."*
-- **What they stay for:** why "we're fine" costs money.
-- **Beats:** the belief: two good incomes, bills paid, so we're fine (R3). Then it's the 24th, $212 left, and
-  neither of you knows where it went.
-- **Rehook (R2):** "It's not that you earn too little. It's not that you spend too much. It's that neither of you
-  knows what's safe to spend *today*."
-- **Payoff:** "Fine is a number, not a feeling. Save first, and the rest becomes one daily number you can both
-  see. That's what fine actually looks like." End card: **"Send this to whoever says 'we're fine'."**
-- Presenter C, framed as an example ("Say your partner says...").
-
-**1b. Red flag or green flag (R3, open loop on #3)**
-- **Hook:** *"3 money habits that quietly drain two-income couples. Number 3 is the one everyone does."*
-- **What they stay for:** what number 3 is, and whether they do it.
-- **Beats:** #1 "only one of you knows the passwords": red. #2 "separate guilt-free money each": green (contradicts
-  the belief that couples should share everything, R3).
-- **Rehook:** "And number 3 is the one almost everyone does."
-- **Payoff:** #3 "Saving whatever's left at the end of the month": red, because there's never anything left. "Move
-  savings first, on payday." End: "Which one is you two?"
-- Presenter E.
-
-**1c. "Save first, or save what's left?" (R2 + R5)**
-- **Hook:** *"Save first, or save what's left? One of these never works."*
-- **What they stay for:** which one, and why.
-- **Beats:** his side: "We'll save what we don't spend." Hers: "There's never anything left." Verdict: save first,
-  because whatever you don't move gets spent.
-- **Rehook (R5):** "But saving first won't work unless you also know what's safe to spend after. Otherwise you
-  dip back into savings by the 20th."
-- **Payoff:** "Save first, then one daily number for the rest. That's how saving first actually sticks." End:
-  "Whose side are you on?" Presenter C.
-
----
-
-## Format 2: How do you compare?
-
-**2a. Savings by age on a $100K salary (Srini's 722-view format, R1 + R4)**
-- **Hook:** *"How much you should have saved by 30, 40, 50 and 67 on a $100K salary."*
-- **What they stay for:** their own row.
-- **Beats:** rows revealed one at a time (Fidelity guideline: 1x salary by 30, 3x by 40, 6x by 50, 8x by 60, 10x
-  by 67): 30 → $100,000, 40 → $300,000, 50 → $600,000.
-- **Rehook (R4), after the 50 row:** "Behind? Most people are. But there's a better way to catch up than earning
-  more."
-- **Payoff:** 60 → $800,000, 67 → $1,000,000 ✓. Then: "Move savings out the day you get paid, before anything
-  else. That's the better way." Presenter E, same table and order as Srini's TikTok.
-
-**2b. Thanksgiving dinner: cheaper than 2022? (R3)**
-- **Hook:** *"Thanksgiving dinner costs less than it did in 2022. So why does November feel so expensive?"*
-- **What they stay for:** why it feels expensive if dinner is cheaper.
-- **Beats:** 2022 $64.05 (record), 2026 $58.63 for 10, $5.86 a person, the turkey up 10% (American Farm Bureau,
-  Nov 18, 2026). It's the belief (dinner is getting pricier) and the contradiction (still below 2022).
-- **Rehook (R2):** "It's not the turkey. It's not the sides. It's that dinner lands in the same week as Black
-  Friday."
-- **Payoff:** "Give the whole week one number before it starts, and spend inside it." Presenter C. Post by Nov 24.
-
-**2c. "Are you saving more than most Americans?" (R1 + R5)**
-- **Hook:** *"The average American saves about 4 cents of every dollar. Here's where you stand."*
-- **What they stay for:** their tier.
-- **Beats:** tiers revealed: 4% average (personal saving rate 3.8% in September, BEA via Fortune, Nov 16, 2026;
-  check BEA before render), 10% "ahead of most", 15%+ "the people who seem to have more than you".
-- **Rehook (R5):** "But none of these happen unless the money moves before you can spend it."
-- **Payoff:** "It's not what you earn, it's what you move first. Pick your number and move it on payday."
-  Presenter C.
-
----
-
-## Format 3: Rules I live by
-
-**3a. Spending rules Dollar Bill will die on (R3, open loop on the last rule)**
-- **Hook:** *"Spending rules I will die on. The last one makes money people mad."*
-- **What they stay for:** the last rule.
-- **Beats:** 1. "Savings leaves the day you get paid. Not 'if there's some left.'" 2. "Your mortgage was never
-  your money." 3. "One daily number beats a 40-line budget."
-- **Rehook:** "And the one money people hate..."
-- **Payoff (R3):** "Your kid's birthday party? Allowed. It's in the plan. You don't have to skip the fun stuff. You
-  just have to save first." Raccoon, Valf voice, script ~20% shorter.
-
-**3b. "You don't need a budget. You need 3 rules." (R2)**
-- **Hook:** *"Two incomes and nothing left? You don't need a budget. You need 3 rules."*
-- **What they stay for:** the 3 rules.
-- **Beats:** 1. "Savings moves on payday, before anyone spends." 2. "One shared number for the week, not two people
-  guessing."
-- **Rehook (R4):** "And the third rule is the one that makes the other two stick."
-- **Payoff:** 3. "Each of you gets money you never have to explain." All three stay on screen at the end
-  (screenshot moment). Presenter E.
-
-**3c. Money things I'll never do as a parent (R3)**
-- **Hook:** *"Money things I'll never do as a parent. The last one surprises people."*
-- **What they stay for:** the surprising one.
-- **Beats:** 1. "Pay for the kids' extras out of savings." 2. "Find out at the end of the month that we overspent."
-- **Rehook:** "And the last one..."
-- **Payoff (R3):** "Say 'we can't afford it.' I say 'that's not in this week's number.' Kids learn that money is a
-  plan, not a panic." End: "Which one would you add?" Presenter C.
-
----
-
-## Format 4: Money news → what it means for your wallet
-
-**4a. "Thanksgiving dinner just went up 6%. That's not the number to worry about." (R3 + R2)**
-- **Hook:** the line above, with the headline card: "Thanksgiving dinner for 10: $58.63, up more than 6%
-  (American Farm Bureau, Nov 18, 2026)."
-- **What they stay for:** which number to worry about.
-- **Rehook (R2):** "It's not the turkey, it's not the pie. It's the week it lands in."
-- **Payoff:** "Black Friday is two days later. Give that week one number now, so the deals don't spend your
-  savings." Presenter C. (Use 4a or 2b in a given week, not both.)
-
-**4b. "You'll spend more on gifts this year and get less." (R1 + R5)**
-- **Hook:** *"You'll spend more on holiday gifts this year and get less. Here's why, and the fix."*
-- **What they stay for:** the why, then the fix.
-- **Beats:** Mastercard SpendingPulse expects holiday sales up 5.5%, about half of it from higher prices; Bank of
-  America sees the most trading down since 2021 (both as reported by Fortune, Nov 16, 2026).
-- **Rehook (R5):** "But cutting back won't work unless you decide the number before you shop."
-- **Payoff:** "Pick December's number now. Save January's money first. Then shop with what's left." Presenter E.
-
-**4c. Standing template for daily news**
-Hook = the headline + "here's what it means for your money" (or R3: "that's not the number to worry about"). Rehook =
-R2 or R5. Payoff = the save-first move for this week. Skip partisan politics and investing tips.
-
----
-
-## Suggested first three days (up to 4 a day, one per format)
-| Day | Reels |
-|---|---|
-| Sun Nov 22 | 1a "We're fine", 2a savings by age, 3a Dollar Bill rules, 4a Thanksgiving +6% |
-| Mon Nov 23 | 1b red/green flags, 2c saving rate, 3b three rules, 4b holiday prices |
-| Tue Nov 24 | 1c save first vs what's left, 3c parent rules, 2b Thanksgiving vs 2022 (if 4a did well) |
-After 72 h, compare on the scorecard (watch time ÷ length, likes and shares per 100 reached). Watch time also tells
-us whether the payoff held people: a drop just after the hook means the hook failed; a drop at the rehook means the
-middle failed.
