@@ -60,25 +60,51 @@ def _count(value, x):
     if not m or x >= 1: return value
     n = int(m.group(2).replace(",", "")); return f"{m.group(1)}{round(n * (1 - (1 - max(x, 0)) ** 3)):,}"
 
-def block(fr, x, y, w, h, b, k, age=9.0, pop=True):
-    """k = opacity 0..1; age = seconds since the tile appeared (drives the pop, count-up and result pulse)."""
+def pop_scale(age, big=False):
+    """One smooth motion: grow from 88% to a small overshoot (6% on results, 3% otherwise) and settle by 0.45 s.
+    No second pulse (two motions back to back read as a jitter)."""
+    x = max(0.0, min(1.0, age / 0.45)); over = 0.06 if big else 0.03
+    e = 1 - (1 - x) ** 3                               # ease-out position 0..1
+    return 0.88 + 0.12 * e + over * _math.sin(_math.pi * e) * (1 - x)
+
+_SPR = {}
+def sprite(key, w, h, paint):
+    """Draw something once at full size into its own transparent image (cached), so scaling it later is a smooth
+    image resize instead of re-laying-out text at a new, rounded font size every frame (which jittered)."""
+    if key not in _SPR:
+        from PIL import ImageDraw
+        sub = Frame.__new__(Frame); sub.layer = Image.new("RGBA", (int(w * S), int(h * S)), (0, 0, 0, 0))
+        sub.d = ImageDraw.Draw(sub.layer); sub.g = 1.0; paint(sub); _SPR[key] = sub.layer
+        if len(_SPR) > 400: _SPR.pop(next(iter(_SPR)))
+    return _SPR[key]
+
+def place(fr, img, cx, cy, sc, k):
+    """Paste a sprite centred on (cx, cy) at scale sc and opacity k, with sub-pixel smooth resampling."""
     if k <= 0: return
-    sc = (0.82 + 0.18 * _back(age / 0.32)) if pop else 1.0
-    if b.get("big") and 0.32 < age < 0.95: sc *= 1 + 0.05 * _math.sin(_math.pi * (age - 0.32) / 0.63)   # one pulse on results
-    cx, cy = x + w / 2, y + h / 2; w2, h2 = w * sc, h * sc; x, y = cx - w2 / 2, cy - h2 / 2; w, h = w2, h2
-    st = b.get("style", "plain")
-    fill = {"good": GREEN, "bad": RED}.get(st, WHITE)
-    txt = WHITE if st in ("good", "bad") else INK
-    fr.rrect([x, y, x + w, y + h], 24 * sc, fill, k)
-    lab_f = font("b", min(26, h * 0.25)); val_size = min(58, h * (0.40 if not b.get("big") else 0.46))
-    fr.text((x + 22 * sc, y + h * 0.10), b["label"].upper(), lab_f, (WHITE if st in ("good", "bad") else GREY), k, dy=0)
-    vcol = txt if st != "minus" else RED
+    w, h = max(1, round(img.width * sc)), max(1, round(img.height * sc))
+    im = img if (w, h) == img.size else img.resize((w, h), Image.BICUBIC)
+    if k < 1: im = im.copy(); im.putalpha(im.split()[3].point(lambda v: int(v * k)))
+    fr.layer.alpha_composite(im, (int(round(cx * S - w / 2)), int(round(cy * S - h / 2))))
+
+def block(fr, x, y, w, h, b, k, age=9.0, pop=True):
+    """k = opacity 0..1; age = seconds since the tile appeared (drives the pop and the count-up)."""
+    if k <= 0: return
     val = _count(b["value"], (age - 0.05) / 0.6)
-    fr.text((x + 22 * sc, y + h - h * 0.12), val, font("xb", fit(fr, b["value"], "xb", val_size, w - 48)), vcol, k, anchor="ld", dy=0)
-    if b.get("mark"): mark(fr, x + w - 40, y + h / 2, 22 * sc, b["mark"], k)
-    if b.get("sub"):                     # short right-aligned note on the value row, e.g. "$100/day · $700/week"
-        scol = COLS.get(b.get("sub_color", "green"), GREEN)
-        fr.text((x + w - 22 * sc, y + h - 18 * sc), b["sub"], font("xb", fit(fr, b["sub"], "xb", min(30, h * 0.3), w * 0.55)), scol, k, anchor="rd", dy=0)
+    st = b.get("style", "plain")
+    def paint(f):
+        fill = {"good": GREEN, "bad": RED}.get(st, WHITE)
+        txt = WHITE if st in ("good", "bad") else INK
+        f.rrect([0, 0, w, h], 24, fill, 1)
+        lab_f = font("b", min(26, h * 0.25)); val_size = min(58, h * (0.40 if not b.get("big") else 0.46))
+        f.text((22, h * 0.10), b["label"].upper(), lab_f, (WHITE if st in ("good", "bad") else GREY), 1, dy=0)
+        vcol = txt if st != "minus" else RED
+        f.text((22, h - h * 0.12), val, font("xb", fit(f, b["value"], "xb", val_size, w - 48)), vcol, 1, anchor="ld", dy=0)
+        if b.get("mark"): mark(f, w - 40, h / 2, 22, b["mark"], 1)
+        if b.get("sub"):
+            scol = COLS.get(b.get("sub_color", "green"), GREEN)
+            f.text((w - 22, h - 18), b["sub"], font("xb", fit(f, b["sub"], "xb", min(30, h * 0.3), w * 0.55)), scol, 1, anchor="rd", dy=0)
+    img = sprite(("blk", round(w), round(h), b["label"], val, st, b.get("sub"), b.get("big")), w, h, paint)
+    place(fr, img, x + w / 2, y + h / 2, pop_scale(age, b.get("big")) if pop else 1.0, k)
 
 def tighten(audio, sr, ch, st, en, starts, max_gap=0.32, speed=1.0, keep_gap=None):
     """Shorten pauses between sentences to max_gap and speed the take up (pitch kept, ffmpeg atempo); the character
@@ -151,12 +177,10 @@ def main():
             bd = h.get("badge")
             if bd:
                 t_in = cue(bd["at"], bd.get("delay", 0.0), bd.get("word")); k = appear(t, t_in, 0.15); bx0 = SAFE_L + tw + 64
-                age = t - t_in; sc = 0.82 + 0.18 * _back(age / 0.32)
-                if 0.32 < age < 0.95: sc *= 1 + 0.06 * _math.sin(_math.pi * (age - 0.32) / 0.63)
-                bf = font("xb", fit(fr, bd["text"], "xb", 36, TEXT_R - bx0 - 40) * sc); bwid = fr.tl(bd["text"], bf)
-                bw0 = fr.tl(bd["text"], font("xb", fit(fr, bd["text"], "xb", 36, TEXT_R - bx0 - 40))) + 40; cx = bx0 + bw0 / 2
-                fr.rrect([cx - (bwid + 40) / 2, r0 + 29 - 29 * sc, cx + (bwid + 40) / 2, r0 + 29 + 29 * sc], 29 * sc, WHITE, k)
-                fr.text((cx, r0 + 29), bd["text"], bf, COLS.get(bd["color"], INK), k, anchor="mm", dy=0)
+                bf = font("xb", fit(fr, bd["text"], "xb", 36, TEXT_R - bx0 - 40)); bwid = fr.tl(bd["text"], bf) + 40
+                def paint_badge(f, bd=bd, bf=bf, bwid=bwid):
+                    f.rrect([0, 0, bwid, 58], 29, WHITE, 1); f.text((bwid / 2, 29), bd["text"], bf, COLS.get(bd["color"], INK), 1, anchor="mm", dy=0)
+                place(fr, sprite(("badge", bd["text"], round(bwid)), bwid, 58, paint_badge), bx0 + bwid / 2, r0 + 29, pop_scale(t - t_in, True), k)
             # blocks
             bx, bw = SAFE_L, spec.get("block_w", 470); top = r0 + 72; bottom = r1
             nb = len(h["blocks"]); gap = 8; nbig = sum(1 for b in h["blocks"] if b.get("big"))
