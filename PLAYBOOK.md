@@ -1,6 +1,8 @@
 # DivvyUpp Reels loop: playbook for scheduled runs
 
-This repo is the memory of the weekly content loop. Scheduled Claude runs read this file first.
+This repo is the memory of the daily content loop. Scheduled Claude runs read this file first, then their own run file
+in `runs/` (`runs/research.md`, `runs/create.md`, `runs/post.md`). If a routine's prompt and these files disagree,
+these files win: the loop is changed by editing the repo, not the routine.
 Videos are served publicly by GitHub Pages at `https://divvyupp.github.io/divvyupp-media/<path>`.
 
 ## Ground rules (never break these)
@@ -10,8 +12,10 @@ Videos are served publicly by GitHub Pages at `https://divvyupp.github.io/divvyu
 - Post only through the Windsor.ai for Social Media connector: connector `instagram`, account `17841422626862357`
   (@getdivvyupp), action `create_video_post`, `share_to_feed: true`.
 - @getdivvyupp is the single main account for all DivvyUpp content (the personal @srinithinks account is retired).
-- Cadence: 5 Reels a week, Tuesday to Saturday, one per day. At most one post per day. If anything fails, stop and tell Srini; do not retry a publish blindly (check with
-  Windsor `get_data` for a media created today before any retry, so nothing posts twice).
+- Cadence: one main Reel a day, posted at 7pm ET, plus up to 3 Trial Reel variants a day (shown to non-followers
+  only). At most one main post per day. If anything fails, stop and tell Srini; do not retry a publish blindly (check with
+  Windsor `get_data` for a media created today before any retry, so nothing posts twice). Trial Reels follow the same
+  approval rule as any post: only entries Srini approved.
 - Brand: warm off-white background, orange #E04A1A, near-black #15100F, Plus Jakarta Sans.
 - Voice (agreed with Srini 2026-11-16): ElevenLabs, model `eleven_v3`, **Jessica** (`cgSgspJ2msm6clMCkdW9`) for presenter C,
   spec value `"character_voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3"`. Direct the delivery with v3 audio tags
@@ -78,51 +82,84 @@ Rules for every presenter character, current or new:
   while anyone speaks.
 - When adding a character, show Srini a lineup still (resting and talking) before rendering any video.
 
-## Monday run: plan and produce
-1. `bash pipeline/setup.sh` (once per machine).
-2. Pull stats for every `posted` queue entry through Windsor `get_data` (connector `instagram`, fields from
-   `get_fields`: `media_id, media_views, media_reach, media_reel_skip_rate, media_reel_avg_watch_time,
-   media_shares, media_saved, media_reel_total_interactions`, a date range wide enough to include the post).
-   Fill the matching rows in `experiment-log.csv` (avg watch in seconds).
-3. Read the funnel. The GitHub Action `Funnel weekly fetch` writes last Monday–Sunday (ET) to
-   `funnel/<ISO-year>-W<ISO-week>.json` at about 5:37am ET. Open the newest file whose `from`/`to` cover last
-   week. If it is missing (GitHub sometimes skips scheduled runs; it did on 2026-11-16), trigger the workflow by
-   hand (GitHub `actions_run_trigger`, `run_workflow`, `funnel-weekly.yml` on `main`), wait for it and pull. Only if
-   that also fails say **"funnel data unavailable"** in the report, say why, and do not guess any numbers. Otherwise, from `instagram.days[]` (one row per day, `stages` gives the order of
-   `reach`), take per day: landing (`ig_visits`), `get_started_clicked` (`get_started`), `signed_up`
-   (`signups`) and `bank_linked` (`bank_links`). Write them into `experiment-log.csv` on the row of the
-   Reel posted that day (`posted_date`), and show the week as Reel views → Instagram visits → Get started
-   → sign-ups → bank connected. Remember older Reels also drive traffic: attribution is by day, not per
-   Reel. Use `all_sources` only for context (e.g. total sign-ups this week).
-3b. Compare against targets. Find last week's row in `targets.json` (match `week` to the funnel file's
-   ISO week). For each metric show actual vs target and mark it **ahead**, **on track** (within ±20%) or
-   **behind**; also show running totals vs the month-1 and month-3 milestones in `_about`. Weeks before the
-   first row: say "no target yet". If a metric is behind two weeks running, propose one concrete change for
-   it (a hook idea, caption/CTA, landing page, or another channel) in the note to Srini. Never edit
-   `targets.json` without Srini's explicit agreement.
-4. Decide: the main signal is **skip rate (lower is better)** then **average watch time**; sign-ups and
-   Get started from step 3 are the business result and win ties. With little data,
-   say so plainly rather than over-reading one post. Write a short `decision` for last week's rows
-   (keep / kill / iterate) and why.
-5. Write **5 new story Reel specs** in `hooks/<YYYY-MM-DD>-a.json` (one per day Tue-Sat) using the story template
-   above and `pipeline/make_story_reel.py`, NOT the old text-only `make_reel.py`. Each tests one idea (pain question,
-   founder result, guarantee-first, before-you-spend, no-budget, audience call-out, flexible-spending reality check).
-6. Check each with `python3 pipeline/make_story_reel.py hooks/<id>.json --check` and look at every still; then render.
-   Srini reviews one day at a time if he asks to; keep unapproved videos out of the repo (scratch folder).
-7. Add queue entries with `"status": "pending_review"`, a caption per video (same structure as the first
-   post), and proposed `post_date`s, one per day Tuesday to Saturday of this week, posted at 7pm ET.
-8. Send Srini the 5 videos (SendUserFile) plus a short note: last week's numbers in one line each (Reel stats plus the funnel from step 3), then a short actual-vs-target scorecard from step 3b, what each
-   new hook tests, and the proposed captions and dates. Ask him to approve, reject or edit each.
-9. When he replies: apply edits (re-render if the hook changed and send it again), set approved entries to
-   `"approved"`, drop rejected ones, then commit and push `hooks/`, approved `reels/`, `queue.json` and
-   `experiment-log.csv`. Confirm one Pages link loads before finishing.
+## The goal: paying subscribers (agreed with Srini 2026-11-20)
+Views and followers are a means to an end. They show the content resonates and fill the top of the funnel. The real
+goal is people who go to divvyupp.com and sign up: **free beta users now, paying subscribers later**.
 
-## Daily run: post one approved Reel
-1. Read `queue.json`. Find the first entry with `"status": "approved"` and `post_date` equal to today (ET).
-   If none, finish silently.
-2. Publish it with Windsor `create_video_post` (video_url = Pages URL of `file`, caption from the entry).
-3. Set `"status": "posted"` and `media_id`, add a row to `experiment-log.csv`, commit and push.
-4. Send Srini one line: what posted and its link (`media_permalink` via `get_data` if available).
+| Layer | What we count | Where it comes from |
+|---|---|---|
+| Goal (now) | Free beta sign-ups, then bank linked (active household) | funnel export: `signed_up`, `bank_linked` |
+| Goal (later) | Paying subscribers | funnel export, once billing is live |
+| Bridge | Instagram visits to divvyupp.com, Get started clicks | funnel export: `instagram.days[]` |
+| Top of funnel | Views per Reel, 3-second hold, watch time, shares, saves, followers | Windsor |
+
+Engagement milestones (agreed 2026-11-20): **first Reel past 1,000 views → 1,000 views every Reel and one past 10,000
+→ 100,000 followers.** Every hypothesis card names which layer it moves. A bet that wins views but sends no one to the
+site is only half a win: say so in the postmortem.
+
+## The daily loop (replaces the weekly batch, agreed 2026-11-20)
+Three scheduled runs a day. Each reads this file, then its own run file.
+
+| Time (ET) | Run | File | Job |
+|---|---|---|---|
+| 07:00 | Research | `runs/research.md` | Look outward. Find better ways to make content that works, from any creator, tool or format. Feed `backlog.md`. Not tied to any one framework. |
+| 09:00 | Create | `runs/create.md` | Postmortem on recent Reels → update `learnings.md` → pick one bet → workshop the script → render → send to Srini. On Mondays it starts with the weekly review. |
+| 19:00 | Post | `runs/post.md` | Post the approved main Reel and any approved Trial Reels. |
+
+Srini approves each day's videos in chat, ideally by 5pm ET. No approval, no post.
+
+### Files that hold the loop's memory
+- `learnings.md`: the rulebook. Each rule cites the Reels that support it. Rules can be overturned by new data.
+- `backlog.md`: ranked bets waiting to be tested. Research adds to it; Create takes from the top.
+- `research/<date>.md`: each day's research brief, with sources.
+- `hypotheses/<date>.md`: each day's hypothesis card, script workshop and later its postmortem.
+- `experiment-log.csv`: one row per posted Reel (main or trial), with the bet, prediction and verdict.
+- `funnel/`: weekly exports (Monday) plus one-day exports `funnel/custom-<d>_<d>.json` the Create run requests.
+
+### Hypothesis card (one per main Reel; trial variants share the card)
+```
+Goal layer:    top of funnel | bridge | sign-ups   (and which milestone)
+Bet:           If we <change>, then <metric> will <move>, because <reason>.
+Evidence:      our data (Reel ids) or an outside source (link) for the reason
+Variable:      the ONE thing changed
+Control:       the Reel id it is compared with (the current best on that metric)
+Prediction:    a number, e.g. "3-second hold >= 30% (skip <= 70%) at 72h"
+If it wins:    what we do next
+If it loses:   what we do next
+```
+
+### Noise rules
+- Fewer than 100 views at the 72h read: **inconclusive**. Log it, change no rule.
+- One variable per main Reel. If two things changed, the verdict is inconclusive.
+- A rule enters `learnings.md` after two supporting Reels, and leaves it after two contradicting ones.
+- Attribution to the site is by day, not by Reel (older Reels also drive visits). Say so when reading sign-ups.
+- Windsor limits: per-Reel follows and profile visits are not reported for Reels; daily new-follower counts need 100+
+  followers. Record `followers_count` every day instead and read the change.
+
+### Script checklist (owned by the loop, not fixed)
+Start from this list. Research may propose changes; Create applies a change only when `learnings.md` supports it.
+1. The first frame and first line deliver the point or the tension. No warm-up.
+2. A stranger knows who it is for within 2 seconds.
+3. On-screen text matches the spoken hook in second one.
+4. The story turns at least once ("but", "so"); it is not a flat list.
+5. Length fits the bet. Srini's standing preference is clarity over a hard 60s cap, with 90s as the ceiling;
+   a shorter cut is a bet to test, not a rule, until `learnings.md` says otherwise.
+6. Read aloud, it has rhythm. Stress words are marked for the voice.
+7. It does not repeat the previous 5 Reels' example, numbers or payoff.
+8. Every figure is real and checked. Guarantee wording as agreed. No competitor names.
+
+### Trial Reels
+Windsor `create_video_post` takes `trial_params: {"graduation_strategy": "MANUAL"}` (or `"SS_PERFORMANCE"`, which
+shares it with followers automatically if it performs well). Trial Reels go to non-followers only. Use them to test
+2–3 hook variants of the day's script at once. Default to `MANUAL`; Srini decides whether a winner goes to followers.
+Queue entries for trials have `"kind": "trial"`; the main Reel has `"kind": "main"` (missing `kind` means main).
+Not yet verified end to end: the first trial post must be checked in the Instagram app (it should not appear on the
+grid) and reported to Srini.
+
+### Blog loop
+The blog stays weekly because search moves in weeks. Each article or improvement the blog run approves gets a short
+card in `docs/seo/hypotheses.md` on the outreach-log branch of DivvyUpp/divvyupp: target query, bet, prediction,
+review date 4 weeks out. The weekly blog run reviews the cards that are due.
 
 ## How-it-works explainer (landing page)
 `python3 pipeline/make_explainer.py hooks/how-it-works-raccoon.json` renders the 1080p landscape explainer: Dollar Bill
