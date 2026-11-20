@@ -38,7 +38,9 @@ our own data. Until then it is a candidate bet in `backlog.md`.
    "needs proof", and say whether that's because the format failed or because the data wasn't there.
    Proven = 3 accounts at 3x+ within 90 days on short-form; supported = 3 accounts at 3x+ within 12 months on any
    format (proposed tiers, 2026-11-20, pending Srini). Data sources: **YouTube Data API** (Srini chose it 2026-11-20) for each watchlist
-   channel's Shorts (views, publish date), key from env `YOUTUBE_API_KEY`, never committed; host `www.googleapis.com`
+   channel's Shorts (views, publish date), key from env `YOUTUBE_API_KEY`, never committed; run
+   `python3 scripts/fetch_shorts.py` (writes `research/shorts-<date>.csv`: each Short's views, likes, channel median,
+   multiple and outlier flag; fix any handle it reports as not found in `research/watchlist.csv`); host `www.googleapis.com`
    must be allowed. If the key or host is missing, say so in the brief and fall back to OutlierKit pages. Shorts are
    a proxy for Reels (audiences may differ), so Shorts-only evidence is graded B until one of our Reels confirms it.
    Prefer formats where the payoff is held until the end and differs by viewer (e.g. a number per age or income
