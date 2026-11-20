@@ -12,8 +12,10 @@ Videos are served publicly by GitHub Pages at `https://divvyupp.github.io/divvyu
 - Post only through the Windsor.ai for Social Media connector: connector `instagram`, account `17841422626862357`
   (@getdivvyupp), action `create_video_post`, `share_to_feed: true`.
 - @getdivvyupp is the single main account for all DivvyUpp content (the personal @srinithinks account is retired).
-- Cadence: one main Reel a day, posted at 7pm ET, plus up to 3 Trial Reel variants a day (shown to non-followers
-  only). At most one main post per day. If anything fails, stop and tell Srini; do not retry a publish blindly (check with
+- Cadence (Srini, 2026-11-20, rapid-test phase): **up to 4 Reels a day**, one per slot at about 8am, noon, 5pm and
+  7pm ET, one Reel per proven format per day so every format gets a daily read. The Post run posts one approved Reel
+  per slot, oldest first. Trial Reels stay off until 200 followers. If the scorecard shows extra posts hurting
+  reach per Reel, propose cutting back. If anything fails, stop and tell Srini; do not retry a publish blindly (check with
   Windsor `get_data` for a media created today before any retry, so nothing posts twice). Trial Reels follow the same
   approval rule as any post: only entries Srini approved.
 - Brand: warm off-white background, orange #E04A1A, near-black #15100F, Plus Jakarta Sans.
@@ -119,7 +121,8 @@ Three scheduled runs a day. Each reads this file, then its own run file.
 |---|---|---|---|
 | 07:00 | Research | `runs/research.md` | Look outward. Find better ways to make content that works, from any creator, tool or format. Feed `backlog.md`. Not tied to any one framework. |
 | 09:00 | Create | `runs/create.md` | Postmortem on recent Reels → update `learnings.md` → pick one bet → workshop the script → render → send to Srini. On Mondays it starts with the weekly review. |
-| 19:00 | Post | `runs/post.md` | Post the approved main Reel and any approved Trial Reels. |
+| 08:00, 12:00, 17:00, 19:00 | Post | `runs/post.md` | Post one approved Reel per slot, oldest first. |
+| Sun 05:30 | Watchlist | `runs/watchlist.md` | Re-check every watchlist account against the entry bar; find and add new ones. |
 
 Srini approves each day's videos in chat, ideally by 5pm ET. No approval, no post.
 

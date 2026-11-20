@@ -46,20 +46,22 @@ For each Reel with a fresh `read_72h` (and, as an early signal only, yesterday's
    `experiment-log.csv`.
 4. Update `learnings.md` only as the noise rules allow. Note which goal layer moved, not just views.
 
-## 4. Pick today's bet
-Take the top bet in `backlog.md` unless today's postmortem points to a better one; if so, say why. One variable
-against the control (the current best Reel on the target metric). Write `hypotheses/<today>.md` with the card.
+## 4. Pick today's bets (rapid-test phase: up to 4 Reels a day)
+Make **one Reel per proven format** in `backlog.md` (proven bets first), up to 4, using the next unused idea in the
+latest `research/reel-ideas-*.md` or a new one that follows the same pattern. For the news format, check this week's
+money headlines first; skip it if nothing touches household spending. Each Reel has its own card in
+`hypotheses/<today>.md`; the variable is the format, the control is the median of our last 5 Reels. Lengths 30–50 s
+unless the card says otherwise.
 
 ## 5. Script workshop
-1. Write **10 hook candidates** for the bet. Score each against the script checklist in `PLAYBOOK.md`. Drop any
+1. For each Reel, write **5 hook candidates** that follow the format's pattern. Score each against the script checklist in `PLAYBOOK.md`. Drop any
    that repeat the last 5 Reels.
 2. Write the **best 2 as full scripts**.
 3. Run a **cold review**: start a subagent that sees only the script and the `--check` stills (not the card or
    this playbook). Ask it, as a scrolling viewer in the target audience: what did you understand at 2 seconds,
    where would you scroll away, would you share it, and why. Revise. Pick one. Record the 10 hooks, the scores, the
    review and the changes in `hypotheses/<today>.md`.
-4. Pick **2 trial variants** of the chosen script that change only the first 3 seconds (hook line, first frame or
-   on-screen text), unless the card says trials are not useful today.
+4. No trial variants until 200 followers (Trial Reels need it).
 
 ## 6. Render
 Use `pipeline/make_story_reel.py` with a spec in `hooks/<today>-a.json` (trial variants `-t1`, `-t2`), or another
@@ -67,7 +69,7 @@ format if the bet calls for it and the tool exists. `--check` first and look at 
 unapproved videos in a scratch folder, not in the repo (the repo is public).
 
 ## 7. Queue and send
-1. Add queue entries with `"status": "pending_review"`, `"post_date": today`, `"kind": "main"` or `"trial"`, a
+1. Add queue entries with `"status": "pending_review"`, `"post_date": today`, `"kind": "main"`, a
    caption each, and `"hypothesis": "hypotheses/<today>.md"`.
 2. Send Srini the videos (SendUserFile) and one short note:
    - research: one line from today's brief;
