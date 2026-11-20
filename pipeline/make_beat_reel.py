@@ -146,7 +146,42 @@ def v_cta(fr, t, v, cues, inst=False):
     fr.rrect([W / 2 - tw / 2 - 50, 1040, W / 2 + tw / 2 + 50, 1150], 55, ORANGE, k)
     fr.text((W / 2, 1095), "divvyupp.com", f, WHITE, k, anchor="mm", dy=0)
 
-VIS = {"title": v_title, "split": v_split, "pairs": v_pairs, "table": v_table, "card": v_card, "cta": v_cta}
+_CLIPS = {}
+def clip_frames(src):
+    """Decode a background clip to 1080x1920 RGB frames (cover-cropped), cached per path."""
+    if src not in _CLIPS:
+        path = src if os.path.isabs(src) else os.path.join(ROOT, src)
+        raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", path, "-an", "-vf",
+                              f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},fps={FPS}",
+                              "-f", "rawvideo", "-pix_fmt", "rgb24", "-"], check=True, capture_output=True).stdout
+        _CLIPS[src] = np.frombuffer(raw, np.uint8).reshape(-1, H, W, 3)
+    return _CLIPS[src]
+
+def v_clip(fr, t, v, cues, inst=False, t0=0.0):
+    """Full-screen background clip (frozen on its last frame if the voice runs longer) with a dark gradient at the
+    top for the hook text, and optional chips near the bottom."""
+    from PIL import Image as _I
+    fs = clip_frames(v["src"]); i = min(int((t - t0) * FPS), len(fs) - 1)
+    frame = _I.fromarray(fs[max(i, 0)]).resize((W * S, H * S)).convert("RGBA")
+    grad = np.zeros((H, 1), np.float32); grad[:820, 0] = np.linspace(0.78, 0, 820); grad[H - 700:, 0] = np.linspace(0, 0.7, 700)
+    shade = np.zeros((H, W, 4), np.uint8); shade[..., 3] = (np.repeat(grad, W, 1) * 255).astype(np.uint8)
+    frame.alpha_composite(_I.fromarray(shade).resize((W * S, H * S)))
+    fr.bg_override = frame
+    y = 260
+    size = min(fit(fr, s_, "xb", 96, 960) for s_, _ in v["lines"])
+    for s_, c in v["lines"]:
+        col = WHITE if c == "ink" else COLS.get(c, WHITE)
+        fr.text((W / 2, y), s_, font("xb", size), col, 1 if inst else k_at(t, cues, 0), anchor="ma"); y += size * 1.15
+    chips = v.get("chips", [])
+    if chips:
+        cy = H - 480; cw = (940 - 30 * (len(chips) - 1)) / len(chips)
+        for j, c in enumerate(chips):
+            k = k_at(t, cues, c.get("at", j)); x0 = 70 + j * (cw + 30); col = COLS.get(c.get("color", "ink"), INK)
+            fr.rrect([x0, cy, x0 + cw, cy + 230], 36, CARD, k)
+            fr.text((x0 + cw / 2, cy + 34), c["label"], font("b", fit(fr, c["label"], "b", 32, cw - 40)), GREY, k, anchor="ma", dy=0)
+            fr.text((x0 + cw / 2, cy + 95), c["value"], font("xb", fit(fr, c["value"], "xb", 88, cw - 40)), col, k, anchor="ma", dy=10)
+
+VIS = {"clip": v_clip, "title": v_title, "split": v_split, "pairs": v_pairs, "table": v_table, "card": v_card, "cta": v_cta}
 
 def main():
     import soundfile as sf
@@ -181,9 +216,11 @@ def main():
         b = next(x for x in beats if x["t0"] <= t < x["t1"] or x is beats[-1]); bi = beats.index(b)
         kin = 1.0 if bi == 0 else appear(t, b["t0"], 0.3)
         sub = Frame(bg, t, total); sub.g = kin * fr.g; sub.layer = fr.layer; sub.d = fr.d
-        if b["v"]["type"] != "cta": logo(sub, W / 2, 140, 60, 1)
-        VIS[b["v"]["type"]](sub, t, b["v"], b["cues"], bi == 0)
-        if b["v"]["type"] != "cta":
+        typ = b["v"]["type"]
+        if typ not in ("cta", "clip"): logo(sub, W / 2, 140, 60, 1)
+        if typ == "clip": v_clip(sub, t, b["v"], b["cues"], bi == 0, b["t0"]); fr.bg = sub.bg_override
+        else: VIS[typ](sub, t, b["v"], b["cues"], bi == 0)
+        if typ not in ("cta", "clip"):
             character(fr.layer, W / 2, PRES_TOP, PRES_H, t, vis[min(f, n - 1)], b["mood"], fr.g, spec["character"])
         return fr.img()
     if check:

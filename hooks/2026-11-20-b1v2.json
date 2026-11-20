@@ -1,0 +1,128 @@
+{
+ "id": "2026-11-20-b1v2",
+ "format": "beat",
+ "character": "c",
+ "character_voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "music": true,
+ "beats": [
+  {
+   "sentences": [
+    {
+     "text": "[curious] Same ten thousand dollars a month."
+    },
+    {
+     "text": "After five years, one couple has ninety thousand saved. The other has twenty-two thousand eight hundred."
+    },
+    {
+     "text": "Which one are you?"
+    }
+   ],
+   "visual": {
+    "type": "clip",
+    "src": "/tmp/claude-0/-home-claude-divvyupp-media/74ed1848-df42-5466-b139-90751a5f3198/scratchpad/runway/couple.mp4",
+    "lines": [
+     [
+      "Same $10K a month.",
+      "ink"
+     ],
+     [
+      "Which one are you?",
+      "orange"
+     ]
+    ],
+    "chips": [
+     {
+      "label": "Couple A, 5 years",
+      "value": "$22,800",
+      "color": "red",
+      "at": 1
+     },
+     {
+      "label": "Couple B, 5 years",
+      "value": "$90,000",
+      "color": "green",
+      "at": 1
+     }
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Couple A spends as it comes, and saves what's left."
+    },
+    {
+     "text": "Couple B moves fifteen hundred to savings first, then spends from a daily number."
+    },
+    {
+     "text": "On the twenty-fourth, couple A has two hundred and twelve dollars left. Couple B is on track."
+    },
+    {
+     "text": "That's three hundred and eighty saved this month, versus fifteen hundred."
+    }
+   ],
+   "visual": {
+    "type": "split",
+    "left": "A: spends first, saves what's left",
+    "right": "B: saves first, spends a daily number",
+    "rows": [
+     {
+      "label": "PAYDAY",
+      "left": "$10,000 in. Spend as it comes.",
+      "right": "$10,000 in. $1,500 to savings first.",
+      "rmark": "check",
+      "at": 0
+     },
+     {
+      "label": "THE 24TH",
+      "left": "$212 left.",
+      "right": "On track. Savings untouched.",
+      "lmark": "x",
+      "rmark": "check",
+      "at": 2
+     }
+    ],
+    "foot": {
+     "left": "$380",
+     "right": "$1,500",
+     "label": "saved this month",
+     "at": 3
+    }
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "[emphatic] Same income. Same bills. It's the order."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Same income.",
+      "ink"
+     ],
+     [
+      "Same bills.",
+      "ink"
+     ],
+     [
+      "It's the order.",
+      "orange"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Save first. Then spend with confidence. Try it at divvyupp dot com."
+    }
+   ],
+   "visual": {
+    "type": "cta"
+   }
+  }
+ ]
+}
