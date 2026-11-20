@@ -28,8 +28,8 @@ HALF = H // 2; BAND = 130
 # scaled to fill the height, so ~55 px is cropped off each side; status bar/Reels header cover the top ~180 px;
 # username + caption + "posts tagged" cover y>=1660 (full width); the like/comment/repost/send rail covers x>=905 from
 # y~1150 down. All text and blocks stay inside; only background and the people run into covered areas.
-SAFE_TOP, SAFE_BOT, SAFE_L, TEXT_R = 190, 1650, 80, 890
-ZONES = [[0, 0, W, 180], [0, 1660, W, H], [905, 1150, W, 1660], [0, 0, 55, H], [W - 55, 0, W, H]]
+SAFE_TOP, SAFE_BOT, SAFE_L, TEXT_R = 255, 1650, 80, 890     # top raised to 255 after the live post: the Reels/Friends header reached y~230
+ZONES = [[0, 0, W, 240], [0, 1660, W, H], [905, 1150, W, 1660], [0, 0, 55, H], [W - 55, 0, W, H]]
 MID = (SAFE_TOP + SAFE_BOT) // 2
 COLS = {"green": GREEN, "red": RED, "orange": ORANGE, "white": WHITE, "ink": INK}
 
@@ -164,6 +164,11 @@ def main():
         if t >= cta_t:
             fr.bg = Image.new("RGBA", (W * S, H * S), (255, 250, 247, 255)); v_cta(fr, t - cta_t, {"lines": spec.get("cta_lines")}, [])
             return fr.img()
+        def region(i): return (SAFE_TOP, MID - BAND // 2 - 14) if i == 0 else (MID + BAND // 2 + 30, SAFE_BOT - (62 if spec.get("note") else 0))
+        def fit_h(i, h):
+            r0, r1 = region(i); nb = len(h["blocks"]); nbig = sum(1 for b in h["blocks"] if b.get("big"))
+            return (r1 - r0 - 72 - 8 * (nb - 1)) / (nb + 0.2 * nbig)
+        bh_all = min([spec.get("block_h", 86)] + [fit_h(i, h) for i, h in enumerate(spec["halves"])])   # same tile size in both halves
         for i, h in enumerate(spec["halves"]):
             r0, r1 = (SAFE_TOP, MID - BAND // 2 - 14) if i == 0 else (MID + BAND // 2 + 30, SAFE_BOT - (62 if spec.get("note") else 0))
             # person on the right; may run into the covered areas (no text there)
@@ -184,7 +189,7 @@ def main():
             # blocks
             bx, bw = SAFE_L, spec.get("block_w", 470); top = r0 + 72; bottom = r1
             nb = len(h["blocks"]); gap = 8; nbig = sum(1 for b in h["blocks"] if b.get("big"))
-            bh = min(spec.get("block_h", 86), (bottom - top - gap * (nb - 1)) / (nb + 0.2 * nbig))
+            bh = bh_all
             yy = top
             for b in h["blocks"]:
                 hh = bh * (1.2 if b.get("big") else 1.0)
