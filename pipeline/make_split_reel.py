@@ -193,12 +193,17 @@ def main():
             yy = top
             for b in h["blocks"]:
                 hh = bh * (1.2 if b.get("big") else 1.0)
-                t_in = cue(b["at"], b.get("delay", 0.0))
+                t_in = cue(b["at"], b.get("delay", 0.0), b.get("word"))
                 block(fr, bx, yy, bw, hh, b, appear(t, t_in, 0.15), t - t_in)
                 yy += hh + gap
         # centre band (full width as a stripe; text inside the safe width)
         fr.rrect([0, MID - BAND // 2, W, MID + BAND // 2], 0, INK, 1)
-        band = spec["band"]; lines = band["lines"] if t < cue(band.get("until", 99)) else band.get("after", band["lines"])
+        band = spec["band"]
+        if band.get("phases"):                    # [{"from": sentence index, "lines": [...]}, ...]: the band changes on cue
+            lines = band["phases"][0]["lines"]
+            for ph_ in band["phases"]:
+                if t >= cue(ph_["from"]): lines = ph_["lines"]
+        else: lines = band["lines"] if t < cue(band.get("until", 99)) else band.get("after", band["lines"])
         size = min(fit(fr, s_, "xb", 52, TEXT_R - SAFE_L) for s_, _ in lines)
         yy = MID - (len(lines) * size * 1.12) / 2 + size * 0.05
         for s_, c in lines:
@@ -224,7 +229,7 @@ def main():
         full = mix_under(full, sr)
     if spec.get("clicks", True):
         tk = click(sr, spec.get("click_gain", 0.06))
-        times = [cue(b["at"], b.get("delay", 0.0)) for h in spec["halves"] for b in h["blocks"]] + \
+        times = [cue(b["at"], b.get("delay", 0.0), b.get("word")) for h in spec["halves"] for b in h["blocks"]] + \
                 [cue(h["badge"]["at"], h["badge"].get("delay", 0.0), h["badge"].get("word")) for h in spec["halves"] if h.get("badge")]
         for tt in times:
             i0 = int(max(tt, 0) * sr)

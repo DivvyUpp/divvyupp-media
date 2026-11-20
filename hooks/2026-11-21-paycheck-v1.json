@@ -1,0 +1,195 @@
+{
+ "id": "2026-11-21-paycheck-v1",
+ "character_voice": "elevenlabs:cjVigY5qzO86Huf0OWal:eleven_v3",
+ "music": true,
+ "speed": 1.12,
+ "max_gap": 0.32,
+ "keep_gap": {
+  "10": 0.75
+ },
+ "sentences": [
+  "[serious] Forty-four percent of people earning over a hundred thousand dollars live paycheck to paycheck.",
+  "Same salary. The day before payday, Maya has two hundred and ten dollars left, plus her savings. Chris has forty.",
+  "Which one are you?",
+  "Both take home eighty-five hundred a month, and pay forty-two hundred in bills.",
+  "Sign one. Maya moves fifteen hundred to savings on payday. Chris saves whatever's left.",
+  "Sign two. Maya knows she can spend ninety-three dollars today. Chris has no idea.",
+  "[pause] But you can't switch sides unless you change one thing.",
+  "Sign three. A four hundred dollar car repair. Maya's daily number adjusts for the week. Chris puts it on the credit card.",
+  "The day before payday, Maya still has two hundred and ten dollars, and her savings. Chris has forty dollars, and nothing saved.",
+  "[emphatic] Same salary. So what's the difference?",
+  "Save first. Then spend what's safe. Try it at divvyupp dot com."
+ ],
+ "band": {
+  "phases": [
+   {
+    "from": 0,
+    "lines": [
+     [
+      "44% earning $100K+",
+      "white"
+     ],
+     [
+      "live paycheck to paycheck.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 2,
+    "lines": [
+     [
+      "Same salary.",
+      "white"
+     ],
+     [
+      "Which one are you?",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 9,
+    "lines": [
+     [
+      "Same salary.",
+      "white"
+     ],
+     [
+      "What's the difference?",
+      "orange"
+     ]
+    ]
+   }
+  ]
+ },
+ "halves": [
+  {
+   "person": "/tmp/claude-0/-home-claude-divvyupp-media/74ed1848-df42-5466-b139-90751a5f3198/scratchpad/runway/maya.png",
+   "tint": [
+    228,
+    243,
+    233
+   ],
+   "tag": "Maya · knows her number",
+   "tag_color": "green",
+   "blocks": [
+    {
+     "label": "Take-home",
+     "value": "$8,500",
+     "sub": "bills −$4,200",
+     "sub_color": "red",
+     "at": 3
+    },
+    {
+     "label": "Saved on payday",
+     "value": "$1,500",
+     "at": 4,
+     "style": "good"
+    },
+    {
+     "label": "Safe to spend today",
+     "value": "$93",
+     "sub": "$650/week",
+     "sub_color": "green",
+     "at": 5
+    },
+    {
+     "label": "Car repair",
+     "value": "−$400",
+     "sub": "week adjusts: $36/day",
+     "sub_color": "green",
+     "at": 7
+    },
+    {
+     "label": "Day before payday",
+     "value": "$210 left + $1,500 saved",
+     "at": 8,
+     "style": "good",
+     "big": true
+    }
+   ],
+   "badge": {
+    "text": "$210 + savings",
+    "color": "green",
+    "at": 1,
+    "word": "Maya"
+   }
+  },
+  {
+   "person": "/tmp/claude-0/-home-claude-divvyupp-media/74ed1848-df42-5466-b139-90751a5f3198/scratchpad/runway/chris.png",
+   "tint": [
+    250,
+    231,
+    227
+   ],
+   "tag": "Chris · paycheck to paycheck",
+   "tag_color": "red",
+   "blocks": [
+    {
+     "label": "Take-home",
+     "value": "$8,500",
+     "sub": "bills −$4,200",
+     "sub_color": "red",
+     "at": 3
+    },
+    {
+     "label": "Savings",
+     "value": "Whatever's left",
+     "sub": "usually $0",
+     "sub_color": "red",
+     "at": 4,
+     "word": "Chris"
+    },
+    {
+     "label": "Safe to spend today",
+     "value": "No idea",
+     "sub": "no daily number",
+     "sub_color": "red",
+     "at": 5,
+     "word": "Chris"
+    },
+    {
+     "label": "Car repair",
+     "value": "On the credit card",
+     "style": "minus",
+     "at": 7,
+     "word": "Chris"
+    },
+    {
+     "label": "Day before payday",
+     "value": "$40 left, $0 saved",
+     "at": 8,
+     "word": "Chris",
+     "style": "bad",
+     "big": true
+    }
+   ],
+   "badge": {
+    "text": "$40 left",
+    "color": "red",
+    "at": 1,
+    "word": "Chris"
+   }
+  }
+ ],
+ "note": {
+  "text": "44%: PYMNTS/LendingClub, 2023. Maya and Chris are examples.",
+  "at": 0
+ },
+ "cta_lines": [
+  [
+   "Save first.",
+   "ink"
+  ],
+  [
+   "Then spend",
+   "ink"
+  ],
+  [
+   "what's safe.",
+   "orange"
+  ]
+ ],
+ "cta_at": 10
+}
