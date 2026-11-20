@@ -1,0 +1,165 @@
+{
+ "id": "2026-11-20-b1",
+ "format": "beat",
+ "character": "c",
+ "character_voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "music": true,
+ "beats": [
+  {
+   "sentences": [
+    {
+     "text": "[curious] Same ten thousand dollars a month."
+    },
+    {
+     "text": "After five years, one couple has ninety thousand dollars saved. The other has twenty-two thousand eight hundred."
+    },
+    {
+     "text": "Which one are you?"
+    }
+   ],
+   "visual": {
+    "type": "title",
+    "lines": [
+     [
+      "Same $10K a month.",
+      "ink"
+     ],
+     [
+      "Which one are you?",
+      "orange"
+     ]
+    ],
+    "chips": [
+     {
+      "label": "Couple A, after 5 years",
+      "value": "$22,800",
+      "color": "red",
+      "at": 1
+     },
+     {
+      "label": "Couple B, after 5 years",
+      "value": "$90,000",
+      "color": "green",
+      "at": 1
+     }
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "On the first, ten thousand lands for both of them. Couple B moves fifteen hundred to savings before anything else."
+    },
+    {
+     "text": "Mid-month, couple A spends as it comes. Couple B spends from a daily number, and when they overspend, tomorrow adjusts."
+    },
+    {
+     "text": "By the twenty-fourth, couple A has two hundred and twelve dollars left. Couple B is on track."
+    },
+    {
+     "text": "This month, couple A saves three hundred and eighty dollars. Couple B saves fifteen hundred."
+    }
+   ],
+   "visual": {
+    "type": "split",
+    "left": "A: spends first, saves what's left",
+    "right": "B: saves first, spends a daily number",
+    "rows": [
+     {
+      "label": "THE 1ST",
+      "left": "$10,000 arrives. Spending starts.",
+      "right": "$10,000 arrives. $1,500 to savings first.",
+      "rmark": "check"
+     },
+     {
+      "label": "MID-MONTH",
+      "left": "Groceries, takeout, an online order. Feels fine.",
+      "right": "A daily number. Big day? Tomorrow adjusts.",
+      "rmark": "check"
+     },
+     {
+      "label": "THE 24TH",
+      "left": "$212 left.",
+      "right": "On track. Savings untouched.",
+      "lmark": "x",
+      "rmark": "check"
+     }
+    ],
+    "foot": {
+     "left": "$380",
+     "right": "$1,500",
+     "label": "saved this month",
+     "at": 3
+    }
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "[emphatic] Same income. Same bills. It's not how much they spend. It's the order."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Same income.",
+      "ink"
+     ],
+     [
+      "Same bills.",
+      "ink"
+     ],
+     [
+      "It's the order.",
+      "orange"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Over five years, that's twenty-two thousand eight hundred, versus ninety thousand."
+    },
+    {
+     "text": "Save first. Then spend a number you know is safe. Which one are you?"
+    }
+   ],
+   "visual": {
+    "type": "title",
+    "lines": [
+     [
+      "After 5 years",
+      "ink"
+     ]
+    ],
+    "chips": [
+     {
+      "label": "Saves 3.8% (US average)",
+      "value": "$22,800",
+      "color": "red",
+      "at": 0
+     },
+     {
+      "label": "Saves 15% first",
+      "value": "$90,000",
+      "color": "green",
+      "at": 0
+     }
+    ],
+    "source": "US personal saving rate 3.8%, Sept 2026 (BEA). No investment growth assumed."
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Save first. Then spend with confidence. Try it at divvyupp dot com."
+    }
+   ],
+   "visual": {
+    "type": "cta"
+   }
+  }
+ ]
+}

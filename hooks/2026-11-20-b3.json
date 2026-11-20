@@ -1,0 +1,106 @@
+{
+ "id": "2026-11-20-b3",
+ "format": "beat",
+ "character": "raccoon_soft3d",
+ "character_voice": "elevenlabs:loY1uopAz31XyhAEhNSa:eleven_v3",
+ "music": true,
+ "voice_prefix": "[excited] Whoa, whoa, whoa. I've seen your bank history! [laughs] Four coffees, two takeouts, AND a quick little online order? On a TUESDAY? [smug] Relax, pal. I'm a raccoon. I know exactly where money disappears to.",
+ "beats": [
+  {
+   "sentences": [
+    {
+     "text": "[excited] Whoa. Fourth takeout this week? [smug] Okay. We need rules."
+    }
+   ],
+   "mood": "unimpressed",
+   "visual": {
+    "type": "title",
+    "lines": [
+     [
+      "Fourth takeout",
+      "ink"
+     ],
+     [
+      "this week?",
+      "ink"
+     ],
+     [
+      "We need rules.",
+      "orange"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Rule one. Savings leaves the day you get paid. Not if there's something left."
+    },
+    {
+     "text": "Rule two. One daily number. Not a forty-line budget."
+    },
+    {
+     "text": "Rule three. Overspent today? Tomorrow pays. Not your savings."
+    },
+    {
+     "text": "[mischievous] And rule four? You're gonna like rule four."
+    }
+   ],
+   "mood": "happy",
+   "visual": {
+    "type": "pairs",
+    "title": "Dollar Bill's rules",
+    "pairs": [
+     {
+      "left": "Savings leaves the day you get paid",
+      "right": "Save if there's something left",
+      "good": "left",
+      "at": 0
+     },
+     {
+      "left": "A 40-line budget",
+      "right": "One daily number",
+      "good": "right",
+      "at": 1
+     },
+     {
+      "left": "Overspent? Tomorrow pays",
+      "right": "Overspent? Dip into savings",
+      "good": "left",
+      "at": 2
+     }
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "[happy] Takeout's allowed. It's in the plan. Just save first."
+    }
+   ],
+   "mood": "happy",
+   "visual": {
+    "type": "pairs",
+    "title": "Rule 4",
+    "pairs": [
+     {
+      "left": "Never order takeout again",
+      "right": "Takeout's in the plan. Save first.",
+      "good": "right",
+      "at": 0
+     }
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Save first. Then spend with confidence. Try it at divvyupp dot com."
+    }
+   ],
+   "visual": {
+    "type": "cta"
+   }
+  }
+ ]
+}

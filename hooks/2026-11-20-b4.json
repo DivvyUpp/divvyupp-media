@@ -1,0 +1,129 @@
+{
+ "id": "2026-11-20-b4",
+ "format": "beat",
+ "character": "e",
+ "character_voice": "elevenlabs:cjVigY5qzO86Huf0OWal:eleven_v3",
+ "music": true,
+ "beats": [
+  {
+   "sentences": [
+    {
+     "text": "[serious] If you're forty and earn a hundred thousand a year, you should have three hundred thousand saved."
+    },
+    {
+     "text": "Here's every age."
+    }
+   ],
+   "visual": {
+    "type": "title",
+    "lines": [
+     [
+      "40 and earning $100K?",
+      "ink"
+     ],
+     [
+      "You should have",
+      "ink"
+     ],
+     [
+      "$300,000 saved.",
+      "orange"
+     ],
+     [
+      "Here's every age.",
+      "ink"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "By thirty: one hundred thousand."
+    },
+    {
+     "text": "By forty: three hundred thousand."
+    },
+    {
+     "text": "By fifty: six hundred thousand."
+    },
+    {
+     "text": "[reassuring] Behind? Most people are. And there's a better way to catch up than earning more."
+    },
+    {
+     "text": "By sixty: eight hundred thousand."
+    },
+    {
+     "text": "And by sixty-seven: a full million."
+    }
+   ],
+   "visual": {
+    "type": "table",
+    "title": "Savings by age \u2022 $100K salary",
+    "rows": [
+     {
+      "label": "30",
+      "value": "$100,000",
+      "at": 0
+     },
+     {
+      "label": "40",
+      "value": "$300,000",
+      "at": 1
+     },
+     {
+      "label": "50",
+      "value": "$600,000",
+      "at": 2
+     },
+     {
+      "label": "60",
+      "value": "$800,000",
+      "at": 4
+     },
+     {
+      "label": "67",
+      "value": "$1,000,000",
+      "at": 5,
+      "check": true
+     }
+    ],
+    "source": "Fidelity guideline: 1x salary by 30, 3x by 40, 6x by 50, 8x by 60, 10x by 67"
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "[warm] The better way: move your savings out the day you get paid. Before anything else."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Move savings out",
+      "ink"
+     ],
+     [
+      "the day you get paid.",
+      "orange"
+     ],
+     [
+      "Before anything else.",
+      "ink"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Save first. Then spend with confidence. Try it at divvyupp dot com."
+    }
+   ],
+   "visual": {
+    "type": "cta"
+   }
+  }
+ ]
+}

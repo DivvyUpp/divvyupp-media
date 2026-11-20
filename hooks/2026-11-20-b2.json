@@ -1,0 +1,108 @@
+{
+ "id": "2026-11-20-b2",
+ "format": "beat",
+ "character": "e",
+ "character_voice": "elevenlabs:cjVigY5qzO86Huf0OWal:eleven_v3",
+ "music": true,
+ "beats": [
+  {
+   "sentences": [
+    {
+     "text": "[serious] Forty-four percent of people earning over a hundred thousand dollars live paycheck to paycheck."
+    },
+    {
+     "text": "Which one are you?"
+    }
+   ],
+   "visual": {
+    "type": "title",
+    "small": "Earning over $100K?",
+    "lines": [
+     [
+      "44% live paycheck",
+      "ink"
+     ],
+     [
+      "to paycheck.",
+      "ink"
+     ],
+     [
+      "Which one are you?",
+      "orange"
+     ]
+    ],
+    "source": "PYMNTS / LendingClub, Sept 2023"
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Sign one: your balance is lowest the day before payday. The other side knows what's safe to spend today."
+    },
+    {
+     "text": "Sign two: savings is whatever's left. The other side moves savings on payday."
+    },
+    {
+     "text": "[pause] But you can't switch sides unless you change one thing."
+    },
+    {
+     "text": "Sign three: a four hundred dollar surprise goes on the credit card. On the other side, it just lowers this week's number."
+    }
+   ],
+   "visual": {
+    "type": "pairs",
+    "title": "Which side are you on?",
+    "pairs": [
+     {
+      "left": "Balance lowest the day before payday",
+      "right": "You know today's safe-to-spend",
+      "good": "right",
+      "at": 0
+     },
+     {
+      "left": "Savings is whatever's left",
+      "right": "Savings leaves on payday",
+      "good": "right",
+      "at": 1
+     },
+     {
+      "left": "A $400 surprise goes on the card",
+      "right": "A surprise just lowers this week's number",
+      "good": "right",
+      "at": 3
+     }
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "[warm] The one thing: move savings first. Then spend from one daily number."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Move savings first.",
+      "ink"
+     ],
+     [
+      "Then spend from one daily number.",
+      "orange"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Save first. Then spend with confidence. Try it at divvyupp dot com."
+    }
+   ],
+   "visual": {
+    "type": "cta"
+   }
+  }
+ ]
+}
