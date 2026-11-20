@@ -1,4 +1,73 @@
-# Reel ideas v3 (2026-11-20): hooks picked by a cold review
+# Reel ideas v4 (2026-11-20): Srini's edits on the v3 picks
+
+Srini's calls on v3: A2's contrast (same income, very different savings) is stronger than A3, which has no contrast;
+say income per month, since "$212 on the 24th" is monthly; B4 gives the answer away, B3 is better; Thanksgiving is
+complicated and few people care; B1 and A8 are good. Two of the four become split-screen comparisons with ✓ and ✗,
+which also makes the payoff visible as it builds.
+
+## Sunday's four Reels
+
+### 1. "Same $10K a month" (couple money, split screen)
+- **Hook (0–2 s, on screen and voiced):** "Same $10K a month. After 5 years, one couple has $90,000 saved. The other
+  has $22,800. Which one are you?"
+- **What they stay for:** which side am I on, and what's the difference?
+- **Screen:** two columns, same couple drawing, same $10K arriving on the 1st. A calendar runs down both sides.
+  - Left, "Spends first, saves what's left": the balance drains through the month; the 24th shows $212; month-end
+    savings $380 (3.8%, the average household).
+  - Right, "Saves first, then a daily number": $1,500 moves out on the 1st (15%); a daily safe-to-spend number;
+    one overspend day, tomorrow adjusts; the 24th still on track; savings kept.
+- **Rehook (R2):** "Same income. Same bills. It's not how much they spend. It's the order."
+- **Payoff:** the five-year totals land under each column, $22,800 vs $90,000. "Save first. Then spend a number
+  you know is safe. Which one are you?"
+- Maths: $10K × 3.8% = $380 a month → $22,800 in 5 years; $10K × 15% = $1,500 → $90,000. No growth assumed.
+
+### 2. "44% of six-figure earners" (how do you compare)
+- **Hook:** "44% of people earning over $100K live paycheck to paycheck. Which one are you?" Source on screen:
+  PYMNTS/LendingClub, Sept 2023.
+- **What they stay for:** am I one of them?
+- **Screen:** split, three signs, each a ✗ on the left and a ✓ on the right:
+  - ✗ "Your balance is lowest the day before payday" / ✓ "You know today's safe-to-spend"
+  - ✗ "Savings is whatever's left" / ✓ "Savings left on payday"
+  - ✗ "A $400 surprise goes on the card" / ✓ "A surprise just lowers this week's number"
+- **Rehook (R5), after the second sign:** "But you can't move sides unless you change one thing."
+- **Payoff:** "Move savings first, then spend from one daily number. That's the side you want."
+
+### 3. "Fourth takeout this week?" (rules, Dollar Bill, ✓ / ✗ comparisons)
+- **Hook:** "Whoa. Fourth takeout this week? Okay. We need rules."
+- **What they stay for:** the rules.
+- **Screen:** each rule is a pair, one ✗ and one ✓, and the ✓ swaps sides each time so the eye keeps moving:
+  1. ✓ "Savings leaves the day you get paid" | ✗ "Save if there's something left"
+  2. ✗ "A 40-line budget" | ✓ "One daily number"
+  3. ✓ "Overspent? Tomorrow pays" | ✗ "Overspent? Dip into savings"
+- **Rehook:** "And rule four? You're gonna like rule four."
+- **Payoff:** ✗ "Never order takeout again" | ✓ "Takeout's in the plan. Save first."
+
+### 4. "Savings by age" (how do you compare, Srini's 722-view format)
+- **Hook:** "If you're 40 and earn $100K, you should have $300,000 saved. Here's every age."
+- **What they stay for:** their own age.
+- **Screen:** the table from Srini's TikTok, rows revealed one at a time (Fidelity guideline: 1x salary by 30, 3x by
+  40, 6x by 50, 8x by 60, 10x by 67).
+- **Rehook (R4), after the 50 row:** "Behind? Most people are. There's a better way to catch up than earning more."
+- **Payoff:** the last row, then "Move savings out the day you get paid, before anything else."
+
+### Next: Monday
+- A8 "Save first or save what's left? On $10K a month, the wrong one costs you $67,200 in 5 years." ($90,000 −
+  $22,800)
+- Money news: no hook good enough yet. The Create run brings 6–8 news hooks through the review on the day.
+
+## Why the reviewers picked A3 and B4 (and why Srini's call stands)
+Both reviewers said A3 was "exactly our life" ("a specific balance, a specific date and that where-did-it-go
+feeling") and B4 was something "I can check tonight in 30 seconds". Srini's objections are fair: A3 has no
+contrast, and B4 answers its own question. The reviewers are a stand-in for real viewers; the 3-second hold on the
+posted Reels decides.
+
+## New pipeline work for these
+Split screen with two columns, a running calendar and balance, ✓ / ✗ pairs, and a table that reveals one row at a
+time. Each will need a `--check` still for Srini before the first full render.
+
+---
+
+# v3 (superseded): hooks picked by a cold review
 
 **What changed from v2:** Srini found the v2 hooks weak. I wrote 23 hook lines across the four formats and had two
 independent reviewers judge each one STOP or SCROLL, in character as our viewer (two-income parents scrolling at
