@@ -90,8 +90,8 @@ def main():
         for i, h in enumerate(spec["halves"]):
             r0, r1 = (SAFE_TOP, MID - BAND // 2 - 14) if i == 0 else (MID + BAND // 2 + 14, SAFE_BOT - (62 if spec.get("note") else 0))
             # person on the right; may run into the covered areas (no text there)
-            if i == 0: pb, ph = MID - BAND // 2, MID - BAND // 2 - 40
-            else: pb, ph = H, min(880, H - (MID + BAND // 2) - 20)
+            if i == 0: pb, ph = MID - BAND // 2, MID - BAND // 2 - SAFE_TOP - 80    # head starts below the tag/badge row
+            else: pb, ph = H, min(790, H - (MID + BAND // 2) - 20)
             p = person(h["person"], int(ph * S * (1 + 0.03 * t / total)))
             fr.layer.alpha_composite(p, (max(W * S - p.width + int(40 * S), int(W * 0.46 * S)), pb * S - p.height))
             # tag + result badge on one row at the top of the safe region
@@ -104,9 +104,9 @@ def main():
                 fr.rrect([bx0, r0, bx0 + bwid + 40, r0 + 58], 29, WHITE, k)
                 fr.text((bx0 + 20, r0 + 29), bd["text"], bf, COLS.get(bd["color"], INK), k, anchor="lm", dy=0)
             # blocks
-            bx, bw = SAFE_L, 500; top = r0 + 72; bottom = r1
+            bx, bw = SAFE_L, spec.get("block_w", 470); top = r0 + 72; bottom = r1
             nb = len(h["blocks"]); gap = 8; nbig = sum(1 for b in h["blocks"] if b.get("big"))
-            bh = min(110, (bottom - top - gap * (nb - 1)) / (nb + 0.2 * nbig))
+            bh = min(spec.get("block_h", 86), (bottom - top - gap * (nb - 1)) / (nb + 0.2 * nbig))
             yy = top
             for b in h["blocks"]:
                 hh = bh * (1.2 if b.get("big") else 1.0)
