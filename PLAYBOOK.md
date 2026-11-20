@@ -93,9 +93,24 @@ goal is people who go to divvyupp.com and sign up: **free beta users now, paying
 | Bridge | Instagram visits to divvyupp.com, Get started clicks | funnel export: `instagram.days[]` |
 | Top of funnel | Views per Reel, 3-second hold, watch time, shares, saves, followers | Windsor |
 
-Engagement milestones (agreed 2026-11-20): **first Reel past 1,000 views → 1,000 views every Reel and one past 10,000
-→ 100,000 followers.** Every hypothesis card names which layer it moves. A bet that wins views but sends no one to the
-site is only half a win: say so in the postmortem.
+Engagement milestones (agreed 2026-11-20): **200 followers (current) → first Reel past 1,000 views → 1,000 views every
+Reel and one past 10,000 → 100,000 followers.** Every hypothesis card names which layer it moves. A bet that wins views
+but sends no one to the site is only half a win: say so in the postmortem.
+
+### Current milestone: 200 followers (set by Srini 2026-11-20)
+Why 200: it is the reported Trial Reels minimum for a professional account (research/2026-11-20.md), and followers
+mean strangers liked enough to come back. We get there through the three signals Instagram names for Reels (Adam
+Mosseri, Jan 2025): **watch time, likes per reach, sends per reach** (sends count most with non-followers).
+Every bet names which of the three it is built to move. Scorecard per Reel at 72h, from Windsor:
+
+| Signal | Windsor field(s) | Read as |
+|---|---|---|
+| Watch time | `media_reel_avg_watch_time` (ms), skip rate | avg watch ÷ video length, and skip % |
+| Likes | `media_like_count` ÷ `media_reach` | likes per 100 reached |
+| Sends | `media_shares` ÷ `media_reach` | shares per 100 reached (Instagram counts DM sends here) |
+| Follows | `followers_count`, read daily into `followers.csv` | change per day; per-Reel follows aren't reported |
+
+Compare each Reel with our own median, never outside benchmarks; under 100 views the read is inconclusive.
 
 ## The daily loop (replaces the weekly batch, agreed 2026-11-20)
 Three scheduled runs a day. Each reads this file, then its own run file.

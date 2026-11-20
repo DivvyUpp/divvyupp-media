@@ -27,10 +27,12 @@ carry on), and the last 3 files in `hypotheses/`.
 ## 2. Pull the data
 1. Windsor `get_data` (connector `instagram`, account `17841422626862357`; fields from `get_fields`):
    `media_id, media_views, media_reach, media_reel_skip_rate, media_reel_avg_watch_time, media_shares,
-   media_saved, media_reel_total_interactions` for every Reel posted in the last 8 days. Also `followers_count`
-   (today's total) and account `views_non_followers` for yesterday.
+   media_saved, media_like_count, media_reel_total_interactions` for every Reel posted in the last 8 days. Also
+   `followers_count` (today's total) and account `views_non_followers` for yesterday.
 2. Write into `experiment-log.csv`: `read_14h` for yesterday's Reels and `read_72h` for Reels posted 3 days ago,
-   as `views/skip%/avg_watch_s/shares/saves`. The stats columns hold the latest read. Avg watch is in seconds.
+   as `views/skip%/avg_watch_s/shares/saves/likes`. The stats columns hold the latest read. Avg watch is in seconds.
+   Append today's `date,followers_count` to `followers.csv`. Work out the 200-follower scorecard in `PLAYBOOK.md`
+   (avg watch ÷ length, likes per 100 reached, shares per 100 reached) for each Reel read today.
 3. Request yesterday's funnel: trigger `funnel-weekly.yml` with `from` = `to` = yesterday, wait, pull, and read
    `funnel/custom-<yesterday>_<yesterday>.json` (`instagram.days[]`: `ig_visits`, `get_started_clicked`, `signed_up`,
    `bank_linked`). Write them on the rows posted that day. If it fails, say "funnel unavailable" and carry on.
