@@ -50,20 +50,63 @@ def person(path, height):
         _P[k] = im.resize((int(im.width * height / im.height), height), Image.LANCZOS)
     return _P[k]
 
-def block(fr, x, y, w, h, b, k):
+import re as _re, math as _math
+def _back(x):                          # ease-out-back: quick overshoot, then settle
+    x = max(0.0, min(1.0, x)); c = 1.9; return 1 + (c + 1) * (x - 1) ** 3 + c * (x - 1) ** 2
+
+def _count(value, x):
+    """Count a plain money value ("$1,500", "−$5,500") up from 0 while x goes 0..1; other text is returned as is."""
+    m = _re.fullmatch(r"(−?\$)([\d,]+)", value)
+    if not m or x >= 1: return value
+    n = int(m.group(2).replace(",", "")); return f"{m.group(1)}{round(n * (1 - (1 - max(x, 0)) ** 3)):,}"
+
+def block(fr, x, y, w, h, b, k, age=9.0, pop=True):
+    """k = opacity 0..1; age = seconds since the tile appeared (drives the pop, count-up and result pulse)."""
     if k <= 0: return
+    sc = (0.82 + 0.18 * _back(age / 0.32)) if pop else 1.0
+    if b.get("big") and 0.32 < age < 0.95: sc *= 1 + 0.05 * _math.sin(_math.pi * (age - 0.32) / 0.63)   # one pulse on results
+    cx, cy = x + w / 2, y + h / 2; w2, h2 = w * sc, h * sc; x, y = cx - w2 / 2, cy - h2 / 2; w, h = w2, h2
     st = b.get("style", "plain")
     fill = {"good": GREEN, "bad": RED}.get(st, WHITE)
     txt = WHITE if st in ("good", "bad") else INK
-    fr.rrect([x, y, x + w, y + h], 24, fill, k)
+    fr.rrect([x, y, x + w, y + h], 24 * sc, fill, k)
     lab_f = font("b", min(26, h * 0.25)); val_size = min(58, h * (0.40 if not b.get("big") else 0.46))
-    fr.text((x + 22, y + h * 0.10), b["label"].upper(), lab_f, (WHITE if st in ("good", "bad") else GREY), k, dy=8)
+    fr.text((x + 22 * sc, y + h * 0.10), b["label"].upper(), lab_f, (WHITE if st in ("good", "bad") else GREY), k, dy=0)
     vcol = txt if st != "minus" else RED
-    fr.text((x + 22, y + h - h * 0.12), b["value"], font("xb", fit(fr, b["value"], "xb", val_size, w - 48)), vcol, k, anchor="ld", dy=8)
-    if b.get("mark"): mark(fr, x + w - 40, y + h / 2, 22, b["mark"], k)
+    val = _count(b["value"], (age - 0.05) / 0.6)
+    fr.text((x + 22 * sc, y + h - h * 0.12), val, font("xb", fit(fr, b["value"], "xb", val_size, w - 48)), vcol, k, anchor="ld", dy=0)
+    if b.get("mark"): mark(fr, x + w - 40, y + h / 2, 22 * sc, b["mark"], k)
     if b.get("sub"):                     # short right-aligned note on the value row, e.g. "$100/day · $700/week"
-        sc = COLS.get(b.get("sub_color", "green"), GREEN)
-        fr.text((x + w - 22, y + h - 18), b["sub"], font("xb", fit(fr, b["sub"], "xb", min(30, h * 0.3), w * 0.55)), sc, k, anchor="rd", dy=8)
+        scol = COLS.get(b.get("sub_color", "green"), GREEN)
+        fr.text((x + w - 22 * sc, y + h - 18 * sc), b["sub"], font("xb", fit(fr, b["sub"], "xb", min(30, h * 0.3), w * 0.55)), scol, k, anchor="rd", dy=0)
+
+def tighten(audio, sr, ch, st, en, starts, max_gap=0.32, speed=1.0):
+    """Shorten pauses between sentences to max_gap and speed the take up (pitch kept, ffmpeg atempo); the character
+    timings are remapped so the visuals stay in sync. Returns audio, st, en."""
+    cuts = []
+    def spoken(j): return ch[j].isalnum()
+    for k in range(1, len(starts)):
+        a = max((en[j] for j in range(starts[k - 1], starts[k]) if spoken(j)), default=None)
+        b = next((st[j] for j in range(starts[k], len(ch)) if spoken(j)), None)
+        if a is not None and b is not None and b - a > max_gap: cuts.append((a + max_gap / 2, b - max_gap / 2))
+    def remap(t): return t - sum(min(max(t - c0, 0), c1 - c0) for c0, c1 in cuts)
+    keep, prev = [], 0
+    for c0, c1 in cuts: keep.append(audio[int(prev * sr):int(c0 * sr)]); prev = c1
+    keep.append(audio[int(prev * sr):]); audio = np.concatenate(keep)
+    st = [remap(t) for t in st]; en = [remap(t) for t in en]
+    if speed != 1.0:
+        import soundfile as sf, tempfile
+        d = tempfile.mkdtemp(); a_, b_ = os.path.join(d, "a.wav"), os.path.join(d, "b.wav"); sf.write(a_, audio, sr)
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", a_, "-filter:a", f"atempo={speed}", b_], check=True)
+        audio, _ = sf.read(b_); st = [t / speed for t in st]; en = [t / speed for t in en]
+    return audio, st, en
+
+def click(sr, gain=0.06):
+    """A very soft, short 'tick' for a tile landing: a damped 1.6 kHz tone plus a tiny noise transient."""
+    n = int(0.05 * sr); t = np.arange(n) / sr
+    tone = np.sin(2 * np.pi * 1600 * t) * np.exp(-t / 0.012)
+    noise = np.random.default_rng(3).normal(0, 1, n) * np.exp(-t / 0.003) * 0.3
+    return (tone + noise) * gain
 
 def main():
     import soundfile as sf
@@ -71,6 +114,8 @@ def main():
     tmp = os.path.join(CACHE, "tmp_" + rid); os.makedirs(tmp, exist_ok=True)
     spec["beats"] = [{"sentences": [{"text": s} for s in spec["sentences"]]}]
     sents, starts, (ch, st, en), audio, sr = one_take(spec, tmp)
+    if spec.get("speed", 1.0) != 1.0 or spec.get("max_gap"):
+        audio, st, en = tighten(audio, sr, ch, st, en, starts, spec.get("max_gap", 0.32), spec.get("speed", 1.0))
     def first_spoken(i):
         tag = False
         for j in range(i, len(ch)):
@@ -99,10 +144,13 @@ def main():
             fr.rrect([SAFE_L, r0, SAFE_L + tw + 44, r0 + 58], 29, col, 1); fr.text((SAFE_L + 22, r0 + 29), h["tag"], tf, WHITE, 1, anchor="lm", dy=0)
             bd = h.get("badge")
             if bd:
-                k = appear(t, cue(bd["at"], bd.get("delay", 0.0)), 0.4); bx0 = SAFE_L + tw + 64
-                bf = font("xb", fit(fr, bd["text"], "xb", 36, TEXT_R - bx0 - 40)); bwid = fr.tl(bd["text"], bf)
-                fr.rrect([bx0, r0, bx0 + bwid + 40, r0 + 58], 29, WHITE, k)
-                fr.text((bx0 + 20, r0 + 29), bd["text"], bf, COLS.get(bd["color"], INK), k, anchor="lm", dy=0)
+                t_in = cue(bd["at"], bd.get("delay", 0.0)); k = appear(t, t_in, 0.15); bx0 = SAFE_L + tw + 64
+                age = t - t_in; sc = 0.82 + 0.18 * _back(age / 0.32)
+                if 0.32 < age < 0.95: sc *= 1 + 0.06 * _math.sin(_math.pi * (age - 0.32) / 0.63)
+                bf = font("xb", fit(fr, bd["text"], "xb", 36, TEXT_R - bx0 - 40) * sc); bwid = fr.tl(bd["text"], bf)
+                bw0 = fr.tl(bd["text"], font("xb", fit(fr, bd["text"], "xb", 36, TEXT_R - bx0 - 40))) + 40; cx = bx0 + bw0 / 2
+                fr.rrect([cx - (bwid + 40) / 2, r0 + 29 - 29 * sc, cx + (bwid + 40) / 2, r0 + 29 + 29 * sc], 29 * sc, WHITE, k)
+                fr.text((cx, r0 + 29), bd["text"], bf, COLS.get(bd["color"], INK), k, anchor="mm", dy=0)
             # blocks
             bx, bw = SAFE_L, spec.get("block_w", 470); top = r0 + 72; bottom = r1
             nb = len(h["blocks"]); gap = 8; nbig = sum(1 for b in h["blocks"] if b.get("big"))
@@ -110,7 +158,8 @@ def main():
             yy = top
             for b in h["blocks"]:
                 hh = bh * (1.2 if b.get("big") else 1.0)
-                block(fr, bx, yy, bw, hh, b, appear(t, cue(b["at"], b.get("delay", 0.0)), 0.35))
+                t_in = cue(b["at"], b.get("delay", 0.0))
+                block(fr, bx, yy, bw, hh, b, appear(t, t_in, 0.15), t - t_in)
                 yy += hh + gap
         # centre band (full width as a stripe; text inside the safe width)
         fr.rrect([0, MID - BAND // 2, W, MID + BAND // 2], 0, INK, 1)
@@ -121,7 +170,6 @@ def main():
             fr.text((W / 2, yy), s_, font("xb", size), COLS.get(c, WHITE), 1, anchor="ma", dy=0); yy += size * 1.12
         nt = spec.get("note")
         if nt:
-            from make_beat_reel import wrap
             from make_beat_reel import wrap
             for j, l in enumerate(wrap(fr, nt["text"], "b", 22, 500)[:2]):
                 fr.text((SAFE_L, SAFE_BOT - 54 + j * 28), l, font("b", 22), INK, appear(t, cue(nt["at"])), dy=0)
@@ -139,6 +187,13 @@ def main():
     if spec.get("music", True):
         from music import mix_under
         full = mix_under(full, sr)
+    if spec.get("clicks", True):
+        tk = click(sr, spec.get("click_gain", 0.06))
+        times = [cue(b["at"], b.get("delay", 0.0)) for h in spec["halves"] for b in h["blocks"]] + \
+                [cue(h["badge"]["at"], h["badge"].get("delay", 0.0)) for h in spec["halves"] if h.get("badge")]
+        for tt in times:
+            i0 = int(max(tt, 0) * sr)
+            if i0 < len(full): full[i0:i0 + len(tk)] += tk[:len(full) - i0]
     wav = os.path.join(tmp, "full.wav"); sf.write(wav, full, sr); vtmp = os.path.join(tmp, "v.mp4")
     pr = subprocess.Popen(["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-",
                            "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-pix_fmt", "yuv420p", vtmp], stdin=subprocess.PIPE)
