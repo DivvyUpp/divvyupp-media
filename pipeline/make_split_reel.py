@@ -85,7 +85,7 @@ def main():
     def draw(f):
         t = f / FPS; fr = Frame(bg, t, total); fr.g = min(1.0, (total - t) / 0.35)
         if t >= cta_t:
-            fr.bg = Image.new("RGBA", (W * S, H * S), (255, 250, 247, 255)); v_cta(fr, t - cta_t, {}, [])
+            fr.bg = Image.new("RGBA", (W * S, H * S), (255, 250, 247, 255)); v_cta(fr, t - cta_t, {"lines": spec.get("cta_lines")}, [])
             return fr.img()
         for i, h in enumerate(spec["halves"]):
             r0, r1 = (SAFE_TOP, MID - BAND // 2 - 14) if i == 0 else (MID + BAND // 2 + 14, SAFE_BOT - (62 if spec.get("note") else 0))

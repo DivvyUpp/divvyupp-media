@@ -140,7 +140,8 @@ def v_card(fr, t, v, cues, inst=False):
 
 def v_cta(fr, t, v, cues, inst=False):
     logo(fr, W / 2, 420, 120, appear(t, 0))
-    for i, (s, c) in enumerate([("Save first.", INK), ("Then spend with", INK), ("confidence.", ORANGE)]):
+    lines = [(s_, COLS.get(c_, INK)) for s_, c_ in v["lines"]] if v.get("lines") else [("Save first.", INK), ("Then spend with", INK), ("confidence.", ORANGE)]
+    for i, (s, c) in enumerate(lines):
         fr.text((W / 2, 640 + i * 110), s, font("xb", 96), c, appear(t, 0.2 + i * 0.25), anchor="ma")
     f = font("xb", 54); tw = fr.tl("divvyupp.com", f); k = appear(t, 1.0)
     fr.rrect([W / 2 - tw / 2 - 50, 1040, W / 2 + tw / 2 + 50, 1150], 55, ORANGE, k)
