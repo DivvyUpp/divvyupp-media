@@ -24,10 +24,12 @@ from make_explainer import one_take
 from make_beat_reel import v_cta, fit, mark, GREEN, RED
 
 HALF = H // 2; BAND = 130
-# Instagram Reels UI covers the top ~250 px (Reels header, camera), the bottom ~420 px (username, caption, audio) and a
-# ~150 px button rail on the right from about y=1000 down. All text and blocks stay inside this box; only background
-# and the people run into the covered areas.
-SAFE_TOP, SAFE_BOT, SAFE_L, TEXT_R = 260, H - 420, 60, W - 170
+# Instagram Reels covered areas, measured on Srini's iPhone screenshot (2026-11-20, 1320x2868): the 9:16 video is
+# scaled to fill the height, so ~55 px is cropped off each side; status bar/Reels header cover the top ~180 px;
+# username + caption + "posts tagged" cover y>=1660 (full width); the like/comment/repost/send rail covers x>=905 from
+# y~1150 down. All text and blocks stay inside; only background and the people run into covered areas.
+SAFE_TOP, SAFE_BOT, SAFE_L, TEXT_R = 190, 1650, 80, 890
+ZONES = [[0, 0, W, 180], [0, 1660, W, H], [905, 1150, W, 1660], [0, 0, 55, H], [W - 55, 0, W, H]]
 MID = (SAFE_TOP + SAFE_BOT) // 2
 COLS = {"green": GREEN, "red": RED, "orange": ORANGE, "white": WHITE, "ink": INK}
 
@@ -129,7 +131,7 @@ def main():
             if tt < total and "--zones" in sys.argv:
                 from PIL import ImageDraw
                 im = draw(int(tt * FPS)).convert("RGBA"); ov = Image.new("RGBA", im.size, (0, 0, 0, 0)); d = ImageDraw.Draw(ov)
-                for r in ([0, 0, W, 250], [0, H - 420, W, H], [W - 150, 1000, W, H - 420]): d.rectangle(r, fill=(255, 0, 0, 80))
+                for r in ZONES: d.rectangle(r, fill=(255, 0, 0, 80))
                 Image.alpha_composite(im, ov).convert("RGB").save(os.path.join(ROOT, "reels", f"{rid}_zones_{j}.jpg"), quality=85)
             if tt < total: draw(int(tt * FPS)).save(os.path.join(ROOT, "reels", f"{rid}_check_{j}.jpg"), quality=85)
         print("check frames written"); return

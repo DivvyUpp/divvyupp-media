@@ -165,8 +165,9 @@ Start from this list. Research may propose changes; Create applies a change only
 6. Read aloud, it has rhythm. Stress words are marked for the voice.
 7. It does not repeat the previous 5 Reels' example, numbers or payoff.
 8. Every figure is real and checked. Guarantee wording as agreed. No competitor names.
-10. **Instagram safe zone (Srini, 2026-11-20).** No text, number or block in the top 250 px, the bottom 420 px, or the
-   right 150 px from y=1000 down (Reels header, caption/username/audio, button rail). Backgrounds and people may run
+10. **Instagram safe zone (Srini, 2026-11-20).** Measured on Srini's iPhone (2026-11-20): no text, number or block in
+   the top 180 px, the bottom 260 px (from y=1660), the right rail (x>=905 from y=1150 down), or 55 px at each side (cropped
+   on tall phones). Backgrounds and people may run
    there. Check with `make_split_reel.py --check --zones` (red = covered) before sending a Reel for review.
 9. **Hook and payoff (Srini, 2026-11-20).** Write down four things before the script: the hook (0–2 s, one specific
    question, same words on screen and in the voice), what the viewer stays for (that question in one line), a
