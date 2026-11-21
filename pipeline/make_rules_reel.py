@@ -39,6 +39,33 @@ def card(w, h, text, ok, size):
         mark(f, w - 44, h / 2, 24, "check" if ok else "x", 1)
     return sprite(("card", round(w), round(h), text, ok, round(size)), w, h, paint)
 
+_IMG = {}
+def prop(path, h):
+    k = (path, h)
+    if k not in _IMG:
+        im = Image.open(path if os.path.isabs(path) else os.path.join(ROOT, path)).convert("RGBA")
+        bb = im.getbbox(); im = im.crop(bb) if bb else im
+        _IMG[k] = im.resize((int(im.width * h * S / im.height), int(h * S)), Image.LANCZOS)
+    return _IMG[k]
+
+TEAL = (22, 140, 130)
+def notif(w, h, text, stage, n, sub):
+    """A generic delivery notification (our own design, no third-party branding): icon, 'Delivery · now', the
+    message, and an n-step progress tracker with `stage` steps filled."""
+    def paint(f):
+        f.rrect([0, 0, w, h], 30, WHITE, 1)
+        f.rrect([22, 22, 86, 86], 18, TEAL, 1)                                   # app icon: a simple bag glyph
+        f.rrect([38, 46, 70, 74], 5, WHITE, 1); f.line([(46, 46), (46, 38), (62, 38), (62, 46)], WHITE + (255,), 4)
+        f.text((104, 22), sub, font("b", 24), GREY, 1, dy=0)
+        f.text((104, 52), text, font("xb", fit(f, text, "xb", 36, w - 130)), INK, 1, dy=0)
+        x0, x1, yy = 104, w - 40, h - 30
+        f.line([(x0, yy), (x1, yy)], (225, 220, 216, 255), 6)
+        if stage > 1: f.line([(x0, yy), (x0 + (x1 - x0) * (stage - 1) / (n - 1), yy)], TEAL + (255,), 6)
+        for i in range(n):
+            cx = x0 + (x1 - x0) * i / (n - 1); r = 11 if i < stage else 8
+            f.ellipse([cx - r, yy - r, cx + r, yy + r], (TEAL if i < stage else (225, 220, 216)) + (255,))
+    return sprite(("notif", round(w), round(h), text, stage, n, sub), w, h, paint)
+
 def fit_size(fr, texts, w, h, start=46):
     """Largest font size at which every card's text fits in two lines."""
     size = start
@@ -91,23 +118,55 @@ def main():
             size = fit(fr, header, "xb", 64, W - 2 * SAFE_L)
             fr.text((W / 2, SAFE_TOP + 40), header, font("xb", size), INK, 1, anchor="ma", dy=0)
         # rule pairs: the good way always on the left, the bad way always on the right
+        PT = spec.get("pairs_top", PAIRS_TOP)
         prs = spec.get("pairs", []); first = min((cue(p["at"], p.get("delay", 0.0)) for p in prs), default=total)
         if prs and not title and t >= first:
             cw = (PAIRS_R - SAFE_L - 24) / 2; lab_h = 0; gap = 18
-            rh = min(160, (PAIRS_BOT - PAIRS_TOP - 70 - len(prs) * (lab_h + gap)) / len(prs))
+            rh = min(160, (PAIRS_BOT - PT - 70 - len(prs) * (lab_h + gap)) / len(prs))
             fs = fit_size(fr, [x for p in prs for x in (p["good_text"], p["bad_text"])], cw, rh)
             hk = appear(t, first - 0.1, 0.25)
             for side, txt, col in ((0, "DO THIS", GREEN), (1, "NOT THIS", RED)):
                 x = SAFE_L + side * (cw + 24)
-                fr.text((x + cw / 2, PAIRS_TOP + 14), txt, font("xb", 34), col, hk, anchor="ma", dy=0)
+                fr.text((x + cw / 2, PT + 14), txt, font("xb", 34), col, hk, anchor="ma", dy=0)
             for j, p in enumerate(prs):
                 t_in = cue(p["at"], p.get("delay", 0.0))
                 if t < t_in: continue
-                y = PAIRS_TOP + 70 + j * (rh + lab_h + gap); age = t - t_in
+                y = PT + 70 + j * (rh + lab_h + gap); age = t - t_in
                 for side, ok, txt in ((0, True, p["good_text"]), (1, False, p["bad_text"])):
                     x = SAFE_L + side * (cw + 24); a2 = age - (0.0 if ok else 0.18)    # ✓ first, then ✗
                     if a2 < 0: continue
                     place(fr, card(cw, rh, txt, ok, fs), x + cw / 2, y + lab_h + rh / 2, pop_scale(a2, False), appear(t, t_in + (0 if ok else 0.18), 0.12))
+        tr = spec.get("tracker")
+        if tr and not title:
+            steps = [st_ for st_ in tr["steps"] if t >= cue(st_["at"], st_.get("delay", 0.0))]
+            nw, nh, top = W - 2 * SAFE_L, 150, tr.get("y", SAFE_TOP + 110)
+            stack = list(enumerate(reversed(steps[-3:])))
+            for back, st_ in reversed(stack):                                    # draw the oldest first so the newest sits on top
+                idx = steps.index(st_) + 1; t_in = cue(st_["at"], st_.get("delay", 0.0)); age = t - t_in
+                sc = (pop_scale(age, False) if back == 0 else 1.0) * (1 - 0.05 * back)
+                yy = top + back * 16 + (0 if back else -30 * (1 - min(1, age / 0.3)))
+                im = notif(nw, nh, st_["text"], idx, len(tr["steps"]), tr.get("sub", "Delivery · now")) if back == 0 else \
+                     sprite(("peek", nw, nh), nw, nh, lambda f_: f_.rrect([0, 0, nw, nh], 30, (246, 240, 236), 1))   # older ones: plain edges
+                if back: im = im.copy(); im.putalpha(im.split()[3].point(lambda v: int(v * (0.85 - 0.25 * back))))
+                place(fr, im, W / 2, yy + nh / 2 + back * 6, sc, appear(t, t_in, 0.12) if back == 0 else 1)
+        for fl in spec.get("fly", []):                                           # a prop zipping across the screen
+            t0 = cue(fl["at"], fl.get("delay", 0.0)); dur = fl.get("dur", 1.4)
+            if t0 <= t <= t0 + dur:
+                im = prop(fl["img"], fl.get("h", 260)); x = (t - t0) / dur
+                x = x * x * (3 - 2 * x)                                          # ease in and out
+                span = W + im.width / S
+                cx = (W + im.width / S / 2 - span * x) if fl.get("from", "right") == "right" else (-im.width / S / 2 + span * x)
+                bob = 6 * np.sin((t - t0) * 22)
+                fr.layer.alpha_composite(im, (int(cx * S - im.width / 2), int((fl["y"] + bob) * S - im.height / 2)))
+        for dp in spec.get("drop", []):                                          # a prop that lands and stays
+            t_in = cue(dp["at"], dp.get("delay", 0.0))
+            if t >= t_in:
+                place(fr, prop(dp["img"], dp.get("h", 200)), dp["x"], dp["y"], pop_scale(t - t_in, True), appear(t, t_in, 0.12))
+                if dp.get("tag"):
+                    tf = font("xb", 24); tw_ = fr.tl(dp["tag"], tf); k = appear(t, t_in + 0.2, 0.2)
+                    ty = dp["y"] + dp.get("h", 200) / 2 + 8
+                    fr.rrect([dp["x"] - tw_ / 2 - 14, ty, dp["x"] + tw_ / 2 + 14, ty + 40], 20, WHITE, k)
+                    fr.text((dp["x"], ty + 20), dp["tag"], tf, INK, k, anchor="mm", dy=0)
         mood = phase(spec.get("moods"), t, "mood") or "happy"
         character(fr.layer, W / 2, SPK_TOP, SPK_H, t, vis[min(f, n - 1)], mood, fr.g, spec["character"])
         nt = spec.get("note")
@@ -132,6 +191,11 @@ def main():
         full = mix_under(full, sr)
     if spec.get("clicks", True):
         tk = click(sr, spec.get("click_gain", 0.06))
+        extra = [cue(st_["at"], st_.get("delay", 0.0)) for st_ in (spec.get("tracker") or {}).get("steps", [])] + \
+                [cue(dp["at"], dp.get("delay", 0.0)) for dp in spec.get("drop", [])]
+        for tt in extra:
+            i0 = int(max(tt, 0) * sr)
+            if i0 < len(full): full[i0:i0 + len(tk)] += tk[:len(full) - i0] * 1.3
         for p in spec.get("pairs", []):
             for d_ in (0.0, 0.18):
                 i0 = int(max(cue(p["at"], p.get("delay", 0.0) + d_), 0) * sr)
