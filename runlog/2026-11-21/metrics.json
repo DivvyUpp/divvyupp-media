@@ -1,0 +1,27 @@
+{
+ "run": "metrics",
+ "date": "2026-11-21",
+ "attempts": [
+  {
+   "started_at": "2026-11-21T11:09:05-05:00",
+   "finished_at": "2026-11-21T11:11:22-05:00",
+   "status": "ok",
+   "trigger": "manual",
+   "summary": "First Metrics pull. Read 7 Reels from the last 8 days. Followers: 3. Non-follower views yesterday: 65.",
+   "outputs": [
+    {
+     "label": "Instagram numbers",
+     "path": "metrics/2026-11-21.json"
+    },
+    {
+     "label": "Experiment log",
+     "path": "experiment-log.csv"
+    },
+    {
+     "label": "Followers",
+     "path": "followers.csv"
+    }
+   ]
+  }
+ ]
+}

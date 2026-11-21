@@ -90,4 +90,9 @@ unapproved videos in a scratch folder, not in the repo (the repo is public).
    `"approved"`, drop rejected ones, then commit and push `hooks/`, approved `reels/`, `queue.json`,
    `experiment-log.csv`, `learnings.md`, `backlog.md` and `hypotheses/` to main. Confirm one Pages link loads.
 
+## 8. Run log
+Write your run log record (`runlog/<today>/create.json`, see "Run log" in `PLAYBOOK.md`) and push it with the rest; write it even if you stop early. Write it when you send the videos (each Reel with
+`status: pending_review` and its hook), and update that same attempt when Srini answers (approved / rejected, plus
+`file` for approved videos now in the repo).
+
 If something blocks you (render, voice, push), tell Srini exactly what and stop.

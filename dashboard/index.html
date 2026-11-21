@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reels Loop Dashboard</title>
+<meta name="robots" content="noindex">
+<style>
+/* One day of the @getdivvyupp Reels loop: a date bar, a status strip per run, then a timeline of every run attempt. */
+:root{
+  --bg:#f5f6f8; --surface:#fff; --fg:#18202a; --muted:#5d6776; --line:#dde1e7;
+  --accent:#0f7c86;
+  --ok:#1f7a3f; --ok-soft:#e2f4e8; --warn:#9a6200; --warn-soft:#fff2d4;
+  --bad:#b42318; --bad-soft:#fde8e6; --idle:#6b7380; --idle-soft:#eceef2; --run:#2457c5; --run-soft:#e5ecfc;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#10151c; --surface:#18202a; --fg:#e7ecf2; --muted:#9aa6b4; --line:#2b3542; --accent:#4cc3cc;
+  --ok:#6fd492; --ok-soft:#173323; --warn:#f3c254; --warn-soft:#3a2f12;
+  --bad:#ff8a80; --bad-soft:#3d1c1a; --idle:#9aa3b0; --idle-soft:#232b36; --run:#8fb1ff; --run-soft:#1d2a47;
+  color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  padding:24px max(16px,env(safe-area-inset-left)) 48px max(16px,env(safe-area-inset-right))}
+.wrap{max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+h1{font-size:1.5rem;margin:0;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:2px 0 0;font-size:.9rem}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button,input[type=date]{font:inherit;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.day{font-weight:600;font-size:1.05rem;margin-left:4px}
+.strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.tile b{font-size:.92rem}
+.pill{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;padding:3px 8px;border-radius:999px;white-space:nowrap;width:max-content}
+.s-ok{background:var(--ok-soft);color:var(--ok)} .s-partial{background:var(--warn-soft);color:var(--warn)}
+.s-blocked{background:var(--bad-soft);color:var(--bad)} .s-failed{background:var(--bad-soft);color:var(--bad)}
+.s-missing{background:var(--bad-soft);color:var(--bad)} .s-running{background:var(--run-soft);color:var(--run)}
+.s-upcoming,.s-none{background:var(--idle-soft);color:var(--idle)}
+.tl{display:flex;flex-direction:column;gap:12px;list-style:none;margin:0;padding:0}
+.card{display:grid;grid-template-columns:64px 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.card.dim{background:transparent;border-style:dashed}
+.time{font-variant-numeric:tabular-nums;font-weight:600;color:var(--muted);padding-top:1px}
+.body{display:flex;flex-direction:column;gap:8px;min-width:0}
+.head{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.head h2{font-size:1rem;margin:0}
+.tag{font-size:.75rem;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+.body p{margin:0;max-width:70ch}
+.blocker{border-left:3px solid var(--bad);padding:4px 0 4px 10px;color:var(--fg)}
+.links{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.9rem}
+a{color:var(--accent)}
+.reels{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.reel{border:1px solid var(--line);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.reel q{font-weight:500}
+.reel video{width:100%;max-height:360px;border-radius:6px;background:#000}
+.empty{color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:24px;text-align:center}
+.foot{color:var(--muted);font-size:.82rem}
+@media (max-width:480px){.card{grid-template-columns:1fr;gap:6px}}
+@media (prefers-reduced-motion:no-preference){.card{transition:border-color .15s}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Reels loop</h1>
+    <p class="sub">What each scheduled run of the @getdivvyupp loop did on a given day. Times are New York time.</p>
+  </header>
+
+  <div class="bar" role="group" aria-label="Choose a day">
+    <button id="prev" type="button" aria-label="Previous day">←</button>
+    <input id="date" type="date" aria-label="Date">
+    <button id="next" type="button" aria-label="Next day">→</button>
+    <button id="today" type="button">Today</button>
+    <span class="day" id="dayname"></span>
+  </div>
+
+  <section class="strip" id="strip" aria-label="Runs at a glance"></section>
+  <ol class="tl" id="tl" aria-label="Timeline"></ol>
+  <p class="foot">Each run writes <code>runlog/&lt;date&gt;/&lt;run&gt;.json</code> in DivvyUpp/divvyupp-media (format in PLAYBOOK.md, "Run log"). A run with no record either didn't start or couldn't save it. The page can lag GitHub by a few minutes.</p>
+</div>
+
+<script>
+const REPO = "https://github.com/DivvyUpp/divvyupp-media/blob/main/";
+const FIRST_DAY = "2026-11-21";          // run log starts here
+const SCHEDULE_FROM = "2026-11-22";      // first day on the current schedule
+const RUNS = {
+  metrics:   {name: "Metrics pull", where: "Cowork"},
+  research:  {name: "Research", where: "Default env"},
+  create:    {name: "Create", where: "Default env"},
+  post:      {name: "Post", where: "Cowork"},
+  watchlist: {name: "Watchlist check", where: "Default env"},
+  funnel:    {name: "Funnel export", where: "GitHub Actions"},
+};
+// expected scheduled slots: [run, "HH:MM", weekday filter (0=Sun) or null]
+const SLOTS = [["watchlist","05:00",0],["funnel","05:37",1],["metrics","05:53",null],["research","05:57",null],
+               ["create","06:27",null],["post","11:57",null],["post","16:57",null],["post","21:57",null]];
+const LABEL = {ok:"OK", partial:"Partial", blocked:"Blocked", failed:"Failed", running:"Running", missing:"No record",
+               upcoming:"Upcoming", none:"Not today", not_rendered:"Not rendered", pending_review:"Waiting for you",
+               approved:"Approved", rejected:"Rejected", posted:"Posted", hold:"On hold"};
+
+const $ = id => document.getElementById(id);
+const el = (tag, attrs = {}, ...kids) => { const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) k === "class" ? e.className = v : e.setAttribute(k, v);
+  for (const c of kids) if (c != null) e.append(c); return e; };
+const pill = s => el("span", {class: "pill s-" + (["ok","partial","blocked","failed","running","missing","upcoming","none"].includes(s) ? s : s === "posted" || s === "approved" ? "ok" : s === "rejected" ? "failed" : "none")}, LABEL[s] || s);
+
+function etNow() {
+  const p = Object.fromEntries(new Intl.DateTimeFormat("en-CA", {timeZone: "America/New_York", year: "numeric", month: "2-digit",
+    day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false}).formatToParts(new Date()).map(x => [x.type, x.value]));
+  return {date: `${p.year}-${p.month}-${p.day}`, time: `${p.hour === "24" ? "00" : p.hour}:${p.minute}`};
+}
+const shift = (d, n) => { const t = new Date(d + "T12:00:00Z"); t.setUTCDate(t.getUTCDate() + n); return t.toISOString().slice(0, 10); };
+const hhmm = iso => (iso || "").slice(11, 16);
+const mins = t => +t.slice(0, 2) * 60 + +t.slice(3, 5);
+const weekday = d => new Date(d + "T12:00:00Z").getUTCDay();
+const href = p => /\.mp4$/i.test(p) ? "../" + p : REPO + p;
+
+async function load(date) {
+  const out = {};
+  await Promise.all(Object.keys(RUNS).map(async r => {
+    try { const res = await fetch(`../runlog/${date}/${r}.json`, {cache: "no-store"});
+          if (res.ok) out[r] = await res.json(); } catch (e) { /* no record */ }
+  }));
+  return out;
+}
+
+function items(date, recs) {
+  const now = etNow(), list = [];
+  for (const [r, rec] of Object.entries(recs))
+    for (const a of rec.attempts || []) list.push({run: r, time: hhmm(a.started_at) || "--:--", a});
+  if (date >= SCHEDULE_FROM) {
+    for (const [r, t, wd] of SLOTS) {
+      if (wd !== null && weekday(date) !== wd) continue;
+      const hit = list.some(x => x.run === r && x.a && x.a.trigger !== "manual" && x.time !== "--:--" &&
+                                  mins(x.time) >= mins(t) - 10 && mins(x.time) <= mins(t) + 90);
+      if (hit) continue;
+      const future = date > now.date || (date === now.date && mins(now.time) < mins(t) + 30);
+      list.push({run: r, time: t, placeholder: future ? "upcoming" : "missing"});
+    }
+  }
+  return list.sort((x, y) => x.time.localeCompare(y.time));
+}
+
+function render(date, recs) {
+  $("date").value = date;
+  $("dayname").textContent = new Date(date + "T12:00:00Z").toLocaleDateString("en-US", {weekday: "long", month: "short", day: "numeric", timeZone: "UTC"});
+  const strip = $("strip"), tl = $("tl"); strip.replaceChildren(); tl.replaceChildren();
+  if (date < FIRST_DAY) { tl.append(el("li", {class: "empty"}, "The run log starts on 21 Nov 2026.")); return; }
+  const list = items(date, recs);
+
+  // status strip: the latest result per run (a later success clears an earlier failure; upcoming slots don't count)
+  for (const r of Object.keys(RUNS)) {
+    const mine = list.filter(x => x.run === r);
+    if (!mine.length) continue;
+    const past = mine.filter(x => x.placeholder !== "upcoming");
+    const st = past.length ? (past[past.length - 1].placeholder || past[past.length - 1].a.status) : "upcoming";
+    const n = mine.filter(x => !x.placeholder).length;
+    strip.append(el("div", {class: "tile"}, el("b", {}, RUNS[r].name), pill(st),
+      el("span", {class: "sub"}, n ? `${n} run${n > 1 ? "s" : ""}` : "no runs yet")));
+  }
+  if (!list.length) { tl.append(el("li", {class: "empty"}, "No runs recorded for this day.")); return; }
+
+  for (const x of list) {
+    const info = RUNS[x.run];
+    if (x.placeholder) {
+      tl.append(el("li", {class: "card dim"}, el("div", {class: "time"}, x.time),
+        el("div", {class: "body"}, el("div", {class: "head"}, el("h2", {}, info.name), pill(x.placeholder)),
+          el("p", {class: "sub"}, x.placeholder === "upcoming" ? `Scheduled (${info.where}).`
+            : `No record. It didn't start, or it couldn't save its record (${info.where}).`))));
+      continue;
+    }
+    const a = x.a, body = el("div", {class: "body"});
+    const head = el("div", {class: "head"}, el("h2", {}, info.name), pill(a.status));
+    if (a.trigger === "manual") head.append(el("span", {class: "tag"}, "manual run"));
+    if (a.finished_at) head.append(el("span", {class: "tag"}, `finished ${hhmm(a.finished_at)}`));
+    body.append(head);
+    if (a.summary) body.append(el("p", {}, a.summary));
+    if (a.blocker) body.append(el("p", {class: "blocker"}, a.blocker));
+    if (a.outputs && a.outputs.length) {
+      const l = el("div", {class: "links"});
+      for (const o of a.outputs) l.append(el("a", {href: href(o.path), target: "_blank", rel: "noopener"}, o.label || o.path));
+      body.append(l);
+    }
+    if (a.reels && a.reels.length) {
+      const g = el("div", {class: "reels"});
+      for (const r of a.reels) {
+        const c = el("div", {class: "reel"}, pill(r.status || "none"));
+        if (r.hook) c.append(el("q", {}, r.hook));
+        if (r.file) c.append(el("video", {src: href(r.file), controls: "", preload: "metadata", playsinline: ""}));
+        if (r.permalink) c.append(el("a", {href: r.permalink, target: "_blank", rel: "noopener"}, "On Instagram"));
+        if (r.id) c.append(el("span", {class: "sub"}, r.id));
+        g.append(c);
+      }
+      body.append(g);
+    }
+    tl.append(el("li", {class: "card"}, el("div", {class: "time"}, x.time), body));
+  }
+}
+
+async function go(date) {
+  if (location.hash.slice(1) !== date) history.replaceState(null, "", "#" + date);
+  render(date, date < FIRST_DAY ? {} : await load(date));
+}
+const current = () => /^\d{4}-\d{2}-\d{2}$/.test(location.hash.slice(1)) ? location.hash.slice(1) : etNow().date;
+$("prev").onclick = () => go(shift(current(), -1));
+$("next").onclick = () => go(shift(current(), 1));
+$("today").onclick = () => go(etNow().date);
+$("date").onchange = e => e.target.value && go(e.target.value);
+addEventListener("hashchange", () => go(current()));
+go(current());
+</script>
+</body>
+</html>

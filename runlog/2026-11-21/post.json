@@ -1,0 +1,13 @@
+{
+ "run": "post",
+ "date": "2026-11-21",
+ "attempts": [
+  {
+   "started_at": "2026-11-21T07:54:29-05:00",
+   "finished_at": "2026-11-21T07:55:13-05:00",
+   "status": "ok",
+   "trigger": "scheduled",
+   "summary": "8am slot (the old 4-slot schedule): nothing was approved, so nothing posted. The Dollar Bill rules Reel stayed on hold for Srini's review."
+  }
+ ]
+}

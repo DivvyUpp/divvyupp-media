@@ -18,5 +18,6 @@ connectors) can read them from the repo. Data only: no postmortem, no verdicts, 
    is in seconds. Append `<today>,<followers_count>` to `followers.csv` (skip if today's row already exists).
 5. Commit `metrics/`, `experiment-log.csv` and `followers.csv` ("metrics: <today>") and push to main. If the push
    is rejected, pull --rebase and push again once.
-6. Reply with one line: how many Reels were read and today's follower count. If Windsor fails or returns nothing,
-   commit nothing, and tell Srini exactly what failed: the Create run will say the numbers are missing.
+6. Write your run log record (`runlog/<today>/metrics.json`, see "Run log" in `PLAYBOOK.md`) and push it with the rest; write it even if you stop early.
+7. Reply with one line: how many Reels were read and today's follower count. If Windsor fails or returns nothing,
+   commit only the run log record (status `failed`), and tell Srini exactly what failed: the Create run will say the numbers are missing.

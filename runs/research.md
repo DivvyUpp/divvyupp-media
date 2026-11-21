@@ -56,6 +56,7 @@ our own data. Until then it is a candidate bet in `backlog.md`.
 7. If a finding argues for changing the script checklist or the loop itself, add it under "Proposed changes" in
    the brief. Do not edit `PLAYBOOK.md` or `learnings.md` yourself.
 8. Commit and push `research/` and `backlog.md` to main.
+9. Write your run log record (`runlog/<today>/research.json`, see "Run log" in `PLAYBOOK.md`) and push it with the rest; write it even if you stop early.
 
 ## Never
 - Never sign up for, buy, install or connect any tool. Propose it in the brief with cost and terms.

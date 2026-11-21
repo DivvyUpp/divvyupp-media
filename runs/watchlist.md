@@ -19,3 +19,4 @@ and stop. Never contact anyone, sign up for or buy anything.
 5. Regenerate `research/watchlist.md` from the CSV (same layout), commit and push to main with a one-line summary of
    added and removed accounts. Send Srini nothing unless the list dropped below 20 niche accounts or you were
    blocked.
+6. Write your run log record (`runlog/<today>/watchlist.json`, see "Run log" in `PLAYBOOK.md`) and push it with the rest; write it even if you stop early.

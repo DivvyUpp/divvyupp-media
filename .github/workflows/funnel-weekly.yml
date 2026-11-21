@@ -38,6 +38,7 @@ jobs:
           cd scripts && python -m pytest -q test_fetch_funnel.py
 
       - name: Fetch funnel
+        id: fetch
         env:
           FUNNEL_EXPORT_TOKEN: ${{ secrets.FUNNEL_EXPORT_TOKEN }}
           FUNNEL_API_BASE: ${{ vars.FUNNEL_API_BASE }}
@@ -47,14 +48,43 @@ jobs:
           if [ -n "$FUNNEL_EXPORT_TOKEN" ]; then echo "::add-mask::$FUNNEL_EXPORT_TOKEN"; fi
           python scripts/fetch_funnel.py
 
+      - name: Run log record
+        if: always()
+        env:
+          FROM_DATE: ${{ github.event.inputs.from }}
+          TO_DATE: ${{ github.event.inputs.to }}
+          OUTCOME: ${{ steps.fetch.outcome }}
+          TRIGGER: ${{ github.event_name }}
+        run: |
+          python3 - <<'PY'
+          import datetime as dt, json, os, pathlib, subprocess, zoneinfo
+          et = zoneinfo.ZoneInfo("America/New_York"); now = dt.datetime.now(et).replace(microsecond=0)
+          day = now.date().isoformat()
+          changed = subprocess.run(["git", "status", "--porcelain", "--untracked-files=all", "funnel/"], capture_output=True, text=True).stdout.split()
+          files = [f for f in changed if f.startswith("funnel/") and f.endswith(".json")]
+          frm, to = os.environ.get("FROM_DATE"), os.environ.get("TO_DATE")
+          kind = f"one-day export for {frm}" if frm and frm == to else (f"export {frm} to {to}" if frm else "weekly export (last Mon-Sun)")
+          ok = os.environ.get("OUTCOME") == "success"
+          att = {"started_at": now.isoformat(), "finished_at": now.isoformat(),
+                 "status": "ok" if ok else "failed",
+                 "trigger": "scheduled" if os.environ.get("TRIGGER") == "schedule" else "manual",
+                 "summary": f"Funnel {kind}: " + (f"wrote {', '.join(files)}." if files else "no new data.") if ok else f"Funnel {kind} failed.",
+                 "outputs": [{"label": "Funnel export", "path": f} for f in files]}
+          if not ok: att["blocker"] = "The fetch step failed; see the GitHub Actions log for this run."
+          p = pathlib.Path(f"runlog/{day}/funnel.json"); p.parent.mkdir(parents=True, exist_ok=True)
+          rec = json.loads(p.read_text()) if p.exists() else {"run": "funnel", "date": day, "attempts": []}
+          rec["attempts"].append(att); p.write_text(json.dumps(rec, indent=1) + "\n")
+          PY
+
       - name: Commit
+        if: always()
         env:
           FROM_DATE: ${{ github.event.inputs.from }}
           TO_DATE: ${{ github.event.inputs.to }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add funnel/
+          git add funnel/ runlog/
           if git diff --cached --quiet; then
             echo "No funnel changes to commit"
             exit 0
