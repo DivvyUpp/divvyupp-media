@@ -1,0 +1,111 @@
+{
+ "id": "2026-11-21-milk",
+ "format": "rules",
+ "character": "raccoon_movie",
+ "character_voice": "elevenlabs:loY1uopAz31XyhAEhNSa:eleven_v3",
+ "voice_prefix": "[excited] Whoa, whoa, whoa. I've seen your bank history! [laughs] Four coffees, two takeouts, AND a quick little online order? On a TUESDAY? [smug] Relax, pal. I'm a raccoon. I know exactly where money disappears to.",
+ "music": true,
+ "max_gap": 0.42,
+ "keep_gap": {
+  "5": 0.8
+ },
+ "takes": 1,
+ "sentences": [
+  "[excited] Went in for milk. Came out with a hundred and forty dollars.",
+  "[smug] Relax. I've done worse in a dumpster. But we need rules.",
+  "[confident] Rule one! Know today's number before you walk in. Say it's thirty-eight dollars. Now the cart has a limit.",
+  "[mischievous] Rule two. Your balance is lying. Half your bills haven't come out yet.",
+  "[laughs] Rule three. Grabbed the big cart anyway? Fine. Tomorrow's number shrinks. Your savings don't.",
+  "[smug] See? You can still grab the good snacks. They're already in the plan.",
+  "Save first. Then spend what's safe. Try it at Divvyup dot com."
+ ],
+ "title": [
+  {
+   "from": 0,
+   "lines": [
+    [
+     "Went in for milk.",
+     "ink"
+    ],
+    [
+     "Came out with",
+     "ink"
+    ],
+    [
+     "$140.",
+     "orange"
+    ]
+   ]
+  },
+  {
+   "from": 1,
+   "lines": [
+    [
+     "In for milk. Out $140.",
+     "ink"
+    ],
+    [
+     "We need rules.",
+     "orange"
+    ]
+   ]
+  },
+  {
+   "from": 2,
+   "lines": null
+  }
+ ],
+ "header": [
+  {
+   "from": 2,
+   "text": "Dollar Bill's rules"
+  },
+  {
+   "from": 5,
+   "text": "Snacks: already in the plan"
+  }
+ ],
+ "pairs": [
+  {
+   "good_text": "Know today's number first",
+   "bad_text": "Check the receipt after",
+   "at": 2
+  },
+  {
+   "good_text": "Trust your safe-to-spend",
+   "bad_text": "Trust your balance",
+   "at": 3
+  },
+  {
+   "good_text": "Over? Tomorrow shrinks",
+   "bad_text": "Over? Raid savings",
+   "at": 4
+  }
+ ],
+ "moods": [
+  {
+   "from": 0,
+   "mood": "unimpressed"
+  },
+  {
+   "from": 2,
+   "mood": "happy"
+  }
+ ],
+ "cta_lines": [
+  [
+   "Save first.",
+   "ink"
+  ],
+  [
+   "Then spend",
+   "ink"
+  ],
+  [
+   "what's safe.",
+   "orange"
+  ]
+ ],
+ "cta_at": 6,
+ "seed": 1
+}

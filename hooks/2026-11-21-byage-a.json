@@ -1,0 +1,117 @@
+{
+ "id": "2026-11-21-byage-a",
+ "format": "beat",
+ "character": "e",
+ "character_voice": "elevenlabs:cjVigY5qzO86Huf0OWal:eleven_v3",
+ "music": true,
+ "beats": [
+  {
+   "sentences": [
+    {
+     "text": "[serious] Thirty: ninety-six thousand. Forty: two hundred and eighty-eight thousand. Fifty: five hundred and seventy-six thousand. Where are you?"
+    },
+    {
+     "text": "That's what Fidelity says you should have saved by each age, if you earn eight thousand a month."
+    }
+   ],
+   "visual": {
+    "type": "table",
+    "title": "Where are you? \u00b7 $8K/mo salary",
+    "rows": [
+     {
+      "label": "30",
+      "value": "$96,000",
+      "at": 0
+     },
+     {
+      "label": "40",
+      "value": "$288,000",
+      "at": 0
+     },
+     {
+      "label": "50",
+      "value": "$576,000",
+      "at": 0
+     },
+     {
+      "label": "60",
+      "value": "$768,000",
+      "at": 1
+     },
+     {
+      "label": "67",
+      "value": "$960,000",
+      "at": 1,
+      "check": true
+     }
+    ],
+    "source": "Fidelity guideline: 1x salary by 30, 3x by 40, 6x by 50, 8x by 60, 10x by 67"
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "[reassuring] Behind? The usual advice is spend less. But that won't work unless the saving happens first."
+    },
+    {
+     "text": "Fidelity's guideline assumes you save fifteen percent of your income every year, from age twenty-five, match included."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Fidelity assumes:",
+      "ink"
+     ],
+     [
+      "15% saved every year",
+      "orange"
+     ],
+     [
+      "from age 25",
+      "ink"
+     ]
+    ],
+    "source": "Includes any employer match. A guideline, not a rule."
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "On eight thousand a month, that's twelve hundred. And it only happens if it leaves on payday, before anything else."
+    },
+    {
+     "text": "Then what's left is yours to spend, with a daily number that adjusts when you overspend."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "$8,000 a month",
+      "ink"
+     ],
+     [
+      "$1,200 saved on payday",
+      "green"
+     ],
+     [
+      "The rest: one daily number",
+      "ink"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "[warm] So find your age, then make payday the day you save. Save first. Then spend what's safe. Try it at Divvyup dot com."
+    }
+   ],
+   "visual": {
+    "type": "cta"
+   }
+  }
+ ]
+}

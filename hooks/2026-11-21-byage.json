@@ -1,0 +1,138 @@
+{
+ "id": "2026-11-21-byage",
+ "format": "beat",
+ "character": "e",
+ "character_voice": "elevenlabs:cjVigY5qzO86Huf0OWal:eleven_v3",
+ "music": true,
+ "beats": [
+  {
+   "sentences": [
+    {
+     "text": "[serious] Forty, and earning eight thousand a month? Fidelity says you should have two hundred and eighty-eight thousand saved."
+    },
+    {
+     "text": "Thirty: ninety-six thousand. Fifty: five seventy-six. Sixty: seven sixty-eight. Sixty-seven: nine hundred and sixty thousand. Where are you?"
+    }
+   ],
+   "visual": {
+    "type": "table",
+    "title": "Where are you? $8K/mo pay",
+    "rows": [
+     {
+      "label": "30",
+      "value": "$96,000",
+      "at": 0
+     },
+     {
+      "label": "40",
+      "value": "$288,000",
+      "at": 0
+     },
+     {
+      "label": "50",
+      "value": "$576,000",
+      "at": 0
+     },
+     {
+      "label": "60",
+      "value": "$768,000",
+      "at": 0
+     },
+     {
+      "label": "67",
+      "value": "$960,000",
+      "at": 0
+     }
+    ],
+    "source": "Fidelity guideline: 1x salary by 30, 3x by 40, 6x by 50, 8x by 60, 10x by 67"
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "[reassuring] Behind? Most advice says spend less. But that won't work unless the saving happens first."
+    },
+    {
+     "text": "Fidelity assumes fifteen percent of your pay, every year, from age twenty-five. Your four-oh-one-k and any match count toward it."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Fidelity assumes:",
+      "ink"
+     ],
+     [
+      "15% of pay, every year",
+      "orange"
+     ],
+     [
+      "from age 25",
+      "ink"
+     ]
+    ],
+    "source": "Your 401(k) and any employer match count. A guideline, not a rule."
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Starting at forty? Fifteen percent of eight thousand is twelve hundred a month. By sixty-seven, that's three hundred and eighty-eight thousand, before any growth."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Starting at 40?",
+      "ink"
+     ],
+     [
+      "$1,200 a month",
+      "green"
+     ],
+     [
+      "= $388,800 by 67",
+      "green"
+     ]
+    ],
+    "source": "15% of $8,000 a month, for 27 years. No investment growth assumed."
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "So it leaves on payday, before anything else. The rest gets one daily number that adjusts when you overspend."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Save on payday.",
+      "green"
+     ],
+     [
+      "The rest:",
+      "ink"
+     ],
+     [
+      "one number for today.",
+      "orange"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "[warm] So, where are you? Find your age, then make payday the day you save. Save first. Then spend what's safe. Try it at Divvyup dot com."
+    }
+   ],
+   "visual": {
+    "type": "cta"
+   }
+  }
+ ]
+}
