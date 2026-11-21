@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reels Review Queue</title>
+<meta name="robots" content="noindex">
+<style>
+/* Every Reel not yet posted, grouped by what it needs from Srini: review, nothing (approved, posts next), or a decision (on hold). */
+:root{
+  --bg:#f5f6f8; --surface:#fff; --fg:#18202a; --muted:#5d6776; --line:#dde1e7; --accent:#0f7c86;
+  --ok:#1f7a3f; --ok-soft:#e2f4e8; --warn:#9a6200; --warn-soft:#fff2d4; --bad:#b42318; --bad-soft:#fde8e6;
+  --idle:#6b7380; --idle-soft:#eceef2; color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#10151c; --surface:#18202a; --fg:#e7ecf2; --muted:#9aa6b4; --line:#2b3542; --accent:#4cc3cc;
+  --ok:#6fd492; --ok-soft:#173323; --warn:#f3c254; --warn-soft:#3a2f12; --bad:#ff8a80; --bad-soft:#3d1c1a;
+  --idle:#9aa3b0; --idle-soft:#232b36; color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  padding:24px max(16px,env(safe-area-inset-left)) 48px max(16px,env(safe-area-inset-right))}
+.wrap{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+a{color:var(--accent)}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.back{font-size:.9rem;text-decoration:none}
+h1{font-size:1.5rem;margin:6px 0 0;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:.9rem;margin:4px 0 0;max-width:68ch}
+section{display:flex;flex-direction:column;gap:10px}
+.sh{display:flex;align-items:baseline;gap:10px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.sh h2{font-size:1.1rem;margin:0}
+.count{font-size:.8rem;font-weight:600;border-radius:999px;padding:2px 9px}
+.c-review{background:var(--warn-soft);color:var(--warn)} .c-approved{background:var(--ok-soft);color:var(--ok)}
+.c-hold{background:var(--idle-soft);color:var(--idle)}
+.what{color:var(--muted);font-size:.88rem;margin:0}
+.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.item{display:grid;grid-template-columns:132px 1fr;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px}
+.vid{width:132px;aspect-ratio:9/16;max-width:100%;border-radius:8px;background:#000;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.vid video{width:100%;height:100%;object-fit:cover;display:block}
+.vid .nofile{color:#c9ced6;font-size:.78rem;text-align:center;padding:8px}
+.info{display:flex;flex-direction:column;gap:6px;min-width:0}
+.title{font-weight:600;font-size:1rem;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:4px 10px;color:var(--muted);font-size:.8rem}
+.slot{font-weight:600;color:var(--ok)}
+.note{font-size:.86rem;margin:0;padding:6px 10px;background:var(--idle-soft);border-radius:8px}
+details{font-size:.88rem}
+summary{cursor:pointer;color:var(--muted)}
+details p{margin:6px 0 0;white-space:pre-line}
+.links{display:flex;gap:14px;font-size:.86rem;margin-top:auto}
+.none{color:var(--muted);font-size:.9rem;margin:0;padding:10px 0}
+.how{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-size:.9rem}
+.how p{margin:0}
+@media (max-width:480px){.item{grid-template-columns:96px 1fr;gap:12px}.vid{width:96px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="back" href="./">← Daily dashboard</a>
+    <h1>Review queue</h1>
+    <p class="sub">Every @getdivvyupp Reel that hasn't been posted yet, grouped by what it needs from you.</p>
+  </header>
+
+  <div class="how"><p><b>To act on a Reel,</b> reply in that day's Create chat, or tell Claude, with the Reel's id and what to do: approve, change the caption, reject, or take it off hold. This page only shows the queue.</p></div>
+
+  <section aria-labelledby="h-review">
+    <div class="sh"><h2 id="h-review">Waiting for your review</h2><span class="count c-review" id="n-review"></span></div>
+    <p class="what">Made by Create. Nothing posts until you approve it.</p>
+    <ol class="list" id="l-review"></ol>
+  </section>
+
+  <section aria-labelledby="h-approved">
+    <div class="sh"><h2 id="h-approved">Approved, posting next</h2><span class="count c-approved" id="n-approved"></span></div>
+    <p class="what">One goes out per Post slot (11:57am, 4:57pm, 9:57pm), oldest first.</p>
+    <ol class="list" id="l-approved"></ol>
+  </section>
+
+  <section aria-labelledby="h-hold">
+    <div class="sh"><h2 id="h-hold">On hold</h2><span class="count c-hold" id="n-hold"></span></div>
+    <p class="what">Parked until you decide: post it, or drop it.</p>
+    <ol class="list" id="l-hold"></ol>
+  </section>
+</div>
+
+<script>
+const REPO = "https://github.com/DivvyUpp/divvyupp-media/blob/main/";
+const SLOTS = ["11:57", "16:57", "21:57"];
+const $ = id => document.getElementById(id);
+const el = (tag, attrs = {}, ...kids) => { const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) k === "class" ? e.className = v : e.setAttribute(k, v);
+  for (const c of kids) if (c != null) e.append(c); return e; };
+const href = p => /\.mp4$/i.test(p) ? "../" + p : REPO + p;
+const short = d => d ? new Date(d + "T12:00:00Z").toLocaleDateString("en-US", {month: "short", day: "numeric", timeZone: "UTC"}) : "";
+
+function etNow() {
+  const p = Object.fromEntries(new Intl.DateTimeFormat("en-CA", {timeZone: "America/New_York", year: "numeric", month: "2-digit",
+    day: "2-digit", hour: "2-digit", minute: "2-digit", hour12: false}).formatToParts(new Date()).map(x => [x.type, x.value]));
+  return {date: `${p.year}-${p.month}-${p.day}`, time: `${p.hour === "24" ? "00" : p.hour}:${p.minute}`};
+}
+// the next n Post slots from now, as readable labels
+function nextSlots(n) {
+  const now = etNow(), out = []; let day = 0;
+  while (out.length < n) {
+    for (const s of SLOTS) {
+      if (day === 0 && s <= now.time) continue;
+      if (out.length >= n) break;
+      const h = +s.slice(0, 2), lbl = `${h > 12 ? h - 12 : h}:${s.slice(3)}${h >= 12 ? "pm" : "am"}`;
+      out.push(`${lbl} ${day === 0 ? "today" : day === 1 ? "tomorrow" : "in " + day + " days"}`);
+    }
+    day++;
+  }
+  return out;
+}
+
+function item(e, slot) {
+  const vid = el("div", {class: "vid"});
+  if (e.file) {
+    const v = el("video", {src: href(e.file), controls: "", preload: "metadata", playsinline: ""});
+    v.addEventListener("error", () => { vid.replaceChildren(el("span", {class: "nofile"}, "Video not in the repo"));
+      const o = vid.parentNode && vid.parentNode.querySelector("a.open"); if (o) o.remove(); });
+    vid.append(v);
+  } else vid.append(el("span", {class: "nofile"}, "No video yet"));
+
+  const title = e.hook || (e.caption || "").split(/(?<=[.?!])\s/)[0] || e.id;
+  const info = el("div", {class: "info"}, el("p", {class: "title"}, title.replace(/\s*\(.*\)\s*$/, "")));
+  const meta = el("div", {class: "meta"}, el("span", {}, e.id || ""));
+  if (e.post_date) meta.append(el("span", {}, "made " + short(e.post_date)));
+  if (e.format) meta.append(el("span", {}, e.format));
+  if (slot) meta.append(el("span", {class: "slot"}, "posts " + slot));
+  info.append(meta);
+  const note = e.hold_note || e.approved_note || e.note;
+  if (note) info.append(el("p", {class: "note"}, note));
+  if (e.caption) info.append(el("details", {}, el("summary", {}, "Caption"), el("p", {}, e.caption)));
+  const links = el("div", {class: "links"});
+  if (e.file) links.append(el("a", {class: "open", href: href(e.file), target: "_blank", rel: "noopener"}, "Open video"));
+  if (e.hypothesis) links.append(el("a", {href: href(e.hypothesis), target: "_blank", rel: "noopener"}, "Bet card"));
+  info.append(links);
+  return el("li", {class: "item"}, vid, info);
+}
+
+async function main() {
+  let q = [];
+  try { const r = await fetch("../queue.json", {cache: "no-store"}); if (r.ok) q = await r.json(); } catch (e) {}
+  if (!Array.isArray(q)) q = q.queue || [];
+  const byDate = (a, b) => (a.post_date || "").localeCompare(b.post_date || "");
+  const groups = {
+    review: q.filter(e => e.status === "pending_review").sort(byDate),
+    approved: q.filter(e => e.status === "approved" && e.kind !== "trial").sort(byDate),
+    hold: q.filter(e => e.status === "hold").sort(byDate),
+  };
+  const empty = {review: "Nothing to review right now.", approved: "Nothing approved yet.", hold: "Nothing on hold."};
+  const slots = nextSlots(groups.approved.length);
+  for (const [k, list] of Object.entries(groups)) {
+    $("n-" + k).textContent = list.length;
+    const ol = $("l-" + k);
+    if (!list.length) ol.append(el("li", {class: "none"}, empty[k]));
+    list.forEach((e, i) => ol.append(item(e, k === "approved" ? slots[i] : null)));
+  }
+}
+main();
+</script>
+</body>
+</html>
