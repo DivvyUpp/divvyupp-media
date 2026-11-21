@@ -8,6 +8,13 @@
    "status": "ok",
    "trigger": "scheduled",
    "summary": "8am slot (the old 4-slot schedule): nothing was approved, so nothing posted. The Dollar Bill rules Reel stayed on hold for Srini's review."
+  },
+  {
+   "started_at": "2026-11-21T11:57:00-05:00",
+   "finished_at": "2026-11-21T11:58:29-05:00",
+   "status": "ok",
+   "trigger": "scheduled",
+   "summary": "Noon slot: Nothing approved to post. Four Reels (2026-11-21-a, 2026-11-20-b4, 2026-11-21-paycheck, 2026-11-21-dollar-bill-rules) are on hold awaiting Srini's review."
   }
  ]
 }
