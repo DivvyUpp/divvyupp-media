@@ -24,15 +24,17 @@ carry on), and the last 3 files in `hypotheses/`.
    40393e71-2526-4648-9859-26f12f001b13) and update each dataset's source url and updated.at with db_get + db_write
    as the README says. Never invent numbers. If the artifact tools aren't available, say so.
 
-## 2. Pull the data
-1. Windsor `get_data` (connector `instagram`, account `17841422626862357`; fields from `get_fields`):
-   `media_id, media_views, media_reach, media_reel_skip_rate, media_reel_avg_watch_time, media_shares,
-   media_saved, media_like_count, media_reel_total_interactions` for every Reel posted in the last 8 days. Also
-   `followers_count` (today's total) and account `views_non_followers` for yesterday.
-2. Write into `experiment-log.csv`: `read_14h` for yesterday's Reels and `read_72h` for Reels posted 3 days ago,
-   as `views/skip%/avg_watch_s/shares/saves/likes`. The stats columns hold the latest read. Avg watch is in seconds.
-   Append today's `date,followers_count` to `followers.csv`. Work out the 200-follower scorecard in `PLAYBOOK.md`
-   (avg watch ÷ length, likes per 100 reached, shares per 100 reached) for each Reel read today.
+## 2. Read the data
+The Create run has no Windsor connector. The Metrics pull run (`runs/metrics.md`, 08:31 ET) pulls the Instagram
+numbers with Windsor and commits them before this run starts.
+1. `git pull` and read `metrics/<today>.json`. It holds every Reel posted in the last 8 days (views, reach, skip
+   rate, avg watch, shares, saves, likes), today's `followers_count` and yesterday's `views_non_followers`. The
+   pull has already written `read_14h` / `read_72h` into `experiment-log.csv` and today's row in `followers.csv`.
+   If `metrics/<today>.json` is missing, say **"Instagram numbers unavailable: the metrics pull didn't land"** at
+   the top of the note to Srini, mark every postmortem due today **inconclusive (no data)**, never guess a number,
+   and carry on with steps 4–7.
+2. Work out the 200-follower scorecard in `PLAYBOOK.md` (avg watch ÷ length, likes per 100 reached, shares per 100
+   reached) for each Reel read today.
 3. Request yesterday's funnel: trigger `funnel-weekly.yml` with `from` = `to` = yesterday, wait, pull, and read
    `funnel/custom-<yesterday>_<yesterday>.json` (`instagram.days[]`: `ig_visits`, `get_started_clicked`, `signed_up`,
    `bank_linked`). Write them on the rows posted that day. If it fails, say "funnel unavailable" and carry on.
@@ -84,4 +86,4 @@ unapproved videos in a scratch folder, not in the repo (the repo is public).
    `"approved"`, drop rejected ones, then commit and push `hooks/`, approved `reels/`, `queue.json`,
    `experiment-log.csv`, `learnings.md`, `backlog.md` and `hypotheses/` to main. Confirm one Pages link loads.
 
-If something blocks you (connector, render, push), tell Srini exactly what and stop.
+If something blocks you (render, voice, push), tell Srini exactly what and stop.

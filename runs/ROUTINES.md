@@ -11,11 +11,19 @@ You run the daily Research run for DivvyUpp's content loop (Instagram @getdivvyu
 ```
 
 ## 2. Create (replaces "DivvyUpp Reels: Monday plan and produce") — every day, 09:00 America/New_York
-Connectors: Windsor.ai for Social Media. Repos: DivvyUpp/divvyupp-media (push), DivvyUpp/divvyupp (push, Mondays, for
-the dashboard on outreach-log).
+Runs in the Default cloud environment (it has `ELEVENLABS_API_KEY` and allows `api.elevenlabs.io`). Connectors: none,
+because tasks in that environment get none; the Instagram numbers come from the Metrics pull below. Repos:
+DivvyUpp/divvyupp-media (push), DivvyUpp/divvyupp (push, Mondays, for the dashboard on outreach-log).
 
 ```
-You run the daily Create run for DivvyUpp's Instagram Reels loop (@getdivvyupp). Make sure the GitHub repo DivvyUpp/divvyupp-media is available (attach it with push access if it is not, then clone it). Read PLAYBOOK.md, then runs/create.md, and follow them exactly. Those files are the source of truth; if they differ from this prompt, they win. On Mondays runs/create.md starts with the weekly review and the Growth Tracker dashboard update, which also needs DivvyUpp/divvyupp with push access (outreach-log branch only, never main). Use the Windsor.ai for Social Media connector (connector instagram, account 17841422626862357). NEVER publish anything in this run and never mark anything approved without Srini's explicit yes in this session. If something blocks you, tell Srini exactly what and stop.
+You run the daily Create run for DivvyUpp's Instagram Reels loop (@getdivvyupp). Make sure the GitHub repo DivvyUpp/divvyupp-media is available (attach it with push access if it is not, then clone it). Read PLAYBOOK.md, then runs/create.md, and follow them exactly. Those files are the source of truth; if they differ from this prompt, they win. On Mondays runs/create.md starts with the weekly review and the Growth Tracker dashboard update, which also needs DivvyUpp/divvyupp with push access (outreach-log branch only, never main). NEVER publish anything in this run and never mark anything approved without Srini's explicit yes in this session. If something blocks you, tell Srini exactly what and stop.
+```
+
+## 2b. Metrics pull — every day, 08:31 America/New_York
+Runs on Cowork (it needs the Windsor.ai for Social Media connector). Repos: DivvyUpp/divvyupp-media (push).
+
+```
+You run the daily Metrics pull for DivvyUpp's Instagram Reels loop (@getdivvyupp). Make sure the GitHub repo DivvyUpp/divvyupp-media is available (attach it with push access if it is not, then clone it). Read runs/metrics.md and follow it exactly. Use the Windsor.ai for Social Media connector (connector instagram, account 17841422626862357). Data only: never post, publish or change anything outside the files runs/metrics.md names. If something blocks you, tell Srini exactly what and stop.
 ```
 
 ## 3. Post (replaces the prompt of "DivvyUpp Reels: post today's approved Reel") — every day, 19:00 America/New_York

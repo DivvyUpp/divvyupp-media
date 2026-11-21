@@ -115,11 +115,12 @@ Every bet names which of the three it is built to move. Scorecard per Reel at 72
 Compare each Reel with our own median, never outside benchmarks; under 100 views the read is inconclusive.
 
 ## The daily loop (replaces the weekly batch, agreed 2026-11-20)
-Three scheduled runs a day. Each reads this file, then its own run file.
+Four scheduled runs a day. Each reads this file, then its own run file.
 
 | Time (ET) | Run | File | Job |
 |---|---|---|---|
 | 07:00 | Research | `runs/research.md` | Look outward. Find better ways to make content that works, from any creator, tool or format. Feed `backlog.md`. Not tied to any one framework. |
+| 08:31 | Metrics pull | `runs/metrics.md` | Pull Instagram numbers with Windsor into `metrics/<date>.json`, `experiment-log.csv` and `followers.csv`. Data only. |
 | 09:00 | Create | `runs/create.md` | Postmortem on recent Reels → update `learnings.md` → pick one bet → workshop the script → render → send to Srini. On Mondays it starts with the weekly review. |
 | 08:00, 12:00, 17:00, 19:00 | Post | `runs/post.md` | Post one approved Reel per slot, oldest first. |
 | Sun 05:30 | Watchlist | `runs/watchlist.md` | Re-check every watchlist account against the entry bar; find and add new ones. |
@@ -132,6 +133,7 @@ Srini approves each day's videos in chat, ideally by 5pm ET. No approval, no pos
 - `research/<date>.md`: each day's research brief, with sources.
 - `hypotheses/<date>.md`: each day's hypothesis card, script workshop and later its postmortem.
 - `experiment-log.csv`: one row per posted Reel (main or trial), with the bet, prediction and verdict.
+- `metrics/<date>.json`: each morning's Windsor pull (written by the Metrics pull run, read by Create).
 - `funnel/`: weekly exports (Monday) plus one-day exports `funnel/custom-<d>_<d>.json` the Create run requests.
 
 ### Hypothesis card (one per main Reel; trial variants share the card)
