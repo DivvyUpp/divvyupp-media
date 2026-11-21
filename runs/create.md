@@ -70,6 +70,9 @@ unless the card says otherwise.
 4. No trial variants until 200 followers (Trial Reels need it).
 
 ## 6. Render
+No Runway in this run (Srini, 2026-11-21): use only images that are in the repo, such as Dollar Bill in
+`pipeline/assets/characters/` and the drawn presenters. Never point a spec at a `/tmp` path: older `hooks/` specs
+reference Runway images from past chat sessions that no longer exist. Srini polishes the visuals himself after review.
 Use `pipeline/make_story_reel.py` with a spec in `hooks/<today>-a.json` (trial variants `-t1`, `-t2`), or another
 format if the bet calls for it and the tool exists. `--check` first and look at every still; then render. Keep
 unapproved videos in a scratch folder, not in the repo (the repo is public).
