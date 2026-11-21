@@ -1,0 +1,199 @@
+{
+ "id": "2026-11-21-paycheck-v3",
+ "character_voice": "elevenlabs:cjVigY5qzO86Huf0OWal:eleven_v3",
+ "music": true,
+ "speed": 1.12,
+ "max_gap": 0.32,
+ "keep_gap": {
+  "2": 0.6,
+  "9": 0.6
+ },
+ "sentences": [
+  "[serious] Chris makes a hundred thousand a year. The day before payday, he has forty dollars.",
+  "Maya makes the same. She has eleven hundred and fifty.",
+  "And no, it's not her budget.",
+  "Both take home sixty-five hundred a month, and pay thirty-two hundred in bills.",
+  "On payday, Maya moves a thousand to savings first. Chris saves whatever's left.",
+  "Maya knows she can spend seventy-seven dollars today. Chris has no idea.",
+  "A three hundred dollar car repair? Maya's daily number adjusts for the week. Chris puts it on the credit card.",
+  "The day before payday, Maya has eleven hundred and fifty: her thousand in savings, plus a hundred and fifty left. Chris has forty dollars.",
+  "[emphatic] So it's not the budget. She saves first, then spends what's safe.",
+  "Try it at divvyupp dot com."
+ ],
+ "band": {
+  "phases": [
+   {
+    "from": 0,
+    "lines": [
+     [
+      "Same $100K salary.",
+      "white"
+     ],
+     [
+      "Day before payday: $1,150 vs $40.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 2,
+    "lines": [
+     [
+      "Same $100K salary.",
+      "white"
+     ],
+     [
+      "It's not her budget.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 8,
+    "lines": [
+     [
+      "Not a budget.",
+      "white"
+     ],
+     [
+      "Save first. Spend what's safe.",
+      "orange"
+     ]
+    ]
+   }
+  ]
+ },
+ "halves": [
+  {
+   "person": "/tmp/claude-0/-home-claude-divvyupp-media/74ed1848-df42-5466-b139-90751a5f3198/scratchpad/runway/maya.png",
+   "tint": [
+    228,
+    243,
+    233
+   ],
+   "tag": "Maya · $100K salary",
+   "tag_color": "green",
+   "blocks": [
+    {
+     "label": "Take-home",
+     "value": "$6,500",
+     "sub": "bills −$3,200",
+     "sub_color": "red",
+     "at": 3
+    },
+    {
+     "label": "Saved on payday",
+     "value": "$1,000",
+     "at": 4,
+     "style": "good"
+    },
+    {
+     "label": "Safe to spend today",
+     "value": "$77",
+     "sub": "$535/week",
+     "sub_color": "green",
+     "at": 5
+    },
+    {
+     "label": "Car repair",
+     "value": "−$300",
+     "sub": "week adjusts: $34/day",
+     "sub_color": "green",
+     "at": 6
+    },
+    {
+     "label": "Day before payday",
+     "value": "$1,150",
+     "sub": "$1,000 saved + $150 left",
+     "sub_color": "white",
+     "at": 7,
+     "style": "good",
+     "big": true
+    }
+   ],
+   "badge": {
+    "text": "$1,150",
+    "color": "green",
+    "at": 1,
+    "word": "Maya"
+   }
+  },
+  {
+   "person": "/tmp/claude-0/-home-claude-divvyupp-media/74ed1848-df42-5466-b139-90751a5f3198/scratchpad/runway/chris.png",
+   "tint": [
+    250,
+    231,
+    227
+   ],
+   "tag": "Chris · $100K salary",
+   "tag_color": "red",
+   "blocks": [
+    {
+     "label": "Take-home",
+     "value": "$6,500",
+     "sub": "bills −$3,200",
+     "sub_color": "red",
+     "at": 3
+    },
+    {
+     "label": "Savings",
+     "value": "Whatever's left",
+     "sub": "usually $0",
+     "sub_color": "red",
+     "at": 4,
+     "word": "Chris"
+    },
+    {
+     "label": "Safe to spend today",
+     "value": "No idea",
+     "sub": "no daily number",
+     "sub_color": "red",
+     "at": 5,
+     "word": "Chris"
+    },
+    {
+     "label": "Car repair",
+     "value": "On the credit card",
+     "style": "minus",
+     "at": 6,
+     "word": "Chris"
+    },
+    {
+     "label": "Day before payday",
+     "value": "$40",
+     "sub": "$0 saved",
+     "sub_color": "white",
+     "at": 7,
+     "word": "Chris",
+     "style": "bad",
+     "big": true
+    }
+   ],
+   "badge": {
+    "text": "$40",
+    "color": "red",
+    "at": 0,
+    "word": "forty"
+   }
+  }
+ ],
+ "note": {
+  "text": "Maya and Chris are examples. Take-home on $100K is approximate.",
+  "at": 0
+ },
+ "cta_lines": [
+  [
+   "Save first.",
+   "ink"
+  ],
+  [
+   "Then spend",
+   "ink"
+  ],
+  [
+   "what's safe.",
+   "orange"
+  ]
+ ],
+ "cta_at": 9
+}
