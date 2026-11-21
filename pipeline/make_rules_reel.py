@@ -55,11 +55,12 @@ def notif(w, h, text, stage, n, sub, color=None):
     AC = tuple(color) if color else TEAL
     def paint(f):
         f.rrect([0, 0, w, h], 30, WHITE, 1)
-        f.rrect([22, 22, 86, 86], 18, AC, 1)                                   # app icon: a simple bag glyph
-        f.rrect([38, 46, 70, 74], 5, WHITE, 1); f.line([(46, 46), (46, 38), (62, 38), (62, 46)], WHITE + (255,), 4)
-        f.text((104, 22), sub, font("b", 24), GREY, 1, dy=0)
-        f.text((104, 52), text, font("xb", fit(f, text, "xb", 36, w - 130)), INK, 1, dy=0)
-        x0, x1, yy = 104, w - 40, h - 30
+        iy = 28                                                                # app icon: a simple bag glyph
+        f.rrect([26, iy, 94, iy + 68], 18, AC, 1)
+        f.rrect([43, iy + 26, 77, iy + 56], 5, WHITE, 1); f.line([(51, iy + 26), (51, iy + 17), (69, iy + 17), (69, iy + 26)], WHITE + (255,), 4)
+        f.text((116, 26), sub, font("b", 25), GREY, 1, dy=0)
+        f.text((116, 60), text, font("xb", fit(f, text, "xb", 38, w - 150)), INK, 1, dy=0)
+        x0, x1, yy = 116, w - 44, h - 30
         f.line([(x0, yy), (x1, yy)], (225, 220, 216, 255), 6)
         if stage > 1: f.line([(x0, yy), (x0 + (x1 - x0) * (stage - 1) / (n - 1), yy)], AC + (255,), 6)
         for i in range(n):
@@ -95,6 +96,11 @@ def main():
     sents, starts, (ch, st, en), audio, sr = one_take(spec, tmp)
     if spec.get("speed", 1.0) != 1.0 or spec.get("max_gap"):
         audio, st, en = tighten(audio, sr, ch, st, en, starts, spec.get("max_gap", 0.32), spec.get("speed", 1.0), spec.get("keep_gap"))
+    for k_, secs in (spec.get("insert_gap") or {}).items():          # silence before sentence k_, e.g. for a doorbell
+        k_ = int(k_); j0 = starts[k_]
+        t_cut = next((st[j] for j in range(j0, len(ch)) if ch[j].isalnum()), st[-1]) - 0.08
+        i_cut = int(max(t_cut, 0) * sr); audio = np.concatenate([audio[:i_cut], np.zeros(int(secs * sr)), audio[i_cut:]])
+        st = [x + secs if j >= j0 else x for j, x in enumerate(st)]; en = [x + secs if j >= j0 else x for j, x in enumerate(en)]
     def first_spoken(i):
         tag = False
         for j in range(i, len(ch)):
@@ -180,7 +186,9 @@ def main():
                     fr.text((dp["x"], ty + 20), dp["tag"], tf, INK, k, anchor="mm", dy=0)
         sc_ = spec.get("scene")
         if sc_:
-            stop_t = cue(sc_["stop_at"], sc_.get("stop_delay", 0.0)) if sc_.get("stop_at") is not None else 1e9
+            rd = sc_["rider"]
+            t_go = cue(rd["leave_at"], -rd.get("leave_lead", 2.4)) if rd.get("leave_at") is not None else 1e9
+            stop_t = (t_go + rd.get("leave_dur", 0.9)) if rd.get("leave_at") is not None else (cue(sc_["stop_at"], sc_.get("stop_delay", 0.0)) if sc_.get("stop_at") is not None else 1e9)
             speed = sc_.get("speed", 240)
             dist = speed * min(t, stop_t) if t < stop_t + 0.6 else speed * stop_t       # world distance travelled
             if stop_t <= t < stop_t + 0.6: dist = speed * stop_t + speed * 0.3 * (1 - (1 - (t - stop_t) / 0.6) ** 2)   # brake
@@ -197,13 +205,28 @@ def main():
                     fr.rrect([xx - 4, yr - 190, xx + 4, yr], 3, (120, 120, 126), 1); fr.ellipse([xx - 16, yr - 205, xx + 16, yr - 180], (250, 226, 150, 255))
             fr.rrect([0, yr - 2, W, yr + 42], 0, (92, 88, 92), 1)                # road
             for xx in np.arange(-150 + (dist % 150), W + 150, 150): fr.rrect([xx, yr + 17, xx + 70, yr + 23], 3, (245, 240, 230), 1)
-            rd = sc_["rider"]; im = prop(rd["img"], rd.get("h", 220)); pw = im.width / S
+            im = prop(rd["img"], rd.get("h", 220)); pw = im.width / S
             t_e = cue(rd.get("enter_at", 0), rd.get("enter_delay", 0.3)); de = rd.get("enter_dur", 1.6)
             if t >= t_e:
                 u = min(1.0, (t - t_e) / de); cx = W + pw / 2 + (rd["x"] - W - pw / 2) * (1 - (1 - u) ** 3)
+                if t >= t_go:                                                   # zoom off to the left
+                    v = min(1.0, (t - t_go) / rd.get("leave_dur", 0.9)); cx = rd["x"] + (-pw / 2 - rd["x"]) * v * v
+                    for kk in range(3):                                         # speed lines behind him
+                        lx = cx + pw * 0.45 + kk * 26; ly = yr - rd.get("h", 220) * (0.35 + 0.15 * kk)
+                        fr.rrect([lx, ly, lx + 70, ly + 6], 3, (180, 175, 175), max(0.0, 1 - v))
                 moving = t < stop_t
                 bob = 4 * np.sin(t * 16) if moving else 0
                 fr.layer.alpha_composite(im, (int(cx * S - im.width / 2), int((yr - rd.get("h", 220) / 2 + 12 + bob) * S - im.height / 2)))
+        lt = spec.get("light")
+        if lt:
+            lx, ly = lt["x"], lt["y"]; on = cue(lt["at"], -lt.get("lead", 1.4))
+            fr.rrect([lx - 6, ly, lx + 6, ly + 90], 3, (110, 104, 104), 1)              # bracket
+            fr.rrect([lx - 26, ly - 40, lx + 26, ly + 8], 10, (90, 84, 84), 1)          # lamp
+            g = max(0.0, min(1.0, (t - on) / 0.25)) if t >= on else 0.0
+            if g > 0:
+                for rr, a in ((150, 0.12), (100, 0.2), (60, 0.35)):
+                    fr.ellipse([lx - rr, ly - 16 - rr, lx + rr, ly - 16 + rr], (255, 214, 120, int(255 * a * g)))
+            fr.rrect([lx - 18, ly - 32, lx + 18, ly], 8, (255, 226, 150) if g > 0 else (200, 196, 190), 1)
         mood = phase(spec.get("moods"), t, "mood") or "happy"
         character(fr.layer, W / 2, spec.get("spk_top", SPK_TOP), spec.get("spk_h", SPK_H), t, vis[min(f, n - 1)], mood, fr.g, spec["character"])
         tr = spec.get("tracker")
@@ -218,19 +241,22 @@ def main():
                     place(fr, im, tr.get("x", W / 2), tr.get("y", 1480), pop_scale(t - t_in, False), k)
         rc = spec.get("receipt")
         if rc and t >= cue(rc["at"], rc.get("delay", 0.0)):
-            t_in = cue(rc["at"], rc.get("delay", 0.0)); rw, rh_ = rc.get("w", 330), 60 + 44 * (len(rc["items"]) + 2)
+            t_in = cue(rc["at"], rc.get("delay", 0.0)); rw, rh_ = rc.get("w", 360), 84 + 54 * len(rc["items"]) + 118
             def paint_r(f, rc=rc, rw=rw, rh_=rh_):
-                f.rrect([0, 0, rw, rh_], 10, WHITE, 1)
-                f.text((rw / 2, 18), rc["title"], font("xb", 26), INK, 1, anchor="ma", dy=0)
-                f.line([(20, 56), (rw - 20, 56)], (200, 195, 190, 255), 2)
+                f.rrect([0, 0, rw, rh_], 12, WHITE, 1)
+                f.text((rw / 2, 24), rc["title"], font("xb", fit(f, rc["title"], "xb", 28, rw - 40)), INK, 1, anchor="ma", dy=0)
+                isz = min(fit(f, it_, "b", 25, rw - 110) for it_, _ in rc["items"])
+                f.line([(24, 70), (rw - 24, 70)], (200, 195, 190, 255), 2)
                 for j, (item, price) in enumerate(rc["items"]):
-                    f.text((20, 72 + j * 44), item, font("b", fit(f, item, "b", 24, rw - 110)), INK, 1, dy=0)
-                    f.text((rw - 20, 72 + j * 44), price, font("b", 24), INK, 1, anchor="ra", dy=0)
-                yy = 72 + len(rc["items"]) * 44
-                f.line([(20, yy), (rw - 20, yy)], (200, 195, 190, 255), 2)
-                f.text((20, yy + 12), rc["total"][0], font("xb", 26), INK, 1, dy=0)
-                f.text((rw - 20, yy + 12), rc["total"][1], font("xb", 26), INK, 1, anchor="ra", dy=0)
-                f.text((rw / 2, yy + 54), rc["footer"], font("xb", fit(f, rc["footer"], "xb", 24, rw - 30)), GREEN, 1, anchor="ma", dy=0)
+                    f.text((24, 86 + j * 54), item, font("b", isz), INK, 1, dy=0)
+                    f.text((rw - 24, 86 + j * 54), price, font("b", 25), INK, 1, anchor="ra", dy=0)
+                yy = 84 + len(rc["items"]) * 54
+                f.line([(24, yy), (rw - 24, yy)], (200, 195, 190, 255), 2)
+                f.text((24, yy + 16), rc["total"][0], font("xb", 28), INK, 1, dy=0)
+                f.text((rw - 24, yy + 16), rc["total"][1], font("xb", 28), INK, 1, anchor="ra", dy=0)
+                ff = font("xb", fit(f, rc["footer"], "xb", 25, rw - 80)); fw = f.tl(rc["footer"], ff)
+                f.text((rw / 2 - 18, yy + 70), rc["footer"], ff, GREEN, 1, anchor="ma", dy=0)
+                mark(f, rw / 2 - 18 + fw / 2 + 22, yy + 84, 13, "check", 1)
             place(fr, sprite(("receipt", rc["title"], tuple(map(tuple, rc["items"]))), rw, rh_, paint_r), rc["x"], rc["y"],
                   pop_scale(t - t_in, True), appear(t, t_in, 0.15))
         nt = spec.get("note")
@@ -253,6 +279,15 @@ def main():
     if spec.get("music", True):
         from music import mix_under
         full = mix_under(full, sr)
+    for fx in spec.get("sfx", []):
+        a_, _ = sf.read(os.path.join(ROOT, fx["file"]) if not os.path.isabs(fx["file"]) else fx["file"])
+        if a_.ndim > 1: a_ = a_.mean(axis=1)
+        import tempfile
+        if _ != sr:
+            d_ = tempfile.mkdtemp(); i_, o_ = os.path.join(d_, "i.wav"), os.path.join(d_, "o.wav"); sf.write(i_, a_, _)
+            subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", i_, "-ar", str(sr), "-ac", "1", o_], check=True); a_, _ = sf.read(o_)
+        i0 = int(max(cue(fx["at"], -fx.get("lead", 0.0)), 0) * sr); a_ = a_ * fx.get("gain", 0.6)
+        if i0 < len(full): full[i0:i0 + len(a_)] += a_[:len(full) - i0]
     if spec.get("clicks", True):
         tk = click(sr, spec.get("click_gain", 0.06))
         extra = [cue(st_["at"], st_.get("delay", 0.0)) for st_ in (spec.get("tracker") or {}).get("steps", [])] + \
