@@ -78,8 +78,10 @@ def one_take(spec, tmp):
     # most like the approved reference recording of this character (spec "voice_reference").
     ref = voice_print(os.path.join(ROOT, spec["voice_reference"])) if spec.get("voice_reference") else None
     best = None
-    for seed in range(1, int(spec.get("takes", 1)) + 1):
-        h_, r_ = _el_request(vid, model, text.strip(), seed=seed if spec.get("takes", 1) > 1 else None)
+    # "seed": voice exactly that seeded take (the one Srini picked by ear) instead of choosing among "takes".
+    seeds = [int(spec["seed"])] if spec.get("seed") is not None else list(range(1, int(spec.get("takes", 1)) + 1))
+    for seed in seeds:
+        h_, r_ = _el_request(vid, model, text.strip(), seed=seed if (spec.get("seed") is not None or spec.get("takes", 1) > 1) else None)
         score = voice_distance(base64.b64decode(r_["audio_base64"]), ref, tmp) if ref else 0
         print(f"take {seed}: distance from reference {score:.1f}")
         if best is None or score < best[0]: best = (score, h_, r_)

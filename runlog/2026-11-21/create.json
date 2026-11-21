@@ -24,9 +24,53 @@
   },
   {
    "started_at": "2026-11-21T11:42:51-05:00",
-   "status": "running",
+   "status": "ok",
    "trigger": "manual",
-   "summary": "Fresh run in the Default environment, from today's metrics and the re-run brief. No Runway. This record was added by hand; it will be updated with the Reels once the run finishes."
+   "summary": "Made three Reels from the top three proven backlog bets (couple conflict, savings by age, Dollar Bill rules), each through the hook review and a cold review, with drawn characters only (no Runway). Sent to Srini for review; nothing approved or posted. v12 early read: 105 views, skip 66.3%, 0 shares; funnel 11-20: 0 Instagram landings.",
+   "finished_at": "2026-11-21T12:03:00-05:00",
+   "outputs": [
+    {
+     "label": "Hypothesis cards and workshop",
+     "path": "hypotheses/2026-11-21.md"
+    },
+    {
+     "label": "Specs",
+     "path": "hooks/2026-11-21-couple.json"
+    },
+    {
+     "label": "Specs",
+     "path": "hooks/2026-11-21-byage.json"
+    },
+    {
+     "label": "Specs",
+     "path": "hooks/2026-11-21-milk.json"
+    },
+    {
+     "label": "Queue",
+     "path": "queue.json"
+    },
+    {
+     "label": "Funnel 2026-11-20",
+     "path": "funnel/custom-2026-11-20_2026-11-20.json"
+    }
+   ],
+   "reels": [
+    {
+     "id": "2026-11-21-couple",
+     "hook": "$11,000 a month. $240 on the 23rd. He says \"we're fine.\"",
+     "status": "pending_review"
+    },
+    {
+     "id": "2026-11-21-byage",
+     "hook": "Forty, and earning $8K a month? Fidelity says you should have $288,000 saved.",
+     "status": "pending_review"
+    },
+    {
+     "id": "2026-11-21-milk",
+     "hook": "Went in for milk. Came out with $140.",
+     "status": "pending_review"
+    }
+   ]
   }
  ]
 }

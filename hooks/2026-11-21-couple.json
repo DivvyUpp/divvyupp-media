@@ -1,0 +1,217 @@
+{
+ "id": "2026-11-21-couple",
+ "format": "split",
+ "character_voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "music": true,
+ "speed": 1.1,
+ "max_gap": 0.32,
+ "keep_gap": {
+  "3": 0.6,
+  "7": 0.5
+ },
+ "sentences": [
+  "[curious] Eleven thousand a month between them. Two hundred and forty dollars in checking on the twenty-third. And Mark still says they're fine.",
+  "He's right about one thing. Every bill gets paid. Mortgage, daycare, the car: seventy-four hundred, on time, every month.",
+  "But Nina's right too. The thirty-six hundred left after the bills just goes, and nothing gets saved.",
+  "[thoughtful] Most couples think the fix is earning more. It isn't. It's the order.",
+  "Each payday, savings goes first. A thousand a month.",
+  "The other twenty-six hundred becomes one number for each day: about eighty-five dollars, six hundred a week. So they know before they spend.",
+  "Seventy dollars over on Thursday? The last three days of the week drop to about sixty, and the week still works.",
+  "[warm] Now, on the twenty-third, there's a thousand saved, and about seven hundred left for the last week. Nina was right to worry. Now Mark's right too.",
+  "Save first. Then spend what's safe. Try it at Divvyup dot com."
+ ],
+ "band": {
+  "phases": [
+   {
+    "from": 0,
+    "lines": [
+     [
+      "$11,000 a month. $240 on the 23rd.",
+      "white"
+     ],
+     [
+      "He says \u201cwe're fine.\u201d",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 3,
+    "lines": [
+     [
+      "Not more income.",
+      "white"
+     ],
+     [
+      "The order.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 4,
+    "lines": [
+     [
+      "Each payday:",
+      "white"
+     ],
+     [
+      "$1,000 to savings first.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 5,
+    "lines": [
+     [
+      "The rest: $85 a day.",
+      "white"
+     ],
+     [
+      "Known before they spend.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 6,
+    "lines": [
+     [
+      "$70 over?",
+      "white"
+     ],
+     [
+      "The week adjusts.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 7,
+    "lines": [
+     [
+      "Send this to whoever",
+      "white"
+     ],
+     [
+      "says \u201cwe're fine.\u201d",
+      "orange"
+     ]
+    ]
+   }
+  ]
+ },
+ "halves": [
+  {
+   "person": "pipeline/assets/characters/presenter_e_happy.png",
+   "tint": [
+    228,
+    243,
+    233
+   ],
+   "tag": "Mark: \u201cWe're fine.\u201d",
+   "tag_color": "green",
+   "blocks": [
+    {
+     "label": "Take-home, both jobs",
+     "value": "$11,000",
+     "at": 0,
+     "word": "thousand"
+    },
+    {
+     "label": "Bills, paid on time",
+     "value": "$7,400",
+     "at": 1,
+     "word": "seventy",
+     "style": "good"
+    },
+    {
+     "label": "Saved each payday",
+     "value": "$1,000",
+     "at": 4,
+     "style": "good"
+    },
+    {
+     "label": "Safe to spend today",
+     "value": "$85",
+     "sub": "$600 a week",
+     "sub_color": "green",
+     "at": 5
+    }
+   ],
+   "badge": {
+    "text": "Bills: paid",
+    "color": "green",
+    "at": 1,
+    "word": "Every"
+   }
+  },
+  {
+   "person": "pipeline/assets/characters/presenter_c_worried.png",
+   "tint": [
+    250,
+    231,
+    227
+   ],
+   "tag": "Nina: \u201cWe're not.\u201d",
+   "tag_color": "red",
+   "blocks": [
+    {
+     "label": "Left after bills",
+     "value": "$3,600",
+     "at": 2,
+     "word": "thirty"
+    },
+    {
+     "label": "Saved this month",
+     "value": "$0",
+     "at": 2,
+     "word": "nothing",
+     "style": "bad"
+    },
+    {
+     "label": "$70 over on Thursday",
+     "value": "$60/day",
+     "sub": "last 3 days of the week",
+     "sub_color": "green",
+     "at": 6
+    },
+    {
+     "label": "Saved by the 23rd",
+     "value": "$1,000",
+     "sub": "+ about $700 to spend",
+     "sub_color": "white",
+     "at": 7,
+     "style": "good",
+     "big": true
+    }
+   ],
+   "badge": {
+    "text": "$240 on the 23rd",
+    "color": "red",
+    "at": 0,
+    "word": "Two"
+   }
+  }
+ ],
+ "note": {
+  "text": "Mark and Nina are an example, not real customers.",
+  "at": 0
+ },
+ "cta_lines": [
+  [
+   "Save first.",
+   "ink"
+  ],
+  [
+   "Then spend",
+   "ink"
+  ],
+  [
+   "what's safe.",
+   "orange"
+  ]
+ ],
+ "cta_at": 8
+}
