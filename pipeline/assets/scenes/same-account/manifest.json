@@ -1,0 +1,42 @@
+{
+ "s1": {
+  "file": "pipeline/assets/scenes/same-account/s1.png",
+  "runway_task": "f78021c3-fc01-463e-9843-e4efd46020d5"
+ },
+ "s2": {
+  "file": "pipeline/assets/scenes/same-account/s2.png",
+  "runway_task": "33486ce8-bbb3-4cad-ac22-1e2a8cbdde1e"
+ },
+ "s3a": {
+  "file": "pipeline/assets/scenes/same-account/s3a.png",
+  "runway_task": "2a2c6ca6-6103-443a-a87e-fe170f14bf7e"
+ },
+ "s3b": {
+  "file": "pipeline/assets/scenes/same-account/s3b.png",
+  "runway_task": "6f12c5df-bfed-4d8e-a158-30feb214c662"
+ },
+ "s4": {
+  "file": "pipeline/assets/scenes/same-account/s4.png",
+  "runway_task": "d7144944-df20-4865-8d17-b3a8adc16c4d"
+ },
+ "s5": {
+  "file": "pipeline/assets/scenes/same-account/s5.png",
+  "runway_task": "0d1b63b3-6015-4363-b8c6-70bd4459a6ad"
+ },
+ "s6": {
+  "file": "pipeline/assets/scenes/same-account/s6.png",
+  "runway_task": "cace06c7-f85e-4720-85eb-a723a737f77b"
+ },
+ "s7": {
+  "file": "pipeline/assets/scenes/same-account/s7.png",
+  "runway_task": "250def11-6629-46d0-b527-ebaf5108a6a1"
+ },
+ "s8": {
+  "file": "pipeline/assets/scenes/same-account/s8.png",
+  "runway_task": "3b3bf13d-5849-462c-990f-f0b78a0bb591"
+ },
+ "_portraits": {
+  "him": "62631f1d-a5ce-4352-8a3d-8722f6a94e95",
+  "her": "3c31a022-3d8d-434f-a65d-d186a07d6458"
+ }
+}
