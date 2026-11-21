@@ -12,8 +12,8 @@ Videos are served publicly by GitHub Pages at `https://divvyupp.github.io/divvyu
 - Post only through the Windsor.ai for Social Media connector: connector `instagram`, account `17841422626862357`
   (@getdivvyupp), action `create_video_post`, `share_to_feed: true`.
 - @getdivvyupp is the single main account for all DivvyUpp content (the personal @srinithinks account is retired).
-- Cadence (Srini, 2026-11-20, rapid-test phase): **up to 4 Reels a day**, one per slot at about 8am, noon, 5pm and
-  7pm ET, one Reel per proven format per day so every format gets a daily read. The Post run posts one approved Reel
+- Cadence (Srini, 2026-11-20, rapid-test phase): **up to 3 Reels a day** (changed 2026-11-21 from 4), one per slot at about noon, 5pm and
+  10pm ET, one Reel per proven format per day so every format gets a daily read. The Post run posts one approved Reel
   per slot, oldest first. Trial Reels stay off until 200 followers. If the scorecard shows extra posts hurting
   reach per Reel, propose cutting back. If anything fails, stop and tell Srini; do not retry a publish blindly (check with
   Windsor `get_data` for a media created today before any retry, so nothing posts twice). Trial Reels follow the same
@@ -115,16 +115,18 @@ Every bet names which of the three it is built to move. Scorecard per Reel at 72
 Compare each Reel with our own median, never outside benchmarks; under 100 views the read is inconclusive.
 
 ## The daily loop (replaces the weekly batch, agreed 2026-11-20)
-Three scheduled runs a day. Each reads this file, then its own run file.
+Scheduled runs (times changed 2026-11-21 so Create's Reels are ready when Srini wakes up): Each reads this file, then its own run file.
 
 | Time (ET) | Run | File | Job |
 |---|---|---|---|
-| 07:00 | Research | `runs/research.md` | Look outward. Find better ways to make content that works, from any creator, tool or format. Feed `backlog.md`. Not tied to any one framework. |
-| 09:00 | Create | `runs/create.md` | Postmortem on recent Reels → update `learnings.md` → pick one bet → workshop the script → render → send to Srini. On Mondays it starts with the weekly review. |
-| 08:00, 12:00, 17:00, 19:00 | Post | `runs/post.md` | Post one approved Reel per slot, oldest first. |
-| Sun 05:30 | Watchlist | `runs/watchlist.md` | Re-check every watchlist account against the entry bar; find and add new ones. |
+| Sun 05:00 | Watchlist | `runs/watchlist.md` | Re-check every watchlist account against the entry bar; find and add new ones. Done before Sunday's Research. |
+| Mon 05:37 | Weekly funnel (GitHub Action) | `.github/workflows/funnel-weekly.yml` | Last Mon–Sun funnel to `funnel/<year>-W<week>.json`, for Monday's weekly review and the blog report. |
+| 05:53 | Metrics pull | `runs/metrics.md` | Pull Instagram numbers with Windsor into `metrics/<date>.json`, `experiment-log.csv` and `followers.csv`. Data only. |
+| 05:57 | Research | `runs/research.md` | Look outward. Find better ways to make content that works, from any creator, tool or format. Feed `backlog.md`. Not tied to any one framework. |
+| 06:27 | Create | `runs/create.md` | Postmortem on recent Reels → update `learnings.md` → pick bets → workshop the scripts → render → send to Srini. On Mondays it starts with the weekly review. |
+| 11:57, 16:57, 21:57 | Post | `runs/post.md` | Post one approved Reel per slot, oldest first. |
 
-Srini approves each day's videos in chat, ideally by 5pm ET. No approval, no post.
+Srini approves each day's videos in chat, ideally by 11:30am ET (he reviews from about 9am). No approval, no post.
 
 ### Files that hold the loop's memory
 - `learnings.md`: the rulebook. Each rule cites the Reels that support it. Rules can be overturned by new data.
@@ -132,6 +134,7 @@ Srini approves each day's videos in chat, ideally by 5pm ET. No approval, no pos
 - `research/<date>.md`: each day's research brief, with sources.
 - `hypotheses/<date>.md`: each day's hypothesis card, script workshop and later its postmortem.
 - `experiment-log.csv`: one row per posted Reel (main or trial), with the bet, prediction and verdict.
+- `metrics/<date>.json`: each morning's Windsor pull (written by the Metrics pull run, read by Create).
 - `funnel/`: weekly exports (Monday) plus one-day exports `funnel/custom-<d>_<d>.json` the Create run requests.
 
 ### Hypothesis card (one per main Reel; trial variants share the card)
@@ -171,9 +174,13 @@ Start from this list. Research may propose changes; Create applies a change only
    there. Check with `make_split_reel.py --check --zones` (red = covered) before sending a Reel for review.
 9. **Hook and payoff (Srini, 2026-11-20).** Write down four things before the script: the hook (0–2 s, one specific
    question, same words on screen and in the voice), what the viewer stays for (that question in one line), a
-   rehook at about 40% using one of the retention devices in `research/reel-ideas-2026-11-20.md` (result first;
-   not A or B but C; common belief then contradict it; "but here's the better way"; "but this won't work unless"),
-   and the payoff in the last 5–8 s that answers exactly the hook's question. No bait. The cold review must say what
+   rehook at about 40% using a retention device (result first; not A or B but C; common belief then contradict
+   it; "but here's the better way"; "but this won't work unless"),
+   and the payoff in the last 5–8 s that answers exactly the hook's question. No bait. Srini's calls on hooks
+   (2026-11-20; taste and two-reviewer tests, not yet our data): a contrast beats a plain moment (same income, very
+   different savings); give income per month; never give the answer away in the hook; skip topics few people care
+   about or that need explaining. The reviewers stopped for a moment they're in (a balance on a date) or something
+   they can check tonight, and scrolled past big totals, "the average couple" and teasers that hide what "this" is. The cold review must say what
    question it was waiting on and whether the payoff answered it.
 
 ### Trial Reels

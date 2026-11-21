@@ -1,4 +1,4 @@
-# Watchlist run (weekly, Sunday 05:30 ET)
+# Watchlist run (weekly, Sunday 05:00 ET)
 
 Keep `research/watchlist.csv` honest: every account on it meets the entry bar in `research/watchlist.md`, and good
 new accounts get in. Needs env `YOUTUBE_API_KEY` and `www.googleapis.com` allowed; if either is missing, tell Srini

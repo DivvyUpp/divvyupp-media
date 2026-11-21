@@ -1,4 +1,4 @@
-# Research run (daily, 07:00 ET)
+# Research run (daily, 05:57 ET)
 
 Your job is to look outward. Find better and better ways to make short-form content that works, and turn them into
 bets the Create run can test. You feed the loop; you do not make or post videos.
