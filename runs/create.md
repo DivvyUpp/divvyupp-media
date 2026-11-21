@@ -83,13 +83,16 @@ video as `reels/<id>.mp4`: the dashboard shows it there for Srini to review (the
    a caption each, and `"hypothesis": "hypotheses/<today>.md"`. Commit and push `reels/`, `hooks/`, `queue.json` and
    today's run log record to main straight away, so the Reels show on the dashboard
    (https://divvyupp.github.io/divvyupp-media/dashboard/) before you message Srini.
-2. Send Srini the videos (SendUserFile) and one short note:
+2. Send Srini a push notification (PushNotification): "<n> Reels ready for review" with the review page link
+   https://divvyupp.github.io/divvyupp-media/dashboard/review.html. Do this every time, even if the run's own
+   notification also fires. If the tool isn't available, say so at the top of your message.
+3. Send Srini the videos (SendUserFile) and one short note:
    - research: one line from today's brief;
    - postmortem: one line per Reel judged today (verdict and why);
    - today's card (bet, variable, prediction);
    - captions; ask him to approve, edit or reject each **by 11:30am ET** (he reviews from about 9am; the Post slots are noon, 5pm and 10pm, and anything approved later goes out in the next free slot).
    Put the dashboard link at the top. On Mondays, put the weekly scorecard first.
-3. When he replies: apply edits (re-render and resend anything that changed), set approved entries to
+4. When he replies: apply edits (re-render and resend anything that changed), set approved entries to
    `"approved"`, set rejected ones to `"rejected"` and delete their video from `reels/`, then commit and push `hooks/`,
    `reels/`, `queue.json`,
    `experiment-log.csv`, `learnings.md`, `backlog.md` and `hypotheses/` to main. Confirm one Pages link loads.

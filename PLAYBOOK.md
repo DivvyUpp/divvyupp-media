@@ -225,6 +225,9 @@ https://divvyupp.github.io/divvyupp-media/dashboard/ (pick a date). The page onl
   paths. `reels` only for Create (every Reel sent for review, updated to `approved`/`rejected` when Srini answers)
   and Post (what posted, with `permalink`). `file` only once the video is in the repo. Leave out fields that don't
   apply. Never put personal data, keys or tokens in a record.
+- Pushing: push to main. If the session only lets you push to your own `claude/...` branch, push there: the
+  "Merge run branches into main" GitHub Action merges any branch with a `runlog/` record into main within a minute
+  (it stops on a conflict, which then needs merging by hand). Don't open a pull request for run work.
 - Write the record as the last step, commit it with the run's other files and push. **Write it even when blocked
   or failed**, then push it on its own. If the push itself fails, say so to Srini: the dashboard will show the run as
   "no record".
