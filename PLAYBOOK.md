@@ -47,7 +47,7 @@ Current template (approved 2026-11-16), copy `hooks/2026-11-19-a.json`:
 - hook → **four-numbers `plan` scene** (income and fixed bills checked against bank history, savings you pick,
   safe-to-spend; replaces the old "flips the order" body section, `skip_flip: true`) → guide with **two `spends`**
   → payoff → `"ending": "rendered"` (guarantee + CTA in the same voice, new guarantee wording; the CTA line is
-  "Save first. Then spend with confidence. Try it at divvyupp dot com.", which Srini prefers to the bare URL).
+  "Save first. Then spend with confidence. Try it at divvy up dot com." (write it "divvy up" in voice scripts: the voice mispronounces "divvyupp"; Srini, 2026-11-20), which Srini prefers to the bare URL).
 - Optional data-backed `stat` card in the hook (guess vs actual, or a %), only from a real, checked source shown
   on screen (e.g. C+R Research 2022: subscriptions guessed $86 vs actual $219; PYMNTS/LendingClub Sept 2023: 44% of
   >$100K earners live paycheck to paycheck). Never invent a statistic.
