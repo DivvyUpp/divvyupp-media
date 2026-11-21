@@ -3,14 +3,14 @@
 The scheduled routines were made in the Claude app, so they are changed there. Each prompt is short on purpose: the
 logic lives in this repo, so changing the loop means editing `PLAYBOOK.md` and `runs/*.md`, not the routines.
 
-## 1. Research (new routine) — every day, 07:00 America/New_York
+## 1. Research (new routine) — every day, 05:57 America/New_York
 Connectors: none beyond GitHub. Web search and fetch on.
 
 ```
 You run the daily Research run for DivvyUpp's content loop (Instagram @getdivvyupp; DivvyUpp is a safe-to-spend personal finance app, divvyupp.com). Make sure the GitHub repo DivvyUpp/divvyupp-media is available (attach it with push access if it is not, then clone it). Read PLAYBOOK.md, then runs/research.md, and follow them exactly. Those files are the source of truth; if they differ from this prompt, they win. Never sign up for, buy, post or send anything. If something blocks you, tell Srini exactly what and stop.
 ```
 
-## 2. Create (replaces "DivvyUpp Reels: Monday plan and produce") — every day, 09:00 America/New_York
+## 2. Create (replaces "DivvyUpp Reels: Monday plan and produce") — every day, 06:27 America/New_York
 Runs in the Default cloud environment (it has `ELEVENLABS_API_KEY` and allows `api.elevenlabs.io`). Connectors: none,
 because tasks in that environment get none; the Instagram numbers come from the Metrics pull below. Repos:
 DivvyUpp/divvyupp-media (push), DivvyUpp/divvyupp (push, Mondays, for the dashboard on outreach-log).
@@ -19,14 +19,14 @@ DivvyUpp/divvyupp-media (push), DivvyUpp/divvyupp (push, Mondays, for the dashbo
 You run the daily Create run for DivvyUpp's Instagram Reels loop (@getdivvyupp). Make sure the GitHub repo DivvyUpp/divvyupp-media is available (attach it with push access if it is not, then clone it). Read PLAYBOOK.md, then runs/create.md, and follow them exactly. Those files are the source of truth; if they differ from this prompt, they win. On Mondays runs/create.md starts with the weekly review and the Growth Tracker dashboard update, which also needs DivvyUpp/divvyupp with push access (outreach-log branch only, never main). NEVER publish anything in this run and never mark anything approved without Srini's explicit yes in this session. If something blocks you, tell Srini exactly what and stop.
 ```
 
-## 2b. Metrics pull — every day, 08:31 America/New_York
+## 2b. Metrics pull — every day, 05:53 America/New_York
 Runs on Cowork (it needs the Windsor.ai for Social Media connector). Repos: DivvyUpp/divvyupp-media (push).
 
 ```
 You run the daily Metrics pull for DivvyUpp's Instagram Reels loop (@getdivvyupp). Make sure the GitHub repo DivvyUpp/divvyupp-media is available (attach it with push access if it is not, then clone it). Read runs/metrics.md and follow it exactly. Use the Windsor.ai for Social Media connector (connector instagram, account 17841422626862357). Data only: never post, publish or change anything outside the files runs/metrics.md names. If something blocks you, tell Srini exactly what and stop.
 ```
 
-## 3. Post (replaces the prompt of "DivvyUpp Reels: post today's approved Reel") — every day, 19:00 America/New_York
+## 3. Post (replaces the prompt of "DivvyUpp Reels: post today's approved Reel") — three slots a day, 11:57, 16:57 and 21:57 America/New_York
 
 ```
 You post DivvyUpp's approved Instagram Reels for today to @getdivvyupp. Make sure the GitHub repo DivvyUpp/divvyupp-media is available (attach it with push access if it is not, then clone it). Read PLAYBOOK.md, then runs/post.md, and follow them exactly. Use the Windsor.ai for Social Media connector (connector instagram, account 17841422626862357). Only entries Srini explicitly approved (status "approved") may ever be posted; never post anything else, never edit captions. If publishing fails, do not retry blindly; tell Srini what failed.

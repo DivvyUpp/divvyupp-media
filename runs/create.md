@@ -1,4 +1,4 @@
-# Create run (daily, 09:00 ET)
+# Create run (daily, 06:27 ET)
 
 Learn from what posted, then make today's Reel around one clear bet. Never post in this run.
 
@@ -25,11 +25,11 @@ carry on), and the last 3 files in `hypotheses/`.
    as the README says. Never invent numbers. If the artifact tools aren't available, say so.
 
 ## 2. Read the data
-The Create run has no Windsor connector. The Metrics pull run (`runs/metrics.md`, 08:31 ET) pulls the Instagram
+The Create run has no Windsor connector. The Metrics pull run (`runs/metrics.md`, 05:53 ET) pulls the Instagram
 numbers with Windsor and commits them before this run starts.
 1. `git pull` and read `metrics/<today>.json`. It holds every Reel posted in the last 8 days (views, reach, skip
    rate, avg watch, shares, saves, likes), today's `followers_count` and yesterday's `views_non_followers`. The
-   pull has already written `read_14h` / `read_72h` into `experiment-log.csv` and today's row in `followers.csv`.
+   pull has already written `read_d1` / `read_72h` into `experiment-log.csv` and today's row in `followers.csv`.
    If `metrics/<today>.json` is missing, say **"Instagram numbers unavailable: the metrics pull didn't land"** at
    the top of the note to Srini, mark every postmortem due today **inconclusive (no data)**, never guess a number,
    and carry on with steps 4–7.
@@ -40,7 +40,7 @@ numbers with Windsor and commits them before this run starts.
    `bank_linked`). Write them on the rows posted that day. If it fails, say "funnel unavailable" and carry on.
 
 ## 3. Postmortem
-For each Reel with a fresh `read_72h` (and, as an early signal only, yesterday's `read_14h`):
+For each Reel with a fresh `read_72h` (and, as an early signal only, yesterday's `read_d1`):
 1. Compare with its card's prediction. Verdict: **supported**, **refuted** or **inconclusive** (noise rules apply).
 2. Ask why, in one or two lines. Was it the bet, the script, or the execution (voice, visuals, length)?
    Use watch time against video length to say where viewers left.
@@ -48,8 +48,8 @@ For each Reel with a fresh `read_72h` (and, as an early signal only, yesterday's
    `experiment-log.csv`.
 4. Update `learnings.md` only as the noise rules allow. Note which goal layer moved, not just views.
 
-## 4. Pick today's bets (rapid-test phase: up to 4 Reels a day)
-Make **one Reel per proven format** in `backlog.md` (proven bets first), up to 4, using the next unused idea in the
+## 4. Pick today's bets (rapid-test phase: up to 3 Reels a day)
+Make **one Reel per proven format** in `backlog.md` (proven bets first), up to 3, using the next unused idea in the
 latest `research/reel-ideas-*.md` or a new one that follows the same pattern. For the news format, check this week's
 money headlines first; skip it if nothing touches household spending. Each Reel has its own card in
 `hypotheses/<today>.md`; the variable is the format, the control is the median of our last 5 Reels. Lengths 30–50 s
@@ -80,7 +80,7 @@ unapproved videos in a scratch folder, not in the repo (the repo is public).
    - research: one line from today's brief;
    - postmortem: one line per Reel judged today (verdict and why);
    - today's card (bet, variable, prediction);
-   - captions; ask him to approve, edit or reject each **by 5pm ET**.
+   - captions; ask him to approve, edit or reject each **by 11:30am ET** (he reviews from about 9am; the Post slots are noon, 5pm and 10pm, and anything approved later goes out in the next free slot).
    On Mondays, put the weekly scorecard and dashboard link first.
 3. When he replies: apply edits (re-render and resend anything that changed), set approved entries to
    `"approved"`, drop rejected ones, then commit and push `hooks/`, approved `reels/`, `queue.json`,

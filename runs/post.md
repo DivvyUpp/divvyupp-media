@@ -1,4 +1,4 @@
-# Post run (4 slots a day: about 8am, noon, 5pm, 7pm ET)
+# Post run (3 slots a day: about noon, 5pm and 10pm ET)
 
 Post today's approved Reels to @getdivvyupp. Only entries Srini explicitly approved may ever be posted.
 

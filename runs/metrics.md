@@ -1,6 +1,6 @@
-# Metrics pull (daily, 08:31 ET)
+# Metrics pull (daily, 05:53 ET)
 
-Pull yesterday's Instagram numbers with Windsor and commit them, so the Create run (09:00, which runs without
+Pull yesterday's Instagram numbers with Windsor and commit them, so the Create run (06:27, which runs without
 connectors) can read them from the repo. Data only: no postmortem, no verdicts, no edits to anything else. Never post.
 
 1. `TZ=America/New_York date +%F` gives today.
@@ -13,7 +13,7 @@ connectors) can read them from the repo. Data only: no postmortem, no verdicts, 
    "reels": [{"media_id": "...", "permalink": "...", "posted": "<date>", "views": N, "reach": N, "skip_rate": N,
    "avg_watch_s": N, "shares": N, "saves": N, "likes": N, "interactions": N}]}`.
    Write exactly what Windsor returns; use `null` for anything it does not return. Never estimate a number.
-4. Write into `experiment-log.csv`: `read_14h` for yesterday's Reels and `read_72h` for Reels posted 3 days ago,
+4. Write into `experiment-log.csv`: `read_d1` (first-morning read, about 8–18 h after posting) for yesterday's Reels and `read_72h` for Reels posted 3 days ago,
    as `views/skip%/avg_watch_s/shares/saves/likes`, and refresh the stats columns with the latest read. Avg watch
    is in seconds. Append `<today>,<followers_count>` to `followers.csv` (skip if today's row already exists).
 5. Commit `metrics/`, `experiment-log.csv` and `followers.csv` ("metrics: <today>") and push to main. If the push
