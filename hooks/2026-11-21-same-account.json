@@ -52,7 +52,8 @@
      "who": "her",
      "text": "[excited] Honey! Look what I got!"
     }
-   ]
+   ],
+   "clip_direction": "She bursts in with the bags and, for a split second, her eyes flick to the laptop he is snapping shut; tiny knowing smile, then straight back to excited."
   },
   {
    "name": "3a Something for her",
@@ -215,14 +216,14 @@
     },
     {
      "who": "her",
-     "text": "[laughing, proud] Good thing I saved six hundred for the hotel!",
+     "text": "[laughing, playful] You left the tab open! I saved six hundred for the hotel.",
      "gap": 0.25
     }
    ],
    "overlays": [
     {
      "type": "note",
-     "text": "Surprise! I saved $600 for our hotel. xo",
+     "text": "I saw the Paris tab. Saved $600 for the hotel. xo",
      "at_line_end": 0,
      "delay": 0.25,
      "y": 1020
