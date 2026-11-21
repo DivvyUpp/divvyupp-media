@@ -24,18 +24,28 @@ from make_beat_reel import v_cta, fit, mark, wrap, GREEN, RED
 from make_split_reel import SAFE_TOP, SAFE_BOT, SAFE_L, ZONES, tighten, click, sprite, place, pop_scale, COLS
 
 SOFT_G = (226, 244, 233); SOFT_R = (250, 228, 224)
-PAIRS_TOP, PAIRS_BOT, PAIRS_R = 470, 1130, W - 80      # rule rows end above the button rail (y>=1150)
+PAIRS_TOP, PAIRS_BOT, PAIRS_R = 400, 1140, W - 80      # rule rows end above the button rail (y>=1150)
 SPK_TOP, SPK_H = 1170, 700                             # speaker at the bottom; may run into covered areas
 
-def card(w, h, text, ok):
+def card(w, h, text, ok, size):
+    """One rule card. All cards in a Reel share the same size and font size (set by fit_size) so they read as a set."""
     def paint(f):
-        f.rrect([0, 0, w, h], 26, SOFT_G if ok else SOFT_R, 1)
-        size = min(44, h * 0.29); lines = wrap(f, text, "b", size, w - 110)[:3]
-        lh = size * 1.22; y0 = h / 2 - lh * len(lines) / 2 + lh / 2
+        f.rrect([0, 0, w, h], 24, SOFT_G if ok else SOFT_R, 1)
+        f.rrect([0, 0, 10, h], 5, GREEN if ok else RED, 1)                 # colour edge on the left
+        lines = wrap(f, text, "b", size, w - 112)[:2]
+        lh = size * 1.2; y0 = h / 2 - lh * len(lines) / 2 + lh / 2
         for i, l in enumerate(lines):
-            f.text((24, y0 + i * lh), l, font("b", size), INK if ok else GREY, 1, anchor="lm", dy=0)
-        mark(f, w - 46, h / 2, 26, "check" if ok else "x", 1)
-    return sprite(("card", round(w), round(h), text, ok), w, h, paint)
+            f.text((34, y0 + i * lh), l, font("b", size), INK if ok else (110, 92, 88), 1, anchor="lm", dy=0)
+        mark(f, w - 44, h / 2, 24, "check" if ok else "x", 1)
+    return sprite(("card", round(w), round(h), text, ok, round(size)), w, h, paint)
+
+def fit_size(fr, texts, w, h, start=46):
+    """Largest font size at which every card's text fits in two lines."""
+    size = start
+    while size > 24:
+        if all(len(wrap(fr, tx, "b", size, w - 112)) <= 2 for tx in texts) and size * 2.5 < h: return size
+        size -= 1
+    return size
 
 def main():
     import soundfile as sf
@@ -80,19 +90,24 @@ def main():
         elif header:
             size = fit(fr, header, "xb", 64, W - 2 * SAFE_L)
             fr.text((W / 2, SAFE_TOP + 40), header, font("xb", size), INK, 1, anchor="ma", dy=0)
-        # rule pairs
-        prs = spec.get("pairs", []); shown = [p for p in prs if t >= cue(p["at"], p.get("delay", 0.0))]
-        if shown and not title:
-            rh = min(170, (PAIRS_BOT - PAIRS_TOP - 14 * (len(prs) - 1)) / len(prs)); cw = (PAIRS_R - SAFE_L - 20) / 2
+        # rule pairs: the good way always on the left, the bad way always on the right
+        prs = spec.get("pairs", []); first = min((cue(p["at"], p.get("delay", 0.0)) for p in prs), default=total)
+        if prs and not title and t >= first:
+            cw = (PAIRS_R - SAFE_L - 24) / 2; lab_h = 0; gap = 18
+            rh = min(160, (PAIRS_BOT - PAIRS_TOP - 70 - len(prs) * (lab_h + gap)) / len(prs))
+            fs = fit_size(fr, [x for p in prs for x in (p["good_text"], p["bad_text"])], cw, rh)
+            hk = appear(t, first - 0.1, 0.25)
+            for side, txt, col in ((0, "DO THIS", GREEN), (1, "NOT THIS", RED)):
+                x = SAFE_L + side * (cw + 24)
+                fr.text((x + cw / 2, PAIRS_TOP + 14), txt, font("xb", 34), col, hk, anchor="ma", dy=0)
             for j, p in enumerate(prs):
                 t_in = cue(p["at"], p.get("delay", 0.0))
                 if t < t_in: continue
-                y = PAIRS_TOP + j * (rh + 14); age = t - t_in
-                for side in ("left", "right"):
-                    ok = side == p.get("good", "right"); x = SAFE_L if side == "left" else SAFE_L + cw + 20
-                    a2 = age - (0.18 if ok else 0.0)                    # the ✓ side lands a beat after the ✗
+                y = PAIRS_TOP + 70 + j * (rh + lab_h + gap); age = t - t_in
+                for side, ok, txt in ((0, True, p["good_text"]), (1, False, p["bad_text"])):
+                    x = SAFE_L + side * (cw + 24); a2 = age - (0.0 if ok else 0.18)    # ✓ first, then ✗
                     if a2 < 0: continue
-                    place(fr, card(cw, rh, p[side], ok), x + cw / 2, y + rh / 2, pop_scale(a2, ok), appear(t, t_in + (0.18 if ok else 0), 0.12))
+                    place(fr, card(cw, rh, txt, ok, fs), x + cw / 2, y + lab_h + rh / 2, pop_scale(a2, False), appear(t, t_in + (0 if ok else 0.18), 0.12))
         mood = phase(spec.get("moods"), t, "mood") or "happy"
         character(fr.layer, W / 2, SPK_TOP, SPK_H, t, vis[min(f, n - 1)], mood, fr.g, spec["character"])
         nt = spec.get("note")

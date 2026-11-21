@@ -1,0 +1,123 @@
+{
+ "id": "2026-11-21-rules-v2",
+ "character": "raccoon_soft3d",
+ "character_voice": "elevenlabs:loY1uopAz31XyhAEhNSa:eleven_v3",
+ "voice_prefix": "[excited] Whoa, whoa, whoa. I've seen your bank history! [laughs] Four coffees, two takeouts, AND a quick little online order? On a TUESDAY? [smug] Relax, pal. I'm a raccoon. I know exactly where money disappears to.",
+ "music": true,
+ "speed": 1.08,
+ "max_gap": 0.3,
+ "keep_gap": {
+  "7": 0.6
+ },
+ "sentences": [
+  "[excited] Whoa. Is this your fourth DoorDash order this week?",
+  "[smug] Relax. Here's how you order guilt-free, and still save money.",
+  "Rule one. Savings leaves the day you get paid. Not whatever's left.",
+  "Rule two. One daily number. Not a monthly budget.",
+  "Rule three. Overspent today? Tomorrow adjusts. Your savings stay put.",
+  "[mischievous] See? It's not spend less. It's spend in the right order. Which brings me to rule four.",
+  "[happy] Your DoorDash is in the plan. Order away.",
+  "Save first. Then spend what's safe. Try it at Divvyup dot com."
+ ],
+ "title": [
+  {
+   "from": 0,
+   "lines": [
+    [
+     "Is this your 4th",
+     "ink"
+    ],
+    [
+     "DoorDash order",
+     "ink"
+    ],
+    [
+     "this week?",
+     "orange"
+    ]
+   ]
+  },
+  {
+   "from": 1,
+   "lines": [
+    [
+     "4th DoorDash this week?",
+     "ink"
+    ],
+    [
+     "Order guilt-free",
+     "orange"
+    ],
+    [
+     "and still save.",
+     "orange"
+    ]
+   ]
+  },
+  {
+   "from": 2,
+   "lines": null
+  }
+ ],
+ "header": [
+  {
+   "from": 2,
+   "text": "Dollar Bill's rules"
+  },
+  {
+   "from": 5,
+   "text": "It's not spend less. It's the order."
+  },
+  {
+   "from": 6,
+   "text": "Dollar Bill's rules"
+  }
+ ],
+ "pairs": [
+  {
+   "good_text": "Save the day you get paid",
+   "bad_text": "Save whatever's left",
+   "at": 2
+  },
+  {
+   "good_text": "One daily number",
+   "bad_text": "A monthly budget",
+   "at": 3
+  },
+  {
+   "good_text": "Overspent? Tomorrow adjusts",
+   "bad_text": "Overspent? Dip into savings",
+   "at": 4
+  },
+  {
+   "good_text": "DoorDash is in the plan",
+   "bad_text": "Never order again",
+   "at": 6
+  }
+ ],
+ "moods": [
+  {
+   "from": 0,
+   "mood": "unimpressed"
+  },
+  {
+   "from": 2,
+   "mood": "happy"
+  }
+ ],
+ "cta_lines": [
+  [
+   "Save first.",
+   "ink"
+  ],
+  [
+   "Then spend",
+   "ink"
+  ],
+  [
+   "what's safe.",
+   "orange"
+  ]
+ ],
+ "cta_at": 7
+}
