@@ -4,8 +4,8 @@ Learn from what posted, then make today's Reel around one clear bet. Never post 
 
 ## 0. Set up
 `bash pipeline/setup.sh` (once per machine). `TZ=America/New_York date +%F` gives today. Read `PLAYBOOK.md`,
-`learnings.md`, `backlog.md`, today's `research/<today>.md` (if the Research run has not written it, say so and
-carry on), and the last 3 files in `hypotheses/`.
+`learnings.md`, `backlog.md` and the last 3 files in `hypotheses/`. Read today's `research/<today>.md` only to quote
+one line of it to Srini (if the Research run has not written it, say so and carry on); ideas never come from it.
 
 ## 1. Monday only: weekly review (do this first)
 1. Read the weekly funnel: the GitHub Action `Funnel weekly fetch` writes last Monday–Sunday (ET) to
@@ -49,9 +49,10 @@ For each Reel with a fresh `read_72h` (and, as an early signal only, yesterday's
 4. Update `learnings.md` only as the noise rules allow. Note which goal layer moved, not just views.
 
 ## 4. Pick today's bets (rapid-test phase: up to 3 Reels a day)
-Make **one Reel per proven format** in `backlog.md` (proven bets first), up to 3, using the next unused idea in the
-latest `research/reel-ideas-*.md` or a new one that follows the same pattern. For the news format, check this week's
-money headlines first; skip it if nothing touches household spending. Each Reel has its own card in
+Today's Reels come from `backlog.md` and nowhere else. Take bets from the top: **proven** first, then
+**supported**; never one marked needs proof or blocked. One Reel per bet, up to 3. Where a bet's row cites a
+research brief, read that part of the brief for its numbers and sources. An idea that is in a brief but not yet in
+the backlog isn't ready: leave it. If fewer than 3 bets qualify, make fewer and say why. Each Reel has its own card in
 `hypotheses/<today>.md`; the variable is the format, the control is the median of our last 5 Reels. Lengths 30–50 s
 unless the card says otherwise.
 

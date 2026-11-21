@@ -1,3 +1,6 @@
+> **Retired 2026-11-21.** A one-off from the 20 Nov planning session, kept for history. The Create run no longer
+> reads it: Reel ideas come only from `backlog.md`. Srini's hook notes from here moved to `PLAYBOOK.md` (item 9).
+
 # Reel ideas v4 (2026-11-20): Srini's edits on the v3 picks
 
 Srini's calls on v3: A2's contrast (same income, very different savings) is stronger than A3, which has no contrast;

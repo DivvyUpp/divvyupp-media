@@ -174,9 +174,13 @@ Start from this list. Research may propose changes; Create applies a change only
    there. Check with `make_split_reel.py --check --zones` (red = covered) before sending a Reel for review.
 9. **Hook and payoff (Srini, 2026-11-20).** Write down four things before the script: the hook (0–2 s, one specific
    question, same words on screen and in the voice), what the viewer stays for (that question in one line), a
-   rehook at about 40% using one of the retention devices in `research/reel-ideas-2026-11-20.md` (result first;
-   not A or B but C; common belief then contradict it; "but here's the better way"; "but this won't work unless"),
-   and the payoff in the last 5–8 s that answers exactly the hook's question. No bait. The cold review must say what
+   rehook at about 40% using a retention device (result first; not A or B but C; common belief then contradict
+   it; "but here's the better way"; "but this won't work unless"),
+   and the payoff in the last 5–8 s that answers exactly the hook's question. No bait. Srini's calls on hooks
+   (2026-11-20; taste and two-reviewer tests, not yet our data): a contrast beats a plain moment (same income, very
+   different savings); give income per month; never give the answer away in the hook; skip topics few people care
+   about or that need explaining. The reviewers stopped for a moment they're in (a balance on a date) or something
+   they can check tonight, and scrolled past big totals, "the average couple" and teasers that hide what "this" is. The cold review must say what
    question it was waiting on and whether the payoff answered it.
 
 ### Trial Reels
