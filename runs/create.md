@@ -74,25 +74,29 @@ No Runway in this run (Srini, 2026-11-21): use only images that are in the repo,
 `pipeline/assets/characters/` and the drawn presenters. Never point a spec at a `/tmp` path: older `hooks/` specs
 reference Runway images from past chat sessions that no longer exist. Srini polishes the visuals himself after review.
 Use `pipeline/make_story_reel.py` with a spec in `hooks/<today>-a.json` (trial variants `-t1`, `-t2`), or another
-format if the bet calls for it and the tool exists. `--check` first and look at every still; then render. Keep
-unapproved videos in a scratch folder, not in the repo (the repo is public).
+format if the bet calls for it and the tool exists. `--check` first and look at every still; then render. Save each
+video as `reels/<id>.mp4`: the dashboard shows it there for Srini to review (the repo is public; Srini accepted on
+2026-11-21 that Reels waiting for review are visible).
 
 ## 7. Queue and send
-1. Add queue entries with `"status": "pending_review"`, `"post_date": today`, `"kind": "main"`, a
-   caption each, and `"hypothesis": "hypotheses/<today>.md"`.
+1. Add queue entries with `"status": "pending_review"`, `"post_date": today`, `"kind": "main"`, `"file"`, `"hook"`,
+   a caption each, and `"hypothesis": "hypotheses/<today>.md"`. Commit and push `reels/`, `hooks/`, `queue.json` and
+   today's run log record to main straight away, so the Reels show on the dashboard
+   (https://divvyupp.github.io/divvyupp-media/dashboard/) before you message Srini.
 2. Send Srini the videos (SendUserFile) and one short note:
    - research: one line from today's brief;
    - postmortem: one line per Reel judged today (verdict and why);
    - today's card (bet, variable, prediction);
    - captions; ask him to approve, edit or reject each **by 11:30am ET** (he reviews from about 9am; the Post slots are noon, 5pm and 10pm, and anything approved later goes out in the next free slot).
-   On Mondays, put the weekly scorecard and dashboard link first.
+   Put the dashboard link at the top. On Mondays, put the weekly scorecard first.
 3. When he replies: apply edits (re-render and resend anything that changed), set approved entries to
-   `"approved"`, drop rejected ones, then commit and push `hooks/`, approved `reels/`, `queue.json`,
+   `"approved"`, set rejected ones to `"rejected"` and delete their video from `reels/`, then commit and push `hooks/`,
+   `reels/`, `queue.json`,
    `experiment-log.csv`, `learnings.md`, `backlog.md` and `hypotheses/` to main. Confirm one Pages link loads.
 
 ## 8. Run log
 Write your run log record (`runlog/<today>/create.json`, see "Run log" in `PLAYBOOK.md`) and push it with the rest; write it even if you stop early. Write it when you send the videos (each Reel with
-`status: pending_review` and its hook), and update that same attempt when Srini answers (approved / rejected, plus
-`file` for approved videos now in the repo).
+`status: pending_review` and its hook), and update that same attempt when Srini answers (approved / rejected).
+Include `file` for each Reel, since the videos are in the repo from the start.
 
 If something blocks you (render, voice, push), tell Srini exactly what and stop.
