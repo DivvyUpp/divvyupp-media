@@ -48,6 +48,13 @@
    "status": "ok",
    "trigger": "manual",
    "summary": "Nothing approved to post. Manual re-fire for 2026-11-21-dollar-bill-rules, but it was already posted at 12:35pm ET (media 17947366023368925), so nothing was published again."
+  },
+  {
+   "started_at": "2026-11-21T16:57:30-05:00",
+   "finished_at": "2026-11-21T16:58:14-05:00",
+   "status": "ok",
+   "trigger": "scheduled",
+   "summary": "5pm slot: Nothing approved to post. Three Reels (2026-11-21-couple, 2026-11-21-byage, 2026-11-21-milk) await Srini's review; three more are on hold."
   }
  ]
 }
