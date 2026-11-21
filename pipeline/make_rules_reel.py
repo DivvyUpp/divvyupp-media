@@ -125,8 +125,9 @@ def main():
             a0 = int((f_ / FPS - LEAD) * sr)
             if 0 <= a0 < len(vb): env[f_] = np.sqrt(np.mean(vb[a0:a0 + int(hop)] ** 2))
         if env.max() > 0: env = np.clip(env / np.percentile(env[env > 0.02 * env.max()], 85), 0, 1)
-        raw = list(vis); vis = movie_char.audio_track(vis, env, lead=spec.get("lip_lead", 1))
-        json.dump({"raw": raw, "smooth": vis}, open(os.path.join(tmp, "vis.json"), "w"))
+        raw = list(vis); lt_ = movie_char.letter_track(ch, st, en, env, LEAD, FPS, n)
+        vis = movie_char.audio_track(lt_, env, lead=spec.get("lip_lead", 1))
+        json.dump({"raw": raw, "smooth": vis, "env": env.tolist(), "cues": cues, "chars": [[c, LEAD + a, LEAD + b] for c, a, b in zip(ch, st, en)]}, open(os.path.join(tmp, "vis.json"), "w"))
     def cue(i, d=0.0): return cues[min(i, len(cues) - 1)] - 0.12 + d
     def phase(lst, t, key):
         cur = None

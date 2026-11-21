@@ -3,6 +3,7 @@ Same contract as animals.sprite / characters.sprite: sprite(name, mouth, blink, 
 import os
 from functools import lru_cache
 from PIL import Image
+import numpy as np
 
 ROOT = os.path.join(os.path.dirname(__file__), "assets", "characters")
 CHARS = {"raccoon_movie": dict(dir="raccoon_movie", mouth_box=(430, 560), eyes_box=(440, 380))}
@@ -58,29 +59,75 @@ def smooth(vis, fps=30, lead=2):
         out.append((v, nxt, 0.5) if nxt != v else (v, v, 1.0))
     return out
 
-def audio_track(vis, env, lead=1):
+VOWEL = {**{c: "A" for c in "a"}, **{c: "E" for c in "eiy"}, **{c: "O" for c in "o"}, **{c: "U" for c in "uw"}}
+
+def letter_track(ch, st, en, env, lead_s, fps, n):
+    """Per-frame (vowel kind, consonant) from the ElevenLabs character timings, cleaned up:
+    - words squeezed by the aligner (typically the first word after an [emotion] tag, e.g. "Rule" reported as
+      50 ms when it lasts ~350 ms) are re-timed to where the voice actually is, using the loudness `env`;
+    - a silent final e ("rule", "save") is ignored;
+    - each frame gets the vowel of the syllable it sits in (nearest vowel letter in the same word)."""
+    words, cur, tag = [], [], False
+    for c, a, b in zip(ch, st, en):
+        if c == "[": tag = True
+        elif c == "]": tag = False; continue
+        if tag: continue
+        if c.isalpha() or (c == "'" and cur): cur.append([c.lower(), lead_s + a, lead_s + b])
+        elif cur: words.append(cur); cur = []
+    if cur: words.append(cur)
+    for w in words:                                             # silent final e
+        if len(w) >= 4 and w[-1][0] == "e" and w[-2][0] not in "aeiouy" and w[-2][0] != "l" or \
+           (len(w) == 4 and w[-1][0] == "e" and w[-2][0] == "l"):
+            w[-2][2] = w[-1][2]; w.pop()
+    for k, w in enumerate(words):                               # re-time squeezed words
+        a, b = w[0][1], w[-1][2]; L = len(w)
+        if b - a >= 0.05 * L: continue
+        prev_end = words[k - 1][-1][2] if k else 0.0
+        nxt = words[k + 1][0][1] if k + 1 < len(words) else b + 0.3
+        f = int(a * fps)
+        while f - 1 > prev_end * fps and f - 1 >= 0 and env[f - 1] > 0.08: f -= 1
+        a2 = min(a, f / fps); b2 = max(b, min(nxt - 0.03, a2 + 0.08 * L))
+        for i, l in enumerate(w): l[1] = a2 + (b2 - a2) * i / L; l[2] = a2 + (b2 - a2) * (i + 1) / L
+    out = [(None, None)] * n
+    for w in words:
+        vow = [(l[0], (l[1] + l[2]) / 2) for l in w if l[0] in VOWEL]
+        for l in w:
+            for f in range(max(0, int(l[1] * fps)), min(n, int(np.ceil(l[2] * fps)))):
+                t = (f + 0.5) / fps
+                v = VOWEL[min(vow, key=lambda x: abs(x[1] - t))[0]] if vow else None
+                c = "M" if l[0] in "mbp" else "F" if l[0] in "fv" else None
+                out[f] = (v, c)
+    filled = [i for i, x in enumerate(out) if x[0]]                   # gaps between words: borrow the nearest vowel
+    import bisect
+    for f in range(n):
+        if out[f][0] is None and filled:
+            k = bisect.bisect_left(filled, f); cand = [filled[j] for j in (k - 1, k) if 0 <= j < len(filled)]
+            g = min(cand, key=lambda j: abs(j - f))
+            if abs(g - f) <= 5: out[f] = (out[g][0], None)
+    return out
+
+def audio_track(letters, env, lead=1):
     """Mouth track driven by the actual voice: how OPEN the mouth is comes from the loudness of the sound in each
     frame (so it can't drift from what you hear); the letters only pick the KIND of shape (round for o/u/w,
-    teeth on lip for f/v, closed lips for m/b/p). `env` = per-frame loudness 0..1 aligned with the video frames.
+    narrow for ee/i, teeth on lip for f/v, closed lips for m/b/p). `letters` = letter_track() output.
     Lips lead the sound by `lead` frames. Returns per-frame tuples (shape_from, shape_to, w) for sprite()."""
-    import numpy as np
-    n = len(vis); env = np.asarray(env, float)[:n]
+    n = len(letters); env = np.asarray(env, float)[:n]
     if len(env) < n: env = np.pad(env, (0, n - len(env)))
     e = np.concatenate([env[lead:], np.zeros(lead)]) if lead else env
-    kinds = [VISEME.get(v) if isinstance(v, str) else None for v in vis]
+    lt = letters[lead:] + [(None, None)] * lead
     seq = []
     for f in range(n):
-        win = [kinds[j] for j in range(max(0, f - 1), min(n, f + 3)) if kinds[j]]     # letters near this moment
-        x = e[f]
+        x = e[f]; vow, con = lt[f]
+        cons_near = [lt[j][1] for j in range(f, min(n, f + 2))]
         if x < 0.10: v = "rest"
-        elif "M" in [vis[j] for j in range(max(0, f), min(n, f + 2))] and x < 0.45: v = "rest"   # m/b/p: lips close
-        elif "F" in win[:2] and x < 0.5: v = "F"
-        elif any(k in ("O", "U") for k in win):
-            v = "U" if x < 0.35 else "O"
-        else:
-            v = "S" if x < 0.30 else "E" if x < 0.80 else "A"
+        elif "M" in cons_near and x < 0.45: v = "rest"                   # m/b/p: lips close
+        elif con == "F" and x < 0.5: v = "F"
+        elif vow == "O": v = "U" if x < 0.35 else "O"
+        elif vow == "U": v = "U" if x < 0.6 else "O"
+        elif vow == "E": v = "S" if x < 0.30 else "E"                     # ee/i: never the wide-open mouth
+        else: v = "S" if x < 0.30 else "E" if x < 0.80 else "A"
         seq.append(v)
-    for f in range(1, n - 1):                                         # drop single-frame flickers
+    for f in range(1, n - 1):                                             # drop single-frame flickers
         if seq[f - 1] == seq[f + 1] != seq[f]: seq[f] = seq[f - 1]
     out = []
     for f, v in enumerate(seq):
