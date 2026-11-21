@@ -1,0 +1,212 @@
+{
+ "id": "2026-11-21-rules-v6",
+ "character": "raccoon_soft3d",
+ "character_voice": "elevenlabs:loY1uopAz31XyhAEhNSa:eleven_v3",
+ "voice_prefix": "[excited] Whoa, whoa, whoa. I've seen your bank history! [laughs] Four coffees, two takeouts, AND a quick little online order? On a TUESDAY? [smug] Relax, pal. I'm a raccoon. I know exactly where money disappears to.",
+ "music": true,
+ "max_gap": 0.3,
+ "keep_gap": {
+  "7": 1.0
+ },
+ "sentences": [
+  "[excited] Whoa, whoa. Is this your FOURTH DoorDash order this week?",
+  "[smug] Relax, pal. Here's how you order guilt-free, and STILL save money.",
+  "[confident] Rule one! Savings leaves the day you get paid. Not whatever's left.",
+  "[laughs] Rule two. One daily number. Not some monthly budget.",
+  "[excited] Rule three. Overspent today? Tomorrow adjusts. Your savings stay put!",
+  "[mischievous] See? It's not spend less. It's spend in the right ORDER. Which brings me to rule four...",
+  "[excited] Ooh, that's mine! Right on time. [smug] See? I order guilt-free, because it's already in the plan.",
+  "Save first. Then spend what's safe. Try it at Divvyup dot com."
+ ],
+ "title": [
+  {
+   "from": 0,
+   "lines": [
+    [
+     "Is this your 4th",
+     "ink"
+    ],
+    [
+     "DoorDash order",
+     "ink"
+    ],
+    [
+     "this week?",
+     "orange"
+    ]
+   ]
+  },
+  {
+   "from": 1,
+   "lines": [
+    [
+     "4th DoorDash this week?",
+     "ink"
+    ],
+    [
+     "Order guilt-free",
+     "orange"
+    ],
+    [
+     "and still save.",
+     "orange"
+    ]
+   ]
+  },
+  {
+   "from": 2,
+   "lines": null
+  }
+ ],
+ "header": [
+  {
+   "from": 2,
+   "text": "Dollar Bill's rules"
+  },
+  {
+   "from": 5,
+   "text": "It's not spend less. It's the order."
+  },
+  {
+   "from": 6,
+   "text": "Dollar Bill's rules"
+  }
+ ],
+ "pairs": [
+  {
+   "good_text": "Save the day you get paid",
+   "bad_text": "Save whatever's left",
+   "at": 2
+  },
+  {
+   "good_text": "One daily number",
+   "bad_text": "A monthly budget",
+   "at": 3
+  },
+  {
+   "good_text": "Overspent? Tomorrow adjusts",
+   "bad_text": "Overspent? Dip into savings",
+   "at": 4
+  },
+  {
+   "good_text": "DoorDash is in the plan",
+   "bad_text": "Never order again",
+   "at": 6
+  }
+ ],
+ "moods": [
+  {
+   "from": 0,
+   "mood": "unimpressed"
+  },
+  {
+   "from": 2,
+   "mood": "happy"
+  }
+ ],
+ "cta_lines": [
+  [
+   "Save first.",
+   "ink"
+  ],
+  [
+   "Then spend",
+   "ink"
+  ],
+  [
+   "what's safe.",
+   "orange"
+  ]
+ ],
+ "cta_at": 7,
+ "pairs_top": 400,
+ "tracker": {
+  "sub": "Dollar Bill's order",
+  "color": [
+   214,
+   35,
+   0
+  ],
+  "x": 500,
+  "y": 1500,
+  "w": 780,
+  "hold": 2.4,
+  "steps": [
+   {
+    "text": "Order picked up",
+    "at": 2
+   },
+   {
+    "text": "Your driver is on the way",
+    "at": 3
+   },
+   {
+    "text": "Your driver is nearby",
+    "at": 4
+   },
+   {
+    "text": "Delivered!",
+    "at": 6,
+    "hold": 1.6
+   }
+  ],
+  "h": 128
+ },
+ "drop": [
+  {
+   "img": "pipeline/assets/props/takeout_bag.png",
+   "at": 6,
+   "delay": 1.3,
+   "x": 935,
+   "y": 1470,
+   "h": 160
+  }
+ ],
+ "receipt": {
+  "at": 6,
+  "delay": 2.4,
+  "x": 235,
+  "y": 1440,
+  "w": 310,
+  "title": "DOLLAR BILL'S ORDER",
+  "items": [
+   [
+    "Gourmet trash platter",
+    "$14"
+   ],
+   [
+    "Leftover pizza crusts",
+    "$6"
+   ],
+   [
+    "Half a burrito, extra cheese",
+    "$9"
+   ]
+  ],
+  "total": [
+   "Total",
+   "$29"
+  ],
+  "footer": "Paid from safe-to-spend ✓"
+ },
+ "takes": 4,
+ "voice_reference": "pipeline/assets/voices/raccoon_reference.wav",
+ "pairs_bot": 1000,
+ "spk_top": 1040,
+ "spk_h": 640,
+ "scene": {
+  "y_top": 1010,
+  "y_road": 1300,
+  "speed": 240,
+  "stop_at": 6,
+  "stop_delay": 0.6,
+  "rider": {
+   "img": "pipeline/assets/props/courier_scooter_red.png",
+   "x": 840,
+   "h": 230,
+   "enter_at": 0,
+   "enter_delay": 0.3,
+   "enter_dur": 1.6
+  }
+ }
+}

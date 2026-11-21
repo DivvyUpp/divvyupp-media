@@ -67,6 +67,18 @@ def notif(w, h, text, stage, n, sub, color=None):
             f.ellipse([cx - r, yy - r, cx + r, yy + r], (AC if i < stage else (225, 220, 216)) + (255,))
     return sprite(("notif", round(w), round(h), text, stage, n, sub, AC), w, h, paint)
 
+import random as _rnd
+def scenery(seed=4, length=2600):
+    """Simple flat scenery (buildings, trees, lamp posts) laid out along a loop of `length` px."""
+    r = _rnd.Random(seed); far, near, x = [], [], 0
+    while x < length:
+        w_ = r.randint(110, 190); h_ = r.randint(140, 260)
+        far.append((x, w_, h_, r.choice([(236, 214, 205), (226, 220, 232), (214, 228, 226), (240, 226, 206)]))); x += w_ + r.randint(10, 40)
+    x = 0
+    while x < length:
+        near.append((x, r.choice(["tree", "tree", "lamp"]))); x += r.randint(170, 300)
+    return far, near
+
 def fit_size(fr, texts, w, h, start=46):
     """Largest font size at which every card's text fits in two lines."""
     size = start
@@ -123,7 +135,7 @@ def main():
         prs = spec.get("pairs", []); first = min((cue(p["at"], p.get("delay", 0.0)) for p in prs), default=total)
         if prs and not title and t >= first:
             cw = (PAIRS_R - SAFE_L - 24) / 2; lab_h = 0; gap = 18
-            rh = min(160, (PAIRS_BOT - PT - 70 - len(prs) * (lab_h + gap)) / len(prs))
+            rh = min(160, (spec.get("pairs_bot", PAIRS_BOT) - PT - 70 - len(prs) * (lab_h + gap)) / len(prs))
             fs = fit_size(fr, [x for p in prs for x in (p["good_text"], p["bad_text"])], cw, rh)
             hk = appear(t, first - 0.1, 0.25)
             for side, txt, col in ((0, "DO THIS", GREEN), (1, "NOT THIS", RED)):
@@ -166,8 +178,34 @@ def main():
                     ty = dp["y"] + dp.get("h", 200) / 2 + 8
                     fr.rrect([dp["x"] - tw_ / 2 - 14, ty, dp["x"] + tw_ / 2 + 14, ty + 40], 20, WHITE, k)
                     fr.text((dp["x"], ty + 20), dp["tag"], tf, INK, k, anchor="mm", dy=0)
+        sc_ = spec.get("scene")
+        if sc_:
+            stop_t = cue(sc_["stop_at"], sc_.get("stop_delay", 0.0)) if sc_.get("stop_at") is not None else 1e9
+            speed = sc_.get("speed", 240)
+            dist = speed * min(t, stop_t) if t < stop_t + 0.6 else speed * stop_t       # world distance travelled
+            if stop_t <= t < stop_t + 0.6: dist = speed * stop_t + speed * 0.3 * (1 - (1 - (t - stop_t) / 0.6) ** 2)   # brake
+            far, near = scenery(); L = 2600; y0, yr = sc_["y_top"], sc_["y_road"]
+            for (x, w_, h_, col) in far:                                        # far buildings, slow parallax
+                xx = (x + dist * 0.35) % L - 300
+                if -w_ < xx < W: fr.rrect([xx, yr - h_, xx + w_, yr], 10, col, 1)
+            for (x, kind) in near:                                              # trees and lamp posts, full speed
+                xx = (x + dist) % L - 300
+                if not (-120 < xx < W + 120): continue
+                if kind == "tree":
+                    fr.rrect([xx - 7, yr - 90, xx + 7, yr], 4, (150, 110, 80), 1); fr.ellipse([xx - 48, yr - 175, xx + 48, yr - 75], (120, 178, 120, 255))
+                else:
+                    fr.rrect([xx - 4, yr - 190, xx + 4, yr], 3, (120, 120, 126), 1); fr.ellipse([xx - 16, yr - 205, xx + 16, yr - 180], (250, 226, 150, 255))
+            fr.rrect([0, yr - 2, W, yr + 42], 0, (92, 88, 92), 1)                # road
+            for xx in np.arange(-150 + (dist % 150), W + 150, 150): fr.rrect([xx, yr + 17, xx + 70, yr + 23], 3, (245, 240, 230), 1)
+            rd = sc_["rider"]; im = prop(rd["img"], rd.get("h", 220)); pw = im.width / S
+            t_e = cue(rd.get("enter_at", 0), rd.get("enter_delay", 0.3)); de = rd.get("enter_dur", 1.6)
+            if t >= t_e:
+                u = min(1.0, (t - t_e) / de); cx = W + pw / 2 + (rd["x"] - W - pw / 2) * (1 - (1 - u) ** 3)
+                moving = t < stop_t
+                bob = 4 * np.sin(t * 16) if moving else 0
+                fr.layer.alpha_composite(im, (int(cx * S - im.width / 2), int((yr - rd.get("h", 220) / 2 + 12 + bob) * S - im.height / 2)))
         mood = phase(spec.get("moods"), t, "mood") or "happy"
-        character(fr.layer, W / 2, SPK_TOP, SPK_H, t, vis[min(f, n - 1)], mood, fr.g, spec["character"])
+        character(fr.layer, W / 2, spec.get("spk_top", SPK_TOP), spec.get("spk_h", SPK_H), t, vis[min(f, n - 1)], mood, fr.g, spec["character"])
         tr = spec.get("tracker")
         if tr:
             stp = tr["steps"]; nw, nh = tr.get("w", 820), tr.get("h", 132)
