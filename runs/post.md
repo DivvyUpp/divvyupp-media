@@ -18,4 +18,6 @@ Post today's approved Reels to @getdivvyupp. Only entries Srini explicitly appro
    `get_data` first and tell Srini what failed.
 6. For each posted entry set `"status": "posted"` and `media_id`, add its row to `experiment-log.csv` (with `kind`,
    `bet`, `variable`, `control_id` and `prediction` copied from its `hypotheses/` card), commit and push to main.
-7. Send Srini one short line: what posted (main and trials) and the links.
+7. Write your run log record (`runlog/<today>/post.json`, see "Run log" in `PLAYBOOK.md`) and push it with the rest; write it even if you stop early. Each slot appends its own attempt, including slots where nothing was approved
+   (status `ok`, summary "Nothing approved to post").
+8. Send Srini one short line: what posted (main and trials) and the links.

@@ -31,6 +31,11 @@ Videos are served publicly by GitHub Pages at `https://divvyupp.github.io/divvyu
 - No competitor names, no maths equations on screen, no invented testimonials. The founder figure is
   "about $1,000 a month" saved; don't inflate it.
 
+- **This repo is public** (GitHub Pages serves the videos Instagram posts from). Never commit personal data (names,
+  emails, anyone's money details), keys or tokens. Business numbers, briefs and unposted Reels are visible to anyone
+  who looks; Srini accepted that on 2026-11-21. Revisit going private when sign-up numbers become confidential or user
+  data could land here; the videos would then need another public host.
+
 ## The offer and message (what every Reel sells)
 Fixed bills stay fixed. What's left is flexible money. DivvyUpp has you save first (you choose the amount),
 then gives a daily and weekly guide for the rest that adjusts when you overspend, before you spend, not after.
@@ -195,6 +200,34 @@ grid) and reported to Srini.
 The blog stays weekly because search moves in weeks. Each article or improvement the blog run approves gets a short
 card in `docs/seo/hypotheses.md` on the outreach-log branch of DivvyUpp/divvyupp: target query, bet, prediction,
 review date 4 weeks out. The weekly blog run reviews the cards that are due.
+
+## Run log (the dashboard reads it; added 2026-11-21)
+Every run writes one record so Srini can see the whole day on one page:
+https://divvyupp.github.io/divvyupp-media/dashboard/ (pick a date). The page only reads `runlog/`.
+
+- File: `runlog/<YYYY-MM-DD>/<run>.json`, with today's ET date and `<run>` one of `metrics`, `research`, `create`,
+  `post`, `watchlist`, `funnel`. One file per run per day; a second run the same day (a re-run, or the next Post
+  slot) **appends** to `attempts`, never rewrites earlier attempts.
+- Shape:
+  ```json
+  {"run": "research", "date": "2026-11-21", "attempts": [{
+    "started_at": "2026-11-21T05:57:10-05:00", "finished_at": "2026-11-21T06:03:40-05:00",
+    "status": "ok", "trigger": "scheduled",
+    "summary": "One or two plain sentences: what this run did and what it found.",
+    "blocker": "Only when status is blocked or failed: what stopped it and what would fix it.",
+    "outputs": [{"label": "Research brief", "path": "research/2026-11-21.md"}],
+    "reels": [{"id": "2026-11-21-a", "hook": "First line of the hook", "status": "pending_review",
+               "file": "reels/2026-11-21-a.mp4", "permalink": "https://www.instagram.com/reel/..."}]
+  }]}
+  ```
+  `status`: `ok`, `partial` (finished with a gap, e.g. a fallback data source), `blocked` (stopped and waiting on
+  Srini), `failed` (an error). `trigger`: `scheduled` or `manual`. Times are ET with offset. `outputs` are repo
+  paths. `reels` only for Create (every Reel sent for review, updated to `approved`/`rejected` when Srini answers)
+  and Post (what posted, with `permalink`). `file` only once the video is in the repo. Leave out fields that don't
+  apply. Never put personal data, keys or tokens in a record.
+- Write the record as the last step, commit it with the run's other files and push. **Write it even when blocked
+  or failed**, then push it on its own. If the push itself fails, say so to Srini: the dashboard will show the run as
+  "no record".
 
 ## How-it-works explainer (landing page)
 `python3 pipeline/make_explainer.py hooks/how-it-works-raccoon.json` renders the 1080p landscape explainer: Dollar Bill

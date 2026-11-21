@@ -1,0 +1,32 @@
+{
+ "run": "create",
+ "date": "2026-11-21",
+ "attempts": [
+  {
+   "started_at": "2026-11-21T09:02:47-05:00",
+   "finished_at": "2026-11-21T09:11:30-05:00",
+   "status": "blocked",
+   "trigger": "scheduled",
+   "summary": "Old Cowork task. Wrote the postmortem and scripted two Reels, then stopped before voicing them. Its work is on the branch create-run-2026-11-21, not main; only its template change was merged.",
+   "blocker": "ELEVENLABS_API_KEY wasn't available in Cowork. Fixed by moving Create to the Default environment.",
+   "reels": [
+    {
+     "id": "2026-11-21-c1",
+     "hook": "One of you says 'we're fine.' The other checks the balance before every grocery run.",
+     "status": "not_rendered"
+    },
+    {
+     "id": "2026-11-21-h1",
+     "hook": "Bought the house. Now you can't afford the life around it?",
+     "status": "not_rendered"
+    }
+   ]
+  },
+  {
+   "started_at": "2026-11-21T11:42:51-05:00",
+   "status": "running",
+   "trigger": "manual",
+   "summary": "Fresh run in the Default environment, from today's metrics and the re-run brief. No Runway. This record was added by hand; it will be updated with the Reels once the run finishes."
+  }
+ ]
+}

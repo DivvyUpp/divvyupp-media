@@ -1,0 +1,43 @@
+{
+ "run": "research",
+ "date": "2026-11-21",
+ "attempts": [
+  {
+   "started_at": "2026-11-21T07:05:21-05:00",
+   "finished_at": "2026-11-21T07:10:15-05:00",
+   "status": "partial",
+   "trigger": "scheduled",
+   "summary": "Old Cowork task. Kill-tested Srini's three picks (house ladder, family-of-4 spend, budget fails by week two) and added the two-income confession bet.",
+   "blocker": "YOUTUBE_API_KEY wasn't available in Cowork, so it reused the 20 Nov Shorts data. Fixed by moving Research to the Default environment."
+  },
+  {
+   "started_at": "2026-11-21T11:15:01-05:00",
+   "finished_at": "2026-11-21T11:20:19-05:00",
+   "status": "failed",
+   "trigger": "manual",
+   "summary": "Re-run in the Default environment with a fresh Shorts pull.",
+   "blocker": "GitHub refused the push (403): the scheduled task had no repository attached. Srini added DivvyUpp/divvyupp-media to the task."
+  },
+  {
+   "started_at": "2026-11-21T11:35:01-05:00",
+   "finished_at": "2026-11-21T11:40:15-05:00",
+   "status": "ok",
+   "trigger": "manual",
+   "summary": "Fresh Shorts pull with the YouTube key; replaces the morning brief. Same $10K is our first Reel past 100 views (105, skip 66%), so the question was what earns watch-through and sends. A parent-money topic now passes the proof bar.",
+   "outputs": [
+    {
+     "label": "Research brief",
+     "path": "research/2026-11-21.md"
+    },
+    {
+     "label": "Shorts pull",
+     "path": "research/shorts-2026-11-21.csv"
+    },
+    {
+     "label": "Backlog",
+     "path": "backlog.md"
+    }
+   ]
+  }
+ ]
+}
