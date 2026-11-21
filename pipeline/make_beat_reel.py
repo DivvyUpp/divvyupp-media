@@ -15,7 +15,8 @@ Visuals (items appear on the sentence index given by "at", default: item i on se
   {"type": "pairs", "title": "...", "pairs": [{"left", "right", "good": "left|right", "at"}]}
   {"type": "table", "title": "...", "rows": [{"label", "value", "at", "check": false}], "source": "..."}
   {"type": "card", "lines": [["text", "colour"], ...], "source": "..."}
-  {"type": "cta"}
+  {"type": "cta", "lines": [["Save first.", "ink"], ...]}  (default lines: "Save first. Then spend what's safe.")
+The small top logo is off by default because it sits inside the Instagram top safe zone (y < 255); spec "logo": true brings it back.
 Hook beat is always fully on screen from frame 1.
 """
 import json, math, os, subprocess, sys
@@ -140,7 +141,7 @@ def v_card(fr, t, v, cues, inst=False):
 
 def v_cta(fr, t, v, cues, inst=False):
     logo(fr, W / 2, 420, 120, appear(t, 0))
-    lines = [(s_, COLS.get(c_, INK)) for s_, c_ in v["lines"]] if v.get("lines") else [("Save first.", INK), ("Then spend with", INK), ("confidence.", ORANGE)]
+    lines = [(s_, COLS.get(c_, INK)) for s_, c_ in v["lines"]] if v.get("lines") else [("Save first.", INK), ("Then spend", INK), ("what's safe.", ORANGE)]
     for i, (s, c) in enumerate(lines):
         fr.text((W / 2, 640 + i * 110), s, font("xb", 96), c, appear(t, 0.2 + i * 0.25), anchor="ma")
     f = font("xb", 54); tw = fr.tl("divvyupp.com", f); k = appear(t, 1.0)
@@ -218,7 +219,7 @@ def main():
         kin = 1.0 if bi == 0 else appear(t, b["t0"], 0.3)
         sub = Frame(bg, t, total); sub.g = kin * fr.g; sub.layer = fr.layer; sub.d = fr.d
         typ = b["v"]["type"]
-        if typ not in ("cta", "clip"): logo(sub, W / 2, 140, 60, 1)
+        if typ not in ("cta", "clip") and spec.get("logo", False): logo(sub, W / 2, 140, 60, 1)  # "logo": false keeps the top 255 px clear (safe zone)
         if typ == "clip": v_clip(sub, t, b["v"], b["cues"], bi == 0, b["t0"]); fr.bg = sub.bg_override
         else: VIS[typ](sub, t, b["v"], b["cues"], bi == 0)
         if typ not in ("cta", "clip"):
