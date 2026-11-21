@@ -58,17 +58,20 @@
     {
      "id": "2026-11-21-couple",
      "hook": "$11,000 a month. $240 on the 23rd. He says \"we're fine.\"",
-     "status": "pending_review"
+     "status": "pending_review",
+     "file": "reels/2026-11-21-couple.mp4"
     },
     {
      "id": "2026-11-21-byage",
      "hook": "Forty, and earning $8K a month? Fidelity says you should have $288,000 saved.",
-     "status": "pending_review"
+     "status": "pending_review",
+     "file": "reels/2026-11-21-byage.mp4"
     },
     {
      "id": "2026-11-21-milk",
      "hook": "Went in for milk. Came out with $140.",
-     "status": "pending_review"
+     "status": "pending_review",
+     "file": "reels/2026-11-21-milk.mp4"
     }
    ]
   }

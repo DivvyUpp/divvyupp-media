@@ -174,7 +174,7 @@
     "hook": "$11,000 a month. $240 on the 23rd. He says \"we're fine.\" (split screen, drawn Mark and Nina, Jessica voice)",
     "caption": "$11,000 a month between them. $240 in checking on the 23rd. He says they're fine. Who's right?\n\nBoth. The income is fine; the order isn't. Each payday, $1,000 goes to savings first. The other $2,600 becomes one number a day (about $85, $600 a week), so they know before they spend. $70 over on Thursday? The last three days of the week drop to about $60, and the week still works.\n\nOn the 23rd now: $1,000 saved and about $700 left for the last week.\n\nSend this to whoever says \"we're fine.\"\n\nSave first. Then spend what's safe.\n\nMark and Nina are an example, not real customers.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio \u2192 divvyupp.com\n\n#personalfinance #couplesandmoney #savingmoney #moneytips #budgeting",
     "hypothesis": "hypotheses/2026-11-21.md",
-    "note": "Video kept out of the repo until Srini approves (sent as a file 2026-11-21). Approved -> copy into reels/ and push."
+    "note": "Review video in reels/ (public repo, per runs/create.md on main 2026-11-21). Not approved."
   },
   {
     "id": "2026-11-21-byage",
@@ -187,7 +187,7 @@
     "hook": "Forty, and earning $8K a month? Fidelity says you should have $288,000 saved. (beat, presenter E, Eric voice)",
     "caption": "40 and earning $8,000 a month? Fidelity's guideline says you should have $288,000 saved. Find your age:\n30: $96,000 \u00b7 40: $288,000 \u00b7 50: $576,000 \u00b7 60: $768,000 \u00b7 67: $960,000\n(1x salary by 30, 3x by 40, 6x by 50, 8x by 60, 10x by 67.)\n\nThe guideline assumes you save 15% of your pay every year from age 25, with your 401(k) and any employer match counting. Starting at 40? 15% of $8,000 is $1,200 a month: $388,800 by 67 before any investment growth.\n\nIt only happens if it leaves on payday. Then the rest gets one daily number that adjusts when you overspend.\n\nSave first. Then spend what's safe.\n\nSource: Fidelity Viewpoints, \"How much should I have saved?\" A guideline, not a rule; not financial advice.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio \u2192 divvyupp.com\n\n#personalfinance #retirementsavings #savingmoney #moneytips #401k",
     "hypothesis": "hypotheses/2026-11-21.md",
-    "note": "Video kept out of the repo until Srini approves (sent as a file 2026-11-21). Approved -> copy into reels/ and push."
+    "note": "Review video in reels/ (public repo, per runs/create.md on main 2026-11-21). Not approved."
   },
   {
     "id": "2026-11-21-milk",
@@ -200,7 +200,7 @@
     "hook": "Went in for milk. Came out with $140. (Dollar Bill rules, Valf voice, take 1)",
     "caption": "Went in for milk. Came out with $140. Dollar Bill has rules:\n\n1. Know today's number before you walk in, not the receipt after.\n2. Your balance is lying: half your bills haven't come out yet. Trust your safe-to-spend.\n3. Grabbed the big cart anyway? Tomorrow's number shrinks. Your savings don't.\n\nThe good snacks are already in the plan.\n\nSave first. Then spend what's safe.\n\nDollar Bill is DivvyUpp's mascot.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio \u2192 divvyupp.com\n\n#personalfinance #groceries #savingmoney #moneytips #budgeting",
     "hypothesis": "hypotheses/2026-11-21.md",
-    "note": "Video kept out of the repo until Srini approves (sent as a file 2026-11-21). Approved -> copy into reels/ and push.",
+    "note": "Review video in reels/ (public repo, per runs/create.md on main 2026-11-21). Not approved.",
     "voice_take_note": "Rendered with seed 1; takes 1-4 sent to Srini to pick by ear. Re-render with spec \"seed\" = his pick."
   }
 ]
