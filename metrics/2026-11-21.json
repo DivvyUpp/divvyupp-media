@@ -1,0 +1,99 @@
+{
+  "date": "2026-11-21",
+  "pulled_at": "2026-11-21T11:10:28-05:00",
+  "followers_count": 3,
+  "views_non_followers_yesterday": 65,
+  "reels": [
+    {
+      "media_id": "18066854978545024",
+      "permalink": "https://www.instagram.com/reel/Dfu_qUMDEKh/",
+      "posted": "2026-11-14",
+      "views": 17,
+      "reach": 10,
+      "skip_rate": 0.917,
+      "avg_watch_s": 13.746,
+      "shares": 0,
+      "saves": 0,
+      "likes": 3,
+      "interactions": 3
+    },
+    {
+      "media_id": "17978102853177338",
+      "permalink": "https://www.instagram.com/reel/DfyBgVSD4fm/",
+      "posted": "2026-11-16",
+      "views": 34,
+      "reach": 30,
+      "skip_rate": 0.875,
+      "avg_watch_s": 11.524,
+      "shares": 0,
+      "saves": 0,
+      "likes": 1,
+      "interactions": 2
+    },
+    {
+      "media_id": "17964468899998273",
+      "permalink": "https://www.instagram.com/reel/Df0m8iCJWAR/",
+      "posted": "2026-11-17",
+      "views": 12,
+      "reach": 9,
+      "skip_rate": 0.444,
+      "avg_watch_s": 16.201,
+      "shares": 0,
+      "saves": 0,
+      "likes": 0,
+      "interactions": 0
+    },
+    {
+      "media_id": "17871776193660389",
+      "permalink": "https://www.instagram.com/reel/Df3LhhkHErO/",
+      "posted": "2026-11-18",
+      "views": 3,
+      "reach": 2,
+      "skip_rate": 0.667,
+      "avg_watch_s": 41.354,
+      "shares": 0,
+      "saves": 0,
+      "likes": 0,
+      "interactions": 0
+    },
+    {
+      "media_id": "18357368245301850",
+      "permalink": "https://www.instagram.com/reel/Df5wTmNDbBT/",
+      "posted": "2026-11-19",
+      "views": 3,
+      "reach": 2,
+      "skip_rate": 0.5,
+      "avg_watch_s": 32.494,
+      "shares": 0,
+      "saves": 0,
+      "likes": 0,
+      "interactions": 0
+    },
+    {
+      "media_id": "18125518024938049",
+      "permalink": "https://www.instagram.com/reel/Df-2piFjEXA/",
+      "posted": "2026-11-20",
+      "views": 105,
+      "reach": 89,
+      "skip_rate": 0.663,
+      "avg_watch_s": 16.681,
+      "shares": 0,
+      "saves": 0,
+      "likes": 1,
+      "interactions": 2
+    },
+    {
+      "media_id": "18121959946770346",
+      "permalink": "https://www.instagram.com/reel/Df8VH02AKzG/",
+      "posted": "2026-11-20",
+      "views": 5,
+      "reach": 4,
+      "skip_rate": 0.75,
+      "avg_watch_s": 15.908,
+      "shares": 0,
+      "saves": 0,
+      "likes": 0,
+      "interactions": 0
+    }
+  ]
+}
