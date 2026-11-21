@@ -21,6 +21,13 @@ None yet. No Reel has reached 100 views, so every result so far is inconclusive.
 - Every Reel so far opens on a blank screen with the presenter fading in; text appears ~0.7s in (execution, not yet
   tested; trial 2026-11-20-t1 tests the fix).
 
+## Update 2026-11-21
+- First Reel to reach a real test group: Same $10K (split-screen comparison, results-first) has 93 views / 82 reach
+  at 14 h, 3x our best; non-follower views jumped to 65 on its day (2 the day before). Still 72.6% skip, 16.5 s of
+  53 s watched, 0 shares, 0 site visits. One Reel, under 100 views at the read: no rule changes until its 72 h read.
+- Hook review (2 personas, both homeowners): every house-*buying* hook was scrolled; only the owner angle ("Bought
+  the house. Can't afford the life?") stopped both. Proxy, not data.
+
 ## Open questions (ranked)
 1. What opening keeps a stranger past 3 seconds?
 2. Does a shorter cut keep more viewers to the end without losing clarity?

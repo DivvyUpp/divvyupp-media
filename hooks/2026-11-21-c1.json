@@ -1,0 +1,195 @@
+{
+ "id": "2026-11-21-c1",
+ "format": "beat",
+ "character": "e",
+ "character_voice": "elevenlabs:cjVigY5qzO86Huf0OWal:eleven_v3",
+ "music": true,
+ "beats": [
+  {
+   "sentences": [
+    {
+     "text": "[knowing] One of you says, we're fine. The other checks the balance before every grocery run."
+    }
+   ],
+   "mood": "worried",
+   "visual": {
+    "type": "title",
+    "lines": [
+     [
+      "One of you says",
+      "ink"
+     ],
+     [
+      "“We're fine.”",
+      "orange"
+     ],
+     [
+      "The other checks the",
+      "ink"
+     ],
+     [
+      "balance before every",
+      "ink"
+     ],
+     [
+      "grocery run.",
+      "ink"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "One of you sees the balance. The other sees the bills still coming."
+    },
+    {
+     "text": "[warm] But neither of you is wrong. You just don't share the same number."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "stagger": true,
+    "lines": [
+     [
+      "One sees the balance.",
+      "ink"
+     ],
+     [
+      "One sees the bills",
+      "ink"
+     ],
+     [
+      "still coming.",
+      "ink"
+     ],
+     [
+      "Neither is wrong.",
+      "orange"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "The fix: on payday, you move savings out first."
+    },
+    {
+     "text": "Then DivvyUpp reads your bank and turns what's left into one daily number you both see. Today, it's ninety-two dollars."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Payday: savings",
+      "ink"
+     ],
+     [
+      "goes out first.",
+      "green"
+     ],
+     [
+      "Then one daily number",
+      "ink"
+     ],
+     [
+      "you both see:",
+      "ink"
+     ],
+     [
+      "$92 today",
+      "orange"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Then the grocery run comes to a hundred and eighty. That's about ninety over."
+    },
+    {
+     "text": "DivvyUpp spreads it over the next two days, so tomorrow is about fifty, not zero."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Grocery run: $180",
+      "ink"
+     ],
+     [
+      "About $90 over",
+      "red"
+     ],
+     [
+      "Tomorrow: about $50",
+      "green"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "[happy] So, we're fine, finally means something. You both know what's safe today."
+    }
+   ],
+   "mood": "happy",
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "“We're fine”",
+      "orange"
+     ],
+     [
+      "finally means",
+      "ink"
+     ],
+     [
+      "something.",
+      "ink"
+     ],
+     [
+      "Send this to",
+      "grey"
+     ],
+     [
+      "your other half.",
+      "grey"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Save first. Then spend what's safe. Try it at Divvyup dot com."
+    }
+   ],
+   "mood": "happy",
+   "visual": {
+    "type": "cta",
+    "lines": [
+     [
+      "Save first.",
+      "ink"
+     ],
+     [
+      "Then spend",
+      "ink"
+     ],
+     [
+      "what's safe.",
+      "orange"
+     ]
+    ]
+   }
+  }
+ ],
+ "logo": false
+}

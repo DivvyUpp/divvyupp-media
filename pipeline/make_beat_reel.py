@@ -15,7 +15,8 @@ Visuals (items appear on the sentence index given by "at", default: item i on se
   {"type": "pairs", "title": "...", "pairs": [{"left", "right", "good": "left|right", "at"}]}
   {"type": "table", "title": "...", "rows": [{"label", "value", "at", "check": false}], "source": "..."}
   {"type": "card", "lines": [["text", "colour"], ...], "source": "..."}
-  {"type": "cta"}
+  {"type": "cta", "lines": [["Save first.", "ink"], ...]}  (default lines: "Save first. Then spend with confidence.")
+Spec "logo": false drops the small top logo, which sits inside the Instagram top safe zone (y < 255).
 Hook beat is always fully on screen from frame 1.
 """
 import json, math, os, subprocess, sys
@@ -218,7 +219,7 @@ def main():
         kin = 1.0 if bi == 0 else appear(t, b["t0"], 0.3)
         sub = Frame(bg, t, total); sub.g = kin * fr.g; sub.layer = fr.layer; sub.d = fr.d
         typ = b["v"]["type"]
-        if typ not in ("cta", "clip"): logo(sub, W / 2, 140, 60, 1)
+        if typ not in ("cta", "clip") and spec.get("logo", True): logo(sub, W / 2, 140, 60, 1)  # "logo": false keeps the top 255 px clear (safe zone)
         if typ == "clip": v_clip(sub, t, b["v"], b["cues"], bi == 0, b["t0"]); fr.bg = sub.bg_override
         else: VIS[typ](sub, t, b["v"], b["cues"], bi == 0)
         if typ not in ("cta", "clip"):

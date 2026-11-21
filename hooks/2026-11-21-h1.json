@@ -1,0 +1,219 @@
+{
+ "id": "2026-11-21-h1",
+ "format": "beat",
+ "character": "e",
+ "character_voice": "elevenlabs:cjVigY5qzO86Huf0OWal:eleven_v3",
+ "music": true,
+ "beats": [
+  {
+   "sentences": [
+    {
+     "text": "[knowing] Bought the house. Now you can't afford the life around it?"
+    }
+   ],
+   "mood": "worried",
+   "visual": {
+    "type": "title",
+    "lines": [
+     [
+      "Bought the house.",
+      "ink"
+     ],
+     [
+      "Now you can't afford",
+      "ink"
+     ],
+     [
+      "the life around it?",
+      "orange"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Say you bring home nine thousand a month."
+    },
+    {
+     "text": "The mortgage is twenty-eight hundred."
+    },
+    {
+     "text": "Car, insurance, daycare and phones: another thirty-one hundred."
+    },
+    {
+     "text": "That leaves thirty-one hundred for everything else."
+    }
+   ],
+   "visual": {
+    "type": "table",
+    "title": "Example: two incomes",
+    "rows": [
+     {
+      "label": "Take-home",
+      "value": "$9,000",
+      "at": 0
+     },
+     {
+      "label": "Mortgage",
+      "value": "−$2,800",
+      "at": 1
+     },
+     {
+      "label": "Other fixed bills",
+      "value": "−$3,100",
+      "at": 2
+     },
+     {
+      "label": "Everything else",
+      "value": "$3,100",
+      "at": 3,
+      "check": true
+     }
+    ],
+    "source": "Example household, not real customers"
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "[reassuring] Thirty-one hundred sounds like plenty. Until day twelve, when it's gone."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "$3,100 sounds",
+      "ink"
+     ],
+     [
+      "like plenty.",
+      "ink"
+     ],
+     [
+      "Until day 12.",
+      "orange"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "So save first: you move five hundred on payday."
+    },
+    {
+     "text": "DivvyUpp reads your bank and turns the rest into about eighty-seven dollars a day."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Payday: save $500",
+      "green"
+     ],
+     [
+      "first.",
+      "green"
+     ],
+     [
+      "The rest: about",
+      "ink"
+     ],
+     [
+      "$87 a day.",
+      "orange"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "School photos and a birthday gift on the same day? A hundred and forty."
+    },
+    {
+     "text": "You're about fifty over, so DivvyUpp spreads it over the next two days. Tomorrow is about sixty."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "School photos and",
+      "ink"
+     ],
+     [
+      "a gift: $140",
+      "ink"
+     ],
+     [
+      "About $50 over",
+      "red"
+     ],
+     [
+      "Tomorrow: about $60",
+      "green"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "[happy] The house was never the problem. The money around it just needed one number."
+    }
+   ],
+   "mood": "happy",
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "The house isn't",
+      "ink"
+     ],
+     [
+      "the problem.",
+      "ink"
+     ],
+     [
+      "The money around it",
+      "ink"
+     ],
+     [
+      "needs one number.",
+      "orange"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Save first. Then spend what's safe. Try it at Divvyup dot com."
+    }
+   ],
+   "mood": "happy",
+   "visual": {
+    "type": "cta",
+    "lines": [
+     [
+      "Save first.",
+      "ink"
+     ],
+     [
+      "Then spend",
+      "ink"
+     ],
+     [
+      "what's safe.",
+      "orange"
+     ]
+    ]
+   }
+  }
+ ],
+ "logo": false
+}
