@@ -217,18 +217,23 @@ def main():
                 moving = t < stop_t
                 bob = 4 * np.sin(t * 16) if moving else 0
                 fr.layer.alpha_composite(im, (int(cx * S - im.width / 2), int((yr - rd.get("h", 220) / 2 + 12 + bob) * S - im.height / 2)))
-        lt = spec.get("light")
-        if lt:
-            lx, ly = lt["x"], lt["y"]; on = cue(lt["at"], -lt.get("lead", 1.4))
-            fr.rrect([lx - 6, ly, lx + 6, ly + 90], 3, (110, 104, 104), 1)              # bracket
-            fr.rrect([lx - 26, ly - 40, lx + 26, ly + 8], 10, (90, 84, 84), 1)          # lamp
-            g = max(0.0, min(1.0, (t - on) / 0.25)) if t >= on else 0.0
-            if g > 0:
-                for rr, a in ((150, 0.12), (100, 0.2), (60, 0.35)):
-                    fr.ellipse([lx - rr, ly - 16 - rr, lx + rr, ly - 16 + rr], (255, 214, 120, int(255 * a * g)))
-            fr.rrect([lx - 18, ly - 32, lx + 18, ly], 8, (255, 226, 150) if g > 0 else (200, 196, 190), 1)
         mood = phase(spec.get("moods"), t, "mood") or "happy"
         character(fr.layer, W / 2, spec.get("spk_top", SPK_TOP), spec.get("spk_h", SPK_H), t, vis[min(f, n - 1)], mood, fr.g, spec["character"])
+        lt = spec.get("light")
+        if lt:                                                                  # porch light: a warm wash from the screen edge
+            on = cue(lt["at"], -lt.get("lead", 1.4)); g = max(0.0, min(1.0, (t - on) / 0.35)) if t >= on else 0.0
+            if g > 0:
+                R = lt.get("radius", 700); key = ("glow", R)
+                if key not in _IMG:
+                    yy_, xx_ = np.mgrid[-R:R, -R:R].astype(np.float32); d_ = np.sqrt(xx_ ** 2 + yy_ ** 2) / R
+                    a_ = np.clip(1 - d_, 0, 1) ** 2
+                    arr = np.zeros((2 * R, 2 * R, 4), np.uint8); arr[..., 0], arr[..., 1], arr[..., 2] = 255, 206, 120
+                    arr[..., 3] = (a_ * 255).astype(np.uint8)
+                    _IMG[key] = Image.fromarray(arr).resize((2 * R * S, 2 * R * S), Image.BILINEAR)
+                im_ = _IMG[key].copy(); k_ = g * lt.get("strength", 0.45)
+                im_.putalpha(im_.split()[3].point(lambda v: int(v * k_)))
+                ex = W + 40 if lt.get("side", "right") == "right" else -40; cy = lt.get("y", 1300)
+                fr.layer.alpha_composite(im_, (int((ex - R) * S), int((cy - R) * S)))
         tr = spec.get("tracker")
         if tr:
             stp = tr["steps"]; nw, nh = tr.get("w", 820), tr.get("h", 132)
