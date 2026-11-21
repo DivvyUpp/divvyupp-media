@@ -58,6 +58,36 @@ def smooth(vis, fps=30, lead=2):
         out.append((v, nxt, 0.5) if nxt != v else (v, v, 1.0))
     return out
 
+def audio_track(vis, env, lead=1):
+    """Mouth track driven by the actual voice: how OPEN the mouth is comes from the loudness of the sound in each
+    frame (so it can't drift from what you hear); the letters only pick the KIND of shape (round for o/u/w,
+    teeth on lip for f/v, closed lips for m/b/p). `env` = per-frame loudness 0..1 aligned with the video frames.
+    Lips lead the sound by `lead` frames. Returns per-frame tuples (shape_from, shape_to, w) for sprite()."""
+    import numpy as np
+    n = len(vis); env = np.asarray(env, float)[:n]
+    if len(env) < n: env = np.pad(env, (0, n - len(env)))
+    e = np.concatenate([env[lead:], np.zeros(lead)]) if lead else env
+    kinds = [VISEME.get(v) if isinstance(v, str) else None for v in vis]
+    seq = []
+    for f in range(n):
+        win = [kinds[j] for j in range(max(0, f - 1), min(n, f + 3)) if kinds[j]]     # letters near this moment
+        x = e[f]
+        if x < 0.10: v = "rest"
+        elif "M" in [vis[j] for j in range(max(0, f), min(n, f + 2))] and x < 0.45: v = "rest"   # m/b/p: lips close
+        elif "F" in win[:2] and x < 0.5: v = "F"
+        elif any(k in ("O", "U") for k in win):
+            v = "U" if x < 0.35 else "O"
+        else:
+            v = "S" if x < 0.30 else "E" if x < 0.80 else "A"
+        seq.append(v)
+    for f in range(1, n - 1):                                         # drop single-frame flickers
+        if seq[f - 1] == seq[f + 1] != seq[f]: seq[f] = seq[f - 1]
+    out = []
+    for f, v in enumerate(seq):
+        nxt = seq[f + 1] if f + 1 < n else v
+        out.append((v, nxt, 0.5) if nxt != v else (v, v, 1.0))
+    return out
+
 @lru_cache(maxsize=96)
 def sprite(name, mouth=0, blink=False, mood="neutral", height=720):
     c = CHARS[name]
