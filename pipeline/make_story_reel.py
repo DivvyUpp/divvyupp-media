@@ -212,11 +212,21 @@ def character(base, cx, top, height, t, mouth, mood, k, who):
     import animals, movie_char
     sprite = (movie_char.sprite if who in movie_char.CHARS else
               animals.sprite if who in animals.ANIMALS else human_sprite)  # all presenters share the same contract
-    m = mouth if isinstance(mouth, str) else (0 if mouth < 0.12 else 1 if mouth < 0.4 else 2 if mouth < 0.75 else 3)
+    m = mouth if isinstance(mouth, (str, tuple)) else (0 if mouth < 0.12 else 1 if mouth < 0.4 else 2 if mouth < 0.75 else 3)
     blink = (t + 0.9) % 3.7 < 0.12
     sp = sprite(who, m, blink, mood, int(height * S))
     if k < 1: sp = sp.copy(); sp.putalpha(sp.split()[3].point(lambda v: int(v * k)))
     bob = math.sin(t * 1.6) * 3
+    if who in movie_char.CHARS:                    # still image: breathe, sway and tilt gently, pivoting at the waist
+        breath = 1 + 0.012 * math.sin(2 * math.pi * t / 3.4)
+        ang = 1.6 * math.sin(2 * math.pi * t / 5.3) + 0.8 * math.sin(2 * math.pi * t / 2.9 + 1.3)
+        w0, h0 = sp.size; sp = sp.resize((w0, round(h0 * breath)), Image.BICUBIC)
+        pad = Image.new("RGBA", (w0 + 200, sp.height * 2), (0, 0, 0, 0)); pad.alpha_composite(sp, (100, 0))
+        pad = pad.rotate(ang, resample=Image.BICUBIC, center=(pad.width / 2, sp.height))
+        sp = pad.crop((0, 0, pad.width, sp.height + 40))
+        drift = 6 * math.sin(2 * math.pi * t / 6.1)
+        base.alpha_composite(sp, (int((cx + drift) * S - sp.width / 2), int((top + (h0 - sp.height + 40) / S) * S)))
+        return
     base.alpha_composite(sp, (int(cx * S - sp.width / 2), int((top + bob) * S)))
 
 def check_icon(fr, x, y, r, k, col=GREEN):

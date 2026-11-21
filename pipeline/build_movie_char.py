@@ -12,7 +12,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 
 OUT = os.path.join(os.path.dirname(__file__), "assets", "characters", "raccoon_movie")
-MOUTH_BOX = (500, 590, 1100, 1000)     # patch area in base pixels (x0, y0, x1, y1)
+MOUTH_BOX = (430, 560, 1170, 1040)     # patch area in base pixels (x0, y0, x1, y1)
 EYES_BOX = (440, 380, 1110, 650)
 
 def ellipse_alpha(box, size, feather):
@@ -55,10 +55,10 @@ def main(src):
     cut = Image.open(os.path.join(src, "cutout.png")).convert("RGBA").resize(base.size, Image.LANCZOS)
     full = base.convert("RGBA"); full.putalpha(cut.split()[3])          # sharp original pixels, Runway's fur matte
     full.save(os.path.join(OUT, "base.png"))
-    eyes_ref = (450, 400, 1100, 640)     # unchanged by mouth edits
+    eyes_ref = (450, 400, 1100, 555)     # unchanged by mouth edits
     mouth_ref = (300, 1050, 1250, 1600)  # chest, unchanged by the blink edit
     for v in "AEOUFS":
-        patch(base, os.path.join(src, f"{v}.png"), MOUTH_BOX, eyes_ref).save(os.path.join(OUT, f"mouth_{v}.png"))
+        patch(base, os.path.join(src, f"{v}.png"), MOUTH_BOX, eyes_ref, feather=45).save(os.path.join(OUT, f"mouth_{v}.png"))
     patch(base, os.path.join(src, "blink.png"), EYES_BOX, mouth_ref, feather=50).save(os.path.join(OUT, "eyes_closed.png"))
     print("wrote", OUT)
 

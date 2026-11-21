@@ -116,6 +116,8 @@ def main():
         if c == "]": tag = False
     total = LEAD + len(audio) / sr + TAIL; n = round(total * FPS)
     vis = viseme_track(phon, n)
+    import movie_char
+    if spec["character"] in movie_char.CHARS: vis = movie_char.smooth(vis)   # held shapes + one blended frame per change
     def cue(i, d=0.0): return cues[min(i, len(cues) - 1)] - 0.12 + d
     def phase(lst, t, key):
         cur = None
@@ -175,15 +177,6 @@ def main():
                 bob = 5 * np.sin((t - t0) * 18) if moving else 0
                 if t0 <= t <= t1:
                     fr.layer.alpha_composite(im, (int(cx * S - im.width / 2), int((fl["y"] + bob) * S - im.height / 2)))
-        for dp in spec.get("drop", []):                                          # a prop that lands and stays
-            t_in = cue(dp["at"], dp.get("delay", 0.0))
-            if t >= t_in:
-                place(fr, prop(dp["img"], dp.get("h", 200)), dp["x"], dp["y"], pop_scale(t - t_in, True), appear(t, t_in, 0.12))
-                if dp.get("tag"):
-                    tf = font("xb", 24); tw_ = fr.tl(dp["tag"], tf); k = appear(t, t_in + 0.2, 0.2)
-                    ty = dp["y"] + dp.get("h", 200) / 2 + 8
-                    fr.rrect([dp["x"] - tw_ / 2 - 14, ty, dp["x"] + tw_ / 2 + 14, ty + 40], 20, WHITE, k)
-                    fr.text((dp["x"], ty + 20), dp["tag"], tf, INK, k, anchor="mm", dy=0)
         sc_ = spec.get("scene")
         if sc_:
             rd = sc_["rider"]
@@ -219,6 +212,20 @@ def main():
                 fr.layer.alpha_composite(im, (int(cx * S - im.width / 2), int((yr - rd.get("h", 220) / 2 + 12 + bob) * S - im.height / 2)))
         mood = phase(spec.get("moods"), t, "mood") or "happy"
         character(fr.layer, W / 2, spec.get("spk_top", SPK_TOP), spec.get("spk_h", SPK_H), t, vis[min(f, n - 1)], mood, fr.g, spec["character"])
+        for fg in spec.get("foreground", []):                                   # props in front of the speaker (e.g. bins)
+            im_fg = prop(fg["img"], fg["h"])
+            sh = fg.get("shadow", 0.18)
+            if sh: fr.ellipse([fg["x"] - im_fg.width / S * 0.52, fg["y"] + fg["h"] - 24, fg["x"] + im_fg.width / S * 0.52, fg["y"] + fg["h"] + 24], (60, 40, 30, fr.a(sh)))
+            fr.layer.alpha_composite(im_fg, (int(fg["x"] * S - im_fg.width / 2), int(fg["y"] * S)))
+        for dp in spec.get("drop", []):                                          # a prop that lands and stays
+            t_in = cue(dp["at"], dp.get("delay", 0.0))
+            if t >= t_in:
+                place(fr, prop(dp["img"], dp.get("h", 200)), dp["x"], dp["y"], pop_scale(t - t_in, True), appear(t, t_in, 0.12))
+                if dp.get("tag"):
+                    tf = font("xb", 24); tw_ = fr.tl(dp["tag"], tf); k = appear(t, t_in + 0.2, 0.2)
+                    ty = dp["y"] + dp.get("h", 200) / 2 + 8
+                    fr.rrect([dp["x"] - tw_ / 2 - 14, ty, dp["x"] + tw_ / 2 + 14, ty + 40], 20, WHITE, k)
+                    fr.text((dp["x"], ty + 20), dp["tag"], tf, INK, k, anchor="mm", dy=0)
         lt = spec.get("light")
         if lt:                                                                  # porch light: a warm wash from the screen edge
             on = cue(lt["at"], -lt.get("lead", 1.4)); g = max(0.0, min(1.0, (t - on) / 0.35)) if t >= on else 0.0
