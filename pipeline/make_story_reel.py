@@ -401,7 +401,7 @@ def cta_scene(fr, t, sp, cues, mouth, spec):
     fr.text((W / 2, 714), "confidence.", font("xb", 72), ORANGE, appear(t, c(0) + 0.9), anchor="ma")
     k = appear(t, c(1) - 0.2)
     logo(fr, W / 2, 860, 110, k)
-    fr.text((W / 2, 1020), "DivvyUpp.com", font("b", 46), INK, k, anchor="ma")
+    fr.text((W / 2, 1020), "divvyupp.com", font("b", 46), INK, k, anchor="ma")
     k2 = appear(t, c(1) + 0.5)
     fr.rrect([200, 1130, W - 200, 1240], 55, ORANGE, k2)
     fr.text((W / 2, 1185), "Try the 90-day guarantee", font("xb", 40), WHITE, k2, anchor="mm", dy=0)

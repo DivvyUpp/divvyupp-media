@@ -129,16 +129,6 @@
     "post_date": "2026-11-21"
   },
   {
-    "id": "2026-11-20-b2",
-    "kind": "main",
-    "status": "pending_review",
-    "post_date": "2026-11-20",
-    "file": "reels/2026-11-20-b2.mp4",
-    "caption": "44% of people earning over $100K live paycheck to paycheck (PYMNTS/LendingClub, 2023). Which side are you on?\n\nThe one thing that moves you over: move savings first, then spend from one daily number.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio → divvyupp.com\n\n#personalfinance #savingmoney #moneytips #payyourselffirst #budgeting",
-    "hypothesis": "research/reel-ideas-2026-11-20.md",
-    "format": "beat"
-  },
-  {
     "id": "2026-11-20-b3",
     "kind": "main",
     "status": "pending_review",
@@ -157,5 +147,16 @@
     "caption": "How much you should have saved by 30, 40, 50, 60 and 67 on a $100K salary (Fidelity's guideline: 1x, 3x, 6x, 8x, 10x your salary).\n\nBehind? Most people are. The better way to catch up: move savings out the day you get paid, before anything else.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio → divvyupp.com\n\n#personalfinance #savingmoney #moneytips #payyourselffirst #budgeting",
     "hypothesis": "research/reel-ideas-2026-11-20.md",
     "format": "beat"
+  },
+  {
+    "id": "2026-11-21-paycheck",
+    "kind": "main",
+    "status": "hold",
+    "post_date": "2026-11-21",
+    "file": "reels/2026-11-21-paycheck.mp4",
+    "caption": "Chris makes $100K and has $40 the day before payday. Maya makes the same and has $1,150. It's not her budget.\n\nMaya moves $1,000 to savings on payday, then spends from a daily safe-to-spend number. When a $300 car repair hits, her week adjusts. Chris saves whatever's left, has no daily number, and puts the repair on his credit card.\n\nSave first. Then spend what's safe.\n\nMaya and Chris are illustrative examples, not real customers. Take-home on $100K is approximate.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio → divvyupp.com\n\n#personalfinance #savingmoney #moneytips #paychecktopaycheck #budgeting",
+    "hypothesis": "hypotheses/2026-11-21.md",
+    "format": "split",
+    "hold_note": "Srini approved b2 v6 on 2026-11-20 but wants to post it after reading the first Reel's data. Not posted until he says so (status must become 'approved')."
   }
 ]

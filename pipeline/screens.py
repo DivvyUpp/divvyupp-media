@@ -168,7 +168,7 @@ def cta(c):
     status_bar(c)
     logo(c, 155, 170, 80); c.text((195, 290), "DivvyUpp", 800, 30, anchor="mm")
     c.text((195, 336), "Save more. Spend less.", 800, 20, fill=ORANGE, anchor="mm")
-    c.rr([28, 400, 362, 470], 20, fill=TINT); c.text((195, 435), "DivvyUpp.com", 800, 26, anchor="mm")
+    c.rr([28, 400, 362, 470], 20, fill=TINT); c.text((195, 435), "divvyupp.com", 800, 26, anchor="mm")
     c.rr([28, 490, 362, 546], 28, fill=ORANGE); c.text((195, 518), "Get Started", 800, 18, fill=WHITE, anchor="mm")
     c.text((195, 580), "Free during beta · No card needed", 700, 14, fill=GREEN, anchor="mm")
 
