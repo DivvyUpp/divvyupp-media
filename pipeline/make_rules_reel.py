@@ -49,22 +49,23 @@ def prop(path, h):
     return _IMG[k]
 
 TEAL = (22, 140, 130)
-def notif(w, h, text, stage, n, sub):
+def notif(w, h, text, stage, n, sub, color=None):
     """A generic delivery notification (our own design, no third-party branding): icon, 'Delivery · now', the
     message, and an n-step progress tracker with `stage` steps filled."""
+    AC = tuple(color) if color else TEAL
     def paint(f):
         f.rrect([0, 0, w, h], 30, WHITE, 1)
-        f.rrect([22, 22, 86, 86], 18, TEAL, 1)                                   # app icon: a simple bag glyph
+        f.rrect([22, 22, 86, 86], 18, AC, 1)                                   # app icon: a simple bag glyph
         f.rrect([38, 46, 70, 74], 5, WHITE, 1); f.line([(46, 46), (46, 38), (62, 38), (62, 46)], WHITE + (255,), 4)
         f.text((104, 22), sub, font("b", 24), GREY, 1, dy=0)
         f.text((104, 52), text, font("xb", fit(f, text, "xb", 36, w - 130)), INK, 1, dy=0)
         x0, x1, yy = 104, w - 40, h - 30
         f.line([(x0, yy), (x1, yy)], (225, 220, 216, 255), 6)
-        if stage > 1: f.line([(x0, yy), (x0 + (x1 - x0) * (stage - 1) / (n - 1), yy)], TEAL + (255,), 6)
+        if stage > 1: f.line([(x0, yy), (x0 + (x1 - x0) * (stage - 1) / (n - 1), yy)], AC + (255,), 6)
         for i in range(n):
             cx = x0 + (x1 - x0) * i / (n - 1); r = 11 if i < stage else 8
-            f.ellipse([cx - r, yy - r, cx + r, yy + r], (TEAL if i < stage else (225, 220, 216)) + (255,))
-    return sprite(("notif", round(w), round(h), text, stage, n, sub), w, h, paint)
+            f.ellipse([cx - r, yy - r, cx + r, yy + r], (AC if i < stage else (225, 220, 216)) + (255,))
+    return sprite(("notif", round(w), round(h), text, stage, n, sub, AC), w, h, paint)
 
 def fit_size(fr, texts, w, h, start=46):
     """Largest font size at which every card's text fits in two lines."""
@@ -136,28 +137,26 @@ def main():
                     x = SAFE_L + side * (cw + 24); a2 = age - (0.0 if ok else 0.18)    # ✓ first, then ✗
                     if a2 < 0: continue
                     place(fr, card(cw, rh, txt, ok, fs), x + cw / 2, y + lab_h + rh / 2, pop_scale(a2, False), appear(t, t_in + (0 if ok else 0.18), 0.12))
-        tr = spec.get("tracker")
-        if tr and not title:
-            steps = [st_ for st_ in tr["steps"] if t >= cue(st_["at"], st_.get("delay", 0.0))]
-            nw, nh, top = W - 2 * SAFE_L, 150, tr.get("y", SAFE_TOP + 110)
-            stack = list(enumerate(reversed(steps[-3:])))
-            for back, st_ in reversed(stack):                                    # draw the oldest first so the newest sits on top
-                idx = steps.index(st_) + 1; t_in = cue(st_["at"], st_.get("delay", 0.0)); age = t - t_in
-                sc = (pop_scale(age, False) if back == 0 else 1.0) * (1 - 0.05 * back)
-                yy = top + back * 16 + (0 if back else -30 * (1 - min(1, age / 0.3)))
-                im = notif(nw, nh, st_["text"], idx, len(tr["steps"]), tr.get("sub", "Delivery · now")) if back == 0 else \
-                     sprite(("peek", nw, nh), nw, nh, lambda f_: f_.rrect([0, 0, nw, nh], 30, (246, 240, 236), 1))   # older ones: plain edges
-                if back: im = im.copy(); im.putalpha(im.split()[3].point(lambda v: int(v * (0.85 - 0.25 * back))))
-                place(fr, im, W / 2, yy + nh / 2 + back * 6, sc, appear(t, t_in, 0.12) if back == 0 else 1)
-        for fl in spec.get("fly", []):                                           # a prop zipping across the screen
-            t0 = cue(fl["at"], fl.get("delay", 0.0)); dur = fl.get("dur", 1.4)
-            if t0 <= t <= t0 + dur:
-                im = prop(fl["img"], fl.get("h", 260)); x = (t - t0) / dur
-                x = x * x * (3 - 2 * x)                                          # ease in and out
-                span = W + im.width / S
-                cx = (W + im.width / S / 2 - span * x) if fl.get("from", "right") == "right" else (-im.width / S / 2 + span * x)
-                bob = 6 * np.sin((t - t0) * 22)
-                fr.layer.alpha_composite(im, (int(cx * S - im.width / 2), int((fl["y"] + bob) * S - im.height / 2)))
+        for fl in spec.get("fly", []):                                           # a prop crossing the screen on a road
+            t0 = cue(fl["at"], fl.get("delay", 0.0)); din, hold, dout = fl.get("dur_in", fl.get("dur", 2.8) / 2), fl.get("hold", 0.0), fl.get("dur_out", fl.get("dur", 2.8) / 2)
+            t1 = t0 + din + hold + dout
+            if t0 - 0.3 <= t <= t1 + 0.3:
+                im = prop(fl["img"], fl.get("h", 260)); pw = im.width / S
+                start, stop, end = W + pw / 2, fl.get("stop_x", W / 2), -pw / 2
+                if t < t0: cx = start
+                elif t < t0 + din: u = (t - t0) / din; cx = start + (stop - start) * (1 - (1 - u) ** 2)          # ease out into the stop
+                elif t < t0 + din + hold: cx = stop
+                elif t <= t1: u = (t - t0 - din - hold) / dout; cx = stop + (end - stop) * u * u                 # ease in away
+                else: cx = end
+                road_y = fl["y"] + fl.get("h", 260) * 0.46; rk = min(1, (t - (t0 - 0.3)) / 0.3, (t1 + 0.3 - t) / 0.3)
+                fr.rrect([0, road_y - 4, W, road_y + 30], 0, (92, 88, 92), rk)
+                moving = (t0 <= t < t0 + din) or (t0 + din + hold < t <= t1)
+                off = ((t * 420) % 120) if moving else ((t0 + din) * 420 % 120)
+                for xx in np.arange(-120 + off, W + 120, 120):
+                    fr.rrect([xx, road_y + 10, xx + 60, road_y + 16], 3, (245, 240, 230), rk)
+                bob = 5 * np.sin((t - t0) * 18) if moving else 0
+                if t0 <= t <= t1:
+                    fr.layer.alpha_composite(im, (int(cx * S - im.width / 2), int((fl["y"] + bob) * S - im.height / 2)))
         for dp in spec.get("drop", []):                                          # a prop that lands and stays
             t_in = cue(dp["at"], dp.get("delay", 0.0))
             if t >= t_in:
@@ -169,6 +168,33 @@ def main():
                     fr.text((dp["x"], ty + 20), dp["tag"], tf, INK, k, anchor="mm", dy=0)
         mood = phase(spec.get("moods"), t, "mood") or "happy"
         character(fr.layer, W / 2, SPK_TOP, SPK_H, t, vis[min(f, n - 1)], mood, fr.g, spec["character"])
+        tr = spec.get("tracker")
+        if tr:
+            stp = tr["steps"]; nw, nh = tr.get("w", 820), tr.get("h", 132)
+            for i_, st_ in enumerate(stp):
+                t_in = cue(st_["at"], st_.get("delay", 0.0))
+                t_end = min(t_in + st_.get("hold", tr.get("hold", 2.6)), cue(stp[i_ + 1]["at"], stp[i_ + 1].get("delay", 0.0)) if i_ + 1 < len(stp) else 1e9)
+                if t_in <= t <= t_end:
+                    k = min(appear(t, t_in, 0.12), max(0.0, min(1.0, (t_end - t) / 0.25)))
+                    im = notif(nw, nh, st_["text"], i_ + 1, len(stp), tr.get("sub", "Dollar Bill's order"), tr.get("color"))
+                    place(fr, im, tr.get("x", W / 2), tr.get("y", 1480), pop_scale(t - t_in, False), k)
+        rc = spec.get("receipt")
+        if rc and t >= cue(rc["at"], rc.get("delay", 0.0)):
+            t_in = cue(rc["at"], rc.get("delay", 0.0)); rw, rh_ = rc.get("w", 330), 60 + 44 * (len(rc["items"]) + 2)
+            def paint_r(f, rc=rc, rw=rw, rh_=rh_):
+                f.rrect([0, 0, rw, rh_], 10, WHITE, 1)
+                f.text((rw / 2, 18), rc["title"], font("xb", 26), INK, 1, anchor="ma", dy=0)
+                f.line([(20, 56), (rw - 20, 56)], (200, 195, 190, 255), 2)
+                for j, (item, price) in enumerate(rc["items"]):
+                    f.text((20, 72 + j * 44), item, font("b", fit(f, item, "b", 24, rw - 110)), INK, 1, dy=0)
+                    f.text((rw - 20, 72 + j * 44), price, font("b", 24), INK, 1, anchor="ra", dy=0)
+                yy = 72 + len(rc["items"]) * 44
+                f.line([(20, yy), (rw - 20, yy)], (200, 195, 190, 255), 2)
+                f.text((20, yy + 12), rc["total"][0], font("xb", 26), INK, 1, dy=0)
+                f.text((rw - 20, yy + 12), rc["total"][1], font("xb", 26), INK, 1, anchor="ra", dy=0)
+                f.text((rw / 2, yy + 54), rc["footer"], font("xb", fit(f, rc["footer"], "xb", 24, rw - 30)), GREEN, 1, anchor="ma", dy=0)
+            place(fr, sprite(("receipt", rc["title"], tuple(map(tuple, rc["items"]))), rw, rh_, paint_r), rc["x"], rc["y"],
+                  pop_scale(t - t_in, True), appear(t, t_in, 0.15))
         nt = spec.get("note")
         if nt and t >= cue(nt["at"]):
             for j, l in enumerate(wrap(fr, nt["text"], "b", 22, 420)[:2]):
