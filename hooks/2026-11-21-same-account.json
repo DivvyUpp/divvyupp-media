@@ -200,9 +200,9 @@
   {
    "name": "7 Two envelopes",
    "media": "pipeline/assets/scenes/same-account/s7.png",
-   "min": 5.2,
+   "min": 5.0,
    "pre": 0.5,
-   "post": 2.2,
+   "post": 1.2,
    "zoom": [
     1.0,
     1.07
@@ -210,16 +210,22 @@
    "lines": [
     {
      "who": "her",
-     "text": "[gasps, thrilled] Paris?!"
+     "text": "[gasps, thrilled] Paris?!",
+     "gap": 0.7
+    },
+    {
+     "who": "her",
+     "text": "[laughing, proud] Good thing I saved six hundred for the hotel!",
+     "gap": 0.25
     }
    ],
    "overlays": [
     {
      "type": "note",
-     "text": "I saved $600 for the hotel.",
+     "text": "Surprise! I saved $600 for our hotel. xo",
      "at_line_end": 0,
-     "delay": 0.6,
-     "y": 1060
+     "delay": 0.25,
+     "y": 1020
     }
    ]
   },
