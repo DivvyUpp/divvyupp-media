@@ -54,13 +54,12 @@ a{color:var(--accent)}
 .reel{border:1px solid var(--line);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:6px;min-width:0}
 .reel q{font-weight:500}
 .reel video{width:100%;max-height:360px;border-radius:6px;background:#000}
-.queue{display:flex;flex-direction:column;gap:10px}
-.queue h2{font-size:1.1rem;margin:0}
-.qgrid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
-.qgrid .reel{background:var(--surface)}
-.cap{font-size:.88rem;color:var(--muted);white-space:pre-line;max-height:7.5em;overflow:auto}
-.note{font-size:.85rem;border-left:3px solid var(--warn);padding-left:8px}
-.missing{font-size:.85rem;color:var(--bad)}
+.todo{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;text-decoration:none;color:var(--fg);
+  background:var(--warn-soft);border:1px solid var(--warn);border-radius:12px;padding:12px 16px}
+.todo.calm{background:var(--surface);border-color:var(--line);color:var(--muted)}
+.todo b{font-size:1rem}
+.todo .go{margin-left:auto;color:var(--accent);font-weight:600;white-space:nowrap}
+.todo:hover{border-color:var(--accent)}
 .empty{color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:12px;padding:24px;text-align:center}
 .foot{color:var(--muted);font-size:.82rem}
 @media (max-width:480px){.card{grid-template-columns:1fr;gap:6px}}
@@ -74,12 +73,7 @@ a{color:var(--accent)}
     <p class="sub">What each scheduled run of the @getdivvyupp loop did on a given day. Times are New York time.</p>
   </header>
 
-  <section class="queue" aria-labelledby="q-h">
-    <div class="head"><h2 id="q-h">Reels in the queue</h2><span class="sub" id="q-count"></span></div>
-    <p class="sub">Everything not yet posted: waiting for your review, on hold, or approved and lined up for the next Post slot
-      (11:57, 4:57, 9:57). To approve, edit, reject or release one, reply in that day's Create chat or tell Claude.</p>
-    <div class="reels qgrid" id="queue"></div>
-  </section>
+  <a class="todo" id="todo" href="review.html" hidden></a>
 
   <div class="bar" role="group" aria-label="Choose a day">
     <button id="prev" type="button" aria-label="Previous day">←</button>
@@ -109,7 +103,6 @@ const RUNS = {
 // expected scheduled slots: [run, "HH:MM", weekday filter (0=Sun) or null]
 const SLOTS = [["watchlist","05:00",0],["funnel","05:37",1],["metrics","05:53",null],["research","05:57",null],
                ["create","06:27",null],["post","11:57",null],["post","16:57",null],["post","21:57",null]];
-const QORDER = {pending_review: 0, approved: 1, hold: 2};
 const LABEL = {ok:"OK", partial:"Partial", blocked:"Blocked", failed:"Failed", running:"Running", missing:"No record",
                upcoming:"Upcoming", none:"Not today", not_rendered:"Not rendered", pending_review:"Waiting for you",
                approved:"Approved", rejected:"Rejected", posted:"Posted", hold:"On hold"};
@@ -213,37 +206,19 @@ function render(date, recs) {
   }
 }
 
-async function loadQueue() {
-  const box = $("queue"); box.replaceChildren();
+async function loadTodo() {
   let q = [];
-  try { const r = await fetch("../queue.json", {cache: "no-store"}); if (r.ok) q = await r.json(); } catch (e) {}
+  try { const r = await fetch("../queue.json", {cache: "no-store"}); if (r.ok) q = await r.json(); } catch (e) { return; }
   if (!Array.isArray(q)) q = q.queue || [];
-  const open = q.filter(e => e.status in QORDER)
-    .sort((a, b) => QORDER[a.status] - QORDER[b.status] || (a.post_date || "").localeCompare(b.post_date || ""));
-  const n = s => open.filter(e => e.status === s).length;
-  $("q-count").textContent = open.length
-    ? `${n("pending_review")} waiting for you · ${n("hold")} on hold · ${n("approved")} approved` : "";
-  if (!open.length) { box.append(el("p", {class: "sub"}, "Nothing waiting. Every Reel in the queue is posted or dropped.")); return; }
-  for (const e of open) {
-    const c = el("div", {class: "reel"});
-    const head = el("div", {class: "head"}, pill(e.status));
-    if (e.post_date) head.append(el("span", {class: "tag"}, "made " + e.post_date));
-    c.append(head);
-    if (e.hook) c.append(el("q", {}, e.hook));
-    if (e.file) {
-      const v = el("video", {src: href(e.file), controls: "", preload: "metadata", playsinline: ""});
-      const miss = el("p", {class: "missing", hidden: ""}, "Video file isn't in the repo (" + e.file + ").");
-      v.addEventListener("error", () => { v.hidden = true; miss.hidden = false; });
-      c.append(v, miss);
-    }
-    if (e.caption) c.append(el("p", {class: "cap"}, e.caption));
-    for (const k of ["hold_note", "approved_note", "note"]) if (e[k]) c.append(el("p", {class: "note"}, e[k]));
-    const links = el("div", {class: "links"});
-    if (e.file) links.append(el("a", {href: href(e.file), target: "_blank", rel: "noopener"}, "Open video"));
-    if (e.hypothesis) links.append(el("a", {href: href(e.hypothesis), target: "_blank", rel: "noopener"}, "Bet card"));
-    c.append(links, el("span", {class: "sub"}, e.id || ""));
-    box.append(c);
-  }
+  const n = s => q.filter(e => e.status === s).length;
+  const waiting = n("pending_review"), hold = n("hold"), approved = n("approved"), t = $("todo");
+  const parts = [];
+  if (waiting) parts.push(`${waiting} Reel${waiting > 1 ? "s" : ""} to review`);
+  if (hold) parts.push(`${hold} on hold`);
+  if (approved) parts.push(`${approved} approved, up next`);
+  if (waiting || hold) t.replaceChildren(el("b", {}, "Needs your attention"), el("span", {}, parts.join(" · ")), el("span", {class: "go"}, "Open review page →"));
+  else { t.className = "todo calm"; t.replaceChildren(el("span", {}, approved ? parts.join(" · ") : "Nothing waiting for review."), el("span", {class: "go"}, "Review page →")); }
+  t.hidden = false;
 }
 
 async function go(date) {
@@ -257,7 +232,7 @@ $("today").onclick = () => go(etNow().date);
 $("date").onchange = e => e.target.value && go(e.target.value);
 addEventListener("hashchange", () => go(current()));
 go(current());
-loadQueue();
+loadTodo();
 </script>
 </body>
 </html>
