@@ -25,7 +25,7 @@ def _mouth_img(name, v):
     if v: img.alpha_composite(_part(name, f"mouth_{v}"), CHARS[name]["mouth_box"])
     return img
 
-def smooth(vis, fps=30):
+def smooth(vis, fps=30, lead=2):
     """Make the per-frame viseme track readable: hold every shape at least ~100 ms (closed lips for m/b/p ~67 ms),
     use the big wide-open shape only on longer vowels, and blend one frame at each change.
     Returns per-frame tuples (shape_from, shape_to, w) for sprite()."""
@@ -41,7 +41,7 @@ def smooth(vis, fps=30):
         changed = False
         for i, (v, k) in enumerate(runs):
             if k < min_len(v):
-                j = i - 1 if i > 0 else i + 1                       # fold short runs into the previous shape
+                j = i + 1 if i + 1 < len(runs) else i - 1           # fold short runs into the NEXT shape (anticipate, never lag)
                 runs[j][1] += k; del runs[i]; changed = True; break
         merged = []
         for v, k in runs:
@@ -51,10 +51,11 @@ def smooth(vis, fps=30):
     for r in runs:
         if r[0] == "A" and r[1] < 5: r[0] = "E"                     # short vowels: medium open, not a shout
     seq = [v for v, k in runs for _ in range(k)]
+    seq = seq[lead:] + [seq[-1]] * lead                              # lips lead the sound by `lead` frames
     out = []
-    for f, v in enumerate(seq):
-        prev = seq[f - 1] if f else v
-        out.append((prev, v, 0.5) if prev != v else (v, v, 1.0))
+    for f, v in enumerate(seq):                                       # blend on the frame BEFORE each change
+        nxt = seq[f + 1] if f + 1 < len(seq) else v
+        out.append((v, nxt, 0.5) if nxt != v else (v, v, 1.0))
     return out
 
 @lru_cache(maxsize=96)

@@ -117,7 +117,9 @@ def main():
     total = LEAD + len(audio) / sr + TAIL; n = round(total * FPS)
     vis = viseme_track(phon, n)
     import movie_char
-    if spec["character"] in movie_char.CHARS: vis = movie_char.smooth(vis)   # held shapes + one blended frame per change
+    if spec["character"] in movie_char.CHARS:
+        raw = list(vis); vis = movie_char.smooth(vis)                     # held shapes + one blended frame per change
+        json.dump({"raw": raw, "smooth": vis}, open(os.path.join(tmp, "vis.json"), "w"))
     def cue(i, d=0.0): return cues[min(i, len(cues) - 1)] - 0.12 + d
     def phase(lst, t, key):
         cur = None
