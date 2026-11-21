@@ -1,0 +1,123 @@
+{
+ "id": "2026-11-21-rules-v1",
+ "character": "raccoon_soft3d",
+ "character_voice": "elevenlabs:loY1uopAz31XyhAEhNSa:eleven_v3",
+ "voice_prefix": "[excited] Whoa, whoa, whoa. I've seen your bank history! [laughs] Four coffees, two takeouts, AND a quick little online order? On a TUESDAY? [smug] Relax, pal. I'm a raccoon. I know exactly where money disappears to.",
+ "music": true,
+ "speed": 1.08,
+ "max_gap": 0.3,
+ "keep_gap": {
+  "7": 0.6
+ },
+ "sentences": [
+  "[excited] Whoa. Fourth takeout this week?",
+  "[smug] Okay. We need rules. And no, rule one isn't stop ordering.",
+  "Rule one. Savings leaves the day you get paid. Not if there's something left.",
+  "Rule two. One daily number. Not a forty-line budget.",
+  "Rule three. Overspent today? Tomorrow pays. Not your savings.",
+  "[mischievous] See, it's not spend less. It's spend in the right order. Which brings me to rule four.",
+  "[happy] Takeout's allowed. It's in the plan.",
+  "Save first. Then spend what's safe. Try it at Divvyup dot com."
+ ],
+ "title": [
+  {
+   "from": 0,
+   "lines": [
+    [
+     "Fourth takeout",
+     "ink"
+    ],
+    [
+     "this week?",
+     "orange"
+    ]
+   ]
+  },
+  {
+   "from": 1,
+   "lines": [
+    [
+     "Fourth takeout",
+     "ink"
+    ],
+    [
+     "this week?",
+     "orange"
+    ],
+    [
+     "Rule 1 isn't \"stop ordering.\"",
+     "ink"
+    ]
+   ]
+  },
+  {
+   "from": 2,
+   "lines": null
+  }
+ ],
+ "header": [
+  {
+   "from": 2,
+   "text": "Dollar Bill's rules"
+  },
+  {
+   "from": 5,
+   "text": "Not spend less. Spend in the right order."
+  },
+  {
+   "from": 6,
+   "text": "Rule 4"
+  }
+ ],
+ "pairs": [
+  {
+   "left": "Savings leaves the day you get paid",
+   "right": "Save if there's something left",
+   "good": "left",
+   "at": 2
+  },
+  {
+   "left": "A 40-line budget",
+   "right": "One daily number",
+   "good": "right",
+   "at": 3
+  },
+  {
+   "left": "Overspent? Tomorrow pays",
+   "right": "Overspent? Dip into savings",
+   "good": "left",
+   "at": 4
+  },
+  {
+   "left": "Never order takeout again",
+   "right": "Takeout's in the plan",
+   "good": "right",
+   "at": 6
+  }
+ ],
+ "moods": [
+  {
+   "from": 0,
+   "mood": "unimpressed"
+  },
+  {
+   "from": 2,
+   "mood": "happy"
+  }
+ ],
+ "cta_lines": [
+  [
+   "Save first.",
+   "ink"
+  ],
+  [
+   "Then spend",
+   "ink"
+  ],
+  [
+   "what's safe.",
+   "orange"
+  ]
+ ],
+ "cta_at": 7
+}
