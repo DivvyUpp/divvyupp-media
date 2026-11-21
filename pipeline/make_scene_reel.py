@@ -49,10 +49,12 @@ def _el_key():
     if not k: sys.exit("No ELEVENLABS_API_KEY (or ~/.secrets/elevenlabs_key)")
     return k
 
-def speak(vid, model, text):
-    """One line -> (mono float audio at SR, [(word, start, end)]). Cached by voice+model+text."""
+def speak(vid, model, text, settings=None):
+    """One line -> (mono float audio at SR, [(word, start, end)]). Cached by voice+model+text+settings.
+    settings: ElevenLabs voice_settings, e.g. {"stability": 0.0} for the most expressive eleven_v3 delivery."""
     os.makedirs(os.path.join(CACHE, "eleven"), exist_ok=True)
     body = {"text": text, "model_id": model}
+    if settings: body["voice_settings"] = settings
     h = hashlib.sha256((vid + json.dumps(body, sort_keys=True)).encode()).hexdigest()[:20]
     cf = os.path.join(CACHE, "eleven", "scene_" + h + ".json")
     if os.path.exists(cf): r = json.load(open(cf))
@@ -83,7 +85,8 @@ def build(spec):
     for sc in spec["scenes"]:
         sc["t0"] = t; cur = t + sc.get("pre", 0.3); sc["_lines"] = []
         for ln in sc.get("lines", []):
-            a, words = speak(spec["voices"][ln["who"]], spec.get("model", "eleven_v3"), ln["text"])
+            st = ln.get("settings", spec.get("voice_settings", {}).get(ln["who"]))
+            a, words = speak(spec["voices"][ln["who"]], spec.get("model", "eleven_v3"), ln["text"], st)
             i0 = int(cur * SR); voice[i0:i0 + len(a)] += a * ln.get("gain", 1.0)
             dur = len(a) / SR; sc["_lines"].append((cur, cur + dur))
             lid = len(caps) and caps[-1][3] + 1 or 0
@@ -153,6 +156,23 @@ def draw_card(img, o, k):
     yy = y + 36
     if lab: d.text((W / 2, yy), lab, font=font("b", 40), fill=GREY, anchor="ma"); yy += 60
     d.text((W / 2, yy), val, font=font("xb", vs), fill=COLS.get(o.get("color", "ink"), INK), anchor="ma")
+    paste(img, lay, k, dy=int((1 - k) * 30))
+
+def draw_stats(img, o, t_local):
+    """A card with one label and up to three columns (e.g. today / this week / this month), columns land one by one."""
+    k = ease((t_local - o["_at"]) / 0.35)
+    lay = layer(); d = ImageDraw.Draw(lay); y = o.get("y", CARD_Y); w0 = 900; x0 = (W - w0) // 2; cols = o["cols"]
+    d.rounded_rectangle([x0, y, x0 + w0, y + 250], 44, fill=(255, 255, 255, 242))
+    d.text((W / 2, y + 30), o.get("label", ""), font=font("b", 38), fill=GREY, anchor="ma")
+    cw = (w0 - 40) / len(cols)
+    for i, (lab, val) in enumerate(cols):
+        kk = ease((t_local - o["_at"] - 0.25 - i * o.get("stagger", 0.35)) / 0.3)
+        if kk <= 0: continue
+        cx = x0 + 20 + cw * (i + 0.5); a = int(255 * kk)
+        if i: d.line([x0 + 20 + cw * i, y + 100, x0 + 20 + cw * i, y + 220], fill=(225, 220, 214, a), width=3)
+        vs = fit(val, "xb", 74, cw - 30)
+        d.text((cx, y + 92), val, font=font("xb", vs), fill=COLS.get(o.get("color", "green"), GREEN) + (a,), anchor="ma")
+        d.text((cx, y + 182), lab, font=font("b", 34), fill=GREY + (a,), anchor="ma")
     paste(img, lay, k, dy=int((1 - k) * 30))
 
 def draw_notif(img, o, k):
@@ -242,6 +262,7 @@ def frame_at(spec, t, caps, total):
         if lt < o["_at"]: continue
         if o.get("until") is not None and lt > o["until"]: continue
         if o["type"] == "progress": draw_progress(img, o, lt)
+        elif o["type"] == "stats": draw_stats(img, o, lt)
         else: DRAW[o["type"]](img, o, ease((lt - o["_at"]) / 0.35))
     hk = spec.get("hook")
     if hk and t < hk.get("until", 4.5): draw_hook(img, hk["text"])
@@ -261,7 +282,19 @@ def mix(spec, voice, total):
         for o in sc.get("overlays", []):
             if o.get("sfx") == "ding":
                 i = int((sc["t0"] + ov_start(sc, o)) * SR); dd = ding(); v[i:i + len(dd)] += dd[:max(0, n - i)]
-    if spec.get("music", True):
+    m = spec.get("music", True)
+    if isinstance(m, str):
+        src = m if os.path.isabs(m) else os.path.join(ROOT, m)
+        pcm = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", src, "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"],
+                             capture_output=True, check=True).stdout
+        bed = np.frombuffer(pcm, np.float32).astype(np.float64); bed = np.pad(bed, (0, max(0, n - len(bed))))[:n]
+        bed *= spec.get("music_gain", 0.32) / max(1e-6, np.abs(bed).max())
+        fo = int(1.2 * SR); bed[-fo:] *= np.linspace(1, 0, fo)                     # fade out at the end
+        w = int(0.25 * SR); loud = np.convolve(np.abs(v), np.ones(w) / w, "same")    # duck under speech
+        act = np.convolve(np.clip(loud / 0.02, 0, 1), np.ones(int(0.4 * SR)) / int(0.4 * SR), "same")
+        out = v + bed * (1 - (1 - spec.get("duck", 0.5)) * act)
+        return out / max(1.0, np.abs(out).max() / 0.98)
+    if m:
         from music import mix_under
         return mix_under(v, SR)
     return v / max(1.0, np.abs(v).max() / 0.98)

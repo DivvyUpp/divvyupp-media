@@ -5,7 +5,7 @@
   "her": "cgSgspJ2msm6clMCkdW9"
  },
  "model": "eleven_v3",
- "music": true,
+ "music": "pipeline/assets/music/same-account-bed.mp3",
  "hook": {
   "text": "Saver married\nto a spender?",
   "until": 4.6
@@ -24,7 +24,7 @@
    "lines": [
     {
      "who": "him",
-     "text": "[warm] We've talked about Paris for six years. [softly, proud] I'm six hundred dollars away from surprising her."
+     "text": "[cheerful] We've talked about Paris for six years. [excited, hushed] And I'm six hundred dollars away from surprising her!"
     }
    ],
    "overlays": [
@@ -66,11 +66,11 @@
    "lines": [
     {
      "who": "him",
-     "text": "[amused] Something for her."
+     "text": "[amused, upbeat] Something for her..."
     },
     {
      "who": "her",
-     "text": "[happy] And candles for the house!"
+     "text": "[delighted] And candles for the house!"
     }
    ]
   },
@@ -90,7 +90,7 @@
     },
     {
      "who": "him",
-     "text": "[laughs] Even something for me."
+     "text": "[laughing] Even something for me!"
     }
    ]
   },
@@ -106,7 +106,7 @@
    "lines": [
     {
      "who": "him",
-     "text": "[resigned, affectionate] Six hundred and forty dollars. [sighs] Paris just moved back a month."
+     "text": "[laughs] Six hundred and forty dollars. [playful, good-natured] Paris just moved back a month!"
     }
    ],
    "overlays": [
@@ -140,20 +140,33 @@
    "lines": [
     {
      "who": "her",
-     "text": "[curious] That's it? That's the whole number?"
+     "text": "[curious, playful] That's it? That's all I have to look at?"
     },
     {
      "who": "him",
-     "text": "[warm] That's the whole number."
+     "text": "[cheerful] That's it!"
     }
    ],
    "overlays": [
     {
-     "type": "card",
-     "label": "Safe to spend today",
-     "value": "$84",
-     "color": "green",
-     "at": 0.3
+     "type": "stats",
+     "label": "Safe to spend",
+     "cols": [
+      [
+       "today",
+       "$84"
+      ],
+      [
+       "this week",
+       "$588"
+      ],
+      [
+       "this month",
+       "$2,520"
+      ]
+     ],
+     "at": 0.3,
+     "color": "green"
     }
    ]
   },
@@ -223,7 +236,7 @@
    "lines": [
     {
      "who": "her",
-     "text": "[warm, smiling] Turns out we weren't a saver and a spender. [softly] We just needed the same number."
+     "text": "[warm, smiling] Turns out we weren't a saver and a spender. [happy] We just needed the same number."
     }
    ]
   }
@@ -246,5 +259,13 @@
   "url": "divvyupp.com",
   "dur": 3.0,
   "small": "Dramatization. Example couple."
+ },
+ "voice_settings": {
+  "him": {
+   "stability": 0.0
+  },
+  "her": {
+   "stability": 0.0
+  }
  }
 }
