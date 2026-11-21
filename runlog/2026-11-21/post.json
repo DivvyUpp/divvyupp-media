@@ -15,6 +15,32 @@
    "status": "ok",
    "trigger": "scheduled",
    "summary": "Noon slot: Nothing approved to post. Four Reels (2026-11-21-a, 2026-11-20-b4, 2026-11-21-paycheck, 2026-11-21-dollar-bill-rules) are on hold awaiting Srini's review."
+  },
+  {
+   "started_at": "2026-11-21T12:33:00-05:00",
+   "finished_at": "2026-11-21T12:38:00-05:00",
+   "status": "ok",
+   "trigger": "scheduled",
+   "summary": "Posted the Dollar Bill rules Reel (approved by Srini at 12:30pm ET for the next slot). Checked Windsor first: nothing else posted today.",
+   "outputs": [
+    {
+     "label": "Queue",
+     "path": "queue.json"
+    },
+    {
+     "label": "Experiment log",
+     "path": "experiment-log.csv"
+    }
+   ],
+   "reels": [
+    {
+     "id": "2026-11-21-dollar-bill-rules",
+     "hook": "4th DoorDash order this week? Dollar Bill says relax.",
+     "status": "posted",
+     "file": "reels/2026-11-21-dollar-bill-rules.mp4",
+     "permalink": "https://www.instagram.com/reel/DgAx28nI9bU/"
+    }
+   ]
   }
  ]
 }
