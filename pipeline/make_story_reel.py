@@ -209,8 +209,9 @@ def character(base, cx, top, height, t, mouth, mood, k, who):
     """Paste presenter `who` centred on cx with its top at `top` (px), `height` px tall, alpha k (0..1)."""
     if k <= 0: return
     from characters import sprite as human_sprite
-    import animals
-    sprite = animals.sprite if who in animals.ANIMALS else human_sprite      # animal presenters share the same contract
+    import animals, movie_char
+    sprite = (movie_char.sprite if who in movie_char.CHARS else
+              animals.sprite if who in animals.ANIMALS else human_sprite)  # all presenters share the same contract
     m = mouth if isinstance(mouth, str) else (0 if mouth < 0.12 else 1 if mouth < 0.4 else 2 if mouth < 0.75 else 3)
     blink = (t + 0.9) % 3.7 < 0.12
     sp = sprite(who, m, blink, mood, int(height * S))
