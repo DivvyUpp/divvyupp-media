@@ -1,0 +1,13 @@
+{
+  "run": "post",
+  "date": "2026-11-22",
+  "attempts": [
+    {
+      "started_at": "2026-11-22T11:58:56-05:00",
+      "finished_at": "2026-11-22T11:59:03-05:00",
+      "status": "ok",
+      "trigger": "scheduled",
+      "summary": "Nothing approved to post in the noon slot. The one approved Reel (2026-11-21-same-account) is held until 19:30 ET, so it goes in the 10pm slot."
+    }
+  ]
+}
