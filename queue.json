@@ -257,5 +257,17 @@
     "caption": "\"It's only $12.\" Six times this week. That's $72.\n\nDollar Bill's three rules:\n1. Small buys count.\n2. Know today's number first. $45 today, a $12 coffee, $33 left, and you knew before you paid.\n3. Savings leave on payday, so the $12 comes out of what's left, not your kid's fund.\n\nKeep the treats. Just let the number count them first.\n\nSave first. Then spend what's safe.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio \u2192 divvyupp.com\n\n#moneytips #personalfinance #savingmoney #budgeting #dollarbill",
     "hypothesis": "hypotheses/2026-11-22.md",
     "note": "Review video in reels/. Voice: seed 1; takes 2-4 sent to Srini as audio. Not approved."
+  },
+  {
+    "id": "2026-11-22-byage-walk",
+    "kind": "main",
+    "status": "approved",
+    "post_date": "2026-11-22",
+    "file": "reels/2026-11-22-byage-walk.mp4",
+    "hook": "You're saving in the wrong order",
+    "caption": "You're saving in the wrong order. \ud83d\udc40\n\nHow much should you have saved by 40? Fidelity's rule of thumb on a $100K salary: 1x by 30, 3x by 40, 6x by 50, 8x by 60, 10x by 67.\n\nBehind? Most people are. Start with the order: save first, then spend what's safe.\n\nWhat age are you? Tell me in the comments \ud83d\udc47\n\nFidelity savings guideline, not personal advice.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio \u2192 divvyupp.com\n\n#personalfinance #savingmoney #retirementsavings #moneytips #budgeting",
+    "hypothesis": "hooks/2026-11-22-byage-walk.md",
+    "format": "talking",
+    "approved_note": "Srini approved 2026-11-22 2:32pm ET in chat: post now. Claude starts the Post run right away."
   }
 ]
