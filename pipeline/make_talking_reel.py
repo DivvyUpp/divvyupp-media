@@ -110,7 +110,7 @@ def frame_at(spec, frames, segs, caps, total, t):
     draw_table(img, spec["table"], t, pn.get("top", 0) + ph + 30, hk if spec.get("hook_in_table", True) else None)
     if hk and not spec.get("hook_in_table", True) and t < hk.get("until", 3.0): draw_hook(img, hk["text"])
     nt = spec.get("nametag")
-    if nt and t < nt.get("until", 3.0):
+    if nt and nt.get("from", 0) <= t < nt.get("until", 3.0):
         d = ImageDraw.Draw(img); f = font("b", 36); tw = f.getlength(nt["text"]); yy = pn.get("top", 0) + ph - 250
         d.rounded_rectangle([60, yy, 60 + tw + 48, yy + 64], 32, fill=(255, 255, 255, 235)); d.text((84, yy + 32), nt["text"], font=f, fill=INK, anchor="lm")
     draw_caption(img, caps, t, pn.get("top", 0) + ph - 150)

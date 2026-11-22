@@ -4,6 +4,10 @@
  "transcript": "pipeline/assets/scenes/by-age/transcript.json",
  "segments": [
   [
+   0.0,
+   1.85
+  ],
+  [
    5.9,
    11.22
   ],
@@ -51,11 +55,12 @@
  },
  "hook": {
   "text": "How much should you\nhave saved by 40?",
-  "until": 3.2
+  "until": 4.8
  },
  "nametag": {
   "text": "Srini \u00b7 Founder, DivvyUpp",
-  "until": 3.2
+  "until": 5.0,
+  "from": 1.9
  },
  "table": {
   "title": "Saved by age, on a $100K salary",
