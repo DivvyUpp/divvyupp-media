@@ -1,0 +1,27 @@
+{
+ "run": "metrics",
+ "date": "2026-11-22",
+ "attempts": [
+  {
+   "started_at": "2026-11-22T05:54:16-05:00",
+   "finished_at": "2026-11-22T05:55:25-05:00",
+   "status": "ok",
+   "trigger": "scheduled",
+   "summary": "Read 8 Reels from the last 8 days (Windsor cached data, trial plan). Followers: 3. Non-follower views yesterday: 65.",
+   "outputs": [
+    {
+     "label": "Instagram numbers",
+     "path": "metrics/2026-11-22.json"
+    },
+    {
+     "label": "Experiment log",
+     "path": "experiment-log.csv"
+    },
+    {
+     "label": "Followers",
+     "path": "followers.csv"
+    }
+   ]
+  }
+ ]
+}
