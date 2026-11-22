@@ -1,0 +1,23 @@
+{
+  "run": "watchlist",
+  "date": "2026-11-22",
+  "attempts": [
+    {
+      "started_at": "2026-11-22T05:00:00-05:00",
+      "finished_at": "2026-11-22T05:09:33-05:00",
+      "status": "ok",
+      "trigger": "scheduled",
+      "summary": "Re-checked all 27 accounts and 295 new channels from 40 searches. Added Casper Capital, Baddies & Budgets and VANNtastic; removed CNBC Make It (mostly off-topic Shorts) and Paddy Galloway (no YouTube uploads since 2022). Niche list is 19, one short of the 20 floor.",
+      "outputs": [
+        {
+          "label": "Watchlist",
+          "path": "research/watchlist.md"
+        },
+        {
+          "label": "Watchlist data",
+          "path": "research/watchlist.csv"
+        }
+      ]
+    }
+  ]
+}
