@@ -80,6 +80,12 @@ details p{margin:6px 0 0;white-space:pre-line}
     <ol class="list" id="l-posted"></ol>
   </section>
 
+  <section aria-labelledby="h-remake">
+    <div class="sh"><h2 id="h-remake">To remake</h2><span class="count c-hold" id="n-remake"></span></div>
+    <p class="what">Ideas you liked that need a new version (for example with real people) before review.</p>
+    <ol class="list" id="l-remake"></ol>
+  </section>
+
   <section aria-labelledby="h-hold">
     <div class="sh"><h2 id="h-hold">On hold</h2><span class="count c-hold" id="n-hold"></span></div>
     <p class="what">Parked until you decide: post it, or drop it.</p>
@@ -137,7 +143,7 @@ function item(e, slot) {
   if (e.format) meta.append(el("span", {}, e.format));
   if (slot) meta.append(el("span", {class: "slot"}, "posts " + slot));
   info.append(meta);
-  const note = e.hold_note || e.approved_note || e.note;
+  const note = e.remake_note || e.hold_note || e.approved_note || e.note;
   if (note) info.append(el("p", {class: "note"}, note));
   if (e.caption) info.append(el("details", {}, el("summary", {}, "Caption"), el("p", {}, e.caption)));
   const links = el("div", {class: "links"});
@@ -157,9 +163,10 @@ async function main() {
     review: q.filter(e => e.status === "pending_review").sort(byDate),
     approved: q.filter(e => e.status === "approved" && e.kind !== "trial").sort(byDate),
     hold: q.filter(e => e.status === "hold").sort(byDate),
+    remake: q.filter(e => e.status === "remake").sort(byDate),
     posted: q.filter(e => e.status === "posted" && e.post_date && e.post_date >= weekAgo()).sort((a, b) => byDate(b, a)),
   };
-  const empty = {review: "Nothing to review right now.", approved: "Nothing approved yet.", hold: "Nothing on hold.", posted: "Nothing posted in the last 7 days."};
+  const empty = {review: "Nothing to review right now.", approved: "Nothing approved yet.", hold: "Nothing on hold.", posted: "Nothing posted in the last 7 days.", remake: "Nothing to remake."};
   const slots = nextSlots(groups.approved.length);
   for (const [k, list] of Object.entries(groups)) {
     $("n-" + k).textContent = list.length;
