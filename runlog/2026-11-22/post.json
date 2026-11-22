@@ -41,6 +41,13 @@
       "status": "ok",
       "trigger": "manual",
       "summary": "Manual run for 2026-11-22-byage-walk: it was already posted by the previous attempt (https://www.instagram.com/reel/DgDkbpCij4D/), so nothing was posted again. 2026-11-21-same-account stays held until 19:30 ET."
+    },
+    {
+      "started_at": "2026-11-22T16:58:47-05:00",
+      "finished_at": "2026-11-22T17:00:30-05:00",
+      "status": "ok",
+      "trigger": "scheduled",
+      "summary": "Nothing approved to post in the 5pm slot. The one approved Reel (2026-11-21-same-account) is held until 19:30 ET, so it goes in a later slot."
     }
   ]
 }
