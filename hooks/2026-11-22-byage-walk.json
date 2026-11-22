@@ -5,7 +5,8 @@
  "segments": [
   [
    0.0,
-   1.85
+   1.85,
+   1.7
   ],
   [
    5.9,
@@ -50,17 +51,19 @@
  "panel": {
   "top": 0,
   "height": 1110,
-  "focus_y": 0.38,
-  "punch": 1.05
+  "focus_y": 0.43,
+  "punch": 1.04,
+  "zoom_out": 1.38
  },
  "hook": {
   "text": "How much should you\nhave saved by 40?",
-  "until": 4.8
+  "until": 3.9
  },
  "nametag": {
   "text": "Srini \u00b7 Founder, DivvyUpp",
-  "until": 5.0,
-  "from": 1.9
+  "until": 4.6,
+  "from": 1.15,
+  "y": 285
  },
  "table": {
   "title": "Saved by age, on a $100K salary",

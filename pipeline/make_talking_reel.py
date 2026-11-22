@@ -28,13 +28,14 @@ def rel(p): return p if os.path.isabs(p) else os.path.join(ROOT, p)
 def timeline(spec):
     """Output time <-> source time over the kept segments."""
     segs, t = [], 0.0
-    for a, b in spec["segments"]:
-        segs.append((t, t + (b - a), a, b)); t += b - a
+    for sg in spec["segments"]:
+        a, b = sg[0], sg[1]; sp = sg[2] if len(sg) > 2 else 1.0
+        segs.append((t, t + (b - a) / sp, a, b, sp)); t += (b - a) / sp
     return segs, t
 
 def src_to_out(segs, s):
-    for o0, o1, a, b in segs:
-        if a <= s <= b: return o0 + (s - a)
+    for o0, o1, a, b, sp in segs:
+        if a <= s <= b: return o0 + (s - a) / sp
     return None
 
 def load_frames(spec):
@@ -96,12 +97,19 @@ def frame_at(spec, frames, segs, caps, total, t):
         from PIL import ImageFilter
         img = last.filter(ImageFilter.GaussianBlur(12)); draw_end(img, end, ease((t - body) / 0.4)); return img
     si = next(i for i, g in enumerate(segs) if g[0] <= t < g[1] or i == len(segs) - 1)
-    o0, o1, a, b = segs[si]; s = a + (t - o0)
+    o0, o1, a, b, sp = segs[si]; s = a + (t - o0) * sp
     src = Image.fromarray(frames[min(int(s * FPS), len(frames) - 1)])
     pn = spec["panel"]; ph = pn["height"]; z = 1.0 if si % 2 == 0 else pn.get("punch", 1.07)
-    cw, ch = W / z, ph / z; cy = H * pn.get("focus_y", 0.42)
+    zo = pn.get("zoom_out", 1.0)                       # >1 shows more of the frame; sides filled with a blurred copy
+    ch = min(H, ph * zo) / z; cw = W / z; cy = H * pn.get("focus_y", 0.42)
     y0 = min(max(0, cy - ch / 2), H - ch); x0 = (W - cw) / 2
-    panel = src.resize((W, ph), Image.BICUBIC, box=(x0, y0, x0 + cw, y0 + ch))
+    pw = int(round(cw * ph / ch)) if zo > 1 else W
+    fg = src.resize((pw, ph), Image.BICUBIC, box=(x0, y0, x0 + cw, y0 + ch))
+    if pw < W:
+        from PIL import ImageFilter
+        bg = src.resize((W, ph), Image.BILINEAR, box=(0, max(0, cy - ph / 2), W, max(0, cy - ph / 2) + ph)).filter(ImageFilter.GaussianBlur(28))
+        bg = Image.blend(bg, Image.new("RGB", bg.size, (20, 16, 15)), 0.25); bg.paste(fg, ((W - pw) // 2, 0)); panel = bg
+    else: panel = fg
     img = Image.new("RGBA", (W, H), CREAM + (255,)); img.paste(panel, (0, pn.get("top", 0)))
     g = np.zeros((ph, 1), np.float32); g[ph - 260:, 0] = np.linspace(0, 0.55, 260); g[:420, 0] = np.linspace(0.45, 0, 420)
     a_ = np.zeros((ph, W, 4), np.uint8); a_[..., 3] = (np.repeat(g, W, 1) * 255).astype(np.uint8)
@@ -111,17 +119,20 @@ def frame_at(spec, frames, segs, caps, total, t):
     if hk and not spec.get("hook_in_table", True) and t < hk.get("until", 3.0): draw_hook(img, hk["text"])
     nt = spec.get("nametag")
     if nt and nt.get("from", 0) <= t < nt.get("until", 3.0):
-        d = ImageDraw.Draw(img); f = font("b", 36); tw = f.getlength(nt["text"]); yy = pn.get("top", 0) + ph - 250
-        d.rounded_rectangle([60, yy, 60 + tw + 48, yy + 64], 32, fill=(255, 255, 255, 235)); d.text((84, yy + 32), nt["text"], font=f, fill=INK, anchor="lm")
-    draw_caption(img, caps, t, pn.get("top", 0) + ph - 150)
+        d = ImageDraw.Draw(img); f = font("b", 32); tw = f.getlength(nt["text"]); yy = nt.get("y", 285); x1 = W - 50
+        k = ease((t - nt.get("from", 0)) / 0.35)
+        d.rounded_rectangle([x1 - tw - 44, yy, x1, yy + 58], 29, fill=(255, 255, 255, int(235 * k)))
+        d.text((x1 - 22, yy + 29), nt["text"], font=f, fill=INK + (int(255 * k),), anchor="rm")
+    draw_caption(img, caps, t, pn.get("top", 0) + ph - pn.get("caption_up", 110))
     return img
 
 def audio(spec, segs, total):
     pcm = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", rel(spec["source"]), "-vn", "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"],
                          capture_output=True, check=True).stdout
     src = np.frombuffer(pcm, np.float32).astype(np.float64); out = []; f = int(0.015 * SR)
-    for _, _, a, b in segs:
+    for _, _, a, b, sp in segs:
         piece = src[int(a * SR):int(b * SR)].copy(); ramp = np.linspace(0, 1, f)
+        if sp != 1.0: piece = np.interp(np.arange(0, len(piece), sp), np.arange(len(piece)), piece)
         piece[:f] *= ramp; piece[-f:] *= ramp[::-1]; out.append(piece)
     v = np.concatenate(out); v /= max(1e-6, np.abs(v).max()) / 0.9
     v = np.pad(v, (0, int(total * SR) - len(v)))[:int(total * SR)]
