@@ -14,7 +14,7 @@
  "scenes": [
   {
    "name": "1 The secret",
-   "media": "pipeline/assets/scenes/same-account/s1.png",
+   "media": "pipeline/assets/scenes/same-account/s1.mp4",
    "min": 4.5,
    "pre": 0.4,
    "zoom": [
@@ -40,7 +40,7 @@
   },
   {
    "name": "2 The door",
-   "media": "pipeline/assets/scenes/same-account/s2.png",
+   "media": "pipeline/assets/scenes/same-account/s2.mp4",
    "min": 2.4,
    "pre": 0.15,
    "zoom": [
@@ -57,7 +57,7 @@
   },
   {
    "name": "3a Something for her",
-   "media": "pipeline/assets/scenes/same-account/s3a.png",
+   "media": "pipeline/assets/scenes/same-account/s3a.mp4",
    "min": 2.6,
    "pre": 0.1,
    "zoom": [
@@ -77,7 +77,7 @@
   },
   {
    "name": "3b Something for me",
-   "media": "pipeline/assets/scenes/same-account/s3b.png",
+   "media": "pipeline/assets/scenes/same-account/s3b.mp4",
    "min": 2.6,
    "pre": 0.1,
    "zoom": [
@@ -97,7 +97,7 @@
   },
   {
    "name": "4 The notification",
-   "media": "pipeline/assets/scenes/same-account/s4.png",
+   "media": "pipeline/assets/scenes/same-account/s4.mp4",
    "min": 4.0,
    "pre": 0.7,
    "zoom": [
@@ -130,7 +130,7 @@
   },
   {
    "name": "5 Next morning",
-   "media": "pipeline/assets/scenes/same-account/s5.png",
+   "media": "pipeline/assets/scenes/same-account/s5.mp4",
    "min": 5.0,
    "pre": 0.6,
    "post": 0.6,
@@ -173,7 +173,7 @@
   },
   {
    "name": "6 The month",
-   "media": "pipeline/assets/scenes/same-account/s6.png",
+   "media": "pipeline/assets/scenes/same-account/s6.mp4",
    "min": 4.2,
    "zoom": [
     1.0,
@@ -200,7 +200,7 @@
   },
   {
    "name": "7 Two envelopes",
-   "media": "pipeline/assets/scenes/same-account/s7.png",
+   "media": "pipeline/assets/scenes/same-account/s7.mp4",
    "min": 5.0,
    "pre": 0.5,
    "post": 1.2,
@@ -232,7 +232,7 @@
   },
   {
    "name": "8 Paris",
-   "media": "pipeline/assets/scenes/same-account/s8.png",
+   "media": "pipeline/assets/scenes/same-account/s8.mp4",
    "min": 6.0,
    "pre": 0.6,
    "post": 0.5,
