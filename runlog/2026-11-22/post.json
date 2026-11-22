@@ -34,6 +34,13 @@
           "permalink": "https://www.instagram.com/reel/DgDkbpCij4D/"
         }
       ]
+    },
+    {
+      "started_at": "2026-11-22T14:36:48-05:00",
+      "finished_at": "2026-11-22T14:36:55-05:00",
+      "status": "ok",
+      "trigger": "manual",
+      "summary": "Manual run for 2026-11-22-byage-walk: it was already posted by the previous attempt (https://www.instagram.com/reel/DgDkbpCij4D/), so nothing was posted again. 2026-11-21-same-account stays held until 19:30 ET."
     }
   ]
 }
