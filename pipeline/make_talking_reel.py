@@ -14,7 +14,7 @@ Spec:
   "music": "pipeline/assets/music/....mp3", "music_gain": 0.2, "duck": 0.35,
   "end": {...same as make_scene_reel...} }
 """
-import json, os, subprocess, sys
+import json, math, os, subprocess, sys
 import numpy as np
 from PIL import Image, ImageDraw
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE); sys.path.insert(0, HERE)
@@ -67,6 +67,35 @@ def draw_caption(img, caps, t, y):
         d.text((x, y), w, font=font("xb", size), fill=col, stroke_width=7, stroke_fill=INK)
         x += font("xb", size).getlength(w + " ")
 
+def draw_logo_icon(d, x, y, size, a=255):
+    """DivvyUpp mark: orange rounded square with the white branching arrow (same geometry as make_reel.logo)."""
+    d.rounded_rectangle([x, y, x + size, y + size], size * 0.28, fill=ORANGE + (a,))
+    c = x + size / 2; sw = max(3, int(size * 0.1)); top, bot = y + size * 0.27, y + size * 0.73; arm = size * 0.19
+    col = WHITE + (a,)
+    d.line([(c, top), (c, bot)], fill=col, width=sw); d.line([(c - arm, top + arm), (c, top), (c + arm, top + arm)], fill=col, width=sw, joint="curve")
+    for px, py in [(c, bot), (c - arm, top + arm), (c + arm, top + arm), (c, top)]:
+        d.ellipse([px - sw / 2, py - sw / 2, px + sw / 2, py + sw / 2], fill=col)
+
+def draw_nametag(img, nt, t):
+    """Pill, top right: [logo] DivvyUpp | Srini · Founder. Pops in with a small scale bounce."""
+    k = ease((t - nt.get("from", 0)) / 0.3)
+    if k <= 0: return
+    pop = 1 + 0.12 * math.sin(min(1.0, (t - nt.get("from", 0)) / 0.35) * math.pi)       # quick overshoot
+    lay = Image.new("RGBA", (900, 120), (0, 0, 0, 0)); d = ImageDraw.Draw(lay)
+    fb, fw = font("xb", 34), font("b", 32); ic = 46; x = 22
+    brand = "DivvyUpp"; who = nt.get("text", "Srini · Founder")
+    wb, ww = fb.getlength(brand), fw.getlength(who); total = 22 + ic + 12 + wb + 22 + 2 + 22 + ww + 26
+    d.rounded_rectangle([0, 20, total, 20 + 74], 37, fill=(255, 255, 255, 240))
+    draw_logo_icon(d, x, 20 + 14, ic); x += ic + 12
+    d.text((x, 57), brand, font=fb, fill=INK, anchor="lm"); x += wb + 22
+    d.line([(x, 38), (x, 76)], fill=(215, 208, 200), width=2); x += 24
+    d.text((x, 57), who, font=fw, fill=GREY, anchor="lm")
+    lay = lay.crop((0, 0, int(total) + 2, 120))
+    if pop != 1: lay = lay.resize((int(lay.width * pop), int(lay.height * pop)), Image.BICUBIC)
+    a = np.array(lay); a[..., 3] = (a[..., 3] * k).astype(np.uint8); lay = Image.fromarray(a)
+    x1 = W - 46; yy = nt.get("y", 270)
+    img.alpha_composite(lay, (int(x1 - lay.width), int(yy - (lay.height - 120) / 2)))
+
 def draw_table(img, tb, t, y0, hook=None):
     """Title slot shows the hook (bigger, in orange) while it's live, then the table title."""
     d = ImageDraw.Draw(img); x0, x1 = 90, W - 90
@@ -118,13 +147,29 @@ def frame_at(spec, frames, segs, caps, total, t):
     draw_table(img, spec["table"], t, pn.get("top", 0) + ph + 30, hk if spec.get("hook_in_table", True) else None)
     if hk and not spec.get("hook_in_table", True) and t < hk.get("until", 3.0): draw_hook(img, hk["text"])
     nt = spec.get("nametag")
-    if nt and nt.get("from", 0) <= t < nt.get("until", 3.0):
-        d = ImageDraw.Draw(img); f = font("b", 32); tw = f.getlength(nt["text"]); yy = nt.get("y", 285); x1 = W - 50
-        k = ease((t - nt.get("from", 0)) / 0.35)
-        d.rounded_rectangle([x1 - tw - 44, yy, x1, yy + 58], 29, fill=(255, 255, 255, int(235 * k)))
-        d.text((x1 - 22, yy + 29), nt["text"], font=f, fill=INK + (int(255 * k),), anchor="rm")
+    if nt and nt.get("from", 0) <= t < nt.get("until", 3.0): draw_nametag(img, nt, t)
     draw_caption(img, caps, t, pn.get("top", 0) + ph - pn.get("caption_up", 110))
     return img
+
+def whoosh(fx):
+    """Airy sweep: noise through a moving low-pass, rising then falling, peaking at fx['peak'] of its length."""
+    dur = fx.get("dur", 1.0); n = int(dur * SR); rng = np.random.default_rng(11); x = rng.normal(0, 1, n)
+    tt = np.arange(n) / n; pk = fx.get("peak", 0.7)
+    cut = 300 + 5200 * np.where(tt < pk, tt / pk, 1 - (tt - pk) / (1 - pk)) ** 1.5
+    y = np.empty(n); acc = 0.0
+    for i in range(n):
+        a = math.exp(-2 * math.pi * cut[i] / SR); acc = (1 - a) * x[i] + a * acc; y[i] = acc
+    env = np.where(tt < pk, (tt / pk) ** 2, ((1 - tt) / (1 - pk)) ** 1.6)
+    return 0.55 * y / max(1e-6, np.abs(y).max()) * env
+
+def pluck_fx(fx):
+    from music import pluck
+    rng = np.random.default_rng(5); out = np.zeros(int(0.7 * SR))
+    for j, f in enumerate(fx.get("notes", [1318.5, 1975.5])):
+        p = pluck(f, 0.6, SR, rng) * (0.5 if j else 0.6); s = int(j * 0.07 * SR); out[s:s + len(p)] += p[:len(out) - s]
+    return 0.5 * out / max(1e-6, np.abs(out).max())
+
+SFX = {"whoosh": whoosh, "pluck": pluck_fx}
 
 def audio(spec, segs, total):
     pcm = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", rel(spec["source"]), "-vn", "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"],
@@ -136,6 +181,9 @@ def audio(spec, segs, total):
         piece[:f] *= ramp; piece[-f:] *= ramp[::-1]; out.append(piece)
     v = np.concatenate(out); v /= max(1e-6, np.abs(v).max()) / 0.9
     v = np.pad(v, (0, int(total * SR) - len(v)))[:int(total * SR)]
+    for fx in spec.get("sfx", []):
+        snd = SFX[fx["type"]](fx); i = int(fx["at"] * SR); n = min(len(snd), len(v) - i)
+        if n > 0: v[i:i + n] += snd[:n] * fx.get("gain", 1.0)
     spec2 = dict(spec); spec2["scenes"] = []
     return M.mix(spec2, v, total)
 

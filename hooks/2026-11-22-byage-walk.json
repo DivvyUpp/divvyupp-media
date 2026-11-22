@@ -60,10 +60,10 @@
   "until": 3.9
  },
  "nametag": {
-  "text": "Srini \u00b7 Founder, DivvyUpp",
+  "text": "Srini \u00b7 Founder",
   "until": 4.6,
   "from": 1.15,
-  "y": 285
+  "y": 270
  },
  "table": {
   "title": "Saved by age, on a $100K salary",
@@ -116,5 +116,19 @@
   ],
   "url": "divvyupp.com",
   "dur": 2.5
- }
+ },
+ "sfx": [
+  {
+   "type": "whoosh",
+   "at": 0.0,
+   "dur": 1.15,
+   "peak": 0.72,
+   "gain": 0.9
+  },
+  {
+   "type": "pluck",
+   "at": 1.15,
+   "gain": 0.8
+  }
+ ]
 }
