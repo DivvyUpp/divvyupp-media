@@ -209,12 +209,14 @@
   {
     "id": "2026-11-21-same-account",
     "kind": "main",
-    "status": "pending_review",
-    "post_date": "2026-11-21",
+    "status": "approved",
+    "post_date": "2026-11-22",
     "file": "reels/2026-11-21-same-account.mp4",
     "hook": "Saver married to a spender?",
-    "caption": "Saver married to a spender? \ud83d\ude05\n\nHe was secretly saving for Paris. She had a really great Saturday. Then they both started looking at the same number.\n\nSave first. Then spend what's safe.\n\nDramatization, example couple.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio \u2192 divvyupp.com\n\n#couplesmoney #personalfinance #savingmoney #moneytips #budgeting",
+    "caption": "Saver married to a spender? 😅\n\nHe was secretly saving for Paris. She had a really great Saturday. Then they both started looking at the same number.\n\nSave first. Then spend what's safe.\n\nDramatization, example couple.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio → divvyupp.com\n\n#couplesmoney #personalfinance #savingmoney #moneytips #budgeting",
     "hypothesis": "hooks/2026-11-21-same-account-script.md",
-    "format": "scene"
+    "format": "scene",
+    "not_before": "19:30",
+    "approved_note": "Srini approved 2026-11-21 (in chat): post Sunday 2026-11-22 at 7:30pm ET. Claude starts the Post run at 19:30; the 21:57 slot is the fallback."
   }
 ]
