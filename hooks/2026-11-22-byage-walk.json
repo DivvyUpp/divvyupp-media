@@ -5,8 +5,13 @@
  "segments": [
   [
    0.0,
+   0.85,
+   0.6
+  ],
+  [
+   0.85,
    1.85,
-   1.7
+   2.0
   ],
   [
    5.9,
@@ -57,12 +62,12 @@
  },
  "hook": {
   "text": "How much should you\nhave saved by 40?",
-  "until": 3.9
+  "until": 4.6
  },
  "nametag": {
   "text": "Srini \u00b7 Founder",
-  "until": 4.6,
-  "from": 1.15,
+  "until": 5.2,
+  "from": 1.95,
   "y": 270
  },
  "table": {
@@ -120,15 +125,41 @@
  "sfx": [
   {
    "type": "whoosh",
-   "at": 0.0,
-   "dur": 1.15,
-   "peak": 0.72,
+   "at": 1.05,
+   "dur": 0.95,
+   "peak": 0.85,
    "gain": 0.9
   },
   {
    "type": "pluck",
-   "at": 1.15,
+   "at": 1.95,
    "gain": 0.8
+  },
+  {
+   "type": "pluck",
+   "at_src": 24.84,
+   "lead": 0.25,
+   "gain": 0.7,
+   "notes": [
+    987.8,
+    1318.5
+   ]
+  }
+ ],
+ "sky_hook": {
+  "text": "The one thing\nyour savings\nare missing",
+  "until": 1.45,
+  "y": 300,
+  "size": 100
+ },
+ "callouts": [
+  {
+   "text": "The one thing you're missing:",
+   "from_src": 24.84,
+   "lead": 0.25,
+   "until_src": 29.24,
+   "y": 290,
+   "size": 60
   }
  ]
 }

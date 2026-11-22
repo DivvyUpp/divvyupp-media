@@ -96,6 +96,29 @@ def draw_nametag(img, nt, t):
     x1 = W - 46; yy = nt.get("y", 270)
     img.alpha_composite(lay, (int(x1 - lay.width), int(yy - (lay.height - 120) / 2)))
 
+def draw_sky_hook(img, sh, t):
+    """Big hook text over the opening shot; fades out as the camera moves."""
+    k = 1.0 - ease((t - sh["until"] + 0.25) / 0.25) if t > sh["until"] - 0.25 else 1.0
+    if k <= 0: return
+    lay = layer(); d = ImageDraw.Draw(lay); lines = sh["text"].split("\n"); y = sh.get("y", 330)
+    for ln in lines:
+        size = fit(ln, "xb", sh.get("size", 96), 940); tw = font("xb", size).getlength(ln)
+        d.rounded_rectangle([W / 2 - tw / 2 - 32, y - 16, W / 2 + tw / 2 + 32, y + size + 26], 28, fill=(255, 255, 255, 246))
+        d.text((W / 2, y), ln, font=font("xb", size), fill=INK, anchor="ma"); y += size + 56
+    paste(img, lay, k)
+
+def draw_callout(img, co, t):
+    """Orange pill that pops in on the video (e.g. 'The one thing you're missing:') between its out-times."""
+    if not (co["_from"] <= t < co["_until"]): return
+    k = ease((t - co["_from"]) / 0.25) * (1 - ease((t - co["_until"] + 0.25) / 0.25))
+    pop = 1 + 0.1 * math.sin(min(1.0, (t - co["_from"]) / 0.3) * math.pi)
+    f = font("xb", co.get("size", 64)); tw = f.getlength(co["text"])
+    lay = Image.new("RGBA", (int(tw + 90), 130), (0, 0, 0, 0)); d = ImageDraw.Draw(lay)
+    d.rounded_rectangle([0, 10, tw + 80, 120], 55, fill=ORANGE); d.text((40, 65), co["text"], font=f, fill=WHITE, anchor="lm")
+    lay = lay.resize((int(lay.width * pop), int(lay.height * pop)), Image.BICUBIC)
+    a = np.array(lay); a[..., 3] = (a[..., 3] * k).astype(np.uint8)
+    img.alpha_composite(Image.fromarray(a), (int((W - lay.width) / 2), int(co.get("y", 300) - (lay.height - 130) / 2)))
+
 def draw_table(img, tb, t, y0, hook=None):
     """Title slot shows the hook (bigger, in orange) while it's live, then the table title."""
     d = ImageDraw.Draw(img); x0, x1 = 90, W - 90
@@ -143,6 +166,8 @@ def frame_at(spec, frames, segs, caps, total, t):
     g = np.zeros((ph, 1), np.float32); g[ph - 260:, 0] = np.linspace(0, 0.55, 260); g[:420, 0] = np.linspace(0.45, 0, 420)
     a_ = np.zeros((ph, W, 4), np.uint8); a_[..., 3] = (np.repeat(g, W, 1) * 255).astype(np.uint8)
     img.alpha_composite(Image.fromarray(a_), (0, pn.get("top", 0)))
+    if spec.get("sky_hook") and t < spec["sky_hook"]["until"]: draw_sky_hook(img, spec["sky_hook"], t)
+    for co in spec.get("callouts", []): draw_callout(img, co, t)
     hk = spec.get("hook")
     draw_table(img, spec["table"], t, pn.get("top", 0) + ph + 30, hk if spec.get("hook_in_table", True) else None)
     if hk and not spec.get("hook_in_table", True) and t < hk.get("until", 3.0): draw_hook(img, hk["text"])
@@ -192,6 +217,10 @@ def main():
     spec = json.load(open(rel(path))); segs, body = timeline(spec)
     total = body + (spec["end"].get("dur", 2.5) if spec.get("end") else 0)
     for r in spec["table"]["rows"]: r["_out"] = src_to_out(segs, r["word_at"]) if r.get("word_at") is not None else None
+    for co in spec.get("callouts", []):
+        co["_from"] = src_to_out(segs, co["from_src"]) - co.get("lead", 0.0); co["_until"] = src_to_out(segs, co["until_src"])
+    for fx in spec.get("sfx", []):
+        if "at_src" in fx: fx["at"] = src_to_out(segs, fx["at_src"]) - fx.get("lead", 0.0)
     caps = captions(spec, segs); frames = load_frames(spec)
     out_dir = os.path.join(ROOT, "reels")
     if check:
