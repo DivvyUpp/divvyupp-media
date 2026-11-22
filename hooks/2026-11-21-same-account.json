@@ -1,0 +1,278 @@
+{
+ "id": "2026-11-21-same-account",
+ "voices": {
+  "him": "cjVigY5qzO86Huf0OWal",
+  "her": "cgSgspJ2msm6clMCkdW9"
+ },
+ "model": "eleven_v3",
+ "music": "pipeline/assets/music/same-account-bed.mp3",
+ "hook": {
+  "text": "Saver married\nto a spender?",
+  "until": 4.6
+ },
+ "label": "Dramatization",
+ "scenes": [
+  {
+   "name": "1 The secret",
+   "media": "pipeline/assets/scenes/same-account/s1.mp4",
+   "min": 4.5,
+   "pre": 0.4,
+   "zoom": [
+    1.0,
+    1.1
+   ],
+   "lines": [
+    {
+     "who": "him",
+     "text": "[cheerful] We've talked about Paris for six years. [excited, hushed] And I'm six hundred dollars away from surprising her!"
+    }
+   ],
+   "overlays": [
+    {
+     "type": "progress",
+     "label": "Paris fund",
+     "from": 9400,
+     "to": 9400,
+     "goal": 10000,
+     "at": 1.2
+    }
+   ]
+  },
+  {
+   "name": "2 The door",
+   "media": "pipeline/assets/scenes/same-account/s2.mp4",
+   "min": 2.4,
+   "pre": 0.15,
+   "zoom": [
+    1.04,
+    1.12
+   ],
+   "lines": [
+    {
+     "who": "her",
+     "text": "[excited] Honey! Look what I got!"
+    }
+   ],
+   "clip_direction": "She bursts in with the bags and, for a split second, her eyes flick to the laptop he is snapping shut; tiny knowing smile, then straight back to excited."
+  },
+  {
+   "name": "3a Something for her",
+   "media": "pipeline/assets/scenes/same-account/s3a.mp4",
+   "min": 2.6,
+   "pre": 0.1,
+   "zoom": [
+    1.0,
+    1.08
+   ],
+   "lines": [
+    {
+     "who": "him",
+     "text": "[amused, upbeat] Something for her..."
+    },
+    {
+     "who": "her",
+     "text": "[delighted] And candles for the house!"
+    }
+   ]
+  },
+  {
+   "name": "3b Something for me",
+   "media": "pipeline/assets/scenes/same-account/s3b.mp4",
+   "min": 2.6,
+   "pre": 0.1,
+   "zoom": [
+    1.0,
+    1.08
+   ],
+   "lines": [
+    {
+     "who": "her",
+     "text": "[playful] And one for you!"
+    },
+    {
+     "who": "him",
+     "text": "[laughing] Even something for me!"
+    }
+   ]
+  },
+  {
+   "name": "4 The notification",
+   "media": "pipeline/assets/scenes/same-account/s4.mp4",
+   "min": 4.0,
+   "pre": 0.7,
+   "zoom": [
+    1.0,
+    1.06
+   ],
+   "lines": [
+    {
+     "who": "him",
+     "text": "[laughs] Six hundred and forty dollars. [playful, good-natured] Paris just moved back a month!"
+    }
+   ],
+   "overlays": [
+    {
+     "type": "notif",
+     "title": "DivvyUpp",
+     "body": "Card purchases today: $640",
+     "at": 0.2,
+     "sfx": "ding"
+    },
+    {
+     "type": "card",
+     "label": "Paris",
+     "value": "One more month",
+     "color": "orange",
+     "at_line": 0,
+     "delay": 1.6
+    }
+   ]
+  },
+  {
+   "name": "5 Next morning",
+   "media": "pipeline/assets/scenes/same-account/s5.mp4",
+   "min": 5.0,
+   "pre": 0.6,
+   "post": 0.6,
+   "zoom": [
+    1.0,
+    1.07
+   ],
+   "lines": [
+    {
+     "who": "her",
+     "text": "[curious, playful] That's it? That's all I have to look at?"
+    },
+    {
+     "who": "him",
+     "text": "[cheerful] That's it!"
+    }
+   ],
+   "overlays": [
+    {
+     "type": "stats",
+     "label": "Safe to spend",
+     "cols": [
+      [
+       "today",
+       "$84"
+      ],
+      [
+       "this week",
+       "$588"
+      ],
+      [
+       "this month",
+       "$2,520"
+      ]
+     ],
+     "at": 0.3,
+     "color": "green"
+    }
+   ]
+  },
+  {
+   "name": "6 The month",
+   "media": "pipeline/assets/scenes/same-account/s6.mp4",
+   "min": 4.2,
+   "zoom": [
+    1.0,
+    1.1
+   ],
+   "overlays": [
+    {
+     "type": "title",
+     "text": "One month later",
+     "at": 0.1,
+     "y": 330
+    },
+    {
+     "type": "progress",
+     "label": "Paris fund",
+     "from": 8760,
+     "to": 10000,
+     "goal": 10000,
+     "at": 0.6,
+     "dur": 2.4,
+     "done": "Paris: booked"
+    }
+   ]
+  },
+  {
+   "name": "7 Two envelopes",
+   "media": "pipeline/assets/scenes/same-account/s7.mp4",
+   "min": 5.0,
+   "pre": 0.5,
+   "post": 1.2,
+   "zoom": [
+    1.0,
+    1.07
+   ],
+   "lines": [
+    {
+     "who": "her",
+     "text": "[gasps, thrilled] Paris?!",
+     "gap": 0.7
+    },
+    {
+     "who": "her",
+     "text": "[laughing, playful] You left the tab open! I saved six hundred for the hotel.",
+     "gap": 0.25
+    }
+   ],
+   "overlays": [
+    {
+     "type": "note",
+     "text": "I saw the Paris tab. Saved $600 for the hotel. xo",
+     "at_line_end": 0,
+     "delay": 0.25,
+     "y": 1020
+    }
+   ]
+  },
+  {
+   "name": "8 Paris",
+   "media": "pipeline/assets/scenes/same-account/s8.mp4",
+   "min": 6.0,
+   "pre": 0.6,
+   "post": 0.5,
+   "zoom": [
+    1.0,
+    1.1
+   ],
+   "lines": [
+    {
+     "who": "her",
+     "text": "[warm, smiling] Turns out we weren't a saver and a spender. [happy] We just needed the same number."
+    }
+   ]
+  }
+ ],
+ "end": {
+  "lines": [
+   [
+    "Save first.",
+    "ink"
+   ],
+   [
+    "Then spend",
+    "ink"
+   ],
+   [
+    "what's safe.",
+    "orange"
+   ]
+  ],
+  "url": "divvyupp.com",
+  "dur": 3.0,
+  "small": "Dramatization. Example couple."
+ },
+ "voice_settings": {
+  "him": {
+   "stability": 0.0
+  },
+  "her": {
+   "stability": 0.0
+  }
+ }
+}

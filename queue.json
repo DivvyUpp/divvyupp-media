@@ -205,5 +205,16 @@
     "hypothesis": "hypotheses/2026-11-21.md",
     "note": "Review video in reels/ (public repo, per runs/create.md on main 2026-11-21). Not approved.",
     "voice_take_note": "Rendered with seed 1; takes 1-4 sent to Srini to pick by ear. Re-render with spec \"seed\" = his pick."
+  },
+  {
+    "id": "2026-11-21-same-account",
+    "kind": "main",
+    "status": "pending_review",
+    "post_date": "2026-11-21",
+    "file": "reels/2026-11-21-same-account.mp4",
+    "hook": "Saver married to a spender?",
+    "caption": "Saver married to a spender? \ud83d\ude05\n\nHe was secretly saving for Paris. She had a really great Saturday. Then they both started looking at the same number.\n\nSave first. Then spend what's safe.\n\nDramatization, example couple.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio \u2192 divvyupp.com\n\n#couplesmoney #personalfinance #savingmoney #moneytips #budgeting",
+    "hypothesis": "hooks/2026-11-21-same-account-script.md",
+    "format": "scene"
   }
 ]
