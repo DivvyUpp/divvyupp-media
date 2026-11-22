@@ -132,13 +132,14 @@
   {
     "id": "2026-11-20-b4",
     "kind": "main",
-    "status": "hold",
+    "status": "archived",
     "post_date": "2026-11-20",
     "file": "reels/2026-11-20-b4.mp4",
     "caption": "How much you should have saved by 30, 40, 50, 60 and 67 on a $100K salary (Fidelity's guideline: 1x, 3x, 6x, 8x, 10x your salary).\n\nBehind? Most people are. The better way to catch up: move savings out the day you get paid, before anything else.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio → divvyupp.com\n\n#personalfinance #savingmoney #moneytips #payyourselffirst #budgeting",
     "hypothesis": "research/reel-ideas-2026-11-20.md",
     "format": "beat",
-    "hold_note": "Srini 2026-11-20: hold everything made before the new format process; may come back to it."
+    "hold_note": "Srini 2026-11-20: hold everything made before the new format process; may come back to it.",
+    "archived_note": "Srini 2026-11-22: archived, same Fidelity by-age topic as the posted 2026-11-22-byage-walk."
   },
   {
     "id": "2026-11-21-paycheck",
@@ -169,7 +170,7 @@
   {
     "id": "2026-11-21-couple",
     "kind": "main",
-    "status": "pending_review",
+    "status": "archived",
     "post_date": "2026-11-21",
     "file": "reels/2026-11-21-couple.mp4",
     "spec": "hooks/2026-11-21-couple.json",
@@ -177,7 +178,8 @@
     "hook": "$11,000 a month. $240 on the 23rd. He says \"we're fine.\" (split screen, drawn Mark and Nina, Jessica voice)",
     "caption": "$11,000 a month between them. $240 in checking on the 23rd. He says they're fine. Who's right?\n\nBoth. The income is fine; the order isn't. Each payday, $1,000 goes to savings first. The other $2,600 becomes one number a day (about $85, $600 a week), so they know before they spend. $70 over on Thursday? The last three days of the week drop to about $60, and the week still works.\n\nOn the 23rd now: $1,000 saved and about $700 left for the last week.\n\nSend this to whoever says \"we're fine.\"\n\nSave first. Then spend what's safe.\n\nMark and Nina are an example, not real customers.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio → divvyupp.com\n\n#personalfinance #couplesandmoney #savingmoney #moneytips #budgeting",
     "hypothesis": "hypotheses/2026-11-21.md",
-    "note": "Review video in reels/ (public repo, per runs/create.md on main 2026-11-21). Not approved."
+    "note": "Review video in reels/ (public repo, per runs/create.md on main 2026-11-21). Not approved.",
+    "archived_note": "Srini 2026-11-22: archived, superseded by the Paris couple Reel (2026-11-21-same-account)."
   },
   {
     "id": "2026-11-21-byage",
