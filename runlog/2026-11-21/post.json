@@ -55,6 +55,13 @@
    "status": "ok",
    "trigger": "scheduled",
    "summary": "5pm slot: Nothing approved to post. Three Reels (2026-11-21-couple, 2026-11-21-byage, 2026-11-21-milk) await Srini's review; three more are on hold."
+  },
+  {
+   "started_at": "2026-11-21T21:58:00-05:00",
+   "finished_at": "2026-11-21T21:58:28-05:00",
+   "status": "ok",
+   "trigger": "scheduled",
+   "summary": "10pm slot: Nothing approved to post. Three Reels (2026-11-21-couple, 2026-11-21-byage, 2026-11-21-milk) await Srini's review; three more are on hold."
   }
  ]
 }
