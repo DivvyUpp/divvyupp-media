@@ -1,0 +1,112 @@
+{
+ "id": "2026-11-22-byage-walk",
+ "source": "pipeline/assets/scenes/by-age/raw.mov",
+ "transcript": "pipeline/assets/scenes/by-age/transcript.json",
+ "segments": [
+  [
+   5.9,
+   11.22
+  ],
+  [
+   11.8,
+   13.22
+  ],
+  [
+   13.86,
+   18.68
+  ],
+  [
+   18.7,
+   20.14
+  ],
+  [
+   20.66,
+   21.24
+  ],
+  [
+   22.12,
+   24.18
+  ],
+  [
+   24.76,
+   27.82
+  ],
+  [
+   28.56,
+   29.32
+  ],
+  [
+   29.8,
+   31.1
+  ]
+ ],
+ "replace": {
+  "do": "Do"
+ },
+ "panel": {
+  "top": 0,
+  "height": 1110,
+  "focus_y": 0.38,
+  "punch": 1.05
+ },
+ "hook": {
+  "text": "How much should you\nhave saved by 40?",
+  "until": 3.2
+ },
+ "nametag": {
+  "text": "Srini \u00b7 Founder, DivvyUpp",
+  "until": 3.2
+ },
+ "table": {
+  "title": "Saved by age, on a $100K salary",
+  "source": "Fidelity savings guideline. Not advice.",
+  "rows": [
+   {
+    "label": "30",
+    "value": "$100K",
+    "word_at": 14.86
+   },
+   {
+    "label": "40",
+    "value": "$300K",
+    "word_at": 12.16
+   },
+   {
+    "label": "50",
+    "value": "$600K",
+    "word_at": 16.68
+   },
+   {
+    "label": "60",
+    "value": "$800K",
+    "word_at": 18.22
+   },
+   {
+    "label": "67",
+    "value": "$1M",
+    "word_at": 20.84
+   }
+  ]
+ },
+ "music": "pipeline/assets/music/same-account-bed.mp3",
+ "music_gain": 0.18,
+ "duck": 0.35,
+ "end": {
+  "lines": [
+   [
+    "Save first.",
+    "ink"
+   ],
+   [
+    "Then spend",
+    "ink"
+   ],
+   [
+    "what's safe.",
+    "orange"
+   ]
+  ],
+  "url": "divvyupp.com",
+  "dur": 2.5
+ }
+}
