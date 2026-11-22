@@ -213,10 +213,49 @@
     "post_date": "2026-11-22",
     "file": "reels/2026-11-21-same-account.mp4",
     "hook": "Saver married to a spender?",
-    "caption": "Saver married to a spender? 😅\n\nHe was secretly saving for Paris. She had a really great Saturday. Then they both started looking at the same number.\n\nSave first. Then spend what's safe.\n\nDramatization, example couple.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio → divvyupp.com\n\n#couplesmoney #personalfinance #savingmoney #moneytips #budgeting",
+    "caption": "Saver married to a spender? \ud83d\ude05\n\nHe was secretly saving for Paris. She had a really great Saturday. Then they both started looking at the same number.\n\nSave first. Then spend what's safe.\n\nDramatization, example couple.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio \u2192 divvyupp.com\n\n#couplesmoney #personalfinance #savingmoney #moneytips #budgeting",
     "hypothesis": "hooks/2026-11-21-same-account-script.md",
     "format": "scene",
     "not_before": "19:30",
     "approved_note": "Srini approved 2026-11-21 (in chat): post Sunday 2026-11-22 at 7:30pm ET. Claude starts the Post run at 19:30; the 21:57 slot is the fallback."
+  },
+  {
+    "id": "2026-11-22-birthdays",
+    "kind": "main",
+    "status": "pending_review",
+    "post_date": "2026-11-22",
+    "file": "reels/2026-11-22-birthdays.mp4",
+    "spec": "hooks/2026-11-22-birthdays.json",
+    "format": "split",
+    "hook": "He wants a $280 party for each kid. She says they can't do both this month. Who's right? (split screen, drawn Dan and Priya, Jessica voice)",
+    "caption": "He wants a $280 party for each kid. She says they can't do both this month. Who's right?\n\nBoth. On payday, $800 goes to savings first. The other $2,400 becomes about $80 a day for food, gas and the rest, so they know before they book anything. The first party is $200 over for the day, so the next week drops to about $50 a day. Eleven days later, the second party fits the same way.\n\nBoth kids get the party. The $800 is still saved.\n\nDan or Priya: which one are you?\n\nSave first. Then spend what's safe.\n\nDan and Priya are an example, not real customers.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio \u2192 divvyupp.com\n\n#parentingmoney #personalfinance #couplesandmoney #savingmoney #budgeting",
+    "hypothesis": "hypotheses/2026-11-22.md",
+    "note": "Review video in reels/. Not approved."
+  },
+  {
+    "id": "2026-11-22-subs",
+    "kind": "main",
+    "status": "pending_review",
+    "post_date": "2026-11-22",
+    "file": "reels/2026-11-22-subs.mp4",
+    "spec": "hooks/2026-11-22-subs.json",
+    "format": "beat",
+    "hook": "He said \"we pay maybe eighty bucks in subscriptions.\" The bank said $219. (beat, presenter C, Jessica voice, C+R Research 2022)",
+    "caption": "\"We pay maybe eighty bucks in subscriptions.\" The bank said $219.\n\nIn a survey of 1,000 people, the average guess was $86 a month. The real total was $219 (C+R Research, 2022). The $133 you forgot gets spent twice: once on the subscriptions, and again because you thought it was still there.\n\nDivvyUpp finds them in your bank history and counts them with your bills, automatically. Savings goes first, and today's number is what's left after all of them.\n\nEighty or two-nineteen? Your statement knows.\n\nSave first. Then spend what's safe.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio \u2192 divvyupp.com\n\n#subscriptions #personalfinance #savingmoney #moneytips #budgeting",
+    "hypothesis": "hypotheses/2026-11-22.md",
+    "note": "Review video in reels/. Not approved."
+  },
+  {
+    "id": "2026-11-22-only12",
+    "kind": "main",
+    "status": "pending_review",
+    "post_date": "2026-11-22",
+    "file": "reels/2026-11-22-only12.mp4",
+    "spec": "hooks/2026-11-22-only12.json",
+    "format": "rules",
+    "hook": "You said \"it's only twelve dollars\" six times this week. That's seventy-two dollars. (Dollar Bill rules, Valf voice, seed 1)",
+    "caption": "\"It's only $12.\" Six times this week. That's $72.\n\nDollar Bill's three rules:\n1. Small buys count.\n2. Know today's number first. $45 today, a $12 coffee, $33 left, and you knew before you paid.\n3. Savings leave on payday, so the $12 comes out of what's left, not your kid's fund.\n\nKeep the treats. Just let the number count them first.\n\nSave first. Then spend what's safe.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio \u2192 divvyupp.com\n\n#moneytips #personalfinance #savingmoney #budgeting #dollarbill",
+    "hypothesis": "hypotheses/2026-11-22.md",
+    "note": "Review video in reels/. Voice: seed 1; takes 2-4 sent to Srini as audio. Not approved."
   }
 ]

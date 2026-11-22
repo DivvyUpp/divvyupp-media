@@ -1,0 +1,148 @@
+{
+ "id": "2026-11-22-subs",
+ "format": "beat",
+ "character": "c",
+ "character_voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "music": true,
+ "beats": [
+  {
+   "sentences": [
+    {
+     "text": "[amused] He said, \"We pay maybe eighty bucks in subscriptions.\" The bank said two hundred and nineteen."
+    }
+   ],
+   "visual": {
+    "type": "title",
+    "small": "He guessed. The bank checked.",
+    "lines": [
+     [
+      "\u201cMaybe $80",
+      "ink"
+     ],
+     [
+      "in subscriptions.\u201d",
+      "ink"
+     ],
+     [
+      "Bank: $219.",
+      "orange"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "He's not alone. In a survey of a thousand people, the average guess was eighty-six dollars a month. The real total was two hundred and nineteen."
+    }
+   ],
+   "visual": {
+    "type": "table",
+    "title": "Survey of 1,000 people: subscriptions a month",
+    "rows": [
+     {
+      "label": "Average guess",
+      "value": "$86",
+      "at": 0
+     },
+     {
+      "label": "Actually paid",
+      "value": "$219",
+      "at": 0,
+      "check": false
+     }
+    ],
+    "source": "C+R Research survey of 1,000 US adults, 2022"
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Streaming, apps, the gym, cloud storage, the kids' games. Each one is small, so none of them feel like a bill."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Each one is small.",
+      "ink"
+     ],
+     [
+      "None of them",
+      "ink"
+     ],
+     [
+      "feel like a bill.",
+      "red"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "[thoughtful] And here's the expensive part. That hundred and thirty-three dollars gets spent twice: once on the subscriptions, and again because you thought it was still there."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "$133 you forgot",
+      "ink"
+     ],
+     [
+      "gets spent",
+      "ink"
+     ],
+     [
+      "twice.",
+      "red"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "DivvyUpp finds them in your bank history and counts them with your bills, automatically."
+    },
+    {
+     "text": "Then savings goes first, and what's left becomes one number for today, after every subscription has been taken out."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Found in your bank history.",
+      "ink"
+     ],
+     [
+      "Counted with your bills.",
+      "green"
+     ],
+     [
+      "Today's number:",
+      "ink"
+     ],
+     [
+      "after all of them.",
+      "orange"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "[warm] So, eighty or two-nineteen? Your statement knows. Save first. Then spend what's safe. Try it at Divvyup dot com."
+    }
+   ],
+   "visual": {
+    "type": "cta"
+   }
+  }
+ ]
+}

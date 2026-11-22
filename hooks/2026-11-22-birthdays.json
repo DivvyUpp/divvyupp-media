@@ -1,0 +1,258 @@
+{
+ "id": "2026-11-22-birthdays",
+ "format": "split",
+ "character_voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "music": true,
+ "speed": 1.1,
+ "max_gap": 0.32,
+ "keep_gap": {
+  "3": 0.6,
+  "8": 0.5
+ },
+ "sentences": [
+  "[curious] He wants a two-hundred-and-eighty-dollar party for each kid. She says they can't do both this month. Who's right?",
+  "Dan thinks fair means the same for both. Priya thinks fair means what they can actually afford.",
+  "They take home ninety-eight hundred a month. Sixty-six hundred of it is bills.",
+  "[thoughtful] The fight isn't really about the party. It's about not knowing what the party does to the rest of the month.",
+  "So on payday, savings goes first. Eight hundred dollars.",
+  "The other twenty-four hundred becomes one number for each day: about eighty dollars. So they know before they book anything.",
+  "The ten-year-old's party is two-eighty. That's two hundred over for the day. DivvyUpp spreads it across the next week, so each day drops to about fifty.",
+  "Eleven days later, the six-year-old's party fits the same way. Same party for both kids, and the eight hundred is still saved.",
+  "[warm] So who's right? Both. Both kids get the party Dan wanted, and the month still works, the way Priya needed. Which one are you?",
+  "Save first. Then spend what's safe. Try it at Divvyup dot com."
+ ],
+ "band": {
+  "phases": [
+   {
+    "from": 0,
+    "lines": [
+     [
+      "$280 party for each kid?",
+      "white"
+     ],
+     [
+      "Who's right?",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 1,
+    "lines": [
+     [
+      "Fair = the same?",
+      "white"
+     ],
+     [
+      "Or fair = affordable?",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 2,
+    "lines": [
+     [
+      "$9,800 in.",
+      "white"
+     ],
+     [
+      "$6,600 in bills.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 3,
+    "lines": [
+     [
+      "Not the party.",
+      "white"
+     ],
+     [
+      "The rest of the month.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 4,
+    "lines": [
+     [
+      "Payday:",
+      "white"
+     ],
+     [
+      "$800 to savings first.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 5,
+    "lines": [
+     [
+      "The rest: $80 a day.",
+      "white"
+     ],
+     [
+      "Known before they book.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 6,
+    "lines": [
+     [
+      "$200 over?",
+      "white"
+     ],
+     [
+      "The next week adjusts.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 7,
+    "lines": [
+     [
+      "Both parties.",
+      "white"
+     ],
+     [
+      "$800 still saved.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 8,
+    "lines": [
+     [
+      "Dan or Priya?",
+      "white"
+     ],
+     [
+      "Which one are you?",
+      "orange"
+     ]
+    ]
+   }
+  ]
+ },
+ "halves": [
+  {
+   "person": "pipeline/assets/characters/presenter_e_happy.png",
+   "tint": [
+    228,
+    243,
+    233
+   ],
+   "tag": "Dan: \u201cSame for both.\u201d",
+   "tag_color": "green",
+   "blocks": [
+    {
+     "label": "Take-home, both jobs",
+     "value": "$9,800",
+     "at": 2,
+     "word": "ninety"
+    },
+    {
+     "label": "Bills",
+     "value": "\u2212$6,600",
+     "at": 2,
+     "word": "Sixty",
+     "style": "minus"
+    },
+    {
+     "label": "Saved on payday",
+     "value": "$800",
+     "at": 4,
+     "style": "good"
+    },
+    {
+     "label": "Safe to spend today",
+     "value": "$80",
+     "sub": "$560/wk \u00b7 food, gas, the rest",
+     "sub_color": "green",
+     "at": 5
+    }
+   ],
+   "badge": {
+    "text": "$280 \u00d7 2 kids",
+    "color": "green",
+    "at": 0,
+    "word": "two"
+   }
+  },
+  {
+   "person": "pipeline/assets/characters/presenter_c_worried.png",
+   "tint": [
+    250,
+    231,
+    227
+   ],
+   "tag": "Priya: \u201cNot both this month.\u201d",
+   "tag_color": "red",
+   "blocks": [
+    {
+     "label": "Party #1, age 10",
+     "value": "$280",
+     "at": 6,
+     "sub": "$200 over today",
+     "sub_color": "red"
+    },
+    {
+     "label": "Next 7 days",
+     "value": "$50/day",
+     "sub": "spread out, not skipped",
+     "sub_color": "green",
+     "at": 6,
+     "word": "spreads"
+    },
+    {
+     "label": "Party #2, age 6, 11 days later",
+     "value": "$280",
+     "at": 7,
+     "sub": "fits the same way",
+     "sub_color": "green"
+    },
+    {
+     "label": "Still saved",
+     "value": "$800",
+     "at": 7,
+     "word": "eight",
+     "style": "good",
+     "big": true
+    }
+   ],
+   "badge": {
+    "text": "Can they do both?",
+    "color": "red",
+    "at": 0,
+    "word": "She"
+   }
+  }
+ ],
+ "note": {
+  "text": "Dan and Priya are an example, not real customers.",
+  "at": 0
+ },
+ "cta_lines": [
+  [
+   "Save first.",
+   "ink"
+  ],
+  [
+   "Then spend",
+   "ink"
+  ],
+  [
+   "what's safe.",
+   "orange"
+  ]
+ ],
+ "cta_at": 9
+}

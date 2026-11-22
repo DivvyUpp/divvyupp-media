@@ -1,0 +1,111 @@
+{
+ "id": "2026-11-22-only12",
+ "format": "rules",
+ "character": "raccoon_movie",
+ "character_voice": "elevenlabs:loY1uopAz31XyhAEhNSa:eleven_v3",
+ "voice_prefix": "[excited] Whoa, whoa, whoa. I've seen your bank history! [laughs] Four coffees, two takeouts, AND a quick little online order? On a TUESDAY? [smug] Relax, pal. I'm a raccoon. I know exactly where money disappears to.",
+ "music": true,
+ "max_gap": 0.42,
+ "keep_gap": {
+  "5": 0.8
+ },
+ "takes": 1,
+ "sentences": [
+  "[smug] You said \"it's only twelve dollars\" six times this week. That's seventy-two dollars.",
+  "[laughs] Hey, I'm a raccoon. I get it. Three rules.",
+  "[confident] Rule one! Small buys count. Twelve here, twelve there. Your week sees every one of them, even when you don't.",
+  "[mischievous] Rule two. Know today's number before you say \"only.\" Say it's forty-five. A twelve-dollar coffee? Now it's thirty-three, and you knew before you paid.",
+  "[excited] Rule three. Savings leave on payday. So the twelve comes out of what's left, not out of your kid's fund.",
+  "[smug] Keep the twelve-dollar treats, pal. Just let the number count them first.",
+  "Save first. Then spend what's safe. Try it at Divvyup dot com."
+ ],
+ "title": [
+  {
+   "from": 0,
+   "lines": [
+    [
+     "\u201cIt's only $12.\u201d",
+     "ink"
+    ],
+    [
+     "Six times this week.",
+     "ink"
+    ],
+    [
+     "= $72.",
+     "orange"
+    ]
+   ]
+  },
+  {
+   "from": 1,
+   "lines": [
+    [
+     "Six \u201conly $12\u201ds.",
+     "ink"
+    ],
+    [
+     "Three rules.",
+     "orange"
+    ]
+   ]
+  },
+  {
+   "from": 2,
+   "lines": null
+  }
+ ],
+ "header": [
+  {
+   "from": 2,
+   "text": "Dollar Bill's rules"
+  },
+  {
+   "from": 5,
+   "text": "Treats: counted first"
+  }
+ ],
+ "pairs": [
+  {
+   "good_text": "Small buys count",
+   "bad_text": "\u201cIt's only $12\u201d",
+   "at": 2
+  },
+  {
+   "good_text": "$45 today, $33 after coffee",
+   "bad_text": "Find out at month end",
+   "at": 3
+  },
+  {
+   "good_text": "Savings leave on payday",
+   "bad_text": "Save whatever's left",
+   "at": 4
+  }
+ ],
+ "moods": [
+  {
+   "from": 0,
+   "mood": "unimpressed"
+  },
+  {
+   "from": 2,
+   "mood": "happy"
+  }
+ ],
+ "cta_lines": [
+  [
+   "Save first.",
+   "ink"
+  ],
+  [
+   "Then spend",
+   "ink"
+  ],
+  [
+   "what's safe.",
+   "orange"
+  ]
+ ],
+ "cta_at": 6,
+ "seed": 1
+}

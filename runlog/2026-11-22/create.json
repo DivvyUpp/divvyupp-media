@@ -1,0 +1,63 @@
+{
+ "run": "create",
+ "date": "2026-11-22",
+ "attempts": [
+  {
+   "started_at": "2026-11-22T06:28:21-05:00",
+   "finished_at": "2026-11-22T07:04:23-05:00",
+   "status": "ok",
+   "trigger": "scheduled",
+   "summary": "Made three Reels, one per proven format: a parent birthday dilemma (backlog #4), a subscriptions guess-vs-bank comparison with a person-led hook (#2 + #5) and a Dollar Bill 'only $12' rules Reel (#3), each through the hook review and a cold review. Sent to Srini; nothing approved or posted. Funnel 11-21: 0 Instagram landings; followers still 3.",
+   "outputs": [
+    {
+     "label": "Hypothesis cards and workshop",
+     "path": "hypotheses/2026-11-22.md"
+    },
+    {
+     "label": "Spec",
+     "path": "hooks/2026-11-22-birthdays.json"
+    },
+    {
+     "label": "Spec",
+     "path": "hooks/2026-11-22-subs.json"
+    },
+    {
+     "label": "Spec",
+     "path": "hooks/2026-11-22-only12.json"
+    },
+    {
+     "label": "Queue",
+     "path": "queue.json"
+    },
+    {
+     "label": "Experiment log",
+     "path": "experiment-log.csv"
+    },
+    {
+     "label": "Funnel 2026-11-21",
+     "path": "funnel/custom-2026-11-21_2026-11-21.json"
+    }
+   ],
+   "reels": [
+    {
+     "id": "2026-11-22-birthdays",
+     "hook": "He wants a $280 party for each kid. She says they can't do both this month.",
+     "status": "pending_review",
+     "file": "reels/2026-11-22-birthdays.mp4"
+    },
+    {
+     "id": "2026-11-22-subs",
+     "hook": "He said \"we pay maybe eighty bucks in subscriptions.\" The bank said $219.",
+     "status": "pending_review",
+     "file": "reels/2026-11-22-subs.mp4"
+    },
+    {
+     "id": "2026-11-22-only12",
+     "hook": "You said \"it's only twelve dollars\" six times this week. That's $72.",
+     "status": "pending_review",
+     "file": "reels/2026-11-22-only12.mp4"
+    }
+   ]
+  }
+ ]
+}
