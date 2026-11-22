@@ -8,6 +8,32 @@
       "status": "ok",
       "trigger": "scheduled",
       "summary": "Nothing approved to post in the noon slot. The one approved Reel (2026-11-21-same-account) is held until 19:30 ET, so it goes in the 10pm slot."
+    },
+    {
+      "started_at": "2026-11-22T14:34:45-05:00",
+      "finished_at": "2026-11-22T14:36:25-05:00",
+      "status": "ok",
+      "trigger": "scheduled",
+      "summary": "Posted 2026-11-22-byage-walk (Srini on camera, \"You're saving in the wrong order\") right after Srini approved it. 2026-11-21-same-account stays held until 19:30 ET for the 10pm slot.",
+      "outputs": [
+        {
+          "label": "Queue",
+          "path": "queue.json"
+        },
+        {
+          "label": "Experiment log",
+          "path": "experiment-log.csv"
+        }
+      ],
+      "reels": [
+        {
+          "id": "2026-11-22-byage-walk",
+          "hook": "You're saving in the wrong order",
+          "status": "posted",
+          "file": "reels/2026-11-22-byage-walk.mp4",
+          "permalink": "https://www.instagram.com/reel/DgDkbpCij4D/"
+        }
+      ]
     }
   ]
 }
