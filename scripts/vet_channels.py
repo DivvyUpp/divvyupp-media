@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Find and vet YouTube channels for research/watchlist.csv against the entry bar in runs/research.md.
 
-Usage: python3 scripts/vet_channels.py --names "Caleb Hammer" "Rachel Cruze" --queries "budgeting tips" ...
+Usage: python3 scripts/vet_channels.py --names @calebhammer "Rachel Cruze" --queries "budgeting tips" ...
+(names starting with @ are looked up by handle, 1 quota unit; other names and queries use search, 100 units)
 Needs env YOUTUBE_API_KEY. Prints one JSON line per channel with the numbers the entry bar uses:
 subscribers, country, Shorts posted in the last 90 days, median Shorts views, last Short date.
 """
@@ -25,6 +26,8 @@ def secs(iso):
 
 
 def find(term, n):
+    if term.startswith("@"):  # handle lookup: 1 unit instead of 100 for a search
+        return [i["id"] for i in get("channels", part="id", forHandle=term).get("items", [])]
     res = get("search", part="snippet", type="channel", q=term, maxResults=n, regionCode="US",
               relevanceLanguage="en")
     return [i["snippet"]["channelId"] for i in res.get("items", [])]
@@ -45,7 +48,7 @@ def vet(cid, since):
         uploads_checked=len(vids), shorts_in_last50=len(shorts), shorts_90d=len(recent),
         median_short_views=int(statistics.median(views)) if views else 0,
         last_short=max((v["snippet"]["publishedAt"][:10] for v in shorts), default=""),
-        sample_titles=[v["snippet"]["title"][:70] for v in shorts[:5]],
+        sample_titles=[v["snippet"]["title"][:70] for v in shorts[:10]],
         url=f"https://www.youtube.com/{ch['snippet'].get('customUrl') or 'channel/' + cid}")
 
 
