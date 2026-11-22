@@ -6,7 +6,7 @@
   [
    0.0,
    0.85,
-   0.75
+   0.5
   ],
   [
    0.85,
@@ -62,12 +62,12 @@
  },
  "hook": {
   "text": "How much should you\nhave saved by 40?",
-  "until": 4.6
+  "until": 4.83
  },
  "nametag": {
   "text": "Srini \u00b7 Founder",
-  "until": 5.2,
-  "from": 1.95,
+  "until": 5.63,
+  "from": 2.28,
   "y": 270
  },
  "table": {
@@ -126,14 +126,14 @@
  "sfx": [
   {
    "type": "whoosh",
-   "at": 1.05,
-   "dur": 0.95,
+   "at": 1.55,
+   "dur": 0.75,
    "peak": 0.85,
    "gain": 0.9
   },
   {
    "type": "pluck",
-   "at": 1.95,
+   "at": 2.28,
    "gain": 0.8
   },
   {
@@ -166,9 +166,10 @@
     ]
    ]
   ],
-  "until": 1.25,
+  "until": 2.23,
   "y": 330,
-  "size": 92
+  "size": 92,
+  "fade": 0.5
  },
  "callouts": [
   {

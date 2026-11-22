@@ -275,7 +275,8 @@ def card(img, box, r=36, fill=(255, 255, 255, 250), shadow=True, k=1.0):
 def draw_sky_hook2(img, sh, t):
     """Animated opening hook: parts pop in one after another with a small overshoot; 'accent' parts sit on an
     orange pill and wiggle. Fades out as the camera moves."""
-    kout = 1.0 - ease((t - sh["until"] + 0.25) / 0.25) if t > sh["until"] - 0.25 else 1.0
+    fo = sh.get("fade", 0.25)
+    kout = 1.0 - ease((t - sh["until"] + fo) / fo) if t > sh["until"] - fo else 1.0
     if kout <= 0: return
     y = sh.get("y", 300); size = sh.get("size", 110)
     for li, line in enumerate(sh["parts"]):            # line = [[text, "plain"|"accent"], ...]
@@ -321,9 +322,8 @@ def draw_table(img, tb, t, y0, hook=None):
     on the spoken word; the revealed value pops and its row glows green briefly."""
     d = ImageDraw.Draw(img); x0, x1 = 70, W - 70
     if hook and t < hook.get("until", 3.0):
-        lines = hook["text"].split("\n")
-        for i, ln in enumerate(lines):
-            d.text((W / 2, y0 + 50 * i), ln, font=font("xb", fit(ln, "xb", 48, 900)), fill=ORANGE, anchor="ma")
+        ln = hook["text"].replace("\n", " ")
+        d.text((W / 2, y0 + 22), ln, font=font("xb", fit(ln, "xb", 46, 940)), fill=ORANGE, anchor="ma")
     else:
         d.text((W / 2, y0 + 22), tb["title"], font=font("xb", 44), fill=INK, anchor="ma")
     rows = tb["rows"]; rh = 64; top = y0 + 96; hh = 54
