@@ -6,7 +6,7 @@
   [
    0.0,
    0.85,
-   0.6
+   0.75
   ],
   [
    0.85,
@@ -99,7 +99,8 @@
     "value": "$1M",
     "word_at": 20.84
    }
-  ]
+  ],
+  "header_right": "SAVED  \u00b7  FIDELITY GUIDELINE, NOT ADVICE"
  },
  "music": "pipeline/assets/music/same-account-bed.mp3",
  "music_gain": 0.18,
@@ -147,10 +148,27 @@
   }
  ],
  "sky_hook": {
-  "text": "You're saving\nin the wrong order",
-  "until": 1.45,
-  "y": 300,
-  "size": 104
+  "parts": [
+   [
+    [
+     "You're saving",
+     "plain"
+    ]
+   ],
+   [
+    [
+     "in",
+     "plain"
+    ],
+    [
+     "the wrong order",
+     "accent"
+    ]
+   ]
+  ],
+  "until": 1.25,
+  "y": 330,
+  "size": 92
  },
  "callouts": [
   {
@@ -169,9 +187,10 @@
   "line1_src": 25.84,
   "line2_src": 27.28,
   "line1": "Save first.",
-  "line2": "Then spend what's safe."
+  "line2": "Spend what's safe."
  },
  "progress": {
   "label": "the right order"
- }
+ },
+ "table_gap": 80
 }

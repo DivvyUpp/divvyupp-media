@@ -179,11 +179,12 @@ def frame_at(spec, frames, segs, caps, total, t):
     src = Image.fromarray(frames[min(int(s * FPS), len(frames) - 1)])
     lf = spec.get("_layout_from")
     if lf is not None and t < lf:                                   # opening: full screen, hook only
-        img = src.convert("RGBA")
+        z = 1.16 - 0.16 * ease(t / max(lf, 0.01)) ** 0.8                 # camera push from frame 1
+        cw, ch = W / z, H / z; img = src.resize((W, H), Image.BICUBIC, box=((W - cw) / 2, (H - ch) / 2, (W + cw) / 2, (H + ch) / 2)).convert("RGBA")
         g = np.zeros((H, 1), np.float32); g[:900, 0] = np.linspace(0.35, 0, 900)
         a_ = np.zeros((H, W, 4), np.uint8); a_[..., 3] = (np.repeat(g, W, 1) * 255).astype(np.uint8); img.alpha_composite(Image.fromarray(a_))
         sh = spec.get("sky_hook")
-        if sh and t < sh["until"]: draw_sky_hook(img, sh, t)
+        if sh and t < sh["until"]: (draw_sky_hook2 if sh.get("parts") else draw_sky_hook)(img, sh, t)
         return img
     pn = spec["panel"]; ph = pn["height"]; z = 1.0 if si % 2 == 0 else pn.get("punch", 1.07)
     zo = pn.get("zoom_out", 1.0)                       # >1 shows more of the frame; sides filled with a blurred copy
@@ -201,7 +202,7 @@ def frame_at(spec, frames, segs, caps, total, t):
     a_ = np.zeros((ph, W, 4), np.uint8); a_[..., 3] = (np.repeat(g, W, 1) * 255).astype(np.uint8)
     img.alpha_composite(Image.fromarray(a_), (0, pn.get("top", 0)))
     for co in spec.get("callouts", []): draw_callout(img, co, t)
-    hk = spec.get("hook"); ty = pn.get("top", 0) + ph + 30
+    hk = spec.get("hook"); ty = pn.get("top", 0) + ph + spec.get("table_gap", 30)
     po = spec.get("payoff"); kin = ease((t - lf) / 0.4) if lf is not None else 1.0
     kout = ease((t - po["_l1"] + 0.3) / 0.3) if po else 0.0        # table stays until the first payoff word
     if kout < 1:                                                    # table slides up in, fades out for the payoff
@@ -210,7 +211,7 @@ def frame_at(spec, frames, segs, caps, total, t):
         paste(img, tl, kin * (1 - kout), dy=int((1 - kin) * 260))
     if po and t >= po["_l1"] - 0.05: draw_payoff(img, po, t, ty)
     pl = spec.get("progress")
-    if pl and lf is not None and po and lf <= t < po["_from"]: draw_progress_line(img, pl, t, lf, po["_from"], pn.get("top", 0) + ph)
+    if pl and lf is not None and po and lf <= t < po["_from"]: draw_progress_pin(img, pl, t, lf, po["_from"], pn.get("top", 0) + ph)
     if hk and not spec.get("hook_in_table", True) and t < hk.get("until", 3.0): draw_hook(img, hk["text"])
     nt = spec.get("nametag")
     if nt and nt.get("from", 0) <= t < nt.get("until", 3.0): draw_nametag(img, nt, t)
@@ -252,6 +253,127 @@ def audio(spec, segs, total):
         if n > 0: v[i:i + n] += snd[:n] * fx.get("gain", 1.0)
     spec2 = dict(spec); spec2["scenes"] = []
     return M.mix(spec2, v, total)
+
+
+# ---------------- polish pass (v7) ----------------
+_SHADOW = {}
+def card(img, box, r=36, fill=(255, 255, 255, 250), shadow=True, k=1.0):
+    """Rounded card with a soft drop shadow (shadow cached per size)."""
+    x0, y0, x1, y1 = [int(v) for v in box]; w, h = x1 - x0, y1 - y0
+    if shadow:
+        key = (w, h, r)
+        if key not in _SHADOW:
+            from PIL import ImageFilter
+            sh = Image.new("RGBA", (w + 80, h + 80), (0, 0, 0, 0))
+            ImageDraw.Draw(sh).rounded_rectangle([40, 48, 40 + w, 48 + h], r, fill=(60, 40, 30, 70))
+            _SHADOW[key] = sh.filter(ImageFilter.GaussianBlur(16))
+        shd = _SHADOW[key]
+        if k < 1: a = np.array(shd); a[..., 3] = (a[..., 3] * k).astype(np.uint8); shd = Image.fromarray(a)
+        img.alpha_composite(shd, (x0 - 40, y0 - 40))
+    ImageDraw.Draw(img).rounded_rectangle(box, r, fill=fill[:3] + (int(fill[3] * k),))
+
+def draw_sky_hook2(img, sh, t):
+    """Animated opening hook: parts pop in one after another with a small overshoot; 'accent' parts sit on an
+    orange pill and wiggle. Fades out as the camera moves."""
+    kout = 1.0 - ease((t - sh["until"] + 0.25) / 0.25) if t > sh["until"] - 0.25 else 1.0
+    if kout <= 0: return
+    y = sh.get("y", 300); size = sh.get("size", 110)
+    for li, line in enumerate(sh["parts"]):            # line = [[text, "plain"|"accent"], ...]
+        f = font("xb", size); widths = [f.getlength(tx) for tx, _ in line]; gap = 24
+        total = sum(widths) + gap * (len(line) - 1) + 64 * len(line); x = W / 2 - total / 2
+        for pi, (tx, st) in enumerate(line):
+            t0 = 0.06 + 0.16 * (li * 2 + pi); k = ease((t - t0) / 0.28)
+            if k <= 0: x += widths[pi] + 64 + gap; continue
+            pop = 1 + 0.18 * math.sin(min(1.0, (t - t0) / 0.32) * math.pi)
+            wob = math.sin(t * 9.0) * 2.2 if st == "accent" else 0.0
+            lay = Image.new("RGBA", (int(widths[pi] + 64), int(size + 52)), (0, 0, 0, 0)); d = ImageDraw.Draw(lay)
+            bg = ORANGE if st == "accent" else WHITE; fg = WHITE if st == "accent" else INK
+            d.rounded_rectangle([0, 0, lay.width - 1, lay.height - 1], 30, fill=bg + (248,)); d.text((32, 18), tx, font=f, fill=fg)
+            lay = lay.rotate(wob, resample=Image.BICUBIC, expand=True)
+            lay = lay.resize((int(lay.width * pop), int(lay.height * pop)), Image.BICUBIC)
+            a = np.array(lay); a[..., 3] = (a[..., 3] * k * kout).astype(np.uint8)
+            cx = x + (widths[pi] + 64) / 2
+            img.alpha_composite(Image.fromarray(a), (int(cx - lay.width / 2), int(y + (size + 52) / 2 - lay.height / 2 + (1 - k) * 30)))
+            x += widths[pi] + 64 + gap
+        y += size + 76
+
+def draw_pin(d, cx, tip_y, s, col):
+    """Map-pin marker with its point at (cx, tip_y)."""
+    r = s / 2; cy = tip_y - s * 1.05
+    d.ellipse([cx - r, cy - r, cx + r, cy + r], fill=col)
+    d.polygon([(cx - r * 0.72, cy + r * 0.55), (cx + r * 0.72, cy + r * 0.55), (cx, tip_y)], fill=col)
+    d.ellipse([cx - r * 0.38, cy - r * 0.38, cx + r * 0.38, cy + r * 0.38], fill=WHITE)
+
+def draw_progress_pin(img, pl, t, t0, t1, y):
+    """Progress track along the top of the table panel: a knob travels toward a destination pin labelled
+    'the right order'. Sits below the video, so captions never cover it."""
+    p = min(1.0, max(0.0, (t - t0) / max(0.01, t1 - t0))); k = ease((t - t0) / 0.4)
+    lay = layer(); d = ImageDraw.Draw(lay); x0, x1 = 70, W - 190; ty = y + 40
+    d.rounded_rectangle([x0, ty - 5, x1, ty + 5], 5, fill=(232, 224, 214))
+    d.rounded_rectangle([x0, ty - 5, x0 + (x1 - x0) * p, ty + 5], 5, fill=ORANGE)
+    kx = x0 + (x1 - x0) * p; d.ellipse([kx - 13, ty - 13, kx + 13, ty + 13], fill=WHITE, outline=ORANGE, width=6)
+    draw_pin(d, x1 + 52, ty + 14, 46, ORANGE)
+    d.text((x1 + 52, ty + 24), pl.get("label", "the right order"), font=font("b", 26), fill=GREY, anchor="ma")  # centred under the pin, inside the frame
+    paste(img, lay, k)
+
+def draw_table(img, tb, t, y0, hook=None):
+    """Polished table: one white card, header row, hairline dividers, values on orange chips that peel away
+    on the spoken word; the revealed value pops and its row glows green briefly."""
+    d = ImageDraw.Draw(img); x0, x1 = 70, W - 70
+    if hook and t < hook.get("until", 3.0):
+        lines = hook["text"].split("\n")
+        for i, ln in enumerate(lines):
+            d.text((W / 2, y0 + 50 * i), ln, font=font("xb", fit(ln, "xb", 48, 900)), fill=ORANGE, anchor="ma")
+    else:
+        d.text((W / 2, y0 + 22), tb["title"], font=font("xb", 44), fill=INK, anchor="ma")
+    rows = tb["rows"]; rh = 64; top = y0 + 96; hh = 54
+    card(img, [x0, top, x1, top + hh + rh * len(rows) + 8], 34)
+    d = ImageDraw.Draw(img); vx0, vx1 = x0 + 300, x1 - 36
+    d.text((x0 + 40, top + hh / 2 + 4), "AGE", font=font("b", 26), fill=GREY, anchor="lm")
+    d.text((vx1, top + hh / 2 + 4), tb.get("header_right", "SAVED"), font=font("b", 24), fill=GREY, anchor="rm")
+    y = top + hh
+    for i, r in enumerate(rows):
+        d.line([(x0 + 28, y), (x1 - 28, y)], fill=(236, 230, 222), width=2)
+        cyy = y + rh / 2; out = r.get("_out"); k = ease((t - out) / 0.35) if out is not None else 0.0
+        if out is not None and 0 <= t - out < 1.2:                       # row glow after reveal
+            g = 1 - (t - out) / 1.2; d.rounded_rectangle([x0 + 10, y + 4, x1 - 10, y + rh - 4], 18, fill=(30, 140, 80, int(40 * g)))
+            d = ImageDraw.Draw(img)
+        d.text((x0 + 40, cyy), r["label"], font=font("xb", 44), fill=INK, anchor="lm")
+        d.text((x0 + 40 + font("xb", 44).getlength(r["label"]) + 10, cyy + 6), "yrs", font=font("m", 26), fill=GREY, anchor="lm")
+        if k > 0:
+            pop = 1 + 0.25 * math.sin(min(1.0, (t - out) / 0.35) * math.pi)
+            d.text((vx1, cyy), r["value"], font=font("xb", int(48 * pop)), fill=GREEN, anchor="rm")
+        if k < 1:
+            cw = 230; cx1 = vx1; cx0 = cx1 - cw; sl = cw * k                # chip peels off to the right
+            if cw - sl > 8:
+                d.rounded_rectangle([cx0 + sl, cyy - 22, cx1, cyy + 22], 22, fill=ORANGE)
+                if k == 0: d.text(((cx0 + cx1) / 2, cyy), "? ? ?", font=font("xb", 30), fill=WHITE, anchor="mm")
+        y += rh
+
+def draw_payoff(img, po, t, y0):
+    """Polished payoff card: STEP 1 / STEP 2 rows with icon badges, a dotted connector and a highlighter sweep."""
+    k1 = ease((t - po["_l1"]) / 0.3); k2 = ease((t - po["_l2"]) / 0.3)
+    x0, x1 = 70, W - 70; top = y0 + 40; rh = 170
+    kc = ease((t - po["_l1"] + 0.1) / 0.3)
+    card(img, [x0, top, x1, top + rh * 2 + 40], 36, k=kc)
+    def row(y, k, n, label, txt, accent, soft):
+        if k <= 0: return
+        lay = layer(); d = ImageDraw.Draw(lay); bx = x0 + 44; by = y + 34
+        d.ellipse([bx, by, bx + 96, by + 96], fill=accent)
+        d.text((bx + 48, by + 50), n, font=font("xb", 52), fill=WHITE, anchor="mm")
+        tx = bx + 128; f = font("xb", fit(max(po["line1"], po["line2"], key=len), "xb", 80, x1 - tx - 40)); tw = f.getlength(txt)
+        d.text((tx, by + 6), label, font=font("b", 26), fill=accent, anchor="la")
+        hl = min(1.0, max(0.0, (t - (po["_l1"] if n == "1" else po["_l2"]) - 0.15) / 0.4))
+        d.rounded_rectangle([tx - 8, by + 44, tx - 8 + (tw + 16) * hl, by + 112], 14, fill=soft)
+        d.text((tx, by + 78), txt, font=f, fill=INK, anchor="lm")
+        paste(img, lay, k * kc, dy=int((1 - k) * 30))
+    row(top + 10, k1, "1", "STEP 1", po["line1"], GREEN, (210, 240, 222, 255))
+    if k1 > 0:
+        d = ImageDraw.Draw(img); cx = x0 + 44 + 48
+        for j in range(5):
+            yy = top + 10 + 34 + 96 + 12 + j * 14
+            if yy < top + rh + 34: d.ellipse([cx - 4, yy, cx + 4, yy + 8], fill=(220, 210, 200, int(255 * min(k1, kc))))
+    row(top + rh + 10, k2, "2", "STEP 2", po["line2"], ORANGE, (253, 226, 213, 255))
 
 def main():
     path = sys.argv[1]; check = "--check" in sys.argv
