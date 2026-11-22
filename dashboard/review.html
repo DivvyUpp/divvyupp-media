@@ -74,6 +74,12 @@ details p{margin:6px 0 0;white-space:pre-line}
     <ol class="list" id="l-approved"></ol>
   </section>
 
+  <section aria-labelledby="h-posted">
+    <div class="sh"><h2 id="h-posted">Posted in the last 7 days</h2><span class="count c-approved" id="n-posted"></span></div>
+    <p class="what">Live on Instagram. Each links to its bet card, which says what we expect at the 72-hour read.</p>
+    <ol class="list" id="l-posted"></ol>
+  </section>
+
   <section aria-labelledby="h-hold">
     <div class="sh"><h2 id="h-hold">On hold</h2><span class="count c-hold" id="n-hold"></span></div>
     <p class="what">Parked until you decide: post it, or drop it.</p>
@@ -111,6 +117,10 @@ function nextSlots(n) {
   return out;
 }
 
+function weekAgo() {
+  const d = new Date(etNow().date + "T12:00:00Z"); d.setUTCDate(d.getUTCDate() - 7); return d.toISOString().slice(0, 10);
+}
+
 function item(e, slot) {
   const vid = el("div", {class: "vid"});
   if (e.file) {
@@ -132,6 +142,7 @@ function item(e, slot) {
   if (e.caption) info.append(el("details", {}, el("summary", {}, "Caption"), el("p", {}, e.caption)));
   const links = el("div", {class: "links"});
   if (e.file) links.append(el("a", {class: "open", href: href(e.file), target: "_blank", rel: "noopener"}, "Open video"));
+  if (e.permalink) links.append(el("a", {href: e.permalink, target: "_blank", rel: "noopener"}, "On Instagram"));
   if (e.hypothesis) links.append(el("a", {href: href(e.hypothesis), target: "_blank", rel: "noopener"}, "Bet card"));
   info.append(links);
   return el("li", {class: "item"}, vid, info);
@@ -146,8 +157,9 @@ async function main() {
     review: q.filter(e => e.status === "pending_review").sort(byDate),
     approved: q.filter(e => e.status === "approved" && e.kind !== "trial").sort(byDate),
     hold: q.filter(e => e.status === "hold").sort(byDate),
+    posted: q.filter(e => e.status === "posted" && e.post_date && e.post_date >= weekAgo()).sort((a, b) => byDate(b, a)),
   };
-  const empty = {review: "Nothing to review right now.", approved: "Nothing approved yet.", hold: "Nothing on hold."};
+  const empty = {review: "Nothing to review right now.", approved: "Nothing approved yet.", hold: "Nothing on hold.", posted: "Nothing posted in the last 7 days."};
   const slots = nextSlots(groups.approved.length);
   for (const [k, list] of Object.entries(groups)) {
     $("n-" + k).textContent = list.length;

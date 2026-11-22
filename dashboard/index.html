@@ -197,6 +197,8 @@ function render(date, recs) {
         if (r.hook) c.append(el("q", {}, r.hook));
         if (r.file) c.append(el("video", {src: href(r.file), controls: "", preload: "metadata", playsinline: ""}));
         if (r.permalink) c.append(el("a", {href: r.permalink, target: "_blank", rel: "noopener"}, "On Instagram"));
+        const hyp = (QMAP && QMAP[r.id] && QMAP[r.id].hypothesis) || r.hypothesis;
+        if (hyp) c.append(el("a", {href: REPO + hyp, target: "_blank", rel: "noopener"}, "Bet card"));
         if (r.id) c.append(el("span", {class: "sub"}, r.id));
         g.append(c);
       }
@@ -221,8 +223,16 @@ async function loadTodo() {
   t.hidden = false;
 }
 
+let QMAP = null;                       // queue.json by Reel id, for bet card links
+async function queueMap() {
+  if (QMAP) return QMAP;
+  QMAP = {};
+  try { const r = await fetch("../queue.json", {cache: "no-store"}); if (r.ok) { let q = await r.json(); if (!Array.isArray(q)) q = q.queue || []; for (const e of q) QMAP[e.id] = e; } } catch (e) {}
+  return QMAP;
+}
 async function go(date) {
   if (location.hash.slice(1) !== date) history.replaceState(null, "", "#" + date);
+  await queueMap();
   render(date, date < FIRST_DAY ? {} : await load(date));
 }
 const current = () => /^\d{4}-\d{2}-\d{2}$/.test(location.hash.slice(1)) ? location.hash.slice(1) : etNow().date;
