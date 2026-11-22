@@ -2,7 +2,7 @@
 
 Question: can an account with almost no followers (we have 3) get Reels pushed widely, and what drives it, mostly
 for views and shares? Sources are secondary (marketing guides, aggregators, creator case studies); Instagram's own
-creator blog (creators.instagram.com) is blocked from this environment, so nothing here is quoted first-hand.
+creator blog was added later the same day (see "In Instagram's own words" below).
 Grades: A = platform data/statement reported consistently, B = study with numbers (secondhand), C = self-report.
 
 ## What the sources agree on
@@ -37,6 +37,27 @@ Grades: A = platform data/statement reported consistently, B = study with number
 - A brand-new account grew 0 to 15K in 30 days. [stan.store](https://stan.store/blog/creator-strategies-case-study/)
 - 9 Trial Reels drove 2.3M impressions (account above 1K followers). [niredonahue.com](https://niredonahue.com/instagram-trial-reels-case-study/)
 
+## In Instagram's own words (creators.instagram.com, read 2026-11-22)
+From ["Helping creators of all sizes break through"](https://creators.instagram.com/blog/helping-creators-of-all-sizes-break-through) (2025):
+- "Among non-followers, your reel is initially recommended and shown to a small audience of people we think will
+  enjoy it. As this initial audience responds to these reels, the best-performing reels are then shown to a slightly
+  wider audience, then the best of those are shown to an even wider group, and so on." It is "designed to level the
+  playing field by distributing content based on its engagement, not just the creator's follower count."
+- Signals: "watch time, retention, shares, likes, and comments", plus audience matching (people with similar interests).
+- Reels are reshared "over 4.5 billion times every day across Instagram and Facebook."
+- Advice: post consistently; "create content that can stand on its own" (it must make sense to strangers); a compelling
+  hook "in the first 3 seconds" and watch the 3-second hold in Insights; "relatable, shareable ideas"; add audio.
+- Example Instagram itself names: **@pov_husband** (home cooking from the husband's point of view) went "from 0
+  followers to over 2 million followers in less than a year" since April 2024, with "over 1.2 billion views".
+  Couple-POV content is exactly our lane.
+From ["Tips for Improving Your Reach"](https://creators.instagram.com/blog/tips-for-improving-your-reach):
+- Recommendations weigh "how many and how quickly other people are liking, commenting, sharing and saving a post".
+- Original content only: "less likely to recommend reposts of a reel that's already on Instagram, content with
+  noticeable watermarks, or accounts that regularly collect and reshare others' content". Reels must be 3 minutes or less.
+- Check **Account Status** in the app to see whether the account is eligible to be recommended to non-followers.
+- Insights split Accounts Reached into followers and non-followers: track the non-follower share over time.
+- Collabs (posting jointly with another creator) reach both audiences and can be recommended.
+
 ## What it means for @getdivvyupp (for Create / the backlog)
 - Our 3 followers don't cap reach: Same $10K got 97 reach, nearly all strangers. The limit is how the seed audience
   reacts: skip is 71-83% (target 60% or less) and shares are 0 on every Reel so far.
@@ -46,3 +67,6 @@ Grades: A = platform data/statement reported consistently, B = study with number
 - Follows: a recurring series and a clear profile, not one-off Reels.
 - Backlog #17 (Trial Reels) unlocks at 1,000 followers, not 200.
 - Seeding by Srini (Stories, group chats) is untested opinion; early real watchers may help the first-wave signals.
+- Srini: check Account Status in the Instagram app once, to confirm @getdivvyupp is eligible for recommendations.
+- Couple-POV as a recurring series fits Instagram's own example (@pov_husband); a Collab with a small couple/finance
+  creator is a cheap way to borrow a second audience.
