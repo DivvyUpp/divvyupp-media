@@ -119,6 +119,32 @@ def draw_callout(img, co, t):
     a = np.array(lay); a[..., 3] = (a[..., 3] * k).astype(np.uint8)
     img.alpha_composite(Image.fromarray(a), (int((W - lay.width) / 2), int(co.get("y", 300) - (lay.height - 130) / 2)))
 
+def draw_progress_line(img, pl, t, t0, t1, y):
+    """Thin orange line along the bottom edge of the video, filling until the payoff; tiny label above it."""
+    p = min(1.0, max(0.0, (t - t0) / max(0.01, t1 - t0))); d = ImageDraw.Draw(img)
+    d.rectangle([0, y - 10, W, y], fill=(255, 255, 255, 70)); d.rectangle([0, y - 10, int(W * p), y], fill=ORANGE)
+    if pl.get("label"): d.text((W - 24, y - 18), pl["label"], font=font("b", 28), fill=WHITE, anchor="rd", stroke_width=3, stroke_fill=INK)
+
+def draw_payoff(img, po, t, y0):
+    """The answer, big, in the table's place: '1 Save first.' then an arrow, then '2 Then spend what's safe.'"""
+    cx = W / 2
+    k1 = ease((t - po["_l1"]) / 0.3); k2 = ease((t - po["_l2"]) / 0.3); ka = ease((t - po["_l1"] - 0.35) / 0.3)
+    size = min(fit(po["line1"], "xb", 92, 760), fit(po["line2"], "xb", 92, 760))
+    def line(y, n, txt, col, k):
+        if k <= 0: return
+        lay = layer(); dd = ImageDraw.Draw(lay); f = font("xb", size); tw = f.getlength(txt)
+        x = cx - (tw + 110) / 2
+        dd.ellipse([x, y + 6, x + 84, y + 90], fill=col); dd.text((x + 42, y + 48), n, font=font("xb", 54), fill=WHITE, anchor="mm")
+        dd.text((x + 110, y + 48), txt, font=f, fill=col, anchor="lm")
+        dd.rectangle([x + 110, y + 104, x + 110 + tw * min(1, k * 1.2), y + 114], fill=col)
+        paste(img, lay, k, dy=int((1 - k) * 40))
+    line(y0 + 40, "1", po["line1"], GREEN, k1)
+    if ka > 0:
+        lay = layer(); dd = ImageDraw.Draw(lay); ax, ay = cx, y0 + 190
+        dd.line([(ax, ay), (ax, ay + 90)], fill=ORANGE, width=14); dd.polygon([(ax - 38, ay + 70), (ax + 38, ay + 70), (ax, ay + 122)], fill=ORANGE)
+        paste(img, lay, ka, dy=int((1 - ka) * -20))
+    line(y0 + 330, "2", po["line2"], ORANGE, k2)
+
 def draw_table(img, tb, t, y0, hook=None):
     """Title slot shows the hook (bigger, in orange) while it's live, then the table title."""
     d = ImageDraw.Draw(img); x0, x1 = 90, W - 90
@@ -151,6 +177,14 @@ def frame_at(spec, frames, segs, caps, total, t):
     si = next(i for i, g in enumerate(segs) if g[0] <= t < g[1] or i == len(segs) - 1)
     o0, o1, a, b, sp = segs[si]; s = a + (t - o0) * sp
     src = Image.fromarray(frames[min(int(s * FPS), len(frames) - 1)])
+    lf = spec.get("_layout_from")
+    if lf is not None and t < lf:                                   # opening: full screen, hook only
+        img = src.convert("RGBA")
+        g = np.zeros((H, 1), np.float32); g[:900, 0] = np.linspace(0.35, 0, 900)
+        a_ = np.zeros((H, W, 4), np.uint8); a_[..., 3] = (np.repeat(g, W, 1) * 255).astype(np.uint8); img.alpha_composite(Image.fromarray(a_))
+        sh = spec.get("sky_hook")
+        if sh and t < sh["until"]: draw_sky_hook(img, sh, t)
+        return img
     pn = spec["panel"]; ph = pn["height"]; z = 1.0 if si % 2 == 0 else pn.get("punch", 1.07)
     zo = pn.get("zoom_out", 1.0)                       # >1 shows more of the frame; sides filled with a blurred copy
     ch = min(H, ph * zo) / z; cw = W / z; cy = H * pn.get("focus_y", 0.42)
@@ -166,10 +200,17 @@ def frame_at(spec, frames, segs, caps, total, t):
     g = np.zeros((ph, 1), np.float32); g[ph - 260:, 0] = np.linspace(0, 0.55, 260); g[:420, 0] = np.linspace(0.45, 0, 420)
     a_ = np.zeros((ph, W, 4), np.uint8); a_[..., 3] = (np.repeat(g, W, 1) * 255).astype(np.uint8)
     img.alpha_composite(Image.fromarray(a_), (0, pn.get("top", 0)))
-    if spec.get("sky_hook") and t < spec["sky_hook"]["until"]: draw_sky_hook(img, spec["sky_hook"], t)
     for co in spec.get("callouts", []): draw_callout(img, co, t)
-    hk = spec.get("hook")
-    draw_table(img, spec["table"], t, pn.get("top", 0) + ph + 30, hk if spec.get("hook_in_table", True) else None)
+    hk = spec.get("hook"); ty = pn.get("top", 0) + ph + 30
+    po = spec.get("payoff"); kin = ease((t - lf) / 0.4) if lf is not None else 1.0
+    kout = ease((t - po["_l1"] + 0.3) / 0.3) if po else 0.0        # table stays until the first payoff word
+    if kout < 1:                                                    # table slides up in, fades out for the payoff
+        tl = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+        draw_table(tl, spec["table"], t, ty, hk if spec.get("hook_in_table", True) else None)
+        paste(img, tl, kin * (1 - kout), dy=int((1 - kin) * 260))
+    if po and t >= po["_l1"] - 0.05: draw_payoff(img, po, t, ty)
+    pl = spec.get("progress")
+    if pl and lf is not None and po and lf <= t < po["_from"]: draw_progress_line(img, pl, t, lf, po["_from"], pn.get("top", 0) + ph)
     if hk and not spec.get("hook_in_table", True) and t < hk.get("until", 3.0): draw_hook(img, hk["text"])
     nt = spec.get("nametag")
     if nt and nt.get("from", 0) <= t < nt.get("until", 3.0): draw_nametag(img, nt, t)
@@ -217,6 +258,11 @@ def main():
     spec = json.load(open(rel(path))); segs, body = timeline(spec)
     total = body + (spec["end"].get("dur", 2.5) if spec.get("end") else 0)
     for r in spec["table"]["rows"]: r["_out"] = src_to_out(segs, r["word_at"]) if r.get("word_at") is not None else None
+    if spec.get("layout_from_src") is not None: spec["_layout_from"] = src_to_out(segs, spec["layout_from_src"]) - 0.05
+    po = spec.get("payoff")
+    if po:
+        po["_from"] = src_to_out(segs, po["from_src"]) - po.get("lead", 0.0)
+        po["_l1"] = src_to_out(segs, po["line1_src"]); po["_l2"] = src_to_out(segs, po["line2_src"])
     for co in spec.get("callouts", []):
         co["_from"] = src_to_out(segs, co["from_src"]) - co.get("lead", 0.0); co["_until"] = src_to_out(segs, co["until_src"])
     for fx in spec.get("sfx", []):

@@ -147,19 +147,31 @@
   }
  ],
  "sky_hook": {
-  "text": "The one thing\nyour savings\nare missing",
+  "text": "You're saving\nin the wrong order",
   "until": 1.45,
   "y": 300,
-  "size": 100
+  "size": 104
  },
  "callouts": [
   {
-   "text": "The one thing you're missing:",
+   "text": "The right order:",
    "from_src": 24.84,
    "lead": 0.25,
    "until_src": 29.24,
    "y": 290,
    "size": 60
   }
- ]
+ ],
+ "layout_from_src": 5.98,
+ "payoff": {
+  "from_src": 24.84,
+  "lead": 0.25,
+  "line1_src": 25.84,
+  "line2_src": 27.28,
+  "line1": "Save first.",
+  "line2": "Then spend what's safe."
+ },
+ "progress": {
+  "label": "the right order"
+ }
 }
