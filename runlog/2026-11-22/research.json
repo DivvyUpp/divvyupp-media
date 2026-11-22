@@ -1,0 +1,28 @@
+{
+ "run": "research",
+ "date": "2026-11-22",
+ "attempts": [
+  {
+   "started_at": "2026-11-22T05:57:30-05:00",
+   "finished_at": "2026-11-22T06:02:03-05:00",
+   "status": "partial",
+   "trigger": "scheduled",
+   "summary": "Fresh Shorts pull (886 Shorts, 25 channels incl. 3 new). Hooks that lead with one person and one money move broke out 2.4x as often (22.6% vs 9.5%), now backlog #5; household money news added as #6; 'Signs you're…' list failed in data.",
+   "blocker": "Partial: lindseygamble.com and socialmediatoday.com are not allowed in this session, so two platform findings come from search summaries. Allow them under Settings → Capabilities → Allowed websites to read them directly.",
+   "outputs": [
+    {
+     "label": "Research brief",
+     "path": "research/2026-11-22.md"
+    },
+    {
+     "label": "Shorts pull",
+     "path": "research/shorts-2026-11-22.csv"
+    },
+    {
+     "label": "Backlog",
+     "path": "backlog.md"
+    }
+   ]
+  }
+ ]
+}
