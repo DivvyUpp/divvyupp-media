@@ -268,5 +268,13 @@
    "src_h": 730,
    "feet": 815
   }
- }
+ },
+ "foreground": [
+  {
+   "img": "pipeline/assets/props/trash_cans.png",
+   "x": 540,
+   "y": 1460,
+   "h": 430
+  }
+ ]
 }
