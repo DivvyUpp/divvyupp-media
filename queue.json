@@ -198,8 +198,10 @@
   {
     "id": "2026-11-21-milk",
     "kind": "main",
-    "status": "pending_review",
-    "post_date": "2026-11-21",
+    "status": "approved",
+    "post_date": "2026-11-23",
+    "not_before": "09:00",
+    "approved_note": "Srini approved v3 on 2026-11-22 (in chat): post Monday 2026-11-23 in the morning. Claude starts the Post run at 9:00am ET; the 11:57am slot is the fallback.",
     "file": "reels/2026-11-21-milk-v3.mp4",
     "spec": "hooks/2026-11-21-milk-v3.json",
     "format": "rules",
