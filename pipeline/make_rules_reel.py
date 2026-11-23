@@ -22,6 +22,7 @@ from make_story_reel import LEAD, TAIL, character, viseme_track, LETTER_PHONEME
 from make_explainer import one_take
 from make_beat_reel import v_cta, fit, mark, wrap, GREEN, RED
 from make_split_reel import SAFE_TOP, SAFE_BOT, SAFE_L, ZONES, tighten, click, sprite, place, pop_scale, COLS
+import store_scene
 
 SOFT_G = (226, 244, 233); SOFT_R = (250, 228, 224)
 PAIRS_TOP, PAIRS_BOT, PAIRS_R = 400, 1140, W - 80      # rule rows end above the button rail (y>=1150)
@@ -129,6 +130,13 @@ def main():
         vis = movie_char.audio_track(lt_, env, lead=spec.get("lip_lead", 1))
         json.dump({"raw": raw, "smooth": vis, "env": env.tolist(), "cues": cues, "chars": [[c, LEAD + a, LEAD + b] for c, a, b in zip(ch, st, en)]}, open(os.path.join(tmp, "vis.json"), "w"))
     def cue(i, d=0.0): return cues[min(i, len(cues) - 1)] - 0.12 + d
+    def tm(m):
+        """Start time of a timed item: sentence `at` plus `delay`, or the moment the phrase `word` is spoken in it."""
+        if not m.get("word"): return cue(m["at"], m.get("delay", 0.0))
+        i = min(m["at"], len(starts) - 1); a = starts[i]; b = starts[i + 1] if i + 1 < len(starts) else len(ch)
+        j = "".join(ch[a:b]).lower().find(m["word"].lower())
+        assert j >= 0, f"'{m['word']}' not in sentence {i}"
+        return LEAD + st[a + j] - 0.05 + m.get("delay", 0.0)
     def phase(lst, t, key):
         cur = None
         for p in lst or []:
@@ -220,6 +228,7 @@ def main():
                 moving = t < stop_t
                 bob = 4 * np.sin(t * 16) if moving else 0
                 fr.layer.alpha_composite(im, (int(cx * S - im.width / 2), int((yr - rd.get("h", 220) / 2 + 12 + bob) * S - im.height / 2)))
+        if spec.get("store"): store_scene.draw_shopper_layer(fr, t, spec["store"], tm)   # supermarket behind the speaker
         mood = phase(spec.get("moods"), t, "mood") or "happy"
         character(fr.layer, W / 2, spec.get("spk_top", SPK_TOP), spec.get("spk_h", SPK_H), t, vis[min(f, n - 1)], mood, fr.g, spec["character"])
         for fg in spec.get("foreground", []):                                   # props in front of the speaker (e.g. bins)
@@ -261,6 +270,7 @@ def main():
                     k = min(appear(t, t_in, 0.12), max(0.0, min(1.0, (t_end - t) / 0.25)))
                     im = notif(nw, nh, st_["text"], i_ + 1, len(stp), tr.get("sub", "Dollar Bill's order"), tr.get("color"))
                     place(fr, im, tr.get("x", W / 2), tr.get("y", 1480), pop_scale(t - t_in, False), k)
+        if spec.get("store"): store_scene.draw_tags(fr, t, spec["store"], tm); store_scene.draw_card(fr, t, spec["store"], tm)
         rc = spec.get("receipt")
         if rc and t >= cue(rc["at"], rc.get("delay", 0.0)):
             t_in = cue(rc["at"], rc.get("delay", 0.0)); rw, rh_ = rc.get("w", 360), 84 + 54 * len(rc["items"]) + 118
@@ -313,7 +323,9 @@ def main():
     if spec.get("clicks", True):
         tk = click(sr, spec.get("click_gain", 0.06))
         extra = [cue(st_["at"], st_.get("delay", 0.0)) for st_ in (spec.get("tracker") or {}).get("steps", [])] + \
-                [cue(dp["at"], dp.get("delay", 0.0)) for dp in spec.get("drop", [])]
+                [cue(dp["at"], dp.get("delay", 0.0)) for dp in spec.get("drop", [])] + \
+                [tm(x) for x in ((spec.get("store") or {}).get("card") or {}).get("stages", [])] + \
+                [tm(x) for x in (spec.get("store") or {}).get("tags", [])]
         for tt in extra:
             i0 = int(max(tt, 0) * sr)
             if i0 < len(full): full[i0:i0 + len(tk)] += tk[:len(full) - i0] * 1.3
