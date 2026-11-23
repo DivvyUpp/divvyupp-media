@@ -51,6 +51,14 @@
       "trigger": "manual",
       "summary": "Test run of the YouTube step: nothing approved for Instagram. Tried the YouTube backfill for 2026-11-21-milk; not uploaded. Picked milk over the older dollar-bill-rules because Windsor's cached data couldn't confirm whether that Reel's rate-limited attempt at 11:20 had finished, so uploading it again risked a duplicate.",
       "blocker": "YouTube answered 'rate-limited' again (second time in 3 minutes, on a channel with no uploads yet). Not retried. If it keeps happening, check the channel in YouTube Studio (phone verification, upload limits) and the Windsor YouTube connection."
+    },
+    {
+      "started_at": "2026-11-23T12:00:03-05:00",
+      "finished_at": "2026-11-23T12:04:00-05:00",
+      "status": "partial",
+      "trigger": "scheduled",
+      "summary": "Noon slot: nothing approved to post on Instagram (three Reels still pending review). YouTube backfill tried 2026-11-21-dollar-bill-rules; not uploaded.",
+      "blocker": "YouTube rate-limited the upload again (third time today across two Reels, on a channel with no uploads). Not retried. Likely a channel-side limit: check YouTube Studio (phone verification, upload limits) and the Windsor YouTube connection. Note: this entry has no hook, so the title used was the caption's first line."
     }
   ]
 }
