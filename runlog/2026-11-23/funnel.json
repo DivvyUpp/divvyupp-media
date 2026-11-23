@@ -27,6 +27,14 @@
      "path": "funnel/custom-2026-11-22_2026-11-22.json"
     }
    ]
+  },
+  {
+   "started_at": "2026-11-23T17:12:38-05:00",
+   "finished_at": "2026-11-23T17:12:38-05:00",
+   "status": "ok",
+   "trigger": "scheduled",
+   "summary": "Funnel weekly export (last Mon-Sun): no new data.",
+   "outputs": []
   }
  ]
 }
