@@ -1,0 +1,71 @@
+{
+  "run": "create",
+  "date": "2026-11-23",
+  "attempts": [
+    {
+      "started_at": "2026-11-23T06:28:14-05:00",
+      "finished_at": "2026-11-23T06:48:46-05:00",
+      "status": "ok",
+      "trigger": "scheduled",
+      "summary": "Monday: weekly review W47 (9 Reels, avg 22 views vs 300 target, first 2 Instagram landings on 11-22, 0 sign-ups; Growth Tracker updated). v12 postmortem: refuted (114 views but skip 71%). Made three Reels on the two proven pain moments, the first with four-layer openings and realistic photos; sent to Srini, nothing approved or posted.",
+      "outputs": [
+        {
+          "label": "Hypothesis cards, weekly review and workshop",
+          "path": "hypotheses/2026-11-23.md"
+        },
+        {
+          "label": "v12 postmortem",
+          "path": "hypotheses/2026-11-21.md"
+        },
+        {
+          "label": "Spec",
+          "path": "hooks/2026-11-23-werefine.json"
+        },
+        {
+          "label": "Spec",
+          "path": "hooks/2026-11-23-behind.json"
+        },
+        {
+          "label": "Spec",
+          "path": "hooks/2026-11-23-goodmoney.json"
+        },
+        {
+          "label": "Weekly funnel W47",
+          "path": "funnel/2026-W47.json"
+        },
+        {
+          "label": "Queue",
+          "path": "queue.json"
+        },
+        {
+          "label": "Experiment log",
+          "path": "experiment-log.csv"
+        },
+        {
+          "label": "Learnings",
+          "path": "learnings.md"
+        }
+      ],
+      "reels": [
+        {
+          "id": "2026-11-23-werefine",
+          "hook": "She asked \"Are we, though?\" He said \"We're fine.\" $310, eight days before payday.",
+          "status": "pending_review",
+          "file": "reels/2026-11-23-werefine.mp4"
+        },
+        {
+          "id": "2026-11-23-behind",
+          "hook": "\"I make good money, and it doesn't feel like it at all.\"",
+          "status": "pending_review",
+          "file": "reels/2026-11-23-behind.mp4"
+        },
+        {
+          "id": "2026-11-23-goodmoney",
+          "hook": "\"I make good money, and it doesn't feel like it at all.\" I'm a raccoon. I know exactly why.",
+          "status": "pending_review",
+          "file": "reels/2026-11-23-goodmoney.mp4"
+        }
+      ]
+    }
+  ]
+}

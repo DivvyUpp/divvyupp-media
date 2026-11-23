@@ -21,6 +21,13 @@ None yet. No Reel has reached 100 views, so every result so far is inconclusive.
 - Every Reel so far opens on a blank screen with the presenter fading in; text appears ~0.7s in (execution, not yet
   tested; trial 2026-11-20-t1 tests the fix).
 
+## Update 2026-11-23 (weekly review, W47)
+- First 72 h read on 100+ views: 2026-11-20-same-10k-v12 **refuted** (114 views, skip 71.3%, avg watch 16.7 s of 53,
+  0 shares). The format package won reach (3-10x every other Reel) but lost the hold, both in the opening and at
+  ~17 s. One Reel: no rule yet.
+- First Instagram landings on divvyupp.com: 2 on 2026-11-22 (founder video + Paris couple film day). 0 Get started.
+- W47: 9 Reels, avg 22 views (target 300), followers flat at 3.
+
 ## Open questions (ranked)
 1. What opening keeps a stranger past 3 seconds?
 2. Does a shorter cut keep more viewers to the end without losing clarity?

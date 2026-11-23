@@ -1,0 +1,185 @@
+{
+ "id": "2026-11-23-behind",
+ "format": "beat",
+ "character": "pipeline/assets/characters/couple/her.png",
+ "photo_focus": 0.06,
+ "character_voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "music": true,
+ "beats": [
+  {
+   "sentences": [
+    {
+     "text": "[thoughtful] \"I make good money, and it doesn't feel like it at all.\" Here's what people your age actually have, and the one thing to check tonight."
+    }
+   ],
+   "visual": {
+    "type": "title",
+    "small": "Feel behind?",
+    "lines": [
+     [
+      "\u201cI make good money,",
+      "ink"
+     ],
+     [
+      "and it doesn't",
+      "ink"
+     ],
+     [
+      "feel like it at all.\u201d",
+      "orange"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Because when you can't tell if you're behind, every purchase feels like a guilty guess."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Can't tell if you're behind?",
+      "ink"
+     ],
+     [
+      "Every purchase feels like",
+      "ink"
+     ],
+     [
+      "a guilty guess.",
+      "red"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "The Federal Reserve's survey. The middle family under thirty-five has about thirty-nine thousand dollars to its name."
+    },
+    {
+     "text": "Thirty-five to forty-four: about a hundred and thirty-six thousand."
+    },
+    {
+     "text": "Forty-five to fifty-four: about two hundred and forty-seven thousand."
+    }
+   ],
+   "visual": {
+    "type": "table",
+    "title": "Median net worth by age",
+    "rows": [
+     {
+      "label": "Under 35",
+      "value": "$39,000",
+      "at": 0
+     },
+     {
+      "label": "35 to 44",
+      "value": "$135,600",
+      "at": 1
+     },
+     {
+      "label": "45 to 54",
+      "value": "$247,200",
+      "at": 2
+     }
+    ],
+    "source": "Federal Reserve, Survey of Consumer Finances 2022. Home included."
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "And that's everything: cash, retirement, and the house. If you rent, compare just your cash and retirement, and expect your number to be lower."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "That's everything:",
+      "ink"
+     ],
+     [
+      "cash, retirement,",
+      "ink"
+     ],
+     [
+      "and the house.",
+      "orange"
+     ],
+     [
+      "Renting? Expect lower.",
+      "ink"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "[curious] So if you earn well and still feel behind, check one thing tonight. Does saving happen first? Or after a month of guessing what's safe to spend?"
+    }
+   ],
+   "visual": {
+    "type": "split",
+    "left": "Most months",
+    "right": "The fix",
+    "rows": [
+     {
+      "label": "When does saving happen?",
+      "left": "After a month of guessing",
+      "right": "First, on payday",
+      "lmark": "x",
+      "rmark": "check",
+      "at": 0
+     }
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "DivvyUpp flips it. Savings leaves on payday, the amount you pick."
+    },
+    {
+     "text": "What's left becomes one number for today. Spend forty over, and the next few days each get a little less. No guessing."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Payday: savings first.",
+      "green"
+     ],
+     [
+      "The rest:",
+      "ink"
+     ],
+     [
+      "today's number.",
+      "orange"
+     ],
+     [
+      "$40 over? Next days adjust.",
+      "ink"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "[warm] So, are you behind? Behind isn't one number. It's whether yours goes up every month. Save first. Then spend what's safe. Try it at Divvyup dot com."
+    }
+   ],
+   "visual": {
+    "type": "cta"
+   }
+  }
+ ]
+}

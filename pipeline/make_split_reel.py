@@ -45,9 +45,15 @@ _P = {}
 def person(path, height):
     k = (path, height)
     if k not in _P:
-        im = Image.open(path if os.path.isabs(path) else os.path.join(ROOT, path)).convert("RGBA")
+        src = Image.open(path if os.path.isabs(path) else os.path.join(ROOT, path)); photo = "A" not in src.getbands()
+        im = src.convert("RGBA")
         bb = im.getbbox(); im = im.crop(bb) if bb else im
-        _P[k] = im.resize((int(im.width * height / im.height), height), Image.LANCZOS)
+        im = im.resize((int(im.width * height / im.height), height), Image.LANCZOS)
+        if photo:                          # a full photo (no cut-out): show it as a rounded photo card
+            from PIL import ImageDraw
+            m = Image.new("L", im.size, 0); ImageDraw.Draw(m).rounded_rectangle([0, 0, im.width - 1, im.height - 1], int(36 * S), fill=255)
+            im.putalpha(m)
+        _P[k] = im
     return _P[k]
 
 import re as _re, math as _math

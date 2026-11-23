@@ -1,0 +1,111 @@
+{
+ "id": "2026-11-23-goodmoney",
+ "format": "rules",
+ "character": "raccoon_movie",
+ "character_voice": "elevenlabs:loY1uopAz31XyhAEhNSa:eleven_v3",
+ "voice_prefix": "[excited] Whoa, whoa, whoa. I've seen your bank history! [laughs] Four coffees, two takeouts, AND a quick little online order? On a TUESDAY? [smug] Relax, pal. I'm a raccoon. I know exactly where money disappears to.",
+ "music": true,
+ "max_gap": 0.42,
+ "keep_gap": {
+  "4": 0.8
+ },
+ "takes": 1,
+ "sentences": [
+  "[smug] \"I make good money, and it doesn't feel like it at all.\" I'm a raccoon. I know exactly why.",
+  "[mischievous] It goes in the first week after payday, when the balance looks huge.",
+  "[confident] Rule one! That balance is lying. Rent, the car, the phone bill haven't left yet.",
+  "[excited] Rule two. Savings leaves first, on payday, before you ever see the big number.",
+  "[mischievous] Rule three. What's left becomes one number for today. Say it's forty. Spend sixty? The rest of the week drops a few bucks a day. No panic.",
+  "[smug] It doesn't disappear, pal. It just never got a job.",
+  "Save first. Then spend what's safe. Try it at Divvyup dot com."
+ ],
+ "title": [
+  {
+   "from": 0,
+   "lines": [
+    [
+     "\u201cI make good money.",
+     "ink"
+    ],
+    [
+     "Doesn't feel like it.\u201d",
+     "ink"
+    ],
+    [
+     "Here's why.",
+     "orange"
+    ]
+   ]
+  },
+  {
+   "from": 1,
+   "lines": [
+    [
+     "Week one after payday:",
+     "ink"
+    ],
+    [
+     "the balance looks huge.",
+     "orange"
+    ]
+   ]
+  },
+  {
+   "from": 2,
+   "lines": null
+  }
+ ],
+ "header": [
+  {
+   "from": 2,
+   "text": "Dollar Bill's rules"
+  },
+  {
+   "from": 5,
+   "text": "Every dollar gets a job"
+  }
+ ],
+ "pairs": [
+  {
+   "good_text": "That balance is lying",
+   "bad_text": "\u201cLook how much I have!\u201d",
+   "at": 2
+  },
+  {
+   "good_text": "Savings leave on payday",
+   "bad_text": "Save whatever's left",
+   "at": 3
+  },
+  {
+   "good_text": "$40 today. Over? Next days adjust",
+   "bad_text": "Guess until the 20th",
+   "at": 4
+  }
+ ],
+ "moods": [
+  {
+   "from": 0,
+   "mood": "unimpressed"
+  },
+  {
+   "from": 2,
+   "mood": "happy"
+  }
+ ],
+ "cta_lines": [
+  [
+   "Save first.",
+   "ink"
+  ],
+  [
+   "Then spend",
+   "ink"
+  ],
+  [
+   "what's safe.",
+   "orange"
+  ]
+ ],
+ "cta_at": 6,
+ "seed": 1
+}

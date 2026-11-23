@@ -280,5 +280,45 @@
     "approved_note": "Srini approved 2026-11-22 2:32pm ET in chat: post now. Claude starts the Post run right away.",
     "media_id": "18093356972695555",
     "permalink": "https://www.instagram.com/reel/DgDkbpCij4D/"
+  },
+  {
+    "id": "2026-11-23-werefine",
+    "kind": "main",
+    "status": "pending_review",
+    "post_date": "2026-11-23",
+    "file": "reels/2026-11-23-werefine.mp4",
+    "spec": "hooks/2026-11-23-werefine.json",
+    "format": "split",
+    "hook": "She asked \"Are we, though?\" He said \"We're fine.\" (split screen, realistic couple photos, Jessica voice, four-layer opening)",
+    "caption": "\"Are we, though?\" \"We're fine.\" $310, eight days before payday. 😬\n\nSaving first didn't fix it for them: the money came straight back out, because nobody knew what was safe to spend after it left. One number did.\n\nSend this to whoever says \"we're fine.\"\n\nAn example couple, not real customers.\n\nSave first. Then spend what's safe, guilt-free. divvyupp.com (link in bio)\n\n#couplesandmoney #moneytalk #budgeting #savingmoney #personalfinance",
+    "hypothesis": "hypotheses/2026-11-23.md",
+    "note": "Review video in reels/. Not approved."
+  },
+  {
+    "id": "2026-11-23-behind",
+    "kind": "main",
+    "status": "pending_review",
+    "post_date": "2026-11-23",
+    "file": "reels/2026-11-23-behind.mp4",
+    "spec": "hooks/2026-11-23-behind.json",
+    "format": "beat",
+    "hook": "\"I make good money, and it doesn't feel like it at all.\" (median net worth by age, Fed SCF 2022, realistic photo, Jessica voice, four-layer opening)",
+    "caption": "\"I make good money, and it doesn't feel like it at all.\"\n\nHere's what people actually have (median net worth, Federal Reserve Survey of Consumer Finances 2022, home included):\nUnder 35: $39,000\n35–44: $135,600\n45–54: $247,200\n\nRenting? Compare just your cash and retirement, and expect lower.\n\nBehind isn't one number. It's whether yours goes up every month. Save first. Then spend what's safe, guilt-free. divvyupp.com (link in bio)\n\n#personalfinance #networth #savingmoney #moneytips #feelbehind",
+    "hypothesis": "hypotheses/2026-11-23.md",
+    "note": "Review video in reels/. Not approved."
+  },
+  {
+    "id": "2026-11-23-goodmoney",
+    "kind": "main",
+    "status": "pending_review",
+    "post_date": "2026-11-23",
+    "file": "reels/2026-11-23-goodmoney.mp4",
+    "spec": "hooks/2026-11-23-goodmoney.json",
+    "format": "rules",
+    "hook": "\"I make good money, and it doesn't feel like it at all.\" I'm a raccoon. I know exactly why. (Dollar Bill rules, Valf voice, seed 1; one-line-hook control)",
+    "caption": "\"I make good money, and it doesn't feel like it at all.\" 🦝 Dollar Bill knows why: it goes in week one after payday, when the balance looks huge.\n\n1. That balance is lying: the bills haven't left yet.\n2. Savings leave first, on payday.\n3. What's left is one number for today. Go over? The rest of the week adjusts.\n\nIt doesn't disappear. It just never got a job.\n\nSave first. Then spend what's safe, guilt-free. divvyupp.com (link in bio)\n\n#moneytips #budgeting #savingmoney #personalfinance #dollarbill",
+    "hypothesis": "hypotheses/2026-11-23.md",
+    "note": "Review video in reels/. Not approved.",
+    "voice_take_note": "Rendered with seed 1; takes 2-4 offered to Srini to pick by ear. Re-render with spec \"seed\" = his pick."
   }
 ]

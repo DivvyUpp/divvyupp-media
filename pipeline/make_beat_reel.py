@@ -183,6 +183,23 @@ def v_clip(fr, t, v, cues, inst=False, t0=0.0):
             fr.text((x0 + cw / 2, cy + 34), c["label"], font("b", fit(fr, c["label"], "b", 32, cw - 40)), GREY, k, anchor="ma", dy=0)
             fr.text((x0 + cw / 2, cy + 95), c["value"], font("xb", fit(fr, c["value"], "xb", 88, cw - 40)), col, k, anchor="ma", dy=10)
 
+_PH = {}
+def photo_card(fr, t, total, src, focus=0.08):
+    """A real photo (no cut-out) in the presenter slot: a rounded card at the bottom with a slow push-in. It may run
+    into the covered bottom zone (no text there). "character": "<path>.png" selects it; "photo_focus" = how far down
+    the photo (0..1) the crop starts, so the face sits near the top of the card."""
+    from PIL import Image as _I, ImageDraw as _D
+    cw, ch = 640, PRES_H - 40
+    if src not in _PH:
+        im = _I.open(src if os.path.isabs(src) else os.path.join(ROOT, src)).convert("RGBA")
+        sc = cw * 1.12 * S / im.width; _PH[src] = im.resize((int(im.width * sc), int(im.height * sc)), _I.LANCZOS)
+    im = _PH[src]; z = 1 + 0.04 * t / max(total, 1)
+    w, h = int(cw * S), int(ch * S); sw, sh = int(w / z), int(h / z)
+    x0 = (im.width - sw) // 2; y0 = min(int(im.height * focus), im.height - sh)
+    card = im.crop((x0, y0, x0 + sw, y0 + sh)).resize((w, h), _I.LANCZOS)
+    m = _I.new("L", (w, h), 0); _D.Draw(m).rounded_rectangle([0, 0, w - 1, h - 1], int(40 * S), fill=int(255 * fr.g))
+    card.putalpha(m); fr.layer.alpha_composite(card, (int((W / 2 - cw / 2) * S), int((PRES_TOP + 20) * S)))
+
 VIS = {"clip": v_clip, "title": v_title, "split": v_split, "pairs": v_pairs, "table": v_table, "card": v_card, "cta": v_cta}
 
 def main():
@@ -222,7 +239,9 @@ def main():
         if typ not in ("cta", "clip") and spec.get("logo", False): logo(sub, W / 2, 140, 60, 1)  # "logo": false keeps the top 255 px clear (safe zone)
         if typ == "clip": v_clip(sub, t, b["v"], b["cues"], bi == 0, b["t0"]); fr.bg = sub.bg_override
         else: VIS[typ](sub, t, b["v"], b["cues"], bi == 0)
-        if typ not in ("cta", "clip"):
+        if typ not in ("cta", "clip") and spec["character"].endswith((".png", ".jpg")):
+            photo_card(fr, t, total, spec["character"], spec.get("photo_focus", 0.08))
+        elif typ not in ("cta", "clip"):
             character(fr.layer, W / 2, PRES_TOP, PRES_H, t, vis[min(f, n - 1)], b["mood"], fr.g, spec["character"])
         return fr.img()
     if check:

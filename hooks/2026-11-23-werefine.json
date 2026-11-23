@@ -1,0 +1,302 @@
+{
+ "id": "2026-11-23-werefine",
+ "format": "split",
+ "character_voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "music": true,
+ "speed": 1.1,
+ "max_gap": 0.32,
+ "keep_gap": {
+  "3": 0.6,
+  "5": 0.5
+ },
+ "sentences": [
+  "[concerned] She asked, \"Are we, though?\" He said, \"We're fine.\" The account said three hundred and ten dollars, eight days before payday.",
+  "So, like every month, she pulls money back out of savings to get to payday. Same fight, every month.",
+  "[thoughtful] And no, \"just save first\" won't fix it. They tried. The money came straight back out, because nobody knew what was safe to spend after it left.",
+  "Here's what fixes it: one number.",
+  "They take home eighty-four hundred a month. Fifty-six hundred of it is bills.",
+  "Six hundred went to savings on payday. Everything after that was a guess.",
+  "Savings still goes first: six hundred dollars, the day the paycheck lands.",
+  "But now the other twenty-two hundred becomes one number for each day: about seventy-three dollars.",
+  "Saturday's big grocery run is a hundred and ninety. That's a hundred and seventeen over.",
+  "So DivvyUpp spreads it across the next six days. Each one drops to about fifty-three.",
+  "[warm] Spending stays inside the twenty-two hundred, so checking never runs dry, and nothing gets pulled back. Eight days before payday, she doesn't have to ask. The six hundred is still saved.",
+  "Send this to whoever says \"we're fine.\"",
+  "Save first. Then spend what's safe. Try it at Divvyup dot com."
+ ],
+ "band": {
+  "phases": [
+   {
+    "from": 0,
+    "lines": [
+     [
+      "\u201cAre we, though?\u201d",
+      "white"
+     ],
+     [
+      "$310. 8 days to payday.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 1,
+    "lines": [
+     [
+      "Savings pulled back out.",
+      "white"
+     ],
+     [
+      "Same fight, every month.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 2,
+    "lines": [
+     [
+      "\u201cJust save first\u201d?",
+      "white"
+     ],
+     [
+      "They tried. It came back out.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 3,
+    "lines": [
+     [
+      "What fixes it:",
+      "white"
+     ],
+     [
+      "one number.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 4,
+    "lines": [
+     [
+      "$8,400 in.",
+      "white"
+     ],
+     [
+      "$5,600 in bills.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 5,
+    "lines": [
+     [
+      "$600 saved on payday.",
+      "white"
+     ],
+     [
+      "The rest: a guess.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 6,
+    "lines": [
+     [
+      "Payday:",
+      "white"
+     ],
+     [
+      "$600 to savings first.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 7,
+    "lines": [
+     [
+      "The rest: $73 a day.",
+      "white"
+     ],
+     [
+      "Known before they spend.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 8,
+    "lines": [
+     [
+      "$190 grocery run.",
+      "white"
+     ],
+     [
+      "$117 over today.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 9,
+    "lines": [
+     [
+      "$117 over?",
+      "white"
+     ],
+     [
+      "The next 6 days adjust.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 10,
+    "lines": [
+     [
+      "8 days to payday:",
+      "white"
+     ],
+     [
+      "$600 still saved.",
+      "orange"
+     ]
+    ]
+   },
+   {
+    "from": 11,
+    "lines": [
+     [
+      "Send this to whoever",
+      "white"
+     ],
+     [
+      "says \u201cwe're fine.\u201d",
+      "orange"
+     ]
+    ]
+   }
+  ]
+ },
+ "halves": [
+  {
+   "person": "pipeline/assets/characters/couple/him.png",
+   "tint": [
+    228,
+    243,
+    233
+   ],
+   "tag": "He: \u201cWe're fine.\u201d",
+   "tag_color": "green",
+   "blocks": [
+    {
+     "label": "Take-home a month",
+     "value": "$8,400",
+     "at": 4,
+     "word": "eighty"
+    },
+    {
+     "label": "Bills",
+     "value": "\u2212$5,600",
+     "at": 4,
+     "word": "Fifty",
+     "style": "minus"
+    },
+    {
+     "label": "Saved on payday",
+     "value": "$600",
+     "at": 6,
+     "word": "six",
+     "style": "good"
+    },
+    {
+     "label": "Safe to spend today",
+     "value": "$73",
+     "sub": "food, gas, the rest",
+     "sub_color": "green",
+     "at": 7,
+     "word": "seventy"
+    }
+   ],
+   "badge": {
+    "text": "Every month",
+    "color": "green",
+    "at": 1,
+    "word": "every"
+   }
+  },
+  {
+   "person": "pipeline/assets/characters/couple/her.png",
+   "tint": [
+    250,
+    231,
+    227
+   ],
+   "tag": "She: \u201cAre we, though?\u201d",
+   "tag_color": "red",
+   "blocks": [
+    {
+     "label": "Before: every month",
+     "value": "Savings back out",
+     "at": 1,
+     "word": "pulls",
+     "style": "bad"
+    },
+    {
+     "label": "Saturday grocery run",
+     "value": "$190",
+     "sub": "$117 over today",
+     "sub_color": "red",
+     "at": 8
+    },
+    {
+     "label": "Next 6 days",
+     "value": "$53/day",
+     "sub": "spread out, not skipped",
+     "sub_color": "green",
+     "at": 9,
+     "word": "spreads"
+    },
+    {
+     "label": "Still saved",
+     "value": "$600",
+     "at": 10,
+     "word": "six",
+     "style": "good",
+     "big": true
+    }
+   ],
+   "badge": {
+    "text": "$310 left",
+    "color": "red",
+    "at": 0,
+    "word": "three"
+   }
+  }
+ ],
+ "note": {
+  "text": "An example couple, not real customers.",
+  "at": 0
+ },
+ "cta_lines": [
+  [
+   "Save first.",
+   "ink"
+  ],
+  [
+   "Then spend",
+   "ink"
+  ],
+  [
+   "what's safe.",
+   "orange"
+  ]
+ ],
+ "cta_at": 12
+}
