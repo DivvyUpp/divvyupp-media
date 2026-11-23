@@ -1,0 +1,12 @@
+{
+ "source": "Runway image generation (3D toy style) + background removal; store sky keyed out locally; facade.png = store.png pieces [0,280]+[280,904]x2+[904,1584]; phone.png = phone pose cutout + cart from walk_empty",
+ "tasks": {
+  "walk_empty_raw": "29a2946d-44ce-4615-984a-4308bbaac28b",
+  "store_raw": "a4e51ca9-7a81-417b-8d73-774eea6bcf46",
+  "walk_full_raw": "2ba1779e-fb48-47b4-a455-95067ebb618e",
+  "phone_raw": "3c9b828e-f02d-44da-a79c-f83ddd1ba09b",
+  "walk_empty_cutout": "264ab23a-6c3d-4c22-b57f-050d674a31ca",
+  "walk_full_cutout": "69d8cb1e-8951-4c73-bc41-af7e21b3feaf",
+  "phone_cutout": "17a0b9bc-07f6-4198-830b-25122189d34e"
+ }
+}
