@@ -200,13 +200,13 @@
     "kind": "main",
     "status": "pending_review",
     "post_date": "2026-11-21",
-    "file": "reels/2026-11-21-milk.mp4",
-    "spec": "hooks/2026-11-21-milk.json",
+    "file": "reels/2026-11-21-milk-v2.mp4",
+    "spec": "hooks/2026-11-21-milk-v2.json",
     "format": "rules",
     "hook": "Went in for milk. Came out with $140. (Dollar Bill rules, Valf voice, take 1)",
-    "caption": "Went in for milk. Came out with $140. Dollar Bill has rules:\n\n1. Know today's number before you walk in, not the receipt after.\n2. Your balance is lying: half your bills haven't come out yet. Trust your safe-to-spend.\n3. Grabbed the big cart anyway? Tomorrow's number shrinks. Your savings don't.\n\nThe good snacks are already in the plan.\n\nSave first. Then spend what's safe.\n\nDollar Bill is DivvyUpp's mascot.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio → divvyupp.com\n\n#personalfinance #groceries #savingmoney #moneytips #budgeting",
+    "caption": "Went in for milk. Came out with $140. Dollar Bill has rules:\n\n1. Your balance is lying: half your bills haven't come out yet. Trust your safe-to-spend.\n2. Check today's number before you walk in, not the receipt after.\n3. Grabbed the big cart anyway? Tomorrow's number shrinks. Your savings don't.\n\nThe good snacks are already in the plan.\n\nSave first. Then spend what's safe.\n\nDollar Bill is DivvyUpp's mascot.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio → divvyupp.com\n\n#personalfinance #groceries #savingmoney #moneytips #budgeting",
     "hypothesis": "hypotheses/2026-11-21.md",
-    "note": "Review video in reels/ (public repo, per runs/create.md on main 2026-11-21). Not approved.",
+    "note": "v2 (2026-11-23): supermarket scene behind Dollar Bill, rules reordered (safe-to-spend first), phone card shows balance vs safe-to-spend, today's number, then tomorrow's number shrinking. Not approved.",
     "voice_take_note": "Rendered with seed 1; takes 1-4 sent to Srini to pick by ear. Re-render with spec \"seed\" = his pick."
   },
   {
