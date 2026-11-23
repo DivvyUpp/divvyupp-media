@@ -35,6 +35,14 @@
       "status": "ok",
       "trigger": "manual",
       "summary": "Re-fire for the milk Reel: it was already posted to Instagram at 9:05am ET by the previous attempt, so nothing was posted again. Nothing else is approved. The YouTube upload was not retried because this session's permission check blocked it in the previous attempt."
+    },
+    {
+      "started_at": "2026-11-23T11:20:00-05:00",
+      "finished_at": "2026-11-23T11:23:04-05:00",
+      "status": "partial",
+      "trigger": "scheduled",
+      "summary": "Nothing approved to post on Instagram. YouTube backfill tried 2026-11-21-dollar-bill-rules (oldest posted Reel in the last 3 days without a YouTube Short); not uploaded.",
+      "blocker": "YouTube rate-limited the upload (Windsor youtube upload_video). Per runs/post.md it was not retried; the next slot's backfill will try again. YouTube showed no videos on the channel, so nothing was uploaded twice."
     }
   ]
 }
