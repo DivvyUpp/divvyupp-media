@@ -104,6 +104,52 @@ def _paint_shopper(f, ph, cart, pose):
     else:
         f.line([(66, 102 + bob), (100, 110)], SKIN + (255,), 10)
 
+# ---------------------------------------------------------------- image mode (3D props, like the DoorDash Reel)
+_IM = {}
+def _load(path, scale_px=None):
+    import os
+    k = (path, scale_px)
+    if k not in _IM:
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        im = Image.open(os.path.join(root, path)).convert("RGBA")
+        if scale_px: im = im.resize((round(im.width * scale_px * S), round(im.height * scale_px * S)), Image.LANCZOS)
+        _IM[k] = im
+    return _IM[k]
+
+def draw_store_img(fr, si, ground, door_x, door_open):
+    """Storefront image placed so its door centre sits at door_x and its sidewalk at the shopper's feet; the two inner
+    door panels slide apart over a lit interior when anyone is near."""
+    s_ = si["scale"]; im = _load(si["path"], s_)
+    X = lambda px: door_x + (px - si["door_center"]) * s_
+    Y = lambda py: ground + (py - si["feet_y"]) * s_
+    fr.layer.alpha_composite(im, (round(X(0) * S), round(Y(0) * S)))
+    u = _smooth(door_open)
+    if u <= 0: return
+    (l0, l1), (r0, r1) = si["sliders"]; y0, y1 = si["door_y"]
+    fr.rrect([X(l0), Y(y0), X(r1), Y(y1)], 0, (236, 226, 204), 1)                 # warm lit interior
+    for sx in (X(l0) + 14, X(l0) + (X(r1) - X(l0)) * 0.55):                       # a hint of shelves inside
+        fr.rrect([sx, Y(y0) + 30 * s_ / 0.7, sx + 30, Y(y1) - 6], 4, (196, 170, 140), 1)
+    for (a, b), sgn in (((l0, l1), -1), ((r0, r1), 1)):
+        k = ("slider", a, b)
+        if k not in _IM: _IM[k] = im.crop((round((a) * s_ * S), round(y0 * s_ * S), round(b * s_ * S), round(y1 * s_ * S)))
+        sl = _IM[k]; shift = sgn * (b - a) * 0.95 * u
+        fr.layer.alpha_composite(sl, (round((X(a) + shift * s_) * S), round(Y(y0) * S)))
+
+def draw_shopper_img(fr, sh, x, ground, face, cart, pose, walking, alpha, t):
+    """One of three 3D poses; all have the cart on the left (moving left). Mirrored when moving right."""
+    key = "phone" if pose == "phone" and cart != "full" else ("full" if cart == "full" else "empty")
+    sc_ = sh["h"] / sh["src_h"]; im = _load(sh[key], sc_)
+    k = ("mir", key, sc_)
+    if face > 0:
+        if k not in _IM: _IM[k] = ImageOps.mirror(im)
+        im = _IM[k]
+    bob = -4 * abs(math.sin(t * 7.5)) if walking else 0
+    ang = 1.2 * math.sin(t * 7.5) if walking else 0
+    if ang:
+        im = im.rotate(ang, resample=Image.BICUBIC, center=(im.width / 2, sh["feet"] * sc_ * S))
+    if alpha < 1: im = im.copy(); im.putalpha(im.split()[3].point(lambda v: int(v * alpha)))
+    fr.layer.alpha_composite(im, (round((x - im.width / S / 2) * S), round((ground - sh["feet"] * sc_ + bob) * S)))
+
 def shopper(ph_i, cart, pose, facing):
     key = ("shopper", ph_i, cart, pose)
     im = sprite(key, SW, SH, lambda f: _paint_shopper(f, ph_i / 12 * 2 * math.pi, cart, pose))
@@ -135,8 +181,11 @@ def draw_shopper_layer(fr, t, sc, tm):
     x, alpha, face, cart, pose, walking = state(sc, t, tm)
     xs = [state(sc, tt, tm) for tt in (t - 0.45, t + 0.45)]                     # doors open around anyone near them
     near = max([max(0.0, 1 - (abs(s_[0] - door_x) - 50) / 120) * (1.0 if s_[1] > 0 else 0.0) for s_ in xs + [(x, alpha)]])
-    draw_store(fr, ground, door_x, near)
+    if sc.get("store_img"): draw_store_img(fr, sc["store_img"], ground, door_x, near)
+    else: draw_store(fr, ground, door_x, near)
     if alpha <= 0: return x
+    if sc.get("shopper_img"):
+        draw_shopper_img(fr, sc["shopper_img"], x, ground, face, cart, pose, walking, alpha, t); return x
     ph_i = int((t * 2.2 * 12) % 12) if walking else 0
     sc_ = sc.get("scale", 0.85); im = shopper(ph_i, cart, pose, face)
     place(fr, im, x, ground - (FOOT - SH / 2) * sc_, sc_, alpha)
@@ -150,7 +199,7 @@ def draw_tags(fr, t, sc, tm):
         t_in = tm(tg); t_out = tm({"at": tg["end_at"], "delay": tg.get("end_delay", 0)}) if "end_at" in tg else 1e9
         if t_in <= t <= t_out + 0.3:
             k = min(appear(t, t_in, 0.15), max(0.0, (t_out + 0.3 - t) / 0.3)) * alpha
-            cx = x; cy = ground - 290 * sc_
+            cy = ground - (sc["shopper_img"]["h"] * 1.25 if sc.get("shopper_img") else 290 * sc_); cx = x
             def paint(f, s=tg["text"]):
                 f.rrect([0, 0, 170, 70], 35, WHITE, 1); f.rrect([0, 0, 170, 70], 35, (255, 255, 255), 1)
                 f.text((85, 36), s, font("xb", 40), ORANGE, 1, anchor="mm", dy=0)
@@ -201,8 +250,9 @@ def draw_card(fr, t, sc, tm):
             row(0, "Safe to spend today", st["safe"], GREEN, True, (226, 244, 233), "check")
             row(1, "Cart limit", st["safe"], INK, False)
         else:
-            a, b = st["from"], st["to"]; v = round(_count(a, b, cq / 20))
-            row(0, "Tomorrow's safe to spend", f"${v}", ORANGE if cq > 0 else GREEN, True, (255, 240, 228) if cq > 0 else None)
+            a, b = st["from"], st["to"]; v = _count(a, b, cq / 20)
+            val = (f"${v:.2f}" if cq > 0 else f"${a:g}") if st.get("cents") else f"${round(v)}"
+            row(0, "Tomorrow's safe to spend", val, ORANGE if cq > 0 else GREEN, True, (255, 240, 228) if cq > 0 else None)
             row(1, "Savings", "untouched" if save_on else "", GREEN, False, None, "check" if save_on else None)
     key = ("pcard", cur, sq, tick, cq, save_on, w)
     place(fr, sprite(key, w, h, paint), cd.get("x", 520), cd.get("y", 1500), pop_scale(t - t_in, False), min(appear(t, t_in, 0.15), k))
