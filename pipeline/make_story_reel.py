@@ -381,29 +381,26 @@ def plan_scene(fr, t, sp, cues, mouth, spec):
 
 # ---------- rendered ending (replaces body part 2 when "ending": "rendered") ----------
 ENDING = {
-    "guarantee": {"narration": ["Try DivvyUpp for ninety days.",
-                                "If you don't save more or spend less, we refund your subscription, up to thirty dollars.",
-                                "Terms apply."]},
+    # Free beta (Srini, 2026-11-23): no guarantee or refund talk. Scene name kept so old specs still render.
+    "guarantee": {"narration": ["DivvyUpp is free while we're in beta.",
+                                "Get started at divvyupp dot com."]},
     "cta": {"narration": ["[warm] Save first. Then spend with confidence.", "Try it at Divvyup dot com."]},
 }
 
 def guarantee_scene(fr, t, sp, cues, mouth, spec):
+    # Free-beta card (replaced the 90-day guarantee card on 2026-11-23).
     logo(fr, W / 2, 150, 70, appear(t, 0.2))
     k = appear(t, 0.3, 0.6); cx, cy, r = W / 2, 560, 250 * (0.85 + 0.15 * k)
     if k > 0:
         fr.ellipse([cx - r - 18, cy - r - 18, cx + r + 18, cy + r + 18], (250, 222, 210) + (fr.a(k),))
         fr.ellipse([cx - r, cy - r, cx + r, cy + r], ORANGE + (fr.a(k),))
         fr.d.ellipse([(cx - r + 22) * S, (cy - r + 22) * S, (cx + r - 22) * S, (cy + r - 22) * S], outline=(255, 255, 255, int(fr.a(k) * 0.55)), width=4 * S)
-        fr.text((cx, cy - 40), "90", font("xb", 200), WHITE, k, anchor="mm", dy=0)
-        fr.text((cx, cy + 92), "DAY", font("xb", 52), WHITE, k, anchor="mm", dy=0)
-        fr.text((cx, cy + 140), "GUARANTEE", font("xb", 32), WHITE, k, anchor="mm", dy=0)
+        fr.text((cx, cy - 30), "FREE", font("xb", 130), WHITE, k, anchor="mm", dy=0)
+        fr.text((cx, cy + 90), "BETA", font("xb", 52), WHITE, k, anchor="mm", dy=0)
     c = lambda i, d=9.0: cues[i] if i < len(cues) else d
-    fr.text((W / 2, 900), "Use DivvyUpp for 90 days.", font("b", 54), INK, appear(t, c(0)), anchor="ma")
-    fr.text((W / 2, 1000), "If you don't save more", font("xb", 58), INK, appear(t, c(1)), anchor="ma")
-    fr.text((W / 2, 1072), "or spend less,", font("xb", 58), ORANGE, appear(t, c(1) + 0.3), anchor="ma")
-    fr.text((W / 2, 1172), "we refund your subscription,", font("b", 50), INK, appear(t, c(1) + 1.6), anchor="ma")
-    fr.text((W / 2, 1236), "up to $30.", font("b", 50), INK, appear(t, c(1) + 1.9), anchor="ma")
-    fr.text((W / 2, 1340), "Terms apply. See divvyupp.com for details.", font("m", 26), GREY, appear(t, c(2)), anchor="ma")
+    fr.text((W / 2, 960), "DivvyUpp is free", font("xb", 64), INK, appear(t, c(0)), anchor="ma")
+    fr.text((W / 2, 1040), "while we're in beta.", font("xb", 64), ORANGE, appear(t, c(0) + 0.4), anchor="ma")
+    fr.text((W / 2, 1170), "Get started at divvyupp.com", font("b", 46), INK, appear(t, c(1)), anchor="ma")
 
 def cta_scene(fr, t, sp, cues, mouth, spec):
     c = lambda i, d=9.0: cues[i] if i < len(cues) else d
@@ -415,7 +412,7 @@ def cta_scene(fr, t, sp, cues, mouth, spec):
     fr.text((W / 2, 1020), "divvyupp.com", font("b", 46), INK, k, anchor="ma")
     k2 = appear(t, c(1) + 0.5)
     fr.rrect([200, 1130, W - 200, 1240], 55, ORANGE, k2)
-    fr.text((W / 2, 1185), "Try the 90-day guarantee", font("xb", 40), WHITE, k2, anchor="mm", dy=0)
+    fr.text((W / 2, 1185), "Free while in beta", font("xb", 40), WHITE, k2, anchor="mm", dy=0)
     k3 = appear(t, c(1) + 0.8)
     fr.rrect([200, 1270, W - 200, 1370], 50, (255, 238, 230), k3)
     fr.text((W / 2, 1320), "Try live demo, no signup", font("b", 36), ORANGE, k3, anchor="mm", dy=0)

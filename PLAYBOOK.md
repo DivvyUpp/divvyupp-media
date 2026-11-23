@@ -26,8 +26,10 @@ Videos are served publicly by GitHub Pages at `https://divvyupp.github.io/divvyu
   missing, ask Srini (SendUserMessage + PushNotification) to paste the key in the session, save it to
   `~/.secrets/elevenlabs_key` (chmod 600, outside the repo) and carry on. If `api.elevenlabs.io` is blocked, stop and
   tell Srini to add it under Settings → Capabilities → Allowed websites. Never fall back to Kokoro.
-- Guarantee wording (agreed 2026-11-16): "If you don't save more or spend less in 90 days, we refund your subscription,
-  up to $30. Terms apply." Never "or both", never "save more and spend less".
+- **Free beta, no guarantee (Srini, 2026-11-23).** DivvyUpp is in free beta, so no caption, voiceover or on-screen text
+  mentions the 90-day guarantee, refunds or a subscription. Caption line: "DivvyUpp is free while we're in beta. Get
+  started at divvyupp.com". The old guarantee Reels (Nov 15-19) stay up as they are; their captions were changed in
+  `queue.json` (old text kept as `caption_before_beta`) and Srini edits them by hand in Instagram.
 - No competitor names, no maths equations on screen, no invented testimonials. The founder figure is
   "about $1,000 a month" saved; don't inflate it.
 
@@ -39,8 +41,8 @@ Videos are served publicly by GitHub Pages at `https://divvyupp.github.io/divvyu
 ## The offer and message (what every Reel sells)
 Fixed bills stay fixed. What's left is flexible money. DivvyUpp has you save first (you choose the amount),
 then gives a daily and weekly guide for the rest that adjusts when you overspend, before you spend, not after.
-No budgeting homework: it sorts transactions into fixed or flexible automatically. 90-day guarantee: save more,
-spend less, or both, or the subscription is refunded up to $30 (terms apply). Audience (Srini,
+No budgeting homework: it sorts transactions into fixed or flexible automatically. Free while in beta (no guarantee
+or refund talk until paid plans launch). Audience (Srini,
 2026-11-23): defined by the **pain, not the demographic**: people who earn decently and have nothing to show for it,
 who want to save more and know what they can safely spend. Single, coupled or raising kids, one income or two.
 Srini is a dad and husband on one income; don't assume two incomes or marriage in scripts.
