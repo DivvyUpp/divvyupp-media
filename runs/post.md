@@ -19,6 +19,9 @@ Post today's approved Reels to @getdivvyupp. Only entries Srini explicitly appro
    Skip the upload if the entry already has `youtube_id` (never upload twice) and skip trial entries. Save the
    returned id and URL on the entry as `youtube_id` and `youtube_url`. If the upload fails, the Instagram post still
    stands: don't retry, put the error in the run log as status `partial` with the blocker, and tell Srini.
+   **Backfill:** every run, also upload any main entry with `"status": "posted"`, a `post_date` in the last 3 days and
+   no `youtube_id` (one upload per run, oldest first), even when nothing new is approved for Instagram. If YouTube
+   answers "rate-limited", stop and leave it for the next run.
 4. Trial entries (`"kind": "trial"`): same action plus `trial_params: {"graduation_strategy": "MANUAL"}`. Instagram
    reportedly needs 200+ followers for trials. If the publish fails with a follower-requirement error, set the entry's
    status to `"trial_rejected"`, check with `get_data` that nothing reached the grid, don't retry, and tell Srini.
