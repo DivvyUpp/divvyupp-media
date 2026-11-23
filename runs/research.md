@@ -18,7 +18,12 @@ our own data. Until then it is a candidate bet in `backlog.md`.
    - formats working in other niches that could carry a personal-finance message;
    - finance creators' formats (study the format, never copy their content);
    - tools that open new formats (AI video such as Runway, AI voice, editing) — what they can do, cost, limits, terms;
-   - data: studies or platform numbers on watch time, skip rate, shares.
+   - data: studies or platform numbers on watch time, skip rate, shares;
+   - **the audience's own words (Srini, 2026-11-23):** how people who earn well but have nothing to show for it
+     describe that pain, in comments under finance Reels/Shorts and in public forums (e.g. Reddit personal-finance
+     threads). Add phrases to `research/pain-language.md` (phrase, where, link, date, how many times seen).
+     Never copy usernames or anything identifying; phrases only. A **pain moment** (a specific scene, e.g. checking
+     the balance before payday) is tested against the same proof bar as a format before Create may build on it.
 4. **Grade the evidence** for each finding: A = platform data or a controlled test with numbers; B = a creator's
    claim with their own numbers; C = opinion. Paraphrase in your own words; at most one short quote per source.
    **Proof bar for a format or tactic (set by Srini 2026-11-20): an idea is not a bet until it has data.** A format

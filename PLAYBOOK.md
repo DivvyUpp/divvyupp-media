@@ -40,14 +40,20 @@ Videos are served publicly by GitHub Pages at `https://divvyupp.github.io/divvyu
 Fixed bills stay fixed. What's left is flexible money. DivvyUpp has you save first (you choose the amount),
 then gives a daily and weekly guide for the rest that adjusts when you overspend, before you spend, not after.
 No budgeting homework: it sorts transactions into fixed or flexible automatically. 90-day guarantee: save more,
-spend less, or both, or the subscription is refunded up to $30 (terms apply). Audience (widened by Srini
-2026-11-23): moms, dads, husbands and wives sharing one family budget, one income or two, who earn decently but
-have nothing left at month end. Srini is a dad and husband on one income; don't assume two incomes in scripts.
+spend less, or both, or the subscription is refunded up to $30 (terms apply). Audience (Srini,
+2026-11-23): defined by the **pain, not the demographic**: people who earn decently and have nothing to show for it,
+who want to save more and know what they can safely spend. Single, coupled or raising kids, one income or two.
+Srini is a dad and husband on one income; don't assume two incomes or marriage in scripts.
 
-**Instagram bio (chosen by Srini 2026-11-23, set by Srini in the app):** "For moms, dads, husbands and wives who
-want to know what's safe to spend today. Built by one of you. Daily money rules 👇" with divvyupp.com below it.
-Reels deliver that promise: each one is a money rule for families, and the last line may echo the bio
-("Daily money rules for moms, dads and couples: follow for tomorrow's").
+**Messaging rule (Srini, 2026-11-23).** Every Reel talks to **one person in one painful moment, in their own words**,
+then follows the four-layer opening (script checklist item 11). *Which* moments, words and formats we use is decided
+by research, not by a fixed list: a pain moment is used only when Research has shown it resonates (the proof bar in
+`runs/research.md`, or our own data), and the viewer's words come from `research/pain-language.md`. Candidate
+moments waiting for proof sit in `backlog.md` under "Pain moments needing proof".
+
+**Instagram bio (Srini, 2026-11-23, set by Srini in the app):** pain-led (earning well with nothing to show for it;
+save first, then know what's safe to spend), with divvyupp.com below it. Read the live bio before writing an end line;
+the last line of a Reel may echo its promise ("Save first. Spend what's safe.").
 
 ## Story Reels and presenter characters (agreed with Srini 2026-11-15)
 A story Reel tells the whole loop, not just a hook: pain → save first (approved body, part 1) → the daily/weekly

@@ -62,7 +62,9 @@ unless the card says otherwise.
    SCROLL with the question it raises. Keep a hook only if both stop. What stops viewers so far: a moment they're in,
    or something they can check against themselves tonight (`research/hook-review-2026-11-20.md`). Score each against the script checklist in `PLAYBOOK.md`. Drop any
    that repeat the last 5 Reels.
-   Then build the opening on the **four-layer gate** (PLAYBOOK checklist item 11): problem in their words, the stakes,
+   Then build the opening on the **four-layer gate** (PLAYBOOK checklist item 11). Layer 1 is one person in one
+   painful moment that Research has backed (PLAYBOOK "Messaging rule"), worded from `research/pain-language.md` where
+   it has a fitting phrase: problem in their words, the stakes,
    something new, a clear promise. Each persona reviewer also answers, for the full opening: who is this for, what's
    it costing them, what did I learn that I didn't believe before, and what am I staying for? Any "don't know" is a
    fail: rewrite that layer.
