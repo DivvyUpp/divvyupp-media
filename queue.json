@@ -212,7 +212,7 @@
   {
     "id": "2026-11-21-same-account",
     "kind": "main",
-    "status": "approved",
+    "status": "posted",
     "post_date": "2026-11-22",
     "file": "reels/2026-11-21-same-account.mp4",
     "hook": "Saver married to a spender?",
@@ -220,7 +220,8 @@
     "hypothesis": "hooks/2026-11-21-same-account-script.md",
     "format": "scene",
     "not_before": "19:30",
-    "approved_note": "Srini approved 2026-11-21 (in chat): post Sunday 2026-11-22 at 7:30pm ET. Claude starts the Post run at 19:30; the 21:57 slot is the fallback."
+    "approved_note": "Srini approved 2026-11-21 (in chat): post Sunday 2026-11-22 at 7:30pm ET. Claude starts the Post run at 19:30; the 21:57 slot is the fallback.",
+    "media_id": "17944847334385773"
   },
   {
     "id": "2026-11-22-birthdays",
