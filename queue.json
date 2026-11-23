@@ -198,7 +198,7 @@
   {
     "id": "2026-11-21-milk",
     "kind": "main",
-    "status": "approved",
+    "status": "posted",
     "post_date": "2026-11-23",
     "not_before": "09:00",
     "approved_note": "Srini approved v3 on 2026-11-22 (in chat): post Monday 2026-11-23 in the morning. Claude starts the Post run at 9:00am ET; the 11:57am slot is the fallback.",
@@ -209,7 +209,11 @@
     "caption": "Went in for milk. Came out with $140. Dollar Bill has rules:\n\n1. Your balance is lying: half your bills haven't come out yet. Trust your safe-to-spend.\n2. Check today's number before you walk in, not the receipt after.\n3. Grabbed the big cart anyway? The overage is spread across the rest of the week, so tomorrow's number shrinks a little. Your savings don't.\n\nThe good snacks are already in the plan.\n\nSave first. Then spend what's safe.\n\nDollar Bill is DivvyUpp's mascot.\n\nTry DivvyUpp for 90 days. If you don't save more or spend less, we refund your subscription, up to $30. Terms apply.\n\nLink in bio → divvyupp.com\n\n#personalfinance #groceries #savingmoney #moneytips #budgeting",
     "hypothesis": "hypotheses/2026-11-21.md",
     "note": "v3 (2026-11-23): 3D store and shopper (Runway stills, motion by the renderer like the DoorDash Reel); rules reordered; $14 over is spread across the next 6 days, so tomorrow goes $38 -> $35.67. Not approved.",
-    "voice_take_note": "Rendered with seed 1; takes 1-4 sent to Srini to pick by ear. Re-render with spec \"seed\" = his pick."
+    "voice_take_note": "Rendered with seed 1; takes 1-4 sent to Srini to pick by ear. Re-render with spec \"seed\" = his pick.",
+    "media_id": "18135018388702700",
+    "permalink": "https://www.instagram.com/reel/DgFjTvwANi0/",
+    "posted_at": "2026-11-23T09:04:58-05:00",
+    "youtube_note": "YouTube Shorts upload not done on 2026-11-23: the upload_video call was blocked by this session's permission check before it reached YouTube. Nothing uploaded."
   },
   {
     "id": "2026-11-21-same-account",

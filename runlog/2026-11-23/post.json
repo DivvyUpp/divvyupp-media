@@ -1,0 +1,33 @@
+{
+  "run": "post",
+  "date": "2026-11-23",
+  "attempts": [
+    {
+      "started_at": "2026-11-23T09:03:00-05:00",
+      "finished_at": "2026-11-23T09:05:08-05:00",
+      "status": "partial",
+      "trigger": "scheduled",
+      "summary": "Posted 2026-11-21-milk (Dollar Bill rules, \"Went in for milk. Came out with $140.\") to Instagram at 9:05am ET.",
+      "blocker": "The YouTube Shorts upload (Windsor youtube upload_video) was blocked by this session's permission check before it ran; nothing was uploaded. Srini can upload it by hand, or allow the action so the next run can do it.",
+      "outputs": [
+        {
+          "label": "Queue",
+          "path": "queue.json"
+        },
+        {
+          "label": "Experiment log",
+          "path": "experiment-log.csv"
+        }
+      ],
+      "reels": [
+        {
+          "id": "2026-11-21-milk",
+          "hook": "Went in for milk. Came out with $140.",
+          "status": "posted",
+          "file": "reels/2026-11-21-milk-v3.mp4",
+          "permalink": "https://www.instagram.com/reel/DgFjTvwANi0/"
+        }
+      ]
+    }
+  ]
+}
