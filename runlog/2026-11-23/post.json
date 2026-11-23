@@ -43,6 +43,14 @@
       "trigger": "scheduled",
       "summary": "Nothing approved to post on Instagram. YouTube backfill tried 2026-11-21-dollar-bill-rules (oldest posted Reel in the last 3 days without a YouTube Short); not uploaded.",
       "blocker": "YouTube rate-limited the upload (Windsor youtube upload_video). Per runs/post.md it was not retried; the next slot's backfill will try again. YouTube showed no videos on the channel, so nothing was uploaded twice."
+    },
+    {
+      "started_at": "2026-11-23T11:23:00-05:00",
+      "finished_at": "2026-11-23T11:23:44-05:00",
+      "status": "partial",
+      "trigger": "manual",
+      "summary": "Test run of the YouTube step: nothing approved for Instagram. Tried the YouTube backfill for 2026-11-21-milk; not uploaded. Picked milk over the older dollar-bill-rules because Windsor's cached data couldn't confirm whether that Reel's rate-limited attempt at 11:20 had finished, so uploading it again risked a duplicate.",
+      "blocker": "YouTube answered 'rate-limited' again (second time in 3 minutes, on a channel with no uploads yet). Not retried. If it keeps happening, check the channel in YouTube Studio (phone verification, upload limits) and the Windsor YouTube connection."
     }
   ]
 }
