@@ -41,6 +41,17 @@ builds them. Proven bets rank first, then supported, then unproven, regardless o
 | 28 | Watch time (3-s hold) + saves | 5×1×3=15 | **Testing from 2026-11-24 (Srini).** A four-layer opening (problem in their words, stakes, a reframe, a clear promise) holds strangers better than our one-line hook. | Hook structure | Skip ≤ 65% and saves ≥ 1 vs the same-day control on a one-line hook | @hilzuckerman's Reel on this framework: 1,443 saves, 1,217 comments, 235 sends (C, one creator's account). [research/2026-11-23-hook-layers.md](research/2026-11-23-hook-layers.md) |
 | 29 | Saves + sends | 4×1×3=12 | **Needs proof (Srini, 2026-11-23).** End on something worth keeping: a 3–4 item checklist on screen with "screenshot this" (e.g. "Before you tap Pay: 1 today's number? 2 bills out yet? 3 is it in the plan?"). Pairs with #19. | Ending (checklist) | Saves ≥ 2 and sends ≥ 1 at 72h | Same @hilzuckerman Reel: saves exceeded likes with a "screenshot this" checklist ending (C). [research/2026-11-23-hook-layers.md](research/2026-11-23-hook-layers.md) |
 
+## Pain moments needing proof (Srini, 2026-11-23)
+Candidate scenes for the opening line. Research tests each against the proof bar and the audience's own words
+(`research/pain-language.md`) before Create builds on it; promote proven ones into bets above, drop ones that fail.
+- Payday to empty: checking the balance days before the next paycheck.
+- "Where did it all go?": every charge on the statement looks small; the total doesn't.
+- Saving "whatever's left" (nothing is).
+- The pause at checkout: card in hand, unsure if it's okay.
+- Guilt after a purchase that was probably fine.
+- Earning more and somehow having less.
+- The money talk: "we're fine" vs "are we, though?" (any couple).
+
 ## Off-Reel actions for Srini (in the Instagram app; the loop never posts or messages for him)
 These feed the same signals but aren't Reel bets, so they aren't scored.
 - **Seed the first test group.** Instagram tests each Reel on a small group first and widens it for the best
