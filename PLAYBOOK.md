@@ -177,6 +177,14 @@ Start from this list. Research may propose changes; Create applies a change only
    the top 255 px (raised after the first live post: the Reels/Friends header reaches ~230 px), the bottom 260 px (from y=1660), the right rail (x>=905 from y=1150 down), or 55 px at each side (cropped
    on tall phones). Backgrounds and people may run
    there. Check with `make_split_reel.py --check --zones` (red = covered) before sending a Reel for review.
+11. **Four-layer opening gate (Srini, 2026-11-23; from @hilzuckerman, see `research/2026-11-23-hook-layers.md`).**
+   Within the first ~6 seconds the script must pass all four, or it doesn't render:
+   1. **One person, their problem in their words** ("Went in for milk, came out with $140?").
+   2. **The stakes:** what it's costing them ("That's how the month runs out by the 20th").
+   3. **Something new:** a reframe that makes them question what they believe ("It's not willpower: your balance is lying").
+   4. **A clear promise:** exactly what they'll get by staying ("Three rules fix it").
+   Mark each layer's line in the script. Until backlog #28 has a verdict, one Reel a day may use our usual one-line
+   hook as the control; all others must pass the gate.
 9. **Hook and payoff (Srini, 2026-11-20).** Write down four things before the script: the hook (0–2 s, one specific
    question, same words on screen and in the voice), what the viewer stays for (that question in one line), a
    rehook at about 40% using a retention device (result first; not A or B but C; common belief then contradict

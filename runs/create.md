@@ -62,10 +62,14 @@ unless the card says otherwise.
    SCROLL with the question it raises. Keep a hook only if both stop. What stops viewers so far: a moment they're in,
    or something they can check against themselves tonight (`research/hook-review-2026-11-20.md`). Score each against the script checklist in `PLAYBOOK.md`. Drop any
    that repeat the last 5 Reels.
+   Then build the opening on the **four-layer gate** (PLAYBOOK checklist item 11): problem in their words, the stakes,
+   something new, a clear promise. Each persona reviewer also answers, for the full opening: who is this for, what's
+   it costing them, what did I learn that I didn't believe before, and what am I staying for? Any "don't know" is a
+   fail: rewrite that layer.
 2. Write the **best 2 as full scripts**.
 3. Run a **cold review**: start a subagent that sees only the script and the `--check` stills (not the card or
    this playbook). Ask it, as a scrolling viewer in the target audience: what did you understand at 2 seconds,
-   where would you scroll away, would you share it, and why. Revise. Pick one. Record the 10 hooks, the scores, the
+   where would you scroll away, would you share it, and why, and whether each of the four opening layers landed. Revise. Pick one. Record the 10 hooks, the scores, the
    review and the changes in `hypotheses/<today>.md`.
 4. No trial variants until 200 followers (Trial Reels need it).
 
