@@ -51,9 +51,9 @@ by research, not by a fixed list: a pain moment is used only when Research has s
 `runs/research.md`, or our own data), and the viewer's words come from `research/pain-language.md`. Candidate
 moments waiting for proof sit in `backlog.md` under "Pain moments needing proof".
 
-**Instagram bio (Srini, 2026-11-23, set by Srini in the app):** pain-led (earning well with nothing to show for it;
-save first, then know what's safe to spend), with divvyupp.com below it. Read the live bio before writing an end line;
-the last line of a Reel may echo its promise ("Save first. Spend what's safe.").
+**Instagram bio (Srini, 2026-11-23, set by Srini in the app):** "You make good money. So where does it all go? Save
+first, then spend what's safe today, guilt-free. Built by one of you 👇" with divvyupp.com below it. The last line
+of a Reel may echo its promise ("Save first. Then spend what's safe, guilt-free.").
 
 ## Story Reels and presenter characters (agreed with Srini 2026-11-15)
 A story Reel tells the whole loop, not just a hook: pain → save first (approved body, part 1) → the daily/weekly
