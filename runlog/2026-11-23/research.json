@@ -1,0 +1,32 @@
+{
+ "run": "research",
+ "date": "2026-11-23",
+ "attempts": [
+  {
+   "started_at": "2026-11-23T05:58:00-05:00",
+   "finished_at": "2026-11-23T06:02:08-05:00",
+   "status": "partial",
+   "trigger": "scheduled",
+   "summary": "Tested the 7 candidate pain moments: only 'the money talk' passes (via bet #1), plus a new proven one, 'feeling behind' (3 orgs at 3x+, new bet #6); payday-to-empty and checkout lean fail. Comments show big salaries in a hook draw pile-ons (new bet #21). 8 audience phrases logged; backlog re-sorted to 25 (four-layer bet is now #13).",
+   "blocker": "Partial: Reddit and news sites are blocked in this session, so audience words come mostly from YouTube comments. Allowing www.reddit.com would fix it.",
+   "outputs": [
+    {
+     "label": "Research brief",
+     "path": "research/2026-11-23.md"
+    },
+    {
+     "label": "Audience words",
+     "path": "research/pain-language.md"
+    },
+    {
+     "label": "Backlog",
+     "path": "backlog.md"
+    },
+    {
+     "label": "Shorts pull",
+     "path": "research/shorts-2026-11-23.csv"
+    }
+   ]
+  }
+ ]
+}
