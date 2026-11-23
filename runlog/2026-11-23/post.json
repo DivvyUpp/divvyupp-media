@@ -59,6 +59,14 @@
       "trigger": "scheduled",
       "summary": "Noon slot: nothing approved to post on Instagram (three Reels still pending review). YouTube backfill tried 2026-11-21-dollar-bill-rules; not uploaded.",
       "blocker": "YouTube rate-limited the upload again (third time today across two Reels, on a channel with no uploads). Not retried. Likely a channel-side limit: check YouTube Studio (phone verification, upload limits) and the Windsor YouTube connection. Note: this entry has no hook, so the title used was the caption's first line."
+    },
+    {
+      "started_at": "2026-11-23T16:58:00-05:00",
+      "finished_at": "2026-11-23T17:04:00-05:00",
+      "status": "blocked",
+      "trigger": "scheduled",
+      "summary": "5pm slot: nothing approved to post on Instagram (three Reels still pending review). YouTube backfill not attempted.",
+      "blocker": "Windsor now reports 1 public video on the DivvyUpp YouTube channel (earlier today it showed none), but it can't say which Reel it is. One of today's 'rate-limited' uploads may have gone through, or it was uploaded by hand. To avoid a duplicate Short, no upload was made. Srini: tell me which Reel is on the channel (or add its youtube_id in queue.json) and the backfill resumes."
     }
   ]
 }
