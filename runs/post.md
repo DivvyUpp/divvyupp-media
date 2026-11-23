@@ -11,6 +11,14 @@ Post today's approved Reels to @getdivvyupp. Only entries Srini explicitly appro
 3. Post it (`kind` is `"main"` or missing): Windsor `execute_action`
    `create_video_post`, `video_url` = `https://divvyupp.github.io/divvyupp-media/<entry.file>`, `caption` =
    `entry.caption`, `share_to_feed` = true.
+3b. **YouTube Shorts (added 2026-11-23, Srini).** Right after a main entry posts on Instagram, upload the same video
+   to the DivvyUpp YouTube channel (@getdivvyupp): Windsor `execute_action`, connector `youtube`, account `115938`,
+   action `upload_video` with `video_url` = the same URL as step 3, `title` = `entry.hook` with any trailing
+   "(...)" note removed and cut to 100 characters, `description` = `entry.caption`, `privacy_status` = `"public"`,
+   `made_for_kids` = false, `category_id` = `"22"`. A vertical video of 3 minutes or less is a Short automatically.
+   Skip the upload if the entry already has `youtube_id` (never upload twice) and skip trial entries. Save the
+   returned id and URL on the entry as `youtube_id` and `youtube_url`. If the upload fails, the Instagram post still
+   stands: don't retry, put the error in the run log as status `partial` with the blocker, and tell Srini.
 4. Trial entries (`"kind": "trial"`): same action plus `trial_params: {"graduation_strategy": "MANUAL"}`. Instagram
    reportedly needs 200+ followers for trials. If the publish fails with a follower-requirement error, set the entry's
    status to `"trial_rejected"`, check with `get_data` that nothing reached the grid, don't retry, and tell Srini.
@@ -20,4 +28,4 @@ Post today's approved Reels to @getdivvyupp. Only entries Srini explicitly appro
    `bet`, `variable`, `control_id` and `prediction` copied from its `hypotheses/` card), commit and push to main.
 7. Write your run log record (`runlog/<today>/post.json`, see "Run log" in `PLAYBOOK.md`) and push it with the rest; write it even if you stop early. Each slot appends its own attempt, including slots where nothing was approved
    (status `ok`, summary "Nothing approved to post").
-8. Send Srini one short line: what posted (main and trials) and the links.
+8. Send Srini one short line: what posted (main and trials) and the links (Instagram and YouTube).

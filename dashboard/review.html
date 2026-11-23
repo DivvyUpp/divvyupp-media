@@ -149,6 +149,7 @@ function item(e, slot) {
   const links = el("div", {class: "links"});
   if (e.file) links.append(el("a", {class: "open", href: href(e.file), target: "_blank", rel: "noopener"}, "Open video"));
   if (e.permalink) links.append(el("a", {href: e.permalink, target: "_blank", rel: "noopener"}, "On Instagram"));
+  if (e.youtube_url) links.append(el("a", {href: e.youtube_url, target: "_blank", rel: "noopener"}, "On YouTube"));
   if (e.hypothesis) links.append(el("a", {href: href(e.hypothesis), target: "_blank", rel: "noopener"}, "Bet card"));
   info.append(links);
   return el("li", {class: "item"}, vid, info);
