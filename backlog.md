@@ -46,8 +46,8 @@ These feed the same signals but aren't Reel bets, so they aren't scored.
 - **Seed the first test group.** Instagram tests each Reel on a small group first and widens it for the best
   performers. With 3 followers that group is tiny. Sharing each day's Reel to your own Stories and to a few
   parent/friend group chats gives it real first viewers who watch and send.
-- **Make the profile worth following.** One-line bio for the audience (two-income families, "know what's safe to
-  spend today"), and pin 3 Reels: what DivvyUpp is, the founder story, and Dollar Bill.
+- **Make the profile worth following.** Bio chosen 2026-11-23 (see PLAYBOOK "Instagram bio"): set it in the app,
+  name field "DivvyUpp · by Srini", and pin 3 Reels: what DivvyUpp is, the founder story, and Dollar Bill.
 - **Line up a Collab (backlog #27).** Pick one small couples or personal-finance creator and invite them to
   co-post a Reel; Instagram shows a Collab to both audiences.
 - **Set up TikTok and YouTube Shorts for DivvyUpp (backlog #25),** so every Reel can go out on all three.
