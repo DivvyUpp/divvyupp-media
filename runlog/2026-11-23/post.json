@@ -28,6 +28,13 @@
           "permalink": "https://www.instagram.com/reel/DgFjTvwANi0/"
         }
       ]
+    },
+    {
+      "started_at": "2026-11-23T09:05:30-05:00",
+      "finished_at": "2026-11-23T09:05:30-05:00",
+      "status": "ok",
+      "trigger": "manual",
+      "summary": "Re-fire for the milk Reel: it was already posted to Instagram at 9:05am ET by the previous attempt, so nothing was posted again. Nothing else is approved. The YouTube upload was not retried because this session's permission check blocked it in the previous attempt."
     }
   ]
 }
