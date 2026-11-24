@@ -11,10 +11,12 @@ connectors) can read them from the repo. Data only: no postmortem, no verdicts, 
 3. Write `metrics/<today>.json`:
    `{"date": "<today>", "pulled_at": "<ISO time ET>", "followers_count": N, "views_non_followers_yesterday": N,
    "reels": [{"media_id": "...", "permalink": "...", "posted": "<date>", "views": N, "reach": N, "skip_rate": N,
-   "avg_watch_s": N, "shares": N, "saves": N, "likes": N, "interactions": N}]}`.
+   "avg_watch_s": N, "shares": N, "saves": N, "likes": N, "interactions": N, "sends_per_1k": N}]}`.
+   `sends_per_1k` = shares ÷ reach × 1000, rounded to 1 decimal (`null` when reach is 0 or missing). It is the
+   primary metric (PLAYBOOK "Primary metric").
    Write exactly what Windsor returns; use `null` for anything it does not return. Never estimate a number.
 4. Write into `experiment-log.csv`: `read_d1` (first-morning read, about 8–18 h after posting) for yesterday's Reels and `read_72h` for Reels posted 3 days ago,
-   as `views/skip%/avg_watch_s/shares/saves/likes`, and refresh the stats columns with the latest read. Avg watch
+   as `sends_per_1k/views/skip%/avg_watch_s/shares/saves/likes`, and refresh the stats columns with the latest read. Avg watch
    is in seconds. Append `<today>,<followers_count>` to `followers.csv` (skip if today's row already exists).
 5. Commit `metrics/`, `experiment-log.csv` and `followers.csv` ("metrics: <today>") and push to main. If the push
    is rejected, pull --rebase and push again once.
