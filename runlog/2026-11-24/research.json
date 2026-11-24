@@ -1,0 +1,19 @@
+{
+  "run": "research",
+  "date": "2026-11-24",
+  "attempts": [
+    {
+      "started_at": "2026-11-24T05:58:00-05:00",
+      "finished_at": "2026-11-24T06:03:10-05:00",
+      "status": "ok",
+      "trigger": "scheduled",
+      "summary": "Tested the Study Reel format against 7 evidence-based channels: their outliers open on a belief the evidence corrects (4 accounts at 3x+), so new bet #7 tests a belief-first Study Reel hook. Pitched 4 new studies (S21-S24) for Srini to mark send or no; Reddit still blocked.",
+      "outputs": [
+        {"label": "Research brief", "path": "research/2026-11-24.md"},
+        {"label": "Backlog", "path": "backlog.md"},
+        {"label": "Study bank", "path": "research/study-bank.md"},
+        {"label": "Shorts pull", "path": "research/shorts-2026-11-24.csv"}
+      ]
+    }
+  ]
+}
