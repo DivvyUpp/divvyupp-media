@@ -54,6 +54,15 @@
           "file": "reels/2026-11-24-s1-goal-diagram.mp4"
         }
       ]
+    },
+    {
+      "started_at": "2026-11-24T16:58:00-05:00",
+      "finished_at": "2026-11-24T16:58:42-05:00",
+      "status": "blocked",
+      "trigger": "scheduled",
+      "summary": "5pm slot: nothing approved to post on Instagram (S3 and three others still pending review). YouTube backfill not attempted.",
+      "blocker": "YouTube backfill still paused: Windsor shows 1 public video on the channel but no title or id (per-video data comes back empty), so it can't be matched to a Reel. To avoid a duplicate Short, nothing was uploaded. Tell me which Reel it is (or add its youtube_id in queue.json) to restart the backfill. Today's S2 and S1 uploads were rate-limited and also need a Short.",
+      "outputs": []
     }
   ]
 }
