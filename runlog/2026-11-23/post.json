@@ -67,6 +67,14 @@
       "trigger": "scheduled",
       "summary": "5pm slot: nothing approved to post on Instagram (three Reels still pending review). YouTube backfill not attempted.",
       "blocker": "Windsor now reports 1 public video on the DivvyUpp YouTube channel (earlier today it showed none), but it can't say which Reel it is. One of today's 'rate-limited' uploads may have gone through, or it was uploaded by hand. To avoid a duplicate Short, no upload was made. Srini: tell me which Reel is on the channel (or add its youtube_id in queue.json) and the backfill resumes."
+    },
+    {
+      "started_at": "2026-11-23T21:58:00-05:00",
+      "finished_at": "2026-11-23T22:01:00-05:00",
+      "status": "blocked",
+      "trigger": "scheduled",
+      "summary": "10pm slot: nothing approved to post on Instagram (three Reels still pending review). YouTube backfill not attempted.",
+      "blocker": "Still waiting on Srini: Windsor shows 1 public video on the YouTube channel but no title or URL, so it can't be matched to a Reel. To avoid a duplicate Short, no upload was made. Add the Reel's youtube_id in queue.json (or tell me which Reel it is) and the backfill resumes."
     }
   ]
 }
