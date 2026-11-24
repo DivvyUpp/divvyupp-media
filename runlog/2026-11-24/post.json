@@ -1,0 +1,33 @@
+{
+  "run": "post",
+  "date": "2026-11-24",
+  "attempts": [
+    {
+      "started_at": "2026-11-24T11:58:00-05:00",
+      "finished_at": "2026-11-24T12:04:00-05:00",
+      "status": "partial",
+      "trigger": "scheduled",
+      "summary": "Noon slot: posted Study Reel S2 (2026-11-23-s2-aging, aged-photo study) to Instagram with its first comment. YouTube Short not uploaded; the backfill stays paused.",
+      "blocker": "YouTube rate-limited the S2 upload (Windsor youtube upload_video); not retried. Backfill of older Reels is still paused until Srini says which Reel is the one video already on the YouTube channel (or adds its youtube_id in queue.json). Pin the first comment by hand in Instagram.",
+      "outputs": [
+        {
+          "label": "Queue",
+          "path": "queue.json"
+        },
+        {
+          "label": "Experiment log",
+          "path": "experiment-log.csv"
+        }
+      ],
+      "reels": [
+        {
+          "id": "2026-11-23-s2-aging",
+          "hook": "Looking at a photo of yourself at 70 made people save 30% more.",
+          "status": "posted",
+          "file": "reels/2026-11-23-s2-aging.mp4",
+          "permalink": "https://www.instagram.com/reel/DgIcFSZjdMN/"
+        }
+      ]
+    }
+  ]
+}
