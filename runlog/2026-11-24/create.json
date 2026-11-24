@@ -78,6 +78,31 @@
           "file": "reels/2026-11-24-s3-raise.mp4"
         }
       ]
+    },
+    {
+      "started_at": "2026-11-24T13:05:00-05:00",
+      "finished_at": "2026-11-24T14:25:00-05:00",
+      "status": "ok",
+      "trigger": "manual",
+      "summary": "Rebuilt Study Reel S1 in a faceless diagram format (new renderer pipeline/make_diagram_reel.py: animated diagrams, word-timed captions, no music) after Srini found the photo version had a weak hook, depressing music and no movement. Hook visuals land in ~1.5 s. Call to action changed to a monthly phone reminder that names the goal, which is what the study tested (Srini's catch; account renaming was our extrapolation, and not every bank can name a transfer). Srini approved v5 and asked to post it now.",
+      "outputs": [
+        {
+          "label": "Spec",
+          "path": "hooks/2026-11-24-s1-goal-diagram.json"
+        },
+        {
+          "label": "Renderer",
+          "path": "pipeline/make_diagram_reel.py"
+        }
+      ],
+      "reels": [
+        {
+          "id": "2026-11-24-s1-goal",
+          "hook": "Keep telling yourself \"I should really save more,\" but your savings haven't moved in months?",
+          "status": "approved",
+          "file": "reels/2026-11-24-s1-goal-diagram.mp4"
+        }
+      ]
     }
   ]
 }

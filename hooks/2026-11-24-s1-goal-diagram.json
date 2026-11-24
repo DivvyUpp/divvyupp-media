@@ -1,0 +1,450 @@
+{
+ "id": "2026-11-24-s1-goal-diagram",
+ "format": "diagram",
+ "voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "speed": 1.1,
+ "max_gap": 0.3,
+ "scenes": [
+  {
+   "title": "stuck",
+   "speed": 1.25,
+   "text": "Keep telling yourself “I should really save more,” but your savings haven't moved in months? This is for you.",
+   "elements": [
+    {
+     "type": "chart",
+     "x0": 110,
+     "x1": 970,
+     "base": 1070,
+     "y": 870,
+     "grid": [
+      770,
+      970
+     ],
+     "label": "Your savings",
+     "label_y": 600,
+     "labels": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun"
+     ],
+     "at": 0,
+     "dur": 0.9
+    },
+    {
+     "type": "chip",
+     "text": "“I should save more.”",
+     "x": 340,
+     "y": 450,
+     "s": 40,
+     "at": 0.25
+    },
+    {
+     "type": "chip",
+     "text": "“I should save more.”",
+     "x": 720,
+     "y": 560,
+     "s": 40,
+     "at": 0.6
+    },
+    {
+     "type": "chip",
+     "text": "“I should save more.”",
+     "x": 470,
+     "y": 700,
+     "s": 40,
+     "at": 0.95
+    },
+    {
+     "type": "chip",
+     "text": "flat for 6 months",
+     "style": "orange",
+     "x": 760,
+     "y": 965,
+     "s": 36,
+     "at": 1.35
+    }
+   ]
+  },
+  {
+   "title": "the experiment",
+   "text": "[curious] Economists tested this with real savers. Reminding them to save did nothing. One small change did. And it takes about two minutes.",
+   "elements": [
+    {
+     "type": "card",
+     "x": 80,
+     "y": 390,
+     "w": 920,
+     "h": 380,
+     "kicker": "MANAGEMENT SCIENCE · 2016",
+     "title": "Getting to the Top of Mind",
+     "subtitle": "How Reminders Increase Saving",
+     "highlight": "tested",
+     "lines": [
+      "Karlan, McConnell, Mullainathan & Zinman",
+      "Field experiments · new savers at real banks"
+     ]
+    },
+    {
+     "type": "panel",
+     "x": 80,
+     "y": 840,
+     "w": 440,
+     "h": 290,
+     "at": "Reminding"
+    },
+    {
+     "type": "text",
+     "text": "“remember to save”",
+     "x": 300,
+     "y": 935,
+     "s": 42,
+     "w": "serif",
+     "at": "Reminding",
+     "strike": "nothing"
+    },
+    {
+     "type": "text",
+     "text": "did nothing",
+     "x": 300,
+     "y": 1035,
+     "s": 48,
+     "w": "xb",
+     "col": "grey",
+     "at": "nothing",
+     "pop": true
+    },
+    {
+     "type": "panel",
+     "x": 560,
+     "y": 840,
+     "w": 440,
+     "h": 290,
+     "accent": true,
+     "at": "One small change"
+    },
+    {
+     "type": "text",
+     "text": "one small change",
+     "x": 780,
+     "y": 925,
+     "s": 42,
+     "w": "xb",
+     "col": "orange",
+     "at": "One small change"
+    },
+    {
+     "type": "clock",
+     "x": 680,
+     "y": 1035,
+     "r": 48,
+     "at": "two minutes",
+     "dur": 1.0
+    },
+    {
+     "type": "text",
+     "text": "2 minutes",
+     "x": 760,
+     "y": 1035,
+     "s": 46,
+     "w": "xb",
+     "align": "l",
+     "at": "two minutes"
+    }
+   ]
+  },
+  {
+   "title": "the trap",
+   "text": "Here's the trap. Most people think the problem is remembering. So they set a reminder: “Remember to save.”",
+   "elements": [
+    {
+     "type": "lock",
+     "x": 270,
+     "y": 380,
+     "w": 540,
+     "h": 760,
+     "date": "Monday, March 3",
+     "notifs": [
+      {
+       "text": "Remember to save",
+       "when": "Jan",
+       "at": "So they set"
+      },
+      {
+       "text": "Remember to save",
+       "when": "Feb",
+       "at": "a reminder"
+      },
+      {
+       "text": "Remember to save",
+       "when": "Mar",
+       "at": "Remember to save"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "the result",
+   "text": "In Peru, new savers got monthly reminders just like that. Compared with no reminder at all: no effect.",
+   "elements": [
+    {
+     "type": "bars",
+     "base": 1080,
+     "x0": 90,
+     "x1": 990,
+     "bars": [
+      {
+       "x": 130,
+       "w": 230,
+       "h": 400,
+       "col": "muted",
+       "label": "no reminder",
+       "at": "Compared with"
+      },
+      {
+       "x": 425,
+       "w": 230,
+       "h": 400,
+       "col": "muted",
+       "label": "“remember\nto save”",
+       "at": "monthly reminders"
+      }
+     ],
+     "bracket": {
+      "a": 0,
+      "b": 1,
+      "label": "no effect",
+      "at": "no effect"
+     }
+    }
+   ]
+  },
+  {
+   "title": "the result",
+   "keep_prev": true,
+   "text": "But some reminders named the exact thing people were saving for. Those raised savings by an estimated sixteen percent.",
+   "elements": [
+    {
+     "type": "bars",
+     "base": 1080,
+     "x0": 90,
+     "x1": 990,
+     "bars": [
+      {
+       "x": 130,
+       "w": 230,
+       "h": 400,
+       "ghost": true
+      },
+      {
+       "x": 425,
+       "w": 230,
+       "h": 400,
+       "ghost": true
+      },
+      {
+       "x": 700,
+       "w": 230,
+       "h": 464,
+       "col": "orange",
+       "label": "named\nthe goal",
+       "at": "named the exact"
+      }
+     ],
+     "gain": {
+      "from": 1,
+      "to": 2,
+      "text": "+{v}%",
+      "value": 16,
+      "at": "by an estimated"
+     },
+     "note": {
+      "text": "Peru · estimate · compared with no reminder",
+      "y": 1235,
+      "at": "estimated"
+     }
+    }
+   ]
+  },
+  {
+   "title": "why it *works*",
+   "text": "“Save” is vague. A reminder that names the goal brings that goal to mind.",
+   "elements": [
+    {
+     "type": "line",
+     "pts": [
+      [
+       540,
+       420
+      ],
+      [
+       540,
+       1090
+      ]
+     ],
+     "col": "muted",
+     "width": 3,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "“save money”",
+     "x": 295,
+     "y": 470,
+     "s": 50,
+     "w": "serif",
+     "col": "grey",
+     "at": 0
+    },
+    {
+     "type": "qring",
+     "x": 295,
+     "y": 760,
+     "r": 150,
+     "at": "vague"
+    },
+    {
+     "type": "text",
+     "text": "vague",
+     "x": 295,
+     "y": 1010,
+     "s": 50,
+     "w": "xb",
+     "col": "grey",
+     "at": "vague",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "“Paris in July”",
+     "x": 790,
+     "y": 470,
+     "s": 50,
+     "w": "serif_b",
+     "col": "orange",
+     "at": "names the goal"
+    },
+    {
+     "type": "target",
+     "x": 790,
+     "y": 760,
+     "r": 150,
+     "at": "names the goal",
+     "hit": "to mind"
+    },
+    {
+     "type": "text",
+     "text": "top of mind",
+     "x": 790,
+     "y": 1010,
+     "s": 50,
+     "w": "xb",
+     "col": "orange",
+     "at": "to mind",
+     "pop": true
+    }
+   ]
+  },
+  {
+   "title": "do *this*",
+   "text": "So set a monthly reminder on your phone that names the goal. Not “Remember to save.” “Save for Paris in July.” Saving for a few things? One reminder for each.",
+   "elements": [
+    {
+     "type": "accounts",
+     "x": 210,
+     "y": 390,
+     "w": 660,
+     "h": 740,
+     "title": "Reminders",
+     "at": "monthly reminder",
+     "rows": [
+      {
+       "label": "MONTHLY REMINDER · 1ST",
+       "from": "Remember to save",
+       "to": "Save for Paris in July",
+       "swap": "Save for Paris",
+       "icon": "!",
+       "s": 38
+      },
+      {
+       "label": "MONTHLY REMINDER · 15TH",
+       "from": "Remember to save",
+       "to": "Save for a new car",
+       "swap": "a few things",
+       "icon": "!",
+       "s": 38
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "send *it*",
+   "text": "[warm] Send this to the person you're saving with, and pick the name together.",
+   "elements": [
+    {
+     "type": "avatar",
+     "x": 300,
+     "y": 620,
+     "r": 90,
+     "label": "you",
+     "instant": true
+    },
+    {
+     "type": "avatar",
+     "x": 780,
+     "y": 620,
+     "r": 90,
+     "label": "them",
+     "tone": "ink",
+     "at": "the person"
+    },
+    {
+     "type": "curve",
+     "p0": [
+      300,
+      790
+     ],
+     "c": [
+      300,
+      930
+     ],
+     "p1": [
+      460,
+      960
+     ],
+     "at": "saving with"
+    },
+    {
+     "type": "curve",
+     "p0": [
+      780,
+      790
+     ],
+     "c": [
+      780,
+      930
+     ],
+     "p1": [
+      620,
+      960
+     ],
+     "at": "saving with"
+    },
+    {
+     "type": "ticket",
+     "x": 540,
+     "y": 1010,
+     "w": 560,
+     "h": 200,
+     "title": "Paris in July",
+     "sub": "saving together",
+     "at": "pick the name"
+    }
+   ]
+  }
+ ]
+}

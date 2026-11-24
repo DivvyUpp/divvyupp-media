@@ -357,16 +357,16 @@
   {
     "id": "2026-11-24-s1-goal",
     "kind": "main",
-    "status": "pending_review",
+    "status": "approved",
     "post_date": "2026-11-24",
-    "file": "reels/2026-11-24-s1-goal.mp4",
-    "spec": "hooks/2026-11-24-s1-goal.json",
-    "format": "study",
-    "hook": "\"I know I should save more.\" In this study, a reminder to save did nothing. Naming the goal raised savings. (Study Reel S1, belief-first hook bet #7, realistic photo, Jessica voice)",
-    "caption": "\"I know I should save more.\" In this study, a reminder to save did nothing. Naming the goal did.\n\nEconomists tested monthly savings reminders with new savers at banks in Bolivia, Peru and the Philippines. In Peru, reminders that named the specific thing people were saving for raised savings by an estimated 16% compared with no reminder. Reminders that didn't name it had no effect. (Field experiments with new savers.)\n\nTry it: rename your savings account and your automatic transfer after the goal. Not \"Savings.\" \"Paris in July.\"\n\nStudy: Karlan, McConnell, Mullainathan & Zinman, Management Science, 2016. Link in the comments.\n\nSend this to the person you're saving with 💸\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #moneytips #savingmoney #savings #research",
-    "first_comment": "📄 The study: Karlan, McConnell, Mullainathan & Zinman, Management Science, 2016 (free working paper)\nhttps://www.nber.org/papers/w16205\n\nWhat's your savings account called right now? 👇",
+    "file": "reels/2026-11-24-s1-goal-diagram.mp4",
+    "spec": "hooks/2026-11-24-s1-goal-diagram.json",
+    "format": "study-diagram",
+    "hook": "Keep telling yourself \"I should really save more,\" but your savings haven't moved in months? (Study Reel S1, faceless diagram format, belief-first hook bet #7, Jessica voice, no music)",
+    "caption": "Keep telling yourself \"I should really save more\" while your savings don't move? A reminder to save did nothing in this study. Naming the goal did.\n\nEconomists tested monthly savings reminders with new savers at banks in Bolivia, Peru and the Philippines. In Peru, reminders that named the specific thing people were saving for raised savings by an estimated 16% compared with no reminder. Reminders that didn't name it had no effect. (Field experiments with new savers.)\n\nTry it: set a monthly reminder on your phone that names the goal. Not \"Remember to save.\" \"Save for Paris in July.\" Saving for a few things? One reminder for each.\n\nStudy: Karlan, McConnell, Mullainathan & Zinman, Management Science, 2016. Link in the comments.\n\nSend this to the person you're saving with 💸\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #moneytips #savingmoney #savings #research",
+    "first_comment": "📄 The study: Karlan, McConnell, Mullainathan & Zinman, Management Science, 2016 (free working paper)\nhttps://www.nber.org/papers/w16205\n\nWhat would your reminder say? 👇",
     "hypothesis": "hypotheses/2026-11-24.md",
-    "note": "Review video in reels/. Not approved."
+    "note": "Srini approved 2026-11-24 ~14:20 ET and asked to post it now (rebuilt in the diagram format; replaces the photo version reels/2026-11-24-s1-goal.mp4). Pin the first comment by hand."
   },
   {
     "id": "2026-11-24-s3-raise",
