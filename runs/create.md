@@ -56,9 +56,12 @@ research brief, read that part of the brief for its numbers and sources. An idea
 the backlog isn't ready: leave it. If fewer than 3 bets qualify, make fewer and say why. Each Reel has its own card in
 `hypotheses/<today>.md`; the variable is the format, the control is the median of our last 5 Reels. Lengths 30–50 s
 unless the card says otherwise.
-**Until ~1,000 followers, build at least 2 of the day's Reels as Send Reels** (PLAYBOOK "Send Reel format"),
-whatever bet they test: name the recipient on the card before scripting, use only **verified** ideas from
-`research/contrarian-ideas.md`, put the send prompt on screen, and keep the product out of the video. The persona
+**Until ~1,000 followers, build at least 2 of the day's Reels as Study Reels** (PLAYBOOK "Study Reel format"),
+each from a `research/study-bank.md` row with status **approved** and no `built` date yet, oldest approval first.
+Only ideas Srini said he would send are ever built (PLAYBOOK "Srini judges send-worthiness"). Use the row's numbers,
+caveat and move exactly; never round a number up or drop the caveat. Set the row's `built` date. Name the recipient
+on the card before scripting, put the send prompt on screen, and keep the product out of the video. If no approved
+row is left, say so in the note to Srini and build no Study Reel that day. The persona
 reviewers each answer "Who would you send this to, and why?"; a script where either can't name someone is rewritten.
 
 ## 5. Script workshop
