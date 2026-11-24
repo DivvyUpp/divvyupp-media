@@ -66,6 +66,35 @@
           "file": "reels/2026-11-23-goodmoney.mp4"
         }
       ]
+    },
+    {
+      "started_at": "2026-11-23T22:20:00-05:00",
+      "finished_at": "2026-11-23T23:40:00-05:00",
+      "status": "ok",
+      "trigger": "manual",
+      "summary": "Edited Srini's recorded take into Study Reel S2 (aging photo, Hershfield 2011): HDR fixed, AI-aged and shocked stills, study link in the comments. Srini approved it in chat; queued for the noon slot on 11-24.",
+      "outputs": [
+        {
+          "label": "Spec",
+          "path": "hooks/2026-11-23-s2-aging.json"
+        },
+        {
+          "label": "Hypothesis card D",
+          "path": "hypotheses/2026-11-23.md"
+        },
+        {
+          "label": "Study bank S2 built",
+          "path": "research/study-bank.md"
+        }
+      ],
+      "reels": [
+        {
+          "id": "2026-11-23-s2-aging",
+          "hook": "Looking at a photo of yourself at 70 made people save 30% more.",
+          "status": "approved",
+          "file": "reels/2026-11-23-s2-aging.mp4"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,367 @@
+{
+ "id": "2026-11-23-s2-aging",
+ "source": "pipeline/assets/scenes/aging-s2/source-720p.mp4",
+ "transcript": "pipeline/assets/scenes/aging-s2/transcript.json",
+ "segments": [
+  [
+   1.16,
+   2.8
+  ],
+  [
+   2.98,
+   4.04
+  ],
+  [
+   4.04,
+   4.76,
+   0.33
+  ],
+  [
+   4.76,
+   5.52
+  ],
+  [
+   5.78,
+   7.22
+  ],
+  [
+   8.22,
+   10.4
+  ],
+  [
+   11.16,
+   11.88
+  ],
+  [
+   12.24,
+   13.14
+  ],
+  [
+   14.06,
+   14.54
+  ],
+  [
+   15.44,
+   16.72
+  ],
+  [
+   17.46,
+   18.0
+  ],
+  [
+   18.28,
+   20.02
+  ],
+  [
+   21.12,
+   22.94
+  ],
+  [
+   23.44,
+   25.18
+  ],
+  [
+   26.46,
+   28.84
+  ],
+  [
+   31.78,
+   32.76
+  ],
+  [
+   34.78,
+   35.88
+  ],
+  [
+   36.12,
+   36.5
+  ],
+  [
+   37.36,
+   38.1
+  ],
+  [
+   38.76,
+   39.4
+  ],
+  [
+   40.04,
+   43.46
+  ],
+  [
+   51.1,
+   52.8
+  ],
+  [
+   53.04,
+   54.42
+  ],
+  [
+   54.9,
+   56.4
+  ],
+  [
+   56.9,
+   59.98
+  ]
+ ],
+ "replace": {
+  "send": "Send"
+ },
+ "tail": 0.7,
+ "panel": {
+  "top": 0,
+  "height": 1180,
+  "focus_y": 0.42,
+  "punch": 1.04,
+  "zoom_out": 1.35,
+  "caption_up": 150
+ },
+ "caption_cx": 540,
+ "caption_maxw": 840,
+ "captions_from_src": 8.22,
+ "label": {
+  "text": "Research-backed money tips \u00b7 #1",
+  "y": 262,
+  "size": 36
+ },
+ "nametag": {
+  "text": "Srini \u00b7 Founder",
+  "from": 0.6,
+  "until": 2.65,
+  "y": 1000,
+  "x1": 805
+ },
+ "cards": [
+  {
+   "from_src": 1.16,
+   "until_src": 8.22,
+   "y": 1215,
+   "cx": 480,
+   "w": 820,
+   "lines": [
+    [
+     "Looking at a photo of yourself at 70",
+     "title"
+    ],
+    [
+     "made people save 30% more",
+     "big"
+    ]
+   ]
+  },
+  {
+   "from_src": 8.22,
+   "lead": 0.1,
+   "until_src": 21.12,
+   "y": 1215,
+   "cx": 480,
+   "w": 820,
+   "lines": [
+    [
+     "The study",
+     "small"
+    ],
+    [
+     "Hershfield et al.",
+     "title"
+    ],
+    [
+     "Journal of Marketing Research",
+     "body"
+    ],
+    [
+     "2011",
+     "small"
+    ],
+    [
+     "Study link in the comments",
+     "note"
+    ]
+   ]
+  },
+  {
+   "from_src": 21.12,
+   "lead": 0.1,
+   "until_src": 31.78,
+   "y": 1215,
+   "cx": 480,
+   "w": 820,
+   "lines": [
+    [
+     "30% more",
+     "big"
+    ],
+    [
+     "put toward retirement",
+     "title"
+    ],
+    [
+     "Lab study: what people chose, not real deposits",
+     "small"
+    ],
+    [
+     "Hershfield et al., 2011",
+     "small"
+    ]
+   ]
+  },
+  {
+   "from_src": 31.78,
+   "lead": 0.1,
+   "until_src": 51.1,
+   "y": 1215,
+   "cx": 480,
+   "w": 820,
+   "lines": [
+    [
+     "Try it",
+     "small"
+    ],
+    [
+     "Age your photo. Look at it.",
+     "title"
+    ],
+    [
+     "Then make it the picture",
+     "body"
+    ],
+    [
+     "on your savings account.",
+     "body"
+    ]
+   ]
+  },
+  {
+   "from_src": 51.1,
+   "lead": 0.1,
+   "y": 1215,
+   "cx": 480,
+   "w": 820,
+   "fill": "orange",
+   "lines": [
+    [
+     "Send this to the friend",
+     "title"
+    ],
+    [
+     "who's behind on their savings",
+     "body"
+    ]
+   ]
+  }
+ ],
+ "music": "pipeline/assets/music/same-account-bed.mp3",
+ "music_gain": 0.16,
+ "duck": 0.35,
+ "sfx": [
+  {
+   "type": "pluck",
+   "at": 0.6,
+   "gain": 0.7
+  },
+  {
+   "type": "whoosh",
+   "at_src": 4.04,
+   "lead": 0.3,
+   "dur": 0.35,
+   "peak": 0.85,
+   "gain": 0.6
+  },
+  {
+   "type": "boom",
+   "at_src": 4.04,
+   "lead": 0.0,
+   "dur": 1.1,
+   "gain": 0.5
+  },
+  {
+   "type": "file",
+   "file": "pipeline/assets/scenes/aging-s2/ahh.mp3",
+   "at_src": 4.04,
+   "lead": -0.1,
+   "gain": 0.45
+  },
+  {
+   "type": "whoosh",
+   "at_src": 8.22,
+   "lead": 0.45,
+   "dur": 0.6,
+   "peak": 0.8,
+   "gain": 0.6
+  },
+  {
+   "type": "pluck",
+   "at_src": 21.12,
+   "lead": 0.1,
+   "gain": 0.7,
+   "notes": [
+    987.8,
+    1318.5
+   ]
+  },
+  {
+   "type": "whoosh",
+   "at_src": 31.78,
+   "lead": 0.45,
+   "dur": 0.6,
+   "peak": 0.8,
+   "gain": 0.6
+  },
+  {
+   "type": "pluck",
+   "at_src": 51.1,
+   "lead": 0.1,
+   "gain": 0.8,
+   "notes": [
+    1318.5,
+    1975.5
+   ]
+  }
+ ],
+ "tail_fade": "blur",
+ "stills": [
+  {
+   "image": "pipeline/assets/scenes/aging-s2/aged-70.jpg",
+   "from_src": 1.9,
+   "until_src": 4.04,
+   "fade": 0.45,
+   "push": 0.05,
+   "fade_out": 0.06
+  },
+  {
+   "image": "pipeline/assets/scenes/aging-s2/shocked-now.jpg",
+   "from_src": 4.04,
+   "until_src": 4.84,
+   "fade": 0.06,
+   "fade_out": 0.2,
+   "push": 0.0,
+   "punch": 0.1,
+   "shake": 14,
+   "pop_text": [
+    {
+     "text": "Whoa! Is that me?",
+     "y": 470,
+     "size": 66,
+     "tilt": -4,
+     "delay": 0.12
+    },
+    {
+     "text": "I need to save more for the old guy",
+     "y": 985,
+     "size": 46,
+     "tilt": 3,
+     "delay": 0.75,
+     "style": "white"
+    }
+   ]
+  },
+  {
+   "image": "pipeline/assets/scenes/aging-s2/aged-70.jpg",
+   "from_src": 23.5,
+   "until_src": 26.7,
+   "fade": 0.4,
+   "push": 0.05
+  }
+ ]
+}

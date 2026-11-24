@@ -11,6 +11,11 @@ Post today's approved Reels to @getdivvyupp. Only entries Srini explicitly appro
 3. Post it (`kind` is `"main"` or missing): Windsor `execute_action`
    `create_video_post`, `video_url` = `https://divvyupp.github.io/divvyupp-media/<entry.file>`, `caption` =
    `entry.caption`, `share_to_feed` = true.
+3a. **First comment (added 2026-11-23, Srini).** If the posted entry has `first_comment`, post it right after the
+   Reel is live: Windsor `execute_action`, connector `instagram`, action `create_comment`, `media_id` = the new
+   media id, `message` = `entry.first_comment` exactly. Save the returned id on the entry as `first_comment_id`.
+   Never post it twice (skip if `first_comment_id` is set). Windsor can't pin comments: tell Srini to pin it in the
+   app. If the comment fails, the Reel still stands: don't retry blindly, log status `partial` and tell Srini.
 3b. **YouTube Shorts (added 2026-11-23, Srini).** Right after a main entry posts on Instagram, upload the same video
    to the DivvyUpp YouTube channel (@getdivvyupp): Windsor `execute_action`, connector `youtube`, account `115938`,
    action `upload_video` with `video_url` = the same URL as step 3, `title` = `entry.hook` with any trailing

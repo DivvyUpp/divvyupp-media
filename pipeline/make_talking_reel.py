@@ -50,18 +50,19 @@ def captions(spec, segs):
         if w["type"] != "word" or w["text"].lower().strip() in FILLERS: continue
         s = src_to_out(segs, w["start"]); e = src_to_out(segs, w["end"])
         if s is None: continue
+        if spec.get("_captions_from") is not None and s < spec["_captions_from"]: continue
         seg = next(i for i, g in enumerate(segs) if g[2] <= w["start"] <= g[3])
         out.append((spec.get("replace", {}).get(w["text"], w["text"]), s, e if e is not None else s + 0.3, seg))
     return out
 
-def draw_caption(img, caps, t, y):
+def draw_caption(img, caps, t, y, cx=W / 2, maxw=860):
     cur = [i for i, c in enumerate(caps) if c[1] - 0.05 <= t <= c[2] + 0.3]
     if not cur: return
     i = cur[-1]; lid = caps[i][3]; first = min(j for j, c in enumerate(caps) if c[3] == lid)
     start = first + ((i - first) // 4) * 4; grp = [c for c in caps[start:start + 4] if c[3] == lid]
     d = ImageDraw.Draw(img); size = 64; words = [c[0] for c in grp]
-    while size > 40 and font("xb", size).getlength(" ".join(words)) > 860: size -= 2
-    x = W / 2 - font("xb", size).getlength(" ".join(words)) / 2
+    while size > 40 and font("xb", size).getlength(" ".join(words)) > maxw: size -= 2
+    x = cx - font("xb", size).getlength(" ".join(words)) / 2
     for w, s, e, _ in grp:
         col = (255, 214, 64) if s - 0.05 <= t <= e + 0.05 else WHITE
         d.text((x, y), w, font=font("xb", size), fill=col, stroke_width=7, stroke_fill=INK)
@@ -93,7 +94,7 @@ def draw_nametag(img, nt, t):
     lay = lay.crop((0, 0, int(total) + 2, 120))
     if pop != 1: lay = lay.resize((int(lay.width * pop), int(lay.height * pop)), Image.BICUBIC)
     a = np.array(lay); a[..., 3] = (a[..., 3] * k).astype(np.uint8); lay = Image.fromarray(a)
-    x1 = W - 46; yy = nt.get("y", 270)
+    x1 = nt.get("x1", W - 46); yy = nt.get("y", 270)
     img.alpha_composite(lay, (int(x1 - lay.width), int(yy - (lay.height - 120) / 2)))
 
 def draw_sky_hook(img, sh, t):
@@ -175,8 +176,30 @@ def frame_at(spec, frames, segs, caps, total, t):
         from PIL import ImageFilter
         img = last.filter(ImageFilter.GaussianBlur(12)); draw_end(img, end, ease((t - body) / 0.4)); return img
     si = next(i for i, g in enumerate(segs) if g[0] <= t < g[1] or i == len(segs) - 1)
-    o0, o1, a, b, sp = segs[si]; s = a + (t - o0) * sp
+    o0, o1, a, b, sp = segs[si]; s = min(b, a + (t - o0) * sp)        # past the body (tail hold): last kept frame
     src = Image.fromarray(frames[min(int(s * FPS), len(frames) - 1)])
+    for st in spec.get("stills", []):                                # crossfade the live frame into a still
+        if st["_from"] <= t < st["_until"]:                          # (e.g. an aged photo with the same framing)
+            fd = st.get("fade", 0.4); fo = st.get("fade_out", fd)
+            k = ease((t - st["_from"]) / fd) * (1 - ease((t - st["_until"] + fo) / fo))
+            im = st.setdefault("_img", Image.open(rel(st["image"])).convert("RGB").resize((W, H), Image.LANCZOS))
+            zk = 1 + st.get("push", 0.04) * (t - st["_from"]) / max(0.01, st["_until"] - st["_from"])
+            lt = t - st["_from"]
+            if st.get("punch"):                                      # quick zoom punch with overshoot on entry
+                zk *= 1 + st["punch"] * math.sin(min(1.0, lt / 0.35) * math.pi) * math.exp(-lt * 2.5) + st["punch"] * 0.4 * ease(lt / 0.2)
+            dx = dy = 0.0
+            if st.get("shake"):                                      # decaying camera shake
+                amp = st["shake"] * math.exp(-lt * 4.0); dx = amp * math.sin(lt * 71); dy = amp * math.cos(lt * 53)
+            if st.get("shake"): zk = max(zk, 1 + 2.2 * st["shake"] / H)  # always leave room to shake inside the frame
+            if zk != 1 or dx or dy:
+                cw, ch = W / zk, H / zk
+                x0 = min(max(0.0, (W - cw) / 2 + dx), W - cw); y0 = min(max(0.0, (H - ch) / 2 + dy), H - ch)
+                im = im.resize((W, H), Image.BICUBIC, box=(x0, y0, x0 + cw, y0 + ch))
+            src = Image.blend(src, im, k)
+    if spec.get("tail_fade") == "blur" and t > body:                # tail: last frame softly blurs and dims
+        from PIL import ImageFilter
+        kb = ease((t - body) / max(0.01, spec.get("tail", 1.0) * 0.7))
+        src = Image.blend(src.filter(ImageFilter.GaussianBlur(14 * kb)), Image.new("RGB", src.size, INK), 0.35 * kb)
     lf = spec.get("_layout_from")
     if lf is not None and t < lf:                                   # opening: full screen, hook only
         z = 1.16 - 0.16 * ease(t / max(lf, 0.01)) ** 0.8                 # camera push from frame 1
@@ -201,11 +224,35 @@ def frame_at(spec, frames, segs, caps, total, t):
     g = np.zeros((ph, 1), np.float32); g[ph - 260:, 0] = np.linspace(0, 0.55, 260); g[:420, 0] = np.linspace(0.45, 0, 420)
     a_ = np.zeros((ph, W, 4), np.uint8); a_[..., 3] = (np.repeat(g, W, 1) * 255).astype(np.uint8)
     img.alpha_composite(Image.fromarray(a_), (0, pn.get("top", 0)))
+    if spec.get("tail_fade") is True and t > body:                  # tail: the video fades to the background
+        kf = ease((t - body) / max(0.01, spec.get("tail", 1.0) * 0.8))
+        img.alpha_composite(Image.new("RGBA", (W, H), CREAM + (int(255 * kf),)))
     for co in spec.get("callouts", []): draw_callout(img, co, t)
+    if spec.get("label"): draw_label(img, spec["label"])
+    for cd in spec.get("cards", []): draw_timed_card(img, cd, t)
+    for st in spec.get("stills", []):                                # reaction sticker, e.g. "Whoa! Is that me?"
+        pts = st.get("pop_text") or []
+        for pt in (pts if isinstance(pts, list) else [pts]):
+            if not (st["_from"] + pt.get("delay", 0.1) <= t < st["_until"]): continue
+            lt = t - st["_from"] - pt.get("delay", 0.1)
+            k = ease(lt / 0.22) * (1 - ease((t - st["_until"] + 0.18) / 0.18))
+            pop = 1 + 0.2 * math.sin(min(1.0, lt / 0.3) * math.pi); f = font("xb", pt.get("size", 66)); tw = f.getlength(pt["text"])
+            lay = Image.new("RGBA", (int(tw + 72), int(pt.get("size", 66) + 56)), (0, 0, 0, 0)); dd = ImageDraw.Draw(lay)
+            wh = pt.get("style") == "white"
+            dd.rounded_rectangle([0, 0, lay.width - 1, lay.height - 1], 32, fill=(WHITE if wh else ORANGE) + (250,))
+            dd.text((36, 20), pt["text"], font=f, fill=INK if wh else WHITE)
+            lay = lay.rotate(pt.get("tilt", -4) + math.sin(t * 10) * 2.0, resample=Image.BICUBIC, expand=True)
+            lay = lay.resize((int(lay.width * pop), int(lay.height * pop)), Image.BICUBIC)
+            a = np.array(lay); a[..., 3] = (a[..., 3] * k).astype(np.uint8)
+            img.alpha_composite(Image.fromarray(a), (int(pt.get("x", W / 2) - lay.width / 2), int(pt.get("y", 420) - lay.height / 2)))
+    for st in spec.get("stills", []):                                # small honest tag while a still is on screen
+        if st.get("tag") and st["_from"] + 0.2 <= t < st["_until"] - 0.1:
+            d = ImageDraw.Draw(img); f = font("b", 30); tw = f.getlength(st["tag"]); x, y = st.get("tag_x", 80), st.get("tag_y", 350)
+            d.rounded_rectangle([x, y, x + tw + 40, y + 52], 26, fill=(21, 16, 15, 190)); d.text((x + 20, y + 26), st["tag"], font=f, fill=WHITE, anchor="lm")
     hk = spec.get("hook"); ty = pn.get("top", 0) + ph + spec.get("table_gap", 30)
     po = spec.get("payoff"); kin = ease((t - lf) / 0.4) if lf is not None else 1.0
     kout = ease((t - po["_l1"] + 0.3) / 0.3) if po else 0.0        # table stays until the first payoff word
-    if kout < 1:                                                    # table slides up in, fades out for the payoff
+    if kout < 1 and spec.get("table"):                              # table slides up in, fades out for the payoff
         tl = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         draw_table(tl, spec["table"], t, ty, hk if spec.get("hook_in_table", True) else None)
         paste(img, tl, kin * (1 - kout), dy=int((1 - kin) * 260))
@@ -215,8 +262,41 @@ def frame_at(spec, frames, segs, caps, total, t):
     if hk and not spec.get("hook_in_table", True) and t < hk.get("until", 3.0): draw_hook(img, hk["text"])
     nt = spec.get("nametag")
     if nt and nt.get("from", 0) <= t < nt.get("until", 3.0): draw_nametag(img, nt, t)
-    draw_caption(img, caps, t, pn.get("top", 0) + ph - pn.get("caption_up", 110))
+    draw_caption(img, caps, t, pn.get("top", 0) + ph - pn.get("caption_up", 110),
+                 spec.get("caption_cx", W / 2), spec.get("caption_maxw", 860))
     return img
+
+def draw_label(img, lb):
+    """Series label pinned at the top the whole time, e.g. 'Research-backed money tips · #1'."""
+    f = font("xb", lb.get("size", 38)); tw = f.getlength(lb["text"]); y = lb.get("y", 280); cx = lb.get("cx", W / 2)
+    d = ImageDraw.Draw(img)
+    d.rounded_rectangle([cx - tw / 2 - 30, y, cx + tw / 2 + 30, y + lb.get("size", 38) + 34], 30, fill=(255, 255, 255, 235))
+    d.text((cx, y + (lb.get("size", 38) + 34) / 2), lb["text"], font=f, fill=INK, anchor="mm")
+
+CARD_STYLE = {"title": ("xb", 54, INK), "big": ("xb", 72, ORANGE), "body": ("b", 46, INK), "small": ("m", 32, GREY),
+              "note": ("b", 34, ORANGE)}
+
+def draw_timed_card(img, cd, t):
+    """White (or orange) card that pops in at a spoken word and fades at another. lines = [[text, style], ...]
+    with style title | big | body | small; long lines wrap to the card width. Box: cx, w, y (top)."""
+    if not (cd["_from"] <= t < cd["_until"]): return
+    k = ease((t - cd["_from"]) / 0.3) * (1 - ease((t - cd["_until"] + 0.25) / 0.25))
+    orange = cd.get("fill") == "orange"; pad = 40; w = cd.get("w", 850); cx = cd.get("cx", W / 2)
+    rows = []
+    for txt, st in cd["lines"]:
+        wt, size, col = CARD_STYLE[st]
+        if orange: col = WHITE if st != "small" else (255, 228, 214)
+        for ln in M.wrap(txt, wt, size, w - 2 * pad): rows.append((ln, wt, size, col))
+    h = pad * 2 + sum(r[2] + 16 for r in rows) - 16
+    lay = Image.new("RGBA", (w + 80, h + 80), (0, 0, 0, 0))
+    card(lay, [40, 40, 40 + w, 40 + h], 36, fill=(ORANGE + (250,)) if orange else (255, 255, 255, 248))
+    d = ImageDraw.Draw(lay); y = 40 + pad
+    for ln, wt, size, col in rows:
+        d.text((40 + w / 2, y), ln, font=font(wt, size), fill=col, anchor="ma"); y += size + 16
+    pop = 1 + 0.06 * math.sin(min(1.0, (t - cd["_from"]) / 0.3) * math.pi)
+    if pop != 1: lay = lay.resize((int(lay.width * pop), int(lay.height * pop)), Image.BICUBIC)
+    a = np.array(lay); a[..., 3] = (a[..., 3] * k).astype(np.uint8)
+    img.alpha_composite(Image.fromarray(a), (int(cx - lay.width / 2), int(cd["y"] + (h + 80) / 2 - lay.height / 2 - 40 + (1 - k) * 24)))
 
 def whoosh(fx):
     """Airy sweep: noise through a moving low-pass, rising then falling, peaking at fx['peak'] of its length."""
@@ -236,7 +316,25 @@ def pluck_fx(fx):
         p = pluck(f, 0.6, SR, rng) * (0.5 if j else 0.6); s = int(j * 0.07 * SR); out[s:s + len(p)] += p[:len(out) - s]
     return 0.5 * out / max(1e-6, np.abs(out).max())
 
-SFX = {"whoosh": whoosh, "pluck": pluck_fx}
+def boom_fx(fx):
+    """Deep reveal hit: a sine that drops from ~150 Hz to ~40 Hz, a short noise click on the attack, a soft
+    sub rumble tail. Synthesized here, no sample."""
+    dur = fx.get("dur", 1.1); n = int(dur * SR); tt = np.arange(n) / SR; rng = np.random.default_rng(7)
+    f = 40 + 110 * np.exp(-tt * 9.0); ph = 2 * np.pi * np.cumsum(f) / SR
+    body = np.sin(ph) * np.exp(-tt * 3.2) + 0.35 * np.sin(2 * ph) * np.exp(-tt * 6.0)
+    click = rng.normal(0, 1, n) * np.exp(-tt * 90.0) * 0.6
+    att = np.clip(tt / 0.004, 0, 1); y = (body + click) * att
+    y = np.tanh(1.8 * y)                                                      # a little saturation for weight
+    return 0.9 * y / max(1e-6, np.abs(y).max())
+
+def file_fx(fx):
+    """An audio file (e.g. a generated reaction sound), decoded to mono at the reel's sample rate."""
+    pcm = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", rel(fx["file"]), "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"],
+                         capture_output=True, check=True).stdout
+    y = np.frombuffer(pcm, np.float32).astype(np.float64)
+    return 0.9 * y / max(1e-6, np.abs(y).max())
+
+SFX = {"whoosh": whoosh, "pluck": pluck_fx, "boom": boom_fx, "file": file_fx}
 
 def audio(spec, segs, total):
     pcm = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", rel(spec["source"]), "-vn", "-ac", "1", "-ar", str(SR), "-f", "f32le", "-"],
@@ -378,8 +476,16 @@ def draw_payoff(img, po, t, y0):
 def main():
     path = sys.argv[1]; check = "--check" in sys.argv
     spec = json.load(open(rel(path))); segs, body = timeline(spec)
-    total = body + (spec["end"].get("dur", 2.5) if spec.get("end") else 0)
-    for r in spec["table"]["rows"]: r["_out"] = src_to_out(segs, r["word_at"]) if r.get("word_at") is not None else None
+    if "--source" in sys.argv: spec["source"] = sys.argv[sys.argv.index("--source") + 1]   # e.g. the full-res original
+    total = body + (spec["end"].get("dur", 2.5) if spec.get("end") else spec.get("tail", 0.0))
+    rows = spec["table"]["rows"] if spec.get("table") else []
+    for r in rows: r["_out"] = src_to_out(segs, r["word_at"]) if r.get("word_at") is not None else None
+    if spec.get("captions_from_src") is not None: spec["_captions_from"] = src_to_out(segs, spec["captions_from_src"]) - 0.05
+    for st in spec.get("stills", []):
+        st["_from"] = src_to_out(segs, st["from_src"]); st["_until"] = src_to_out(segs, st["until_src"])
+    for cd in spec.get("cards", []):
+        cd["_from"] = src_to_out(segs, cd["from_src"]) - cd.get("lead", 0.0)
+        cd["_until"] = src_to_out(segs, cd["until_src"]) if cd.get("until_src") is not None else total + 1
     if spec.get("layout_from_src") is not None: spec["_layout_from"] = src_to_out(segs, spec["layout_from_src"]) - 0.05
     po = spec.get("payoff")
     if po:
@@ -392,7 +498,8 @@ def main():
     caps = captions(spec, segs); frames = load_frames(spec)
     out_dir = os.path.join(ROOT, "reels")
     if check:
-        for i, t in enumerate([0.5] + [r["_out"] + 0.8 for r in spec["table"]["rows"] if r["_out"] is not None] + [total - 1]):
+        ts = spec.get("check_at") or ([0.5] + [r["_out"] + 0.8 for r in rows if r["_out"] is not None] + [total - 1])
+        for i, t in enumerate(ts):
             frame_at(spec, frames, segs, caps, total, t).convert("RGB").save(os.path.join(out_dir, f"{spec['id']}_check_{i + 1}.jpg"), quality=85)
         print(f"checks written, total {total:.1f}s"); return
     import soundfile as sf
