@@ -22,6 +22,19 @@
           "file": "reels/2026-11-23-s2-aging.mp4"
         }
       ]
+    },
+    {
+      "started_at": "2026-11-24T01:25:00-05:00",
+      "finished_at": "2026-11-24T01:35:00-05:00",
+      "status": "ok",
+      "trigger": "manual",
+      "summary": "Changed Study Reel S2's caption send line to \"Send this to the person you want to grow old with\" and the comment ask to a partner dare. Srini approved; the video is unchanged.",
+      "outputs": [
+        {
+          "label": "Queue entry",
+          "path": "queue.json"
+        }
+      ]
     }
   ]
 }
