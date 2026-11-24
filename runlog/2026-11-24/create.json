@@ -35,6 +35,49 @@
           "path": "queue.json"
         }
       ]
+    },
+    {
+      "started_at": "2026-11-24T06:27:00-05:00",
+      "finished_at": "2026-11-24T06:58:00-05:00",
+      "status": "ok",
+      "trigger": "scheduled",
+      "summary": "Made two Study Reels from approved study-bank rows: S1 (naming the savings goal, belief-first hook, bet #7) and S3 (save from your next raise, move+result hook). Postmortem: 2026-11-21-dollar-bill-rules inconclusive (33 views); 0 sends on every Reel in 8 days; 0 Instagram landings on 11-23. No third Reel: yesterday's three proven-format Reels and only12 are still waiting for review.",
+      "outputs": [
+        {
+          "label": "Hypothesis cards and script workshop",
+          "path": "hypotheses/2026-11-24.md"
+        },
+        {
+          "label": "Postmortem (dollar-bill-rules)",
+          "path": "hypotheses/2026-11-21.md"
+        },
+        {
+          "label": "Spec S1",
+          "path": "hooks/2026-11-24-s1-goal.json"
+        },
+        {
+          "label": "Spec S3",
+          "path": "hooks/2026-11-24-s3-raise.json"
+        },
+        {
+          "label": "Funnel 2026-11-23",
+          "path": "funnel/custom-2026-11-23_2026-11-23.json"
+        }
+      ],
+      "reels": [
+        {
+          "id": "2026-11-24-s1-goal",
+          "hook": "\"I know I should save more.\" In this study, a reminder to save did nothing. Naming the goal raised savings.",
+          "status": "pending_review",
+          "file": "reels/2026-11-24-s1-goal.mp4"
+        },
+        {
+          "id": "2026-11-24-s3-raise",
+          "hook": "Can't afford to save more right now? Save from your next raise. 3.5% became 13.6%.",
+          "status": "pending_review",
+          "file": "reels/2026-11-24-s3-raise.mp4"
+        }
+      ]
     }
   ]
 }

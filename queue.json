@@ -349,5 +349,33 @@
     "first_comment": "📄 The study (free to read): Hershfield et al., Journal of Marketing Research, 2011\nhttps://pmc.ncbi.nlm.nih.gov/articles/PMC3949005/\n\nTried it? Show your partner the aged photo and see who saves more 😅",
     "hypothesis": "hypotheses/2026-11-23.md",
     "note": "Approved by Srini in chat: v6 on 2026-11-23 ~23:20 ET; v9 (send line trimmed so it can't read as an insult) on 2026-11-24 ~00:40 ET. Post in the noon slot 2026-11-24. After posting, pin first_comment by hand (Windsor can't pin). Caption send line and comment ask changed to the 'grow old with' framing (Srini, 2026-11-24 ~01:30 ET); video unchanged."
+  },
+  {
+    "id": "2026-11-24-s1-goal",
+    "kind": "main",
+    "status": "pending_review",
+    "post_date": "2026-11-24",
+    "file": "reels/2026-11-24-s1-goal.mp4",
+    "spec": "hooks/2026-11-24-s1-goal.json",
+    "format": "study",
+    "hook": "\"I know I should save more.\" In this study, a reminder to save did nothing. Naming the goal raised savings. (Study Reel S1, belief-first hook bet #7, realistic photo, Jessica voice)",
+    "caption": "\"I know I should save more.\" In this study, a reminder to save did nothing. Naming the goal did.\n\nEconomists tested monthly savings reminders with new savers at banks in Bolivia, Peru and the Philippines. In Peru, reminders that named the specific thing people were saving for raised savings by an estimated 16% compared with no reminder. Reminders that didn't name it had no effect. (Field experiments with new savers.)\n\nTry it: rename your savings account and your automatic transfer after the goal. Not \"Savings.\" \"Paris in July.\"\n\nStudy: Karlan, McConnell, Mullainathan & Zinman, Management Science, 2016. Link in the comments.\n\nSend this to the person you're saving with 💸\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #moneytips #savingmoney #savings #research",
+    "first_comment": "📄 The study: Karlan, McConnell, Mullainathan & Zinman, Management Science, 2016 (free working paper)\nhttps://www.nber.org/papers/w16205\n\nWhat's your savings account called right now? 👇",
+    "hypothesis": "hypotheses/2026-11-24.md",
+    "note": "Review video in reels/. Not approved."
+  },
+  {
+    "id": "2026-11-24-s3-raise",
+    "kind": "main",
+    "status": "pending_review",
+    "post_date": "2026-11-24",
+    "file": "reels/2026-11-24-s3-raise.mp4",
+    "spec": "hooks/2026-11-24-s3-raise.json",
+    "format": "study",
+    "hook": "Can't afford to save more right now? Save from your next raise. 3.5% became 13.6%. (Study Reel S3, move+result hook, realistic photo, Eric voice)",
+    "caption": "Can't afford to save more right now? You don't have to. Save from your next raise.\n\nIn one well-known study, workers at one company agreed in advance to put part of each future raise into retirement savings. Over about 40 months, their savings rate went from 3.5% to 13.6%. (One employer's plan; a Department of Labor review rates the causal evidence low. One study, not a promise.)\n\nTry it: turn on auto-increase in your 401(k). No 401(k)? Set a rule: half of every raise goes to savings the week it lands.\n\nStudy: Thaler & Benartzi, \"Save More Tomorrow\", Journal of Political Economy, 2004. Link in the comments.\n\nSend this to whoever has a review coming up 📈\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #moneytips #savingmoney #401k #research",
+    "first_comment": "📄 The study: Thaler & Benartzi, \"Save More Tomorrow\", Journal of Political Economy, 2004\nhttps://www.chicagobooth.edu/research/rustandy/social-impact-research/research-papers/2004/save-more-tomorrow-using-behavioral-economics-to-increase-employee-saving\n\nHave you ever turned on auto-increase? 👇",
+    "hypothesis": "hypotheses/2026-11-24.md",
+    "note": "Review video in reels/. Not approved."
   }
 ]

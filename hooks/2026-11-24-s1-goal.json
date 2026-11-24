@@ -1,0 +1,169 @@
+{
+ "id": "2026-11-24-s1-goal",
+ "format": "beat",
+ "character": "pipeline/assets/characters/couple/her.png",
+ "photo_focus": 0.06,
+ "character_voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "music": true,
+ "beats": [
+  {
+   "sentences": [
+    {
+     "text": "[sighs] \"I know I should save more.\" [curious] In this study, a reminder to save did nothing. Naming the goal raised savings."
+    }
+   ],
+   "visual": {
+    "type": "title",
+    "small": "“I know I should save more.”",
+    "lines": [
+     [
+      "A reminder to save:",
+      "ink"
+     ],
+     [
+      "nothing.",
+      "red"
+     ],
+     [
+      "Naming the goal:",
+      "ink"
+     ],
+     [
+      "more saved.",
+      "green"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Meanwhile the savings account stays flat, month after month. Try the two-minute fix."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Savings: flat,",
+      "ink"
+     ],
+     [
+      "month after month.",
+      "red"
+     ],
+     [
+      "Try the 2-minute fix.",
+      "orange"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Economists tested monthly savings reminders at banks in three countries."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Monthly savings",
+      "ink"
+     ],
+     [
+      "reminders, tested at",
+      "ink"
+     ],
+     [
+      "banks in 3 countries",
+      "orange"
+     ]
+    ],
+    "source": "Karlan, McConnell, Mullainathan & Zinman, Management Science, 2016"
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "In Peru, naming what people were saving for raised savings by an estimated sixteen percent."
+    },
+    {
+     "text": "Reminders that didn't name it: no effect."
+    }
+   ],
+   "visual": {
+    "type": "table",
+    "title": "Peru, vs no reminder",
+    "rows": [
+     {
+      "label": "Named the goal",
+      "value": "+16%",
+      "at": 0
+     },
+     {
+      "label": "Didn't name it",
+      "value": "No effect",
+      "at": 1
+     }
+    ],
+    "source": "Field experiments with new savers. +16% is an estimate."
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "So rename the account after the goal. Not \"Savings.\" \"Paris in July.\""
+    },
+    {
+     "text": "And the auto-transfer too."
+    }
+   ],
+   "visual": {
+    "type": "pairs",
+    "title": "The move",
+    "pairs": [
+     {
+      "left": "Savings",
+      "right": "Paris in July",
+      "good": "right",
+      "at": 0
+     },
+     {
+      "left": "Transfer: Savings",
+      "right": "Transfer: Paris in July",
+      "good": "right",
+      "at": 1
+     }
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "[warm] Send this to the person you're saving with. Name it together."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Send this to the person",
+      "ink"
+     ],
+     [
+      "you're saving with.",
+      "orange"
+     ],
+     [
+      "Name it together.",
+      "green"
+     ]
+    ]
+   }
+  }
+ ],
+ "speed": 1.15,
+ "max_gap": 0.25
+}

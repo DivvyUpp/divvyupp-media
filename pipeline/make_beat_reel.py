@@ -6,7 +6,7 @@ Usage:  python3 pipeline/make_beat_reel.py hooks/<id>.json          -> reels/<id
 
 Spec:
 { "id": "...", "character": "c" | "e" | "raccoon_soft3d", "character_voice": "elevenlabs:<voice>:eleven_v3",
-  "voice_prefix": "..." (optional, raccoon), "music": true,
+  "voice_prefix": "..." (optional, raccoon), "music": true, "speed": 1.08, "max_gap": 0.3 (optional, as make_split_reel.py),
   "beats": [ {"sentences": [{"text": "..."}, ...], "visual": {...}}, ... ] }
 Visuals (items appear on the sentence index given by "at", default: item i on sentence i):
   {"type": "title", "small": "...", "lines": [["text", "ink|orange|green|red"], ...], "chips": [{"label", "value", "color", "at"}]}
@@ -209,6 +209,9 @@ def main():
     tmp = os.path.join(CACHE, "tmp_" + rid); os.makedirs(tmp, exist_ok=True); os.makedirs(os.path.join(ROOT, "reels"), exist_ok=True)
     bg = make_bg()
     sents, starts, (ch, st, en), audio, sr = one_take(spec, tmp)
+    if spec.get("speed", 1.0) != 1.0 or spec.get("max_gap"):        # optional: shorter pauses / faster take
+        from make_split_reel import tighten
+        audio, st, en = tighten(audio, sr, ch, st, en, starts, spec.get("max_gap", 0.32), spec.get("speed", 1.0), spec.get("keep_gap"))
     def first_spoken(i):
         tag = False
         for j in range(i, len(ch)):

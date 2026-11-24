@@ -1,0 +1,169 @@
+{
+ "id": "2026-11-24-s3-raise",
+ "format": "beat",
+ "character": "pipeline/assets/characters/couple/him.png",
+ "photo_focus": 0.06,
+ "character_voice": "elevenlabs:cjVigY5qzO86Huf0OWal:eleven_v3",
+ "music": true,
+ "beats": [
+  {
+   "sentences": [
+    {
+     "text": "[earnest] Can't afford to save more right now? Save from your next raise. In one well-known study, savings went from three and a half percent to thirteen point six."
+    }
+   ],
+   "visual": {
+    "type": "title",
+    "small": "Can't afford to save more right now?",
+    "lines": [
+     [
+      "Save from your",
+      "ink"
+     ],
+     [
+      "next raise.",
+      "orange"
+     ],
+     [
+      "3.5% became 13.6%.",
+      "green"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Otherwise every raise quietly turns into lifestyle. Here's what to flip."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Every raise turns",
+      "ink"
+     ],
+     [
+      "into lifestyle.",
+      "red"
+     ],
+     [
+      "Here's what to flip.",
+      "orange"
+     ]
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Workers at one company agreed, in advance, to put part of each future raise into savings."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Workers at one company",
+      "ink"
+     ],
+     [
+      "committed part of",
+      "ink"
+     ],
+     [
+      "every future raise",
+      "orange"
+     ],
+     [
+      "to savings",
+      "orange"
+     ]
+    ],
+    "source": "Thaler & Benartzi, Journal of Political Economy, 2004"
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "Over about forty months, their savings rate went from three point five to thirteen point six percent."
+    },
+    {
+     "text": "One company, so it's one study, not a promise."
+    }
+   ],
+   "visual": {
+    "type": "table",
+    "title": "Savings rate of those who joined",
+    "rows": [
+     {
+      "label": "Before",
+      "value": "3.5%",
+      "at": 0
+     },
+     {
+      "label": "~40 months on",
+      "value": "13.6%",
+      "at": 0
+     }
+    ],
+    "source": "One employer's plan. A DOL review rates the causal evidence low."
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "So turn on auto-increase in your 401(k)."
+    },
+    {
+     "text": "Or set a rule: half of every raise goes to savings the week it lands."
+    }
+   ],
+   "visual": {
+    "type": "pairs",
+    "title": "The move",
+    "pairs": [
+     {
+      "left": "Squeeze today's budget",
+      "right": "Auto-increase in your 401(k)",
+      "good": "right",
+      "at": 0
+     },
+     {
+      "left": "Spend the whole raise",
+      "right": "Half of every raise to savings",
+      "good": "right",
+      "at": 1
+     }
+    ]
+   }
+  },
+  {
+   "sentences": [
+    {
+     "text": "[warm] Send this to whoever has a review soon. Before it lands."
+    }
+   ],
+   "visual": {
+    "type": "card",
+    "lines": [
+     [
+      "Send this to whoever",
+      "ink"
+     ],
+     [
+      "has a review soon.",
+      "orange"
+     ],
+     [
+      "Before it lands.",
+      "green"
+     ]
+    ]
+   }
+  }
+ ],
+ "speed": 1.15,
+ "max_gap": 0.25
+}
