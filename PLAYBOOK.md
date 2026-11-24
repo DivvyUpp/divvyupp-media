@@ -55,7 +55,15 @@ moments waiting for proof sit in `backlog.md` under "Pain moments needing proof"
 
 **Instagram bio (Srini, 2026-11-23, set by Srini in the app):** "You make good money. So where does it all go? Save
 first, then spend what's safe today, guilt-free. Built by one of you 👇" with divvyupp.com below it. The last line
-of a Reel may echo its promise ("Save first. Then spend what's safe, guilt-free.").
+of a Reel may echo its promise.
+
+**End line = the landing page's promise (Srini, 2026-11-24).** Someone who taps through from a Reel should land on
+the same promise they just heard. The site headline is "Know what you can safely spend — before you spend it." (with
+"Save first. Then see exactly what's safe to spend, every day." under it), so a Reel's closing line or end card is
+**"Know what's safe to spend — before you spend it."** "Save first" is the mechanism: say it inside the Reel, never
+as the closing promise, and never in a way that implies DivvyUpp moves or holds money (it's read-only). Study Reels
+have no product line at all; this applies to formats that end on DivvyUpp. If the site headline changes, change
+this line to match.
 
 ## Story Reels and presenter characters (agreed with Srini 2026-11-15)
 A story Reel tells the whole loop, not just a hook: pain → save first (approved body, part 1) → the daily/weekly
@@ -66,7 +74,7 @@ Current template (approved 2026-11-16), copy `hooks/2026-11-19-a.json`:
 - hook → **four-numbers `plan` scene** (income and fixed bills checked against bank history, savings you pick,
   safe-to-spend; replaces the old "flips the order" body section, `skip_flip: true`) → guide with **two `spends`**
   → payoff → `"ending": "rendered"` (guarantee + CTA in the same voice, new guarantee wording; the CTA line is
-  "Save first. Then spend what's safe. Try it at Divvyup dot com." (in voice scripts always write the name "Divvyup": the voice spells out "divvyupp" as U-P-P; Srini chose this spelling 2026-11-20. On screen the brand is "DivvyUpp" and the web address is all lowercase, "divvyupp.com" (Srini, 2026-11-20).), which Srini prefers to the bare URL).
+  "Know what's safe to spend, before you spend it. Try it at Divvyup dot com." (changed 2026-11-24 to match the site headline) (in voice scripts always write the name "Divvyup": the voice spells out "divvyupp" as U-P-P; Srini chose this spelling 2026-11-20. On screen the brand is "DivvyUpp" and the web address is all lowercase, "divvyupp.com" (Srini, 2026-11-20).), which Srini prefers to the bare URL).
 - Optional data-backed `stat` card in the hook (guess vs actual, or a %), only from a real, checked source shown
   on screen (e.g. C+R Research 2022: subscriptions guessed $86 vs actual $219; PYMNTS/LendingClub Sept 2023: 44% of
   >$100K earners live paycheck to paycheck). Never invent a statistic.
