@@ -1,6 +1,7 @@
 # Contrarian money truths for Send Reels
 
-The bank of non-obvious claims that Send Reels are built on (PLAYBOOK "Send Reel format"). Create may only use rows
+The bank of non-obvious claims that Send Reels are built on (PLAYBOOK "Send Reel format"). Srini judged none of these send-worthy on 2026-11-24 (see `research/study-bank.md`); they stay as verified
+facts for context, not as Reel ideas. Create may only use rows
 marked **verified**. Each one has a primary source and the exact claim it supports, worded no stronger than the
 source allows. Research verifies candidates, adds new ones, and records rejected ones (runs/research.md).
 Call-outs punch at the habit, never at a group of people or their income.

@@ -142,6 +142,23 @@ Compare each Reel with our own median, never outside benchmarks; under 100 reach
 "Some posts are built to hold your followers, some are built to be forwarded. They look different" (Marina
 Mogilko): until ~1,000 followers, every Reel is built to be forwarded (see "Send Reel format").
 
+### Srini judges send-worthiness (Srini, 2026-11-24)
+**No idea becomes a Send Reel unless Srini has said he would send it.** Research pitches ideas; Srini marks each
+"send" or "no"; Create builds only "send" ideas, from `research/study-bank.md` (status **approved**). His first
+verdicts: surprising, data-backed, with a fun or concrete move = send; generic advice everyone knows, or a fact with
+no clear "so what do I do", = no. Hot takes without a study behind them didn't pass.
+
+### Study Reel format (the default Send Reel; Srini, 2026-11-24)
+A real study, its real number, and a move you can copy, the way evidence-based fitness channels cite papers.
+20–40 s:
+1. **The hook is the move plus the result** ("Naming your savings goal raised savings 16%. 'Remember to save'
+   did nothing."). Never a bare instruction without the payoff.
+2. **The study:** who was studied, how many, what they did. Researcher names and journal on screen.
+3. **The result:** the exact number from the bank, worded no stronger than the source, with its caveat said plainly
+   ("in a lab study", "at one company").
+4. **The move:** the one concrete thing to do today, from the bank.
+5. **Send prompt** naming who to send it to, on screen at the payoff and as the last line. No product pitch.
+
 ### Send Reel format (default until ~1,000 followers; Srini, 2026-11-24)
 The only job of a Send Reel is to make a viewer think of one specific person and send it to them. Why people pass
 things on (Jonah Berger's research, *Contagious*): it makes the sharer look smart or caring (social currency), it's
@@ -149,8 +166,8 @@ useful (practical value), and it sparks a high-arousal feeling such as surprise 
 Shape, 20–35 s:
 1. **Call-out (0–2 s):** a specific behaviour, in the viewer's own words, that they recognise in themselves or in
    someone they'd send it to ("'I'll save whatever's left.' Nothing is ever left.").
-2. **Contrarian truth (2–8 s):** the non-obvious claim that flips what they believe. It must be true and come from
-   `research/contrarian-ideas.md` with status **verified**; never invent a fact or a number.
+2. **Contrarian truth (2–8 s):** the non-obvious claim that flips what they believe. It must be true, come from
+   `research/study-bank.md` with status **approved** (Srini said he'd send it); never invent a fact or a number.
 3. **Proof (8–20 s):** one concrete thing they can check: a cited study, an official statistic, or simple math shown
    on screen.
 4. **The fix (20–28 s):** one practical line they can do today.

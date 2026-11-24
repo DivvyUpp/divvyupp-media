@@ -19,9 +19,13 @@ our own data. Until then it is a candidate bet in `backlog.md`.
    - finance creators' formats (study the format, never copy their content);
    - tools that open new formats (AI video such as Runway, AI voice, editing) — what they can do, cost, limits, terms;
    - data: studies or platform numbers on watch time, skip rate, shares;
-   - **contrarian money truths (Srini, 2026-11-24):** verify or reject candidates in `research/contrarian-ideas.md`
-     and add new ones. Mark one **verified** only with a primary source (study, official statistic, regulator report)
-     and the exact claim it supports, worded no stronger than the source. Record rejected ones and why.
+   - **studies for Study Reels (Srini, 2026-11-24), every run:** pitch up to 5 new ideas into
+     `research/study-bank.md` with status **pitched**. Each needs a primary source (journal paper, NBER/working
+     paper, J-PAL/regulator report): who was studied and how many, what they did, the measured result worded no
+     stronger than the source, the caveat (lab vs field, one company, observational), and one concrete move a viewer
+     can copy today. Prefer surprising results with a fun or concrete move; skip advice everyone already knows.
+     Ask Srini in the run's note to mark each "send" or "no"; when he answers in this chat, set the status to
+     **approved** or **declined** and record his reason. Never mark anything approved yourself.
    - **the audience's own words (Srini, 2026-11-23):** how people who earn well but have nothing to show for it
      describe that pain, in comments under finance Reels/Shorts and in public forums (e.g. Reddit personal-finance
      threads). Add phrases to `research/pain-language.md` (phrase, where, link, date, how many times seen).
