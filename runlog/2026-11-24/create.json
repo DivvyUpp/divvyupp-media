@@ -1,0 +1,27 @@
+{
+  "run": "create",
+  "date": "2026-11-24",
+  "attempts": [
+    {
+      "started_at": "2026-11-24T00:05:00-05:00",
+      "finished_at": "2026-11-24T00:45:00-05:00",
+      "status": "ok",
+      "trigger": "manual",
+      "summary": "Re-cut Study Reel S2's send line to \"Send this to a friend and see if that helps them\" (the old line could read as an insult). Srini approved v9; it replaces v6 in today's noon slot.",
+      "outputs": [
+        {
+          "label": "Spec",
+          "path": "hooks/2026-11-23-s2-aging.json"
+        }
+      ],
+      "reels": [
+        {
+          "id": "2026-11-23-s2-aging",
+          "hook": "Looking at a photo of yourself at 70 made people save 30% more.",
+          "status": "approved",
+          "file": "reels/2026-11-23-s2-aging.mp4"
+        }
+      ]
+    }
+  ]
+}

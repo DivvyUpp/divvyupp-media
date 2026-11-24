@@ -90,18 +90,10 @@
   ],
   [
    51.1,
-   52.8
+   52.42
   ],
   [
-   53.04,
-   54.42
-  ],
-  [
-   54.9,
-   56.4
-  ],
-  [
-   56.9,
+   57.92,
    59.98
   ]
  ],
@@ -241,11 +233,11 @@
    "fill": "orange",
    "lines": [
     [
-     "Send this to the friend",
+     "Send this to a friend",
      "title"
     ],
     [
-     "who's behind on their savings",
+     "and see if it helps them too",
      "body"
     ]
    ]
