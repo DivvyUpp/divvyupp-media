@@ -33,8 +33,9 @@ numbers with Windsor and commits them before this run starts.
    If `metrics/<today>.json` is missing, say **"Instagram numbers unavailable: the metrics pull didn't land"** at
    the top of the note to Srini, mark every postmortem due today **inconclusive (no data)**, never guess a number,
    and carry on with steps 4–7.
-2. Work out the 200-follower scorecard in `PLAYBOOK.md` (avg watch ÷ length, likes per 100 reached, shares per 100
-   reached) for each Reel read today.
+2. Work out the scorecard in `PLAYBOOK.md` for each Reel read today, **leading with sends per 1,000 reached** (the
+   primary metric), then avg watch ÷ length, likes per 100 reached and saves per 1,000. A postmortem verdict is
+   about sends per 1,000 first; views are context only.
 3. Request yesterday's funnel: trigger `funnel-weekly.yml` with `from` = `to` = yesterday, wait, pull, and read
    `funnel/custom-<yesterday>_<yesterday>.json` (`instagram.days[]`: `ig_visits`, `get_started_clicked`, `signed_up`,
    `bank_linked`). Write them on the rows posted that day. If it fails, say "funnel unavailable" and carry on.
@@ -55,6 +56,10 @@ research brief, read that part of the brief for its numbers and sources. An idea
 the backlog isn't ready: leave it. If fewer than 3 bets qualify, make fewer and say why. Each Reel has its own card in
 `hypotheses/<today>.md`; the variable is the format, the control is the median of our last 5 Reels. Lengths 30–50 s
 unless the card says otherwise.
+**Until ~1,000 followers, build at least 2 of the day's Reels as Send Reels** (PLAYBOOK "Send Reel format"),
+whatever bet they test: name the recipient on the card before scripting, use only **verified** ideas from
+`research/contrarian-ideas.md`, put the send prompt on screen, and keep the product out of the video. The persona
+reviewers each answer "Who would you send this to, and why?"; a script where either can't name someone is rewritten.
 
 ## 5. Script workshop
 1. For each Reel, write **6–8 hook candidates** that follow the format's pattern, then a **hook review**: two

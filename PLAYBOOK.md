@@ -122,16 +122,44 @@ but sends no one to the site is only half a win: say so in the postmortem.
 Why 200: it is the reported Trial Reels minimum for a professional account (research/2026-11-20.md), and followers
 mean strangers liked enough to come back. We get there through the three signals Instagram names for Reels (Adam
 Mosseri, Jan 2025): **watch time, likes per reach, sends per reach** (sends count most with non-followers).
-Every bet names which of the three it is built to move. Scorecard per Reel at 72h, from Windsor:
+Every bet names which of the three it is built to move.
+
+**Primary metric: sends per 1,000 reached (Srini, 2026-11-24).** Adam Mosseri (Silicon Valley Girl podcast, Nov
+2026): "Sends per impression, definitely. That's a huge one for unconnected reach": of every 1,000 people who saw
+the Reel, how many sent it to a friend. Watch time and like rate matter more for followers; views are "a relatively
+shallow measure". Almost everyone who sees our Reels is a non-follower, so every postmortem, scorecard and dashboard
+leads with sends per 1,000 reached. Views are context only. Scorecard per Reel at 72h, from Windsor, in this order:
 
 | Signal | Windsor field(s) | Read as |
 |---|---|---|
+| **Sends (primary)** | `media_shares` ÷ `media_reach` × 1000 | **sends per 1,000 reached** (Windsor's `shares`; Instagram counts DM sends here) |
 | Watch time | `media_reel_avg_watch_time` (ms), skip rate | avg watch ÷ video length, and skip % |
 | Likes | `media_like_count` ÷ `media_reach` | likes per 100 reached |
-| Sends | `media_shares` ÷ `media_reach` | shares per 100 reached (Instagram counts DM sends here) |
+| Saves | `media_saved` ÷ `media_reach` × 1000 | saves per 1,000 reached |
 | Follows | `followers_count`, read daily into `followers.csv` | change per day; per-Reel follows aren't reported |
 
-Compare each Reel with our own median, never outside benchmarks; under 100 views the read is inconclusive.
+Compare each Reel with our own median, never outside benchmarks; under 100 reached the read is inconclusive.
+"Some posts are built to hold your followers, some are built to be forwarded. They look different" (Marina
+Mogilko): until ~1,000 followers, every Reel is built to be forwarded (see "Send Reel format").
+
+### Send Reel format (default until ~1,000 followers; Srini, 2026-11-24)
+The only job of a Send Reel is to make a viewer think of one specific person and send it to them. Why people pass
+things on (Jonah Berger's research, *Contagious*): it makes the sharer look smart or caring (social currency), it's
+useful (practical value), and it sparks a high-arousal feeling such as surprise or amused outrage, not sadness.
+Shape, 20–35 s:
+1. **Call-out (0–2 s):** a specific behaviour, in the viewer's own words, that they recognise in themselves or in
+   someone they'd send it to ("'I'll save whatever's left.' Nothing is ever left.").
+2. **Contrarian truth (2–8 s):** the non-obvious claim that flips what they believe. It must be true and come from
+   `research/contrarian-ideas.md` with status **verified**; never invent a fact or a number.
+3. **Proof (8–20 s):** one concrete thing they can check: a cited study, an official statistic, or simple math shown
+   on screen.
+4. **The fix (20–28 s):** one practical line they can do today.
+5. **Send prompt:** on screen at the moment of recognition AND as the last line, naming the recipient ("Send this
+   to the friend who always says 'I deserve it'"). No "follow for more".
+6. **No product pitch inside the video.** People don't send ads. DivvyUpp lives in the logo, the caption and the bio.
+Send gate (all must be yes, or rewrite): Who exactly would you send this to, and why? Does sending it make the
+sender look smart or caring rather than mean? Is there one surprising, verified claim? One fix? Under 35 s?
+Call-outs punch at the habit, never at a group of people or their income, and never shame the viewer.
 
 ## The daily loop (replaces the weekly batch, agreed 2026-11-20)
 Scheduled runs (times changed 2026-11-21 so Create's Reels are ready when Srini wakes up): Each reads this file, then its own run file.
