@@ -2,3 +2,4 @@ pipeline/.cache/
 reels/*_check*.jpg
 pipeline/__pycache__/
 .venv/
+reels/*_at.jpg
