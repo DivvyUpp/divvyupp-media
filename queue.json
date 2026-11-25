@@ -422,7 +422,7 @@
  {
   "id": "2026-11-25-s8-minimum",
   "kind": "main",
-  "status": "pending_review",
+  "status": "approved",
   "post_date": "2026-11-25",
   "file": "reels/2026-11-25-s8-minimum-v2.mp4",
   "spec": "hooks/2026-11-25-s8-minimum-v2.json",
@@ -431,7 +431,8 @@
   "caption": "The smallest number on your card bill might be the most expensive one: the minimum payment.\n\nIn an experiment, UK cardholders were shown a card statement. Among people not paying in full, those who saw a minimum payment repaid about £99; those who never saw one repaid about £175. Almost double. (A lab experiment; a later study by the UK regulator tested it at larger scale.) Paying more each month clears the balance sooner, with less interest.\n\nTry it: set autopay to a fixed amount you choose, never \"minimum\".\n\nStudy: Neil Stewart, \"The Cost of Anchoring on Credit-Card Minimum Repayments\", Psychological Science, 2009. Link in the comments.\n\nSend this to anyone with autopay on minimum. It takes two minutes to change 💳\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #creditcard #debtfree #moneytips #research",
   "first_comment": "📄 The study: Stewart, \"The Cost of Anchoring on Credit-Card Minimum Repayments\", Psychological Science, 2009\nhttps://wrap.warwick.ac.uk/id/eprint/2552",
   "hypothesis": "hypotheses/2026-11-25.md",
-  "note": "v2 for review (Srini asked 2026-11-25 for the S4/S7 v2 treatment): habit hook, research-backed money tip #5 teaser. Not approved.",
-  "file_before_v2": "reels/2026-11-25-s8-minimum.mp4"
+  "note": "v2 approved by Srini in chat 2026-11-25 (\"this looks good. You can post it at 10\"): question hook on a real-looking card statement, tip #5 shows the result only, flow-checked script (54s). Caption unchanged from v1. For the 10pm slot.",
+  "file_before_v2": "reels/2026-11-25-s8-minimum.mp4",
+  "not_before": "21:30"
  }
 ]
