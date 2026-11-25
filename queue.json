@@ -387,7 +387,7 @@
  {
   "id": "2026-11-25-s4-lock",
   "kind": "main",
-  "status": "approved",
+  "status": "posted",
   "post_date": "2026-11-25",
   "file": "reels/2026-11-25-s4-lock-v2.mp4",
   "spec": "hooks/2026-11-25-s4-lock-v2.json",
@@ -397,7 +397,11 @@
   "first_comment": "📄 The study: Ashraf, Karlan & Yin, \"Tying Odysseus to the Mast: Evidence from a Commitment Savings Product in the Philippines\", Quarterly Journal of Economics, 2006\nhttps://www.povertyactionlab.org/print/pdf/node/1423?lang=en",
   "hypothesis": "hypotheses/2026-11-25.md",
   "note": "v2 approved by Srini in chat 2026-11-25 ~12:05 ET (\"this looks perfect. It's good to post\"): habit hook, research-backed money tip #3 tag, 53% Credible stat, catch scene removed.",
-  "file_before_v2": "reels/2026-11-25-s4-lock.mp4"
+  "file_before_v2": "reels/2026-11-25-s4-lock.mp4",
+  "media_id": "18110007686200894",
+  "permalink": "https://www.instagram.com/reel/DgLB52VIjzG/",
+  "posted_at": "2026-11-25T12:08:43-05:00",
+  "first_comment_id": "18205184725391121"
  },
  {
   "id": "2026-11-25-s7-gym",

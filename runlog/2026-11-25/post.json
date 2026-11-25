@@ -9,6 +9,37 @@
       "trigger": "scheduled",
       "summary": "Noon slot: nothing approved to post on Instagram. YouTube backfill not attempted.",
       "blocker": "YouTube backfill still paused: Windsor still shows 1 public video on the channel with no title or id, so it can't be matched to a Reel. To avoid a duplicate Short, nothing was uploaded. Add the Reel's youtube_id in queue.json (or tell me which Reel it is) to restart the backfill; S2 and S1 also still need Shorts."
+    },
+    {
+      "started_at": "2026-11-25T12:05:00-05:00",
+      "finished_at": "2026-11-25T12:12:00-05:00",
+      "status": "partial",
+      "trigger": "manual",
+      "summary": "Posted Study Reel S4 v2 (2026-11-25-s4-lock, new habit hook and research-backed money tip #3 tag) to Instagram at Srini's request, with its first comment.",
+      "blocker": "YouTube rate-limited the S4 upload (Windsor youtube upload_video); not retried. Pin the first comment by hand in Instagram.",
+      "outputs": [
+        {
+          "label": "Queue",
+          "path": "queue.json"
+        },
+        {
+          "label": "Experiment log",
+          "path": "experiment-log.csv"
+        },
+        {
+          "label": "Spec",
+          "path": "hooks/2026-11-25-s4-lock-v2.json"
+        }
+      ],
+      "reels": [
+        {
+          "id": "2026-11-25-s4-lock",
+          "hook": "Do you keep moving money from your savings back to checking?",
+          "status": "posted",
+          "file": "reels/2026-11-25-s4-lock-v2.mp4",
+          "permalink": "https://www.instagram.com/reel/DgLB52VIjzG/"
+        }
+      ]
     }
   ]
 }
