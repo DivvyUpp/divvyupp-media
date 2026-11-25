@@ -34,6 +34,7 @@ Element types (coordinates are 1080x1920 frame pixels):
   curve   p0 p1 c [col] [dur]                                  dashed bezier that draws itself
   ticket  x y w h title [sub]
   clock   x y r [dur] [label]
+  tag     x y lines:[{text style: ink|orange}] [s] [dx] [stagger]   series tag: stacked solid blocks slide in
   line    pts [col] [width] [dash] [dur]
   dot     x y [r] [col] [pulse]
 Every element must sit outside the Instagram safe zones (PLAYBOOK checklist 10); --check shades them red.
@@ -179,6 +180,23 @@ def e_chip(cv, e, t, T):
     if style in ("quote", "orange"): cv.shadow(b, ph / 2, k, blur=16, dy=8, alpha=0.12)
     cv.rect(b, ph / 2, fill=fill, k=k)
     cv.text(x, y + (2 if w_ != "serif" else 0), e["text"], F(w_, s * sc), tc, k)
+
+def e_tag(cv, e, t, T):
+    """Series tag: solid blocks (white text on ink / orange) that stack, staggered, one after another."""
+    k0 = T.fade(e, t); s = e.get("s", 54); f = F("xb", s); ph = s * 1.75; gap = e.get("gap", 10); dx = e.get("dx", 70)
+    lines = e["lines"]; n = len(lines); y_top = e["y"] - (n * ph + (n - 1) * gap) / 2
+    for i, ln in enumerate(lines):
+        u = clamp((t - T.t_in(e) - i * e.get("stagger", 0.14)) / 0.38)
+        if e.get("instant"): u = 1.0
+        if u <= 0 or k0 <= 0: continue
+        tw = cv.tl(ln["text"], f); pw = tw + s * 1.1
+        cx = e["x"] + (i - (n - 1) / 2) * dx                     # staggered: each block shifts right
+        side = -1 if i % 2 == 0 else 1; slide = (1 - back(u, 1.4)) * 260 * side
+        x0 = cx - pw / 2 + slide; y0 = y_top + i * (ph + gap); k = k0 * clamp(u * 4)
+        fill = ORANGE if ln.get("style") == "orange" else INK
+        cv.shadow([x0, y0, x0 + pw, y0 + ph], 12, k, blur=14, dy=8, alpha=0.18)
+        cv.rect([x0, y0, x0 + pw, y0 + ph], 12, fill=fill, k=k)
+        cv.text(x0 + pw / 2, y0 + ph / 2 + 2, ln["text"], f, WHITE, k)
 
 def e_chart(cv, e, t, T):
     k = T.fade(e, t); x0, x1, base, y = e["x0"], e["x1"], e["base"], e["y"]; labels = e.get("labels", [])
@@ -389,7 +407,7 @@ def e_dot(cv, e, t, T):
 
 DRAW = {"text": e_text, "chip": e_chip, "chart": e_chart, "card": e_card, "panel": e_panel, "bars": e_bars, "lock": e_lock,
         "target": e_target, "qring": e_qring, "accounts": e_accounts, "avatar": e_avatar, "curve": e_curve,
-        "ticket": e_ticket, "clock": e_clock, "line": e_line, "dot": e_dot}
+        "ticket": e_ticket, "tag": e_tag, "clock": e_clock, "line": e_line, "dot": e_dot}
 
 # ---------------- timeline ----------------
 class Timing:
