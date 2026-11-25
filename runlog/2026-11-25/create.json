@@ -7,7 +7,7 @@
       "finished_at": "2026-11-25T06:38:43-05:00",
       "status": "ok",
       "trigger": "scheduled",
-      "summary": "Made three faceless diagram Study Reels from approved study-bank rows: S4 (locked savings, 81%), S7 (gym plans, 70% more than per-visit) and S8 (hiding the card minimum, £99 vs £175). Postmortem: byage-walk and same-account inconclusive at 72h (5 and 10 views); 0 sends on every Reel in 8 days; 0 Instagram landings on 11-24.",
+      "summary": "Made three faceless diagram Study Reels from approved study-bank rows: S4 (locked savings, 81%), S7 (gym plans, 70% more than per-visit) and S8 (hiding the card minimum, \u00a399 vs \u00a3175). Postmortem: byage-walk and same-account inconclusive at 72h (5 and 10 views); 0 sends on every Reel in 8 days; 0 Instagram landings on 11-24.",
       "outputs": [
         {
           "label": "Hypothesis cards and script workshop",
@@ -48,7 +48,7 @@
         {
           "id": "2026-11-25-s7-gym",
           "hook": "Divide your gym bill by how many times you actually went.",
-          "status": "pending_review",
+          "status": "approved",
           "file": "reels/2026-11-25-s7-gym.mp4"
         },
         {

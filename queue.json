@@ -406,16 +406,18 @@
  {
   "id": "2026-11-25-s7-gym",
   "kind": "main",
-  "status": "pending_review",
+  "status": "approved",
   "post_date": "2026-11-25",
-  "file": "reels/2026-11-25-s7-gym.mp4",
-  "spec": "hooks/2026-11-25-s7-gym.json",
+  "file": "reels/2026-11-25-s7-gym-v2.mp4",
+  "spec": "hooks/2026-11-25-s7-gym-v2.json",
   "format": "study",
-  "hook": "Divide your gym bill by how many times you actually went. The big monthly plans cost 70% more than paying per visit. (Study Reel S7, faceless diagram, Eric voice)",
+  "hook": "Paying seventy dollars or more a month for a gym you barely go to? (Study Reel S7 v2: research-backed money tip #4)",
   "caption": "Divide your gym bill by how many times you actually went.\n\nEconomists followed 7,752 members of three US gyms over three years. People on monthly plans over $70 paid, on average, 70% more than paying per visit would have cost for the visits they actually made. People overestimated how often they'd go. (Three gyms, one study.)\n\nThe 10-second check: add up 3 months of fees and divide by your visits in those 3 months. More than the drop-in price? Check the cancellation fee, then switch.\n\nStudy: DellaVigna & Malmendier, \"Paying Not to Go to the Gym\", American Economic Review, 2006. Link in the comments.\n\nSend this to your friend with the gym membership. You know the one 🏋️\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #moneytips #gym #savingmoney #research",
   "first_comment": "📄 The study: DellaVigna & Malmendier, \"Paying Not to Go to the Gym\", American Economic Review, 2006\nhttps://eml.berkeley.edu/%7Eulrike/Papers/gym.pdf",
   "hypothesis": "hypotheses/2026-11-25.md",
-  "note": "Review video in reels/. Not approved."
+  "note": "v2 approved by Srini in chat 2026-11-25 (~13:10 ET): \"the gym membership video looked fine, so we can post that at 5\"; confirmed v2 (habit hook, research-backed money tip #4). For the 5pm slot.",
+  "file_before_v2": "reels/2026-11-25-s7-gym.mp4",
+  "not_before": "16:30"
  },
  {
   "id": "2026-11-25-s8-minimum",
