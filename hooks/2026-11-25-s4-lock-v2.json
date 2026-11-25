@@ -163,8 +163,54 @@
    ]
   },
   {
+   "title": "the *data*",
+   "text": "One survey found more than half of Americans pulled money out of savings in the past year.",
+   "source": "Credible, American Savings Statistics 2025 (survey of 1,001 U.S. adults, Aug 2025): 'More than half of Americans (53%) withdrew money from savings in the past year.' https://www.credible.com/personal-finance/american-savings-statistics",
+   "elements": [
+    {
+     "type": "text",
+     "text": "53%",
+     "x": 540,
+     "y": 720,
+     "s": 220,
+     "w": "xb",
+     "col": "orange",
+     "at": "more than half",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "pulled money out of savings",
+     "x": 540,
+     "y": 900,
+     "s": 44,
+     "w": "b",
+     "at": "pulled money"
+    },
+    {
+     "type": "text",
+     "text": "in the past year",
+     "x": 540,
+     "y": 965,
+     "s": 44,
+     "w": "b",
+     "at": "pulled money"
+    },
+    {
+     "type": "text",
+     "text": "Credible survey · 1,001 U.S. adults · Aug 2025",
+     "x": 540,
+     "y": 1120,
+     "s": 28,
+     "w": "m",
+     "col": "grey",
+     "at": 0.2
+    }
+   ]
+  },
+  {
    "title": "the *real* problem",
-   "text": "It slides back, and a year later there's nothing to show. The fix isn't willpower. It's how easy the money is to reach.",
+   "text": "And every time it slides back, your savings stay flat. A year later, there's nothing to show. The fix isn't willpower. It's how easy the money is to reach.",
    "elements": [
     {
      "type": "chart",
@@ -298,51 +344,6 @@
      "col": "orange",
      "at": "eighty-one",
      "pop": true
-    }
-   ]
-  },
-  {
-   "title": "the *catch*",
-   "text": "One trial, in the rural Philippines. And only about one in four people offered it signed up.",
-   "elements": [
-    {
-     "type": "chip",
-     "text": "one trial",
-     "style": "soft",
-     "x": 340,
-     "y": 470,
-     "s": 38,
-     "at": 0
-    },
-    {
-     "type": "chip",
-     "text": "rural Philippines",
-     "style": "soft",
-     "x": 700,
-     "y": 560,
-     "s": 38,
-     "at": "rural"
-    },
-    {
-     "type": "text",
-     "text": "28%",
-     "x": 540,
-     "y": 850,
-     "s": 190,
-     "w": "xb",
-     "col": "orange",
-     "at": "one in four",
-     "pop": true
-    },
-    {
-     "type": "text",
-     "text": "of people offered it signed up",
-     "x": 540,
-     "y": 1010,
-     "s": 40,
-     "w": "b",
-     "col": "grey",
-     "at": "signed up"
     }
    ]
   },
