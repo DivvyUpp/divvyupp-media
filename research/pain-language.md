@@ -13,6 +13,11 @@ first line of a Reel. Phrases only: no usernames or anything that identifies a p
 | "Get paid and the money's gone in a week" (creator's title, not a viewer's: weaker evidence) | Anthony O'Neal Short title | https://www.youtube.com/shorts/66na1utCd_0 | 2026-11-23 | 1 (similar: "Where does my paycheck go?!", VANNtastic title, https://www.youtube.com/shorts/__kSIhhynd0) |
 | "$400 left in checking before each payday" on $68K, living alone (secondhand: a news summary of an r/SavingMoney post; thread not opened) | Web search summary | (Reddit thread not reachable from this session) | 2026-11-23 | 1 |
 | "Half my paycheck goes to daycare" (secondhand: a news summary of a Reddit comment; thread not opened) | Web search summary | (Reddit thread not reachable from this session) | 2026-11-23 | 1 |
+| "Forced generosity" (gifts given because they're expected; 460 likes, quoting the host) | YouTube comment, The Ramsey Show "Is She Cheap For Not Wanting To Give Everyone Gifts?" | https://www.youtube.com/shorts/vOZ45U89H4c | 2026-11-25 | 1 |
+| "Buying for 10+ people can get a bit costly" (228 likes) | same Short | https://www.youtube.com/shorts/vOZ45U89H4c | 2026-11-25 | 1 |
+| "Not sure how much I spent but I'm pretty sure I'm still paying for it!" | YouTube comment, Rachel Cruze "Do You Remember What You Spent On Christmas?" | https://www.youtube.com/shorts/LJ_YqXVTtM8 | 2026-11-25 | 1 |
+| "I hate buying gifts just to not feel guilty" | YouTube comment, The Ramsey Show gift Short | https://www.youtube.com/shorts/vOZ45U89H4c | 2026-11-25 | 1 (similar: "financially exhausting but mentally too", same Short) |
+| "They just go into debt to show off" (about family at the holidays; 76 likes) | same Short | https://www.youtube.com/shorts/vOZ45U89H4c | 2026-11-25 | 1 |
 
 ## What the comments say about *how* to speak to this pain (2026-11-23)
 Under Shorts about well-paid people with nothing left, most top comments **judge** the person instead of relating:
@@ -22,3 +27,8 @@ whining about it" (50 likes), "Make smarter spending decisions" (101 likes), "Yo
 salary"). People who are in the pain rarely describe it in public comments; onlookers do. Read this as: a big salary
 in the hook invites a pile-on, and an income figure that viewers think is inflated becomes the conversation. See
 `research/2026-11-23.md` finding 3.
+
+## Holiday gifts: comments relate instead of judging (2026-11-25)
+Under gift-obligation Shorts (Ramsey Show, Rachel Cruze), top comments agree and add their own family story; under
+"what did you spend on Christmas" people post their own totals. That's the opposite of the pile-on under high-earner
+Shorts. See `research/2026-11-25.md` finding 3.

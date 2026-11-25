@@ -1,0 +1,35 @@
+{
+ "run": "research",
+ "date": "2026-11-25",
+ "attempts": [
+  {
+   "started_at": "2026-11-25T05:57:00-05:00",
+   "finished_at": "2026-11-25T06:02:14-05:00",
+   "status": "ok",
+   "trigger": "scheduled",
+   "summary": "Holiday/Black Friday money Shorts miss across the niche (1 of 22 at 3x+, vs 12% base rate), so no 'don't overspend' Reel this week; faceless animated explainers rarely spike (5%), so the diagram Study Reel format becomes a bet read in our own data (#22). Pitched S25-S27 (card rewards, buy now pay later, free returns) for Srini's send/no.",
+   "outputs": [
+    {
+     "label": "Research brief",
+     "path": "research/2026-11-25.md"
+    },
+    {
+     "label": "Backlog",
+     "path": "backlog.md"
+    },
+    {
+     "label": "Study bank",
+     "path": "research/study-bank.md"
+    },
+    {
+     "label": "Pain language",
+     "path": "research/pain-language.md"
+    },
+    {
+     "label": "Shorts pull",
+     "path": "research/shorts-2026-11-25.csv"
+    }
+   ]
+  }
+ ]
+}
