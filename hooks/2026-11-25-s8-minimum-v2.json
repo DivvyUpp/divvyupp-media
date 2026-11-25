@@ -7,66 +7,50 @@
  "scenes": [
   {
    "title": "sound *familiar*?",
-   "text": "[curious] Paying close to the minimum on your credit card, month after month?",
+   "text": "[curious] Are you only making the minimum payment on your credit card?",
    "elements": [
     {
-     "type": "panel",
-     "x": 160,
+     "type": "text",
+     "text": "Only making the",
+     "x": 540,
      "y": 400,
-     "w": 760,
-     "h": 560,
-     "at": 0,
-     "instant": true
-    },
-    {
-     "type": "text",
-     "text": "CARD STATEMENT",
-     "x": 220,
-     "y": 480,
-     "s": 30,
+     "s": 64,
      "w": "xb",
-     "col": "grey",
-     "align": "l",
      "at": 0,
      "instant": true
     },
     {
      "type": "text",
-     "text": "New balance",
-     "x": 220,
-     "y": 600,
-     "s": 44,
-     "w": "b",
-     "align": "l",
-     "at": 0,
-     "instant": true
-    },
-    {
-     "type": "text",
-     "text": "Minimum payment due",
-     "x": 220,
-     "y": 740,
-     "s": 48,
+     "text": "minimum payment?",
+     "x": 540,
+     "y": 480,
+     "s": 64,
      "w": "xb",
      "col": "orange",
-     "align": "l",
      "at": 0,
      "instant": true
     },
     {
-     "type": "chip",
-     "text": "“I'll pay more next month.”",
-     "style": "quote",
-     "x": 540,
-     "y": 1060,
-     "s": 40,
-     "at": "month after month"
+     "type": "statement",
+     "x": 100,
+     "y": 555,
+     "w": 880,
+     "h": 585,
+     "at": 0,
+     "instant": true,
+     "hl": "minimum payment",
+     "warnings": [
+      [
+       "Minimum Payment Warning:",
+       "If you make only the minimum payment each period, you will pay more in interest and it will take you longer to pay off your balance."
+      ]
+     ]
     }
    ]
   },
   {
    "title": "money *tip*",
-   "text": "Here's a research-backed money tip. In one experiment, people who never saw the minimum paid almost double.",
+   "text": "Here's a research-backed money tip. In a UK experiment, one small change almost doubled what people paid toward their card.",
    "elements": [
     {
      "type": "tag",
@@ -88,24 +72,24 @@
     },
     {
      "type": "text",
-     "text": "paid almost 2x",
+     "text": "almost 2x repaid",
      "x": 540,
      "y": 830,
      "s": 110,
      "w": "xb",
      "col": "orange",
-     "at": "never saw",
+     "at": "almost doubled",
      "pop": true
     },
     {
      "type": "text",
-     "text": "in a lab experiment with UK cardholders",
+     "text": "one small change · UK lab experiment",
      "x": 540,
      "y": 940,
      "s": 36,
      "w": "b",
      "col": "grey",
-     "at": "almost double"
+     "at": "almost doubled"
     }
    ]
   },
@@ -375,5 +359,5 @@
    ]
   }
  ],
- "note": "v2 (Srini 2026-11-25): habit question hook, then \"research-backed money tip #5\" with the payoff, method held back until the end (same treatment as S4 v2 and S7 v2)."
+ "note": "v2 (Srini 2026-11-25): screen 1 = habit question hook on a real-looking card statement; screen 2 = \"research-backed money tip #5\" with the result only (no fix, no mechanism); fix at the end."
 }

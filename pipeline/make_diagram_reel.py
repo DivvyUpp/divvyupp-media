@@ -37,6 +37,7 @@ Element types (coordinates are 1080x1920 frame pixels):
   tag     x y lines:[{text style: ink|orange}] [s] [dx] [stagger]   series tag: stacked solid blocks slide in
   line    pts [col] [width] [dash] [dur]
   dot     x y [r] [col] [pulse]
+  statement x y w h [issuer] [acct] [rows] [hl: at] [hl_row] [warnings]   card statement Payment Information box
 Every element must sit outside the Instagram safe zones (PLAYBOOK checklist 10); --check shades them red.
 """
 import json, math, os, re, subprocess, sys
@@ -397,6 +398,45 @@ def e_line(cv, e, t, T):
     if e.get("dash"): dashed(cv, p, col, e.get("width", 4), k)
     else: cv.line(p, col, e.get("width", 4), k)
 
+def e_statement(cv, e, t, T):
+    """A US credit-card statement's Payment Information box, the part people recognise: New Balance, Minimum Payment
+    Due, Payment Due Date, then the Late Payment / Minimum Payment Warnings in small print. "hl" highlights the
+    minimum row (orange marker sweep) on a phrase. Generic issuer, no real bank's name or logo."""
+    u = T.u(e, t, 0.5); k = T.fade(e, t) * clamp(u * 2.5)
+    if k <= 0: return
+    x, y, w, h = e["x"], e["y"] + (1 - back(u)) * 40, e["w"], e["h"]
+    cv.shadow([x, y, x + w, y + h], 6, k, blur=26, dy=16, alpha=0.16); cv.rect([x, y, x + w, y + h], 6, fill=WHITE, k=k)
+    NAVY = (24, 44, 84); RULE = (196, 201, 210); SMALL = (88, 92, 100)
+    pad = 44; cy = y + 52
+    cv.rect([x + pad, cy - 22, x + pad + 62, cy + 18], 6, fill=NAVY, k=k)            # generic card chip/logo
+    cv.rect([x + pad + 10, cy - 8, x + pad + 30, cy + 6], 3, fill=(214, 182, 96), k=k)
+    cv.text(x + pad + 84, cy - 2, e.get("issuer", "Credit Card Statement"), F("xb", 30), NAVY, k, anchor="lm")
+    cv.text(x + w - pad, cy - 2, e.get("acct", "Account ending in 4821"), F("m", 24), SMALL, k, anchor="rm")
+    cy += 50; cv.line([(x + pad, cy), (x + w - pad, cy)], NAVY, 3, k, caps=False)
+    cy += 46; cv.text(x + pad, cy, "Payment Information", F("xb", 34), INK, k, anchor="lm")
+    cy += 28
+    rows = e.get("rows", [["New Balance", "$3,482.17"], ["Minimum Payment Due", "$98.00"], ["Payment Due Date", "12/18/26"]])
+    hl = T.at(e, "hl")
+    for i, (a, b) in enumerate(rows):
+        ry = cy + 36 + i * 72
+        if i == e.get("hl_row", 1) and hl is not None and t >= hl:
+            cv.rect([x + pad - 12, ry - 32, x + pad - 12 + (w - 2 * pad + 24) * ease((t - hl) / 0.5), ry + 32], 6, fill=HILITE, k=k)
+        bold = i == e.get("hl_row", 1)
+        cv.text(x + pad, ry, a, F("xb" if bold else "b", 36), INK, k, anchor="lm")
+        cv.text(x + w - pad, ry, b, F("xb" if bold else "b", 36), INK, k, anchor="rm")
+        cv.line([(x + pad, ry + 36), (x + w - pad, ry + 36)], RULE, 2, k, caps=False)
+    cy += 36 + len(rows) * 72 + 10
+    for head, body in e.get("warnings", [["Late Payment Warning:", "If we do not receive your minimum payment by the date listed above, you may have to pay a late fee."],
+                                         ["Minimum Payment Warning:", "If you make only the minimum payment each period, you will pay more in interest and it will take you longer to pay off your balance."]]):
+        f = F("m", 22); fb = F("xb", 22); lines = wrap(cv, head + " " + body, f, w - 2 * pad)
+        for li, l in enumerate(lines):
+            if li == 0 and l.startswith(head):
+                cv.text(x + pad, cy, head, fb, INK, k, anchor="lm")
+                cv.text(x + pad + cv.tl(head + " ", fb), cy, l[len(head):].strip(), f, SMALL, k, anchor="lm")
+            else: cv.text(x + pad, cy, l, f, SMALL, k, anchor="lm")
+            cy += 32
+        cy += 12
+
 def e_dot(cv, e, t, T):
     k = T.k(e, t)
     if k <= 0: return
@@ -407,7 +447,7 @@ def e_dot(cv, e, t, T):
 
 DRAW = {"text": e_text, "chip": e_chip, "chart": e_chart, "card": e_card, "panel": e_panel, "bars": e_bars, "lock": e_lock,
         "target": e_target, "qring": e_qring, "accounts": e_accounts, "avatar": e_avatar, "curve": e_curve,
-        "ticket": e_ticket, "tag": e_tag, "clock": e_clock, "line": e_line, "dot": e_dot}
+        "ticket": e_ticket, "tag": e_tag, "clock": e_clock, "line": e_line, "dot": e_dot, "statement": e_statement}
 
 # ---------------- timeline ----------------
 class Timing:

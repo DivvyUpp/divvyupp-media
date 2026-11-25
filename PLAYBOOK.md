@@ -167,6 +167,15 @@ A real study, its real number, and a move you can copy, the way evidence-based f
 4. **The move:** the one concrete thing to do today, from the bank.
 5. **Send prompt** naming who to send it to, on screen at the payoff and as the last line. No product pitch.
 
+**Opening order for Study Reels (Srini, 2026-11-25; supersedes item 1 above, applied in S4 v2, S7 v2, S8 v2):**
+- **Screen 1 = the hook: a question to the viewer about their own habit**, big on screen and the same words in the
+  voice ("Are you only making the minimum payment on your card?"). It must relate to them. Any visual there must look
+  like the real thing people would recognise (a real-looking card statement, app screen, bill), never a generic box.
+- **Screen 2 = "research-backed money tip #N" + the RESULT they want, never the fix or the mechanism** ("In a UK
+  experiment, one change nearly doubled what people paid off"). If a viewer could act on screen 2 alone, it gives
+  the payoff away: rewrite it.
+- Then why it happens → the study → the result → **the fix at the end** → send prompt.
+
 ### Send Reel format (default until ~1,000 followers; Srini, 2026-11-24)
 The only job of a Send Reel is to make a viewer think of one specific person and send it to them. Why people pass
 things on (Jonah Berger's research, *Contagious*): it makes the sharer look smart or caring (social currency), it's
