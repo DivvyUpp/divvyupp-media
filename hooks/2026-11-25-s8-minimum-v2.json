@@ -94,8 +94,8 @@
    ]
   },
   {
-   "title": "why it *happens*",
-   "text": "That number pulls your payment toward it, and the balance barely moves. It's not you. The minimum works like an anchor.",
+   "title": "the *problem*",
+   "text": "Here's the problem. The minimum payment printed on your statement pulls your payment down toward it, so the balance barely moves. Researchers call it anchoring.",
    "elements": [
     {
      "type": "chip",
@@ -104,7 +104,7 @@
      "x": 540,
      "y": 900,
      "s": 44,
-     "at": 0
+     "at": "minimum payment printed"
     },
     {
      "type": "chip",
@@ -129,7 +129,7 @@
       540,
       840
      ],
-     "at": "pulls your payment"
+     "at": "down toward"
     },
     {
      "type": "text",
@@ -144,20 +144,20 @@
     },
     {
      "type": "text",
-     "text": "an anchor",
+     "text": "anchoring",
      "x": 540,
      "y": 1220,
      "s": 60,
      "w": "xb",
      "col": "orange",
-     "at": "like an anchor",
+     "at": "call it anchoring",
      "pop": true
     }
    ]
   },
   {
    "title": "the *study*",
-   "text": "UK cardholders were shown a card statement. Some saw a minimum payment. Some didn't.",
+   "text": "In the experiment, UK cardholders were shown a card statement. Some saw a minimum payment on it. Some didn't.",
    "elements": [
     {
      "type": "card",
@@ -214,7 +214,7 @@
   },
   {
    "title": "the *result*",
-   "text": "Among people not paying in full, those shown the minimum paid about ninety-nine pounds. Those who never saw it paid about a hundred seventy-five. Almost double.",
+   "text": "Among people not paying in full, those who saw the minimum paid about ninety-nine pounds. Those who never saw it paid about a hundred seventy-five. Almost double, from that one change.",
    "elements": [
     {
      "type": "bars",
@@ -281,7 +281,7 @@
   },
   {
    "title": "do *this*",
-   "text": "One lab experiment, but paying more each month clears the balance sooner, with less interest. So set autopay to a fixed amount you choose. Never “minimum.”",
+   "text": "It was one lab study. But you can't take the minimum off your statement, so take it out of your autopay. Set it to a fixed amount you choose. Paying more clears the balance sooner, with less interest.",
    "elements": [
     {
      "type": "accounts",

@@ -175,6 +175,10 @@ A real study, its real number, and a move you can copy, the way evidence-based f
   experiment, one change nearly doubled what people paid off"). If a viewer could act on screen 2 alone, it gives
   the payoff away: rewrite it.
 - Then why it happens → the study → the result → **the fix at the end** → send prompt.
+- **Flow check before any render (Srini, 2026-11-25):** read the whole script top to bottom as a stranger. Each
+  scene's first line must follow from the line before it: name the thing again ("The minimum payment printed on
+  your statement..."), never "that number" / "it" pointing back past another scene. Signpost each turn ("Here's the
+  problem." "In the experiment..."), and tie the result back to screen 2's promise ("...from that one change").
 
 ### Send Reel format (default until ~1,000 followers; Srini, 2026-11-24)
 The only job of a Send Reel is to make a viewer think of one specific person and send it to them. Why people pass
