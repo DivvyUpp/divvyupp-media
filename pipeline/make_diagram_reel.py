@@ -365,8 +365,9 @@ def e_clock(cv, e, t, T):
     if k <= 0: return
     x, y, r = e["x"], e["y"], e.get("r", 60) * (0.6 + 0.4 * back(u)); f = ease(T.u(e, t, e.get("dur", 1.2)))
     cv.circle(x, y, r, fill=WHITE, outline=INK, w=5, k=k)
-    cv.pie(x, y, r - 6, -90, -90 + 360 * f * 0.9, TINT2, k)
-    a = math.radians(-90 + 360 * f * 0.9); cv.line([(x, y), (x + (r - 16) * math.cos(a), y + (r - 16) * math.sin(a))], INK, 5, k)
+    # The sweep completes the full circle: a clock that stops short reads as "not done" (Srini, 2026-11-25).
+    if f > 0: cv.pie(x, y, r - 6, -90, -90 + 360 * f, TINT2, k)
+    a = math.radians(-90 + 360 * f); cv.line([(x, y), (x + (r - 16) * math.cos(a), y + (r - 16) * math.sin(a))], INK, 5, k)
     cv.circle(x, y, 6, fill=INK, k=k)
     if e.get("label"): cv.text(x, y + r + 40, e["label"], F("xb", 36), ORANGE, k)
 
