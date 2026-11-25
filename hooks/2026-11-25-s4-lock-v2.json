@@ -118,8 +118,8 @@
    ]
   },
   {
-   "title": "the *fix*",
-   "text": "Here's a research-backed money tip. People offered a way to lock their savings saved eighty-one percent more.",
+   "title": "money *tip*",
+   "text": "Here's a research-backed money tip where people kept their money in savings, and saved eighty-one percent more.",
    "elements": [
     {
      "type": "tag",
@@ -152,7 +152,7 @@
     },
     {
      "type": "text",
-     "text": "when offered a locked account",
+     "text": "in a one-year randomized trial",
      "x": 540,
      "y": 940,
      "s": 36,
