@@ -1,0 +1,405 @@
+{
+ "id": "2026-11-25-s4-lock",
+ "format": "diagram",
+ "voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "speed": 1.15,
+ "max_gap": 0.3,
+ "scenes": [
+  {
+   "title": "sound *familiar*?",
+   "speed": 1.2,
+   "text": "[sighs] “I'll just move it back. It's only this once.” [curious] People offered a way to lock their savings saved eighty-one percent more.",
+   "elements": [
+    {
+     "type": "chip",
+     "text": "“I'll just move it back.”",
+     "x": 540,
+     "y": 430,
+     "s": 42,
+     "at": 0
+    },
+    {
+     "type": "panel",
+     "x": 110,
+     "y": 580,
+     "w": 380,
+     "h": 250,
+     "at": 0.1
+    },
+    {
+     "type": "text",
+     "text": "Savings",
+     "x": 300,
+     "y": 660,
+     "s": 44,
+     "w": "xb",
+     "at": 0.1
+    },
+    {
+     "type": "text",
+     "text": "goal money",
+     "x": 300,
+     "y": 740,
+     "s": 32,
+     "w": "m",
+     "col": "grey",
+     "at": 0.1
+    },
+    {
+     "type": "panel",
+     "x": 590,
+     "y": 580,
+     "w": 380,
+     "h": 250,
+     "accent": true,
+     "at": 0.1
+    },
+    {
+     "type": "text",
+     "text": "Checking",
+     "x": 780,
+     "y": 660,
+     "s": 44,
+     "w": "xb",
+     "at": 0.1
+    },
+    {
+     "type": "text",
+     "text": "debit card",
+     "x": 780,
+     "y": 740,
+     "s": 32,
+     "w": "m",
+     "col": "grey",
+     "at": 0.1
+    },
+    {
+     "type": "curve",
+     "p0": [
+      300,
+      840
+     ],
+     "c": [
+      540,
+      1010
+     ],
+     "p1": [
+      780,
+      840
+     ],
+     "at": "move it back"
+    },
+    {
+     "type": "chip",
+     "text": "only this once",
+     "style": "orange",
+     "x": 540,
+     "y": 960,
+     "s": 34,
+     "at": "only this once"
+    },
+    {
+     "type": "text",
+     "text": "+81% saved",
+     "x": 540,
+     "y": 1190,
+     "s": 96,
+     "w": "xb",
+     "col": "orange",
+     "at": "eighty-one",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "when offered a locked account",
+     "x": 540,
+     "y": 1290,
+     "s": 34,
+     "w": "b",
+     "col": "grey",
+     "at": "eighty-one"
+    }
+   ]
+  },
+  {
+   "title": "the *real* problem",
+   "text": "It slides back, and a year later there's nothing to show. The fix isn't willpower. It's how easy the money is to reach.",
+   "elements": [
+    {
+     "type": "chart",
+     "x0": 110,
+     "x1": 970,
+     "base": 1010,
+     "y": 830,
+     "grid": [
+      730,
+      920
+     ],
+     "label": "Your savings",
+     "label_y": 560,
+     "labels": [
+      "Jan",
+      "Mar",
+      "May",
+      "Jul",
+      "Sep",
+      "Nov"
+     ],
+     "at": 0,
+     "dur": 1.2
+    },
+    {
+     "type": "chip",
+     "text": "a year: nothing to show",
+     "style": "orange",
+     "x": 640,
+     "y": 690,
+     "s": 34,
+     "at": "nothing to show"
+    },
+    {
+     "type": "text",
+     "text": "willpower",
+     "x": 300,
+     "y": 1200,
+     "s": 54,
+     "w": "xb",
+     "col": "grey",
+     "at": "isn't willpower",
+     "strike": "It's how"
+    },
+    {
+     "type": "text",
+     "text": "reach",
+     "x": 780,
+     "y": 1200,
+     "s": 64,
+     "w": "xb",
+     "col": "orange",
+     "at": "how easy",
+     "pop": true
+    }
+   ]
+  },
+  {
+   "title": "the *study*",
+   "text": "Economists offered people at one bank an account they couldn't touch until they hit their own goal.",
+   "elements": [
+    {
+     "type": "card",
+     "x": 80,
+     "y": 390,
+     "w": 920,
+     "h": 400,
+     "kicker": "QUARTERLY JOURNAL OF ECONOMICS · 2006",
+     "title": "Tying Odysseus to the Mast",
+     "title_s": 54,
+     "subtitle": "A commitment savings product",
+     "highlight": "couldn't touch",
+     "lines": [
+      "Ashraf, Karlan & Yin",
+      "Randomized trial · rural Philippines"
+     ]
+    },
+    {
+     "type": "ticket",
+     "x": 540,
+     "y": 1010,
+     "w": 600,
+     "h": 200,
+     "title": "Locked",
+     "sub": "until you hit your goal",
+     "at": "until they hit"
+    }
+   ]
+  },
+  {
+   "title": "the *result*",
+   "text": "After a year, people offered it had saved eighty-one percent more than people who weren't.",
+   "elements": [
+    {
+     "type": "bars",
+     "base": 1080,
+     "x0": 90,
+     "x1": 990,
+     "bars": [
+      {
+       "x": 170,
+       "w": 260,
+       "h": 320,
+       "col": "muted",
+       "label": "not offered",
+       "at": "After a year"
+      },
+      {
+       "x": 620,
+       "w": 260,
+       "h": 579,
+       "col": "orange",
+       "label": "offered the\nlocked account",
+       "at": "people offered"
+      }
+     ],
+     "note": {
+      "text": "randomized trial · savings after one year",
+      "y": 1235,
+      "x": 540,
+      "at": "After a year"
+     }
+    },
+    {
+     "type": "text",
+     "text": "+81%",
+     "x": 750,
+     "y": 420,
+     "s": 80,
+     "w": "xb",
+     "col": "orange",
+     "at": "eighty-one",
+     "pop": true
+    }
+   ]
+  },
+  {
+   "title": "the *catch*",
+   "text": "One trial, in the rural Philippines. And only about one in four people offered it signed up.",
+   "elements": [
+    {
+     "type": "chip",
+     "text": "one trial",
+     "style": "soft",
+     "x": 340,
+     "y": 470,
+     "s": 38,
+     "at": 0
+    },
+    {
+     "type": "chip",
+     "text": "rural Philippines",
+     "style": "soft",
+     "x": 700,
+     "y": 560,
+     "s": 38,
+     "at": "rural"
+    },
+    {
+     "type": "text",
+     "text": "28%",
+     "x": 540,
+     "y": 850,
+     "s": 190,
+     "w": "xb",
+     "col": "orange",
+     "at": "one in four",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "of people offered it signed up",
+     "x": 540,
+     "y": 1010,
+     "s": 40,
+     "w": "b",
+     "col": "grey",
+     "at": "signed up"
+    }
+   ]
+  },
+  {
+   "title": "do *this*",
+   "text": "So keep your goal money in a separate account with no debit card attached.",
+   "elements": [
+    {
+     "type": "accounts",
+     "x": 210,
+     "y": 390,
+     "w": 660,
+     "h": 740,
+     "title": "Accounts",
+     "at": 0,
+     "rows": [
+      {
+       "label": "CHECKING · DEBIT CARD",
+       "from": "Everyday spending",
+       "icon": "$",
+       "s": 38
+      },
+      {
+       "label": "GOAL ACCOUNT",
+       "from": "Card attached",
+       "to": "No card attached",
+       "swap": "no debit card",
+       "icon": "!",
+       "s": 38
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "send *it*",
+   "text": "[warm] Send this to the person you share savings with, and set it up together.",
+   "elements": [
+    {
+     "type": "avatar",
+     "x": 300,
+     "y": 620,
+     "r": 90,
+     "label": "you",
+     "instant": true
+    },
+    {
+     "type": "avatar",
+     "x": 780,
+     "y": 620,
+     "r": 90,
+     "label": "them",
+     "tone": "ink",
+     "at": "the person"
+    },
+    {
+     "type": "curve",
+     "p0": [
+      300,
+      790
+     ],
+     "c": [
+      300,
+      930
+     ],
+     "p1": [
+      460,
+      960
+     ],
+     "at": "share savings"
+    },
+    {
+     "type": "curve",
+     "p0": [
+      780,
+      790
+     ],
+     "c": [
+      780,
+      930
+     ],
+     "p1": [
+      620,
+      960
+     ],
+     "at": "share savings"
+    },
+    {
+     "type": "ticket",
+     "x": 540,
+     "y": 1030,
+     "w": 560,
+     "h": 200,
+     "title": "Goal account",
+     "sub": "no card attached",
+     "at": "set it up"
+    }
+   ]
+  }
+ ]
+}

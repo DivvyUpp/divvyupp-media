@@ -383,5 +383,47 @@
     "first_comment": "📄 The study: Thaler & Benartzi, \"Save More Tomorrow\", Journal of Political Economy, 2004\nhttps://www.chicagobooth.edu/research/rustandy/social-impact-research/research-papers/2004/save-more-tomorrow-using-behavioral-economics-to-increase-employee-saving\n\nHave you ever turned on auto-increase? 👇",
     "hypothesis": "hypotheses/2026-11-24.md",
     "note": "Review video in reels/. Not approved."
+  },
+  {
+    "id": "2026-11-25-s4-lock",
+    "kind": "main",
+    "status": "pending_review",
+    "post_date": "2026-11-25",
+    "file": "reels/2026-11-25-s4-lock.mp4",
+    "spec": "hooks/2026-11-25-s4-lock.json",
+    "format": "study",
+    "hook": "\"I'll just move it back. It's only this once.\" People offered a way to lock their savings saved 81% more. (Study Reel S4, faceless diagram, Jessica voice)",
+    "caption": "\"I'll just move it back. It's only this once.\" Sound familiar?\n\nIn a randomized trial at one bank in the rural Philippines, people were offered a savings account they couldn't withdraw from until they reached a goal they chose. A year later, the people offered it had saved about 81% more than people who weren't. (One trial, and only 28% of the people offered the account signed up.)\n\nTry it: keep your goal money in a separate account with no debit card attached. Hard to reach is the point.\n\nStudy: Ashraf, Karlan & Yin, \"Tying Odysseus to the Mast\", Quarterly Journal of Economics, 2006. Link in the comments.\n\nSend this to the person you share savings with, and set it up together 🔒\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #savingmoney #moneytips #savings #research",
+    "first_comment": "📄 The study: Ashraf, Karlan & Yin, \"Tying Odysseus to the Mast: Evidence from a Commitment Savings Product in the Philippines\", Quarterly Journal of Economics, 2006\nhttps://www.povertyactionlab.org/print/pdf/node/1423?lang=en",
+    "hypothesis": "hypotheses/2026-11-25.md",
+    "note": "Review video in reels/. Not approved."
+  },
+  {
+    "id": "2026-11-25-s7-gym",
+    "kind": "main",
+    "status": "pending_review",
+    "post_date": "2026-11-25",
+    "file": "reels/2026-11-25-s7-gym.mp4",
+    "spec": "hooks/2026-11-25-s7-gym.json",
+    "format": "study",
+    "hook": "Divide your gym bill by how many times you actually went. The big monthly plans cost 70% more than paying per visit. (Study Reel S7, faceless diagram, Eric voice)",
+    "caption": "Divide your gym bill by how many times you actually went.\n\nEconomists followed 7,752 members of three US gyms over three years. People on monthly plans over $70 paid, on average, 70% more than paying per visit would have cost for the visits they actually made. People overestimated how often they'd go. (Three gyms, one study.)\n\nThe 10-second check: add up 3 months of fees and divide by your visits in those 3 months. More than the drop-in price? Check the cancellation fee, then switch.\n\nStudy: DellaVigna & Malmendier, \"Paying Not to Go to the Gym\", American Economic Review, 2006. Link in the comments.\n\nSend this to your friend with the gym membership. You know the one 🏋️\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #moneytips #gym #savingmoney #research",
+    "first_comment": "📄 The study: DellaVigna & Malmendier, \"Paying Not to Go to the Gym\", American Economic Review, 2006\nhttps://eml.berkeley.edu/%7Eulrike/Papers/gym.pdf",
+    "hypothesis": "hypotheses/2026-11-25.md",
+    "note": "Review video in reels/. Not approved."
+  },
+  {
+    "id": "2026-11-25-s8-minimum",
+    "kind": "main",
+    "status": "pending_review",
+    "post_date": "2026-11-25",
+    "file": "reels/2026-11-25-s8-minimum.mp4",
+    "spec": "hooks/2026-11-25-s8-minimum.json",
+    "format": "study",
+    "hook": "The smallest number on your card bill might be the most expensive one. It's the minimum payment. (Study Reel S8, faceless diagram, Jessica voice)",
+    "caption": "The smallest number on your card bill might be the most expensive one: the minimum payment.\n\nIn an experiment, UK cardholders were shown a card statement. Among people not paying in full, those who saw a minimum payment repaid about £99; those who never saw one repaid about £175. Almost double. (A lab experiment; a later study by the UK regulator tested it at larger scale.) Paying more each month clears the balance sooner, with less interest.\n\nTry it: set autopay to a fixed amount you choose, never \"minimum\".\n\nStudy: Neil Stewart, \"The Cost of Anchoring on Credit-Card Minimum Repayments\", Psychological Science, 2009. Link in the comments.\n\nSend this to anyone with autopay on minimum. It takes two minutes to change 💳\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #creditcard #debtfree #moneytips #research",
+    "first_comment": "📄 The study: Stewart, \"The Cost of Anchoring on Credit-Card Minimum Repayments\", Psychological Science, 2009\nhttps://wrap.warwick.ac.uk/id/eprint/2552",
+    "hypothesis": "hypotheses/2026-11-25.md",
+    "note": "Review video in reels/. Not approved."
   }
 ]

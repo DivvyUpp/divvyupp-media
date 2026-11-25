@@ -1,0 +1,63 @@
+{
+  "run": "create",
+  "date": "2026-11-25",
+  "attempts": [
+    {
+      "started_at": "2026-11-25T06:27:00-05:00",
+      "finished_at": "2026-11-25T06:38:43-05:00",
+      "status": "ok",
+      "trigger": "scheduled",
+      "summary": "Made three faceless diagram Study Reels from approved study-bank rows: S4 (locked savings, 81%), S7 (gym plans, 70% more than per-visit) and S8 (hiding the card minimum, £99 vs £175). Postmortem: byage-walk and same-account inconclusive at 72h (5 and 10 views); 0 sends on every Reel in 8 days; 0 Instagram landings on 11-24.",
+      "outputs": [
+        {
+          "label": "Hypothesis cards and script workshop",
+          "path": "hypotheses/2026-11-25.md"
+        },
+        {
+          "label": "Postmortem (byage-walk)",
+          "path": "hypotheses/2026-11-22.md"
+        },
+        {
+          "label": "Postmortem (same-account)",
+          "path": "hypotheses/2026-11-21.md"
+        },
+        {
+          "label": "Spec S4",
+          "path": "hooks/2026-11-25-s4-lock.json"
+        },
+        {
+          "label": "Spec S7",
+          "path": "hooks/2026-11-25-s7-gym.json"
+        },
+        {
+          "label": "Spec S8",
+          "path": "hooks/2026-11-25-s8-minimum.json"
+        },
+        {
+          "label": "Funnel 2026-11-24",
+          "path": "funnel/custom-2026-11-24_2026-11-24.json"
+        }
+      ],
+      "reels": [
+        {
+          "id": "2026-11-25-s4-lock",
+          "hook": "\"I'll just move it back. It's only this once.\" People offered a way to lock their savings saved 81% more.",
+          "status": "pending_review",
+          "file": "reels/2026-11-25-s4-lock.mp4"
+        },
+        {
+          "id": "2026-11-25-s7-gym",
+          "hook": "Divide your gym bill by how many times you actually went.",
+          "status": "pending_review",
+          "file": "reels/2026-11-25-s7-gym.mp4"
+        },
+        {
+          "id": "2026-11-25-s8-minimum",
+          "hook": "The smallest number on your card bill might be the most expensive one.",
+          "status": "pending_review",
+          "file": "reels/2026-11-25-s8-minimum.mp4"
+        }
+      ]
+    }
+  ]
+}

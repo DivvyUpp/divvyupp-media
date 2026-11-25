@@ -1,0 +1,347 @@
+{
+ "id": "2026-11-25-s7-gym",
+ "format": "diagram",
+ "voice": "elevenlabs:cjVigY5qzO86Huf0OWal:eleven_v3",
+ "speed": 1.15,
+ "max_gap": 0.3,
+ "scenes": [
+  {
+   "title": "try *this*",
+   "speed": 1.15,
+   "text": "Divide your gym bill by how many times you actually went. In one study, the big monthly plans cost seventy percent more than paying per visit.",
+   "elements": [
+    {
+     "type": "text",
+     "text": "gym bill",
+     "x": 540,
+     "y": 520,
+     "s": 70,
+     "w": "xb",
+     "at": 0
+    },
+    {
+     "type": "line",
+     "pts": [
+      [
+       300,
+       600
+      ],
+      [
+       780,
+       600
+      ]
+     ],
+     "col": "ink",
+     "width": 6,
+     "at": 0.1,
+     "dur": 0.4
+    },
+    {
+     "type": "text",
+     "text": "times you went",
+     "x": 540,
+     "y": 690,
+     "s": 70,
+     "w": "xb",
+     "col": "orange",
+     "at": "how many times"
+    },
+    {
+     "type": "text",
+     "text": "= what each workout really cost",
+     "x": 540,
+     "y": 810,
+     "s": 38,
+     "w": "b",
+     "col": "grey",
+     "at": "actually went"
+    },
+    {
+     "type": "text",
+     "text": "+70%",
+     "x": 540,
+     "y": 1060,
+     "s": 150,
+     "w": "xb",
+     "col": "orange",
+     "at": "seventy percent",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "vs paying per visit",
+     "x": 540,
+     "y": 1190,
+     "s": 40,
+     "w": "b",
+     "col": "grey",
+     "at": "paying per visit"
+    }
+   ]
+  },
+  {
+   "title": "why it *happens*",
+   "text": "We all say “I'll go more next month.” The fee comes out either way. It's not laziness. In the study, people guessed they'd go more than they did. Here's the ten-second check.",
+   "elements": [
+    {
+     "type": "chip",
+     "text": "“I'll go more next month.”",
+     "x": 400,
+     "y": 450,
+     "s": 40,
+     "at": 0
+    },
+    {
+     "type": "chip",
+     "text": "“I'll go more next month.”",
+     "x": 680,
+     "y": 570,
+     "s": 40,
+     "at": "next month"
+    },
+    {
+     "type": "chip",
+     "text": "fee: every month",
+     "style": "ink",
+     "x": 540,
+     "y": 720,
+     "s": 38,
+     "at": "fee comes out"
+    },
+    {
+     "type": "text",
+     "text": "laziness",
+     "x": 300,
+     "y": 930,
+     "s": 54,
+     "w": "xb",
+     "col": "grey",
+     "at": "not laziness",
+     "strike": "people guessed"
+    },
+    {
+     "type": "text",
+     "text": "guessing high",
+     "x": 780,
+     "y": 930,
+     "s": 54,
+     "w": "xb",
+     "col": "orange",
+     "at": "people guessed",
+     "pop": true
+    },
+    {
+     "type": "clock",
+     "x": 540,
+     "y": 1170,
+     "r": 60,
+     "at": "ten-second",
+     "dur": 1.0
+    }
+   ]
+  },
+  {
+   "title": "the *study*",
+   "text": "Economists followed seven thousand seven hundred fifty-two members of three US gyms, for three years.",
+   "elements": [
+    {
+     "type": "card",
+     "x": 80,
+     "y": 390,
+     "w": 920,
+     "h": 380,
+     "kicker": "AMERICAN ECONOMIC REVIEW · 2006",
+     "title": "Paying Not to Go to the Gym",
+     "title_s": 54,
+     "highlight": "followed",
+     "lines": [
+      "DellaVigna & Malmendier",
+      "7,752 members · 3 US gyms · 3 years"
+     ]
+    },
+    {
+     "type": "text",
+     "text": "7,752",
+     "x": 540,
+     "y": 990,
+     "s": 120,
+     "w": "xb",
+     "col": "orange",
+     "at": "seven thousand",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "gym members",
+     "x": 540,
+     "y": 1100,
+     "s": 40,
+     "w": "b",
+     "col": "grey",
+     "at": "members"
+    }
+   ]
+  },
+  {
+   "title": "the *result*",
+   "text": "Members on plans over seventy dollars a month paid, on average, seventy percent more than paying per visit, for the visits they actually made.",
+   "elements": [
+    {
+     "type": "bars",
+     "base": 1080,
+     "x0": 90,
+     "x1": 990,
+     "bars": [
+      {
+       "x": 170,
+       "w": 260,
+       "h": 330,
+       "col": "muted",
+       "label": "pay per visit",
+       "at": "Members on plans"
+      },
+      {
+       "x": 620,
+       "w": 260,
+       "h": 561,
+       "col": "orange",
+       "label": "monthly plan\nover $70",
+       "at": "Members on plans"
+      }
+     ],
+     "gain": {
+      "from": 0,
+      "to": 1,
+      "text": "+{v}%",
+      "value": 70,
+      "at": "seventy percent"
+     },
+     "note": {
+      "text": "average · same visits · three US gyms",
+      "y": 1235,
+      "x": 540,
+      "at": "on average"
+     }
+    }
+   ]
+  },
+  {
+   "title": "do *this*",
+   "text": "Add up three months of fees, and divide by your visits in those three months. More than the drop-in price? Check the cancellation fee, then switch.",
+   "elements": [
+    {
+     "type": "panel",
+     "x": 120,
+     "y": 400,
+     "w": 840,
+     "h": 620,
+     "at": 0
+    },
+    {
+     "type": "text",
+     "text": "3 months of fees",
+     "x": 540,
+     "y": 520,
+     "s": 56,
+     "w": "xb",
+     "at": "three months of fees"
+    },
+    {
+     "type": "line",
+     "pts": [
+      [
+       260,
+       600
+      ],
+      [
+       820,
+       600
+      ]
+     ],
+     "col": "ink",
+     "width": 6,
+     "at": "divide",
+     "dur": 0.4
+    },
+    {
+     "type": "text",
+     "text": "visits in those 3 months",
+     "x": 540,
+     "y": 680,
+     "s": 50,
+     "w": "xb",
+     "col": "orange",
+     "at": "your visits"
+    },
+    {
+     "type": "text",
+     "text": "more than drop-in?",
+     "x": 540,
+     "y": 850,
+     "s": 46,
+     "w": "b",
+     "col": "grey",
+     "at": "More than the drop-in"
+    },
+    {
+     "type": "chip",
+     "text": "check the cancel fee, then switch",
+     "style": "orange",
+     "x": 540,
+     "y": 940,
+     "s": 38,
+     "at": "cancellation fee"
+    }
+   ]
+  },
+  {
+   "title": "send *it*",
+   "text": "[playful] Send this to your friend with the gym membership. You know the one.",
+   "elements": [
+    {
+     "type": "avatar",
+     "x": 300,
+     "y": 620,
+     "r": 90,
+     "label": "you",
+     "instant": true
+    },
+    {
+     "type": "avatar",
+     "x": 780,
+     "y": 620,
+     "r": 90,
+     "label": "that friend",
+     "tone": "ink",
+     "at": "your friend"
+    },
+    {
+     "type": "curve",
+     "p0": [
+      390,
+      620
+     ],
+     "c": [
+      540,
+      520
+     ],
+     "p1": [
+      690,
+      620
+     ],
+     "at": "Send this"
+    },
+    {
+     "type": "ticket",
+     "x": 540,
+     "y": 1010,
+     "w": 600,
+     "h": 200,
+     "title": "Gym check",
+     "sub": "fees ÷ visits",
+     "at": "gym membership"
+    }
+   ]
+  }
+ ]
+}

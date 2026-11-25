@@ -60,7 +60,11 @@ def F(w, s):
     """Font at supersampled size. w: m|b|xb (Plus Jakarta Sans) or serif|serif_b (Georgia italic)."""
     if w in SERIF:
         k = (w, int(s))
-        if k not in _sf: _sf[k] = ImageFont.truetype(SERIF[w], int(s * S))
+        if k not in _sf:
+            path = SERIF[w]
+            if not os.path.exists(path):  # Linux (cloud runs): Liberation Serif has the same metrics family
+                path = "/usr/share/fonts/truetype/liberation/LiberationSerif-%s.ttf" % ("BoldItalic" if w == "serif_b" else "Italic")
+            _sf[k] = ImageFont.truetype(path, int(s * S))
         return _sf[k]
     return _font(w, s * S)
 
