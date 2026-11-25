@@ -424,13 +424,14 @@
   "kind": "main",
   "status": "pending_review",
   "post_date": "2026-11-25",
-  "file": "reels/2026-11-25-s8-minimum.mp4",
-  "spec": "hooks/2026-11-25-s8-minimum.json",
+  "file": "reels/2026-11-25-s8-minimum-v2.mp4",
+  "spec": "hooks/2026-11-25-s8-minimum-v2.json",
   "format": "study",
-  "hook": "The smallest number on your card bill might be the most expensive one. It's the minimum payment. (Study Reel S8, faceless diagram, Jessica voice)",
+  "hook": "Paying close to the minimum on your credit card, month after month? (Study Reel S8 v2: research-backed money tip #5)",
   "caption": "The smallest number on your card bill might be the most expensive one: the minimum payment.\n\nIn an experiment, UK cardholders were shown a card statement. Among people not paying in full, those who saw a minimum payment repaid about £99; those who never saw one repaid about £175. Almost double. (A lab experiment; a later study by the UK regulator tested it at larger scale.) Paying more each month clears the balance sooner, with less interest.\n\nTry it: set autopay to a fixed amount you choose, never \"minimum\".\n\nStudy: Neil Stewart, \"The Cost of Anchoring on Credit-Card Minimum Repayments\", Psychological Science, 2009. Link in the comments.\n\nSend this to anyone with autopay on minimum. It takes two minutes to change 💳\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #creditcard #debtfree #moneytips #research",
   "first_comment": "📄 The study: Stewart, \"The Cost of Anchoring on Credit-Card Minimum Repayments\", Psychological Science, 2009\nhttps://wrap.warwick.ac.uk/id/eprint/2552",
   "hypothesis": "hypotheses/2026-11-25.md",
-  "note": "Review video in reels/. Not approved."
+  "note": "v2 for review (Srini asked 2026-11-25 for the S4/S7 v2 treatment): habit hook, research-backed money tip #5 teaser. Not approved.",
+  "file_before_v2": "reels/2026-11-25-s8-minimum.mp4"
  }
 ]

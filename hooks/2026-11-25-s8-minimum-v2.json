@@ -1,0 +1,379 @@
+{
+ "id": "2026-11-25-s8-minimum-v2",
+ "format": "diagram",
+ "voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "speed": 1.15,
+ "max_gap": 0.3,
+ "scenes": [
+  {
+   "title": "sound *familiar*?",
+   "text": "[curious] Paying close to the minimum on your credit card, month after month?",
+   "elements": [
+    {
+     "type": "panel",
+     "x": 160,
+     "y": 400,
+     "w": 760,
+     "h": 560,
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "CARD STATEMENT",
+     "x": 220,
+     "y": 480,
+     "s": 30,
+     "w": "xb",
+     "col": "grey",
+     "align": "l",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "New balance",
+     "x": 220,
+     "y": 600,
+     "s": 44,
+     "w": "b",
+     "align": "l",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Minimum payment due",
+     "x": 220,
+     "y": 740,
+     "s": 48,
+     "w": "xb",
+     "col": "orange",
+     "align": "l",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "chip",
+     "text": "“I'll pay more next month.”",
+     "style": "quote",
+     "x": 540,
+     "y": 1060,
+     "s": 40,
+     "at": "month after month"
+    }
+   ]
+  },
+  {
+   "title": "money *tip*",
+   "text": "Here's a research-backed money tip. In one experiment, people who never saw the minimum paid almost double.",
+   "elements": [
+    {
+     "type": "tag",
+     "x": 540,
+     "y": 560,
+     "s": 58,
+     "dx": 80,
+     "lines": [
+      {
+       "text": "RESEARCH-BACKED",
+       "style": "ink"
+      },
+      {
+       "text": "MONEY TIP #5",
+       "style": "orange"
+      }
+     ],
+     "at": 0
+    },
+    {
+     "type": "text",
+     "text": "paid almost 2x",
+     "x": 540,
+     "y": 830,
+     "s": 110,
+     "w": "xb",
+     "col": "orange",
+     "at": "never saw",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "in a lab experiment with UK cardholders",
+     "x": 540,
+     "y": 940,
+     "s": 36,
+     "w": "b",
+     "col": "grey",
+     "at": "almost double"
+    }
+   ]
+  },
+  {
+   "title": "why it *happens*",
+   "text": "That number pulls your payment toward it, and the balance barely moves. It's not you. The minimum works like an anchor.",
+   "elements": [
+    {
+     "type": "chip",
+     "text": "minimum",
+     "style": "ink",
+     "x": 540,
+     "y": 900,
+     "s": 44,
+     "at": 0
+    },
+    {
+     "type": "chip",
+     "text": "your payment",
+     "style": "quote",
+     "x": 540,
+     "y": 520,
+     "s": 40,
+     "at": "pulls your payment"
+    },
+    {
+     "type": "curve",
+     "p0": [
+      540,
+      580
+     ],
+     "c": [
+      540,
+      720
+     ],
+     "p1": [
+      540,
+      840
+     ],
+     "at": "pulls your payment"
+    },
+    {
+     "type": "text",
+     "text": "balance barely moves",
+     "x": 540,
+     "y": 1060,
+     "s": 44,
+     "w": "xb",
+     "col": "grey",
+     "at": "barely moves",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "an anchor",
+     "x": 540,
+     "y": 1220,
+     "s": 60,
+     "w": "xb",
+     "col": "orange",
+     "at": "like an anchor",
+     "pop": true
+    }
+   ]
+  },
+  {
+   "title": "the *study*",
+   "text": "UK cardholders were shown a card statement. Some saw a minimum payment. Some didn't.",
+   "elements": [
+    {
+     "type": "card",
+     "x": 80,
+     "y": 390,
+     "w": 920,
+     "h": 400,
+     "kicker": "PSYCHOLOGICAL SCIENCE · 2009",
+     "title": "The Cost of Anchoring",
+     "subtitle": "on credit-card minimum repayments",
+     "highlight": "card statement",
+     "lines": [
+      "Neil Stewart",
+      "Lab experiment · UK cardholders"
+     ]
+    },
+    {
+     "type": "panel",
+     "x": 100,
+     "y": 860,
+     "w": 420,
+     "h": 250,
+     "at": "Some saw"
+    },
+    {
+     "type": "text",
+     "text": "minimum shown",
+     "x": 310,
+     "y": 985,
+     "s": 40,
+     "w": "xb",
+     "at": "Some saw"
+    },
+    {
+     "type": "panel",
+     "x": 560,
+     "y": 860,
+     "w": 420,
+     "h": 250,
+     "accent": true,
+     "at": "Some didn't"
+    },
+    {
+     "type": "text",
+     "text": "no minimum",
+     "x": 770,
+     "y": 985,
+     "s": 40,
+     "w": "xb",
+     "col": "orange",
+     "at": "Some didn't"
+    }
+   ]
+  },
+  {
+   "title": "the *result*",
+   "text": "Among people not paying in full, those shown the minimum paid about ninety-nine pounds. Those who never saw it paid about a hundred seventy-five. Almost double.",
+   "elements": [
+    {
+     "type": "bars",
+     "base": 1080,
+     "x0": 90,
+     "x1": 990,
+     "bars": [
+      {
+       "x": 170,
+       "w": 260,
+       "h": 300,
+       "col": "muted",
+       "label": "minimum\nshown",
+       "at": "Among people"
+      },
+      {
+       "x": 620,
+       "w": 260,
+       "h": 530,
+       "col": "orange",
+       "label": "no minimum\nshown",
+       "at": "Among people"
+      }
+     ],
+     "note": {
+      "text": "lab experiment · people not paying in full",
+      "y": 1235,
+      "x": 540,
+      "at": "Almost double"
+     }
+    },
+    {
+     "type": "text",
+     "text": "£99",
+     "x": 300,
+     "y": 730,
+     "s": 64,
+     "w": "xb",
+     "col": "grey",
+     "at": "ninety-nine",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "£175",
+     "x": 750,
+     "y": 500,
+     "s": 72,
+     "w": "xb",
+     "col": "orange",
+     "at": "hundred seventy-five",
+     "pop": true
+    },
+    {
+     "type": "chip",
+     "text": "almost double",
+     "style": "orange",
+     "x": 520,
+     "y": 420,
+     "s": 34,
+     "at": "Almost double"
+    }
+   ]
+  },
+  {
+   "title": "do *this*",
+   "text": "One lab experiment, but paying more each month clears the balance sooner, with less interest. So set autopay to a fixed amount you choose. Never “minimum.”",
+   "elements": [
+    {
+     "type": "accounts",
+     "x": 210,
+     "y": 390,
+     "w": 660,
+     "h": 740,
+     "title": "Autopay",
+     "at": 0,
+     "rows": [
+      {
+       "label": "CARD AUTOPAY",
+       "from": "Minimum payment",
+       "to": "Fixed: amount I choose",
+       "swap": "fixed amount",
+       "icon": "$",
+       "s": 38
+      },
+      {
+       "label": "CLEARS THE BALANCE",
+       "from": "Sooner, less interest",
+       "icon": "+",
+       "s": 38
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "send *it*",
+   "text": "[warm] Send this to anyone with autopay on minimum. It takes two minutes to change.",
+   "elements": [
+    {
+     "type": "avatar",
+     "x": 300,
+     "y": 620,
+     "r": 90,
+     "label": "you",
+     "instant": true
+    },
+    {
+     "type": "avatar",
+     "x": 780,
+     "y": 620,
+     "r": 90,
+     "label": "them",
+     "tone": "ink",
+     "at": "anyone"
+    },
+    {
+     "type": "curve",
+     "p0": [
+      390,
+      620
+     ],
+     "c": [
+      540,
+      520
+     ],
+     "p1": [
+      690,
+      620
+     ],
+     "at": "Send this"
+    },
+    {
+     "type": "clock",
+     "x": 540,
+     "y": 1000,
+     "r": 70,
+     "at": "two minutes",
+     "dur": 1.0,
+     "label": "2 minutes"
+    }
+   ]
+  }
+ ],
+ "note": "v2 (Srini 2026-11-25): habit question hook, then \"research-backed money tip #5\" with the payoff, method held back until the end (same treatment as S4 v2 and S7 v2)."
+}
