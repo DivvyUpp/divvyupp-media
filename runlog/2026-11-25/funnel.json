@@ -1,0 +1,19 @@
+{
+ "run": "funnel",
+ "date": "2026-11-25",
+ "attempts": [
+  {
+   "started_at": "2026-11-25T06:30:18-05:00",
+   "finished_at": "2026-11-25T06:30:18-05:00",
+   "status": "ok",
+   "trigger": "manual",
+   "summary": "Funnel one-day export for 2026-11-24: wrote funnel/custom-2026-11-24_2026-11-24.json.",
+   "outputs": [
+    {
+     "label": "Funnel export",
+     "path": "funnel/custom-2026-11-24_2026-11-24.json"
+    }
+   ]
+  }
+ ]
+}
