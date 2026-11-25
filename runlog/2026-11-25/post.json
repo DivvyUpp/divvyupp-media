@@ -40,6 +40,32 @@
           "permalink": "https://www.instagram.com/reel/DgLB52VIjzG/"
         }
       ]
+    },
+    {
+      "started_at": "2026-11-25T16:57:00-05:00",
+      "finished_at": "2026-11-25T17:00:01-05:00",
+      "status": "partial",
+      "trigger": "scheduled",
+      "summary": "5pm slot: posted Study Reel S7 v2 (2026-11-25-s7-gym, gym bill per visit, research-backed money tip #4) to Instagram with its first comment.",
+      "blocker": "YouTube rate-limited the S7 upload (Windsor youtube upload_video); not retried. YouTube backfill still paused (unmatched video on the channel). Pin the first comment by hand in Instagram.",
+      "outputs": [
+        {
+          "label": "Queue",
+          "path": "queue.json"
+        },
+        {
+          "label": "Experiment log",
+          "path": "experiment-log.csv"
+        }
+      ],
+      "reels": [
+        {
+          "id": "2026-11-25-s7-gym",
+          "hook": "Paying seventy dollars or more a month for a gym you barely go to?",
+          "status": "posted",
+          "file": "reels/2026-11-25-s7-gym-v2.mp4"
+        }
+      ]
     }
   ]
 }
