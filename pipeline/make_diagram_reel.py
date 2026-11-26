@@ -38,6 +38,13 @@ Element types (coordinates are 1080x1920 frame pixels):
   line    pts [col] [width] [dash] [dur]
   dot     x y [r] [col] [pulse]
   statement x y w h [issuer] [acct] [rows] [hl: at] [hl_row] [warnings]   card statement Payment Information box
+  couple  x y h [gap] [show: both|him|her] moods:[{at, him, her}] [labels:[l, r]] [q]   Style C couple (Srini picked
+          2026-11-26), sprites from pipeline/couple_sprites.js; moods happy|neutral|worried|sad|confused; a mood
+          change gives a little bounce; q draws an orange "?" over confused faces
+Spec options (2026-11-26, Srini): "cap_style": "karaoke" draws the spoken words in a dark box, the current word on an
+orange pill and upcoming words dimmed, so captions read as speech, not as part of the diagram. A scene's
+"cap_split": "sentence" keeps whole sentences together (up to "cap_max" words, default 12) so a still frame such as
+the cover carries the full thought. "--cover" writes reels/<id>_cover.jpg at the spec's "cover_at" ([scene, phrase]).
 Every element must sit outside the Instagram safe zones (PLAYBOOK checklist 10); --check shades them red.
 """
 import json, math, os, re, subprocess, sys
@@ -445,7 +452,38 @@ def e_dot(cv, e, t, T):
         ph = ((t - T.t_in(e)) % 1.4) / 1.4; cv.circle(x, y, r + 28 * ph, fill=col, k=k * 0.3 * (1 - ph))
     cv.circle(x, y, r * (0.5 + 0.5 * back(T.u(e, t, 0.4))), fill=col, k=k)
 
-DRAW = {"text": e_text, "chip": e_chip, "chart": e_chart, "card": e_card, "panel": e_panel, "bars": e_bars, "lock": e_lock,
+_spr = {}
+def sprite(who, mood, h):
+    k = (who, mood, int(h))
+    if k not in _spr:
+        im = Image.open(os.path.join(HERE, "assets", "characters", "couple_c", f"{who}_{mood}.png")).convert("RGBA")
+        _spr[k] = im.resize((int(im.width * h * S / im.height), int(h * S)), Image.LANCZOS)
+    return _spr[k]
+
+def e_couple(cv, e, t, T):
+    u = T.u(e, t, 0.5); k = T.fade(e, t) * clamp(u * 3)
+    if k <= 0: return
+    h, gap = e.get("h", 240), e.get("gap", e.get("h", 240) * 0.66); show = e.get("show", "both")
+    cur, since = {"him": "neutral", "her": "neutral"}, {"him": -9.0, "her": -9.0}
+    for m in e.get("moods", []):
+        tm = T.anchor(m.get("at", 0))
+        if t >= tm:
+            for who in ("him", "her"):
+                if who in m and m[who] != cur[who]: cur[who] = m[who]; since[who] = tm
+    for i, who in enumerate(("him", "her")):
+        if show not in ("both", who): continue
+        cx = e["x"] + ((i - 0.5) * gap if show == "both" else 0)
+        b = t - since[who]; bounce = math.sin(min(b / 0.35, 1) * math.pi) * 0.06 if 0 <= b < 0.35 else 0.0
+        sc = (0.6 + 0.4 * back(u)) * (1 + bounce); hh = h * sc
+        im = sprite(who, cur[who], hh)
+        if k < 1: im = im.copy(); im.putalpha(im.getchannel("A").point(lambda v: int(v * k)))
+        x0, y0 = cx - im.width / S / 2, e["y"] + h / 2 - hh               # feet stay on the floor line
+        cv.im.paste(im, (int(x0 * S), int(y0 * S)), im)
+        if e.get("q") and cur[who] == "confused": cv.text(cx + hh * 0.33, y0 + hh * 0.12, "?", F("xb", hh * 0.16), ORANGE, k)
+        if e.get("labels"): cv.text(cx, e["y"] + h / 2 + 40, e["labels"][i], F("xb", 38), INK, k)
+    cv.d = ImageDraw.Draw(cv.im, "RGBA")
+
+DRAW = {"couple": e_couple, "text": e_text, "chip": e_chip, "chart": e_chart, "card": e_card, "panel": e_panel, "bars": e_bars, "lock": e_lock,
         "target": e_target, "qring": e_qring, "accounts": e_accounts, "avatar": e_avatar, "curve": e_curve,
         "ticket": e_ticket, "tag": e_tag, "clock": e_clock, "line": e_line, "dot": e_dot, "statement": e_statement}
 
@@ -516,19 +554,47 @@ def captions(sc, words):
     """Split a scene's words into caption chunks at punctuation; a phrase over 8 words is split into even halves,
     so no chunk is a lone leftover word."""
     phrases, cur = [], []
+    sentence = sc.get("cap_split") == "sentence"; mx = sc.get("cap_max", 12) if sentence else 8
     for w in words:
         cur.append(w)
-        if re.search(r"[.,?!:;]['\"”’]?$", w[0]): phrases.append(cur); cur = []
+        if re.search(r"[.?!:;]['\"”’]?$" if sentence else r"[.,?!:;]['\"”’]?$", w[0]): phrases.append(cur); cur = []
     if cur: phrases.append(cur)
     chunks = []
     for p in phrases:
-        n = max(1, math.ceil(len(p) / 8)); size = math.ceil(len(p) / n)
+        n = max(1, math.ceil(len(p) / mx)); size = math.ceil(len(p) / n)
         chunks += [p[i:i + size] for i in range(0, len(p), size)]
     merged = []
     for c in chunks:                                   # a 1-2 word phrase joins the previous chunk if it fits
         if merged and len(c) <= 2 and len(merged[-1]) + len(c) <= 9: merged[-1] = merged[-1] + c
         else: merged.append(c)
-    return [(c[0][1], " ".join(x[0] for x in c)) for c in merged]
+    return [(c[0][1], " ".join(x[0] for x in c), c) for c in merged]
+
+def karaoke(cv, cap, t):
+    """Spoken words in a dark box: said words white, the current word on an orange pill, upcoming words dimmed."""
+    st, _, ws = cap; kc = ease((t - st + 0.04) / 0.12); size = 48; f = F("xb", size); sp = cv.tl(" ", f) + 8; lh = 72
+    def lay(maxw):
+        out, cur, cw = [], [], 0.0
+        for w in ws:
+            tw = cv.tl(w[0], f)
+            if cur and cw + sp + tw > maxw: out.append(cur); cur, cw = [], 0.0
+            cw += (sp if cur else 0) + tw; cur.append((w, tw))
+        return out + ([cur] if cur else [])
+    lines = lay(CAP_W - 60); n = len(lines); mw = CAP_W - 60
+    while n > 1 and len(lay(mw - 10)) == n: mw -= 10        # balance the lines: no lone word on the last line
+    lines = lay(mw)
+    bw = max(sum(tw for _, tw in l) + sp * (len(l) - 1) for l in lines) + 64; bh = lh * len(lines) + 34
+    cy = min(CAP_Y, 1640 - bh / 2) + (1 - ease((t - st + 0.04) / 0.14)) * 14; b = [CAP_CX - bw / 2, cy - bh / 2, CAP_CX + bw / 2, cy + bh / 2]
+    cv.shadow(b, 26, kc, blur=16, dy=8, alpha=0.22); cv.rect(b, 26, fill=INK, k=kc * 0.94)
+    now = [w for w, _ in sum(lines, []) if w[1] <= t + 0.03]; cur_w = now[-1] if now else None
+    for li, l in enumerate(lines):
+        x = CAP_CX - (sum(tw for _, tw in l) + sp * (len(l) - 1)) / 2; y = cy - bh / 2 + 17 + lh * li + lh / 2
+        for w, tw in l:
+            said = w[1] <= t + 0.03
+            if w is cur_w:
+                u = clamp((t - w[1] + 0.03) / 0.12); pad = 10 + 4 * (1 - u)
+                cv.rect([x - pad, y - size * 0.62 - 2, x + tw + pad, y + size * 0.62 - 2], 14, fill=ORANGE, k=kc)
+            cv.text(x, y, w[0], f, WHITE, kc * (1.0 if said else 0.42), anchor="lm")
+            x += tw + sp
 
 def click(n, gain):
     t = np.arange(int(0.06 * SR)) / SR
@@ -576,8 +642,9 @@ def main():
         kt = 1.0 if (prev == sc["title"] or j == 0) else ease((t - sc["t0"]) / 0.3)
         rich(cv, W / 2, TITLE_Y, sc["title"], 44, kt)
         cur = [c for c in caps if c[0] <= t + 0.04]
-        if cur:
-            st, s = cur[-1]; kc = ease((t - st + 0.04) / 0.1); f = F("b", 50)
+        if cur and spec.get("cap_style") == "karaoke": karaoke(cv, cur[-1], t)
+        elif cur:
+            st, s, _ = cur[-1]; kc = ease((t - st + 0.04) / 0.1); f = F("b", 50)
             lines = wrap(cv, strip_tags(s), f, CAP_W)
             for li, l in enumerate(lines): cv.text(CAP_CX, CAP_Y - (len(lines) - 1) * 31 + li * 62, l, f, INK, kc, rise=6)
         return cv.out()
@@ -587,6 +654,9 @@ def main():
         for b in [(0, 0, W, 255), (0, 1660, W, H), (905, 1150, W, H), (0, 0, 55, H), (W - 55, 0, W, H)]: d.rectangle(b, fill=(255, 0, 0, 45))
         return Image.alpha_composite(im, ov).convert("RGB")
 
+    if "--cover" in sys.argv:
+        j, ph = spec["cover_at"]; tc = scenes[j]["_T"].anchor(ph) + 0.25
+        out = os.path.join(ROOT, "reels", rid + "_cover.jpg"); draw(tc).save(out, quality=92); print(out, f"{tc:.2f}s"); return
     if check or at:
         times = at or [min((sc["t0"] + sc["t1"]) / 2 + 0.8, sc["t1"] - 0.05) for sc in scenes]
         sz = (W // 2, H // 2) if at else (W // 3, H // 3); ims = [zones(draw(x)).resize(sz) for x in times]

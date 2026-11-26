@@ -447,13 +447,16 @@
   "kind": "main",
   "status": "pending_review",
   "post_date": "2026-11-26",
-  "file": "reels/2026-11-26-s10-joint.mp4",
+  "file": "reels/2026-11-26-s10-joint-v2.mp4",
   "spec": "hooks/2026-11-26-s10-joint.json",
   "format": "study",
   "hook": "Half the bills on your card, half on theirs, and nobody knows what's left? (Study Reel S10: research-backed money tip #6)",
   "caption": "Half the bills on your card, half on theirs, and nobody knows what's left?\n\nIn a two-year experiment, 230 engaged or newly married couples were randomly given a joint account, separate accounts, or their own choice. The joint-account couples kept their relationship quality and fought less about money; the others showed the usual decline. (About 1 in 5 couples dropped out, and the researchers don't say merge everything.)\n\nTry it: open one shared account for shared costs, and keep your own too.\n\nStudy: Olson, Rick, Small & Finkel, Journal of Consumer Research, 2023. Link in the comments.\n\nSend this to your partner, and set it up together 🤝\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #couplesandmoney #moneytips #relationships #research",
   "first_comment": "📄 The study: Olson, Rick, Small & Finkel, Journal of Consumer Research, 2023 (Kellogg Insight summary)\nhttps://insight.kellogg.northwestern.edu/article/key-to-happy-marriage-joint-bank-account",
-  "hypothesis": "hypotheses/2026-11-26.md"
+  "hypothesis": "hypotheses/2026-11-26.md",
+  "file_before_v2": "reels/2026-11-26-s10-joint.mp4",
+  "cover": "Tip #6 frame at 12.1 s (tip + result + full caption sentence); still at reels/2026-11-26-s10-joint_cover.jpg once approved",
+  "note": "v2 for review (Srini, 2026-11-26): caveat cut from the voice-over; Style C couple through the story; bigger hook; karaoke captions; tip #6 frame now names the tip (open one joint account) and the result, for the cover."
  },
  {
   "id": "2026-11-26-s11-fights",

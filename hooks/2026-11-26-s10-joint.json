@@ -11,31 +11,52 @@
    "elements": [
     {
      "type": "text",
-     "text": "Half on your card, half on theirs,",
+     "text": "Half on your card,",
      "x": 540,
-     "y": 400,
-     "s": 48,
+     "y": 410,
+     "s": 80,
      "w": "xb",
      "at": 0,
      "instant": true
     },
     {
      "type": "text",
-     "text": "and nobody knows what's left?",
+     "text": "half on theirs.",
      "x": 540,
-     "y": 470,
-     "s": 48,
+     "y": 505,
+     "s": 80,
      "w": "xb",
      "at": 0,
-     "col": "orange",
      "instant": true
+    },
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 695,
+     "h": 250,
+     "gap": 480,
+     "at": 0,
+     "instant": true,
+     "q": true,
+     "moods": [
+      {
+       "at": 0,
+       "him": "confused",
+       "her": "confused"
+      },
+      {
+       "at": "nobody knows",
+       "him": "worried",
+       "her": "worried"
+      }
+     ]
     },
     {
      "type": "panel",
      "x": 110,
-     "y": 580,
+     "y": 830,
      "w": 380,
-     "h": 330,
+     "h": 270,
      "at": 0,
      "instant": true
     },
@@ -43,7 +64,7 @@
      "type": "text",
      "text": "Your card",
      "x": 300,
-     "y": 650,
+     "y": 885,
      "s": 40,
      "w": "xb",
      "at": 0,
@@ -53,7 +74,7 @@
      "type": "text",
      "text": "Rent ½",
      "x": 300,
-     "y": 730,
+     "y": 950,
      "s": 32,
      "w": "m",
      "at": 0,
@@ -64,7 +85,7 @@
      "type": "text",
      "text": "Groceries",
      "x": 300,
-     "y": 780,
+     "y": 998,
      "s": 32,
      "w": "m",
      "at": 0,
@@ -75,7 +96,7 @@
      "type": "text",
      "text": "Internet",
      "x": 300,
-     "y": 830,
+     "y": 1046,
      "s": 32,
      "w": "m",
      "at": 0,
@@ -85,9 +106,9 @@
     {
      "type": "panel",
      "x": 590,
-     "y": 580,
+     "y": 830,
      "w": 380,
-     "h": 330,
+     "h": 270,
      "accent": true,
      "at": 0,
      "instant": true
@@ -96,7 +117,7 @@
      "type": "text",
      "text": "Their card",
      "x": 780,
-     "y": 650,
+     "y": 885,
      "s": 40,
      "w": "xb",
      "at": 0,
@@ -106,7 +127,7 @@
      "type": "text",
      "text": "Rent ½",
      "x": 780,
-     "y": 730,
+     "y": 950,
      "s": 32,
      "w": "m",
      "at": 0,
@@ -117,7 +138,7 @@
      "type": "text",
      "text": "Power bill",
      "x": 780,
-     "y": 780,
+     "y": 998,
      "s": 32,
      "w": "m",
      "at": 0,
@@ -128,7 +149,7 @@
      "type": "text",
      "text": "Takeout",
      "x": 780,
-     "y": 830,
+     "y": 1046,
      "s": 32,
      "w": "m",
      "at": 0,
@@ -136,32 +157,25 @@
      "instant": true
     },
     {
-     "type": "qring",
-     "x": 540,
-     "y": 1090,
-     "r": 90,
-     "at": "nobody knows"
-    },
-    {
      "type": "chip",
-     "text": "what's left?",
+     "text": "Nobody knows what's left?",
      "style": "orange",
      "x": 540,
-     "y": 1240,
-     "s": 40,
-     "at": "what's left"
+     "y": 1200,
+     "s": 44,
+     "at": "nobody knows"
     }
    ]
   },
   {
    "title": "money *tip*",
-   "text": "Here's a research-backed money tip. In a two-year experiment, couples who made one change stayed happier. The others got less happy.",
+   "text": "Here's research-backed money tip number six. Open one joint account. Over two years, couples with a joint account stayed happier. The others got less happy.",
    "elements": [
     {
      "type": "tag",
      "x": 540,
-     "y": 560,
-     "s": 58,
+     "y": 470,
+     "s": 54,
      "dx": 80,
      "lines": [
       {
@@ -177,26 +191,55 @@
     },
     {
      "type": "text",
-     "text": "one change",
+     "text": "Open one",
      "x": 540,
-     "y": 830,
-     "s": 110,
+     "y": 660,
+     "s": 64,
      "w": "xb",
-     "at": "one change",
-     "col": "orange",
-     "pop": true
+     "at": "Open one"
     },
     {
      "type": "text",
-     "text": "happier couples · 2-year experiment",
+     "text": "joint account",
      "x": 540,
-     "y": 940,
+     "y": 755,
+     "s": 100,
+     "w": "xb",
+     "col": "orange",
+     "at": "joint account",
+     "pop": true
+    },
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 980,
+     "h": 250,
+     "gap": 180,
+     "at": "Open one",
+     "moods": [
+      {
+       "at": 0,
+       "him": "neutral",
+       "her": "neutral"
+      },
+      {
+       "at": "stayed happier",
+       "him": "happy",
+       "her": "happy"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "text": "Couples stayed happier · 2-year experiment",
+     "x": 540,
+     "y": 1145,
      "s": 36,
      "w": "b",
-     "at": "stayed happier",
-     "col": "grey"
+     "at": "stayed happier"
     }
-   ]
+   ],
+   "cap_split": "sentence"
   },
   {
    "title": "the *study*",
@@ -222,7 +265,7 @@
      "type": "chip",
      "text": "joint account",
      "style": "orange",
-     "x": 540,
+     "x": 650,
      "y": 900,
      "s": 40,
      "at": "a joint account"
@@ -231,7 +274,7 @@
      "type": "chip",
      "text": "separate accounts",
      "style": "soft",
-     "x": 540,
+     "x": 650,
      "y": 1000,
      "s": 40,
      "at": "separate accounts"
@@ -240,16 +283,31 @@
      "type": "chip",
      "text": "their own choice",
      "style": "soft",
-     "x": 540,
+     "x": 650,
      "y": 1100,
      "s": 40,
      "at": "own choice"
+    },
+    {
+     "type": "couple",
+     "x": 190,
+     "y": 1000,
+     "h": 180,
+     "gap": 125,
+     "at": 0,
+     "moods": [
+      {
+       "at": 0,
+       "him": "neutral",
+       "her": "neutral"
+      }
+     ]
     }
    ]
   },
   {
    "title": "the *result*",
-   "text": "After two years, the joint-account couples had kept their relationship quality, and fought less about money. The others showed the usual decline. One caveat: about one in five couples dropped out.",
+   "text": "After two years, the joint-account couples had kept their relationship quality, and fought less about money. The others showed the usual decline.",
    "elements": [
     {
      "type": "chart",
@@ -313,20 +371,25 @@
      "type": "chip",
      "text": "fewer money fights",
      "style": "orange",
-     "x": 540,
-     "y": 1120,
+     "x": 650,
+     "y": 1160,
      "s": 38,
      "at": "fought less"
     },
     {
-     "type": "text",
-     "text": "about 1 in 5 couples dropped out",
-     "x": 540,
-     "y": 1230,
-     "s": 30,
-     "w": "m",
-     "at": "dropped out",
-     "col": "grey"
+     "type": "couple",
+     "x": 190,
+     "y": 1160,
+     "h": 180,
+     "gap": 125,
+     "at": "kept their relationship",
+     "moods": [
+      {
+       "at": 0,
+       "him": "happy",
+       "her": "happy"
+      }
+     ]
     }
    ]
   },
@@ -364,6 +427,21 @@
        "s": 38
       }
      ]
+    },
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 1345,
+     "h": 170,
+     "gap": 130,
+     "at": "keep your own",
+     "moods": [
+      {
+       "at": 0,
+       "him": "happy",
+       "her": "happy"
+      }
+     ]
     }
    ]
   },
@@ -372,27 +450,30 @@
    "text": "[warm] Send this to your partner, and set it up together.",
    "elements": [
     {
-     "type": "avatar",
-     "x": 300,
-     "y": 620,
-     "r": 90,
-     "label": "you",
-     "instant": true
-    },
-    {
-     "type": "avatar",
-     "x": 780,
-     "y": 620,
-     "r": 90,
-     "label": "your partner",
-     "tone": "ink",
-     "at": "your partner"
+     "type": "couple",
+     "x": 540,
+     "y": 640,
+     "h": 260,
+     "gap": 480,
+     "at": 0,
+     "instant": true,
+     "labels": [
+      "you",
+      "your partner"
+     ],
+     "moods": [
+      {
+       "at": 0,
+       "him": "happy",
+       "her": "happy"
+      }
+     ]
     },
     {
      "type": "curve",
      "p0": [
       300,
-      790
+      830
      ],
      "c": [
       300,
@@ -408,7 +489,7 @@
      "type": "curve",
      "p0": [
       780,
-      790
+      830
      ],
      "c": [
       780,
@@ -433,5 +514,10 @@
    ]
   }
  ],
- "note": "Study bank S10 (Olson, Rick, Small & Finkel, JCR 2023). Hook = A11 (round 2; both personas STOP)."
+ "note": "Study bank S10 (Olson, Rick, Small & Finkel, JCR 2023). Hook = A11 (round 2; both personas STOP). v2 (Srini, 2026-11-26): caveat cut; Style C couple through the story; bigger hook; karaoke captions; tip #6 frame names the tip and the result as the cover.",
+ "cap_style": "karaoke",
+ "cover_at": [
+  1,
+  "stayed happier"
+ ]
 }
