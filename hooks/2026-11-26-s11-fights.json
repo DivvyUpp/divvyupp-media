@@ -11,31 +11,63 @@
    "elements": [
     {
      "type": "text",
-     "text": "Every money talk starts",
+     "text": "Every money talk",
      "x": 540,
      "y": 400,
-     "s": 54,
+     "s": 80,
      "w": "xb",
      "at": 0,
      "instant": true
     },
     {
      "type": "text",
-     "text": "with “what's this charge?”",
+     "text": "starts with",
      "x": 540,
-     "y": 475,
-     "s": 54,
+     "y": 490,
+     "s": 80,
      "w": "xb",
      "at": 0,
-     "col": "orange",
      "instant": true
+    },
+    {
+     "type": "text",
+     "text": "“What's this charge?”",
+     "x": 540,
+     "y": 585,
+     "s": 74,
+     "w": "xb",
+     "col": "orange",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 785,
+     "h": 220,
+     "gap": 480,
+     "at": 0,
+     "instant": true,
+     "q": true,
+     "moods": [
+      {
+       "at": 0,
+       "him": "neutral",
+       "her": "neutral"
+      },
+      {
+       "at": "what's this",
+       "him": "worried",
+       "her": "confused"
+      }
+     ]
     },
     {
      "type": "panel",
      "x": 110,
-     "y": 560,
+     "y": 905,
      "w": 860,
-     "h": 470,
+     "h": 235,
      "at": 0,
      "instant": true
     },
@@ -43,8 +75,8 @@
      "type": "text",
      "text": "Recent transactions",
      "x": 160,
-     "y": 620,
-     "s": 34,
+     "y": 955,
+     "s": 32,
      "w": "xb",
      "at": 0,
      "align": "l",
@@ -54,7 +86,7 @@
      "type": "text",
      "text": "Grocery store",
      "x": 160,
-     "y": 710,
+     "y": 1025,
      "s": 34,
      "w": "b",
      "at": 0,
@@ -65,7 +97,7 @@
      "type": "text",
      "text": "−$142.18",
      "x": 920,
-     "y": 710,
+     "y": 1025,
      "s": 34,
      "w": "b",
      "at": 0,
@@ -74,92 +106,37 @@
     },
     {
      "type": "text",
-     "text": "Online order",
+     "text": "Online order ?",
      "x": 160,
-     "y": 800,
+     "y": 1090,
      "s": 34,
      "w": "xb",
-     "at": 0,
      "col": "orange",
-     "align": "l",
-     "instant": true
+     "at": "what's this",
+     "align": "l"
     },
     {
      "type": "text",
      "text": "−$86.40",
      "x": 920,
-     "y": 800,
+     "y": 1090,
      "s": 34,
      "w": "xb",
-     "at": 0,
      "col": "orange",
-     "align": "r",
-     "instant": true
-    },
-    {
-     "type": "text",
-     "text": "Gas",
-     "x": 160,
-     "y": 890,
-     "s": 34,
-     "w": "b",
-     "at": 0,
-     "align": "l",
-     "instant": true
-    },
-    {
-     "type": "text",
-     "text": "−$54.02",
-     "x": 920,
-     "y": 890,
-     "s": 34,
-     "w": "b",
-     "at": 0,
-     "align": "r",
-     "instant": true
-    },
-    {
-     "type": "text",
-     "text": "Pharmacy",
-     "x": 160,
-     "y": 980,
-     "s": 34,
-     "w": "b",
-     "at": 0,
-     "align": "l",
-     "instant": true
-    },
-    {
-     "type": "text",
-     "text": "−$23.67",
-     "x": 920,
-     "y": 980,
-     "s": 34,
-     "w": "b",
-     "at": 0,
-     "align": "r",
-     "instant": true
-    },
-    {
-     "type": "chip",
-     "text": "“What's this charge?”",
-     "style": "quote",
-     "x": 540,
-     "y": 1130,
-     "s": 42,
-     "at": "what's this"
+     "at": "what's this",
+     "align": "r"
     }
    ]
   },
   {
    "title": "money *tip*",
-   "text": "Here's a research-backed money tip. Of everything couples argue about, one topic predicted divorce best. And it's not chores.",
+   "text": "Here's research-backed money tip number seven. Of everything couples disagree about, one topic was most tied to whether they stayed together. And it's not chores.",
    "elements": [
     {
      "type": "tag",
      "x": 540,
-     "y": 560,
-     "s": 58,
+     "y": 470,
+     "s": 54,
      "dx": 80,
      "lines": [
       {
@@ -175,26 +152,58 @@
     },
     {
      "type": "text",
-     "text": "1 topic",
+     "text": "one topic",
      "x": 540,
-     "y": 830,
+     "y": 700,
      "s": 110,
      "w": "xb",
-     "at": "one topic",
      "col": "orange",
+     "at": "one topic",
      "pop": true
     },
     {
      "type": "text",
-     "text": "predicted divorce best · 4,500+ couples",
+     "text": "4,500+ couples · followed over time",
      "x": 540,
-     "y": 940,
+     "y": 800,
      "s": 36,
      "w": "b",
-     "at": "predicted divorce",
-     "col": "grey"
+     "col": "grey",
+     "at": "one topic"
+    },
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 1010,
+     "h": 230,
+     "gap": 170,
+     "at": "one topic",
+     "moods": [
+      {
+       "at": 0,
+       "him": "neutral",
+       "her": "neutral"
+      },
+      {
+       "at": "stayed together",
+       "him": "happy",
+       "her": "happy"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "text": "(not chores)",
+     "x": 540,
+     "y": 1170,
+     "s": 40,
+     "w": "xb",
+     "col": "grey",
+     "at": "not chores"
     }
-   ]
+   ],
+   "cap_split": "sentence",
+   "cap_max": 20
   },
   {
    "title": "the *study*",
@@ -242,18 +251,38 @@
      "y": 930,
      "s": 42,
      "at": "money."
+    },
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 1150,
+     "h": 170,
+     "gap": 125,
+     "at": "compared",
+     "moods": [
+      {
+       "at": 0,
+       "him": "neutral",
+       "her": "neutral"
+      },
+      {
+       "at": "money.",
+       "him": "worried",
+       "her": "worried"
+      }
+     ]
     }
    ]
   },
   {
    "title": "the *result*",
-   "text": "Money disagreements predicted divorce most strongly. It's survey data, so it's a link, not proof of cause.",
+   "text": "Disagreements about money were the strongest warning sign, stronger than chores or time together. Which means money is the talk most worth getting right.",
    "elements": [
     {
      "type": "text",
-     "text": "strongest predictor of divorce",
+     "text": "strongest warning sign",
      "x": 540,
-     "y": 520,
+     "y": 470,
      "s": 40,
      "w": "b",
      "at": 0,
@@ -263,47 +292,88 @@
      "type": "text",
      "text": "money",
      "x": 540,
-     "y": 700,
+     "y": 620,
      "s": 170,
      "w": "xb",
-     "at": "Money disagreements",
+     "at": "Disagreements about money",
      "col": "orange",
      "pop": true
     },
     {
      "type": "text",
-     "text": "fights",
+     "text": "disagreements",
      "x": 540,
-     "y": 860,
-     "s": 90,
+     "y": 750,
+     "s": 64,
      "w": "xb",
-     "at": "Money disagreements"
+     "at": "Disagreements about money"
     },
     {
      "type": "text",
-     "text": "chores · time · other topics: weaker",
+     "text": "chores · time together: weaker",
      "x": 540,
-     "y": 1010,
-     "s": 38,
+     "y": 840,
+     "s": 36,
      "w": "b",
-     "at": "most strongly",
+     "at": "stronger than",
      "col": "grey"
     },
     {
+     "type": "couple",
+     "x": 300,
+     "y": 1060,
+     "h": 200,
+     "gap": 140,
+     "at": "Disagreements about money",
+     "moods": [
+      {
+       "at": 0,
+       "him": "frustrated",
+       "her": "sad"
+      }
+     ]
+    },
+    {
      "type": "text",
-     "text": "survey data · a link, not proof of cause",
-     "x": 540,
-     "y": 1180,
+     "text": "money fights",
+     "x": 300,
+     "y": 1200,
      "s": 32,
-     "w": "m",
-     "at": "survey data",
-     "col": "grey"
+     "w": "xb",
+     "col": "grey",
+     "at": "Disagreements about money"
+    },
+    {
+     "type": "couple",
+     "x": 740,
+     "y": 1060,
+     "h": 200,
+     "gap": 140,
+     "at": "worth getting right",
+     "moods": [
+      {
+       "at": 0,
+       "him": "happy",
+       "her": "happy"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "text": "getting it right",
+     "x": 740,
+     "y": 1200,
+     "s": 32,
+     "w": "xb",
+     "col": "orange",
+     "at": "worth getting right"
     }
-   ]
+   ],
+   "cap_split": "sentence"
   },
   {
    "title": "do *this*",
-   "text": "So don't wait for the next surprise charge. Do a fifteen-minute money check-in every week.",
+   "text": "So don't wait for the next surprise charge. Do a fifteen-minute money check-in every week, together.",
    "elements": [
     {
      "type": "clock",
@@ -327,13 +397,28 @@
     },
     {
      "type": "text",
-     "text": "before it turns into a fight",
+     "text": "before the next surprise charge",
      "x": 540,
      "y": 1040,
      "s": 40,
      "w": "b",
      "at": "every week",
      "col": "grey"
+    },
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 1250,
+     "h": 170,
+     "gap": 130,
+     "at": "together.",
+     "moods": [
+      {
+       "at": 0,
+       "him": "happy",
+       "her": "happy"
+      }
+     ]
     }
    ]
   },
@@ -342,35 +427,43 @@
    "text": "[warm] Send this to your partner with one question: Sunday, fifteen minutes?",
    "elements": [
     {
-     "type": "avatar",
-     "x": 300,
-     "y": 620,
-     "r": 90,
-     "label": "you",
-     "instant": true
-    },
-    {
-     "type": "avatar",
-     "x": 780,
-     "y": 620,
-     "r": 90,
-     "label": "your partner",
-     "tone": "ink",
-     "at": "your partner"
+     "type": "couple",
+     "x": 540,
+     "y": 640,
+     "h": 260,
+     "gap": 480,
+     "at": 0,
+     "instant": true,
+     "labels": [
+      "you",
+      "your partner"
+     ],
+     "moods": [
+      {
+       "at": 0,
+       "him": "neutral",
+       "her": "neutral"
+      },
+      {
+       "at": "Sunday",
+       "him": "happy",
+       "her": "happy"
+      }
+     ]
     },
     {
      "type": "curve",
      "p0": [
-      390,
-      620
+      400,
+      560
      ],
      "c": [
       540,
-      520
+      450
      ],
      "p1": [
-      690,
-      620
+      680,
+      560
      ],
      "at": "Send this"
     },
@@ -387,5 +480,10 @@
    ]
   }
  ],
- "note": "Study bank S11 (Dew, Britt & Huston, Family Relations 2012). Hook = B2 (both personas STOP strong)."
+ "note": "Study bank S11 (Dew, Britt & Huston, Family Relations 2012). Hook = B2 (both personas STOP strong). v2 (Srini, 2026-11-26): S10 v3 treatment (karaoke captions, Style C couple, no caveat in video, tip frame teases only) and a more positive frame: 'stayed together' / 'the talk most worth getting right' instead of leading with divorce.",
+ "cap_style": "karaoke",
+ "cover_at": [
+  1,
+  "not chores"
+ ]
 }
