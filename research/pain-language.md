@@ -18,6 +18,9 @@ first line of a Reel. Phrases only: no usernames or anything that identifies a p
 | "Not sure how much I spent but I'm pretty sure I'm still paying for it!" | YouTube comment, Rachel Cruze "Do You Remember What You Spent On Christmas?" | https://www.youtube.com/shorts/LJ_YqXVTtM8 | 2026-11-25 | 1 |
 | "I hate buying gifts just to not feel guilty" | YouTube comment, The Ramsey Show gift Short | https://www.youtube.com/shorts/vOZ45U89H4c | 2026-11-25 | 1 (similar: "financially exhausting but mentally too", same Short) |
 | "They just go into debt to show off" (about family at the holidays; 76 likes) | same Short | https://www.youtube.com/shorts/vOZ45U89H4c | 2026-11-25 | 1 |
+| "We stopped buying gifts for adults years ago" (also "We don't buy for adults either", "no adult gifts, no coworker gifts", "gifts for kids only") | YouTube comments, George Kamel "What Is Your Christmas Budget?" | https://www.youtube.com/shorts/E7c5m8TsiVM | 2026-11-26 | 4 (top comment, 17 likes) |
+| "Adults don't need more crap at the end of the year" | same Short | https://www.youtube.com/shorts/E7c5m8TsiVM | 2026-11-26 | 1 |
+| "This has been so freeing" (after cutting gifts to kids only, on a set budget per child) | same Short | https://www.youtube.com/shorts/E7c5m8TsiVM | 2026-11-26 | 1 |
 
 ## What the comments say about *how* to speak to this pain (2026-11-23)
 Under Shorts about well-paid people with nothing left, most top comments **judge** the person instead of relating:

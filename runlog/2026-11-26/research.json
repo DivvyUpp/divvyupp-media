@@ -1,0 +1,35 @@
+{
+ "run": "research",
+ "date": "2026-11-26",
+ "attempts": [
+  {
+   "started_at": "2026-11-26T05:57:53-05:00",
+   "finished_at": "2026-11-26T06:01:36-05:00",
+   "status": "ok",
+   "trigger": "scheduled",
+   "summary": "Our Reels hold only 9-17 s whatever their length, so the fix and send line at 35-50 s are rarely seen; outside, 30-60 s Shorts (where our Study Reels sit) break out least (6-9% vs 14-17% under 30 s and over 90 s), but length alone isn't proven. New bet #11: a 20-25 s Study Reel cut. Pitched S28-S31 (payday spending, credit-limit increases, tip screens, auto-renew trials) for Srini's send/no.",
+   "outputs": [
+    {
+     "label": "Research brief",
+     "path": "research/2026-11-26.md"
+    },
+    {
+     "label": "Backlog",
+     "path": "backlog.md"
+    },
+    {
+     "label": "Study bank",
+     "path": "research/study-bank.md"
+    },
+    {
+     "label": "Pain language",
+     "path": "research/pain-language.md"
+    },
+    {
+     "label": "Shorts pull",
+     "path": "research/shorts-2026-11-26.csv"
+    }
+   ]
+  }
+ ]
+}
