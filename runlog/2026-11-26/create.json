@@ -1,0 +1,47 @@
+{
+ "run": "create",
+ "date": "2026-11-26",
+ "attempts": [
+  {
+   "started_at": "2026-11-26T06:27:49-05:00",
+   "finished_at": "2026-11-26T06:38:00-05:00",
+   "status": "ok",
+   "trigger": "scheduled",
+   "summary": "Three Study Reels sent for review: S10 joint account, S11 money fights, and a 25 s cut of S8 (minimum payment) testing length (backlog #11). Postmortem: 2026-11-21-milk inconclusive (19 views); still 0 sends on every Reel.",
+   "outputs": [
+    {
+     "label": "Hypotheses and script workshop",
+     "path": "hypotheses/2026-11-26.md"
+    },
+    {
+     "label": "Milk postmortem",
+     "path": "hypotheses/2026-11-21.md"
+    },
+    {
+     "label": "Queue",
+     "path": "queue.json"
+    }
+   ],
+   "reels": [
+    {
+     "id": "2026-11-26-s10-joint",
+     "hook": "Half the bills on your card, half on theirs, and nobody knows what's left?",
+     "status": "pending_review",
+     "file": "reels/2026-11-26-s10-joint.mp4"
+    },
+    {
+     "id": "2026-11-26-s11-fights",
+     "hook": "Does every money talk in your house start with \"what's this charge?\"",
+     "status": "pending_review",
+     "file": "reels/2026-11-26-s11-fights.mp4"
+    },
+    {
+     "id": "2026-11-26-s8-short",
+     "hook": "Are you only making the minimum payment on your credit card? (25 s cut)",
+     "status": "pending_review",
+     "file": "reels/2026-11-26-s8-short.mp4"
+    }
+   ]
+  }
+ ]
+}

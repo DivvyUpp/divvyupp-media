@@ -1,0 +1,437 @@
+{
+ "id": "2026-11-26-s10-joint",
+ "format": "diagram",
+ "voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "speed": 1.15,
+ "max_gap": 0.3,
+ "scenes": [
+  {
+   "title": "sound *familiar*?",
+   "text": "[curious] Half the bills on your card, half on theirs, and nobody knows what's left?",
+   "elements": [
+    {
+     "type": "text",
+     "text": "Half on your card, half on theirs,",
+     "x": 540,
+     "y": 400,
+     "s": 48,
+     "w": "xb",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "and nobody knows what's left?",
+     "x": 540,
+     "y": 470,
+     "s": 48,
+     "w": "xb",
+     "at": 0,
+     "col": "orange",
+     "instant": true
+    },
+    {
+     "type": "panel",
+     "x": 110,
+     "y": 580,
+     "w": 380,
+     "h": 330,
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Your card",
+     "x": 300,
+     "y": 650,
+     "s": 40,
+     "w": "xb",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Rent ½",
+     "x": 300,
+     "y": 730,
+     "s": 32,
+     "w": "m",
+     "at": 0,
+     "col": "grey",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Groceries",
+     "x": 300,
+     "y": 780,
+     "s": 32,
+     "w": "m",
+     "at": 0,
+     "col": "grey",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Internet",
+     "x": 300,
+     "y": 830,
+     "s": 32,
+     "w": "m",
+     "at": 0,
+     "col": "grey",
+     "instant": true
+    },
+    {
+     "type": "panel",
+     "x": 590,
+     "y": 580,
+     "w": 380,
+     "h": 330,
+     "accent": true,
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Their card",
+     "x": 780,
+     "y": 650,
+     "s": 40,
+     "w": "xb",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Rent ½",
+     "x": 780,
+     "y": 730,
+     "s": 32,
+     "w": "m",
+     "at": 0,
+     "col": "grey",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Power bill",
+     "x": 780,
+     "y": 780,
+     "s": 32,
+     "w": "m",
+     "at": 0,
+     "col": "grey",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Takeout",
+     "x": 780,
+     "y": 830,
+     "s": 32,
+     "w": "m",
+     "at": 0,
+     "col": "grey",
+     "instant": true
+    },
+    {
+     "type": "qring",
+     "x": 540,
+     "y": 1090,
+     "r": 90,
+     "at": "nobody knows"
+    },
+    {
+     "type": "chip",
+     "text": "what's left?",
+     "style": "orange",
+     "x": 540,
+     "y": 1240,
+     "s": 40,
+     "at": "what's left"
+    }
+   ]
+  },
+  {
+   "title": "money *tip*",
+   "text": "Here's a research-backed money tip. In a two-year experiment, couples who made one change stayed happier. The others got less happy.",
+   "elements": [
+    {
+     "type": "tag",
+     "x": 540,
+     "y": 560,
+     "s": 58,
+     "dx": 80,
+     "lines": [
+      {
+       "text": "RESEARCH-BACKED",
+       "style": "ink"
+      },
+      {
+       "text": "MONEY TIP #6",
+       "style": "orange"
+      }
+     ],
+     "at": 0
+    },
+    {
+     "type": "text",
+     "text": "one change",
+     "x": 540,
+     "y": 830,
+     "s": 110,
+     "w": "xb",
+     "at": "one change",
+     "col": "orange",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "happier couples · 2-year experiment",
+     "x": 540,
+     "y": 940,
+     "s": 36,
+     "w": "b",
+     "at": "stayed happier",
+     "col": "grey"
+    }
+   ]
+  },
+  {
+   "title": "the *study*",
+   "text": "Researchers gave two hundred thirty engaged or newly married couples a joint account, separate accounts, or their own choice, at random.",
+   "elements": [
+    {
+     "type": "card",
+     "x": 80,
+     "y": 390,
+     "w": 920,
+     "h": 400,
+     "kicker": "JOURNAL OF CONSUMER RESEARCH · 2023",
+     "title": "Joint Accounts",
+     "title_s": 56,
+     "subtitle": "and relationship quality",
+     "highlight": "at random",
+     "lines": [
+      "Olson, Rick, Small & Finkel",
+      "Randomized · 230 couples · 2 years"
+     ]
+    },
+    {
+     "type": "chip",
+     "text": "joint account",
+     "style": "orange",
+     "x": 540,
+     "y": 900,
+     "s": 40,
+     "at": "a joint account"
+    },
+    {
+     "type": "chip",
+     "text": "separate accounts",
+     "style": "soft",
+     "x": 540,
+     "y": 1000,
+     "s": 40,
+     "at": "separate accounts"
+    },
+    {
+     "type": "chip",
+     "text": "their own choice",
+     "style": "soft",
+     "x": 540,
+     "y": 1100,
+     "s": 40,
+     "at": "own choice"
+    }
+   ]
+  },
+  {
+   "title": "the *result*",
+   "text": "After two years, the joint-account couples had kept their relationship quality, and fought less about money. The others showed the usual decline. One caveat: about one in five couples dropped out.",
+   "elements": [
+    {
+     "type": "chart",
+     "x0": 110,
+     "x1": 970,
+     "base": 1010,
+     "y": 760,
+     "grid": [
+      700,
+      880
+     ],
+     "label": "Relationship quality",
+     "label_y": 560,
+     "labels": [
+      "start",
+      "6 mo",
+      "1 yr",
+      "18 mo",
+      "2 yrs"
+     ],
+     "at": 0,
+     "dur": 1.2,
+     "flat_label": "joint account"
+    },
+    {
+     "type": "line",
+     "pts": [
+      [
+       110,
+       760
+      ],
+      [
+       400,
+       800
+      ],
+      [
+       690,
+       850
+      ],
+      [
+       970,
+       900
+      ]
+     ],
+     "col": "muted",
+     "width": 6,
+     "dash": true,
+     "at": "usual decline",
+     "dur": 1.0
+    },
+    {
+     "type": "chip",
+     "text": "others: the usual decline",
+     "style": "soft",
+     "x": 600,
+     "y": 960,
+     "s": 32,
+     "at": "usual decline"
+    },
+    {
+     "type": "chip",
+     "text": "fewer money fights",
+     "style": "orange",
+     "x": 540,
+     "y": 1120,
+     "s": 38,
+     "at": "fought less"
+    },
+    {
+     "type": "text",
+     "text": "about 1 in 5 couples dropped out",
+     "x": 540,
+     "y": 1230,
+     "s": 30,
+     "w": "m",
+     "at": "dropped out",
+     "col": "grey"
+    }
+   ]
+  },
+  {
+   "title": "do *this*",
+   "text": "You don't have to merge everything. Start with one shared account for shared costs, and keep your own too.",
+   "elements": [
+    {
+     "type": "accounts",
+     "x": 210,
+     "y": 380,
+     "w": 660,
+     "h": 860,
+     "title": "Accounts",
+     "at": 0,
+     "rows": [
+      {
+       "label": "YOURS",
+       "from": "Your own spending",
+       "icon": "$",
+       "s": 38
+      },
+      {
+       "label": "THEIRS",
+       "from": "Their own spending",
+       "icon": "$",
+       "s": 38
+      },
+      {
+       "label": "SHARED",
+       "from": "New account",
+       "to": "Rent, groceries, bills",
+       "swap": "one shared account",
+       "icon": "+",
+       "s": 38
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "send *it*",
+   "text": "[warm] Send this to your partner, and set it up together.",
+   "elements": [
+    {
+     "type": "avatar",
+     "x": 300,
+     "y": 620,
+     "r": 90,
+     "label": "you",
+     "instant": true
+    },
+    {
+     "type": "avatar",
+     "x": 780,
+     "y": 620,
+     "r": 90,
+     "label": "your partner",
+     "tone": "ink",
+     "at": "your partner"
+    },
+    {
+     "type": "curve",
+     "p0": [
+      300,
+      790
+     ],
+     "c": [
+      300,
+      930
+     ],
+     "p1": [
+      460,
+      960
+     ],
+     "at": "set it up"
+    },
+    {
+     "type": "curve",
+     "p0": [
+      780,
+      790
+     ],
+     "c": [
+      780,
+      930
+     ],
+     "p1": [
+      620,
+      960
+     ],
+     "at": "set it up"
+    },
+    {
+     "type": "ticket",
+     "x": 540,
+     "y": 1030,
+     "w": 560,
+     "h": 200,
+     "title": "Shared account",
+     "sub": "for shared costs",
+     "at": "together"
+    }
+   ]
+  }
+ ],
+ "note": "Study bank S10 (Olson, Rick, Small & Finkel, JCR 2023). Hook = A11 (round 2; both personas STOP)."
+}

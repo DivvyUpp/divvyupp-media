@@ -1,0 +1,279 @@
+{
+ "id": "2026-11-26-s8-short",
+ "format": "diagram",
+ "voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "speed": 1.2,
+ "max_gap": 0.3,
+ "scenes": [
+  {
+   "title": "sound *familiar*?",
+   "text": "[curious] Are you only making the minimum payment on your credit card?",
+   "elements": [
+    {
+     "type": "text",
+     "text": "Only making the",
+     "x": 540,
+     "y": 400,
+     "s": 64,
+     "w": "xb",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "minimum payment?",
+     "x": 540,
+     "y": 480,
+     "s": 64,
+     "w": "xb",
+     "col": "orange",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "statement",
+     "x": 100,
+     "y": 555,
+     "w": 880,
+     "h": 585,
+     "at": 0,
+     "instant": true,
+     "hl": "minimum payment",
+     "warnings": [
+      [
+       "Minimum Payment Warning:",
+       "If you make only the minimum payment each period, you will pay more in interest and it will take you longer to pay off your balance."
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "money *tip*",
+   "text": "Research-backed money tip. One change almost doubled what people paid toward their card.",
+   "elements": [
+    {
+     "type": "tag",
+     "x": 540,
+     "y": 560,
+     "s": 58,
+     "dx": 80,
+     "lines": [
+      {
+       "text": "RESEARCH-BACKED",
+       "style": "ink"
+      },
+      {
+       "text": "MONEY TIP #5",
+       "style": "orange"
+      }
+     ],
+     "at": 0
+    },
+    {
+     "type": "text",
+     "text": "almost 2x repaid",
+     "x": 540,
+     "y": 830,
+     "s": 110,
+     "w": "xb",
+     "col": "orange",
+     "at": "almost doubled",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "one small change · UK lab experiment",
+     "x": 540,
+     "y": 940,
+     "s": 36,
+     "w": "b",
+     "col": "grey",
+     "at": "almost doubled"
+    }
+   ]
+  },
+  {
+   "title": "the *problem*",
+   "text": "The minimum on your statement pulls your payment down toward it.",
+   "elements": [
+    {
+     "type": "chip",
+     "text": "minimum",
+     "style": "ink",
+     "x": 540,
+     "y": 900,
+     "s": 44,
+     "at": "minimum on"
+    },
+    {
+     "type": "chip",
+     "text": "your payment",
+     "style": "quote",
+     "x": 540,
+     "y": 520,
+     "s": 40,
+     "at": "pulls your payment"
+    },
+    {
+     "type": "curve",
+     "p0": [
+      540,
+      580
+     ],
+     "c": [
+      540,
+      720
+     ],
+     "p1": [
+      540,
+      840
+     ],
+     "at": "down toward"
+    }
+   ]
+  },
+  {
+   "title": "the *study*",
+   "text": "In a UK lab study, people who never saw a minimum paid about a hundred seventy-five pounds, versus ninety-nine.",
+   "elements": [
+    {
+     "type": "text",
+     "text": "Stewart · Psychological Science · 2009",
+     "x": 540,
+     "y": 400,
+     "s": 30,
+     "w": "b",
+     "col": "grey",
+     "at": 0
+    },
+    {
+     "type": "bars",
+     "base": 1080,
+     "x0": 90,
+     "x1": 990,
+     "bars": [
+      {
+       "x": 170,
+       "w": 260,
+       "h": 300,
+       "col": "muted",
+       "label": "minimum\nshown",
+       "at": "never saw"
+      },
+      {
+       "x": 620,
+       "w": 260,
+       "h": 530,
+       "col": "orange",
+       "label": "no minimum\nshown",
+       "at": "never saw"
+      }
+     ],
+     "note": {
+      "text": "lab experiment · UK cardholders not paying in full",
+      "y": 1235,
+      "x": 540,
+      "at": "lab study"
+     }
+    },
+    {
+     "type": "text",
+     "text": "£99",
+     "x": 300,
+     "y": 730,
+     "s": 64,
+     "w": "xb",
+     "col": "grey",
+     "at": "ninety-nine",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "£175",
+     "x": 750,
+     "y": 500,
+     "s": 72,
+     "w": "xb",
+     "col": "orange",
+     "at": "hundred seventy-five",
+     "pop": true
+    },
+    {
+     "type": "chip",
+     "text": "almost double",
+     "style": "orange",
+     "x": 520,
+     "y": 470,
+     "s": 34,
+     "at": "ninety-nine"
+    }
+   ]
+  },
+  {
+   "title": "do *this*",
+   "text": "So set your autopay to a fixed amount you choose. Never minimum.",
+   "elements": [
+    {
+     "type": "accounts",
+     "x": 210,
+     "y": 390,
+     "w": 660,
+     "h": 740,
+     "title": "Autopay",
+     "at": 0,
+     "rows": [
+      {
+       "label": "CARD AUTOPAY",
+       "from": "Minimum payment",
+       "to": "Fixed: amount I choose",
+       "swap": "fixed amount",
+       "icon": "$",
+       "s": 38
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "send *it*",
+   "text": "[warm] Send this to anyone with autopay on minimum.",
+   "elements": [
+    {
+     "type": "avatar",
+     "x": 300,
+     "y": 620,
+     "r": 90,
+     "label": "you",
+     "instant": true
+    },
+    {
+     "type": "avatar",
+     "x": 780,
+     "y": 620,
+     "r": 90,
+     "label": "them",
+     "tone": "ink",
+     "at": "anyone"
+    },
+    {
+     "type": "curve",
+     "p0": [
+      390,
+      620
+     ],
+     "c": [
+      540,
+      520
+     ],
+     "p1": [
+      690,
+      620
+     ],
+     "at": "Send this"
+    }
+   ]
+  }
+ ],
+ "note": "Bet #11 (length only): S8 v2's study, opening order and voice cut to ~20-25 s; control = 2026-11-25-s8-minimum (v2, 54 s)."
+}

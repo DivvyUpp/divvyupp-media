@@ -441,5 +441,44 @@
   "permalink": "https://www.instagram.com/reel/DgMFoAWyHVj/",
   "first_comment_id": "18223505797342489",
   "posted_at": "2026-11-25T22:00-05:00"
+ },
+ {
+  "id": "2026-11-26-s10-joint",
+  "kind": "main",
+  "status": "pending_review",
+  "post_date": "2026-11-26",
+  "file": "reels/2026-11-26-s10-joint.mp4",
+  "spec": "hooks/2026-11-26-s10-joint.json",
+  "format": "study",
+  "hook": "Half the bills on your card, half on theirs, and nobody knows what's left? (Study Reel S10: research-backed money tip #6)",
+  "caption": "Half the bills on your card, half on theirs, and nobody knows what's left?\n\nIn a two-year experiment, 230 engaged or newly married couples were randomly given a joint account, separate accounts, or their own choice. The joint-account couples kept their relationship quality and fought less about money; the others showed the usual decline. (About 1 in 5 couples dropped out, and the researchers don't say merge everything.)\n\nTry it: open one shared account for shared costs, and keep your own too.\n\nStudy: Olson, Rick, Small & Finkel, Journal of Consumer Research, 2023. Link in the comments.\n\nSend this to your partner, and set it up together 🤝\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #couplesandmoney #moneytips #relationships #research",
+  "first_comment": "📄 The study: Olson, Rick, Small & Finkel, Journal of Consumer Research, 2023 (Kellogg Insight summary)\nhttps://insight.kellogg.northwestern.edu/article/key-to-happy-marriage-joint-bank-account",
+  "hypothesis": "hypotheses/2026-11-26.md"
+ },
+ {
+  "id": "2026-11-26-s11-fights",
+  "kind": "main",
+  "status": "pending_review",
+  "post_date": "2026-11-26",
+  "file": "reels/2026-11-26-s11-fights.mp4",
+  "spec": "hooks/2026-11-26-s11-fights.json",
+  "format": "study",
+  "hook": "Does every money talk in your house start with \"what's this charge?\" (Study Reel S11: research-backed money tip #7)",
+  "caption": "Does every money talk in your house start with \"what's this charge?\"\n\nResearchers followed 4,500+ US couples over time. Of everything they disagreed about (chores, time together, money), money disagreements predicted divorce most strongly. (Survey data: a link, not proof of cause.)\n\nTry it: a 15-minute money check-in every week, before the next surprise charge.\n\nStudy: Dew, Britt & Huston, Family Relations, 2012. Link in the comments.\n\nSend this to your partner with one question: Sunday, fifteen minutes? 🗓️\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #couplesandmoney #marriage #moneytips #research",
+  "first_comment": "📄 The study: Dew, Britt & Huston, \"Examining the Relationship Between Financial Issues and Divorce\", Family Relations, 2012\nhttps://scholarsarchive.byu.edu/facpub/4526",
+  "hypothesis": "hypotheses/2026-11-26.md"
+ },
+ {
+  "id": "2026-11-26-s8-short",
+  "kind": "main",
+  "status": "pending_review",
+  "post_date": "2026-11-26",
+  "file": "reels/2026-11-26-s8-short.mp4",
+  "spec": "hooks/2026-11-26-s8-short.json",
+  "format": "study",
+  "hook": "Are you only making the minimum payment on your credit card? (Study Reel S8, 25 s cut: bet #11 length test)",
+  "caption": "Only making the minimum payment on your card?\n\nIn a UK lab experiment, cardholders who never saw a minimum payment on their statement repaid about £175, vs about £99 when it was shown (among people not paying in full). Almost double, from one change.\n\nTry it: set autopay to a fixed amount you choose, never \"minimum\".\n\nStudy: Neil Stewart, Psychological Science, 2009. Link in the comments.\n\nSend this to anyone with autopay on minimum 💳\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #creditcard #debtfree #moneytips #research",
+  "first_comment": "📄 The study: Stewart, \"The Cost of Anchoring on Credit-Card Minimum Repayments\", Psychological Science, 2009\nhttps://wrap.warwick.ac.uk/id/eprint/2552",
+  "hypothesis": "hypotheses/2026-11-26.md"
  }
 ]

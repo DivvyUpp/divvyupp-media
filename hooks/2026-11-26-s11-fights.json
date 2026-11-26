@@ -1,0 +1,391 @@
+{
+ "id": "2026-11-26-s11-fights",
+ "format": "diagram",
+ "voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "speed": 1.15,
+ "max_gap": 0.3,
+ "scenes": [
+  {
+   "title": "sound *familiar*?",
+   "text": "[curious] Does every money talk in your house start with \"what's this charge?\"",
+   "elements": [
+    {
+     "type": "text",
+     "text": "Every money talk starts",
+     "x": 540,
+     "y": 400,
+     "s": 54,
+     "w": "xb",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "with “what's this charge?”",
+     "x": 540,
+     "y": 475,
+     "s": 54,
+     "w": "xb",
+     "at": 0,
+     "col": "orange",
+     "instant": true
+    },
+    {
+     "type": "panel",
+     "x": 110,
+     "y": 560,
+     "w": 860,
+     "h": 470,
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Recent transactions",
+     "x": 160,
+     "y": 620,
+     "s": 34,
+     "w": "xb",
+     "at": 0,
+     "align": "l",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Grocery store",
+     "x": 160,
+     "y": 710,
+     "s": 34,
+     "w": "b",
+     "at": 0,
+     "align": "l",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "−$142.18",
+     "x": 920,
+     "y": 710,
+     "s": 34,
+     "w": "b",
+     "at": 0,
+     "align": "r",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Online order",
+     "x": 160,
+     "y": 800,
+     "s": 34,
+     "w": "xb",
+     "at": 0,
+     "col": "orange",
+     "align": "l",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "−$86.40",
+     "x": 920,
+     "y": 800,
+     "s": 34,
+     "w": "xb",
+     "at": 0,
+     "col": "orange",
+     "align": "r",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Gas",
+     "x": 160,
+     "y": 890,
+     "s": 34,
+     "w": "b",
+     "at": 0,
+     "align": "l",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "−$54.02",
+     "x": 920,
+     "y": 890,
+     "s": 34,
+     "w": "b",
+     "at": 0,
+     "align": "r",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Pharmacy",
+     "x": 160,
+     "y": 980,
+     "s": 34,
+     "w": "b",
+     "at": 0,
+     "align": "l",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "−$23.67",
+     "x": 920,
+     "y": 980,
+     "s": 34,
+     "w": "b",
+     "at": 0,
+     "align": "r",
+     "instant": true
+    },
+    {
+     "type": "chip",
+     "text": "“What's this charge?”",
+     "style": "quote",
+     "x": 540,
+     "y": 1130,
+     "s": 42,
+     "at": "what's this"
+    }
+   ]
+  },
+  {
+   "title": "money *tip*",
+   "text": "Here's a research-backed money tip. Of everything couples argue about, one topic predicted divorce best. And it's not chores.",
+   "elements": [
+    {
+     "type": "tag",
+     "x": 540,
+     "y": 560,
+     "s": 58,
+     "dx": 80,
+     "lines": [
+      {
+       "text": "RESEARCH-BACKED",
+       "style": "ink"
+      },
+      {
+       "text": "MONEY TIP #7",
+       "style": "orange"
+      }
+     ],
+     "at": 0
+    },
+    {
+     "type": "text",
+     "text": "1 topic",
+     "x": 540,
+     "y": 830,
+     "s": 110,
+     "w": "xb",
+     "at": "one topic",
+     "col": "orange",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "predicted divorce best · 4,500+ couples",
+     "x": 540,
+     "y": 940,
+     "s": 36,
+     "w": "b",
+     "at": "predicted divorce",
+     "col": "grey"
+    }
+   ]
+  },
+  {
+   "title": "the *study*",
+   "text": "Researchers followed over four thousand five hundred US couples over time, and compared what they disagreed about: chores, time together, money.",
+   "elements": [
+    {
+     "type": "card",
+     "x": 80,
+     "y": 390,
+     "w": 920,
+     "h": 400,
+     "kicker": "FAMILY RELATIONS · 2012",
+     "title": "Examining the Relationship",
+     "title_s": 50,
+     "subtitle": "between financial issues and divorce",
+     "highlight": "followed",
+     "lines": [
+      "Dew, Britt & Huston",
+      "4,500+ US couples · followed over time"
+     ]
+    },
+    {
+     "type": "chip",
+     "text": "chores",
+     "style": "soft",
+     "x": 250,
+     "y": 930,
+     "s": 42,
+     "at": "chores"
+    },
+    {
+     "type": "chip",
+     "text": "time",
+     "style": "soft",
+     "x": 540,
+     "y": 930,
+     "s": 42,
+     "at": "time together"
+    },
+    {
+     "type": "chip",
+     "text": "money",
+     "style": "orange",
+     "x": 820,
+     "y": 930,
+     "s": 42,
+     "at": "money."
+    }
+   ]
+  },
+  {
+   "title": "the *result*",
+   "text": "Money disagreements predicted divorce most strongly. It's survey data, so it's a link, not proof of cause.",
+   "elements": [
+    {
+     "type": "text",
+     "text": "strongest predictor of divorce",
+     "x": 540,
+     "y": 520,
+     "s": 40,
+     "w": "b",
+     "at": 0,
+     "col": "grey"
+    },
+    {
+     "type": "text",
+     "text": "money",
+     "x": 540,
+     "y": 700,
+     "s": 170,
+     "w": "xb",
+     "at": "Money disagreements",
+     "col": "orange",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "fights",
+     "x": 540,
+     "y": 860,
+     "s": 90,
+     "w": "xb",
+     "at": "Money disagreements"
+    },
+    {
+     "type": "text",
+     "text": "chores · time · other topics: weaker",
+     "x": 540,
+     "y": 1010,
+     "s": 38,
+     "w": "b",
+     "at": "most strongly",
+     "col": "grey"
+    },
+    {
+     "type": "text",
+     "text": "survey data · a link, not proof of cause",
+     "x": 540,
+     "y": 1180,
+     "s": 32,
+     "w": "m",
+     "at": "survey data",
+     "col": "grey"
+    }
+   ]
+  },
+  {
+   "title": "do *this*",
+   "text": "So don't wait for the next surprise charge. Do a fifteen-minute money check-in every week.",
+   "elements": [
+    {
+     "type": "clock",
+     "x": 540,
+     "y": 620,
+     "r": 150,
+     "at": "fifteen-minute",
+     "dur": 1.2,
+     "label": "15 minutes"
+    },
+    {
+     "type": "text",
+     "text": "every week",
+     "x": 540,
+     "y": 940,
+     "s": 72,
+     "w": "xb",
+     "at": "every week",
+     "col": "orange",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "before it turns into a fight",
+     "x": 540,
+     "y": 1040,
+     "s": 40,
+     "w": "b",
+     "at": "every week",
+     "col": "grey"
+    }
+   ]
+  },
+  {
+   "title": "send *it*",
+   "text": "[warm] Send this to your partner with one question: Sunday, fifteen minutes?",
+   "elements": [
+    {
+     "type": "avatar",
+     "x": 300,
+     "y": 620,
+     "r": 90,
+     "label": "you",
+     "instant": true
+    },
+    {
+     "type": "avatar",
+     "x": 780,
+     "y": 620,
+     "r": 90,
+     "label": "your partner",
+     "tone": "ink",
+     "at": "your partner"
+    },
+    {
+     "type": "curve",
+     "p0": [
+      390,
+      620
+     ],
+     "c": [
+      540,
+      520
+     ],
+     "p1": [
+      690,
+      620
+     ],
+     "at": "Send this"
+    },
+    {
+     "type": "ticket",
+     "x": 540,
+     "y": 1000,
+     "w": 560,
+     "h": 200,
+     "title": "Money check-in",
+     "sub": "Sunday · 15 minutes",
+     "at": "Sunday"
+    }
+   ]
+  }
+ ],
+ "note": "Study bank S11 (Dew, Britt & Huston, Family Relations 2012). Hook = B2 (both personas STOP strong)."
+}
