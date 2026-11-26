@@ -39,11 +39,11 @@ Element types (coordinates are 1080x1920 frame pixels):
   dot     x y [r] [col] [pulse]
   statement x y w h [issuer] [acct] [rows] [hl: at] [hl_row] [warnings]   card statement Payment Information box
   couple  x y h [gap] [show: both|him|her] moods:[{at, him, her}] [labels:[l, r]] [q]   Style C couple (Srini picked
-          2026-11-26), sprites from pipeline/couple_sprites.js; moods happy|neutral|worried|sad|confused; a mood
+          2026-11-26), sprites from pipeline/couple_sprites.js; moods happy|neutral|worried|sad|confused|frustrated; a mood
           change gives a little bounce; q draws an orange "?" over confused faces
 Spec options (2026-11-26, Srini): "cap_style": "karaoke" draws the spoken words in a dark box, the current word on an
 orange pill and upcoming words dimmed, so captions read as speech, not as part of the diagram. A scene's
-"cap_split": "sentence" keeps whole sentences together (up to "cap_max" words, default 12) so a still frame such as
+"cap_split": "sentence" keeps whole sentences together (up to "cap_max" words, default 12; a sentence of 5 words or fewer joins the one before) so a still frame such as
 the cover carries the full thought. "--cover" writes reels/<id>_cover.jpg at the spec's "cover_at" ([scene, phrase]).
 Every element must sit outside the Instagram safe zones (PLAYBOOK checklist 10); --check shades them red.
 """
@@ -565,13 +565,14 @@ def captions(sc, words):
         chunks += [p[i:i + size] for i in range(0, len(p), size)]
     merged = []
     for c in chunks:                                   # a 1-2 word phrase joins the previous chunk if it fits
-        if merged and len(c) <= 2 and len(merged[-1]) + len(c) <= 9: merged[-1] = merged[-1] + c
+        short, room = (5, mx) if sentence else (2, 9)
+        if merged and len(c) <= short and len(merged[-1]) + len(c) <= room: merged[-1] = merged[-1] + c
         else: merged.append(c)
     return [(c[0][1], " ".join(x[0] for x in c), c) for c in merged]
 
 def karaoke(cv, cap, t):
     """Spoken words in a dark box: said words white, the current word on an orange pill, upcoming words dimmed."""
-    st, _, ws = cap; kc = ease((t - st + 0.04) / 0.12); size = 48; f = F("xb", size); sp = cv.tl(" ", f) + 8; lh = 72
+    st, _, ws = cap; kc = ease((t - st + 0.04) / 0.12); size = 48 if len(ws) <= 12 else 42; f = F("xb", size); sp = cv.tl(" ", f) + 8; lh = 72
     def lay(maxw):
         out, cur, cw = [], [], 0.0
         for w in ws:

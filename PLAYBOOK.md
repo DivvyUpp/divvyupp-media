@@ -173,7 +173,11 @@ A real study, its real number, and a move you can copy, the way evidence-based f
   like the real thing people would recognise (a real-looking card statement, app screen, bill), never a generic box.
 - **Screen 2 = "research-backed money tip #N" + the RESULT they want, never the fix or the mechanism** ("In a UK
   experiment, one change nearly doubled what people paid off"). If a viewer could act on screen 2 alone, it gives
-  the payoff away: rewrite it.
+  the payoff away: rewrite it. This holds even when screen 2 is the cover frame (Srini, 2026-11-26: S10 v2 named the
+  joint account there and had to be redone): the cover teases the result ("couples who made this one change stayed
+  happier"), and its caption is one whole thought (`cap_split: "sentence"`) so the still reads on its own.
+- **Show both sides of the result (Srini, 2026-11-26).** When the voice contrasts winners with "the others", show a
+  second couple (or person) with the unhappy/frustrated face next to the happy one, on screen 2 and on the result.
 - Then why it happens → the study → the result → **the fix at the end** → send prompt.
 - **Flow check before any render (Srini, 2026-11-25):** read the whole script top to bottom as a stranger. Each
   scene's first line must follow from the line before it: name the thing again ("The minimum payment printed on

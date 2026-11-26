@@ -169,7 +169,7 @@
   },
   {
    "title": "money *tip*",
-   "text": "Here's research-backed money tip number six. Open one joint account. Over two years, couples with a joint account stayed happier. The others got less happy.",
+   "text": "Here's research-backed money tip number six. Over two years, couples who made this one change stayed happier. The others got less happy.",
    "elements": [
     {
      "type": "tag",
@@ -191,31 +191,32 @@
     },
     {
      "type": "text",
-     "text": "Open one",
+     "text": "one change",
      "x": 540,
-     "y": 660,
-     "s": 64,
-     "w": "xb",
-     "at": "Open one"
-    },
-    {
-     "type": "text",
-     "text": "joint account",
-     "x": 540,
-     "y": 755,
-     "s": 100,
+     "y": 700,
+     "s": 110,
      "w": "xb",
      "col": "orange",
-     "at": "joint account",
+     "at": "one change",
      "pop": true
     },
     {
-     "type": "couple",
+     "type": "text",
+     "text": "2-year experiment",
      "x": 540,
-     "y": 980,
-     "h": 250,
-     "gap": 180,
-     "at": "Open one",
+     "y": 800,
+     "s": 36,
+     "w": "b",
+     "col": "grey",
+     "at": "Over two years"
+    },
+    {
+     "type": "couple",
+     "x": 300,
+     "y": 1020,
+     "h": 220,
+     "gap": 150,
+     "at": "couples who made",
      "moods": [
       {
        "at": 0,
@@ -231,15 +232,47 @@
     },
     {
      "type": "text",
-     "text": "Couples stayed happier · 2-year experiment",
-     "x": 540,
-     "y": 1145,
-     "s": 36,
-     "w": "b",
-     "at": "stayed happier"
+     "text": "made the change",
+     "x": 300,
+     "y": 1175,
+     "s": 34,
+     "w": "xb",
+     "col": "orange",
+     "at": "couples who made"
+    },
+    {
+     "type": "couple",
+     "x": 760,
+     "y": 1020,
+     "h": 220,
+     "gap": 150,
+     "at": "The others",
+     "moods": [
+      {
+       "at": 0,
+       "him": "neutral",
+       "her": "neutral"
+      },
+      {
+       "at": "less happy",
+       "him": "frustrated",
+       "her": "sad"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "text": "the others",
+     "x": 760,
+     "y": 1175,
+     "s": 34,
+     "w": "xb",
+     "col": "grey",
+     "at": "The others"
     }
    ],
-   "cap_split": "sentence"
+   "cap_split": "sentence",
+   "cap_max": 18
   },
   {
    "title": "the *study*",
@@ -371,15 +404,15 @@
      "type": "chip",
      "text": "fewer money fights",
      "style": "orange",
-     "x": 650,
-     "y": 1160,
+     "x": 540,
+     "y": 640,
      "s": 38,
      "at": "fought less"
     },
     {
      "type": "couple",
-     "x": 190,
-     "y": 1160,
+     "x": 300,
+     "y": 1210,
      "h": 180,
      "gap": 125,
      "at": "kept their relationship",
@@ -390,6 +423,46 @@
        "her": "happy"
       }
      ]
+    },
+    {
+     "type": "text",
+     "text": "joint account",
+     "x": 300,
+     "y": 1335,
+     "s": 32,
+     "w": "xb",
+     "col": "orange",
+     "at": "kept their relationship"
+    },
+    {
+     "type": "couple",
+     "x": 700,
+     "y": 1210,
+     "h": 180,
+     "gap": 125,
+     "at": "The others",
+     "moods": [
+      {
+       "at": 0,
+       "him": "neutral",
+       "her": "neutral"
+      },
+      {
+       "at": "usual decline",
+       "him": "frustrated",
+       "her": "sad"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "text": "the others",
+     "x": 700,
+     "y": 1335,
+     "s": 32,
+     "w": "xb",
+     "col": "grey",
+     "at": "The others"
     }
    ]
   },
@@ -514,10 +587,10 @@
    ]
   }
  ],
- "note": "Study bank S10 (Olson, Rick, Small & Finkel, JCR 2023). Hook = A11 (round 2; both personas STOP). v2 (Srini, 2026-11-26): caveat cut; Style C couple through the story; bigger hook; karaoke captions; tip #6 frame names the tip and the result as the cover.",
+ "note": "Study bank S10 (Olson, Rick, Small & Finkel, JCR 2023). Hook = A11 (round 2; both personas STOP). v2 (Srini, 2026-11-26): caveat cut; Style C couple through the story; bigger hook; karaoke captions; tip #6 frame teases the result only (never the tip), with a happy couple vs a frustrated 'others' couple, as the cover. Result scene shows both couples.",
  "cap_style": "karaoke",
  "cover_at": [
   1,
-  "stayed happier"
+  "less happy"
  ]
 }

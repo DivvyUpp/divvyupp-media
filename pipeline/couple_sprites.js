@@ -23,6 +23,10 @@ function face(x, y, mood, w) {
   } else if (mood === 'sad') {
     for (const sx of [-1, 1]) s += dot(sx, 0, 2) + P(`M${x + sx * (ex + 10)},${y - 14} L${x + sx * (ex - 8)},${y - 22}`, { w: w * .8 });
     s += P(`M${x - 14},${y + 34} Q${x},${y + 22} ${x + 14},${y + 34}`, { w });
+  } else if (mood === 'frustrated') {
+    for (const sx of [-1, 1]) s += dot(sx, 0, 3) + P(`M${x + sx * (ex + 11)},${y - 24} L${x + sx * (ex - 9)},${y - 14}`, { w: w * .9 });
+    s += P(`M${x - 15},${y + 34} Q${x},${y + 22} ${x + 15},${y + 34}`, { w });
+    s += P(`M${x + ex + 20},${y - 44} l8,-10 M${x + ex + 30},${y - 34} l12,-4 M${x + ex + 26},${y - 40} l11,-9`, { w: 4, s: OR });
   } else { // confused
     s += dot(-1, 3) + dot(1, 3);
     s += P(`M${x - ex - 8},${y - 20} L${x - ex + 8},${y - 20}`, { w: w * .8 }) + P(`M${x + ex - 8},${y - 24} Q${x + ex},${y - 32} ${x + ex + 8},${y - 26}`, { w: w * .8 });
@@ -43,7 +47,7 @@ function fig(who, mood) {
 (async () => {
   const out = path.join(__dirname, 'assets', 'characters', 'couple_c'); fs.mkdirSync(out, { recursive: true });
   const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 200, height: 270 }, deviceScaleFactor: 3 });
-  for (const who of ['him', 'her']) for (const mood of ['happy', 'neutral', 'worried', 'sad', 'confused']) {
+  for (const who of ['him', 'her']) for (const mood of ['happy', 'neutral', 'worried', 'sad', 'confused', 'frustrated']) {
     await p.setContent(`<html><body style="margin:0;background:transparent"><svg width="200" height="270" viewBox="0 -4 200 274">${fig(who, mood)}</svg></body></html>`);
     await p.screenshot({ path: path.join(out, `${who}_${mood}.png`), omitBackground: true });
   }
