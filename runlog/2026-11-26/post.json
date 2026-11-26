@@ -40,6 +40,15 @@
           "file": "reels/2026-11-26-s10-joint-v3.mp4"
         }
       ]
+    },
+    {
+      "started_at": "2026-11-26T16:58:00-05:00",
+      "finished_at": "2026-11-26T17:03:00-05:00",
+      "status": "blocked",
+      "trigger": "scheduled",
+      "summary": "5pm slot: nothing due on Instagram (S11 is approved for 19:30 and the S8 25s cut for 21:30), so nothing to TikTok either. YouTube backfill still paused.",
+      "blocker": "YouTube backfill still paused: Windsor shows 2 public videos (S10 plus the one that can't be matched to a Reel; per-video data still comes back empty), so uploading S2, S1, S4, S7 or S8 risks a duplicate Short. Check YouTube Studio and add youtube_id in queue.json for any Reel already there (or tell me) to restart the backfill.",
+      "outputs": []
     }
   ]
 }
