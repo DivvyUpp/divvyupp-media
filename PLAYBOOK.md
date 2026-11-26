@@ -162,8 +162,8 @@ A real study, its real number, and a move you can copy, the way evidence-based f
 1. **The hook is the move plus the result** ("Naming your savings goal raised savings 16%. 'Remember to save'
    did nothing."). Never a bare instruction without the payoff.
 2. **The study:** who was studied, how many, what they did. Researcher names and journal on screen.
-3. **The result:** the exact number from the bank, worded no stronger than the source, with its caveat said plainly
-   ("in a lab study", "at one company").
+3. **The result:** the exact number from the bank, worded no stronger than the source. **No caveat line in the video
+   (Srini, 2026-11-26):** not in the voice-over, not on screen. The caveat stays in the written caption only.
 4. **The move:** the one concrete thing to do today, from the bank.
 5. **Send prompt** naming who to send it to, on screen at the payoff and as the last line. No product pitch.
 
@@ -176,6 +176,11 @@ A real study, its real number, and a move you can copy, the way evidence-based f
   the payoff away: rewrite it. This holds even when screen 2 is the cover frame (Srini, 2026-11-26: S10 v2 named the
   joint account there and had to be redone): the cover teases the result ("couples who made this one change stayed
   happier"), and its caption is one whole thought (`cap_split: "sentence"`) so the still reads on its own.
+- **Default look for every Study Reel (Srini, 2026-11-26, first used in S10 v3):** `"cap_style": "karaoke"` captions
+  (spoken words in a dark box, current word on an orange pill) and the Style C characters (`couple` element,
+  sprites from `pipeline/couple_sprites.js`) whose faces follow the story: confused/worried on the problem, happy on
+  the win, frustrated/sad for "the others". Use the same characters for individuals too (`"show": "him"` or `"her"`)
+  when the study is about one person, not a couple. Hook text on screen 1 big (about 80 px) and quick to scan.
 - **Show both sides of the result (Srini, 2026-11-26).** When the voice contrasts winners with "the others", show a
   second couple (or person) with the unhappy/frustrated face next to the happy one, on screen 2 and on the result.
 - Then why it happens → the study → the result → **the fix at the end** → send prompt.

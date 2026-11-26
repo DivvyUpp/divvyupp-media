@@ -445,7 +445,7 @@
  {
   "id": "2026-11-26-s10-joint",
   "kind": "main",
-  "status": "pending_review",
+  "status": "approved",
   "post_date": "2026-11-26",
   "file": "reels/2026-11-26-s10-joint-v3.mp4",
   "spec": "hooks/2026-11-26-s10-joint.json",
@@ -456,7 +456,8 @@
   "hypothesis": "hypotheses/2026-11-26.md",
   "file_before_v2": "reels/2026-11-26-s10-joint.mp4",
   "cover": "Tip #6 frame at 13.2 s (result tease + happy vs frustrated couples + full caption); still at reels/2026-11-26-s10-joint-v3_cover.jpg once approved",
-  "note": "v3 for review (Srini, 2026-11-26): v2 changes (caveat cut, Style C couple, bigger hook, karaoke captions) plus the tip #6 frame teases the result only, and a frustrated 'others' couple on the tip and result screens."
+  "note": "v3 for review (Srini, 2026-11-26): v2 changes (caveat cut, Style C couple, bigger hook, karaoke captions) plus the tip #6 frame teases the result only, and a frustrated 'others' couple on the tip and result screens. Approved by Srini in chat 2026-11-26 ~15:00 ET (\"I approve this reel, so you can go ahead and post it now\").",
+  "not_before": "15:00"
  },
  {
   "id": "2026-11-26-s11-fights",
