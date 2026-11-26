@@ -1,0 +1,18 @@
+{
+ "run": "metrics",
+ "date": "2026-11-26",
+ "attempts": [
+  {
+   "started_at": "2026-11-26T05:53:30-05:00",
+   "finished_at": "2026-11-26T05:55:42-05:00",
+   "status": "ok",
+   "trigger": "scheduled",
+   "summary": "Read 13 Reels from the last 8 days via Windsor (cached, trial plan). Followers: 3. Non-follower views yesterday: 56. Logged read_d1 for 2026-11-25-s4-lock, -s7-gym and -s8-minimum (S8 is dated 2026-11-26 by Windsor, posted 10pm ET 11-25), read_72h for 2026-11-21-milk; still no shares on any Reel (sends per 1,000 reached 0.0 across the board).",
+   "outputs": [
+    {"label": "Instagram numbers", "path": "metrics/2026-11-26.json"},
+    {"label": "Experiment log", "path": "experiment-log.csv"},
+    {"label": "Followers", "path": "followers.csv"}
+   ]
+  }
+ ]
+}
