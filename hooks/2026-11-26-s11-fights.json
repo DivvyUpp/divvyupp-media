@@ -151,6 +151,13 @@
      "at": 0
     },
     {
+     "type": "research",
+     "x": 520,
+     "y": 930,
+     "at": 0.15,
+     "until": "everything couples"
+    },
+    {
      "type": "text",
      "text": "one topic",
      "x": 540,
@@ -300,11 +307,11 @@
     {
      "type": "crowd",
      "x": 540,
-     "y": 960,
+     "y": 1010,
      "cols": 10,
      "rows": 2,
      "h": 90,
-     "sp": 78,
+     "sp": 72,
      "count": 4500,
      "suffix": "+",
      "label": "US couples, followed over time",

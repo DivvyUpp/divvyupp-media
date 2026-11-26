@@ -38,6 +38,7 @@ Element types (coordinates are 1080x1920 frame pixels):
   line    pts [col] [width] [dash] [dur]
   dot     x y [r] [col] [pulse]
   statement x y w h [issuer] [acct] [rows] [hl: at] [hl_row] [warnings]   card statement Payment Information box
+  research x y                                                 study paper + magnifier sweep + $ coin pop (tip-tag intro)
   crowd   x y [cols rows h sp] [count suffix label] [dur] [moods]   rows of small figures popping in, number counts up
   couple  x y h [gap] [label label_col] [move:{at x dur}] [show: both|him|her] moods:[{at, him, her}] [labels:[l, r]] [q]   Style C couple (Srini picked
           2026-11-26), sprites from pipeline/couple_sprites.js; moods happy|neutral|worried|sad|confused|frustrated; a mood
@@ -509,7 +510,32 @@ def e_crowd(cv, e, t, T):
         cv.im.paste(im, (int((cx - im.width / S / 2) * S), int((fy - hh) * S)), im)
     cv.d = ImageDraw.Draw(cv.im, "RGBA")
 
-DRAW = {"crowd": e_crowd, "couple": e_couple, "text": e_text, "chip": e_chip, "chart": e_chart, "card": e_card, "panel": e_panel, "bars": e_bars, "lock": e_lock,
+def e_research(cv, e, t, T):
+    """A study paper slides up, a magnifier sweeps over it, and a $ coin with a spark pops: "research -> money tip"."""
+    k = T.fade(e, t); t0 = T.t_in(e)
+    if k <= 0 or t < t0: return
+    x, y = e["x"], e["y"]; u = ease((t - t0) / 0.45); yy = y + (1 - u) * 60; ku = k * u
+    b = [x - 170, yy - 210, x + 170, yy + 210]
+    cv.shadow(b, 22, ku, blur=18, dy=10, alpha=0.14); cv.rect(b, 22, fill=WHITE, outline=INK, w=5, k=ku)
+    cv.text(x - 130, yy - 160, "STUDY", F("xb", 26), ORANGE, ku, anchor="lm")
+    for i, lw in enumerate([260, 230, 250, 180, 240, 150]):
+        cv.line([(x - 130, yy - 105 + i * 50), (x - 130 + lw * ease((t - t0 - 0.2 - i * 0.07) / 0.3), yy - 105 + i * 50)], MUTED, 10, ku)
+    m = ease((t - t0 - 0.55) / 0.7)                          # magnifier sweeps across the lines
+    if m > 0:
+        mx, my = x - 110 + 150 * m, yy - 40 + 40 * math.sin(m * math.pi)
+        cv.circle(mx, my, 62, fill=(255, 255, 255), k=k * 0.35); cv.circle(mx, my, 62, outline=INK, w=9, k=k)
+        cv.line([(mx + 44, my + 44), (mx + 100, my + 100)], INK, 16, k)
+    c = T.u({"at": 0}, t - (t0 - T.sc["t0"]) - 1.15, 0.45) if False else clamp((t - t0 - 1.15) / 0.45)
+    if c > 0:                                                # the coin pops at the top right with a little spark
+        r = 70 * (0.5 + 0.5 * back(c)); cx, cy = x + 175, yy - 200
+        cv.shadow([cx - r, cy - r, cx + r, cy + r], r, k, blur=12, dy=6, alpha=0.18)
+        cv.circle(cx, cy, r, fill=ORANGE, k=k); cv.circle(cx, cy, r * 0.78, outline=WHITE, w=4, k=k)
+        cv.text(cx, cy + 2, "$", F("xb", r * 1.1), WHITE, k)
+        for a in range(0, 360, 45):
+            ra = math.radians(a); d0, d1 = r + 14, r + 14 + 26 * ease(c)
+            cv.line([(cx + math.cos(ra) * d0, cy + math.sin(ra) * d0), (cx + math.cos(ra) * d1, cy + math.sin(ra) * d1)], ORANGE, 6, k * (1 - clamp((t - t0 - 1.6) / 0.4)))
+
+DRAW = {"research": e_research, "crowd": e_crowd, "couple": e_couple, "text": e_text, "chip": e_chip, "chart": e_chart, "card": e_card, "panel": e_panel, "bars": e_bars, "lock": e_lock,
         "target": e_target, "qring": e_qring, "accounts": e_accounts, "avatar": e_avatar, "curve": e_curve,
         "ticket": e_ticket, "tag": e_tag, "clock": e_clock, "line": e_line, "dot": e_dot, "statement": e_statement}
 
