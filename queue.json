@@ -485,7 +485,7 @@
  {
   "id": "2026-11-26-s8-short",
   "kind": "main",
-  "status": "pending_review",
+  "status": "approved",
   "post_date": "2026-11-26",
   "file": "reels/2026-11-26-s8-short.mp4",
   "spec": "hooks/2026-11-26-s8-short.json",
@@ -493,6 +493,8 @@
   "hook": "Are you only making the minimum payment on your credit card? (Study Reel S8, 25 s cut: bet #11 length test)",
   "caption": "Only making the minimum payment on your card?\n\nIn a UK lab experiment, cardholders who never saw a minimum payment on their statement repaid about £175, vs about £99 when it was shown (among people not paying in full). Almost double, from one change.\n\nTry it: set autopay to a fixed amount you choose, never \"minimum\".\n\nStudy: Neil Stewart, Psychological Science, 2009. Link in the comments.\n\nSend this to anyone with autopay on minimum 💳\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #creditcard #debtfree #moneytips #research",
   "first_comment": "📄 The study: Stewart, \"The Cost of Anchoring on Credit-Card Minimum Repayments\", Psychological Science, 2009\nhttps://wrap.warwick.ac.uk/id/eprint/2552",
-  "hypothesis": "hypotheses/2026-11-26.md"
+  "hypothesis": "hypotheses/2026-11-26.md",
+  "not_before": "21:30",
+  "note": "Approved by Srini in chat 2026-11-26 (\"let's do 10 pm tonight\"), kept in the old Study Reel look so bet #11 tests length only; for the 10pm slot."
  }
 ]
