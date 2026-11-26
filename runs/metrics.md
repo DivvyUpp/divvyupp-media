@@ -8,24 +8,29 @@ connectors) can read them from the repo. Data only: no postmortem, no verdicts, 
    fields it lists): `media_id, media_views, media_reach, media_reel_skip_rate, media_reel_avg_watch_time,
    media_shares, media_saved, media_like_count, media_reel_total_interactions` for every Reel posted in the last
    8 days. Also `followers_count` (today's total) and account `views_non_followers` for yesterday.
-2b. **TikTok (added 2026-11-26).** If Windsor lists a `tiktok_organic` account for @getdivvyupp, pull the same
-   numbers for every TikTok posted in the last 8 days (views, reach if listed, avg watch time, full-watch rate,
-   shares, likes, comments, saves) and the follower count, using only fields `get_fields` lists. Match each video to
-   its queue entry by `tiktok_id`. If there is no TikTok account in Windsor, skip this and say so in the run log.
 3. Write `metrics/<today>.json`:
    `{"date": "<today>", "pulled_at": "<ISO time ET>", "followers_count": N, "views_non_followers_yesterday": N,
    "reels": [{"media_id": "...", "permalink": "...", "posted": "<date>", "views": N, "reach": N, "skip_rate": N,
    "avg_watch_s": N, "shares": N, "saves": N, "likes": N, "interactions": N, "sends_per_1k": N}]}`.
-   With TikTok data, add `"tiktok": {"followers_count": N, "videos": [{"tiktok_id": "...", "queue_id": "...", ...same
-   fields, `null` where TikTok has none}]}`. Same rule: write what Windsor returns, never estimate.
+   (`tiktok`, `youtube` and `combined` are added by step 3b.)
    `sends_per_1k` = shares ÷ reach × 1000, rounded to 1 decimal (`null` when reach is 0 or missing). It is the
    primary metric (PLAYBOOK "Primary metric").
    Write exactly what Windsor returns; use `null` for anything it does not return. Never estimate a number.
+3b. **TikTok + YouTube, through Postproxy (Srini, 2026-11-26).** Right after step 3 writes `metrics/<today>.json`,
+   run from the repo root: `python3 scripts/fetch_platform_stats.py`
+   (needs `POSTPROXY_API_KEY`, which the environment has). It adds `"tiktok"` (follower count + per-video views,
+   reach, avg/total watch, full-watch rate, likes, comments, shares, sends per 1,000), `"youtube"` (subscribers,
+   channel 7-day watch figures + per-Short views, likes, comments) and `"combined"` (one row per Reel: Instagram,
+   TikTok and YouTube views side by side, `total_views` over the platforms it's on) to the same file, leaving the
+   Instagram fields untouched. Everything is written exactly as Postproxy returns it, `null` where it returns
+   nothing. If it exits 1, the Instagram numbers still stand: log status `partial` with its stderr line and say
+   "TikTok/YouTube numbers unavailable" in the reply. Windsor is NOT used for TikTok or YouTube.
 4. Write into `experiment-log.csv`: `read_d1` (first-morning read, about 8–18 h after posting) for yesterday's Reels and `read_72h` for Reels posted 3 days ago,
    as `sends_per_1k/views/skip%/avg_watch_s/shares/saves/likes`, and refresh the stats columns with the latest read. Avg watch
    is in seconds. Append `<today>,<followers_count>` to `followers.csv` (skip if today's row already exists).
 5. Commit `metrics/`, `experiment-log.csv` and `followers.csv` ("metrics: <today>") and push to main. If the push
    is rejected, pull --rebase and push again once.
 6. Write your run log record (`runlog/<today>/metrics.json`, see "Run log" in `PLAYBOOK.md`) and push it with the rest; write it even if you stop early.
-7. Reply with one line: how many Reels were read and today's follower count. If Windsor fails or returns nothing,
+7. Reply with one line: how many Reels were read and today's follower count, plus TikTok followers and YouTube
+   subscribers. If Windsor fails or returns nothing,
    commit only the run log record (status `failed`), and tell Srini exactly what failed: the Create run will say the numbers are missing.

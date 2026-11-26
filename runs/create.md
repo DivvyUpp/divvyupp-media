@@ -36,6 +36,14 @@ numbers with Windsor and commits them before this run starts.
 2. Work out the scorecard in `PLAYBOOK.md` for each Reel read today, **leading with sends per 1,000 reached** (the
    primary metric), then avg watch ÷ length, likes per 100 reached and saves per 1,000. A postmortem verdict is
    about sends per 1,000 first; views are context only.
+2a. **Cross-platform view (Srini, 2026-11-26).** The same file has `tiktok`, `youtube` and `combined` (written by the
+   Metrics pull from Postproxy). In the note to Srini, add one line per Reel from `combined`: Instagram / TikTok /
+   YouTube views and the total, plus TikTok followers and YouTube subscribers. In each postmortem, add the Reel's
+   TikTok avg watch ÷ length and full-watch rate and its YouTube views as a second read on the same bet; the verdict
+   still leads with Instagram sends per 1,000 until the Instagram vs TikTok comparison (PLAYBOOK, ~14 paired Reels)
+   says otherwise. TikTok's view count can lag its watch-time numbers by hours: when views is 0 but `total_watch_s`
+   is not, say "TikTok views not counted yet" instead of reading it as zero. If `tiktok` / `youtube` are missing,
+   say "TikTok/YouTube numbers unavailable" and carry on with Instagram.
 3. Request yesterday's funnel: trigger `funnel-weekly.yml` with `from` = `to` = yesterday, wait, pull, and read
    `funnel/custom-<yesterday>_<yesterday>.json` (`instagram.days[]`: `ig_visits`, `get_started_clicked`, `signed_up`,
    `bank_linked`). Write them on the rows posted that day. If it fails, say "funnel unavailable" and carry on.

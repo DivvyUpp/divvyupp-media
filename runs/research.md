@@ -36,8 +36,9 @@ our own data. Until then it is a candidate bet in `backlog.md`.
    **Proof bar for a format or tactic (set by Srini 2026-11-20): an idea is not a bet until it has data.** A format
    counts as proven when we can show **at least 3 unrelated accounts** posting it **in the last 90 days**, each post
    beating that account's own typical views by **3x or more** (compare against 5–10 of its recent posts; write the
-   numbers down: post views, account median, ratio, date, link). Our own numbers count too: a Reel or TikTok of
-   Srini's with 100+ views. An idea without this is listed under "Ideas needing proof", not ranked as a bet.
+   numbers down: post views, account median, ratio, date, link). Our own numbers count too: a Reel, TikTok or YouTube Short of
+   Srini's with 100+ views on any one platform (read them from `combined` / `tiktok` / `youtube` in the latest
+   `metrics/<date>.json`; name the platform with the number). An idea without this is listed under "Ideas needing proof", not ranked as a bet.
    `research/watchlist.csv` (readable version: `research/watchlist.md`, with the **entry bar** every account must meet)
    holds three lists (Srini, 2026-11-20): niche, fintech_brand and format_teacher. Add accounts only if they meet the
    bar, and log any you check and leave out. Vet with `python3 scripts/vet_channels.py --names ...` (search costs

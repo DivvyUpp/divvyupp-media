@@ -20,10 +20,11 @@ You run the daily Create run for DivvyUpp's Instagram Reels loop (@getdivvyupp).
 ```
 
 ## 2b. Metrics pull — every day, 05:53 America/New_York
-Runs on Cowork (it needs the Windsor.ai for Social Media connector). Repos: DivvyUpp/divvyupp-media (push).
+Needs the Windsor.ai for Social Media connector (Instagram) and `POSTPROXY_API_KEY` with `api.postproxy.dev` allowed
+(TikTok and YouTube, 2026-11-26). Repos: DivvyUpp/divvyupp-media (push).
 
 ```
-You run the daily Metrics pull for DivvyUpp's Instagram Reels loop (@getdivvyupp). Make sure the GitHub repo DivvyUpp/divvyupp-media is available (attach it with push access if it is not, then clone it). Read runs/metrics.md and follow it exactly. Use the Windsor.ai for Social Media connector (connector instagram, account 17841422626862357). Data only: never post, publish or change anything outside the files runs/metrics.md names. If something blocks you, tell Srini exactly what and stop.
+You run the daily Metrics pull for DivvyUpp's Instagram Reels loop (@getdivvyupp). Make sure the GitHub repo DivvyUpp/divvyupp-media is available (attach it with push access if it is not, then clone it). Read runs/metrics.md and follow it exactly. Use the Windsor.ai for Social Media connector (connector instagram, account 17841422626862357) for Instagram, and scripts/fetch_platform_stats.py (Postproxy, needs POSTPROXY_API_KEY) for TikTok and YouTube. Data only: never post, publish or change anything outside the files runs/metrics.md names. If something blocks you, tell Srini exactly what and stop.
 ```
 
 ## 3. Post (replaces the prompt of "DivvyUpp Reels: post today's approved Reel") — three slots a day, 11:57, 16:57 and 21:57 America/New_York
