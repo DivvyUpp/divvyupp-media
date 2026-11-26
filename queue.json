@@ -447,7 +447,7 @@
   "kind": "main",
   "status": "pending_review",
   "post_date": "2026-11-26",
-  "file": "reels/2026-11-26-s10-joint-v2.mp4",
+  "file": "reels/2026-11-26-s10-joint-v3.mp4",
   "spec": "hooks/2026-11-26-s10-joint.json",
   "format": "study",
   "hook": "Half the bills on your card, half on theirs, and nobody knows what's left? (Study Reel S10: research-backed money tip #6)",
@@ -455,8 +455,8 @@
   "first_comment": "📄 The study: Olson, Rick, Small & Finkel, Journal of Consumer Research, 2023 (Kellogg Insight summary)\nhttps://insight.kellogg.northwestern.edu/article/key-to-happy-marriage-joint-bank-account",
   "hypothesis": "hypotheses/2026-11-26.md",
   "file_before_v2": "reels/2026-11-26-s10-joint.mp4",
-  "cover": "Tip #6 frame at 12.1 s (tip + result + full caption sentence); still at reels/2026-11-26-s10-joint_cover.jpg once approved",
-  "note": "v2 for review (Srini, 2026-11-26): caveat cut from the voice-over; Style C couple through the story; bigger hook; karaoke captions; tip #6 frame now names the tip (open one joint account) and the result, for the cover."
+  "cover": "Tip #6 frame at 13.2 s (result tease + happy vs frustrated couples + full caption); still at reels/2026-11-26-s10-joint-v3_cover.jpg once approved",
+  "note": "v3 for review (Srini, 2026-11-26): v2 changes (caveat cut, Style C couple, bigger hook, karaoke captions) plus the tip #6 frame teases the result only, and a frustrated 'others' couple on the tip and result screens."
  },
  {
   "id": "2026-11-26-s11-fights",
