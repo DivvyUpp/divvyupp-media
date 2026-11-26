@@ -218,3 +218,19 @@ def test_no_trailing_newline_kept(tmp_path):
     p.write_text(json.dumps([entry()], indent=1))
     code, _, _ = run(p, [post("published", URL)])
     assert code == 0 and not p.read_text().endswith("\n")
+
+
+@pytest.mark.parametrize("cap,want", [
+    ("Same $10K.\n\nGet started. Link in the comments.\n\n#money", "Same $10K.\n\nGet started.\n\n#money"),
+    ("Hook.\n\nLink in the comments.\n\n#a #b", "Hook.\n\n#a #b"),
+    ("Free in beta. Link in the comments. Terms apply.", "Free in beta. Terms apply."),
+    ("No link line here.", "No link line here."),
+])
+def test_drops_instagram_only_comment_line(tmp_path, cap, want):
+    p = write_queue(tmp_path, [entry(caption=cap)])
+    code, seen, _ = run(p, [post("published", URL)])
+    assert code == 0 and json.loads(seen[0].data)["post"]["body"] == want
+
+
+def test_tiktok_caption_used_verbatim():
+    assert pt.tiktok_caption(entry(tiktok_caption="Link in the comments.")) == "Link in the comments."

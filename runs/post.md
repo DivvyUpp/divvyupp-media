@@ -31,7 +31,7 @@ Post today's approved Reels to @getdivvyupp. Only entries Srini explicitly appro
    main entry posts on Instagram (and its YouTube step), publish the same video **publicly** to @getdivvyupp on TikTok
    through **Postproxy** (REST API, `POSTPROXY_API_KEY` in the environment; TikTok profile `MZU39X`). Run:
    `python3 scripts/post_tiktok.py <entry.id>` from the repo root. It posts `entry.tiktok_caption` (else
-   `entry.caption`, exactly as approved), video = the same GitHub Pages URL as step 3, public, comments / Duet /
+   `entry.caption` with only the "Link in the comments." sentence removed: that comment is Instagram-only), video = the same GitHub Pages URL as step 3, public, comments / Duet /
    Stitch on, posted now (the Post slots already are the schedule), then waits for TikTok and writes `tiktok_id`,
    `tiktok_url` and `tiktok_postproxy_id` onto the entry in `queue.json`. Tested end to end 2026-11-26 (same-10k
    v12 → https://www.tiktok.com/@getdivvyupp/video/7712592763354762509).

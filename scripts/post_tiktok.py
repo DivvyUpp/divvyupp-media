@@ -12,7 +12,8 @@ Env:
 What it does:
   * refuses unless the entry is "kind": "main" (or no kind), status "approved" or "posted",
     and has no tiktok_id (never posts twice);
-  * caption = entry.tiktok_caption, else entry.caption (exactly; never edited);
+  * caption = entry.tiktok_caption, else entry.caption with only the "Link in the comments."
+    sentence removed (that first comment is posted on Instagram only); nothing else changes;
   * video  = https://divvyupp.github.io/divvyupp-media/<entry.file> (Postproxy downloads it);
   * public, comments / Duet / Stitch on, posted now; an Idempotency-Key per entry id, so a
     re-sent request cannot make a second post;
@@ -24,6 +25,7 @@ processing when the wait ran out (tiktok_postproxy_id is saved: check it, never 
 """
 import json
 import os
+import re
 import sys
 import time
 import urllib.error
@@ -69,8 +71,18 @@ def check_postable(e):
         raise Refused(f"{e['id']} has no file")
 
 
+def tiktok_caption(e):
+    """entry.tiktok_caption, else entry.caption minus "Link in the comments." (Instagram-only comment)."""
+    if e.get("tiktok_caption"):
+        return e["tiktok_caption"]
+    cap = re.sub(r"[ \t]*Link in the comments\.?[ \t]*", " ", e["caption"])
+    cap = re.sub(r" *\n *", "\n", cap)
+    cap = re.sub(r"\n{3,}", "\n\n", cap)
+    return re.sub(r" {2,}", " ", cap).strip()
+
+
 def build_payload(e):
-    caption = e.get("tiktok_caption") or e["caption"]
+    caption = tiktok_caption(e)
     return {
         "post": {"body": caption},
         "profiles": [PROFILE_ID],
