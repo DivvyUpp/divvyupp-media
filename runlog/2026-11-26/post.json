@@ -10,6 +10,36 @@
       "summary": "Noon slot: nothing approved to post on Instagram (S10, S11 and the S8 25s cut are pending review). YouTube backfill not attempted.",
       "blocker": "YouTube backfill still paused: Windsor still shows 1 public video on the channel that can't be matched to a Reel (per-video data comes back empty, and this Windsor trial plan can't force-refresh). Because that video appeared after an upload that answered 'rate-limited', other 'rate-limited' uploads may also have gone through, so uploading again risks duplicate Shorts. Check YouTube Studio and add youtube_id in queue.json for any Reel already there (or tell me) to restart the backfill; S2, S1, S4, S7 and S8 still need Shorts.",
       "outputs": []
+    },
+    {
+      "started_at": "2026-11-26T15:11:00-05:00",
+      "finished_at": "2026-11-26T15:14:16-05:00",
+      "status": "ok",
+      "trigger": "manual",
+      "summary": "Posted Study Reel S10 v3 (2026-11-26-s10-joint, joint account, research-backed money tip #6) to Instagram at Srini's request, with its first comment, and uploaded it as a YouTube Short.",
+      "blocker": "Pin the first comment by hand in Instagram.",
+      "outputs": [
+        {
+          "label": "Queue",
+          "path": "queue.json"
+        },
+        {
+          "label": "Experiment log",
+          "path": "experiment-log.csv"
+        },
+        {
+          "label": "Spec",
+          "path": "hooks/2026-11-26-s10-joint.json"
+        }
+      ],
+      "reels": [
+        {
+          "id": "2026-11-26-s10-joint",
+          "hook": "Half the bills on your card, half on theirs, and nobody knows what's left?",
+          "status": "posted",
+          "file": "reels/2026-11-26-s10-joint-v3.mp4"
+        }
+      ]
     }
   ]
 }
