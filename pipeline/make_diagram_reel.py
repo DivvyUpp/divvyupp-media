@@ -38,7 +38,8 @@ Element types (coordinates are 1080x1920 frame pixels):
   line    pts [col] [width] [dash] [dur]
   dot     x y [r] [col] [pulse]
   statement x y w h [issuer] [acct] [rows] [hl: at] [hl_row] [warnings]   card statement Payment Information box
-  couple  x y h [gap] [show: both|him|her] moods:[{at, him, her}] [labels:[l, r]] [q]   Style C couple (Srini picked
+  crowd   x y [cols rows h sp] [count suffix label] [dur] [moods]   rows of small figures popping in, number counts up
+  couple  x y h [gap] [label label_col] [move:{at x dur}] [show: both|him|her] moods:[{at, him, her}] [labels:[l, r]] [q]   Style C couple (Srini picked
           2026-11-26), sprites from pipeline/couple_sprites.js; moods happy|neutral|worried|sad|confused|frustrated; a mood
           change gives a little bounce; q draws an orange "?" over confused faces
 Spec options (2026-11-26, Srini): "cap_style": "karaoke" draws the spoken words in a dark box, the current word on an
@@ -470,9 +471,13 @@ def e_couple(cv, e, t, T):
         if t >= tm:
             for who in ("him", "her"):
                 if who in m and m[who] != cur[who]: cur[who] = m[who]; since[who] = tm
+    X = e["x"]
+    if e.get("move"):                                       # slide to a new x, e.g. to make room for a second couple
+        mv = e["move"]; X = X + (mv["x"] - X) * ease((t - T.anchor(mv["at"])) / mv.get("dur", 0.5))
+    if e.get("label"): cv.text(X, e["y"] + h / 2 + 40, e["label"], F("xb", e.get("label_s", 32)), COLS.get(e.get("label_col", "ink"), INK), k)
     for i, who in enumerate(("him", "her")):
         if show not in ("both", who): continue
-        cx = e["x"] + ((i - 0.5) * gap if show == "both" else 0)
+        cx = X + ((i - 0.5) * gap if show == "both" else 0)
         b = t - since[who]; bounce = math.sin(min(b / 0.35, 1) * math.pi) * 0.06 if 0 <= b < 0.35 else 0.0
         sc = (0.6 + 0.4 * back(u)) * (1 + bounce); hh = h * sc
         im = sprite(who, cur[who], hh)
@@ -483,7 +488,28 @@ def e_couple(cv, e, t, T):
         if e.get("labels"): cv.text(cx, e["y"] + h / 2 + 40, e["labels"][i], F("xb", 38), INK, k)
     cv.d = ImageDraw.Draw(cv.im, "RGBA")
 
-DRAW = {"couple": e_couple, "text": e_text, "chip": e_chip, "chart": e_chart, "card": e_card, "panel": e_panel, "bars": e_bars, "lock": e_lock,
+def e_crowd(cv, e, t, T):
+    """Rows of small figures (him/her alternating) popping in one by one, with a number counting up above them."""
+    k = T.fade(e, t)
+    if k <= 0: return
+    t0 = T.t_in(e); dur = e.get("dur", 1.6); cols, rows, h, sp = e.get("cols", 10), e.get("rows", 2), e.get("h", 90), e.get("sp", 78)
+    n = cols * rows; moods = e.get("moods", ["neutral", "happy"])
+    if e.get("count"):
+        u = ease((t - t0) / dur); v = int(round(e["count"] * u / 50.0)) * 50
+        txt = f"{v:,}" + (e.get("suffix", "") if u >= 0.999 else "")
+        if t >= t0: cv.text(e["x"], e["y"] - 120, txt, F("xb", e.get("count_s", 96)), ORANGE, k)
+        if e.get("label") and t >= t0: cv.text(e["x"], e["y"] - 50, e["label"], F("b", 36), GREY, k)
+    for i in range(n):
+        ti = t0 + dur * 0.85 * i / n; u = clamp((t - ti) / 0.3)
+        if u <= 0: continue
+        r, c = divmod(i, cols); who = "him" if (r + c) % 2 == 0 else "her"
+        hh = h * (0.5 + 0.5 * back(u)); im = sprite(who, moods[(i * 7) % len(moods)], hh)
+        if k < 1: im = im.copy(); im.putalpha(im.getchannel("A").point(lambda v_: int(v_ * k)))
+        cx = e["x"] + (c - (cols - 1) / 2) * sp; fy = e["y"] + 40 + r * (h + 18) + h
+        cv.im.paste(im, (int((cx - im.width / S / 2) * S), int((fy - hh) * S)), im)
+    cv.d = ImageDraw.Draw(cv.im, "RGBA")
+
+DRAW = {"crowd": e_crowd, "couple": e_couple, "text": e_text, "chip": e_chip, "chart": e_chart, "card": e_card, "panel": e_panel, "bars": e_bars, "lock": e_lock,
         "target": e_target, "qring": e_qring, "accounts": e_accounts, "avatar": e_avatar, "curve": e_curve,
         "ticket": e_ticket, "tag": e_tag, "clock": e_clock, "line": e_line, "dot": e_dot, "statement": e_statement}
 

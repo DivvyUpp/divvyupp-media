@@ -158,7 +158,7 @@
      "s": 110,
      "w": "xb",
      "col": "orange",
-     "at": "one topic",
+     "at": "was most",
      "pop": true
     },
     {
@@ -169,7 +169,7 @@
      "s": 36,
      "w": "b",
      "col": "grey",
-     "at": "one topic"
+     "at": "was most"
     },
     {
      "type": "couple",
@@ -177,10 +177,15 @@
      "y": 1010,
      "h": 230,
      "gap": 170,
-     "at": "one topic",
+     "at": "Of everything",
      "moods": [
       {
        "at": 0,
+       "him": "frustrated",
+       "her": "frustrated"
+      },
+      {
+       "at": "one topic",
        "him": "neutral",
        "her": "neutral"
       },
@@ -200,6 +205,46 @@
      "w": "xb",
      "col": "grey",
      "at": "not chores"
+    },
+    {
+     "type": "chip",
+     "text": "chores",
+     "style": "soft",
+     "x": 250,
+     "y": 690,
+     "s": 40,
+     "at": "everything couples",
+     "until": "one topic"
+    },
+    {
+     "type": "chip",
+     "text": "time together",
+     "style": "soft",
+     "x": 620,
+     "y": 640,
+     "s": 40,
+     "at": "everything couples",
+     "until": "one topic"
+    },
+    {
+     "type": "chip",
+     "text": "plans",
+     "style": "soft",
+     "x": 800,
+     "y": 760,
+     "s": 40,
+     "at": "disagree about",
+     "until": "one topic"
+    },
+    {
+     "type": "chip",
+     "text": "…",
+     "style": "soft",
+     "x": 380,
+     "y": 790,
+     "s": 40,
+     "at": "disagree about",
+     "until": "one topic"
     }
    ],
    "cap_split": "sentence",
@@ -230,7 +275,7 @@
      "text": "chores",
      "style": "soft",
      "x": 250,
-     "y": 930,
+     "y": 1010,
      "s": 42,
      "at": "chores"
     },
@@ -239,7 +284,7 @@
      "text": "time",
      "style": "soft",
      "x": 540,
-     "y": 930,
+     "y": 1010,
      "s": 42,
      "at": "time together"
     },
@@ -248,29 +293,24 @@
      "text": "money",
      "style": "orange",
      "x": 820,
-     "y": 930,
+     "y": 1010,
      "s": 42,
      "at": "money."
     },
     {
-     "type": "couple",
+     "type": "crowd",
      "x": 540,
-     "y": 1150,
-     "h": 170,
-     "gap": 125,
-     "at": "compared",
-     "moods": [
-      {
-       "at": 0,
-       "him": "neutral",
-       "her": "neutral"
-      },
-      {
-       "at": "money.",
-       "him": "worried",
-       "her": "worried"
-      }
-     ]
+     "y": 960,
+     "cols": 10,
+     "rows": 2,
+     "h": 90,
+     "sp": 78,
+     "count": 4500,
+     "suffix": "+",
+     "label": "US couples, followed over time",
+     "at": "followed",
+     "dur": 1.8,
+     "until": "chores"
     }
    ]
   },
@@ -320,7 +360,7 @@
     },
     {
      "type": "couple",
-     "x": 300,
+     "x": 540,
      "y": 1060,
      "h": 200,
      "gap": 140,
@@ -331,17 +371,14 @@
        "him": "frustrated",
        "her": "sad"
       }
-     ]
-    },
-    {
-     "type": "text",
-     "text": "money fights",
-     "x": 300,
-     "y": 1200,
-     "s": 32,
-     "w": "xb",
-     "col": "grey",
-     "at": "Disagreements about money"
+     ],
+     "move": {
+      "at": "worth getting right",
+      "x": 300,
+      "dur": 0.5
+     },
+     "label": "money fights",
+     "label_col": "grey"
     },
     {
      "type": "couple",
@@ -356,17 +393,9 @@
        "him": "happy",
        "her": "happy"
       }
-     ]
-    },
-    {
-     "type": "text",
-     "text": "getting it right",
-     "x": 740,
-     "y": 1200,
-     "s": 32,
-     "w": "xb",
-     "col": "orange",
-     "at": "worth getting right"
+     ],
+     "label": "getting it right",
+     "label_col": "orange"
     }
    ],
    "cap_split": "sentence"
