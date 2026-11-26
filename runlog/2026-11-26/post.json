@@ -1,0 +1,15 @@
+{
+  "run": "post",
+  "date": "2026-11-26",
+  "attempts": [
+    {
+      "started_at": "2026-11-26T11:58:00-05:00",
+      "finished_at": "2026-11-26T12:03:00-05:00",
+      "status": "blocked",
+      "trigger": "scheduled",
+      "summary": "Noon slot: nothing approved to post on Instagram (S10, S11 and the S8 25s cut are pending review). YouTube backfill not attempted.",
+      "blocker": "YouTube backfill still paused: Windsor still shows 1 public video on the channel that can't be matched to a Reel (per-video data comes back empty, and this Windsor trial plan can't force-refresh). Because that video appeared after an upload that answered 'rate-limited', other 'rate-limited' uploads may also have gone through, so uploading again risks duplicate Shorts. Check YouTube Studio and add youtube_id in queue.json for any Reel already there (or tell me) to restart the backfill; S2, S1, S4, S7 and S8 still need Shorts.",
+      "outputs": []
+    }
+  ]
+}
