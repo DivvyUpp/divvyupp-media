@@ -8,10 +8,16 @@ connectors) can read them from the repo. Data only: no postmortem, no verdicts, 
    fields it lists): `media_id, media_views, media_reach, media_reel_skip_rate, media_reel_avg_watch_time,
    media_shares, media_saved, media_like_count, media_reel_total_interactions` for every Reel posted in the last
    8 days. Also `followers_count` (today's total) and account `views_non_followers` for yesterday.
+2b. **TikTok (added 2026-11-26).** If Windsor lists a `tiktok_organic` account for @getdivvyupp, pull the same
+   numbers for every TikTok posted in the last 8 days (views, reach if listed, avg watch time, full-watch rate,
+   shares, likes, comments, saves) and the follower count, using only fields `get_fields` lists. Match each video to
+   its queue entry by `tiktok_id`. If there is no TikTok account in Windsor, skip this and say so in the run log.
 3. Write `metrics/<today>.json`:
    `{"date": "<today>", "pulled_at": "<ISO time ET>", "followers_count": N, "views_non_followers_yesterday": N,
    "reels": [{"media_id": "...", "permalink": "...", "posted": "<date>", "views": N, "reach": N, "skip_rate": N,
    "avg_watch_s": N, "shares": N, "saves": N, "likes": N, "interactions": N, "sends_per_1k": N}]}`.
+   With TikTok data, add `"tiktok": {"followers_count": N, "videos": [{"tiktok_id": "...", "queue_id": "...", ...same
+   fields, `null` where TikTok has none}]}`. Same rule: write what Windsor returns, never estimate.
    `sends_per_1k` = shares ÷ reach × 1000, rounded to 1 decimal (`null` when reach is 0 or missing). It is the
    primary metric (PLAYBOOK "Primary metric").
    Write exactly what Windsor returns; use `null` for anything it does not return. Never estimate a number.

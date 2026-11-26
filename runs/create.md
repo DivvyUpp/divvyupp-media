@@ -95,7 +95,8 @@ video as `reels/<id>.mp4`: the dashboard shows it there for Srini to review (the
 
 ## 7. Queue and send
 1. Add queue entries with `"status": "pending_review"`, `"post_date": today`, `"kind": "main"`, `"file"`, `"hook"`,
-   a caption each, and `"hypothesis": "hypotheses/<today>.md"`. Commit and push `reels/`, `hooks/`, `queue.json` and
+   a caption each, a `"tiktok_caption"` (same text without the "Link in the comments" line: name the study inline instead, since TikTok
+   gets no first comment; under 2,000 characters), and `"hypothesis": "hypotheses/<today>.md"`. Commit and push `reels/`, `hooks/`, `queue.json` and
    today's run log record to main straight away, so the Reels show on the dashboard
    (https://divvyupp.github.io/divvyupp-media/dashboard/) before you message Srini.
 2. Send Srini a push notification (PushNotification): "<n> Reels ready for review" with the review page link

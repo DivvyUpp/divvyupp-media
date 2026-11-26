@@ -11,6 +11,10 @@ Videos are served publicly by GitHub Pages at `https://divvyupp.github.io/divvyu
   **not pushed to this public repo** until approved.
 - Post only through the Windsor.ai for Social Media connector: connector `instagram`, account `17841422626862357`
   (@getdivvyupp), action `create_video_post`, `share_to_feed: true`.
+- **Cross-posting (Srini, 2026-11-26):** every approved main Reel also goes to YouTube Shorts (Windsor) and, once a
+  TikTok posting connector is connected, publicly to @getdivvyupp on TikTok (`runs/post.md` 3b/3c). Approval covers
+  all three platforms; nothing unapproved goes anywhere. Instagram vs TikTok is compared per Reel at 72 h on the same
+  scorecard; read it after ~14 paired Reels.
 - @getdivvyupp is the single main account for all DivvyUpp content (the personal @srinithinks account is retired).
 - Cadence (Srini, 2026-11-20, rapid-test phase): **up to 3 Reels a day** (changed 2026-11-21 from 4), one per slot at about noon, 5pm and
   10pm ET, one Reel per proven format per day so every format gets a daily read. The Post run posts one approved Reel
