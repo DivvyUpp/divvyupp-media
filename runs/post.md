@@ -37,8 +37,7 @@ Post today's approved Reels to @getdivvyupp. Only entries Srini explicitly appro
    v12 → https://www.tiktok.com/@getdivvyupp/video/7712592763354762509).
    - Exit 0 = live: commit the `queue.json` change with the Instagram one. Exit 1 = refused or failed: the reason is
      on stderr; log status `partial` with it and tell Srini. Exit 2 = still processing after ~10 minutes: log
-     `partial`, tell Srini, and leave it: the next run checks `GET https://api.postproxy.dev/api/posts/<tiktok_postproxy_id>`
-     and copies the permalink onto the entry once it shows `published`.
+     `partial`, tell Srini the Postproxy post id, and leave it (never re-post).
    - Never post twice: the script refuses an entry that already has `tiktok_id` or `tiktok_postproxy_id`, and sends
      an idempotency key per entry. Never work around a refusal, never retry blindly, never post a private copy or a
      draft. Skip trial entries (the script refuses them too).
@@ -46,8 +45,8 @@ Post today's approved Reels to @getdivvyupp. Only entries Srini explicitly appro
      is `partial` with "TikTok: POSTPROXY_API_KEY missing in this environment", and Srini is told the same run.
    - The script needs `api.postproxy.dev` reachable. It does not need `divvyupp.github.io` (Postproxy fetches the video
      itself).
-   - Backfill like YouTube: one approved, posted main entry from the last 3 days with no `tiktok_id` and no
-     `tiktok_postproxy_id` per run.
+   - **No TikTok backfill or catch-up (Srini, 2026-11-26).** TikTok gets exactly the Reel this slot just posted to
+     Instagram, nothing else. Never post older Reels to TikTok unless Srini asks for that specific Reel.
 4. Trial entries (`"kind": "trial"`): same action plus `trial_params: {"graduation_strategy": "MANUAL"}`. Instagram
    reportedly needs 200+ followers for trials. If the publish fails with a follower-requirement error, set the entry's
    status to `"trial_rejected"`, check with `get_data` that nothing reached the grid, don't retry, and tell Srini.
