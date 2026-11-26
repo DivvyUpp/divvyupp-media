@@ -155,7 +155,7 @@
      "x": 520,
      "y": 930,
      "at": 0.15,
-     "until": "Of everything"
+     "until": "seven."
     },
     {
      "type": "text",
@@ -184,7 +184,7 @@
      "y": 1010,
      "h": 230,
      "gap": 170,
-     "at": "couples disagree",
+     "at": "Of everything",
      "moods": [
       {
        "at": 0,
@@ -220,7 +220,7 @@
      "x": 250,
      "y": 690,
      "s": 40,
-     "at": "couples disagree",
+     "at": "Of everything",
      "until": "one topic"
     },
     {
@@ -230,7 +230,7 @@
      "x": 620,
      "y": 640,
      "s": 40,
-     "at": "couples disagree",
+     "at": "Of everything",
      "until": "one topic"
     },
     {
@@ -240,7 +240,7 @@
      "x": 800,
      "y": 760,
      "s": 40,
-     "at": "disagree about",
+     "at": "everything couples",
      "until": "one topic"
     },
     {
@@ -250,7 +250,7 @@
      "x": 380,
      "y": 790,
      "s": 40,
-     "at": "disagree about",
+     "at": "everything couples",
      "until": "one topic"
     }
    ],
