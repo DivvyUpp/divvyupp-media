@@ -16,37 +16,30 @@ Post today's approved Reels to @getdivvyupp. Only entries Srini explicitly appro
    media id, `message` = `entry.first_comment` exactly. Save the returned id on the entry as `first_comment_id`.
    Never post it twice (skip if `first_comment_id` is set). Windsor can't pin comments: tell Srini to pin it in the
    app. If the comment fails, the Reel still stands: don't retry blindly, log status `partial` and tell Srini.
-3b. **YouTube Shorts (added 2026-11-23, Srini).** Right after a main entry posts on Instagram, upload the same video
-   to the DivvyUpp YouTube channel (@getdivvyupp): Windsor `execute_action`, connector `youtube`, account `115938`,
-   action `upload_video` with `video_url` = the same URL as step 3, `title` = `entry.hook` with any trailing
-   "(...)" note removed and cut to 100 characters, `description` = `entry.caption`, `privacy_status` = `"public"`,
-   `made_for_kids` = false, `category_id` = `"22"`. A vertical video of 3 minutes or less is a Short automatically.
-   Skip the upload if the entry already has `youtube_id` (never upload twice) and skip trial entries. Save the
-   returned id and URL on the entry as `youtube_id` and `youtube_url`. If the upload fails, the Instagram post still
-   stands: don't retry, put the error in the run log as status `partial` with the blocker, and tell Srini.
-   **Backfill:** every run, also upload any main entry with `"status": "posted"`, a `post_date` in the last 3 days and
-   no `youtube_id` (one upload per run, oldest first), even when nothing new is approved for Instagram. If YouTube
-   answers "rate-limited", stop and leave it for the next run.
-3c. **TikTok (Srini, 2026-11-26: Instagram and TikTok post together, every approved main Reel).** Right after a
-   main entry posts on Instagram (and its YouTube step), publish the same video **publicly** to @getdivvyupp on TikTok
-   through **Postproxy** (REST API, `POSTPROXY_API_KEY` in the environment; TikTok profile `MZU39X`). Run:
-   `python3 scripts/post_tiktok.py <entry.id>` from the repo root. It posts `entry.tiktok_caption` (else
-   `entry.caption` with only the "Link in the comments." sentence removed: that comment is Instagram-only), video = the same GitHub Pages URL as step 3, public, comments / Duet /
-   Stitch on, posted now (the Post slots already are the schedule), then waits for TikTok and writes `tiktok_id`,
-   `tiktok_url` and `tiktok_postproxy_id` onto the entry in `queue.json`. Tested end to end 2026-11-26 (same-10k
-   v12 → https://www.tiktok.com/@getdivvyupp/video/7712592763354762509).
-   - Exit 0 = live: commit the `queue.json` change with the Instagram one. Exit 1 = refused or failed: the reason is
-     on stderr; log status `partial` with it and tell Srini. Exit 2 = still processing after ~10 minutes: log
-     `partial`, tell Srini the Postproxy post id, and leave it (never re-post).
-   - Never post twice: the script refuses an entry that already has `tiktok_id` or `tiktok_postproxy_id`, and sends
-     an idempotency key per entry. Never work around a refusal, never retry blindly, never post a private copy or a
-     draft. Skip trial entries (the script refuses them too).
-   - **If `POSTPROXY_API_KEY` is not set, TikTok is NOT skipped silently:** Instagram still posts, the run log status
-     is `partial` with "TikTok: POSTPROXY_API_KEY missing in this environment", and Srini is told the same run.
-   - The script needs `api.postproxy.dev` reachable. It does not need `divvyupp.github.io` (Postproxy fetches the video
-     itself).
-   - **No TikTok backfill or catch-up (Srini, 2026-11-26).** TikTok gets exactly the Reel this slot just posted to
-     Instagram, nothing else. Never post older Reels to TikTok unless Srini asks for that specific Reel.
+3b. **TikTok + YouTube Shorts, through Postproxy (Srini, 2026-11-26).** Right after a main entry posts on Instagram,
+   the SAME entry goes to @getdivvyupp on TikTok and on YouTube (Shorts) in one Postproxy request (one Postproxy post,
+   whatever the number of platforms). From the repo root run:
+   `python3 scripts/post_postproxy.py <entry.id>`
+   (Postproxy REST API, `POSTPROXY_API_KEY` in the environment; profiles TikTok `MZU39X`, YouTube `rOUpVX`.) It posts
+   `entry.tiktok_caption`, else `entry.caption` with only the "Link in the comments." sentence removed (that comment is
+   Instagram-only), as the TikTok caption and the YouTube description; YouTube title = `entry.hook` without a trailing
+   "(...)" note, cut to 100 characters; both public, TikTok comments / Duet / Stitch on; posted now (the Post slots
+   already are the schedule). It waits for both, then writes `tiktok_id` / `tiktok_url` / `tiktok_postproxy_id` and
+   `youtube_id` / `youtube_url` / `youtube_postproxy_id` onto the entry in `queue.json`. Tested end to end 2026-11-26
+   (TikTok: same-10k v12; YouTube: S8 minimum → https://www.youtube.com/watch?v=U82Qn1ZS-GU).
+   - **Only the Reel this slot just posted to Instagram. No backfill or catch-up on TikTok or YouTube (Srini,
+     2026-11-26).** If nothing posted to Instagram this slot, nothing goes to TikTok or YouTube. Older Reels go there
+     only when Srini asks for that specific Reel. Skip trial entries (the script refuses them).
+   - Exit 0 = live on both: commit `queue.json` with the Instagram change. Exit 1 = refused or a platform failed (the
+     reason is on stderr; a platform that did publish is still recorded): log status `partial`, tell Srini. Exit 2 =
+     a platform still processing after ~10 minutes: log `partial`, tell Srini the Postproxy post id, and leave it.
+   - Never post twice: the script leaves out any platform the entry already has `<platform>_id` or
+     `<platform>_postproxy_id` for, and sends an idempotency key. Never work around a refusal, never retry blindly,
+     never post a private copy or a draft.
+   - If `POSTPROXY_API_KEY` is not set, Instagram still posts; the run log status is `partial` with "Postproxy:
+     POSTPROXY_API_KEY missing in this environment", and Srini is told the same run.
+   - YouTube no longer goes through Windsor (its uploads kept coming back "rate-limited"). Windsor stays for Instagram.
+   - The script needs `api.postproxy.dev` reachable, not `divvyupp.github.io` (Postproxy fetches the video itself).
 4. Trial entries (`"kind": "trial"`): same action plus `trial_params: {"graduation_strategy": "MANUAL"}`. Instagram
    reportedly needs 200+ followers for trials. If the publish fails with a follower-requirement error, set the entry's
    status to `"trial_rejected"`, check with `get_data` that nothing reached the grid, don't retry, and tell Srini.
