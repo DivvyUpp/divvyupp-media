@@ -27,9 +27,12 @@ You run the daily Metrics pull for DivvyUpp's Instagram Reels loop (@getdivvyupp
 ```
 
 ## 3. Post (replaces the prompt of "DivvyUpp Reels: post today's approved Reel") — three slots a day, 11:57, 16:57 and 21:57 America/New_York
+Needs the Windsor.ai for Social Media connector AND `POSTPROXY_API_KEY` in its environment, with `api.postproxy.dev`
+allowed (2026-11-26: TikTok posts with Instagram). Without the key the run still posts Instagram and reports TikTok
+as missing.
 
 ```
-You post DivvyUpp's approved Instagram Reels for today to @getdivvyupp. Make sure the GitHub repo DivvyUpp/divvyupp-media is available (attach it with push access if it is not, then clone it). Read PLAYBOOK.md, then runs/post.md, and follow them exactly. Use the Windsor.ai for Social Media connector (connector instagram, account 17841422626862357). Only entries Srini explicitly approved (status "approved") may ever be posted; never post anything else, never edit captions. If publishing fails, do not retry blindly; tell Srini what failed.
+You post DivvyUpp's approved Reels for today to @getdivvyupp on Instagram, YouTube Shorts and TikTok. Make sure the GitHub repo DivvyUpp/divvyupp-media is available (attach it with push access if it is not, then clone it). Read PLAYBOOK.md, then runs/post.md, and follow them exactly. Use the Windsor.ai for Social Media connector (connector instagram, account 17841422626862357) for Instagram and YouTube, and scripts/post_tiktok.py (Postproxy, needs POSTPROXY_API_KEY) for TikTok. Only entries Srini explicitly approved (status "approved") may ever be posted; never post anything else, never edit captions. If publishing fails, do not retry blindly; tell Srini what failed.
 ```
 
 ## 4. Blog (add to "DivvyUpp Blog: weekly SEO report & article management") — add this paragraph under HISTORY

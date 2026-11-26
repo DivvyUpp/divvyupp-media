@@ -6,15 +6,16 @@ these files win: the loop is changed by editing the repo, not the routine.
 Videos are served publicly by GitHub Pages at `https://divvyupp.github.io/divvyupp-media/<path>`.
 
 ## Ground rules (never break these)
-- **Nothing is posted to Instagram unless its queue entry has `"status": "approved"`**, set only after Srini
+- **Nothing is posted anywhere (Instagram, YouTube, TikTok) unless its queue entry has `"status": "approved"`**, set only after Srini
   watched the actual video and said yes in chat. Videos awaiting review are sent to him as files and are
   **not pushed to this public repo** until approved.
 - Post only through the Windsor.ai for Social Media connector: connector `instagram`, account `17841422626862357`
   (@getdivvyupp), action `create_video_post`, `share_to_feed: true`.
-- **Cross-posting (Srini, 2026-11-26):** every approved main Reel also goes to YouTube Shorts (Windsor) and, once a
-  TikTok posting connector is connected, publicly to @getdivvyupp on TikTok (`runs/post.md` 3b/3c). Approval covers
-  all three platforms; nothing unapproved goes anywhere. Instagram vs TikTok is compared per Reel at 72 h on the same
-  scorecard; read it after ~14 paired Reels.
+- **Cross-posting (Srini, 2026-11-26):** every approved main Reel posts to Instagram (Windsor), YouTube Shorts
+  (Windsor) and TikTok (Postproxy, `scripts/post_tiktok.py`) in the same Post slot (`runs/post.md` 3, 3b, 3c).
+  Instagram and TikTok always go together; a Reel missing from either is a `partial` run that Srini hears about.
+  Approval covers all three platforms; nothing unapproved goes anywhere. Instagram vs TikTok is compared per Reel at
+  72 h on the same scorecard; read it after ~14 paired Reels.
 - @getdivvyupp is the single main account for all DivvyUpp content (the personal @srinithinks account is retired).
 - Cadence (Srini, 2026-11-20, rapid-test phase): **up to 3 Reels a day** (changed 2026-11-21 from 4), one per slot at about noon, 5pm and
   10pm ET, one Reel per proven format per day so every format gets a daily read. The Post run posts one approved Reel

@@ -27,19 +27,27 @@ Post today's approved Reels to @getdivvyupp. Only entries Srini explicitly appro
    **Backfill:** every run, also upload any main entry with `"status": "posted"`, a `post_date` in the last 3 days and
    no `youtube_id` (one upload per run, oldest first), even when nothing new is approved for Instagram. If YouTube
    answers "rate-limited", stop and leave it for the next run.
-3c. **TikTok (added 2026-11-26, Srini: "whatever is the most automated").** Right after a main entry posts on
-   Instagram (and its YouTube step), publish the same video **publicly** to @getdivvyupp on TikTok with the TikTok
-   posting connector Srini connected (planned: PostProxy's MCP; use whatever TikTok publish tool the session lists).
-   Video = the same `video_url` as step 3; caption = `entry.tiktok_caption` (fall back to `entry.caption` with the
-   "Link in the comments" sentence removed); privacy public; comments, duet and stitch on. Post now, not scheduled:
-   the Post slots already are the schedule. Save the returned id/URL as `tiktok_id` / `tiktok_url`.
-   - Never post twice: skip if the entry has `tiktok_id`; after a failure or timeout, check the account's latest
-     posts (or the publish status) before anything else, and never retry blindly. Skip trial entries.
-   - **If no TikTok posting tool is in the session, skip this step** and write "TikTok not connected" in the run log
-     summary (status stays `ok`; tell Srini once per day at most).
-   - If TikTok only allows a private post or a draft (TikTok's unaudited-app limit), don't post private copies:
-     stop the TikTok step, log status `partial` with that blocker, and tell Srini.
-   - Backfill like YouTube: one approved, posted main entry from the last 3 days with no `tiktok_id` per run.
+3c. **TikTok (Srini, 2026-11-26: Instagram and TikTok post together, every approved main Reel).** Right after a
+   main entry posts on Instagram (and its YouTube step), publish the same video **publicly** to @getdivvyupp on TikTok
+   through **Postproxy** (REST API, `POSTPROXY_API_KEY` in the environment; TikTok profile `MZU39X`). Run:
+   `python3 scripts/post_tiktok.py <entry.id>` from the repo root. It posts `entry.tiktok_caption` (else
+   `entry.caption`, exactly as approved), video = the same GitHub Pages URL as step 3, public, comments / Duet /
+   Stitch on, posted now (the Post slots already are the schedule), then waits for TikTok and writes `tiktok_id`,
+   `tiktok_url` and `tiktok_postproxy_id` onto the entry in `queue.json`. Tested end to end 2026-11-26 (same-10k
+   v12 → https://www.tiktok.com/@getdivvyupp/video/7712592763354762509).
+   - Exit 0 = live: commit the `queue.json` change with the Instagram one. Exit 1 = refused or failed: the reason is
+     on stderr; log status `partial` with it and tell Srini. Exit 2 = still processing after ~10 minutes: log
+     `partial`, tell Srini, and leave it: the next run checks `GET https://api.postproxy.dev/api/posts/<tiktok_postproxy_id>`
+     and copies the permalink onto the entry once it shows `published`.
+   - Never post twice: the script refuses an entry that already has `tiktok_id` or `tiktok_postproxy_id`, and sends
+     an idempotency key per entry. Never work around a refusal, never retry blindly, never post a private copy or a
+     draft. Skip trial entries (the script refuses them too).
+   - **If `POSTPROXY_API_KEY` is not set, TikTok is NOT skipped silently:** Instagram still posts, the run log status
+     is `partial` with "TikTok: POSTPROXY_API_KEY missing in this environment", and Srini is told the same run.
+   - The script needs `api.postproxy.dev` reachable. It does not need `divvyupp.github.io` (Postproxy fetches the video
+     itself).
+   - Backfill like YouTube: one approved, posted main entry from the last 3 days with no `tiktok_id` and no
+     `tiktok_postproxy_id` per run.
 4. Trial entries (`"kind": "trial"`): same action plus `trial_params: {"graduation_strategy": "MANUAL"}`. Instagram
    reportedly needs 200+ followers for trials. If the publish fails with a follower-requirement error, set the entry's
    status to `"trial_rejected"`, check with `get_data` that nothing reached the grid, don't retry, and tell Srini.
@@ -49,4 +57,5 @@ Post today's approved Reels to @getdivvyupp. Only entries Srini explicitly appro
    `bet`, `variable`, `control_id` and `prediction` copied from its `hypotheses/` card), commit and push to main.
 7. Write your run log record (`runlog/<today>/post.json`, see "Run log" in `PLAYBOOK.md`) and push it with the rest; write it even if you stop early. Each slot appends its own attempt, including slots where nothing was approved
    (status `ok`, summary "Nothing approved to post").
-8. Send Srini one short line: what posted (main and trials) and the links (Instagram, YouTube and TikTok).
+8. Send Srini one short line: what posted (main and trials) and the links (Instagram, YouTube and TikTok). If any of
+   the three is missing for a main Reel, say which and why in that same line.
