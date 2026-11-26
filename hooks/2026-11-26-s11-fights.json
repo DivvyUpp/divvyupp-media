@@ -373,37 +373,36 @@
   },
   {
    "title": "do *this*",
-   "text": "So don't wait for the next surprise charge. Do a fifteen-minute money check-in every week, together.",
+   "text": "Do a fifteen-minute money check-in every week, together.",
    "elements": [
     {
      "type": "clock",
      "x": 540,
      "y": 620,
      "r": 150,
-     "at": "fifteen-minute",
+     "at": 0,
      "dur": 1.2,
      "label": "15 minutes"
     },
     {
      "type": "text",
+     "text": "money check-in",
+     "x": 540,
+     "y": 880,
+     "s": 72,
+     "w": "xb",
+     "at": "money check-in"
+    },
+    {
+     "type": "text",
      "text": "every week",
      "x": 540,
-     "y": 940,
+     "y": 980,
      "s": 72,
      "w": "xb",
      "at": "every week",
      "col": "orange",
      "pop": true
-    },
-    {
-     "type": "text",
-     "text": "before the next surprise charge",
-     "x": 540,
-     "y": 1040,
-     "s": 40,
-     "w": "b",
-     "at": "every week",
-     "col": "grey"
     },
     {
      "type": "couple",
