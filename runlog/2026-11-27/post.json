@@ -20,6 +20,32 @@
      "file": "reels/2026-11-27-savings-tiers-30.mp4"
     }
    ]
+  },
+  {
+   "started_at": "2026-11-27T11:57:30-05:00",
+   "finished_at": "2026-11-27T12:01:30-05:00",
+   "status": "ok",
+   "trigger": "scheduled",
+   "summary": "Posted S8 short (2026-11-26-s8-short) to Instagram, TikTok and YouTube Shorts via Postproxy. First comment sent with the post; pin it in the app.",
+   "outputs": [
+    {
+     "label": "Queue",
+     "path": "queue.json"
+    },
+    {
+     "label": "Experiment log",
+     "path": "experiment-log.csv"
+    }
+   ],
+   "reels": [
+    {
+     "id": "2026-11-26-s8-short",
+     "hook": "Are you only making the minimum payment on your credit card? (Study Reel S8, 25 s cut: bet #11 length test)",
+     "status": "posted",
+     "file": "reels/2026-11-26-s8-short.mp4",
+     "permalink": "https://www.instagram.com/p/DgQKbNqK3uY"
+    }
+   ]
   }
  ]
 }
