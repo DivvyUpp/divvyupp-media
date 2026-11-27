@@ -589,7 +589,7 @@
  {
   "id": "2026-11-27-s10-answer",
   "kind": "main",
-  "status": "approved",
+  "status": "posted",
   "post_date": "2026-11-27",
   "file": "reels/2026-11-27-s10-answer.mp4",
   "spec": "hooks/2026-11-27-s10-answer.json",
@@ -599,7 +599,18 @@
   "tiktok_caption": "Half the bills on your card, half on theirs, and nobody knows what's left?\n\nIn a two-year experiment, 230 engaged or newly married couples were randomly given a joint account, separate accounts, or their own choice. The joint-account couples kept their relationship quality and fought less about money; the others showed the usual decline. (About 1 in 5 couples dropped out, and the researchers don't say merge everything.)\n\nTry it: open one shared account for shared costs, and keep your own too.\n\nStudy: Olson, Rick, Small & Finkel, Journal of Consumer Research, 2023.\n\nSend this to your partner, and set it up together 🤝\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #couplesandmoney #moneytips #relationships #research",
   "first_comment": "📄 The study: Olson, Rick, Small & Finkel, Journal of Consumer Research, 2023 (Kellogg Insight summary)\nhttps://insight.kellogg.northwestern.edu/article/key-to-happy-marriage-joint-bank-account",
   "hypothesis": "research/2026-11-27-retention.md",
-  "note": "Retest of S10 with the same hook and the 'money tip #6' bridge removed (answer in the next sentence), 28.7 s. Compare its retention curve at 4–9 s and avg watch with S10 v3 (8 s). Approved by Srini in chat 2026-11-27 ~11:00 ET: post about an hour after the tier list."
+  "note": "Retest of S10 with the same hook and the 'money tip #6' bridge removed (answer in the next sentence), 28.7 s. Compare its retention curve at 4–9 s and avg watch with S10 v3 (8 s). Approved by Srini in chat 2026-11-27 ~11:00 ET: post about an hour after the tier list.",
+  "instagram_postproxy_id": "kZtX3Kl",
+  "instagram_url": "https://www.instagram.com/p/DgQOUXVuq76",
+  "instagram_id": "DgQOUXVuq76",
+  "posted_at": "2026-11-27T12:33:18-05:00",
+  "tiktok_postproxy_id": "J5toWXb",
+  "youtube_postproxy_id": "J5toWXb",
+  "youtube_url": "https://www.youtube.com/watch?v=k0zDGHwb4Tw",
+  "youtube_id": "k0zDGHwb4Tw",
+  "tiktok_url": "https://www.tiktok.com/@getdivvyupp/video/7712905865954610446",
+  "tiktok_id": "7712905865954610446",
+  "first_comment_id": "18461688460130090"
  },
  {
   "id": "2026-11-27-savings-tiers-30",

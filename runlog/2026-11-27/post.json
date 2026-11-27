@@ -46,6 +46,27 @@
      "permalink": "https://www.instagram.com/p/DgQKbNqK3uY"
     }
    ]
+  },
+  {
+   "started_at": "2026-11-27T12:31:13-05:00",
+   "finished_at": "2026-11-27T12:34:00-05:00",
+   "status": "ok",
+   "trigger": "manual",
+   "summary": "Posted S10 answer-first (2026-11-27-s10-answer) to Instagram, TikTok and YouTube from the chat session (Srini: an hour after tier list v2), cover on all three.",
+   "outputs": [
+    {
+     "label": "Queue",
+     "path": "queue.json"
+    }
+   ],
+   "reels": [
+    {
+     "id": "2026-11-27-s10-answer",
+     "hook": "Half the bills on your card, half on theirs, and nobody knows what's left? (S10 answer-first retest: no tip bridge)",
+     "status": "posted",
+     "file": "reels/2026-11-27-s10-answer.mp4"
+    }
+   ]
   }
  ]
 }
