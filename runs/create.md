@@ -97,7 +97,9 @@ No Runway in this run (Srini, 2026-11-21): use only images that are in the repo,
 `pipeline/assets/characters/` and the drawn presenters. Never point a spec at a `/tmp` path: older `hooks/` specs
 reference Runway images from past chat sessions that no longer exist. Srini polishes the visuals himself after review.
 Use `pipeline/make_story_reel.py` with a spec in `hooks/<today>-a.json` (trial variants `-t1`, `-t2`), or another
-format if the bet calls for it and the tool exists. `--check` first and look at every still; then render. Save each
+format if the bet calls for it and the tool exists. `--check` first and look at every still; then render. Then render the cover: set the spec's `"cover_at"` to `[0, "<last words of the hook>"]` (the hook frame with all
+its text on screen; Srini, 2026-11-27) and run with `--cover`; commit `reels/<id>_cover.jpg` with the video. The Post
+run sends it as the Instagram cover. Save each
 video as `reels/<id>.mp4`: the dashboard shows it there for Srini to review (the repo is public; Srini accepted on
 2026-11-21 that Reels waiting for review are visible).
 

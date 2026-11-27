@@ -26,6 +26,11 @@ def comments(*rows):
     return {"data": list(rows)}
 
 
+@pytest.fixture(autouse=True)
+def _no_repo_covers(tmp_path_factory, monkeypatch):
+    monkeypatch.setattr(pr, "ROOT", str(tmp_path_factory.mktemp("root")))
+
+
 def run(p, responses, entry_id="r1", **kw):
     seen, logs = [], []
     code = pr.run(entry_id, key=KEY, opener=opener_from(responses, seen), sleep=lambda s: None,
@@ -234,3 +239,14 @@ def test_defaults(tmp_path, monkeypatch, capsys):
 
 def test_fake_resp_reexport():
     assert FakeResp(b"{}").read() == b"{}"
+
+
+def test_cover_from_entry_and_from_rendered_file(tmp_path, monkeypatch):
+    monkeypatch.setattr(pr, "ROOT", str(tmp_path))
+    assert pr.ig_payload(entry(cover="reels/x.jpg"))["platforms"]["instagram"]["cover_url"] == \
+        "https://divvyupp.github.io/divvyupp-media/reels/x.jpg"
+    assert "cover_url" not in pr.ig_payload(entry())["platforms"]["instagram"]
+    (tmp_path / "reels").mkdir(); (tmp_path / "reels" / "r1_cover.jpg").write_bytes(b"jpg")
+    assert pr.ig_payload(entry())["platforms"]["instagram"]["cover_url"] == \
+        "https://divvyupp.github.io/divvyupp-media/reels/r1_cover.jpg"
+    assert pr.ig_payload(entry(kind="trial"))["platforms"]["instagram"]["cover_url"].endswith("r1_cover.jpg")

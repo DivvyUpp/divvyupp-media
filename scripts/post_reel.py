@@ -15,6 +15,8 @@ What it does:
      Instagram keeps the FULL caption (with "Link in the comments.") while TikTok/YouTube drop that line:
      * refuses unless status is "approved" (or "posted" with Instagram already live, to finish the
        other platforms), and the entry has a file and a caption;
+     * cover = entry.cover (repo path), else reels/<video>_cover.jpg when the renderer made one (`--cover`),
+       sent as the Reel's cover_url, so nobody has to set it by hand in the app;
      * main entry -> Reel, share_to_feed on, `first_comment` = entry.first_comment (if set and no
        first_comment_id yet); trial entry -> Reel with trial_strategy MANUAL (no first comment);
      * skipped when Instagram is already live (`media_id` / `instagram_id`) or already sent
@@ -44,6 +46,7 @@ from zoneinfo import ZoneInfo
 
 import post_postproxy as pp
 
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 IG_PROFILE = "6lUEBB"  # @getdivvyupp Instagram (GET /api/profiles; platform_id 17841422626862357)
 ET = ZoneInfo("America/New_York")
 RECENT_POSTS = 20  # Postproxy posts checked for an earlier send of the same file
@@ -77,8 +80,20 @@ def check_postable(e):
                          f"{e['instagram_postproxy_id']}; check that post, never re-post")
 
 
+def cover_path(e):
+    """entry.cover, else reels/<video name>_cover.jpg next to the video if it exists in the repo; None otherwise."""
+    if e.get("cover"):
+        return e["cover"]
+    stem, _ = os.path.splitext(e["file"])
+    guess = stem + "_cover.jpg"
+    return guess if os.path.exists(os.path.join(ROOT, guess)) else None
+
+
 def ig_payload(e):
     ig = {"format": "reel"}
+    cover = cover_path(e)
+    if cover:
+        ig["cover_url"] = pp.PAGES + cover
     if e.get("kind", "main") == "trial":
         ig["trial_strategy"] = "MANUAL"
     else:

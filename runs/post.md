@@ -15,7 +15,8 @@ Post today's approved Reels to @getdivvyupp. Only entries Srini explicitly appro
    `python3 scripts/post_reel.py <entry.id>`
    (`--dry-run` prints both payloads and sends nothing.) What it does, in order:
    - **Instagram first**, as its own Postproxy post (profile `6lUEBB` = account `17841422626862357`): Reel,
-     `share_to_feed` on, caption = `entry.caption` exactly, video =
+     `share_to_feed` on, cover = `entry.cover` or the rendered `reels/<video>_cover.jpg` (2026-11-27: no more setting
+     covers by hand), caption = `entry.caption` exactly, video =
      `https://divvyupp.github.io/divvyupp-media/<entry.file>`. Main entries with `first_comment` (and no
      `first_comment_id`) get it as Postproxy's `first_comment`, posted right after the Reel is live; the script
      records Instagram's comment id as `first_comment_id` when Postproxy lists it. Instagram's API can't pin comments:
