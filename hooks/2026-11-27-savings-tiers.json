@@ -6,7 +6,7 @@
  "max_gap": 0.3,
  "cap_style": "karaoke",
  "cover_at": [
-  8,
+  9,
   "I bonds"
  ],
  "note": "Format copy of the tier-list Short (Graham Stephan 'Ranking The BEST Credit Cards', 2.38M views, 75.8x his median, Sep 2026): structure and pacing only. Topic, script, numbers, visuals and voice are ours. Rates as of 2026-11-27: Chase/Wells Fargo 0.01% (SwitchWize 11-08), Vanguard VMFXX 7-day 3.95% (11-20), T-bills 4.19% 4-wk / 4.50% 26-wk (11-23/25 auctions), Vio Bank & Pibank 4.40% APY (Motley Fool / WalletHub 11-26), I bonds 5.51% composite Nov 2026-Apr 2027 (TreasuryDirect). REITs -25% (FTSE Nareit All Equity, 2022), gold -45% (2011 high to end of 2015). Recheck every rate the day it posts.",
@@ -159,7 +159,7 @@
      "row": 2,
      "slot": 0,
      "name": "Vanguard money market",
-     "chip": "Money market fund",
+     "chip": "Money market",
      "chip_rate": "~4%",
      "rate": "~4%",
      "sub": "Vanguard · not FDIC insured",
@@ -174,7 +174,33 @@
      "value": 395,
      "value_fmt": "~${:,.0f}",
      "name_s": 40,
-     "span": 2
+     "span": 1
+    }
+   ]
+  },
+  {
+   "title": "savings *tier list*",
+   "keep_prev": true,
+   "text": "Robinhood: three point six percent, but only with Gold at five dollars a month. B tier.",
+   "elements": [
+    {
+     "type": "tieritem",
+     "row": 2,
+     "slot": 1,
+     "name": "Robinhood cash sweep",
+     "chip": "Robinhood Gold",
+     "chip_rate": "3.6%",
+     "rate": "3.6%",
+     "sub": "Only with Gold: $5 a month",
+     "focus": [
+      330,
+      1040,
+      560,
+      300
+     ],
+     "at": "Robinhood",
+     "land": "B tier",
+     "value_text": "$300 net"
     }
    ]
   },
@@ -244,8 +270,8 @@
      "name": "Gold",
      "chip": "Gold",
      "chip_rate": null,
-     "rate": "-45%",
-     "sub": "2011 high to 2015",
+     "rate": "-42%",
+     "sub": "Aug 2011 to Dec 2015",
      "focus": [
       330,
       1040,
@@ -297,7 +323,7 @@
   {
    "title": "savings *tier list*",
    "keep_prev": true,
-   "text": "[excited] S tier: Series I bonds. Five and a half percent, and it rises with inflation. The catch? Locked for a year.",
+   "text": "[excited] Series I bonds: five and a half percent, and it rises with inflation. S tier. The catch? Locked for a year.",
    "elements": [
     {
      "type": "tieritem",
@@ -315,7 +341,7 @@
       300
      ],
      "at": "Series",
-     "land": "The catch",
+     "land": "S tier",
      "value": 551,
      "value_fmt": "~${:,.0f}",
      "span": 2
@@ -345,7 +371,7 @@
   {
    "title": "the *move*",
    "keep_prev": true,
-   "text": "Emergency money in high-yield. Money you won't touch for a year in I bonds.",
+   "text": "Emergency money: high-yield savings. Money you won't touch for a year: I bonds.",
    "elements": [
     {
      "type": "chip",
@@ -373,5 +399,7 @@
    "text": "[warm] Send this to a friend whose savings is still at a big bank.",
    "elements": []
   }
- ]
+ ],
+ "bg": "warm",
+ "fps": 60
 }

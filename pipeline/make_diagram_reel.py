@@ -93,9 +93,20 @@ def mix(a, b, u): return tuple(int(p + (q - p) * clamp(u)) for p, q in zip(a, b)
 def norm(w): return re.sub(r"[^a-z0-9%]", "", w.lower().replace("’", "'"))
 def strip_tags(s): return re.sub(r"\[[^\]]*\]\s*", "", s).strip()
 
+BG = {"im": None}
+
+def warm_bg():
+    """Cream with two soft warm glows (top right, bottom left): depth without noise."""
+    w, h = W // 4, H // 4; y, x = np.mgrid[0:h, 0:w].astype(float)
+    base = np.array(CREAM, float)[None, None, :] * np.ones((h, w, 1))
+    for (gx, gy, rad, col, a) in [(0.92, 0.08, 0.75, (255, 214, 190), 0.55), (0.0, 0.95, 0.7, (255, 228, 205), 0.45), (0.5, 0.45, 0.9, (255, 252, 247), 0.35)]:
+        d = np.sqrt(((x / w - gx) * 1.0) ** 2 + ((y / h - gy) * (H / W)) ** 2) / rad; f = np.clip(1 - d, 0, 1) ** 2 * a
+        base = base * (1 - f[..., None]) + np.array(col, float)[None, None, :] * f[..., None]
+    return Image.fromarray(base.clip(0, 255).astype(np.uint8), "RGB").resize((W * S, H * S), Image.BICUBIC)
+
 class Canvas:
     def __init__(self):
-        self.im = Image.new("RGB", (W * S, H * S), CREAM); self.d = ImageDraw.Draw(self.im, "RGBA"); self.g = 1.0
+        self.im = BG["im"].copy() if BG["im"] is not None else Image.new("RGB", (W * S, H * S), CREAM); self.d = ImageDraw.Draw(self.im, "RGBA"); self.g = 1.0
     def c(self, col, k=1.0): return tuple(col[:3]) + (int(255 * clamp(k) * self.g),)
     def text(self, x, y, s, f, col, k=1.0, anchor="mm", rise=0):
         if k > 0 and s: self.d.text((x * S, (y + (1 - ease(k)) * rise) * S), s, font=f, fill=self.c(col, k), anchor=anchor)
@@ -194,8 +205,13 @@ def e_chip(cv, e, t, T):
     sc = 0.55 + 0.45 * back(u); tw = cv.tl(e["text"], f); pw, ph = (tw + 2.0 * s) * sc, s * 2.1 * sc
     x, y = e["x"], e["y"]; b = [x - pw / 2, y - ph / 2, x + pw / 2, y + ph / 2]
     fill, tc = {"quote": (WHITE, INK), "orange": (ORANGE, WHITE), "ink": (INK, WHITE), "soft": (TINT, ORANGE)}[style]
-    if style in ("quote", "orange"): cv.shadow(b, ph / 2, k, blur=16, dy=8, alpha=0.12)
-    cv.rect(b, ph / 2, fill=fill, k=k)
+    if BG["im"] is not None and style in ("orange", "ink"):
+        soft(cv, b, ph / 2, k, 0.8)
+        g0, g1 = (TIER_GRAD["S"] if style == "orange" else ((58, 46, 42), (21, 16, 15)))
+        paste_rgba(cv, gradient(b[2] - b[0], b[3] - b[1], g0, g1, ph / 2), b[0], b[1], k)
+    else:
+        if style in ("quote", "orange"): cv.shadow(b, ph / 2, k, blur=16, dy=8, alpha=0.12)
+        cv.rect(b, ph / 2, fill=fill, k=k)
     cv.text(x, y + (2 if w_ != "serif" else 0), e["text"], F(w_, s * sc), tc, k)
 
 def e_tag(cv, e, t, T):
@@ -497,6 +513,8 @@ def e_couple(cv, e, t, T):
         im = sprite(who, mood, hh)
         if k < 1: im = im.copy(); im.putalpha(im.getchannel("A").point(lambda v: int(v * k)))
         x0, y0 = cx - im.width / S / 2, e["y"] + h / 2 - hh               # feet stay on the floor line
+        if BG["im"] is not None:
+            fy = e["y"] + h / 2; cv.d.ellipse([(cx - hh * 0.26) * S, (fy - 7) * S, (cx + hh * 0.26) * S, (fy + 9) * S], fill=(120, 70, 40, int(38 * k)))
         cv.im.paste(im, (int(x0 * S), int(y0 * S)), im)
         if e.get("q") and cur[who] == "confused": cv.text(cx + hh * 0.33, y0 + hh * 0.12, "?", F("xb", hh * 0.16), ORANGE, k)
         if e.get("labels"): cv.text(cx, e["y"] + h / 2 + 40, e["labels"][i], F("xb", 38), INK, k)
@@ -566,9 +584,40 @@ def mouth_level(t):
     v = env[i]
     return 0 if v < 0.16 else (1 if v < 0.55 else 2)
 
-# ---------------- tier list ----------------
+# ---------------- tier list (polished, 2026-11-27) ----------------
 BOARD = {}
-TIER_COLS = {"S": ORANGE, "A": (238, 128, 62), "B": (244, 176, 92), "C": (236, 208, 128), "D": (214, 205, 190), "F": (176, 168, 160)}
+# (top, bottom) gradient stops per tier; text colour
+TIER_GRAD = {"S": ((255, 122, 69), (214, 52, 18)), "A": ((255, 170, 84), (236, 116, 36)), "B": ((250, 210, 120), (232, 168, 64)),
+             "C": ((236, 222, 160), (210, 190, 110)), "D": ((214, 205, 190), (180, 170, 156)), "F": ((196, 190, 184), (140, 133, 127)),
+             "BIN": ((240, 84, 76), (178, 34, 24))}
+_grad = {}
+
+def gradient(w, h, top, bot, r, diag=False):
+    """RGBA rounded box (at supersample) filled with a vertical (or diagonal) gradient; cached."""
+    key = (int(w), int(h), top, bot, int(r), diag)
+    if key not in _grad:
+        W2, H2 = max(1, int(w * S)), max(1, int(h * S))
+        y = np.linspace(0, 1, H2)[:, None]; x = np.linspace(0, 1, W2)[None, :]
+        u = (y * 0.75 + x * 0.25) if diag else np.repeat(y, W2, axis=1)
+        u = np.broadcast_to(u, (H2, W2))
+        rgb = np.stack([top[c] + (bot[c] - top[c]) * u for c in range(3)], axis=-1).astype(np.uint8)
+        im = Image.fromarray(rgb, "RGB").convert("RGBA")
+        m = Image.new("L", (W2, H2), 0); ImageDraw.Draw(m).rounded_rectangle([0, 0, W2 - 1, H2 - 1], int(r * S), fill=255)
+        im.putalpha(m); _grad[key] = im
+    return _grad[key]
+
+def layer_canvas(w, h):
+    c = Canvas.__new__(Canvas); c.g = 1.0
+    c.im = Image.new("RGBA", (int(w * S), int(h * S)), (0, 0, 0, 0)); c.d = ImageDraw.Draw(c.im, "RGBA"); return c
+
+def paste_rgba(cv, im, x, y, k=1.0):
+    if k <= 0: return
+    if k < 1: im = im.copy(); im.putalpha(im.getchannel("A").point(lambda v: int(v * k)))
+    cv.im.paste(im, (int(x * S), int(y * S)), im); cv.d = ImageDraw.Draw(cv.im, "RGBA")
+
+def soft(cv, b, r, k, lift=1.0):
+    """Two-layer shadow: a tight contact shadow plus a wide ambient one."""
+    cv.shadow(b, r, k, blur=6, dy=3 * lift, alpha=0.10); cv.shadow(b, r, k, blur=26, dy=16 * lift, alpha=0.10 * lift)
 
 def board_rect(row):
     b = BOARD; y = b["y0"] + row * (b["rh"] + b["gap"]) + (b["gap"] * 2 if row >= len(b["rows"]) else 0)
@@ -576,66 +625,115 @@ def board_rect(row):
 
 def slot_rect(row, slot, span=1):
     b = BOARD; x0, y0, x1, y1 = board_rect(row); n = b["bin_slots"] if row >= len(b["rows"]) else b["slots"]
-    lx = x0 + b["label_w"] + 14; sw = (x1 - 10 - lx - 10 * (n - 1)) / n
-    return [lx + slot * (sw + 10), y0 + 12, lx + slot * (sw + 10) + sw * span + 10 * (span - 1), y1 - 12]
+    lx = x0 + b["label_w"] + 12; sw = (x1 - 12 - lx - 10 * (n - 1)) / n
+    return [lx + slot * (sw + 10), y0 + 11, lx + slot * (sw + 10) + sw * span + 10 * (span - 1), y1 - 11]
+
+def row_key(r): return "BIN" if r >= len(BOARD["rows"]) else BOARD["rows"][r]["tier"]
 
 def e_tiers(cv, e, t, T):
     k0 = T.k(e, t)
     if k0 <= 0: return
-    for r in range(len(BOARD["rows"]) + (1 if BOARD.get("bin") else 0)):
-        k = k0 * (1.0 if e.get("instant") else ease((t - T.t_in(e) - r * 0.08) / 0.3))
+    n = len(BOARD["rows"]) + (1 if BOARD.get("bin") else 0)
+    for r in range(n):
+        u = 1.0 if e.get("instant") else clamp((t - T.t_in(e) - r * 0.07) / 0.45)
+        k = k0 * ease(u)
         if k <= 0: continue
-        x0, y0, x1, y1 = board_rect(r); isbin = r >= len(BOARD["rows"])
-        cv.shadow([x0, y0, x1, y1], 18, k, blur=14, dy=6, alpha=0.08)
-        cv.rect([x0, y0, x1, y1], 18, fill=(255, 241, 238) if isbin else WHITE, outline=RED if isbin else LINE, w=3 if isbin else 2, k=k)
-        lw = BOARD["label_w"]
+        x0, y0, x1, y1 = board_rect(r); dx = (1 - ease(u)) * -60; isbin = r >= len(BOARD["rows"])
+        b = [x0 + dx, y0, x1 + dx, y1]; lw = BOARD["label_w"]
+        soft(cv, b, 20, k, 0.6)
+        top, bot = ((255, 246, 244), (253, 232, 228)) if isbin else ((255, 255, 255), (250, 246, 241))
+        paste_rgba(cv, gradient(x1 - x0, y1 - y0, top, bot, 20), b[0], b[1], k)
+        cv.rect(b, 20, outline=(236, 170, 160) if isbin else (234, 227, 219), w=1.5, k=k)
+        g0, g1 = TIER_GRAD[row_key(r)]
+        paste_rgba(cv, gradient(lw, y1 - y0, g0, g1, 20, diag=True), b[0], b[1], k)
+        cv.rect([b[0] + 6, b[1] + 5, b[0] + lw - 6, b[1] + 9], 3, fill=(255, 255, 255), k=k * 0.28)   # top highlight
         if isbin:
-            cv.rect([x0, y0, x0 + lw, y1], 18, fill=RED, k=k)
-            for i, part in enumerate(BOARD["bin"].split()):
-                cv.text(x0 + lw / 2, (y0 + y1) / 2 + (i - (len(BOARD["bin"].split()) - 1) / 2) * 30, part, F("xb", 21), WHITE, k)
+            parts = BOARD["bin"].split()
+            for i, part in enumerate(parts):
+                cv.text(b[0] + lw / 2, (y0 + y1) / 2 + (i - (len(parts) - 1) / 2) * 27, part, F("xb", 21), WHITE, k)
         else:
-            tr = BOARD["rows"][r]; col = COLS.get(tr.get("col"), None) or TIER_COLS.get(tr["tier"], ORANGE)
-            cv.rect([x0, y0, x0 + lw, y1], 18, fill=col, k=k)
-            cv.text(x0 + lw / 2, (y0 + y1) / 2, tr["tier"], F("xb", 62), WHITE if tr["tier"] in "SAF" else INK, k)
+            tier = BOARD["rows"][r]["tier"]; fl = F("xb", 60); cx, cy = b[0] + lw / 2, (y0 + y1) / 2
+            cv.text(cx + 1.5, cy + 3, tier, fl, (90, 30, 10), k * 0.25); cv.text(cx, cy, tier, fl, WHITE, k)
     if e.get("note"):
-        _, _, x1, y1 = board_rect(len(BOARD["rows"]) + (1 if BOARD.get("bin") else 0) - 1)
-        cv.text(x1, y1 + 30, e["note"], F("m", 24), GREY, k0, anchor="rm")
+        _, _, x1, y1 = board_rect(n - 1)
+        cv.text(x1 - 4, y1 + 30, e["note"], F("m", 23), GREY, k0, anchor="rm")
 
 def _fmt_val(e, v): return e.get("value_fmt", "${:,.0f} a year").format(v)
 
+def card_layer(e, t, ta, w, h, isbin):
+    """The big item card as its own RGBA layer (so it can be scaled smoothly while it flies)."""
+    c = layer_canvas(w, h)
+    paste_rgba(c, gradient(w, h, (255, 255, 255), (252, 247, 242), 28), 0, 0)
+    g0, g1 = TIER_GRAD["BIN"] if isbin else TIER_GRAD["S"]
+    paste_rgba(c, gradient(10, h - 36, g0, g1, 5), 0, 18)                       # accent bar on the left
+    c.rect([1, 1, w - 1, h - 1], 28, outline=(236, 226, 216), w=1.5)
+    x = 44
+    c.text(x, 62, e["name"], F("xb", e.get("name_s", 44)), INK, 1, anchor="lm")
+    if e.get("sub"): c.text(x, 110, e["sub"], F("b", 27), GREY, 1, anchor="lm")
+    rate_col = RED if isbin else ORANGE
+    c.text(x + 2, 196, e["rate"], F("xb", e.get("rate_s", 90)), (120, 40, 10), 0.18, anchor="lm")
+    c.text(x, 192, e["rate"], F("xb", e.get("rate_s", 90)), rate_col, 1, anchor="lm")
+    if e.get("value") is not None or e.get("value_text"):
+        v = (e.get("value") or 0) * ease(clamp((t - ta - 0.3) / 0.8))
+        lab = e.get("value_label", "On $10K for a year:") + " "; fl, fv = F("b", 30), F("xb", 36)
+        c.rect([x - 14, 238, w - 30, 292], 16, fill=(250, 240, 232))
+        c.text(x + 4, 266, lab, fl, GREY, 1, anchor="lm")
+        c.text(x + 4 + c.tl(lab, fl), 266, e.get("value_text") or _fmt_val(e, v), fv, INK, 1, anchor="lm")
+    return c.im
+
+def chip_layer(e, w, h, isbin, key):
+    c = layer_canvas(w, h)
+    g0, g1 = TIER_GRAD[key]
+    top = tuple(int(255 - (255 - v) * 0.16) for v in g0); bot = tuple(int(255 - (255 - v) * 0.26) for v in g1)
+    paste_rgba(c, gradient(w, h, top, bot, 14), 0, 0)
+    c.rect([1, 1, w - 1, h - 1], 14, outline=tuple(int(255 - (255 - v) * 0.45) for v in g1), w=1.2)
+    fc = F("xb", e.get("chip_s", 28))
+    c.text(18, h / 2, e["chip"], fc, INK if not isbin else (120, 70, 64), 1, anchor="lm")
+    if e.get("chip_rate"): c.text(w - 16, h / 2, e["chip_rate"], F("xb", 28), RED if isbin else ORANGE, 1, anchor="rm")
+    if isbin: c.line([(14, h / 2), (24 + c.tl(e["chip"], fc), h / 2)], RED, 3.5)
+    return c.im
+
+_chips = {}
 def e_tieritem(cv, e, t, T):
     ta, tl = T.t_in(e), T.at(e, "land")
     if t < ta: return
-    fx, fy, fw, fh = e["focus"]; F0 = [fx, fy, fx + fw, fy + fh]; S1 = slot_rect(e["row"], e["slot"], e.get("span", 1))
-    isbin = e["row"] >= len(BOARD["rows"]); g = T.fade(e, t)
-    m = clamp((t - tl) / 0.5) if tl is not None else 0.0; m = ease(m)
-    if m < 1:                                                      # the big card (pops in, then flies to its slot)
-        pop = back(clamp((t - ta) / 0.4)) if not e.get("instant") else 1.0
-        cx = (F0[0] + F0[2]) / 2 + ((S1[0] + S1[2]) / 2 - (F0[0] + F0[2]) / 2) * m
-        cy = (F0[1] + F0[3]) / 2 + ((S1[1] + S1[3]) / 2 - (F0[1] + F0[3]) / 2) * m
-        w = (fw + ((S1[2] - S1[0]) - fw) * m) * (0.7 + 0.3 * pop); h = (fh + ((S1[3] - S1[1]) - fh) * m) * (0.7 + 0.3 * pop)
-        b = [cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2]; kc = clamp((t - ta) / 0.2) * g
-        cv.shadow(b, 24, kc, blur=20, dy=10, alpha=0.16)
-        cv.rect(b, 24, fill=WHITE, outline=RED if isbin else ORANGE, w=4, k=kc)
-        kt = kc * (1 - clamp(m * 2.5))                             # card text fades as it starts to fly
-        if kt > 0:
-            x = b[0] + 40; y = b[1]
-            cv.text(x, y + 62, e["name"], F("xb", e.get("name_s", 44)), INK, kt, anchor="lm")
-            if e.get("sub"): cv.text(x, y + 112, e["sub"], F("b", 28), GREY, kt, anchor="lm")
-            cv.text(x, y + 192, e["rate"], F("xb", e.get("rate_s", 88)), RED if isbin else ORANGE, kt, anchor="lm")
-            if e.get("value") is not None or e.get("value_text"):
-                v = (e.get("value") or 0) * ease(clamp((t - ta - 0.25) / 0.7))
-                lab = e.get("value_label", "On $10K for a year:") + " "; fl, fv = F("b", 32), F("xb", 38)
-                cv.text(x, y + 266, lab, fl, GREY, kt, anchor="lm")
-                cv.text(x + cv.tl(lab, fl), y + 266, e.get("value_text") or _fmt_val(e, v), fv, INK, kt, anchor="lm")
-        kchip = clamp((m - 0.6) / 0.4) * kc
+    fx, fy, fw, fh = e["focus"]; S1 = slot_rect(e["row"], e["slot"], e.get("span", 1))
+    isbin = e["row"] >= len(BOARD["rows"]); g = T.fade(e, t); key = row_key(e["row"])
+    sw, sh = S1[2] - S1[0], S1[3] - S1[1]
+    fly = 0.62
+    m = clamp((t - tl) / fly) if tl is not None else 0.0
+    if m < 1:
+        pop = 1.0 if e.get("instant") else clamp((t - ta) / 0.5)
+        sc_in = 0.86 + 0.14 * back(pop, 2.4)                              # springs in
+        me = m * m * (3 - 2 * m)                                          # smoothstep: no jerk at either end
+        # position along a gentle arc; size shrinks to the slot
+        c0 = (fx + fw / 2, fy + fh / 2); c1 = ((S1[0] + S1[2]) / 2, (S1[1] + S1[3]) / 2)
+        ctrl = ((c0[0] + c1[0]) / 2 + 60, min(c0[1], c1[1]) - 40)
+        cx = (1 - me) ** 2 * c0[0] + 2 * (1 - me) * me * ctrl[0] + me ** 2 * c1[0]
+        cy = (1 - me) ** 2 * c0[1] + 2 * (1 - me) * me * ctrl[1] + me ** 2 * c1[1]
+        w = (fw + (sw - fw) * me) * sc_in; h = (fh + (sh - fh) * me) * sc_in
+        kc = ease(pop * 1.6) * g
+        layer = card_layer(e, t, ta, fw, fh, isbin)
+        if m > 0:                                                          # cross-fade into the chip as it shrinks
+            ck = (e["chip"], int(sw), int(sh))
+            if ck not in _chips: _chips[ck] = chip_layer(e, sw, sh, isbin, key)
+            chip = _chips[ck].resize(layer.size, Image.BILINEAR)
+            layer = Image.blend(layer, chip, clamp((m - 0.35) / 0.45))
+        im = layer.resize((max(1, int(w * S)), max(1, int(h * S))), Image.LANCZOS)
+        b = [cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2]
+        soft(cv, b, 28 - 14 * me, kc, 1.4 - 0.9 * me)
+        paste_rgba(cv, im, b[0], b[1], kc)
     else:
-        kchip = g
-    if kchip > 0:                                                  # the chip in its row
-        b = S1; cv.rect(b, 14, fill=(255, 228, 224) if isbin else (253, 236, 226), k=kchip)
-        cv.text(b[0] + 18, (b[1] + b[3]) / 2, e["chip"], F("xb", e.get("chip_s", 28)), INK, kchip, anchor="lm")
-        if e.get("chip_rate"): cv.text(b[2] - 16, (b[1] + b[3]) / 2, e["chip_rate"], F("xb", 28), RED if isbin else ORANGE, kchip, anchor="rm")
-        if isbin: cv.line([(b[0] + 12, (b[1] + b[3]) / 2), (b[0] + 18 + cv.tl(e["chip"], F("xb", e.get("chip_s", 28))) + 6, (b[1] + b[3]) / 2)], RED, 4, kchip)
+        ck = (e["chip"], int(sw), int(sh))
+        if ck not in _chips: _chips[ck] = chip_layer(e, sw, sh, isbin, key)
+        land = t - tl - fly; sq = 1 + 0.06 * math.sin(clamp(land / 0.28) * math.pi)   # little landing bump
+        w, h = sw * sq, sh * sq; b = [S1[0] - (w - sw) / 2, S1[1] - (h - sh) / 2, S1[0] - (w - sw) / 2 + w, S1[1] - (h - sh) / 2 + h]
+        if land < 0.5:                                                     # glow pulse on the row
+            rb = board_rect(e["row"]); gk = (1 - clamp(land / 0.5)) * g
+            cv.rect([rb[0] - 4, rb[1] - 4, rb[2] + 4, rb[3] + 4], 24, outline=RED if isbin else ORANGE, w=3, k=gk * 0.7)
+        cv.shadow(b, 14, g, blur=6, dy=3, alpha=0.08)
+        im = _chips[ck] if sq == 1 else _chips[ck].resize((int(w * S), int(h * S)), Image.LANCZOS)
+        paste_rgba(cv, im, b[0], b[1], g)
 
 DRAW = {"tiers": e_tiers, "tieritem": e_tieritem, "research": e_research, "crowd": e_crowd, "couple": e_couple, "text": e_text, "chip": e_chip, "chart": e_chart, "card": e_card, "panel": e_panel, "bars": e_bars, "lock": e_lock,
         "target": e_target, "qring": e_qring, "accounts": e_accounts, "avatar": e_avatar, "curve": e_curve,
@@ -760,6 +858,9 @@ def main():
     spec_path = sys.argv[1]; check = "--check" in sys.argv
     at = [float(x) for x in sys.argv[sys.argv.index("--at") + 1:]] if "--at" in sys.argv else None
     spec = json.load(open(spec_path)); rid = spec["id"]
+    global FPS
+    FPS = spec.get("fps", FPS)
+    if spec.get("bg") == "warm": BG["im"] = warm_bg()
     tmp = os.path.join(HERE, ".cache", "tmp_" + rid); os.makedirs(tmp, exist_ok=True)
     audio, words, counts = take(spec, tmp)
     scenes, i = spec["scenes"], 0
