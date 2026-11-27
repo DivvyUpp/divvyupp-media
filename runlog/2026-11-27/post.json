@@ -1,0 +1,25 @@
+{
+ "attempts": [
+  {
+   "started_at": "2026-11-27T11:01:27-05:00",
+   "finished_at": "2026-11-27T11:04:00-05:00",
+   "status": "ok",
+   "trigger": "manual",
+   "summary": "Posted tier list v2 (2026-11-27-savings-tiers-30) to Instagram, TikTok and YouTube from the chat session at Srini's request (hourly testing).",
+   "outputs": [
+    {
+     "label": "Queue",
+     "path": "queue.json"
+    }
+   ],
+   "reels": [
+    {
+     "id": "2026-11-27-savings-tiers-30",
+     "hook": "If you're a parent, your emergency fund is probably earning one dollar a year. (Tier list v2: 30 s, household hook, send after S)",
+     "status": "posted",
+     "file": "reels/2026-11-27-savings-tiers-30.mp4"
+    }
+   ]
+  }
+ ]
+}
