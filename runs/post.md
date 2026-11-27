@@ -27,7 +27,8 @@ Post today's approved Reels to @getdivvyupp. Only entries Srini explicitly appro
    - **Then TikTok + YouTube Shorts** for main entries only, in one Postproxy request (`scripts/post_postproxy.py`,
      called by `post_reel.py`): caption = `entry.tiktok_caption`, else `entry.caption` with only the "Link in the
      comments." sentence removed; YouTube title = `entry.hook` without a trailing "(...)" note, cut to 100
-     characters; both public, TikTok comments / Duet / Stitch on. Writes `tiktok_*` / `youtube_*` ids and urls.
+     characters; both public, TikTok comments / Duet / Stitch on; the same cover image as Instagram (TikTok cover,
+     YouTube thumbnail; YouTube needs a verified channel, so if YouTube fails on the thumbnail, tell Srini). Writes `tiktok_*` / `youtube_*` ids and urls.
    - **If Instagram does not publish, nothing goes to TikTok or YouTube.** No backfill or catch-up on any platform
      (Srini, 2026-11-26): only the Reel this slot posts. Older Reels go to TikTok/YouTube only when Srini asks for
      that specific Reel (`python3 scripts/post_postproxy.py <id>`).

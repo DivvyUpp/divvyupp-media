@@ -28,7 +28,7 @@ def comments(*rows):
 
 @pytest.fixture(autouse=True)
 def _no_repo_covers(tmp_path_factory, monkeypatch):
-    monkeypatch.setattr(pr, "ROOT", str(tmp_path_factory.mktemp("root")))
+    monkeypatch.setattr(pp, "ROOT", str(tmp_path_factory.mktemp("root")))
 
 
 def run(p, responses, entry_id="r1", **kw):
@@ -242,7 +242,7 @@ def test_fake_resp_reexport():
 
 
 def test_cover_from_entry_and_from_rendered_file(tmp_path, monkeypatch):
-    monkeypatch.setattr(pr, "ROOT", str(tmp_path))
+    monkeypatch.setattr(pp, "ROOT", str(tmp_path))
     assert pr.ig_payload(entry(cover="reels/x.jpg"))["platforms"]["instagram"]["cover_url"] == \
         "https://divvyupp.github.io/divvyupp-media/reels/x.jpg"
     assert "cover_url" not in pr.ig_payload(entry())["platforms"]["instagram"]

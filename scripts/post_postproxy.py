@@ -19,6 +19,7 @@ What it does:
     only the "Link in the comments." sentence removed (that first comment exists on Instagram only);
   * YouTube title = entry.hook without a trailing "(...)" note, cut to 100 characters;
   * video = https://divvyupp.github.io/divvyupp-media/<entry.file> (Postproxy downloads it);
+  * cover (TikTok cover, YouTube thumbnail) = entry.cover or reels/<video>_cover.jpg when rendered;
   * both public; TikTok comments / Duet / Stitch on; posted now; an Idempotency-Key per entry and
     platform set, so a re-sent request cannot make a second post;
   * waits for every platform, then writes `<platform>_id`, `<platform>_url` and
@@ -39,6 +40,7 @@ import urllib.request
 API = "https://api.postproxy.dev"
 PROFILES = {"tiktok": "MZU39X", "youtube": "rOUpVX"}  # @getdivvyupp (GET /api/profiles)
 PLATFORMS = ("tiktok", "youtube")
+ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 PAGES = "https://divvyupp.github.io/divvyupp-media/"
 QUEUE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "queue.json")
 TIMEOUT_S = 30
@@ -101,8 +103,19 @@ def youtube_title(e):
     return title[:100]
 
 
+def cover_path(e):
+    """entry.cover, else reels/<video name>_cover.jpg next to the video if it exists in the repo; None otherwise.
+    Sent as the cover on Instagram, TikTok and YouTube (2026-11-27: Srini stopped setting covers by hand)."""
+    if e.get("cover"):
+        return e["cover"]
+    stem, _ = os.path.splitext(e["file"])
+    guess = stem + "_cover.jpg"
+    return guess if os.path.exists(os.path.join(ROOT, guess)) else None
+
+
 def build_payload(e, todo):
     params = {}
+    cover = cover_path(e)
     if "tiktok" in todo:
         params["tiktok"] = {
             "format": "video",
@@ -111,8 +124,12 @@ def build_payload(e, todo):
             "disable_duet": False,
             "disable_stitch": False,
         }
+        if cover:
+            params["tiktok"]["cover_url"] = PAGES + cover
     if "youtube" in todo:
         params["youtube"] = {"title": youtube_title(e), "privacy_status": "public"}
+        if cover:
+            params["youtube"]["cover_url"] = PAGES + cover          # custom thumbnail (verified channel)
     return {
         "post": {"body": caption(e)},
         "profiles": [PROFILES[p] for p in todo],

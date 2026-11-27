@@ -46,7 +46,6 @@ from zoneinfo import ZoneInfo
 
 import post_postproxy as pp
 
-ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 IG_PROFILE = "6lUEBB"  # @getdivvyupp Instagram (GET /api/profiles; platform_id 17841422626862357)
 ET = ZoneInfo("America/New_York")
 RECENT_POSTS = 20  # Postproxy posts checked for an earlier send of the same file
@@ -80,18 +79,9 @@ def check_postable(e):
                          f"{e['instagram_postproxy_id']}; check that post, never re-post")
 
 
-def cover_path(e):
-    """entry.cover, else reels/<video name>_cover.jpg next to the video if it exists in the repo; None otherwise."""
-    if e.get("cover"):
-        return e["cover"]
-    stem, _ = os.path.splitext(e["file"])
-    guess = stem + "_cover.jpg"
-    return guess if os.path.exists(os.path.join(ROOT, guess)) else None
-
-
 def ig_payload(e):
     ig = {"format": "reel"}
-    cover = cover_path(e)
+    cover = pp.cover_path(e)
     if cover:
         ig["cover_url"] = pp.PAGES + cover
     if e.get("kind", "main") == "trial":

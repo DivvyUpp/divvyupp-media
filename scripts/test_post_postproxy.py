@@ -50,6 +50,11 @@ def entry(**kw):
     return e
 
 
+@pytest.fixture(autouse=True)
+def _no_repo_covers(tmp_path_factory, monkeypatch):
+    monkeypatch.setattr(pp, "ROOT", str(tmp_path_factory.mktemp("root")))
+
+
 def write_queue(tmp_path, entries, indent=1, newline=True):
     p = tmp_path / "queue.json"
     p.write_text(json.dumps(entries, indent=indent, ensure_ascii=False) + ("\n" if newline else ""))
@@ -248,3 +253,13 @@ def test_default_log_and_sleep(tmp_path, monkeypatch, capsys):
                                      post(("published", TT), ("published", YT))], seen))
     assert pp.run("r1", key=KEY) == 0
     assert "sent to Postproxy" in capsys.readouterr().err
+
+
+def test_cover_on_tiktok_and_youtube(tmp_path, monkeypatch):
+    assert "cover_url" not in pp.build_payload(entry(), ["tiktok", "youtube"])["platforms"]["tiktok"]
+    (tmp_path / "reels").mkdir(); (tmp_path / "reels" / "r1_cover.jpg").write_bytes(b"jpg")
+    monkeypatch.setattr(pp, "ROOT", str(tmp_path))
+    pl = pp.build_payload(entry(), ["tiktok", "youtube"])["platforms"]
+    url = "https://divvyupp.github.io/divvyupp-media/reels/r1_cover.jpg"
+    assert pl["tiktok"]["cover_url"] == url and pl["youtube"]["cover_url"] == url
+    assert pp.build_payload(entry(cover="reels/c.jpg"), ["youtube"])["platforms"]["youtube"]["cover_url"].endswith("/reels/c.jpg")
