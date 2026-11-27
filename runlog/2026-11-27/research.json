@@ -1,0 +1,36 @@
+{
+  "run": "research",
+  "date": "2026-11-27",
+  "attempts": [
+    {
+      "started_at": "2026-11-27T05:58:33-05:00",
+      "finished_at": "2026-11-27T06:07:19-05:00",
+      "status": "partial",
+      "trigger": "scheduled",
+      "summary": "Tier lists by an expert on everyday choices break out across niches (5 health/fitness accounts at 3x+), and 3 finance accounts at 3x+ make the format proven for us. Added bet #8 (money moves ranked by what the research measured). Pitched 3 studies (S32-S34) for Srini's send/no. Our first share came on s10-joint; 338 non-follower views yesterday.",
+      "blocker": "Partial: povertyactionlab.org, uclahealth.org and Reddit are blocked by the network settings, so the S33/S34 figures come from search summaries. Allow them under Settings > Capabilities > Allowed websites to check the sources.",
+      "outputs": [
+        {
+          "label": "Research brief",
+          "path": "research/2026-11-27.md"
+        },
+        {
+          "label": "Backlog",
+          "path": "backlog.md"
+        },
+        {
+          "label": "Study bank (S32-S34 pitched)",
+          "path": "research/study-bank.md"
+        },
+        {
+          "label": "Pain language",
+          "path": "research/pain-language.md"
+        },
+        {
+          "label": "Shorts pull",
+          "path": "research/shorts-2026-11-27.csv"
+        }
+      ]
+    }
+  ]
+}

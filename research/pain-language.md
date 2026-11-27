@@ -21,6 +21,8 @@ first line of a Reel. Phrases only: no usernames or anything that identifies a p
 | "We stopped buying gifts for adults years ago" (also "We don't buy for adults either", "no adult gifts, no coworker gifts", "gifts for kids only") | YouTube comments, George Kamel "What Is Your Christmas Budget?" | https://www.youtube.com/shorts/E7c5m8TsiVM | 2026-11-26 | 4 (top comment, 17 likes) |
 | "Adults don't need more crap at the end of the year" | same Short | https://www.youtube.com/shorts/E7c5m8TsiVM | 2026-11-26 | 1 |
 | "This has been so freeing" (after cutting gifts to kids only, on a set budget per child) | same Short | https://www.youtube.com/shorts/E7c5m8TsiVM | 2026-11-26 | 1 |
+| "Killing himself so she can stay home" (about a one-income dad on long hours; the top comments pile on the wife, 6,292 likes) | YouTube comments, Caleb Hammer "Stay-At-Home Mom VS Dad With TWO Jobs" (2.7x) | https://www.youtube.com/shorts/OWyt6tRPDWM | 2026-11-27 | 3 (also "Poor guy is TIRED!", "That poor guy. Can see the exhaustion") |
+| "The problem is a lack of appreciation of what the other side is contributing" (a minority view, 5 likes) | same Short | https://www.youtube.com/shorts/OWyt6tRPDWM | 2026-11-27 | 1 |
 
 ## What the comments say about *how* to speak to this pain (2026-11-23)
 Under Shorts about well-paid people with nothing left, most top comments **judge** the person instead of relating:
@@ -35,3 +37,9 @@ in the hook invites a pile-on, and an income figure that viewers think is inflat
 Under gift-obligation Shorts (Ramsey Show, Rachel Cruze), top comments agree and add their own family story; under
 "what did you spend on Christmas" people post their own totals. That's the opposite of the pile-on under high-earner
 Shorts. See `research/2026-11-25.md` finding 3.
+
+## One-income households: real couples on screen draw a pile-on (2026-11-27)
+Under Caleb Hammer's stay-at-home mom vs two-jobs dad Short, nearly every top comment judges one partner (the wife)
+by name of role, with thousands of likes; only a few say both roles count. Same pattern as the high-earner Shorts on
+2026-11-23. For us: keep couple examples drawn and framed as examples (PLAYBOOK), and aim the snark at the habit,
+never at one partner. See `research/2026-11-27.md` finding 4.
