@@ -1,0 +1,251 @@
+{
+ "id": "2026-11-27-savings-tiers-30",
+ "format": "diagram",
+ "voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "speed": 1.25,
+ "max_gap": 0.3,
+ "cap_style": "karaoke",
+ "cover_at": [
+  5,
+  "S tier"
+ ],
+ "note": "Tier list v2 (2026-11-27, research/2026-11-27-retention.md): ~30 s, 4 items, hook names the household (parents), send prompt right after the S reveal, no recap, no bin. Rates as of Nov 27, 2026 (unchanged from Nov 26 reads).",
+ "scenes": [
+  {
+   "title": "*parents*: your savings",
+   "text": "[curious] Parents: your emergency fund is probably earning one dollar a year.",
+   "elements": [
+    {
+     "type": "text",
+     "text": "Your emergency fund",
+     "x": 540,
+     "y": 430,
+     "s": 84,
+     "w": "xb",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "at a big bank earns",
+     "x": 540,
+     "y": 530,
+     "s": 64,
+     "w": "b",
+     "col": "grey",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "$1 a year?",
+     "x": 540,
+     "y": 650,
+     "s": 120,
+     "w": "xb",
+     "col": "orange",
+     "at": "one dollar",
+     "pop": true
+    },
+    {
+     "type": "couple",
+     "show": "her",
+     "x": 540,
+     "y": 1080,
+     "h": 380,
+     "talk": "her",
+     "at": 0,
+     "instant": true,
+     "moods": [
+      {
+       "at": 0,
+       "her": "neutral"
+      },
+      {
+       "at": "one dollar",
+       "her": "worried"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "savings *tier list*",
+   "text": "Ranking where to park ten thousand dollars.",
+   "elements": [
+    {
+     "type": "tiers",
+     "rows": [
+      {
+       "tier": "S"
+      },
+      {
+       "tier": "A"
+      },
+      {
+       "tier": "B"
+      },
+      {
+       "tier": "F"
+      }
+     ],
+     "at": "Ranking",
+     "note": "Rates as of Nov 27, 2026 · not financial advice"
+    },
+    {
+     "type": "couple",
+     "show": "her",
+     "x": 185,
+     "y": 1250,
+     "h": 280,
+     "talk": "her",
+     "at": 0,
+     "instant": true,
+     "moods": [
+      {
+       "at": 0,
+       "her": "neutral"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "savings *tier list*",
+   "keep_prev": true,
+   "text": "Chase savings: zero point zero one percent. F tier.",
+   "elements": [
+    {
+     "type": "tieritem",
+     "row": 3,
+     "slot": 0,
+     "span": 2,
+     "name": "Chase · Wells Fargo",
+     "chip": "Chase · Wells Fargo",
+     "chip_rate": "0.01%",
+     "rate": "0.01%",
+     "sub": "Standard savings",
+     "focus": [
+      330,
+      1040,
+      560,
+      300
+     ],
+     "at": "Chase",
+     "land": "F tier",
+     "value": 1,
+     "value_fmt": "${:,.0f}"
+    }
+   ]
+  },
+  {
+   "title": "savings *tier list*",
+   "keep_prev": true,
+   "text": "Robinhood: three point six, but only with Gold. B tier.",
+   "elements": [
+    {
+     "type": "tieritem",
+     "row": 2,
+     "slot": 0,
+     "span": 2,
+     "name": "Robinhood cash sweep",
+     "chip": "Robinhood Gold",
+     "chip_rate": "3.6%",
+     "rate": "3.6%",
+     "sub": "Only with Gold: $5 a month",
+     "focus": [
+      330,
+      1040,
+      560,
+      300
+     ],
+     "at": "Robinhood",
+     "land": "B tier",
+     "value_text": "$300 net"
+    }
+   ]
+  },
+  {
+   "title": "savings *tier list*",
+   "keep_prev": true,
+   "text": "High-yield savings like Vio Bank: four point four percent, FDIC insured. A tier.",
+   "elements": [
+    {
+     "type": "tieritem",
+     "row": 1,
+     "slot": 0,
+     "span": 2,
+     "name": "Vio Bank · Pibank",
+     "chip": "Vio · Pibank",
+     "chip_rate": "4.40%",
+     "rate": "4.40%",
+     "sub": "High-yield savings · FDIC insured",
+     "focus": [
+      330,
+      1040,
+      560,
+      300
+     ],
+     "at": "High-yield",
+     "land": "A tier",
+     "value": 440,
+     "value_fmt": "${:,.0f}"
+    }
+   ]
+  },
+  {
+   "title": "savings *tier list*",
+   "keep_prev": true,
+   "gap_before": 0.6,
+   "text": "[excited] And the top: Series I bonds. Five and a half percent, and it beats inflation. S tier.",
+   "elements": [
+    {
+     "type": "tieritem",
+     "row": 0,
+     "slot": 0,
+     "span": 2,
+     "name": "Series I bonds",
+     "chip": "I bonds",
+     "chip_rate": "5.51%",
+     "rate": "5.51%",
+     "sub": "US Treasury · locked 12 months",
+     "focus": [
+      330,
+      1040,
+      560,
+      300
+     ],
+     "at": "Series",
+     "land": "S tier",
+     "value": 551,
+     "value_fmt": "~${:,.0f}"
+    }
+   ]
+  },
+  {
+   "title": "send *it*",
+   "keep_prev": true,
+   "text": "[warm] Send this to whoever still keeps their savings at Chase.",
+   "elements": [
+    {
+     "type": "tierhl",
+     "row": 0,
+     "slot": 0,
+     "span": 2,
+     "at": 0
+    },
+    {
+     "type": "chip",
+     "x": 600,
+     "y": 1180,
+     "s": 30,
+     "text": "Send to a friend at a big bank",
+     "style": "orange",
+     "at": "Send"
+    }
+   ]
+  }
+ ],
+ "bg": "warm",
+ "fps": 60
+}

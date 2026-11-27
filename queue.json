@@ -575,5 +575,35 @@
   "hypothesis": "hypotheses/2026-11-27.md",
   "cover": "reels/2026-11-27-s14-five_cover.jpg (tip #9 frame, '$5 > $20')",
   "note": "Create run 2026-11-27."
+ },
+ {
+  "id": "2026-11-27-s10-answer",
+  "kind": "main",
+  "status": "pending_review",
+  "post_date": "2026-11-27",
+  "file": "reels/2026-11-27-s10-answer.mp4",
+  "spec": "hooks/2026-11-27-s10-answer.json",
+  "format": "study",
+  "hook": "Half the bills on your card, half on theirs, and nobody knows what's left? (S10 answer-first retest: no tip bridge)",
+  "caption": "Half the bills on your card, half on theirs, and nobody knows what's left?\n\nIn a two-year experiment, 230 engaged or newly married couples were randomly given a joint account, separate accounts, or their own choice. The joint-account couples kept their relationship quality and fought less about money; the others showed the usual decline. (About 1 in 5 couples dropped out, and the researchers don't say merge everything.)\n\nTry it: open one shared account for shared costs, and keep your own too.\n\nStudy: Olson, Rick, Small & Finkel, Journal of Consumer Research, 2023. Link in the comments.\n\nSend this to your partner, and set it up together 🤝\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #couplesandmoney #moneytips #relationships #research",
+  "tiktok_caption": "Half the bills on your card, half on theirs, and nobody knows what's left?\n\nIn a two-year experiment, 230 engaged or newly married couples were randomly given a joint account, separate accounts, or their own choice. The joint-account couples kept their relationship quality and fought less about money; the others showed the usual decline. (About 1 in 5 couples dropped out, and the researchers don't say merge everything.)\n\nTry it: open one shared account for shared costs, and keep your own too.\n\nStudy: Olson, Rick, Small & Finkel, Journal of Consumer Research, 2023.\n\nSend this to your partner, and set it up together 🤝\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #couplesandmoney #moneytips #relationships #research",
+  "first_comment": "📄 The study: Olson, Rick, Small & Finkel, Journal of Consumer Research, 2023 (Kellogg Insight summary)\nhttps://insight.kellogg.northwestern.edu/article/key-to-happy-marriage-joint-bank-account",
+  "hypothesis": "research/2026-11-27-retention.md",
+  "note": "Retest of S10 with the same hook and the 'money tip #6' bridge removed (answer in the next sentence), 28.7 s. Compare its retention curve at 4–9 s and avg watch with S10 v3 (8 s)."
+ },
+ {
+  "id": "2026-11-27-savings-tiers-30",
+  "kind": "main",
+  "status": "pending_review",
+  "post_date": "2026-11-27",
+  "file": "reels/2026-11-27-savings-tiers-30.mp4",
+  "spec": "hooks/2026-11-27-savings-tiers-30.json",
+  "format": "tier-list",
+  "hook": "Parents: your emergency fund is probably earning one dollar a year. (Tier list v2: 30 s, household hook, send after S)",
+  "caption": "Parents: your emergency fund at a big bank probably earns $1 a year on $10,000. Where to park it instead, ranked:\n\nS: Series I bonds, 5.51% (bought Nov 2026–Apr 2027). Rises with inflation. Catch: locked 12 months, 3 months' interest lost if cashed before 5 years, $10K per person per year.\nA: High-yield savings (Vio Bank, Pibank), 4.40% APY. FDIC insured, out any day.\nB: Robinhood cash sweep, 3.6% APY, only with Robinhood Gold ($5 a month): about $300 a year on $10K after the fee.\nF: Standard savings at Chase or Wells Fargo, 0.01% (Wells Fargo's Platinum Savings pays more, but only on $25K+).\n\nRates as of Nov 27, 2026; they change often. Not financial advice; we're not paid by anyone on this list. Sources in the comments.\n\nSend this to whoever still keeps their savings at Chase 🏦\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #savings #highyieldsavings #ibonds #parentsofinstagram",
+  "tiktok_caption": "Parents: your emergency fund at a big bank probably earns $1 a year on $10,000. Where to park it instead, ranked:\n\nS: Series I bonds, 5.51% (bought Nov 2026–Apr 2027). Rises with inflation. Catch: locked 12 months, 3 months' interest lost if cashed before 5 years, $10K per person per year.\nA: High-yield savings (Vio Bank, Pibank), 4.40% APY. FDIC insured, out any day.\nB: Robinhood cash sweep, 3.6% APY, only with Robinhood Gold ($5 a month): about $300 a year on $10K after the fee.\nF: Standard savings at Chase or Wells Fargo, 0.01% (Wells Fargo's Platinum Savings pays more, but only on $25K+).\n\nRates as of Nov 27, 2026; they change often. Not financial advice; we're not paid by anyone on this list. Sources: TreasuryDirect, FDIC.\n\nSend this to whoever still keeps their savings at Chase 🏦\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #savings #highyieldsavings #ibonds #parentsofinstagram",
+  "first_comment": "📊 Sources (rates as of Nov 27, 2026)\nI bonds: treasurydirect.gov/savings-bonds/i-bonds/i-bonds-interest-rates\nAverage rates: fdic.gov/national-rates-and-rate-caps",
+  "hypothesis": "research/2026-11-27-retention.md",
+  "note": "Tier list v2 (retention read 2026-11-27): 31 s, 4 items, 'Parents' in the hook (audience signal), send prompt right after the S reveal, no recap. Compare 35–44 share, US share, avg watch and sends with the 59 s version."
  }
 ]

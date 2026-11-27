@@ -1,0 +1,489 @@
+{
+ "id": "2026-11-27-s10-answer",
+ "format": "diagram",
+ "voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "speed": 1.15,
+ "max_gap": 0.3,
+ "scenes": [
+  {
+   "title": "sound *familiar*?",
+   "text": "[curious] Half the bills on your card, half on theirs, and nobody knows what's left?",
+   "elements": [
+    {
+     "type": "text",
+     "text": "Half on your card,",
+     "x": 540,
+     "y": 410,
+     "s": 80,
+     "w": "xb",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "half on theirs.",
+     "x": 540,
+     "y": 505,
+     "s": 80,
+     "w": "xb",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 695,
+     "h": 250,
+     "gap": 480,
+     "at": 0,
+     "instant": true,
+     "q": true,
+     "moods": [
+      {
+       "at": 0,
+       "him": "confused",
+       "her": "confused"
+      },
+      {
+       "at": "nobody knows",
+       "him": "worried",
+       "her": "worried"
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "x": 110,
+     "y": 830,
+     "w": 380,
+     "h": 270,
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Your card",
+     "x": 300,
+     "y": 885,
+     "s": 40,
+     "w": "xb",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Rent ½",
+     "x": 300,
+     "y": 950,
+     "s": 32,
+     "w": "m",
+     "at": 0,
+     "col": "grey",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Groceries",
+     "x": 300,
+     "y": 998,
+     "s": 32,
+     "w": "m",
+     "at": 0,
+     "col": "grey",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Internet",
+     "x": 300,
+     "y": 1046,
+     "s": 32,
+     "w": "m",
+     "at": 0,
+     "col": "grey",
+     "instant": true
+    },
+    {
+     "type": "panel",
+     "x": 590,
+     "y": 830,
+     "w": 380,
+     "h": 270,
+     "accent": true,
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Their card",
+     "x": 780,
+     "y": 885,
+     "s": 40,
+     "w": "xb",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Rent ½",
+     "x": 780,
+     "y": 950,
+     "s": 32,
+     "w": "m",
+     "at": 0,
+     "col": "grey",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Power bill",
+     "x": 780,
+     "y": 998,
+     "s": 32,
+     "w": "m",
+     "at": 0,
+     "col": "grey",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Takeout",
+     "x": 780,
+     "y": 1046,
+     "s": 32,
+     "w": "m",
+     "at": 0,
+     "col": "grey",
+     "instant": true
+    },
+    {
+     "type": "chip",
+     "text": "Nobody knows what's left?",
+     "style": "orange",
+     "x": 540,
+     "y": 1200,
+     "s": 44,
+     "at": "nobody knows"
+    }
+   ]
+  },
+  {
+   "title": "the *answer*",
+   "text": "Couples who put shared bills in one joint account stayed happier for two years, and fought less about money. The others got less happy.",
+   "elements": [
+    {
+     "type": "chart",
+     "x0": 110,
+     "x1": 970,
+     "base": 1010,
+     "y": 760,
+     "grid": [
+      700,
+      880
+     ],
+     "label": "Relationship quality",
+     "label_y": 560,
+     "labels": [
+      "start",
+      "6 mo",
+      "1 yr",
+      "18 mo",
+      "2 yrs"
+     ],
+     "at": 0,
+     "dur": 1.2,
+     "flat_label": "joint account"
+    },
+    {
+     "type": "line",
+     "pts": [
+      [
+       110,
+       760
+      ],
+      [
+       400,
+       800
+      ],
+      [
+       690,
+       850
+      ],
+      [
+       970,
+       900
+      ]
+     ],
+     "col": "muted",
+     "width": 6,
+     "dash": true,
+     "at": "got less happy",
+     "dur": 1.0
+    },
+    {
+     "type": "chip",
+     "text": "others: the usual decline",
+     "style": "soft",
+     "x": 600,
+     "y": 960,
+     "s": 32,
+     "at": "got less happy"
+    },
+    {
+     "type": "chip",
+     "text": "fewer money fights",
+     "style": "orange",
+     "x": 540,
+     "y": 640,
+     "s": 38,
+     "at": "fought less"
+    },
+    {
+     "type": "couple",
+     "x": 300,
+     "y": 1210,
+     "h": 180,
+     "gap": 125,
+     "at": "Couples who",
+     "moods": [
+      {
+       "at": 0,
+       "him": "happy",
+       "her": "happy"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "text": "joint account",
+     "x": 300,
+     "y": 1335,
+     "s": 32,
+     "w": "xb",
+     "col": "orange",
+     "at": "Couples who"
+    },
+    {
+     "type": "couple",
+     "x": 700,
+     "y": 1210,
+     "h": 180,
+     "gap": 125,
+     "at": "The others",
+     "moods": [
+      {
+       "at": 0,
+       "him": "neutral",
+       "her": "neutral"
+      },
+      {
+       "at": "got less happy",
+       "him": "frustrated",
+       "her": "sad"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "text": "the others",
+     "x": 700,
+     "y": 1335,
+     "s": 32,
+     "w": "xb",
+     "col": "grey",
+     "at": "The others"
+    }
+   ]
+  },
+  {
+   "title": "the *proof*",
+   "text": "That's from an experiment: two hundred thirty couples, each given a joint account, separate accounts, or their own choice, at random.",
+   "elements": [
+    {
+     "type": "card",
+     "x": 80,
+     "y": 390,
+     "w": 920,
+     "h": 400,
+     "kicker": "JOURNAL OF CONSUMER RESEARCH · 2023",
+     "title": "Joint Accounts",
+     "title_s": 56,
+     "subtitle": "and relationship quality",
+     "highlight": "at random",
+     "lines": [
+      "Olson, Rick, Small & Finkel",
+      "Randomized · 230 couples · 2 years"
+     ]
+    },
+    {
+     "type": "chip",
+     "text": "joint account",
+     "style": "orange",
+     "x": 650,
+     "y": 900,
+     "s": 40,
+     "at": "a joint account"
+    },
+    {
+     "type": "chip",
+     "text": "separate accounts",
+     "style": "soft",
+     "x": 650,
+     "y": 1000,
+     "s": 40,
+     "at": "separate accounts"
+    },
+    {
+     "type": "chip",
+     "text": "their own choice",
+     "style": "soft",
+     "x": 650,
+     "y": 1100,
+     "s": 40,
+     "at": "own choice"
+    },
+    {
+     "type": "couple",
+     "x": 190,
+     "y": 1000,
+     "h": 180,
+     "gap": 125,
+     "at": 0,
+     "moods": [
+      {
+       "at": 0,
+       "him": "neutral",
+       "her": "neutral"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "do *this*",
+   "text": "Start with one shared account for shared bills, and keep your own too.",
+   "elements": [
+    {
+     "type": "accounts",
+     "x": 210,
+     "y": 380,
+     "w": 660,
+     "h": 860,
+     "title": "Accounts",
+     "at": 0,
+     "rows": [
+      {
+       "label": "YOURS",
+       "from": "Your own spending",
+       "icon": "$",
+       "s": 38
+      },
+      {
+       "label": "THEIRS",
+       "from": "Their own spending",
+       "icon": "$",
+       "s": 38
+      },
+      {
+       "label": "SHARED",
+       "from": "New account",
+       "to": "Rent, groceries, bills",
+       "swap": "one shared account",
+       "icon": "+",
+       "s": 38
+      }
+     ]
+    },
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 1345,
+     "h": 170,
+     "gap": 130,
+     "at": "keep your own",
+     "moods": [
+      {
+       "at": 0,
+       "him": "happy",
+       "her": "happy"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "send *it*",
+   "text": "[warm] Send this to your partner, and set it up together.",
+   "elements": [
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 640,
+     "h": 260,
+     "gap": 480,
+     "at": 0,
+     "instant": true,
+     "labels": [
+      "you",
+      "your partner"
+     ],
+     "moods": [
+      {
+       "at": 0,
+       "him": "happy",
+       "her": "happy"
+      }
+     ]
+    },
+    {
+     "type": "curve",
+     "p0": [
+      300,
+      830
+     ],
+     "c": [
+      300,
+      930
+     ],
+     "p1": [
+      460,
+      960
+     ],
+     "at": "set it up"
+    },
+    {
+     "type": "curve",
+     "p0": [
+      780,
+      830
+     ],
+     "c": [
+      780,
+      930
+     ],
+     "p1": [
+      620,
+      960
+     ],
+     "at": "set it up"
+    },
+    {
+     "type": "ticket",
+     "x": 540,
+     "y": 1030,
+     "w": 560,
+     "h": 200,
+     "title": "Shared account",
+     "sub": "for shared costs",
+     "at": "together"
+    }
+   ]
+  }
+ ],
+ "note": "Retest of S10 (2026-11-27, research/2026-11-27-retention.md finding 1): SAME hook, the 'research-backed money tip #6' bridge removed; the result comes in the sentence right after the hook, then one line of proof, the move, the send prompt. Variable = the bridge only.",
+ "cap_style": "karaoke",
+ "cover_at": [
+  1,
+  "less happy"
+ ]
+}
