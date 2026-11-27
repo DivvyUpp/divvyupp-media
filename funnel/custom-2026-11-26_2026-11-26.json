@@ -1,0 +1,156 @@
+{
+  "all_sources": {
+    "days": [
+      {
+        "date": "2026-11-26",
+        "sources": [
+          {
+            "cohort": 4,
+            "engagement": {
+              "access_request.submitted": 0,
+              "beta_gate.viewed": 0,
+              "demo.opened": 0,
+              "founder_video.played": 0
+            },
+            "reach": [
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source": "direct"
+          },
+          {
+            "cohort": 1,
+            "engagement": {
+              "access_request.submitted": 0,
+              "beta_gate.viewed": 0,
+              "demo.opened": 0,
+              "founder_video.played": 0
+            },
+            "reach": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source": "referral:divvyupp.com"
+          }
+        ]
+      }
+    ],
+    "engagement_keys": [
+      "access_request.submitted",
+      "beta_gate.viewed",
+      "demo.opened",
+      "founder_video.played"
+    ],
+    "from": "2026-11-26",
+    "generated_at": "2026-11-27T11:30:55.720011983Z",
+    "source_filter": null,
+    "stages": [
+      "landing",
+      "get_started_clicked",
+      "wizard_in_progress",
+      "wizard_completed",
+      "result_viewed",
+      "signup_started",
+      "signed_up",
+      "email_verified",
+      "bank_link_attempted",
+      "bank_linked",
+      "verifying_plan",
+      "plan_verified",
+      "dashboard_active",
+      "can_i_spend_user"
+    ],
+    "timezone": "America/New_York",
+    "to": "2026-11-26"
+  },
+  "fetched_at": "2026-11-27T11:30:55Z",
+  "from": "2026-11-26",
+  "instagram": {
+    "days": [
+      {
+        "date": "2026-11-26",
+        "sources": [
+          {
+            "cohort": 0,
+            "engagement": {
+              "access_request.submitted": 0,
+              "beta_gate.viewed": 0,
+              "demo.opened": 0,
+              "founder_video.played": 0
+            },
+            "reach": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "source": "instagram"
+          }
+        ]
+      }
+    ],
+    "engagement_keys": [
+      "access_request.submitted",
+      "beta_gate.viewed",
+      "demo.opened",
+      "founder_video.played"
+    ],
+    "from": "2026-11-26",
+    "generated_at": "2026-11-27T11:30:55.338286038Z",
+    "source_filter": "instagram",
+    "stages": [
+      "landing",
+      "get_started_clicked",
+      "wizard_in_progress",
+      "wizard_completed",
+      "result_viewed",
+      "signup_started",
+      "signed_up",
+      "email_verified",
+      "bank_link_attempted",
+      "bank_linked",
+      "verifying_plan",
+      "plan_verified",
+      "dashboard_active",
+      "can_i_spend_user"
+    ],
+    "timezone": "America/New_York",
+    "to": "2026-11-26"
+  },
+  "to": "2026-11-26",
+  "week": "2026-W48"
+}
