@@ -1,0 +1,31 @@
+{
+ "run": "metrics",
+ "date": "2026-11-27",
+ "attempts": [
+  {
+   "started_at": "2026-11-27T05:55:42-05:00",
+   "finished_at": "2026-11-27T05:56:00-05:00",
+   "status": "ok",
+   "trigger": "scheduled",
+   "summary": "Read 15 Reels from the last 8 days via Windsor (cached, trial plan). Followers: 3. Non-follower views yesterday: 338. Logged read_d1 for 2026-11-26-s10-joint (146 views, 1 share, 7.8 sends per 1,000 reached: the first share on any Reel), -s11-fights and 2026-11-27-savings-tiers, read_72h for 2026-11-23-s2-aging and 2026-11-24-s1-goal. Filled media_id 18103133177552314 for savings-tiers (Postproxy post, matched by shortcode DgOqaahNg9G). TikTok/YouTube are added by the 06:05 run.",
+   "outputs": [
+    {
+     "label": "Instagram numbers",
+     "path": "metrics/2026-11-27.json"
+    },
+    {
+     "label": "Experiment log",
+     "path": "experiment-log.csv"
+    },
+    {
+     "label": "Followers",
+     "path": "followers.csv"
+    },
+    {
+     "label": "Queue (media_id filled)",
+     "path": "queue.json"
+    }
+   ]
+  }
+ ]
+}
