@@ -519,7 +519,7 @@
  {
   "id": "2026-11-27-savings-tiers",
   "kind": "main",
-  "status": "approved",
+  "status": "posted",
   "post_date": "2026-11-26",
   "file": "reels/2026-11-27-savings-tiers.mp4",
   "spec": "hooks/2026-11-27-savings-tiers.json",
@@ -530,6 +530,17 @@
   "first_comment": "📊 Sources (rates as of Nov 26, 2026)\nI bonds: treasurydirect.gov/savings-bonds/i-bonds/i-bonds-interest-rates\nT-bills: treasurydirect.gov (auction results, Nov 23–25)\nMoney market (VMFXX): investor.vanguard.com\nAverage rates: fdic.gov/national-rates-and-rate-caps",
   "hypothesis": "hypotheses/2026-11-27.md",
   "note": "Srini asked for a format copy of a multi-million-view Short (2026-11-27): Graham Stephan's tier list (2.38M, 75.8x). Structure only; topic, script, numbers, visuals and voice are ours. First Reel with the lip-synced presenter. Recheck every rate the day it posts. Also the first post through the Postproxy-only Post task. Approved by Srini in chat 2026-11-26 ~9:20pm ET (v3) for the 9:57pm slot, through the Post task, to all three platforms.",
-  "not_before": "21:30"
+  "not_before": "21:30",
+  "posted_at": "2026-11-26T21:59:13-05:00",
+  "instagram_url": "https://www.instagram.com/p/DgOqaahNg9G",
+  "instagram_id": "DgOqaahNg9G",
+  "instagram_postproxy_id": "E7tlxBa",
+  "first_comment_id": "17883847020631599",
+  "tiktok_url": "https://www.tiktok.com/@getdivvyupp/video/7712680922843254046",
+  "tiktok_id": "7712680922843254046",
+  "tiktok_postproxy_id": "zvt3dML",
+  "youtube_url": "https://www.youtube.com/watch?v=x4gCwmMdWQ4",
+  "youtube_id": "x4gCwmMdWQ4",
+  "youtube_postproxy_id": "zvt3dML"
  }
 ]

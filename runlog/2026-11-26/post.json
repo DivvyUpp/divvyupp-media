@@ -1,84 +1,110 @@
 {
-  "run": "post",
-  "date": "2026-11-26",
-  "attempts": [
+ "run": "post",
+ "date": "2026-11-26",
+ "attempts": [
+  {
+   "started_at": "2026-11-26T11:58:00-05:00",
+   "finished_at": "2026-11-26T12:03:00-05:00",
+   "status": "blocked",
+   "trigger": "scheduled",
+   "summary": "Noon slot: nothing approved to post on Instagram (S10, S11 and the S8 25s cut are pending review). YouTube backfill not attempted.",
+   "blocker": "YouTube backfill still paused: Windsor still shows 1 public video on the channel that can't be matched to a Reel (per-video data comes back empty, and this Windsor trial plan can't force-refresh). Because that video appeared after an upload that answered 'rate-limited', other 'rate-limited' uploads may also have gone through, so uploading again risks duplicate Shorts. Check YouTube Studio and add youtube_id in queue.json for any Reel already there (or tell me) to restart the backfill; S2, S1, S4, S7 and S8 still need Shorts.",
+   "outputs": []
+  },
+  {
+   "started_at": "2026-11-26T15:11:00-05:00",
+   "finished_at": "2026-11-26T15:14:16-05:00",
+   "status": "ok",
+   "trigger": "manual",
+   "summary": "Posted Study Reel S10 v3 (2026-11-26-s10-joint, joint account, research-backed money tip #6) to Instagram at Srini's request, with its first comment, and uploaded it as a YouTube Short.",
+   "blocker": "Pin the first comment by hand in Instagram.",
+   "outputs": [
     {
-      "started_at": "2026-11-26T11:58:00-05:00",
-      "finished_at": "2026-11-26T12:03:00-05:00",
-      "status": "blocked",
-      "trigger": "scheduled",
-      "summary": "Noon slot: nothing approved to post on Instagram (S10, S11 and the S8 25s cut are pending review). YouTube backfill not attempted.",
-      "blocker": "YouTube backfill still paused: Windsor still shows 1 public video on the channel that can't be matched to a Reel (per-video data comes back empty, and this Windsor trial plan can't force-refresh). Because that video appeared after an upload that answered 'rate-limited', other 'rate-limited' uploads may also have gone through, so uploading again risks duplicate Shorts. Check YouTube Studio and add youtube_id in queue.json for any Reel already there (or tell me) to restart the backfill; S2, S1, S4, S7 and S8 still need Shorts.",
-      "outputs": []
+     "label": "Queue",
+     "path": "queue.json"
     },
     {
-      "started_at": "2026-11-26T15:11:00-05:00",
-      "finished_at": "2026-11-26T15:14:16-05:00",
-      "status": "ok",
-      "trigger": "manual",
-      "summary": "Posted Study Reel S10 v3 (2026-11-26-s10-joint, joint account, research-backed money tip #6) to Instagram at Srini's request, with its first comment, and uploaded it as a YouTube Short.",
-      "blocker": "Pin the first comment by hand in Instagram.",
-      "outputs": [
-        {
-          "label": "Queue",
-          "path": "queue.json"
-        },
-        {
-          "label": "Experiment log",
-          "path": "experiment-log.csv"
-        },
-        {
-          "label": "Spec",
-          "path": "hooks/2026-11-26-s10-joint.json"
-        }
-      ],
-      "reels": [
-        {
-          "id": "2026-11-26-s10-joint",
-          "hook": "Half the bills on your card, half on theirs, and nobody knows what's left?",
-          "status": "posted",
-          "file": "reels/2026-11-26-s10-joint-v3.mp4"
-        }
-      ]
+     "label": "Experiment log",
+     "path": "experiment-log.csv"
     },
     {
-      "started_at": "2026-11-26T16:58:00-05:00",
-      "finished_at": "2026-11-26T17:03:00-05:00",
-      "status": "blocked",
-      "trigger": "scheduled",
-      "summary": "5pm slot: nothing due on Instagram (S11 is approved for 19:30 and the S8 25s cut for 21:30), so nothing to TikTok either. YouTube backfill still paused.",
-      "blocker": "YouTube backfill still paused: Windsor shows 2 public videos (S10 plus the one that can't be matched to a Reel; per-video data still comes back empty), so uploading S2, S1, S4, S7 or S8 risks a duplicate Short. Check YouTube Studio and add youtube_id in queue.json for any Reel already there (or tell me) to restart the backfill.",
-      "outputs": []
-    },
-    {
-      "started_at": "2026-11-26T19:30:00-05:00",
-      "finished_at": "2026-11-26T19:31:48-05:00",
-      "status": "partial",
-      "trigger": "manual",
-      "summary": "Posted Study Reel S11 v7 (2026-11-26-s11-fights, weekly money check-in, research-backed money tip #7) to Instagram at 7:30pm as Srini asked, with its first comment.",
-      "blocker": "TikTok + YouTube (scripts/post_postproxy.py) refused: POSTPROXY_API_KEY is not set in this session; not retried. Run `python3 scripts/post_postproxy.py 2026-11-26-s11-fights` from a session that has the key. Pin the first comment by hand in Instagram.",
-      "outputs": [
-        {
-          "label": "Queue",
-          "path": "queue.json"
-        },
-        {
-          "label": "Experiment log",
-          "path": "experiment-log.csv"
-        },
-        {
-          "label": "Spec",
-          "path": "hooks/2026-11-26-s11-fights.json"
-        }
-      ],
-      "reels": [
-        {
-          "id": "2026-11-26-s11-fights",
-          "hook": "Does every money talk in your house start with \"what's this charge?\"",
-          "status": "posted",
-          "file": "reels/2026-11-26-s11-fights-v7.mp4"
-        }
-      ]
+     "label": "Spec",
+     "path": "hooks/2026-11-26-s10-joint.json"
     }
-  ]
+   ],
+   "reels": [
+    {
+     "id": "2026-11-26-s10-joint",
+     "hook": "Half the bills on your card, half on theirs, and nobody knows what's left?",
+     "status": "posted",
+     "file": "reels/2026-11-26-s10-joint-v3.mp4"
+    }
+   ]
+  },
+  {
+   "started_at": "2026-11-26T16:58:00-05:00",
+   "finished_at": "2026-11-26T17:03:00-05:00",
+   "status": "blocked",
+   "trigger": "scheduled",
+   "summary": "5pm slot: nothing due on Instagram (S11 is approved for 19:30 and the S8 25s cut for 21:30), so nothing to TikTok either. YouTube backfill still paused.",
+   "blocker": "YouTube backfill still paused: Windsor shows 2 public videos (S10 plus the one that can't be matched to a Reel; per-video data still comes back empty), so uploading S2, S1, S4, S7 or S8 risks a duplicate Short. Check YouTube Studio and add youtube_id in queue.json for any Reel already there (or tell me) to restart the backfill.",
+   "outputs": []
+  },
+  {
+   "started_at": "2026-11-26T19:30:00-05:00",
+   "finished_at": "2026-11-26T19:31:48-05:00",
+   "status": "partial",
+   "trigger": "manual",
+   "summary": "Posted Study Reel S11 v7 (2026-11-26-s11-fights, weekly money check-in, research-backed money tip #7) to Instagram at 7:30pm as Srini asked, with its first comment.",
+   "blocker": "TikTok + YouTube (scripts/post_postproxy.py) refused: POSTPROXY_API_KEY is not set in this session; not retried. Run `python3 scripts/post_postproxy.py 2026-11-26-s11-fights` from a session that has the key. Pin the first comment by hand in Instagram.",
+   "outputs": [
+    {
+     "label": "Queue",
+     "path": "queue.json"
+    },
+    {
+     "label": "Experiment log",
+     "path": "experiment-log.csv"
+    },
+    {
+     "label": "Spec",
+     "path": "hooks/2026-11-26-s11-fights.json"
+    }
+   ],
+   "reels": [
+    {
+     "id": "2026-11-26-s11-fights",
+     "hook": "Does every money talk in your house start with \"what's this charge?\"",
+     "status": "posted",
+     "file": "reels/2026-11-26-s11-fights-v7.mp4"
+    }
+   ]
+  },
+  {
+   "started_at": "2026-11-26T21:57:28-05:00",
+   "finished_at": "2026-11-26T22:03:04-05:00",
+   "status": "partial",
+   "trigger": "schedule",
+   "summary": "Posted the savings tier list (2026-11-27-savings-tiers) to Instagram, TikTok and YouTube through Postproxy (post_reel.py exit 0): IG E7tlxBa, TikTok+YouTube zvt3dML, first comment posted.",
+   "blocker": "The Post task's session could not push to DivvyUpp/divvyupp-media (403: repo not attached to the task). queue.json, experiment-log.csv and this record were written by hand afterwards from Postproxy. Pin the first comment in Instagram.",
+   "outputs": [
+    {
+     "label": "Queue",
+     "path": "queue.json"
+    },
+    {
+     "label": "Experiment log",
+     "path": "experiment-log.csv"
+    }
+   ],
+   "reels": [
+    {
+     "id": "2026-11-27-savings-tiers",
+     "hook": "Your savings account probably pays you one dollar a year. (Savings tier list: format copy of the tier-list Short)",
+     "status": "posted",
+     "file": "reels/2026-11-27-savings-tiers.mp4"
+    }
+   ]
+  }
+ ]
 }
