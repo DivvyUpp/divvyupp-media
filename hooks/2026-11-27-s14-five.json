@@ -1,0 +1,489 @@
+{
+ "id": "2026-11-27-s14-five",
+ "format": "diagram",
+ "voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "speed": 1.15,
+ "max_gap": 0.3,
+ "cap_style": "karaoke",
+ "scenes": [
+  {
+   "title": "be *honest*",
+   "text": "[curious] Feel guilty spending even five dollars on anything that isn't a bill?",
+   "elements": [
+    {
+     "type": "text",
+     "text": "Feel guilty spending",
+     "x": 540,
+     "y": 400,
+     "s": 76,
+     "w": "xb",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "even $5 on anything",
+     "x": 540,
+     "y": 490,
+     "s": 76,
+     "w": "xb",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "that isn't a bill?",
+     "x": 540,
+     "y": 585,
+     "s": 76,
+     "w": "xb",
+     "at": 0,
+     "col": "orange",
+     "instant": true
+    },
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 790,
+     "h": 220,
+     "show": "her",
+     "at": 0,
+     "instant": true,
+     "moods": [
+      {
+       "at": 0,
+       "her": "neutral"
+      },
+      {
+       "at": "guilty",
+       "her": "worried"
+      }
+     ]
+    },
+    {
+     "type": "panel",
+     "x": 160,
+     "y": 915,
+     "w": 760,
+     "h": 225,
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Recent transactions",
+     "x": 210,
+     "y": 960,
+     "s": 30,
+     "w": "xb",
+     "at": 0,
+     "align": "l",
+     "col": "grey",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Electric bill",
+     "x": 210,
+     "y": 1020,
+     "s": 34,
+     "w": "b",
+     "at": 0,
+     "align": "l",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "−$128.40",
+     "x": 870,
+     "y": 1020,
+     "s": 34,
+     "w": "b",
+     "at": 0,
+     "align": "r",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Coffee ?",
+     "x": 210,
+     "y": 1085,
+     "s": 34,
+     "w": "xb",
+     "at": "five dollars",
+     "align": "l",
+     "col": "orange"
+    },
+    {
+     "type": "text",
+     "text": "−$5.00",
+     "x": 870,
+     "y": 1085,
+     "s": 34,
+     "w": "xb",
+     "at": "five dollars",
+     "align": "r",
+     "col": "orange"
+    }
+   ]
+  },
+  {
+   "title": "money *tip*",
+   "text": "Here's research-backed money tip number nine. In a study published in Science, five dollars spent one way made people happier than twenty dollars spent the other way.",
+   "cap_split": "sentence",
+   "cap_max": 20,
+   "elements": [
+    {
+     "type": "tag",
+     "x": 540,
+     "y": 470,
+     "s": 54,
+     "dx": 80,
+     "lines": [
+      {
+       "text": "RESEARCH-BACKED",
+       "style": "ink"
+      },
+      {
+       "text": "MONEY TIP #9",
+       "style": "orange"
+      }
+     ],
+     "at": 0
+    },
+    {
+     "type": "research",
+     "x": 520,
+     "y": 930,
+     "at": 0.15,
+     "until": "nine."
+    },
+    {
+     "type": "text",
+     "text": "$5",
+     "x": 330,
+     "y": 720,
+     "s": 140,
+     "w": "xb",
+     "at": "five dollars spent",
+     "col": "orange",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": ">",
+     "x": 540,
+     "y": 720,
+     "s": 110,
+     "w": "xb",
+     "at": "happier",
+     "col": "grey"
+    },
+    {
+     "type": "text",
+     "text": "$20",
+     "x": 760,
+     "y": 720,
+     "s": 140,
+     "w": "xb",
+     "at": "twenty dollars",
+     "col": "grey"
+    },
+    {
+     "type": "couple",
+     "x": 330,
+     "y": 1040,
+     "h": 200,
+     "show": "her",
+     "at": "happier",
+     "moods": [
+      {
+       "at": 0,
+       "her": "happy"
+      }
+     ],
+     "label": "one way",
+     "label_col": "orange"
+    },
+    {
+     "type": "couple",
+     "x": 760,
+     "y": 1040,
+     "h": 200,
+     "show": "him",
+     "at": "twenty dollars",
+     "moods": [
+      {
+       "at": 0,
+       "him": "neutral"
+      }
+     ],
+     "label": "the other way",
+     "label_col": "grey"
+    }
+   ]
+  },
+  {
+   "title": "the *study*",
+   "text": "Researchers gave students five or twenty dollars in the morning, to spend by evening, either on themselves or on someone else.",
+   "elements": [
+    {
+     "type": "card",
+     "x": 80,
+     "y": 390,
+     "w": 920,
+     "h": 400,
+     "kicker": "SCIENCE · 2008",
+     "title": "Spending Money on Others",
+     "title_s": 50,
+     "subtitle": "promotes happiness",
+     "highlight": "morning",
+     "lines": [
+      "Dunn, Aknin & Norton",
+      "$5 or $20 · spend it by evening"
+     ]
+    },
+    {
+     "type": "chip",
+     "text": "$5",
+     "style": "soft",
+     "x": 330,
+     "y": 930,
+     "s": 48,
+     "at": "five or"
+    },
+    {
+     "type": "chip",
+     "text": "$20",
+     "style": "soft",
+     "x": 750,
+     "y": 930,
+     "s": 48,
+     "at": "twenty dollars"
+    },
+    {
+     "type": "chip",
+     "text": "on themselves",
+     "style": "soft",
+     "x": 330,
+     "y": 1060,
+     "s": 40,
+     "at": "on themselves"
+    },
+    {
+     "type": "chip",
+     "text": "on someone else",
+     "style": "orange",
+     "x": 750,
+     "y": 1060,
+     "s": 40,
+     "at": "someone else"
+    }
+   ]
+  },
+  {
+   "title": "the *result*",
+   "text": "That evening, the students who spent it on someone else were happier. And the amount made no difference. Five dollars worked as well as twenty.",
+   "cap_split": "sentence",
+   "elements": [
+    {
+     "type": "text",
+     "text": "that evening",
+     "x": 540,
+     "y": 470,
+     "s": 40,
+     "w": "b",
+     "at": 0,
+     "col": "grey"
+    },
+    {
+     "type": "text",
+     "text": "happier",
+     "x": 540,
+     "y": 600,
+     "s": 130,
+     "w": "xb",
+     "at": "happier",
+     "col": "orange",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "$5 = $20",
+     "x": 540,
+     "y": 750,
+     "s": 80,
+     "w": "xb",
+     "at": "Five dollars"
+    },
+    {
+     "type": "couple",
+     "x": 330,
+     "y": 1050,
+     "h": 200,
+     "show": "her",
+     "at": "spent it",
+     "moods": [
+      {
+       "at": 0,
+       "her": "happy"
+      }
+     ],
+     "label": "on someone else",
+     "label_col": "orange"
+    },
+    {
+     "type": "couple",
+     "x": 750,
+     "y": 1050,
+     "h": 200,
+     "show": "him",
+     "at": "spent it",
+     "moods": [
+      {
+       "at": 0,
+       "him": "neutral"
+      },
+      {
+       "at": "happier",
+       "him": "sad"
+      }
+     ],
+     "label": "on themselves",
+     "label_col": "grey"
+    }
+   ]
+  },
+  {
+   "title": "do *this*",
+   "text": "So if five dollars feels hard to spend on you, spend it on someone else this week. A coffee, a snack, anything. Then notice how you feel.",
+   "elements": [
+    {
+     "type": "text",
+     "text": "$5",
+     "x": 540,
+     "y": 600,
+     "s": 170,
+     "w": "xb",
+     "at": "five dollars",
+     "col": "orange",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "on someone else",
+     "x": 540,
+     "y": 760,
+     "s": 64,
+     "w": "xb",
+     "at": "someone else"
+    },
+    {
+     "type": "text",
+     "text": "this week",
+     "x": 540,
+     "y": 850,
+     "s": 44,
+     "w": "b",
+     "at": "this week",
+     "col": "grey"
+    },
+    {
+     "type": "chip",
+     "text": "a coffee",
+     "style": "soft",
+     "x": 300,
+     "y": 960,
+     "s": 42,
+     "at": "coffee"
+    },
+    {
+     "type": "chip",
+     "text": "a snack",
+     "style": "soft",
+     "x": 780,
+     "y": 960,
+     "s": 42,
+     "at": "snack"
+    },
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 1200,
+     "h": 180,
+     "gap": 140,
+     "at": "notice",
+     "moods": [
+      {
+       "at": 0,
+       "him": "happy",
+       "her": "happy"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "send *it*",
+   "text": "[warm] Send this to the person you'd buy that coffee for.",
+   "elements": [
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 640,
+     "h": 260,
+     "gap": 480,
+     "at": 0,
+     "instant": true,
+     "labels": [
+      "you",
+      "them"
+     ],
+     "moods": [
+      {
+       "at": 0,
+       "him": "neutral",
+       "her": "neutral"
+      },
+      {
+       "at": "coffee for",
+       "him": "happy",
+       "her": "happy"
+      }
+     ]
+    },
+    {
+     "type": "curve",
+     "p0": [
+      400,
+      560
+     ],
+     "c": [
+      540,
+      450
+     ],
+     "p1": [
+      680,
+      560
+     ],
+     "at": "Send this"
+    },
+    {
+     "type": "ticket",
+     "x": 540,
+     "y": 1000,
+     "w": 560,
+     "h": 200,
+     "title": "Coffee's on me",
+     "sub": "it's science",
+     "at": "buy that"
+    }
+   ]
+  }
+ ],
+ "note": "Study bank S14 (Dunn, Aknin & Norton, Science 2008). Hook B5 (both personas STOP strong); B7 ('$5 beats $20?') stopped both too but gives the result away, so its contrast moved to screen 2. Caveat in caption only.",
+ "cover_at": [
+  1,
+  "twenty dollars"
+ ]
+}

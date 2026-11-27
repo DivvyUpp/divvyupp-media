@@ -1,0 +1,45 @@
+{
+ "run": "create",
+ "date": "2026-11-27",
+ "attempts": [
+  {
+   "started_at": "2026-11-27T06:28:00-05:00",
+   "finished_at": "2026-11-27T07:40:00-05:00",
+   "status": "ok",
+   "trigger": "scheduled",
+   "summary": "Two Study Reels sent for review: S13 (debit vs cash at the grocery store, tip #8) and S14 ($5 on someone else, tip #9). Postmortem: s2-aging and s1-goal inconclusive at 72 h (<100 reached); s10-joint has our first share (7.8 per 1,000 at d1).",
+   "outputs": [
+    {
+     "label": "Hypotheses and script workshop",
+     "path": "hypotheses/2026-11-27.md"
+    },
+    {
+     "label": "S2 postmortem",
+     "path": "hypotheses/2026-11-23.md"
+    },
+    {
+     "label": "S1 postmortem",
+     "path": "hypotheses/2026-11-24.md"
+    },
+    {
+     "label": "Queue",
+     "path": "queue.json"
+    }
+   ],
+   "reels": [
+    {
+     "id": "2026-11-27-s13-card",
+     "hook": "Think paying with debit keeps your grocery spending in check?",
+     "status": "pending_review",
+     "file": "reels/2026-11-27-s13-card.mp4"
+    },
+    {
+     "id": "2026-11-27-s14-five",
+     "hook": "Feel guilty spending even five dollars on anything that isn't a bill?",
+     "status": "pending_review",
+     "file": "reels/2026-11-27-s14-five.mp4"
+    }
+   ]
+  }
+ ]
+}

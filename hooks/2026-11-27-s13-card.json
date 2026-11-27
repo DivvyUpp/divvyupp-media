@@ -1,0 +1,561 @@
+{
+ "id": "2026-11-27-s13-card",
+ "format": "diagram",
+ "voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "speed": 1.15,
+ "max_gap": 0.3,
+ "cap_style": "karaoke",
+ "scenes": [
+  {
+   "title": "be *honest*",
+   "text": "[curious] Think paying with debit keeps your grocery spending in check?",
+   "elements": [
+    {
+     "type": "text",
+     "text": "Paying with debit",
+     "x": 540,
+     "y": 400,
+     "s": 80,
+     "w": "xb",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "keeps groceries",
+     "x": 540,
+     "y": 490,
+     "s": 80,
+     "w": "xb",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "in check?",
+     "x": 540,
+     "y": 585,
+     "s": 80,
+     "w": "xb",
+     "at": 0,
+     "col": "orange",
+     "instant": true
+    },
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 790,
+     "h": 220,
+     "show": "him",
+     "at": 0,
+     "instant": true,
+     "moods": [
+      {
+       "at": 0,
+       "him": "neutral"
+      },
+      {
+       "at": "in check",
+       "him": "confused"
+      }
+     ],
+     "q": true
+    },
+    {
+     "type": "panel",
+     "x": 160,
+     "y": 915,
+     "w": 760,
+     "h": 225,
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "GROCERY · DEBIT •• 4821",
+     "x": 210,
+     "y": 960,
+     "s": 30,
+     "w": "xb",
+     "at": 0,
+     "align": "l",
+     "col": "grey",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Milk",
+     "x": 210,
+     "y": 1020,
+     "s": 34,
+     "w": "b",
+     "at": 0,
+     "align": "l",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "$3.49",
+     "x": 870,
+     "y": 1020,
+     "s": 34,
+     "w": "b",
+     "at": 0,
+     "align": "r",
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Chips + cookies",
+     "x": 210,
+     "y": 1085,
+     "s": 34,
+     "w": "xb",
+     "at": "keeps",
+     "align": "l",
+     "col": "orange"
+    },
+    {
+     "type": "text",
+     "text": "$11.98",
+     "x": 870,
+     "y": 1085,
+     "s": 34,
+     "w": "xb",
+     "at": "keeps",
+     "align": "r",
+     "col": "orange"
+    }
+   ]
+  },
+  {
+   "title": "money *tip*",
+   "text": "Here's research-backed money tip number eight. In a study of real grocery receipts, one thing at the register changed how much junk food ended up in the cart.",
+   "cap_split": "sentence",
+   "cap_max": 20,
+   "elements": [
+    {
+     "type": "tag",
+     "x": 540,
+     "y": 470,
+     "s": 54,
+     "dx": 80,
+     "lines": [
+      {
+       "text": "RESEARCH-BACKED",
+       "style": "ink"
+      },
+      {
+       "text": "MONEY TIP #8",
+       "style": "orange"
+      }
+     ],
+     "at": 0
+    },
+    {
+     "type": "research",
+     "x": 520,
+     "y": 930,
+     "at": 0.15,
+     "until": "eight."
+    },
+    {
+     "type": "text",
+     "text": "one thing",
+     "x": 540,
+     "y": 700,
+     "s": 110,
+     "w": "xb",
+     "at": "one thing",
+     "col": "orange",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "at the register",
+     "x": 540,
+     "y": 800,
+     "s": 44,
+     "w": "b",
+     "at": "at the register",
+     "col": "grey"
+    },
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 1030,
+     "h": 230,
+     "gap": 170,
+     "at": "one thing",
+     "labels": [
+      "",
+      ""
+     ],
+     "moods": [
+      {
+       "at": 0,
+       "him": "neutral",
+       "her": "neutral"
+      },
+      {
+       "at": "junk food",
+       "him": "frustrated",
+       "her": "happy"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "here's *why*",
+   "text": "Here's why. Handing over cash feels like paying. Tapping a card, credit or debit, barely feels like anything.",
+   "elements": [
+    {
+     "type": "chip",
+     "text": "cash",
+     "style": "orange",
+     "x": 300,
+     "y": 620,
+     "s": 60,
+     "at": "cash"
+    },
+    {
+     "type": "text",
+     "text": "feels like paying",
+     "x": 300,
+     "y": 720,
+     "s": 40,
+     "w": "b",
+     "at": "feels like paying"
+    },
+    {
+     "type": "chip",
+     "text": "tap a card",
+     "style": "ink",
+     "x": 780,
+     "y": 620,
+     "s": 60,
+     "at": "Tapping"
+    },
+    {
+     "type": "text",
+     "text": "feels like nothing",
+     "x": 780,
+     "y": 720,
+     "s": 40,
+     "w": "b",
+     "at": "Tapping",
+     "col": "grey"
+    },
+    {
+     "type": "text",
+     "text": "credit or debit",
+     "x": 780,
+     "y": 780,
+     "s": 34,
+     "w": "b",
+     "at": "credit or debit",
+     "col": "grey"
+    },
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 1030,
+     "h": 220,
+     "gap": 480,
+     "at": "Handing",
+     "moods": [
+      {
+       "at": 0,
+       "him": "neutral",
+       "her": "neutral"
+      },
+      {
+       "at": "barely",
+       "him": "happy",
+       "her": "neutral"
+      }
+     ],
+     "labels": [
+      "",
+      ""
+     ]
+    }
+   ]
+  },
+  {
+   "title": "the *study*",
+   "text": "Researchers looked at six months of grocery receipts from a thousand households.",
+   "elements": [
+    {
+     "type": "card",
+     "x": 80,
+     "y": 390,
+     "w": 920,
+     "h": 400,
+     "kicker": "JOURNAL OF CONSUMER RESEARCH · 2011",
+     "title": "How Credit Card Payments",
+     "title_s": 50,
+     "subtitle": "increase unhealthy food purchases",
+     "highlight": "receipts",
+     "lines": [
+      "Thomas, Desai & Seenivasan",
+      "1,000 households · 6 months · credit AND debit"
+     ]
+    },
+    {
+     "type": "crowd",
+     "x": 540,
+     "y": 1020,
+     "cols": 10,
+     "rows": 2,
+     "h": 90,
+     "sp": 72,
+     "count": 1000,
+     "label": "households",
+     "at": "thousand",
+     "dur": 1.6
+    }
+   ]
+  },
+  {
+   "title": "the *result*",
+   "text": "Baskets paid by card had more impulse junk food: chips, candy, cookies. And debit was no better than credit.",
+   "cap_split": "sentence",
+   "elements": [
+    {
+     "type": "text",
+     "text": "paid by card",
+     "x": 540,
+     "y": 470,
+     "s": 40,
+     "w": "b",
+     "at": 0,
+     "col": "grey"
+    },
+    {
+     "type": "text",
+     "text": "more junk food",
+     "x": 540,
+     "y": 600,
+     "s": 100,
+     "w": "xb",
+     "at": "more impulse",
+     "col": "orange",
+     "pop": true
+    },
+    {
+     "type": "chip",
+     "text": "chips",
+     "style": "soft",
+     "x": 290,
+     "y": 730,
+     "s": 42,
+     "at": "chips"
+    },
+    {
+     "type": "chip",
+     "text": "candy",
+     "style": "soft",
+     "x": 540,
+     "y": 730,
+     "s": 42,
+     "at": "candy"
+    },
+    {
+     "type": "chip",
+     "text": "cookies",
+     "style": "soft",
+     "x": 790,
+     "y": 730,
+     "s": 42,
+     "at": "cookies"
+    },
+    {
+     "type": "text",
+     "text": "debit = credit",
+     "x": 540,
+     "y": 850,
+     "s": 64,
+     "w": "xb",
+     "at": "And debit",
+     "col": "orange",
+     "pop": true
+    },
+    {
+     "type": "couple",
+     "x": 330,
+     "y": 1080,
+     "h": 200,
+     "show": "him",
+     "at": "Baskets",
+     "moods": [
+      {
+       "at": 0,
+       "him": "frustrated"
+      }
+     ],
+     "label": "credit or debit",
+     "label_col": "grey"
+    },
+    {
+     "type": "couple",
+     "x": 750,
+     "y": 1080,
+     "h": 200,
+     "show": "her",
+     "at": "Baskets",
+     "moods": [
+      {
+       "at": 0,
+       "her": "happy"
+      }
+     ],
+     "label": "paid cash",
+     "label_col": "orange"
+    }
+   ]
+  },
+  {
+   "title": "do *this*",
+   "text": "So make the money feel real again. Before your next grocery run, write a list and set an amount.",
+   "elements": [
+    {
+     "type": "panel",
+     "x": 200,
+     "y": 420,
+     "w": 680,
+     "h": 420,
+     "at": 0
+    },
+    {
+     "type": "text",
+     "text": "Grocery list",
+     "x": 250,
+     "y": 480,
+     "s": 40,
+     "w": "xb",
+     "at": 0,
+     "align": "l"
+    },
+    {
+     "type": "text",
+     "text": "1  milk",
+     "x": 250,
+     "y": 560,
+     "s": 38,
+     "w": "b",
+     "at": "write a list",
+     "align": "l"
+    },
+    {
+     "type": "text",
+     "text": "2  eggs",
+     "x": 250,
+     "y": 630,
+     "s": 38,
+     "w": "b",
+     "at": "write a list",
+     "align": "l"
+    },
+    {
+     "type": "text",
+     "text": "3  bread",
+     "x": 250,
+     "y": 700,
+     "s": 38,
+     "w": "b",
+     "at": "list",
+     "align": "l"
+    },
+    {
+     "type": "text",
+     "text": "set amount: $80",
+     "x": 540,
+     "y": 930,
+     "s": 64,
+     "w": "xb",
+     "at": "set an amount",
+     "col": "orange",
+     "pop": true
+    },
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 1200,
+     "h": 180,
+     "show": "him",
+     "at": "set an amount",
+     "moods": [
+      {
+       "at": 0,
+       "him": "happy"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "send *it*",
+   "text": "[warm] Send this to whoever does the grocery run on debit.",
+   "elements": [
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 640,
+     "h": 260,
+     "gap": 480,
+     "at": 0,
+     "instant": true,
+     "labels": [
+      "you",
+      "the grocery runner"
+     ],
+     "moods": [
+      {
+       "at": 0,
+       "him": "neutral",
+       "her": "neutral"
+      },
+      {
+       "at": "grocery run",
+       "him": "happy",
+       "her": "happy"
+      }
+     ]
+    },
+    {
+     "type": "curve",
+     "p0": [
+      400,
+      560
+     ],
+     "c": [
+      540,
+      450
+     ],
+     "p1": [
+      680,
+      560
+     ],
+     "at": "Send this"
+    },
+    {
+     "type": "ticket",
+     "x": 540,
+     "y": 1000,
+     "w": 560,
+     "h": 200,
+     "title": "Debit = credit",
+     "sub": "at the register",
+     "at": "grocery run"
+    }
+   ]
+  }
+ ],
+ "note": "Study bank S13 (Thomas, Desai & Seenivasan, JCR 2011). Hook A8 (both personas STOP strong; both would send to their partner). Caveat in caption only.",
+ "cover_at": [
+  1,
+  "junk food"
+ ]
+}

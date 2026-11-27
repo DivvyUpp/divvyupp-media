@@ -543,5 +543,37 @@
   "youtube_id": "x4gCwmMdWQ4",
   "youtube_postproxy_id": "zvt3dML",
   "media_id": "18103133177552314"
+ },
+ {
+  "id": "2026-11-27-s13-card",
+  "kind": "main",
+  "status": "pending_review",
+  "post_date": "2026-11-27",
+  "file": "reels/2026-11-27-s13-card.mp4",
+  "spec": "hooks/2026-11-27-s13-card.json",
+  "format": "study",
+  "hook": "Think paying with debit keeps your grocery spending in check? (Study Reel S13: research-backed money tip #8)",
+  "caption": "Think paying with debit keeps your grocery spending in check?\n\nResearchers looked at six months of real grocery receipts from 1,000 households. Baskets paid by card, credit or debit, had a bigger share of impulse junk food (chips, candy, cookies) than baskets paid in cash. Debit didn't help: it behaved like credit, because neither feels like handing over cash. (Correlational field data plus lab follow-ups.)\n\nTry it: do the grocery run with a list and a set amount.\n\nStudy: Thomas, Desai & Seenivasan, Journal of Consumer Research, 2011. Link in the comments.\n\nSend this to whoever does the grocery run on debit 🛒\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #moneytips #groceries #budgeting #research",
+  "tiktok_caption": "Think paying with debit keeps your grocery spending in check?\n\nResearchers looked at six months of real grocery receipts from 1,000 households. Baskets paid by card, credit or debit, had a bigger share of impulse junk food (chips, candy, cookies) than baskets paid in cash. Debit didn't help: it behaved like credit, because neither feels like handing over cash. (Correlational field data plus lab follow-ups.)\n\nTry it: do the grocery run with a list and a set amount.\n\nStudy: Thomas, Desai & Seenivasan, \"How Credit Card Payments Increase Unhealthy Food Purchases\", Journal of Consumer Research, 2011.\n\nSend this to whoever does the grocery run on debit 🛒\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #moneytips #groceries #budgeting #research",
+  "first_comment": "📄 The study: Thomas, Desai & Seenivasan, \"How Credit Card Payments Increase Unhealthy Food Purchases: Visceral Regulation of Vices\", Journal of Consumer Research, 2011\nhttps://news.cornell.edu/index%2ephp/node/270571",
+  "hypothesis": "hypotheses/2026-11-27.md",
+  "cover": "reels/2026-11-27-s13-card_cover.jpg (tip #8 frame, 'junk food')",
+  "note": "Create run 2026-11-27. Receipt lines and the $80 set amount are illustrative, not study figures."
+ },
+ {
+  "id": "2026-11-27-s14-five",
+  "kind": "main",
+  "status": "pending_review",
+  "post_date": "2026-11-27",
+  "file": "reels/2026-11-27-s14-five.mp4",
+  "spec": "hooks/2026-11-27-s14-five.json",
+  "format": "study",
+  "hook": "Feel guilty spending even five dollars on anything that isn't a bill? (Study Reel S14: research-backed money tip #9)",
+  "caption": "Feel guilty spending even $5 on anything that isn't a bill?\n\nStudents were given $5 or $20 in the morning to spend by that evening, either on themselves or on someone else. That evening, the ones who spent it on someone else were happier, and the amount made no difference. (A small study, about 46 people, with self-reported happiness; a 2022 replication exists.)\n\nTry it: spend $5 on someone this week and see how you feel.\n\nStudy: Dunn, Aknin & Norton, Science, 2008. Link in the comments.\n\nSend this to the person you'd buy that coffee for ☕\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #moneytips #happiness #psychology #research",
+  "tiktok_caption": "Feel guilty spending even $5 on anything that isn't a bill?\n\nStudents were given $5 or $20 in the morning to spend by that evening, either on themselves or on someone else. That evening, the ones who spent it on someone else were happier, and the amount made no difference. (A small study, about 46 people, with self-reported happiness; a 2022 replication exists.)\n\nTry it: spend $5 on someone this week and see how you feel.\n\nStudy: Dunn, Aknin & Norton, \"Spending Money on Others Promotes Happiness\", Science, 2008.\n\nSend this to the person you'd buy that coffee for ☕\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #moneytips #happiness #psychology #research",
+  "first_comment": "📄 The study: Dunn, Aknin & Norton, \"Spending Money on Others Promotes Happiness\", Science, 2008\nhttps://news.harvard.edu/gazette/story/2008/04/money-spent-on-others-can-buy-happiness/",
+  "hypothesis": "hypotheses/2026-11-27.md",
+  "cover": "reels/2026-11-27-s14-five_cover.jpg (tip #9 frame, '$5 > $20')",
+  "note": "Create run 2026-11-27."
  }
 ]
