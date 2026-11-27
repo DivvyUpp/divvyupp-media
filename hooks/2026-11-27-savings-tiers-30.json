@@ -13,7 +13,7 @@
  "scenes": [
   {
    "title": "*parents*: your savings",
-   "text": "[curious] Parents: your emergency fund is probably earning one dollar a year.",
+   "text": "If you're a parent, your emergency fund is probably earning one dollar a year.",
    "elements": [
     {
      "type": "text",
@@ -225,7 +225,7 @@
   {
    "title": "send *it*",
    "keep_prev": true,
-   "text": "[warm] Send this to whoever still keeps their savings at Chase.",
+   "text": "[warm] Send this to whoever still keeps their savings at Chase or Wells Fargo.",
    "elements": [
     {
      "type": "tierhl",
