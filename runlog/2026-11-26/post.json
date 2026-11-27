@@ -49,6 +49,36 @@
       "summary": "5pm slot: nothing due on Instagram (S11 is approved for 19:30 and the S8 25s cut for 21:30), so nothing to TikTok either. YouTube backfill still paused.",
       "blocker": "YouTube backfill still paused: Windsor shows 2 public videos (S10 plus the one that can't be matched to a Reel; per-video data still comes back empty), so uploading S2, S1, S4, S7 or S8 risks a duplicate Short. Check YouTube Studio and add youtube_id in queue.json for any Reel already there (or tell me) to restart the backfill.",
       "outputs": []
+    },
+    {
+      "started_at": "2026-11-26T19:30:00-05:00",
+      "finished_at": "2026-11-26T19:31:48-05:00",
+      "status": "partial",
+      "trigger": "manual",
+      "summary": "Posted Study Reel S11 v7 (2026-11-26-s11-fights, weekly money check-in, research-backed money tip #7) to Instagram at 7:30pm as Srini asked, with its first comment.",
+      "blocker": "TikTok + YouTube (scripts/post_postproxy.py) refused: POSTPROXY_API_KEY is not set in this session; not retried. Run `python3 scripts/post_postproxy.py 2026-11-26-s11-fights` from a session that has the key. Pin the first comment by hand in Instagram.",
+      "outputs": [
+        {
+          "label": "Queue",
+          "path": "queue.json"
+        },
+        {
+          "label": "Experiment log",
+          "path": "experiment-log.csv"
+        },
+        {
+          "label": "Spec",
+          "path": "hooks/2026-11-26-s11-fights.json"
+        }
+      ],
+      "reels": [
+        {
+          "id": "2026-11-26-s11-fights",
+          "hook": "Does every money talk in your house start with \"what's this charge?\"",
+          "status": "posted",
+          "file": "reels/2026-11-26-s11-fights-v7.mp4"
+        }
+      ]
     }
   ]
 }
