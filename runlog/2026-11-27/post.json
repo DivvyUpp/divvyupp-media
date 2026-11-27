@@ -1,72 +1,79 @@
 {
- "attempts": [
-  {
-   "started_at": "2026-11-27T11:01:27-05:00",
-   "finished_at": "2026-11-27T11:04:00-05:00",
-   "status": "ok",
-   "trigger": "manual",
-   "summary": "Posted tier list v2 (2026-11-27-savings-tiers-30) to Instagram, TikTok and YouTube from the chat session at Srini's request (hourly testing).",
-   "outputs": [
+  "attempts": [
     {
-     "label": "Queue",
-     "path": "queue.json"
-    }
-   ],
-   "reels": [
-    {
-     "id": "2026-11-27-savings-tiers-30",
-     "hook": "If you're a parent, your emergency fund is probably earning one dollar a year. (Tier list v2: 30 s, household hook, send after S)",
-     "status": "posted",
-     "file": "reels/2026-11-27-savings-tiers-30.mp4"
-    }
-   ]
-  },
-  {
-   "started_at": "2026-11-27T11:57:30-05:00",
-   "finished_at": "2026-11-27T12:01:30-05:00",
-   "status": "ok",
-   "trigger": "scheduled",
-   "summary": "Posted S8 short (2026-11-26-s8-short) to Instagram, TikTok and YouTube Shorts via Postproxy. First comment sent with the post; pin it in the app.",
-   "outputs": [
-    {
-     "label": "Queue",
-     "path": "queue.json"
+      "started_at": "2026-11-27T11:01:27-05:00",
+      "finished_at": "2026-11-27T11:04:00-05:00",
+      "status": "ok",
+      "trigger": "manual",
+      "summary": "Posted tier list v2 (2026-11-27-savings-tiers-30) to Instagram, TikTok and YouTube from the chat session at Srini's request (hourly testing).",
+      "outputs": [
+        {
+          "label": "Queue",
+          "path": "queue.json"
+        }
+      ],
+      "reels": [
+        {
+          "id": "2026-11-27-savings-tiers-30",
+          "hook": "If you're a parent, your emergency fund is probably earning one dollar a year. (Tier list v2: 30 s, household hook, send after S)",
+          "status": "posted",
+          "file": "reels/2026-11-27-savings-tiers-30.mp4"
+        }
+      ]
     },
     {
-     "label": "Experiment log",
-     "path": "experiment-log.csv"
-    }
-   ],
-   "reels": [
+      "started_at": "2026-11-27T11:57:30-05:00",
+      "finished_at": "2026-11-27T12:01:30-05:00",
+      "status": "ok",
+      "trigger": "scheduled",
+      "summary": "Posted S8 short (2026-11-26-s8-short) to Instagram, TikTok and YouTube Shorts via Postproxy. First comment sent with the post; pin it in the app.",
+      "outputs": [
+        {
+          "label": "Queue",
+          "path": "queue.json"
+        },
+        {
+          "label": "Experiment log",
+          "path": "experiment-log.csv"
+        }
+      ],
+      "reels": [
+        {
+          "id": "2026-11-26-s8-short",
+          "hook": "Are you only making the minimum payment on your credit card? (Study Reel S8, 25 s cut: bet #11 length test)",
+          "status": "posted",
+          "file": "reels/2026-11-26-s8-short.mp4",
+          "permalink": "https://www.instagram.com/p/DgQKbNqK3uY"
+        }
+      ]
+    },
     {
-     "id": "2026-11-26-s8-short",
-     "hook": "Are you only making the minimum payment on your credit card? (Study Reel S8, 25 s cut: bet #11 length test)",
-     "status": "posted",
-     "file": "reels/2026-11-26-s8-short.mp4",
-     "permalink": "https://www.instagram.com/p/DgQKbNqK3uY"
-    }
-   ]
-  },
-  {
-   "started_at": "2026-11-27T12:31:13-05:00",
-   "finished_at": "2026-11-27T12:34:00-05:00",
-   "status": "ok",
-   "trigger": "manual",
-   "summary": "Posted S10 answer-first (2026-11-27-s10-answer) to Instagram, TikTok and YouTube from the chat session (Srini: an hour after tier list v2), cover on all three.",
-   "outputs": [
+      "started_at": "2026-11-27T12:31:13-05:00",
+      "finished_at": "2026-11-27T12:34:00-05:00",
+      "status": "ok",
+      "trigger": "manual",
+      "summary": "Posted S10 answer-first (2026-11-27-s10-answer) to Instagram, TikTok and YouTube from the chat session (Srini: an hour after tier list v2), cover on all three.",
+      "outputs": [
+        {
+          "label": "Queue",
+          "path": "queue.json"
+        }
+      ],
+      "reels": [
+        {
+          "id": "2026-11-27-s10-answer",
+          "hook": "Half the bills on your card, half on theirs, and nobody knows what's left? (S10 answer-first retest: no tip bridge)",
+          "status": "posted",
+          "file": "reels/2026-11-27-s10-answer.mp4"
+        }
+      ]
+    },
     {
-     "label": "Queue",
-     "path": "queue.json"
+      "started_at": "2026-11-27T16:58:08-05:00",
+      "finished_at": "2026-11-27T16:58:13-05:00",
+      "status": "ok",
+      "trigger": "scheduled",
+      "summary": "Nothing approved to post"
     }
-   ],
-   "reels": [
-    {
-     "id": "2026-11-27-s10-answer",
-     "hook": "Half the bills on your card, half on theirs, and nobody knows what's left? (S10 answer-first retest: no tip bridge)",
-     "status": "posted",
-     "file": "reels/2026-11-27-s10-answer.mp4"
-    }
-   ]
-  }
- ]
+  ]
 }
