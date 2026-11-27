@@ -5,7 +5,7 @@ connectors) can read them from the repo. Data only: no postmortem, no verdicts, 
 
 1. `TZ=America/New_York date +%F` gives today.
 2. Windsor `get_data` (connector `instagram`, account `17841422626862357`; call `get_fields` first and use only
-   fields it lists): `media_id, media_views, media_reach, media_reel_skip_rate, media_reel_avg_watch_time,
+   fields it lists): `media_id, media_shortcode, media_permalink, media_views, media_reach, media_reel_skip_rate, media_reel_avg_watch_time,
    media_shares, media_saved, media_like_count, media_reel_total_interactions` for every Reel posted in the last
    8 days. Also `followers_count` (today's total) and account `views_non_followers` for yesterday.
 3. Write `metrics/<today>.json`:
@@ -16,8 +16,15 @@ connectors) can read them from the repo. Data only: no postmortem, no verdicts, 
    `sends_per_1k` = shares ÷ reach × 1000, rounded to 1 decimal (`null` when reach is 0 or missing). It is the
    primary metric (PLAYBOOK "Primary metric").
    Write exactly what Windsor returns; use `null` for anything it does not return. Never estimate a number.
-3b. **TikTok + YouTube, through Postproxy (Srini, 2026-11-26).** Right after step 3 writes `metrics/<today>.json`,
-   run from the repo root: `python3 scripts/fetch_platform_stats.py`
+3a. **Fill in Instagram `media_id` for Reels posted through Postproxy (2026-11-27).** Postproxy records only the
+   permalink (`instagram_url`, shortcode in `instagram_id`). For each `queue.json` entry with `instagram_id` and no
+   `media_id`, find the Windsor row from step 2 whose `media_shortcode` equals it (or whose permalink contains it) and set the entry's
+   `media_id` to it, and the `media_id` cell of that entry's `experiment-log.csv` row (matched by `id`). Never guess:
+   no matching row means leave it empty and say so in the reply. Commit `queue.json` with the rest in step 5.
+3b. **TikTok + YouTube, through Postproxy (Srini, 2026-11-26).** NOT part of the 05:53 Cowork pull (Cowork has no
+   `POSTPROXY_API_KEY`): since 2026-11-27 it runs on its own at 06:05 ET in a Claude Code cloud session (task
+   "DivvyUpp Reels: TikTok + YouTube stats"), which pulls main, runs this step only, commits `metrics/` and pushes.
+   It runs from the repo root: `python3 scripts/fetch_platform_stats.py`
    (needs `POSTPROXY_API_KEY`, which the environment has). It adds `"tiktok"` (follower count + per-video views,
    reach, avg/total watch, full-watch rate, likes, comments, shares, sends per 1,000), `"youtube"` (subscribers,
    channel 7-day watch figures + per-Short views, likes, comments) and `"combined"` (one row per Reel: Instagram,

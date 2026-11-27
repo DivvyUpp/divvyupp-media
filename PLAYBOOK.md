@@ -9,11 +9,13 @@ Videos are served publicly by GitHub Pages at `https://divvyupp.github.io/divvyu
 - **Nothing is posted anywhere (Instagram, YouTube, TikTok) unless its queue entry has `"status": "approved"`**, set only after Srini
   watched the actual video and said yes in chat. Videos awaiting review are sent to him as files and are
   **not pushed to this public repo** until approved.
-- Instagram posts only through the Windsor.ai for Social Media connector: connector `instagram`, account
-  `17841422626862357` (@getdivvyupp), action `create_video_post`, `share_to_feed: true`.
-- **Cross-posting (Srini, 2026-11-26):** every approved main Reel that posts to Instagram (Windsor) goes in the same
-  Post slot to TikTok and YouTube Shorts through Postproxy, in one request (`scripts/post_postproxy.py`,
-  `runs/post.md` 3 and 3b). Only that Reel: no backfill or catch-up on any platform; older Reels go to TikTok or
+- **All posting goes through Postproxy (Srini, 2026-11-27): Instagram, TikTok and YouTube**, with one command,
+  `python3 scripts/post_reel.py <id>` (`runs/post.md` step 3). Instagram = Postproxy profile `6lUEBB` (account
+  `17841422626862357`, @getdivvyupp), Reel, `share_to_feed` on. Windsor is no longer used to post; it still supplies
+  the Instagram numbers in the Metrics pull.
+- **Cross-posting (Srini, 2026-11-26):** every approved main Reel that posts to Instagram goes in the same
+  Post slot to TikTok and YouTube Shorts (one Postproxy request, `scripts/post_postproxy.py`, run by
+  `scripts/post_reel.py` only once Instagram is live; `runs/post.md` 3). Only that Reel: no backfill or catch-up on any platform; older Reels go to TikTok or
   YouTube only when Srini asks for that specific Reel. A Reel missing from any of the three is a `partial` run that
   Srini hears about. Approval covers all three platforms; nothing unapproved goes anywhere. Instagram vs TikTok is
   compared per Reel at 72 h on the same scorecard; read it after ~14 paired Reels.
@@ -21,8 +23,8 @@ Videos are served publicly by GitHub Pages at `https://divvyupp.github.io/divvyu
 - Cadence (Srini, 2026-11-20, rapid-test phase): **up to 3 Reels a day** (changed 2026-11-21 from 4), one per slot at about noon, 5pm and
   10pm ET, one Reel per proven format per day so every format gets a daily read. The Post run posts one approved Reel
   per slot, oldest first. Trial Reels stay off until 200 followers. If the scorecard shows extra posts hurting
-  reach per Reel, propose cutting back. If anything fails, stop and tell Srini; do not retry a publish blindly (check with
-  Windsor `get_data` for a media created today before any retry, so nothing posts twice). Trial Reels follow the same
+  reach per Reel, propose cutting back. If anything fails, stop and tell Srini; do not retry a publish blindly (check the entry's Postproxy post ids with
+  `GET /api/posts/<id>` before anything else, so nothing posts twice). Trial Reels follow the same
   approval rule as any post: only entries Srini approved.
 - Brand: warm off-white background, orange #E04A1A, near-black #15100F, Plus Jakarta Sans.
 - Voice (agreed with Srini 2026-11-16): ElevenLabs, model `eleven_v3`, **Jessica** (`cgSgspJ2msm6clMCkdW9`) for presenter C,
@@ -292,7 +294,7 @@ Start from this list. Research may propose changes; Create applies a change only
    question it was waiting on and whether the payoff answered it.
 
 ### Trial Reels
-Windsor `create_video_post` takes `trial_params: {"graduation_strategy": "MANUAL"}` (or `"SS_PERFORMANCE"`, which
+Postproxy's Instagram Reel takes `trial_strategy: "MANUAL"` (`scripts/post_reel.py` sends it for trial entries; Postproxy also offers `"SS_PERFORMANCE"`, which
 shares it with followers automatically if it performs well). Trial Reels go to non-followers only. Use them to test
 2–3 hook variants of the day's script at once. Default to `MANUAL`; Srini decides whether a winner goes to followers.
 Queue entries for trials have `"kind": "trial"`; the main Reel has `"kind": "main"` (missing `kind` means main).
