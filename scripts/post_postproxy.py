@@ -41,9 +41,9 @@ API = "https://api.postproxy.dev"
 PROFILES = {"tiktok": "MZU39X", "youtube": "rOUpVX"}  # @getdivvyupp (GET /api/profiles)
 PLATFORMS = ("tiktok", "youtube")
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
-# YouTube custom thumbnails need a phone-verified channel; not confirmed yet (2026-11-27). Set True once Srini confirms
-# Studio > Settings > Channel > Feature eligibility shows "Features that require phone verification: Enabled".
-YOUTUBE_THUMBNAIL = False
+# YouTube custom thumbnails need a phone-verified channel: confirmed 2026-11-27 (Studio > Settings > Channel >
+# Feature eligibility: Intermediate features Enabled). Set False to send YouTube uploads without a thumbnail.
+YOUTUBE_THUMBNAIL = True
 PAGES = "https://divvyupp.github.io/divvyupp-media/"
 QUEUE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "queue.json")
 TIMEOUT_S = 30

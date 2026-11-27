@@ -28,8 +28,8 @@ Post today's approved Reels to @getdivvyupp. Only entries Srini explicitly appro
      called by `post_reel.py`): caption = `entry.tiktok_caption`, else `entry.caption` with only the "Link in the
      comments." sentence removed; YouTube title = `entry.hook` without a trailing "(...)" note, cut to 100
      characters; both public, TikTok comments / Duet / Stitch on; the same cover image as Instagram (TikTok cover,
-     YouTube thumbnail only once `YOUTUBE_THUMBNAIL` in scripts/post_postproxy.py is True: it needs a phone-verified
-     channel, not yet confirmed on 2026-11-27). Writes `tiktok_*` / `youtube_*` ids and urls.
+     YouTube thumbnail; the channel's phone verification was confirmed 2026-11-27, switch: `YOUTUBE_THUMBNAIL` in
+     scripts/post_postproxy.py). Writes `tiktok_*` / `youtube_*` ids and urls.
    - **If Instagram does not publish, nothing goes to TikTok or YouTube.** No backfill or catch-up on any platform
      (Srini, 2026-11-26): only the Reel this slot posts. Older Reels go to TikTok/YouTube only when Srini asks for
      that specific Reel (`python3 scripts/post_postproxy.py <id>`).
