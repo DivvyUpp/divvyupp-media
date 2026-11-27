@@ -2,7 +2,7 @@
  "id": "2026-11-27-savings-tiers",
  "format": "diagram",
  "voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
- "speed": 1.25,
+ "speed": 1.3,
  "max_gap": 0.3,
  "cap_style": "karaoke",
  "cover_at": [
@@ -71,7 +71,7 @@
   },
   {
    "title": "savings *tier list*",
-   "text": "Let's rank where to park ten thousand dollars you can't lose.",
+   "text": "Let's rank where to park ten thousand dollars.",
    "elements": [
     {
      "type": "tiers",
@@ -116,7 +116,7 @@
      "text": "$10,000 · one year",
      "style": "orange",
      "at": "ten thousand",
-     "until": "can't lose",
+     "until": "dollars.",
      "s": 30
     }
    ]
@@ -323,7 +323,7 @@
   {
    "title": "savings *tier list*",
    "keep_prev": true,
-   "text": "[excited] Series I bonds: five and a half percent, and it rises with inflation. S tier. The catch? Locked for a year.",
+   "text": "[excited] And the top spot: Series I bonds. Five and a half percent, and it rises with inflation. S tier. The catch? Locked for a year, max ten thousand dollars per person.",
    "elements": [
     {
      "type": "tieritem",
@@ -352,21 +352,22 @@
      "y": 1130,
      "text": "Locked 12 months",
      "style": "ink",
-     "at": "The catch",
+     "at": "Locked",
      "s": 30,
-     "until": "year"
+     "until": "per person"
     },
     {
      "type": "chip",
      "x": 600,
      "y": 1230,
-     "text": "Up to $10K a year each",
+     "text": "Max $10K per person a year",
      "style": "orange",
-     "at": "The catch",
+     "at": "max",
      "s": 30,
-     "until": "year"
+     "until": "per person"
     }
-   ]
+   ],
+   "gap_before": 0.7
   },
   {
    "title": "the *move*",
@@ -390,6 +391,20 @@
      "style": "orange",
      "at": "Money you",
      "s": 30
+    },
+    {
+     "type": "tierhl",
+     "row": 1,
+     "slot": 1,
+     "at": "Emergency",
+     "until": "Money you"
+    },
+    {
+     "type": "tierhl",
+     "row": 0,
+     "slot": 0,
+     "span": 2,
+     "at": "Money you"
     }
    ]
   },

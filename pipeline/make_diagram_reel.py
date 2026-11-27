@@ -15,6 +15,7 @@ Spec:
       "text": "Here's the trap. ...",                   # spoken; v3 audio tags are stripped from captions
       "speed": 1.2,                                     # optional: this scene's lines faster/slower than "speed"
       "keep_prev": true,                                # optional: the previous scene's diagram stays on screen
+      "gap_before": 0.6,                                # optional: seconds of silence before this scene's first word
       "elements": [ {"type": "...", "at": "phrase" | seconds, ...}, ... ] } ] }
 
 Element timing: "at" is a phrase from this scene's text (the element lands as that word starts) or seconds from the
@@ -47,6 +48,7 @@ Element types (coordinates are 1080x1920 frame pixels):
           words; happy/neutral moods only, sprites *_m1/_m2) [talk_from] [talk_until]
   tiers   x0 x1 y0 rh [gap] rows:[{tier col}] [bin] [slots] [bin_slots] [note]   tier-list board (2026-11-27): coloured
           tier labels, empty rows, an optional red "bin" row below (e.g. "NOT SAVINGS"); rows pop in one by one
+  tierhl  row slot [span] at [until]                          spotlight one slot with a breathing orange glow
   tieritem row slot name chip rate [sub] [value value_fmt] focus:[x y w h] at land   one ranked item: a big card pops in
           at the focus box on "at" (value counts up), then flies into its row/slot on "land" and stays as a chip
           (row = index into the board's rows; len(rows) = the bin). Needs a "tiers" element earlier in the Reel.
@@ -700,15 +702,15 @@ def e_tieritem(cv, e, t, T):
     fx, fy, fw, fh = e["focus"]; S1 = slot_rect(e["row"], e["slot"], e.get("span", 1))
     isbin = e["row"] >= len(BOARD["rows"]); g = T.fade(e, t); key = row_key(e["row"])
     sw, sh = S1[2] - S1[0], S1[3] - S1[1]
-    fly = 0.62
+    fly = e.get("fly", 0.9)
     m = clamp((t - tl) / fly) if tl is not None else 0.0
     if m < 1:
         pop = 1.0 if e.get("instant") else clamp((t - ta) / 0.5)
         sc_in = 0.86 + 0.14 * back(pop, 2.4)                              # springs in
-        me = m * m * (3 - 2 * m)                                          # smoothstep: no jerk at either end
+        me = m * m * m * (m * (m * 6 - 15) + 10)                          # smootherstep: zero speed and acceleration at both ends
         # position along a gentle arc; size shrinks to the slot
         c0 = (fx + fw / 2, fy + fh / 2); c1 = ((S1[0] + S1[2]) / 2, (S1[1] + S1[3]) / 2)
-        ctrl = ((c0[0] + c1[0]) / 2 + 60, min(c0[1], c1[1]) - 40)
+        ctrl = ((c0[0] + c1[0]) / 2 + 30, (c0[1] + c1[1]) / 2 - 20)              # a flat arc
         cx = (1 - me) ** 2 * c0[0] + 2 * (1 - me) * me * ctrl[0] + me ** 2 * c1[0]
         cy = (1 - me) ** 2 * c0[1] + 2 * (1 - me) * me * ctrl[1] + me ** 2 * c1[1]
         w = (fw + (sw - fw) * me) * sc_in; h = (fh + (sh - fh) * me) * sc_in
@@ -718,15 +720,17 @@ def e_tieritem(cv, e, t, T):
             ck = (e["chip"], int(sw), int(sh))
             if ck not in _chips: _chips[ck] = chip_layer(e, sw, sh, isbin, key)
             chip = _chips[ck].resize(layer.size, Image.BILINEAR)
-            layer = Image.blend(layer, chip, clamp((m - 0.35) / 0.45))
+            xf = clamp((me - 0.45) / 0.45); layer = Image.blend(layer, chip, xf * xf * (3 - 2 * xf))
         im = layer.resize((max(1, int(w * S)), max(1, int(h * S))), Image.LANCZOS)
         b = [cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2]
-        soft(cv, b, 28 - 14 * me, kc, 1.4 - 0.9 * me)
+        if me < 1:                                                         # card shadow eases into the chip shadow
+            cv.shadow(b, 28 - 14 * me, kc * (1 - me), blur=26, dy=16, alpha=0.14)
+            cv.shadow(b, 28 - 14 * me, kc, blur=int(6 + 4 * (1 - me)), dy=3 + 3 * (1 - me), alpha=0.08 + 0.04 * (1 - me))
         paste_rgba(cv, im, b[0], b[1], kc)
     else:
         ck = (e["chip"], int(sw), int(sh))
         if ck not in _chips: _chips[ck] = chip_layer(e, sw, sh, isbin, key)
-        land = t - tl - fly; sq = 1 + 0.06 * math.sin(clamp(land / 0.28) * math.pi)   # little landing bump
+        land = t - tl - fly; sq = 1 + 0.025 * math.sin(clamp(land / 0.35) * math.pi)  # a soft settle
         w, h = sw * sq, sh * sq; b = [S1[0] - (w - sw) / 2, S1[1] - (h - sh) / 2, S1[0] - (w - sw) / 2 + w, S1[1] - (h - sh) / 2 + h]
         if land < 0.5:                                                     # glow pulse on the row
             rb = board_rect(e["row"]); gk = (1 - clamp(land / 0.5)) * g
@@ -735,7 +739,24 @@ def e_tieritem(cv, e, t, T):
         im = _chips[ck] if sq == 1 else _chips[ck].resize((int(w * S), int(h * S)), Image.LANCZOS)
         paste_rgba(cv, im, b[0], b[1], g)
 
-DRAW = {"tiers": e_tiers, "tieritem": e_tieritem, "research": e_research, "crowd": e_crowd, "couple": e_couple, "text": e_text, "chip": e_chip, "chart": e_chart, "card": e_card, "panel": e_panel, "bars": e_bars, "lock": e_lock,
+def e_tierhl(cv, e, t, T):
+    """Spotlight one board slot: a glowing orange ring that breathes, from "at" until "until"."""
+    k = T.k(e, t)
+    if k <= 0: return
+    b0 = slot_rect(e["row"], e["slot"], e.get("span", 1)); grow = 6 * ease(clamp((t - T.t_in(e)) / 0.4))
+    b = [b0[0] - grow, b0[1] - grow, b0[2] + grow, b0[3] + grow]
+    pulse = 0.75 + 0.25 * math.sin((t - T.t_in(e)) * 2 * math.pi / 1.4)
+    bx0, by0, bx1, _ = board_rect(0); _, _, _, by1 = board_rect(len(BOARD["rows"]) + (1 if BOARD.get("bin") else 0) - 1)
+    pad = 10; dim = (249, 245, 239)                             # dim the rest of the board around the spotlit slot
+    for r_ in ([bx0 - pad, by0 - pad, bx1 + pad, b[1] - 3], [bx0 - pad, b[3] + 3, bx1 + pad, by1 + pad],
+               [bx0 - pad, b[1] - 3, b[0] - 3, b[3] + 3], [b[2] + 3, b[1] - 3, bx1 + pad, b[3] + 3]):
+        if r_[2] > r_[0] and r_[3] > r_[1]: cv.d.rectangle([v * S for v in r_], fill=dim + (int(255 * 0.45 * k),))
+    cv.rect(b, 16, fill=ORANGE, k=k * 0.10)
+    for i, a in enumerate((0.10, 0.16, 0.24)):                  # soft glow: widest and faintest first
+        p = 14 - i * 5; cv.rect([b[0] - p, b[1] - p, b[2] + p, b[3] + p], 18 + p, outline=ORANGE, w=5, k=k * a * pulse)
+    cv.rect(b, 16, outline=ORANGE, w=4, k=k)
+
+DRAW = {"tierhl": e_tierhl, "tiers": e_tiers, "tieritem": e_tieritem, "research": e_research, "crowd": e_crowd, "couple": e_couple, "text": e_text, "chip": e_chip, "chart": e_chart, "card": e_card, "panel": e_panel, "bars": e_bars, "lock": e_lock,
         "target": e_target, "qring": e_qring, "accounts": e_accounts, "avatar": e_avatar, "curve": e_curve,
         "ticket": e_ticket, "tag": e_tag, "clock": e_clock, "line": e_line, "dot": e_dot, "statement": e_statement}
 
@@ -798,6 +819,8 @@ def take(spec, tmp):
             p_in, p_out = os.path.join(tmp, f"s{j}.wav"), os.path.join(tmp, f"s{j}x.wav"); sf.write(p_in, seg, SR)
             subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", p_in, "-filter:a", f"atempo={sp}", p_out], check=True)
             seg, _ = sf.read(p_out)
+        if sc.get("gap_before"):                           # a deliberate beat of silence before this scene
+            pieces.append(np.zeros(int(sc["gap_before"] * SR))); out_t0 += sc["gap_before"]
         for w, a, b in words[i:i + counts[j]]: new_words.append((w, out_t0 + (a - a0) / sp, out_t0 + (b - a0) / sp))
         i += counts[j]; pieces.append(seg); out_t0 += len(seg) / SR
     return np.concatenate(pieces), [(w, a + LEAD, b + LEAD) for w, a, b in new_words], counts
