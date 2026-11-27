@@ -259,6 +259,8 @@ def test_cover_on_tiktok_and_youtube(tmp_path, monkeypatch):
     assert "cover_url" not in pp.build_payload(entry(), ["tiktok", "youtube"])["platforms"]["tiktok"]
     (tmp_path / "reels").mkdir(); (tmp_path / "reels" / "r1_cover.jpg").write_bytes(b"jpg")
     monkeypatch.setattr(pp, "ROOT", str(tmp_path))
+    assert "cover_url" not in pp.build_payload(entry(), ["youtube"])["platforms"]["youtube"]   # off until verified
+    monkeypatch.setattr(pp, "YOUTUBE_THUMBNAIL", True)
     pl = pp.build_payload(entry(), ["tiktok", "youtube"])["platforms"]
     url = "https://divvyupp.github.io/divvyupp-media/reels/r1_cover.jpg"
     assert pl["tiktok"]["cover_url"] == url and pl["youtube"]["cover_url"] == url
