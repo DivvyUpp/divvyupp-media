@@ -43,6 +43,13 @@ Element types (coordinates are 1080x1920 frame pixels):
   couple  x y h [gap] [label label_col] [move:{at x dur}] [show: both|him|her] moods:[{at, him, her}] [labels:[l, r]] [q]   Style C couple (Srini picked
           2026-11-26), sprites from pipeline/couple_sprites.js; moods happy|neutral|worried|sad|confused|frustrated; a mood
           change gives a little bounce; q draws an orange "?" over confused faces
+          [talk: him|her] lip-syncs that figure to the voice-over (mouth opens with the voice's loudness, closed between
+          words; happy/neutral moods only, sprites *_m1/_m2) [talk_from] [talk_until]
+  tiers   x0 x1 y0 rh [gap] rows:[{tier col}] [bin] [slots] [bin_slots] [note]   tier-list board (2026-11-27): coloured
+          tier labels, empty rows, an optional red "bin" row below (e.g. "NOT SAVINGS"); rows pop in one by one
+  tieritem row slot name chip rate [sub] [value value_fmt] focus:[x y w h] at land   one ranked item: a big card pops in
+          at the focus box on "at" (value counts up), then flies into its row/slot on "land" and stays as a chip
+          (row = index into the board's rows; len(rows) = the bin). Needs a "tiers" element earlier in the Reel.
 Spec options (2026-11-26, Srini): "cap_style": "karaoke" draws the spoken words in a dark box, the current word on an
 orange pill and upcoming words dimmed, so captions read as speech, not as part of the diagram. A scene's
 "cap_split": "sentence" keeps whole sentences together (up to "cap_max" words, default 12; a sentence of 5 words or fewer joins the one before) so a still frame such as
@@ -481,7 +488,13 @@ def e_couple(cv, e, t, T):
         cx = X + ((i - 0.5) * gap if show == "both" else 0)
         b = t - since[who]; bounce = math.sin(min(b / 0.35, 1) * math.pi) * 0.06 if 0 <= b < 0.35 else 0.0
         sc = (0.6 + 0.4 * back(u)) * (1 + bounce); hh = h * sc
-        im = sprite(who, cur[who], hh)
+        mood = cur[who]
+        if e.get("talk") == who and mood in ("happy", "neutral"):
+            a0, a1 = T.at(e, "talk_from"), T.at(e, "talk_until")
+            if (a0 is None or t >= a0) and (a1 is None or t < a1):
+                lv = mouth_level(t)
+                if lv: mood = f"{mood}_m{lv}"
+        im = sprite(who, mood, hh)
         if k < 1: im = im.copy(); im.putalpha(im.getchannel("A").point(lambda v: int(v * k)))
         x0, y0 = cx - im.width / S / 2, e["y"] + h / 2 - hh               # feet stay on the floor line
         cv.im.paste(im, (int(x0 * S), int(y0 * S)), im)
@@ -535,7 +548,96 @@ def e_research(cv, e, t, T):
             ra = math.radians(a); d0, d1 = r + 14, r + 14 + 26 * ease(c)
             cv.line([(cx + math.cos(ra) * d0, cy + math.sin(ra) * d0), (cx + math.cos(ra) * d1, cy + math.sin(ra) * d1)], ORANGE, 6, k * (1 - clamp((t - t0 - 1.6) / 0.4)))
 
-DRAW = {"research": e_research, "crowd": e_crowd, "couple": e_couple, "text": e_text, "chip": e_chip, "chart": e_chart, "card": e_card, "panel": e_panel, "bars": e_bars, "lock": e_lock,
+# ---------------- lip-sync ----------------
+MOUTH = {"env": None, "words": []}
+
+def set_mouth(audio, words):
+    """Per-frame mouth level (0 closed, 1 half, 2 open) from the take's loudness, closed outside spoken words."""
+    hop = SR // FPS; n = len(audio) // hop
+    rms = np.sqrt(np.array([np.mean(audio[i * hop:(i + 1) * hop] ** 2) for i in range(n)]) + 1e-12)
+    ref = np.percentile(rms[rms > rms.max() * 0.02], 90) if np.any(rms > rms.max() * 0.02) else 1.0
+    MOUTH["env"] = np.clip(rms / ref, 0, 1.5); MOUTH["words"] = words
+
+def mouth_level(t):
+    env, ws = MOUTH["env"], MOUTH["words"]
+    if env is None or not any(a - 0.02 <= t <= b + 0.02 for _, a, b in ws): return 0
+    i = int((t - LEAD) * FPS)
+    if i < 0 or i >= len(env): return 0
+    v = env[i]
+    return 0 if v < 0.16 else (1 if v < 0.55 else 2)
+
+# ---------------- tier list ----------------
+BOARD = {}
+TIER_COLS = {"S": ORANGE, "A": (238, 128, 62), "B": (244, 176, 92), "C": (236, 208, 128), "D": (214, 205, 190), "F": (176, 168, 160)}
+
+def board_rect(row):
+    b = BOARD; y = b["y0"] + row * (b["rh"] + b["gap"]) + (b["gap"] * 2 if row >= len(b["rows"]) else 0)
+    return [b["x0"], y, b["x1"], y + b["rh"]]
+
+def slot_rect(row, slot, span=1):
+    b = BOARD; x0, y0, x1, y1 = board_rect(row); n = b["bin_slots"] if row >= len(b["rows"]) else b["slots"]
+    lx = x0 + b["label_w"] + 14; sw = (x1 - 10 - lx - 10 * (n - 1)) / n
+    return [lx + slot * (sw + 10), y0 + 12, lx + slot * (sw + 10) + sw * span + 10 * (span - 1), y1 - 12]
+
+def e_tiers(cv, e, t, T):
+    k0 = T.k(e, t)
+    if k0 <= 0: return
+    for r in range(len(BOARD["rows"]) + (1 if BOARD.get("bin") else 0)):
+        k = k0 * (1.0 if e.get("instant") else ease((t - T.t_in(e) - r * 0.08) / 0.3))
+        if k <= 0: continue
+        x0, y0, x1, y1 = board_rect(r); isbin = r >= len(BOARD["rows"])
+        cv.shadow([x0, y0, x1, y1], 18, k, blur=14, dy=6, alpha=0.08)
+        cv.rect([x0, y0, x1, y1], 18, fill=(255, 241, 238) if isbin else WHITE, outline=RED if isbin else LINE, w=3 if isbin else 2, k=k)
+        lw = BOARD["label_w"]
+        if isbin:
+            cv.rect([x0, y0, x0 + lw, y1], 18, fill=RED, k=k)
+            for i, part in enumerate(BOARD["bin"].split()):
+                cv.text(x0 + lw / 2, (y0 + y1) / 2 + (i - (len(BOARD["bin"].split()) - 1) / 2) * 30, part, F("xb", 21), WHITE, k)
+        else:
+            tr = BOARD["rows"][r]; col = COLS.get(tr.get("col"), None) or TIER_COLS.get(tr["tier"], ORANGE)
+            cv.rect([x0, y0, x0 + lw, y1], 18, fill=col, k=k)
+            cv.text(x0 + lw / 2, (y0 + y1) / 2, tr["tier"], F("xb", 62), WHITE if tr["tier"] in "SAF" else INK, k)
+    if e.get("note"):
+        _, _, x1, y1 = board_rect(len(BOARD["rows"]) + (1 if BOARD.get("bin") else 0) - 1)
+        cv.text(x1, y1 + 30, e["note"], F("m", 24), GREY, k0, anchor="rm")
+
+def _fmt_val(e, v): return e.get("value_fmt", "${:,.0f} a year").format(v)
+
+def e_tieritem(cv, e, t, T):
+    ta, tl = T.t_in(e), T.at(e, "land")
+    if t < ta: return
+    fx, fy, fw, fh = e["focus"]; F0 = [fx, fy, fx + fw, fy + fh]; S1 = slot_rect(e["row"], e["slot"], e.get("span", 1))
+    isbin = e["row"] >= len(BOARD["rows"]); g = T.fade(e, t)
+    m = clamp((t - tl) / 0.5) if tl is not None else 0.0; m = ease(m)
+    if m < 1:                                                      # the big card (pops in, then flies to its slot)
+        pop = back(clamp((t - ta) / 0.4)) if not e.get("instant") else 1.0
+        cx = (F0[0] + F0[2]) / 2 + ((S1[0] + S1[2]) / 2 - (F0[0] + F0[2]) / 2) * m
+        cy = (F0[1] + F0[3]) / 2 + ((S1[1] + S1[3]) / 2 - (F0[1] + F0[3]) / 2) * m
+        w = (fw + ((S1[2] - S1[0]) - fw) * m) * (0.7 + 0.3 * pop); h = (fh + ((S1[3] - S1[1]) - fh) * m) * (0.7 + 0.3 * pop)
+        b = [cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2]; kc = clamp((t - ta) / 0.2) * g
+        cv.shadow(b, 24, kc, blur=20, dy=10, alpha=0.16)
+        cv.rect(b, 24, fill=WHITE, outline=RED if isbin else ORANGE, w=4, k=kc)
+        kt = kc * (1 - clamp(m * 2.5))                             # card text fades as it starts to fly
+        if kt > 0:
+            x = b[0] + 40; y = b[1]
+            cv.text(x, y + 62, e["name"], F("xb", e.get("name_s", 44)), INK, kt, anchor="lm")
+            if e.get("sub"): cv.text(x, y + 112, e["sub"], F("b", 28), GREY, kt, anchor="lm")
+            cv.text(x, y + 192, e["rate"], F("xb", e.get("rate_s", 88)), RED if isbin else ORANGE, kt, anchor="lm")
+            if e.get("value") is not None or e.get("value_text"):
+                v = (e.get("value") or 0) * ease(clamp((t - ta - 0.25) / 0.7))
+                lab = e.get("value_label", "On $10K for a year:") + " "; fl, fv = F("b", 32), F("xb", 38)
+                cv.text(x, y + 266, lab, fl, GREY, kt, anchor="lm")
+                cv.text(x + cv.tl(lab, fl), y + 266, e.get("value_text") or _fmt_val(e, v), fv, INK, kt, anchor="lm")
+        kchip = clamp((m - 0.6) / 0.4) * kc
+    else:
+        kchip = g
+    if kchip > 0:                                                  # the chip in its row
+        b = S1; cv.rect(b, 14, fill=(255, 228, 224) if isbin else (253, 236, 226), k=kchip)
+        cv.text(b[0] + 18, (b[1] + b[3]) / 2, e["chip"], F("xb", e.get("chip_s", 28)), INK, kchip, anchor="lm")
+        if e.get("chip_rate"): cv.text(b[2] - 16, (b[1] + b[3]) / 2, e["chip_rate"], F("xb", 28), RED if isbin else ORANGE, kchip, anchor="rm")
+        if isbin: cv.line([(b[0] + 12, (b[1] + b[3]) / 2), (b[0] + 18 + cv.tl(e["chip"], F("xb", e.get("chip_s", 28))) + 6, (b[1] + b[3]) / 2)], RED, 4, kchip)
+
+DRAW = {"tiers": e_tiers, "tieritem": e_tieritem, "research": e_research, "crowd": e_crowd, "couple": e_couple, "text": e_text, "chip": e_chip, "chart": e_chart, "card": e_card, "panel": e_panel, "bars": e_bars, "lock": e_lock,
         "target": e_target, "qring": e_qring, "accounts": e_accounts, "avatar": e_avatar, "curve": e_curve,
         "ticket": e_ticket, "tag": e_tag, "clock": e_clock, "line": e_line, "dot": e_dot, "statement": e_statement}
 
@@ -669,6 +771,12 @@ def main():
     caps = []
     for sc in scenes: caps += captions(sc, sc["_words"])
     for sc in scenes: sc["_T"] = Timing(sc, sc["_words"])
+    set_mouth(audio, words)
+    for sc in scenes:
+        for e in sc.get("elements", []):
+            if e["type"] == "tiers" and not BOARD:
+                BOARD.update(x0=e.get("x0", 80), x1=e.get("x1", 1000), y0=e.get("y0", 370), rh=e.get("rh", 104), gap=e.get("gap", 12),
+                             rows=e["rows"], bin=e.get("bin"), slots=e.get("slots", 2), bin_slots=e.get("bin_slots", 3), label_w=e.get("label_w", 110))
 
     def owners(j):
         """Scenes whose diagrams are on screen during scene j (a keep_prev chain)."""

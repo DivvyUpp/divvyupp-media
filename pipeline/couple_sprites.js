@@ -6,16 +6,19 @@ const { chromium } = require('playwright');
 const INK = '#15100f', OR = '#e04a1a', TINT = '#fce2d4', CREAM = '#f9f5ef';
 const P = (d, o = {}) => `<path d="${d}" fill="${o.f || 'none'}" stroke="${o.s || INK}" stroke-width="${o.w || 5}" stroke-linecap="round" stroke-linejoin="round"/>`;
 const C = (x, y, r, o = {}) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${o.f || 'none'}" stroke="${o.s || 'none'}" stroke-width="${o.w || 0}"/>`;
-function face(x, y, mood, w) {
+function face(x, y, mood, w, talk = 0) {
+  // talk 1|2: the same face with a half / fully open mouth, for lip-sync (happy and neutral only)
+  const M = (d) => talk ? '' : d;
+  const open = () => talk ? C(x, y + 28, 0, {}) + `<ellipse cx="${x}" cy="${y + 28}" rx="${talk === 1 ? 11 : 13}" ry="${talk === 1 ? 6 : 11}" fill="${INK}"/>` + (talk === 2 ? `<ellipse cx="${x}" cy="${y + 33}" rx="7" ry="4" fill="#e8806a"/>` : '') : '';
   let s = ''; const ex = 22, dot = (sx, dx = 0, dy = 0) => C(x + sx * ex + dx, y + dy, 5.5, { f: INK });
   const cheeks = () => C(x - ex - 6, y + 16, 7, { f: TINT }) + C(x + ex + 6, y + 16, 7, { f: TINT });
   if (mood === 'happy') {
     for (const sx of [-1, 1]) s += P(`M${x + sx * ex - 9},${y + 3} Q${x + sx * ex},${y - 9} ${x + sx * ex + 9},${y + 3}`, { w });
     s += P(`M${x - ex - 8},${y - 20} Q${x - ex},${y - 26} ${x - ex + 8},${y - 22}`, { w: w * .8 }) + P(`M${x + ex - 8},${y - 22} Q${x + ex},${y - 26} ${x + ex + 8},${y - 20}`, { w: w * .8 });
-    s += P(`M${x - 16},${y + 22} Q${x},${y + 40} ${x + 16},${y + 22} Z`, { w, f: INK }) + cheeks();
+    s += M(P(`M${x - 16},${y + 22} Q${x},${y + 40} ${x + 16},${y + 22} Z`, { w, f: INK })) + open() + cheeks();
   } else if (mood === 'neutral') {
     s += dot(-1) + dot(1);
-    s += P(`M${x - 12},${y + 26} Q${x},${y + 32} ${x + 12},${y + 26}`, { w });
+    s += M(P(`M${x - 12},${y + 26} Q${x},${y + 32} ${x + 12},${y + 26}`, { w })) + open();
   } else if (mood === 'worried') {
     for (const sx of [-1, 1]) s += dot(sx) + P(`M${x + sx * (ex + 10)},${y - 16} L${x + sx * (ex - 8)},${y - 24}`, { w: w * .8 });
     s += P(`M${x - 14},${y + 32} Q${x - 7},${y + 24} ${x},${y + 30} Q${x + 7},${y + 36} ${x + 14},${y + 28}`, { w });
@@ -34,7 +37,7 @@ function face(x, y, mood, w) {
   }
   return s;
 }
-function fig(who, mood) {
+function fig(who, mood, talk = 0) {
   let s = '', w = 8;
   s += P(`M88,150 L88,176 M112,150 L112,176`, { w });                                       // neck
   s += P(`M38,262 L44,190 Q100,168 156,190 L162,262`, { w, s: who === 'her' ? OR : INK, f: CREAM });
@@ -42,7 +45,7 @@ function fig(who, mood) {
   s += C(100, 104, 52, { f: CREAM, s: INK, w });
   if (who === 'him') s += P(`M48,100 Q52,48 100,48 Q150,48 152,100 L128,76 L100,88 L72,76Z`, { w: w * .7, f: INK });
   else s += P(`M50,96 Q70,56 120,60 Q140,64 150,92 Q100,92 50,96Z`, { w: w * .7, f: INK });
-  return s + face(100, 112, mood, 6);
+  return s + face(100, 112, mood, 6, talk);
 }
 (async () => {
   const out = path.join(__dirname, 'assets', 'characters', 'couple_c'); fs.mkdirSync(out, { recursive: true });
@@ -50,6 +53,10 @@ function fig(who, mood) {
   for (const who of ['him', 'her']) for (const mood of ['happy', 'neutral', 'worried', 'sad', 'confused', 'frustrated']) {
     await p.setContent(`<html><body style="margin:0;background:transparent"><svg width="200" height="270" viewBox="0 -4 200 274">${fig(who, mood)}</svg></body></html>`);
     await p.screenshot({ path: path.join(out, `${who}_${mood}.png`), omitBackground: true });
+  }
+  for (const who of ['him', 'her']) for (const mood of ['happy', 'neutral']) for (const talk of [1, 2]) {   // lip-sync mouths
+    await p.setContent(`<html><body style="margin:0;background:transparent"><svg width="200" height="270" viewBox="0 -4 200 274">${fig(who, mood, talk)}</svg></body></html>`);
+    await p.screenshot({ path: path.join(out, `${who}_${mood}_m${talk}.png`), omitBackground: true });
   }
   await b.close();
 })();
