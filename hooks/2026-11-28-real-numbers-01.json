@@ -146,7 +146,7 @@
      "instant": true,
      "shots": [
       {
-       "src": "/root/.claude/uploads/d173b594-6591-530d-9967-88f5ca00ec14/56178a69-image.png",
+       "src": "private/real-numbers/2026-09-flexible.png",
        "blur": [
         [
          272,
@@ -168,7 +168,7 @@
        ]
       },
       {
-       "src": "/root/.claude/uploads/d173b594-6591-530d-9967-88f5ca00ec14/51d18208-image.png",
+       "src": "private/real-numbers/2026-10-flexible.png",
        "blur": [
         [
          272,
@@ -197,7 +197,7 @@
        ]
       },
       {
-       "src": "/root/.claude/uploads/d173b594-6591-530d-9967-88f5ca00ec14/bb45d9c4-image.png",
+       "src": "private/real-numbers/2026-11-flexible.png",
        "blur": [
         [
          272,
@@ -372,7 +372,7 @@
      "instant": true,
      "shots": [
       {
-       "src": "/tmp/claude-0/-home-user-divvyupp/d173b594-6591-530d-9967-88f5ca00ec14/scratchpad/nov_categories.png",
+       "src": "private/real-numbers/2026-11-flexible-categories.png",
        "spot": [
         {
          "box": [
@@ -529,5 +529,6 @@
     }
    ]
   }
- ]
+ ],
+ "note": "Real Numbers ep 01. Render: python3 pipeline/make_realnumbers_reel.py hooks/2026-11-28-real-numbers-01.json. Screenshots live in private/real-numbers/ (git-ignored; Srini keeps the originals)."
 }

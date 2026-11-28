@@ -337,6 +337,21 @@ https://divvyupp.github.io/divvyupp-media/dashboard/ (pick a date). The page onl
   or failed**, then push it on its own. If the push itself fails, say so to Srini: the dashboard will show the run as
   "no record".
 
+## Real Numbers series (founder's own money; Srini, 2026-11-28)
+A recurring series where Srini shows his OWN DivvyUpp screenshots: what he planned, what he spent, what he's changing,
+and the real result later. Ep 01 (posted 2026-11-27, `hooks/2026-11-28-real-numbers-01.json`): "I built a budgeting app.
+Still blew my budget, 3 months in a row." The founder voice speaks as "I" with an "EPISODE 0N" chip; Eric's voice
+until Srini records his own. Render with `python3 pipeline/make_realnumbers_reel.py hooks/<id>.json` (diagram look,
+karaoke captions, the "him" character, plus `phone` / `stat` / `mchip` / `plan` elements and the upbeat bed in
+`pipeline/music_upbeat.py`; options in the script's docstring). Aim for about 30 s.
+- **Raw screenshots never enter the repo.** Keep them in `private/real-numbers/` (git-ignored) and blur income,
+  fixed-expense amounts and bank balances with `blur` boxes. Category amounts and monthly totals may show (Srini's
+  call). Only the rendered video is committed, and only after Srini approves it, because this repo is public.
+- Every figure comes from a screenshot. A month that isn't over is labelled "so far" on screen and "month to date" in
+  the caption. Say only what the numbers prove (ep 01: "+$3,000 saved / -$2,884 overspent", not "wiped out").
+- Big numbers carry the story; screenshots are the proof beside them. End on the follow prompt for the next episode,
+  with divvyupp.com small underneath. This series is the exception to "no follow for more".
+
 ## How-it-works explainer (landing page)
 `python3 pipeline/make_explainer.py hooks/how-it-works-raccoon.json` renders the 1080p landscape explainer: Dollar Bill
 on the left, app screens redrawn in the current brand (`pipeline/screens.py`, never the old blue screens) in a phone on
