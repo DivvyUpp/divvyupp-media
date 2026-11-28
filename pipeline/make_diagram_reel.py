@@ -848,6 +848,14 @@ class Timing:
         if e.get("instant"): return self.fade(e, t)
         return ease((t - self.t_in(e)) / 0.35) * self.fade(e, t) if t >= self.t_in(e) else 0.0
 
+def voice_onset(audio, win=0.01, rel=0.08):
+    """Seconds where speech starts: the first 10 ms window louder than 8% of the loudest window in the first 2 s."""
+    n = int(win * SR); head = audio[:int(2 * SR)]
+    if len(head) < n: return 0.0
+    rms = np.sqrt(np.mean(head[:len(head) // n * n].reshape(-1, n) ** 2, axis=1))
+    if rms.max() <= 0: return 0.0
+    return float(np.argmax(rms > rel * rms.max()) * win)
+
 def take(spec, tmp):
     """One voice-over take for the whole script -> audio, [(word, start, end)], words per scene.
     Pauses are capped at max_gap, then each scene is time-stretched by its own speed (pitch kept)."""
@@ -858,8 +866,10 @@ def take(spec, tmp):
     counts = [len([w for w in strip_tags(sc["text"]).split() if w.strip()]) for sc in spec["scenes"]]
     if sum(counts) != len(words): sys.exit(f"word count mismatch: script {sum(counts)} vs take {len(words)}")
     gap, cuts = spec.get("max_gap"), []
-    lead_in = words[0][1]                                  # trim silence (or a breath) before the first word
-    if lead_in > 0.05: cuts.append((0.0, lead_in - 0.03))
+    # Trim silence before the first word, but never past where the sound actually starts: ElevenLabs' timestamp for
+    # the first word can land ~0.2 s late, and trusting it cut "Couples" to "ples" (2026-11-28).
+    lead_in = min(words[0][1], voice_onset(audio))
+    if lead_in > 0.05: cuts.append((0.0, lead_in - 0.04))
     if gap:
         for (_, _, e0), (_, s1, _) in zip(words, words[1:]):
             if s1 - e0 > gap: cuts.append((e0 + gap / 2, s1 - gap / 2))

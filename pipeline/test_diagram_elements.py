@@ -29,3 +29,14 @@ def test_diverge_stays_level_for_first_part():
 
 def test_new_elements_registered():
     assert m.DRAW["diverge"] is m.e_diverge and m.DRAW["bubble"] is m.e_bubble
+
+
+def test_voice_onset_finds_sound_before_late_timestamp():
+    import numpy as np
+    sr = m.SR; a = np.zeros(int(1.0 * sr)); a[int(0.10 * sr):int(0.6 * sr)] = 0.3  # speech starts at 0.10 s
+    assert abs(m.voice_onset(a) - 0.10) < 0.011
+
+
+def test_voice_onset_silent_audio_is_zero():
+    import numpy as np
+    assert m.voice_onset(np.zeros(m.SR)) == 0.0
