@@ -80,7 +80,8 @@ SERIF = {"serif": "/System/Library/Fonts/Supplemental/Georgia Italic.ttf",
 _sf, _shadow = {}, {}
 
 def F(w, s):
-    """Font at supersampled size. w: m|b|xb (Plus Jakarta Sans) or serif|serif_b (Georgia italic)."""
+    """Font at supersampled size. w: m|b|xb (Plus Jakarta Sans), d (Anton display: hooks and big numbers, in
+    CAPITALS) or serif|serif_b (Georgia italic)."""
     if w in SERIF:
         k = (w, int(s))
         if k not in _sf:

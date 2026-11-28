@@ -37,13 +37,13 @@ def headline(cv, t, line1, hl1, line2, hl2, col1, col2):
     for i, (pre, hl, col, ts, y) in enumerate(((line1, hl1, col1, 0.0, 300), (line2, hl2, col2, 1.0, 435))):
         k = clamp((t - ts) / 0.2) if i else 1.0
         if k <= 0: continue
-        f = F("xb", 74); gap = 34
+        f = F("d", 96); gap = 30; pre, hl = pre.upper(), hl.upper()           # Anton display font, capitals
         if col is None:
             cv.text(540, y, f"{pre} {hl}", f, INK, k); continue
         wp, wh = cv.tl(pre, f), cv.tl(hl, f); x0 = 540 - (wp + gap + wh) / 2; hx = x0 + wp + gap + wh / 2
         cv.text(x0, y, pre, f, INK, k, anchor="lm")
         u = clamp((t - ts - 0.15) / 0.35); sc = back(u) if u > 0 else 0
-        if sc > 0: cv.rect([hx - (wh / 2 + 16) * sc, y - 50, hx + (wh / 2 + 16) * sc, y + 50], 26, fill=col, k=k)
+        if sc > 0: cv.rect([hx - (wh / 2 + 16) * sc, y - 60, hx + (wh / 2 + 16) * sc, y + 60], 22, fill=col, k=k)
         cv.text(hx, y, hl, f, WHITE if u > 0.3 else INK, k)
 
 
@@ -68,7 +68,7 @@ def jar(cv, x, y0, y1, w, level, col, label, k=1.0, label_col=INK, spout=False):
 
 
 def amount(cv, x, y, v, k=1.0):
-    txt = f"${v:,.0f}"; f = F("xb", 84); w = cv.tl(txt, f) + 70
+    txt = f"${v:,.0f}"; f = F("d", 104); w = cv.tl(txt, f) + 80
     cv.rect([x - w / 2, y - 62, x + w / 2, y + 62], 62, fill=INK, k=0.92 * k); cv.text(x, y, txt, f, WHITE, k)
 
 
@@ -126,7 +126,7 @@ def part_a(cv, t):
     if t < 1.1:                                                                 # the paycheck block drops in
         yb = JY0 + 90 + (JY1 - 160 - JY0 - 90) * ease(clamp((t - 0.15) / 0.7)); kb = 1 - clamp((t - 0.9) / 0.2)
         cv.rect([JX - 225, yb - 66, JX + 225, yb + 66], 30, fill=GREEN, k=kb)
-        cv.text(JX, yb - 18, f"Paycheck +${PAY:,}", F("xb", 44), WHITE, kb)
+        cv.text(JX, yb - 18, f"PAYCHECK +${PAY:,}", F("d", 56), WHITE, kb)
         cv.text(JX, yb + 26, "(left after bills)", F("b", 28), WHITE, kb)
     if t >= 0.9: amount(cv, JX, (JY0 + JY1) / 2, PAY * (1 - spent))
     if 1.5 <= t < 6.5: stream(cv, JX, t, 0.25 + 0.75 * u)
@@ -138,7 +138,7 @@ def part_a(cv, t):
                 sd = -1 if i % 2 else 1
                 chip(cv, JX + sd * 255, JY1 + 70 + 70 * a, f"{name}  -${amt}", clamp(a / 0.15) * (1 - clamp((a - 0.75) / 0.25)))
     if t >= 6.4:
-        e = ease(clamp((t - 6.4) / 0.35)); cv.text(JX, JY1 + 330, "Empty, 3 days before payday.", F("xb", 54), ORANGE, e)
+        e = ease(clamp((t - 6.4) / 0.35)); cv.text(JX, JY1 + 330, "EMPTY, 3 DAYS BEFORE PAYDAY.", F("d", 70), ORANGE, e)
 
 
 def part_b(cv, t):
@@ -158,7 +158,7 @@ def part_b(cv, t):
     jar(cv, mx, JY0, JY1, JW - 80, level, ORANGE, "Checking", spout=True)
     sk = clamp((tb - 0.6) / 0.3)
     jar(cv, SX, SY0, JY1, SW, 0.9 * land, GREEN, "Savings", k=sk, label_col=GREEN)
-    if land > 0: cv.text(SX, (SY0 + JY1) / 2 + 30, f"${SAVE * land:,.0f}", F("xb", 54), WHITE, sk * land)
+    if land > 0: cv.text(SX, (SY0 + JY1) / 2 + 30, f"${SAVE * land:,.0f}", F("d", 66), WHITE, sk * land)
     if 1.0 <= tb < 2.1:                                                          # the $500 block leaves checking
         p0 = (mx, JY0 + 60); p1 = (SX, SY0 + 60); fe = ease(fly)
         bx = p0[0] + (p1[0] - p0[0]) * fe; by = p0[1] + (p1[1] - p0[1]) * fe - 190 * math.sin(math.pi * fe)
@@ -167,14 +167,14 @@ def part_b(cv, t):
         cv.text(bx, by, f"-${SAVE} to savings", F("xb", 38), WHITE, kb)
     amount(cv, mx, (JY0 + JY1) / 2 + 40, checking)
     if tb >= 2.3:
-        dk = ease(clamp((tb - 2.3) / 0.35)); txt = f"${PER_DAY:,.0f} a day is safe"; f = F("xb", 42); w = cv.tl(txt, f) + 60
+        dk = ease(clamp((tb - 2.3) / 0.35)); txt = f"${PER_DAY:,.0f} A DAY IS SAFE"; f = F("d", 52); w = cv.tl(txt, f) + 60
         cv.rect([mx - w / 2, JY0 + 30, mx + w / 2, JY0 + 118], 44, fill=INK, k=dk); cv.text(mx, JY0 + 74, txt, f, WHITE, dk)
     if 2.6 <= tb < 6.8:                                                         # a calm, even trickle: one step a day
         a = (u * DAYS) % 1.0
         drip(cv, mx, a)
         chip(cv, mx - 255, JY1 + 80 + 40 * a, f"-${PER_DAY:,.0f}", clamp(a / 0.12) * (1 - clamp((a - 0.65) / 0.2)))
     if tb >= 6.8:
-        e = ease(clamp((tb - 6.8) / 0.35)); cv.text(540, JY1 + 330, "Lasts to payday. Savings kept.", F("xb", 54), GREEN, e)
+        e = ease(clamp((tb - 6.8) / 0.35)); cv.text(540, JY1 + 330, "LASTS TO PAYDAY. SAVINGS KEPT.", F("d", 70), GREEN, e)
 
 
 def frame(t):

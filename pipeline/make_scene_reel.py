@@ -29,13 +29,17 @@ CACHE = os.path.join(HERE, ".cache")
 W, H, FPS, SR = 1080, 1920, 30, 24000
 CAP_Y, CARD_Y = 1500, 1130          # captions and cards sit low, clear of faces and inside the safe zone (bottom 260 px)
 FD = os.path.join(CACHE, "fonts/package/files/plus-jakarta-sans-latin-%s-normal.woff")
+# Display font (Srini, 2026-11-28): Anton, condensed, for hooks and big numbers only; write that text in CAPITALS.
+FD_DISPLAY = os.path.join(CACHE, "fonts/anton/package/files/anton-latin-400-normal.woff")
 INK = (21, 16, 15); GREY = (95, 102, 114); ORANGE = (224, 74, 26); WHITE = (255, 255, 255)
 GREEN = (30, 140, 80); RED = (200, 40, 30); CREAM = (250, 245, 238)
 COLS = {"ink": INK, "orange": ORANGE, "green": GREEN, "red": RED, "grey": GREY, "white": WHITE}
 _fc = {}
 def font(w, s):
     k = (w, int(s))
-    if k not in _fc: _fc[k] = ImageFont.truetype(FD % {"m": 500, "b": 700, "xb": 800}[w], int(s))
+    if k not in _fc:
+        path = FD_DISPLAY if w == "d" else FD % {"m": 500, "b": 700, "xb": 800}[w]
+        _fc[k] = ImageFont.truetype(path, int(s))
     return _fc[k]
 def ease(x): x = max(0.0, min(1.0, x)); return 1 - (1 - x) ** 3
 def strip_tags(s): return re.sub(r"\[[^\]]*\]\s*", "", s).strip()

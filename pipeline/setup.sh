@@ -9,6 +9,9 @@ REL=https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1
 [ -s "$CACHE/voices.bin" ]  || curl -sSL -o "$CACHE/voices.bin"  "$REL/voices-v1.0.bin"
 # Same model with its per-phoneme durations exposed as an output, for lip-sync in story Reels
 [ -s "$CACHE/kokoro-timed.onnx" ] || python3 "$HERE/expose_durations.py" "$CACHE/kokoro.onnx" "$CACHE/kokoro-timed.onnx"
+if [ ! -d "$CACHE/fonts/anton/package" ]; then          # display font for hooks and big numbers (2026-11-28)
+  mkdir -p "$CACHE/fonts/anton" && (cd "$CACHE/fonts/anton" && npm pack -q @fontsource/anton >/dev/null && tar xzf ./*.tgz)
+fi
 if [ ! -d "$CACHE/fonts/package" ]; then
   mkdir -p "$CACHE/fonts" && (cd "$CACHE/fonts" && npm pack -q @fontsource/plus-jakarta-sans >/dev/null && tar xzf ./*.tgz)
 fi

@@ -27,6 +27,9 @@ Videos are served publicly by GitHub Pages at `https://divvyupp.github.io/divvyu
   `GET /api/posts/<id>` before anything else, so nothing posts twice). Trial Reels follow the same
   approval rule as any post: only entries Srini approved.
 - Brand: warm off-white background, orange #E04A1A, near-black #15100F, Plus Jakarta Sans.
+  **Display font (Srini, 2026-11-28): Anton**, in CAPITALS, for the hook line, key headline words and big numbers only
+  (`"w": "d"` in specs; `F("d", size)` in code; free OFL font, installed by `pipeline/setup.sh`). Everything else
+  (captions, labels, chips, citations) stays Plus Jakarta Sans. No green: orange = spending/problem, near-black = kept/safe.
 - Voice (agreed with Srini 2026-11-16): ElevenLabs, model `eleven_v3`, **Jessica** (`cgSgspJ2msm6clMCkdW9`) for presenter C,
   spec value `"character_voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3"`. Direct the delivery with v3 audio tags
   ([playful], [sighs], [reassuring], [happy]...). Kokoro `af_heart` sounded flat and is retired for Reels.
