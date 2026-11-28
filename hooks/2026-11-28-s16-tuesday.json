@@ -1,0 +1,683 @@
+{
+ "id": "2026-11-28-s16-tuesday",
+ "format": "diagram",
+ "voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "speed": 1.15,
+ "max_gap": 0.3,
+ "cap_style": "karaoke",
+ "cover_at": [
+  0,
+  "Tuesday"
+ ],
+ "note": "V2 Study Reel from study bank S16 (Dai, Milkman & Riis, Management Science 2014). Hook = persona pick B6. Time-bound: only true until Mon Nov 30.",
+ "scenes": [
+  {
+   "title": "be *honest*",
+   "text": "[knowing] Keep saying you'll start saving next month? Next month is Tuesday.",
+   "elements": [
+    {
+     "type": "text",
+     "text": "KEEP SAYING YOU'LL",
+     "x": 540,
+     "y": 370,
+     "s": 88,
+     "w": "d",
+     "col": "ink",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "START SAVING",
+     "x": 540,
+     "y": 465,
+     "s": 88,
+     "w": "d",
+     "col": "ink",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "NEXT MONTH?",
+     "x": 540,
+     "y": 560,
+     "s": 88,
+     "w": "d",
+     "col": "orange",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "couple",
+     "show": "him",
+     "x": 240,
+     "y": 700,
+     "h": 300,
+     "at": 0,
+     "moods": [
+      {
+       "at": 0,
+       "him": "neutral"
+      },
+      {
+       "at": "Tuesday",
+       "him": "worried"
+      }
+     ],
+     "instant": true
+    },
+    {
+     "type": "bubble",
+     "x": 690,
+     "y": 720,
+     "w": 460,
+     "s": 40,
+     "text": "I'll start\nnext month.",
+     "tail": "l",
+     "style": "white",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "panel",
+     "x": 170,
+     "y": 930,
+     "w": 720,
+     "h": 420,
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "DECEMBER",
+     "x": 540,
+     "y": 990,
+     "s": 34,
+     "w": "xb",
+     "col": "grey",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Mon",
+     "x": 214,
+     "y": 1060,
+     "s": 28,
+     "w": "b",
+     "col": "grey",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Tue",
+     "x": 322,
+     "y": 1060,
+     "s": 28,
+     "w": "b",
+     "col": "grey",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Wed",
+     "x": 430,
+     "y": 1060,
+     "s": 28,
+     "w": "b",
+     "col": "grey",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Thu",
+     "x": 538,
+     "y": 1060,
+     "s": 28,
+     "w": "b",
+     "col": "grey",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Fri",
+     "x": 646,
+     "y": 1060,
+     "s": 28,
+     "w": "b",
+     "col": "grey",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Sat",
+     "x": 754,
+     "y": 1060,
+     "s": 28,
+     "w": "b",
+     "col": "grey",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Sun",
+     "x": 862,
+     "y": 1060,
+     "s": 28,
+     "w": "b",
+     "col": "grey",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "dot",
+     "x": 322,
+     "y": 1150,
+     "r": 42,
+     "col": "orange",
+     "at": "Tuesday",
+     "pulse": true
+    },
+    {
+     "type": "text",
+     "text": "2",
+     "x": 430,
+     "y": 1150,
+     "s": 40,
+     "w": "xb",
+     "col": "ink",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "3",
+     "x": 538,
+     "y": 1150,
+     "s": 40,
+     "w": "xb",
+     "col": "ink",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "4",
+     "x": 646,
+     "y": 1150,
+     "s": 40,
+     "w": "xb",
+     "col": "ink",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "5",
+     "x": 754,
+     "y": 1150,
+     "s": 40,
+     "w": "xb",
+     "col": "ink",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "6",
+     "x": 862,
+     "y": 1150,
+     "s": 40,
+     "w": "xb",
+     "col": "ink",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "1",
+     "x": 322,
+     "y": 1150,
+     "s": 40,
+     "w": "xb",
+     "col": "ink",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "7",
+     "x": 214,
+     "y": 1250,
+     "s": 40,
+     "w": "b",
+     "col": "ink",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "8",
+     "x": 322,
+     "y": 1250,
+     "s": 40,
+     "w": "b",
+     "col": "ink",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "9",
+     "x": 430,
+     "y": 1250,
+     "s": 40,
+     "w": "b",
+     "col": "ink",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "10",
+     "x": 538,
+     "y": 1250,
+     "s": 40,
+     "w": "b",
+     "col": "ink",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "11",
+     "x": 646,
+     "y": 1250,
+     "s": 40,
+     "w": "b",
+     "col": "ink",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "12",
+     "x": 754,
+     "y": 1250,
+     "s": 40,
+     "w": "b",
+     "col": "ink",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "13",
+     "x": 862,
+     "y": 1250,
+     "s": 40,
+     "w": "b",
+     "col": "ink",
+     "at": 0,
+     "instant": true
+    }
+   ]
+  },
+  {
+   "title": "the *study*",
+   "text": "And that's when people actually start. Gym visits, diet searches and goal sign-ups all jump after a new month, a Monday or a birthday.",
+   "elements": [
+    {
+     "type": "text",
+     "text": "THAT'S WHEN PEOPLE START",
+     "x": 540,
+     "y": 400,
+     "s": 72,
+     "w": "d",
+     "col": "ink",
+     "at": 0
+    },
+    {
+     "type": "text",
+     "text": "gym visits",
+     "x": 190,
+     "y": 620,
+     "s": 46,
+     "w": "xb",
+     "col": "ink",
+     "at": "Gym visits",
+     "align": "l"
+    },
+    {
+     "type": "line",
+     "pts": [
+      [
+       530,
+       648
+      ],
+      [
+       690,
+       648
+      ],
+      [
+       720,
+       592
+      ],
+      [
+       870,
+       592
+      ]
+     ],
+     "col": "orange",
+     "width": 10,
+     "dur": 0.6,
+     "at": "jump"
+    },
+    {
+     "type": "text",
+     "text": "diet searches",
+     "x": 190,
+     "y": 800,
+     "s": 46,
+     "w": "xb",
+     "col": "ink",
+     "at": "diet searches",
+     "align": "l"
+    },
+    {
+     "type": "line",
+     "pts": [
+      [
+       530,
+       828
+      ],
+      [
+       690,
+       828
+      ],
+      [
+       720,
+       772
+      ],
+      [
+       870,
+       772
+      ]
+     ],
+     "col": "orange",
+     "width": 10,
+     "dur": 0.6,
+     "at": "jump"
+    },
+    {
+     "type": "text",
+     "text": "goal sign-ups",
+     "x": 190,
+     "y": 980,
+     "s": 46,
+     "w": "xb",
+     "col": "ink",
+     "at": "goal sign-ups",
+     "align": "l"
+    },
+    {
+     "type": "line",
+     "pts": [
+      [
+       530,
+       1008
+      ],
+      [
+       690,
+       1008
+      ],
+      [
+       720,
+       952
+      ],
+      [
+       870,
+       952
+      ]
+     ],
+     "col": "orange",
+     "width": 10,
+     "dur": 0.6,
+     "at": "jump"
+    },
+    {
+     "type": "chip",
+     "text": "new month",
+     "x": 230,
+     "y": 1150,
+     "s": 38,
+     "style": "orange",
+     "at": "new month"
+    },
+    {
+     "type": "chip",
+     "text": "Monday",
+     "x": 540,
+     "y": 1150,
+     "s": 38,
+     "style": "orange",
+     "at": "Monday"
+    },
+    {
+     "type": "chip",
+     "text": "birthday",
+     "x": 840,
+     "y": 1150,
+     "s": 38,
+     "style": "orange",
+     "at": "birthday"
+    },
+    {
+     "type": "chip",
+     "text": "observational \u00b7 not an experiment",
+     "x": 540,
+     "y": 1290,
+     "s": 32,
+     "style": "soft",
+     "at": "birthday"
+    }
+   ],
+   "gap_before": 0.5
+  },
+  {
+   "title": "the *why*",
+   "text": "Researchers call it the fresh start effect. A new date makes last month's slip-ups feel like the old you.",
+   "elements": [
+    {
+     "type": "text",
+     "text": "FRESH START",
+     "x": 540,
+     "y": 450,
+     "s": 110,
+     "w": "d",
+     "col": "orange",
+     "at": "fresh start",
+     "pop": true
+    },
+    {
+     "type": "couple",
+     "show": "him",
+     "x": 300,
+     "y": 800,
+     "h": 340,
+     "at": "slip-ups",
+     "moods": [
+      {
+       "at": 0,
+       "him": "sad"
+      }
+     ],
+     "label": "November",
+     "label_col": "grey"
+    },
+    {
+     "type": "couple",
+     "show": "him",
+     "x": 780,
+     "y": 800,
+     "h": 340,
+     "at": "new date",
+     "moods": [
+      {
+       "at": 0,
+       "him": "happy"
+      }
+     ],
+     "label": "December",
+     "label_col": "orange"
+    },
+    {
+     "type": "bubble",
+     "x": 540,
+     "y": 1250,
+     "w": 460,
+     "s": 40,
+     "text": "That was old me.",
+     "tail": "none",
+     "style": "orange",
+     "at": "old you"
+    }
+   ]
+  },
+  {
+   "title": "do *this*",
+   "text": "So on Tuesday, the first, write down how much you'll save each month, and set up an automatic transfer that day.",
+   "elements": [
+    {
+     "type": "panel",
+     "x": 170,
+     "y": 420,
+     "w": 740,
+     "h": 480,
+     "at": 0
+    },
+    {
+     "type": "text",
+     "text": "TUE, DEC 1",
+     "x": 540,
+     "y": 510,
+     "s": 80,
+     "w": "d",
+     "col": "orange",
+     "at": "Tuesday"
+    },
+    {
+     "type": "text",
+     "text": "I'll save $______",
+     "x": 540,
+     "y": 660,
+     "s": 52,
+     "w": "xb",
+     "col": "ink",
+     "at": "write down"
+    },
+    {
+     "type": "text",
+     "text": "every month",
+     "x": 540,
+     "y": 740,
+     "s": 40,
+     "w": "b",
+     "col": "grey",
+     "at": "each month"
+    },
+    {
+     "type": "chip",
+     "text": "automatic transfer",
+     "x": 540,
+     "y": 840,
+     "s": 38,
+     "style": "ink",
+     "at": "automatic"
+    },
+    {
+     "type": "couple",
+     "show": "him",
+     "x": 540,
+     "y": 1080,
+     "h": 320,
+     "at": 0,
+     "moods": [
+      {
+       "at": 0,
+       "him": "happy"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "send *it*",
+   "text": "[warm] Send this to the friend who keeps saying, I'll start next month.",
+   "elements": [
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 600,
+     "h": 360,
+     "gap": 460,
+     "at": 0,
+     "instant": true,
+     "labels": [
+      "you",
+      "your friend"
+     ],
+     "moods": [
+      {
+       "at": 0,
+       "him": "happy",
+       "her": "neutral"
+      },
+      {
+       "at": "next month",
+       "him": "happy",
+       "her": "happy"
+      }
+     ]
+    },
+    {
+     "type": "ticket",
+     "x": 540,
+     "y": 1080,
+     "w": 640,
+     "h": 190,
+     "title": "Next month",
+     "sub": "starts Tuesday",
+     "at": "keeps saying"
+    },
+    {
+     "type": "text",
+     "text": "Dai, Milkman & Riis",
+     "x": 540,
+     "y": 1280,
+     "s": 30,
+     "w": "b",
+     "col": "grey",
+     "at": 0
+    },
+    {
+     "type": "text",
+     "text": "Management Science, 2014",
+     "x": 540,
+     "y": 1325,
+     "s": 30,
+     "w": "m",
+     "col": "grey",
+     "at": 0
+    }
+   ]
+  }
+ ]
+}

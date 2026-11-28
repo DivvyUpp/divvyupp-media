@@ -1,0 +1,45 @@
+{
+  "run": "create",
+  "date": "2026-11-28",
+  "attempts": [
+    {
+      "started_at": "2026-11-28T06:27:50-05:00",
+      "finished_at": "2026-11-28T07:05:00-05:00",
+      "status": "ok",
+      "trigger": "scheduled",
+      "summary": "Two V2 Study Reels sent for review: S15 (paying to skip a chore, 23.6 s) and S16 (fresh start, 'Next month is Tuesday', 29.3 s; must post by Nov 30). Postmortems: s4-lock, s7-gym and s8-minimum inconclusive at 72 h (all under 100 reached). Funnel 11-27: 0 Instagram landings, 0 sign-ups.",
+      "outputs": [
+        {
+          "label": "Hypothesis cards and workshop",
+          "path": "hypotheses/2026-11-28.md"
+        },
+        {
+          "label": "Queue",
+          "path": "queue.json"
+        },
+        {
+          "label": "Experiment log",
+          "path": "experiment-log.csv"
+        },
+        {
+          "label": "Funnel 11-27",
+          "path": "funnel/custom-2026-11-27_2026-11-27.json"
+        }
+      ],
+      "reels": [
+        {
+          "id": "2026-11-28-s15-chores",
+          "hook": "Hate folding laundry? Paying to skip a chore put people in a better mood than buying themselves a thing.",
+          "status": "pending_review",
+          "file": "reels/2026-11-28-s15-chores.mp4"
+        },
+        {
+          "id": "2026-11-28-s16-tuesday",
+          "hook": "Keep saying you'll start saving next month? Next month is Tuesday.",
+          "status": "pending_review",
+          "file": "reels/2026-11-28-s16-tuesday.mp4"
+        }
+      ]
+    }
+  ]
+}

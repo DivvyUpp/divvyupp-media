@@ -708,5 +708,38 @@
   "tiktok_caption": "Money in: once. Money out: all month.\n\nSame paycheck, two ways:\n1) Spend first, save what's left → empty 3 days before payday.\n2) Save first, then spend an even amount each day → it lasts to payday, and the savings stay put.\n\nIllustrative numbers: $2,400 left after bills, paid every 2 weeks, $500 saved first = about $136 a day.\n\nWhich jar is your checking account? Send this to the person you split the bills with.\n\nKnow what you can safely spend — before you spend it. DivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #budgeting #moneytips #savingmoney #paycheck",
   "hypothesis": "research/2026-11-28-gump-eval.md",
   "note": "Exploration slot: wordless 15 s visual metaphor (mechanism from @neuronvisuals via Gump). Srini approved in chat 2026-11-28 ~01:20 ET with this caption, to post at 9:00 ET (scheduled from the chat session). No end line on purpose: a twin with the site line is the follow-up test if this beats the median."
+ },
+ {
+  "id": "2026-11-28-s15-chores",
+  "kind": "main",
+  "status": "pending_review",
+  "post_date": "2026-11-28",
+  "file": "reels/2026-11-28-s15-chores.mp4",
+  "cover": "reels/2026-11-28-s15-chores_cover.jpg",
+  "spec": "hooks/2026-11-28-s15-chores.json",
+  "format": "diagram",
+  "lane": "exploit",
+  "hook": "Hate folding laundry? Paying to skip a chore put people in a better mood than buying themselves a thing. (Study Reel S15, V2)",
+  "caption": "Hate folding laundry? Paying to skip a chore put people in a better mood than buying themselves a thing.\n\nIn the experiment, working adults were given money to spend on two weekends: once on something that saved them time, once on a material thing for themselves. After the weekend they paid to save time, they were in a better mood. (A small experiment, 60 adults, plus survey data; the effect is modest.)\n\nTry it: buy back one hour of the chore you hate most this month.\n\nStudy: Whillans et al., \"Buying time promotes happiness,\" PNAS, 2017. Link in the comments.\n\nSend this to whoever folds the laundry in your house 🧺\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #moneytips #timeismoney #couplesandmoney #research",
+  "tiktok_caption": "Hate folding laundry? Paying to skip a chore put people in a better mood than buying themselves a thing.\n\nIn the experiment, working adults were given money to spend on two weekends: once on something that saved them time, once on a material thing for themselves. After the weekend they paid to save time, they were in a better mood. (A small experiment, 60 adults, plus survey data; the effect is modest.)\n\nTry it: buy back one hour of the chore you hate most this month.\n\nStudy: Whillans et al., \"Buying time promotes happiness,\" PNAS, 2017.\n\nSend this to whoever folds the laundry in your house 🧺\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #moneytips #timeismoney #couplesandmoney #research",
+  "first_comment": "📄 The study: Whillans et al., \"Buying time promotes happiness,\" PNAS, 2017\nhttps://pmc.ncbi.nlm.nih.gov/articles/PMC5559044",
+  "hypothesis": "hypotheses/2026-11-28.md"
+ },
+ {
+  "id": "2026-11-28-s16-tuesday",
+  "kind": "main",
+  "status": "pending_review",
+  "post_date": "2026-11-28",
+  "file": "reels/2026-11-28-s16-tuesday.mp4",
+  "cover": "reels/2026-11-28-s16-tuesday_cover.jpg",
+  "spec": "hooks/2026-11-28-s16-tuesday.json",
+  "format": "diagram",
+  "lane": "exploit",
+  "hook": "Keep saying you'll start saving next month? Next month is Tuesday. (Study Reel S16, V2)",
+  "caption": "Keep saying you'll start saving next month? Next month is Tuesday.\n\nResearchers looked at Google searches for \"diet\", gym visits and goal sign-ups. All of them jumped right after a new week, a new month, a new year or a birthday. They call it the fresh start effect. (Observational data: it shows when people start, not that starting then works better.)\n\nTry it: on Tuesday, December 1, write down how much you'll save each month and set up an automatic transfer that day.\n\nStudy: Dai, Milkman & Riis, \"The Fresh Start Effect,\" Management Science, 2014. Link in the comments.\n\nSend this to the friend who keeps saying \"I'll start next month\" 📅\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #savingmoney #moneytips #freshstart #research",
+  "tiktok_caption": "Keep saying you'll start saving next month? Next month is Tuesday.\n\nResearchers looked at Google searches for \"diet\", gym visits and goal sign-ups. All of them jumped right after a new week, a new month, a new year or a birthday. They call it the fresh start effect. (Observational data: it shows when people start, not that starting then works better.)\n\nTry it: on Tuesday, December 1, write down how much you'll save each month and set up an automatic transfer that day.\n\nStudy: Dai, Milkman & Riis, \"The Fresh Start Effect,\" Management Science, 2014.\n\nSend this to the friend who keeps saying \"I'll start next month\" 📅\nDivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #savingmoney #moneytips #freshstart #research",
+  "first_comment": "📄 The study: Dai, Milkman & Riis, \"The Fresh Start Effect,\" Management Science, 2014\nhttps://faculty.wharton.upenn.edu/wp-content/uploads/2014/06/Dai_Fresh_Start_2014_Mgmt_Sci.pdf",
+  "hypothesis": "hypotheses/2026-11-28.md",
+  "note": "Time-bound: the hook is only true until Mon Nov 30. If not posted by the 10pm ET slot on Nov 30, do not post it."
  }
 ]

@@ -1,0 +1,408 @@
+{
+ "id": "2026-11-28-s15-chores",
+ "format": "diagram",
+ "voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "speed": 1.15,
+ "max_gap": 0.3,
+ "cap_style": "karaoke",
+ "cover_at": [
+  0,
+  "themselves"
+ ],
+ "note": "V2 Study Reel from study bank S15 (Whillans et al., PNAS 2017). Hook = persona pick A3. Result in the first line; contrast = same person, two weekends, mood changes.",
+ "scenes": [
+  {
+   "title": "be *honest*",
+   "text": "[curious] Hate folding laundry? Paying to skip a chore put people in a better mood than buying themselves a thing.",
+   "elements": [
+    {
+     "type": "text",
+     "text": "HATE FOLDING",
+     "x": 540,
+     "y": 390,
+     "s": 104,
+     "w": "d",
+     "col": "ink",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "LAUNDRY?",
+     "x": 540,
+     "y": 500,
+     "s": 104,
+     "w": "d",
+     "col": "orange",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "chip",
+     "text": "bought a thing",
+     "x": 300,
+     "y": 660,
+     "s": 36,
+     "style": "soft",
+     "at": "buying"
+    },
+    {
+     "type": "chip",
+     "text": "paid to skip a chore",
+     "x": 770,
+     "y": 660,
+     "s": 36,
+     "style": "orange",
+     "at": "Paying"
+    },
+    {
+     "type": "couple",
+     "show": "her",
+     "x": 300,
+     "y": 900,
+     "h": 340,
+     "at": 0,
+     "moods": [
+      {
+       "at": 0,
+       "her": "neutral"
+      }
+     ],
+     "instant": true
+    },
+    {
+     "type": "couple",
+     "show": "her",
+     "x": 770,
+     "y": 900,
+     "h": 340,
+     "at": 0,
+     "moods": [
+      {
+       "at": 0,
+       "her": "worried"
+      },
+      {
+       "at": "better mood",
+       "her": "happy"
+      }
+     ],
+     "instant": true
+    },
+    {
+     "type": "chip",
+     "text": "60 working adults \u00b7 modest effect",
+     "x": 540,
+     "y": 1290,
+     "s": 34,
+     "style": "soft",
+     "at": "thing"
+    }
+   ]
+  },
+  {
+   "title": "the *study*",
+   "text": "Same people, same money, two weekends. The weekend they paid to save time, they were in a better mood.",
+   "elements": [
+    {
+     "type": "panel",
+     "x": 80,
+     "y": 400,
+     "w": 440,
+     "h": 680,
+     "at": 0
+    },
+    {
+     "type": "panel",
+     "x": 560,
+     "y": 400,
+     "w": 440,
+     "h": 680,
+     "at": 0,
+     "accent": true
+    },
+    {
+     "type": "text",
+     "text": "WEEKEND 1",
+     "x": 300,
+     "y": 460,
+     "s": 34,
+     "w": "xb",
+     "col": "grey",
+     "at": 0
+    },
+    {
+     "type": "text",
+     "text": "WEEKEND 2",
+     "x": 780,
+     "y": 460,
+     "s": 34,
+     "w": "xb",
+     "col": "grey",
+     "at": "two weekends"
+    },
+    {
+     "type": "chip",
+     "text": "bought a thing",
+     "x": 300,
+     "y": 560,
+     "s": 32,
+     "style": "soft",
+     "at": "two weekends"
+    },
+    {
+     "type": "chip",
+     "text": "paid to save time",
+     "x": 780,
+     "y": 560,
+     "s": 32,
+     "style": "orange",
+     "at": "two weekends"
+    },
+    {
+     "type": "couple",
+     "show": "her",
+     "x": 300,
+     "y": 760,
+     "h": 300,
+     "at": 0,
+     "moods": [
+      {
+       "at": 0,
+       "her": "neutral"
+      }
+     ]
+    },
+    {
+     "type": "couple",
+     "show": "her",
+     "x": 780,
+     "y": 760,
+     "h": 300,
+     "at": "two weekends",
+     "moods": [
+      {
+       "at": 0,
+       "her": "neutral"
+      },
+      {
+       "at": "paid to save",
+       "her": "happy"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "text": "BETTER MOOD",
+     "x": 780,
+     "y": 1010,
+     "s": 64,
+     "w": "d",
+     "col": "orange",
+     "at": "paid to save",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "same money each weekend",
+     "x": 540,
+     "y": 1170,
+     "s": 36,
+     "w": "b",
+     "col": "grey",
+     "at": "same money"
+    }
+   ]
+  },
+  {
+   "title": "the *catch*",
+   "text": "Doing it yourself feels free. But it costs you the hour.",
+   "elements": [
+    {
+     "type": "bubble",
+     "x": 560,
+     "y": 560,
+     "w": 560,
+     "s": 42,
+     "text": "I'll just do it\nmyself. It's free.",
+     "tail": "l",
+     "style": "white",
+     "at": 0
+    },
+    {
+     "type": "couple",
+     "show": "her",
+     "x": 290,
+     "y": 880,
+     "h": 380,
+     "at": 0,
+     "moods": [
+      {
+       "at": 0,
+       "her": "worried"
+      }
+     ]
+    },
+    {
+     "type": "clock",
+     "x": 760,
+     "y": 920,
+     "r": 150,
+     "at": "the hour",
+     "dur": 1.0
+    },
+    {
+     "type": "text",
+     "text": "IT COSTS THE HOUR",
+     "x": 540,
+     "y": 1290,
+     "s": 72,
+     "w": "d",
+     "col": "orange",
+     "at": "costs"
+    }
+   ],
+   "gap_before": 0.4
+  },
+  {
+   "title": "do *this*",
+   "text": "So this month, buy back one hour of the chore you hate most.",
+   "elements": [
+    {
+     "type": "text",
+     "text": "BUY BACK",
+     "x": 540,
+     "y": 450,
+     "s": 80,
+     "w": "d",
+     "col": "ink",
+     "at": "buy back"
+    },
+    {
+     "type": "text",
+     "text": "1 HOUR",
+     "x": 540,
+     "y": 610,
+     "s": 190,
+     "w": "d",
+     "col": "orange",
+     "at": "one hour",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "this month",
+     "x": 540,
+     "y": 770,
+     "s": 46,
+     "w": "b",
+     "col": "grey",
+     "at": 0
+    },
+    {
+     "type": "chip",
+     "text": "laundry",
+     "x": 250,
+     "y": 900,
+     "s": 40,
+     "style": "soft",
+     "at": "chore"
+    },
+    {
+     "type": "chip",
+     "text": "cleaning",
+     "x": 540,
+     "y": 900,
+     "s": 40,
+     "style": "soft",
+     "at": "chore"
+    },
+    {
+     "type": "chip",
+     "text": "errands",
+     "x": 830,
+     "y": 900,
+     "s": 40,
+     "style": "soft",
+     "at": "hate"
+    },
+    {
+     "type": "couple",
+     "show": "her",
+     "x": 540,
+     "y": 1080,
+     "h": 320,
+     "at": 0,
+     "moods": [
+      {
+       "at": 0,
+       "her": "happy"
+      }
+     ]
+    }
+   ],
+   "gap_before": 0.3
+  },
+  {
+   "title": "send *it*",
+   "text": "[warm] Send this to whoever folds the laundry in your house.",
+   "elements": [
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 600,
+     "h": 360,
+     "gap": 460,
+     "at": 0,
+     "instant": true,
+     "labels": [
+      "you",
+      "your partner"
+     ],
+     "moods": [
+      {
+       "at": 0,
+       "him": "happy",
+       "her": "worried"
+      },
+      {
+       "at": "laundry",
+       "him": "happy",
+       "her": "happy"
+      }
+     ]
+    },
+    {
+     "type": "ticket",
+     "x": 540,
+     "y": 1080,
+     "w": 700,
+     "h": 190,
+     "title": "Buy back 1 hour",
+     "sub": "this month",
+     "at": "folds"
+    },
+    {
+     "type": "text",
+     "text": "Whillans et al.",
+     "x": 540,
+     "y": 1280,
+     "s": 30,
+     "w": "b",
+     "col": "grey",
+     "at": 0
+    },
+    {
+     "type": "text",
+     "text": "PNAS, 2017",
+     "x": 540,
+     "y": 1325,
+     "s": 30,
+     "w": "m",
+     "col": "grey",
+     "at": 0
+    }
+   ]
+  }
+ ]
+}
