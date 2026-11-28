@@ -116,7 +116,7 @@ def chip(cv, x, y, txt, k, col=ORANGE):
 
 
 def part_a(cv, t):
-    headline(cv, t, "Money in:", "once.", "Money out:", "all month.", GREEN, ORANGE)
+    headline(cv, t, "Money in:", "payday.", "Money out:", "every day.", GREEN, ORANGE)
     pour = ease(clamp((t - 0.35) / 0.6))
     u = clamp((t - 1.5) / 4.9); spent = u ** 1.6                                # leak 1.5 -> 6.4 s, accelerating
     level = 0.9 * pour * (1 - spent)
