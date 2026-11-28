@@ -696,7 +696,7 @@
  {
   "id": "2026-11-28-paycheck-jar",
   "kind": "main",
-  "status": "approved",
+  "status": "posted",
   "post_date": "2026-11-28",
   "not_before": "09:00",
   "file": "reels/2026-11-28-paycheck-jar.mp4",
@@ -707,7 +707,17 @@
   "caption": "Money in: payday. Money out: every day.\n\nSame paycheck, two ways:\n1) Spend first, save what's left → empty 3 days before payday.\n2) Save first, then spend an even amount each day → it lasts to payday, and the savings stay put.\n\nIllustrative numbers: $2,400 left after bills, paid every 2 weeks, $500 saved first = about $136 a day.\n\nWhich jar is your checking account? Send this to the person you split the bills with.\n\nKnow what you can safely spend — before you spend it. DivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #budgeting #moneytips #savingmoney #paycheck",
   "tiktok_caption": "Money in: payday. Money out: every day.\n\nSame paycheck, two ways:\n1) Spend first, save what's left → empty 3 days before payday.\n2) Save first, then spend an even amount each day → it lasts to payday, and the savings stay put.\n\nIllustrative numbers: $2,400 left after bills, paid every 2 weeks, $500 saved first = about $136 a day.\n\nWhich jar is your checking account? Send this to the person you split the bills with.\n\nKnow what you can safely spend — before you spend it. DivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #budgeting #moneytips #savingmoney #paycheck",
   "hypothesis": "research/2026-11-28-gump-eval.md",
-  "note": "Exploration slot: wordless 15 s visual metaphor (mechanism from @neuronvisuals via Gump). Srini approved in chat 2026-11-28 ~01:20 ET with this caption, to post at 9:00 ET (scheduled from the chat session). No end line on purpose: a twin with the site line is the follow-up test if this beats the median. Headline changed to 'Money in: payday. Money out: every day.' at Srini's request (~01:40 ET) to match the 2-week counter; caption first line changed to match, Srini approved the swap."
+  "note": "Exploration slot: wordless 15 s visual metaphor (mechanism from @neuronvisuals via Gump). Srini approved in chat 2026-11-28 ~01:20 ET with this caption, to post at 9:00 ET (scheduled from the chat session). No end line on purpose: a twin with the site line is the follow-up test if this beats the median. Headline changed to 'Money in: payday. Money out: every day.' at Srini's request (~01:40 ET) to match the 2-week counter; caption first line changed to match, Srini approved the swap.",
+  "instagram_postproxy_id": "0ktRL5v",
+  "instagram_url": "https://www.instagram.com/p/DgSbEVxOpCW",
+  "instagram_id": "DgSbEVxOpCW",
+  "posted_at": "2026-11-28T09:03:28-05:00",
+  "tiktok_postproxy_id": "o7toWzE",
+  "youtube_postproxy_id": "o7toWzE",
+  "youtube_url": "https://www.youtube.com/watch?v=8YmuGx-16YQ",
+  "youtube_id": "8YmuGx-16YQ",
+  "tiktok_url": "https://www.tiktok.com/@getdivvyupp/video/7713222690613529870",
+  "tiktok_id": "7713222690613529870"
  },
  {
   "id": "2026-11-28-s15-chores",

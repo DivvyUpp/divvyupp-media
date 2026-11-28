@@ -1,0 +1,22 @@
+{
+ "run": "post",
+ "date": "2026-11-28",
+ "attempts": [
+  {
+   "started_at": "2026-11-28T09:00:30-05:00",
+   "finished_at": "2026-11-28T09:05:10-05:00",
+   "status": "ok",
+   "trigger": "manual",
+   "summary": "Posted the paycheck jar Reel (wordless exploration, 'Money in: payday. Money out: every day.') at 9:00 ET as Srini asked, on Instagram, TikTok and YouTube.",
+   "reels": [
+    {
+     "id": "2026-11-28-paycheck-jar",
+     "hook": "Money in: payday. Money out: every day. (wordless paycheck jar, exploration)",
+     "status": "posted",
+     "file": "reels/2026-11-28-paycheck-jar.mp4",
+     "permalink": "https://www.instagram.com/p/DgSbEVxOpCW"
+    }
+   ]
+  }
+ ]
+}
