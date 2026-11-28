@@ -1,0 +1,533 @@
+{
+ "id": "2026-11-28-real-numbers-01",
+ "format": "diagram",
+ "voice": "elevenlabs:cjVigY5qzO86Huf0OWal:eleven_v3",
+ "speed": 1.18,
+ "max_gap": 0.25,
+ "cap_style": "karaoke",
+ "cover_at": [
+  0,
+  "row"
+ ],
+ "scenes": [
+  {
+   "title": "real *numbers*",
+   "text": "[excited] I built a budgeting app. And I still blew my budget, three months in a row.",
+   "elements": [
+    {
+     "type": "chip",
+     "text": "EPISODE 01",
+     "style": "ink",
+     "x": 540,
+     "y": 420,
+     "s": 30,
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "I built a budgeting app.",
+     "x": 540,
+     "y": 540,
+     "s": 64,
+     "w": "xb",
+     "col": "ink",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "Still blew my budget",
+     "x": 540,
+     "y": 630,
+     "s": 64,
+     "w": "xb",
+     "col": "orange",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "3 months in a row.",
+     "x": 540,
+     "y": 760,
+     "s": 96,
+     "w": "xb",
+     "col": "ink",
+     "at": "three",
+     "instant": true
+    },
+    {
+     "type": "couple",
+     "show": "him",
+     "x": 540,
+     "y": 1140,
+     "h": 300,
+     "at": 0,
+     "moods": [
+      {
+       "at": 0,
+       "him": "worried"
+      }
+     ],
+     "instant": true
+    }
+   ]
+  },
+  {
+   "title": "the *evidence*",
+   "text": "[upbeat] My budget? Two thousand a month. September, October, November... I went over by almost three thousand.",
+   "elements": [
+    {
+     "type": "text",
+     "text": "Budget: $2,000 a month",
+     "x": 540,
+     "y": 420,
+     "s": 58,
+     "w": "xb",
+     "col": "ink",
+     "at": 0
+    },
+    {
+     "type": "stat",
+     "x": 70,
+     "y": 500,
+     "w": 430,
+     "h": 130,
+     "label": "SEP",
+     "value": "$2,993",
+     "at": "September",
+     "col": "red",
+     "s": 64
+    },
+    {
+     "type": "stat",
+     "x": 70,
+     "y": 645,
+     "w": 430,
+     "h": 130,
+     "label": "OCT",
+     "value": "$2,859",
+     "at": "October",
+     "col": "red",
+     "s": 64
+    },
+    {
+     "type": "stat",
+     "x": 70,
+     "y": 790,
+     "w": 430,
+     "h": 130,
+     "label": "NOV (SO FAR)",
+     "value": "$3,032",
+     "at": "November",
+     "col": "red",
+     "s": 64
+    },
+    {
+     "type": "stat",
+     "x": 70,
+     "y": 945,
+     "w": 430,
+     "h": 190,
+     "label": "TOTAL OVER BUDGET",
+     "value": "$2,884",
+     "at": "over",
+     "col": "red",
+     "s": 80,
+     "accent": true
+    },
+    {
+     "type": "phone",
+     "x": 540,
+     "y": 520,
+     "w": 360,
+     "h": 720,
+     "instant": true,
+     "shots": [
+      {
+       "src": "/root/.claude/uploads/d173b594-6591-530d-9967-88f5ca00ec14/56178a69-image.png",
+       "blur": [
+        [
+         272,
+         560,
+         610,
+         612
+        ]
+       ],
+       "spot": [
+        {
+         "box": [
+          36,
+          990,
+          886,
+          1062
+         ],
+         "at": 0
+        }
+       ]
+      },
+      {
+       "src": "/root/.claude/uploads/d173b594-6591-530d-9967-88f5ca00ec14/51d18208-image.png",
+       "blur": [
+        [
+         272,
+         560,
+         610,
+         612
+        ],
+        [
+         60,
+         606,
+         330,
+         648
+        ]
+       ],
+       "at": "October",
+       "spot": [
+        {
+         "box": [
+          36,
+          1028,
+          886,
+          1100
+         ],
+         "at": "October"
+        }
+       ]
+      },
+      {
+       "src": "/root/.claude/uploads/d173b594-6591-530d-9967-88f5ca00ec14/bb45d9c4-image.png",
+       "blur": [
+        [
+         272,
+         560,
+         610,
+         612
+        ]
+       ],
+       "at": "November",
+       "spot": [
+        {
+         "box": [
+          36,
+          990,
+          886,
+          1062
+         ],
+         "at": "November"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "couple",
+     "show": "him",
+     "x": 200,
+     "y": 1235,
+     "h": 180,
+     "at": 0,
+     "moods": [
+      {
+       "at": 0,
+       "him": "confused"
+      },
+      {
+       "at": "over",
+       "him": "frustrated"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "the *twist*",
+   "text": "[wry] The crazy part? I saved three thousand in those same months. And overspent twenty-eight eighty-four.",
+   "elements": [
+    {
+     "type": "stat",
+     "x": 70,
+     "y": 470,
+     "w": 455,
+     "h": 320,
+     "label": "SAVED, SEP TO NOV",
+     "value": "+$3,000",
+     "at": "saved",
+     "col": "green",
+     "s": 96,
+     "sub": "$1,000 every month"
+    },
+    {
+     "type": "stat",
+     "x": 555,
+     "y": 470,
+     "w": 455,
+     "h": 320,
+     "label": "OVERSPENT",
+     "value": "-$2,884",
+     "at": "overspent",
+     "col": "red",
+     "s": 96,
+     "sub": "over my $2,000 budget"
+    },
+    {
+     "type": "chip",
+     "text": "almost cancelled out",
+     "style": "orange",
+     "x": 540,
+     "y": 880,
+     "s": 40,
+     "at": "eighty-four"
+    },
+    {
+     "type": "couple",
+     "show": "him",
+     "x": 540,
+     "y": 1180,
+     "h": 280,
+     "at": 0,
+     "moods": [
+      {
+       "at": 0,
+       "him": "happy"
+      },
+      {
+       "at": "overspent",
+       "him": "sad"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "where it *went*",
+   "text": "[curious] November alone? Dining, entertainment and shopping. Almost fourteen hundred.",
+   "elements": [
+    {
+     "type": "text",
+     "text": "November alone:",
+     "x": 540,
+     "y": 420,
+     "s": 58,
+     "w": "xb",
+     "col": "ink",
+     "at": 0
+    },
+    {
+     "type": "stat",
+     "x": 70,
+     "y": 500,
+     "w": 430,
+     "h": 130,
+     "label": "DINING",
+     "value": "$549",
+     "at": "Dining",
+     "col": "red",
+     "s": 64
+    },
+    {
+     "type": "stat",
+     "x": 70,
+     "y": 645,
+     "w": 430,
+     "h": 130,
+     "label": "ENTERTAINMENT",
+     "value": "$435",
+     "at": "entertainment",
+     "col": "red",
+     "s": 64
+    },
+    {
+     "type": "stat",
+     "x": 70,
+     "y": 790,
+     "w": 430,
+     "h": 130,
+     "label": "SHOPPING",
+     "value": "$410",
+     "at": "shopping",
+     "col": "red",
+     "s": 64
+    },
+    {
+     "type": "stat",
+     "x": 70,
+     "y": 945,
+     "w": 430,
+     "h": 190,
+     "label": "THOSE THREE",
+     "value": "$1,394",
+     "at": "fourteen",
+     "col": "red",
+     "s": 80,
+     "accent": true
+    },
+    {
+     "type": "phone",
+     "x": 540,
+     "y": 520,
+     "w": 360,
+     "h": 720,
+     "instant": true,
+     "shots": [
+      {
+       "src": "/tmp/claude-0/-home-user-divvyupp/d173b594-6591-530d-9967-88f5ca00ec14/scratchpad/nov_categories.png",
+       "spot": [
+        {
+         "box": [
+          34,
+          605,
+          886,
+          745
+         ],
+         "at": "Dining"
+        },
+        {
+         "box": [
+          34,
+          922,
+          886,
+          1063
+         ],
+         "at": "entertainment"
+        },
+        {
+         "box": [
+          34,
+          1081,
+          886,
+          1222
+         ],
+         "at": "shopping"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "type": "couple",
+     "show": "him",
+     "x": 200,
+     "y": 1235,
+     "h": 180,
+     "at": 0,
+     "moods": [
+      {
+       "at": 0,
+       "him": "confused"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "the december *test*",
+   "text": "[upbeat] So in December, those three get four hundred. Groceries stay. Can I get that thousand back?",
+   "elements": [
+    {
+     "type": "plan",
+     "x": 80,
+     "y": 420,
+     "w": 920,
+     "rows": [
+      {
+       "label": "Dining, shopping & entertainment",
+       "value": "$400",
+       "from": "$1,394",
+       "col": "orange",
+       "at": "those"
+      },
+      {
+       "label": "Groceries",
+       "value": "Untouched",
+       "col": "ink",
+       "at": "Groceries"
+      },
+      {
+       "label": "The goal",
+       "value": "~$1,000 back",
+       "col": "green",
+       "at": "thousand"
+      }
+     ]
+    },
+    {
+     "type": "couple",
+     "show": "him",
+     "x": 540,
+     "y": 1180,
+     "h": 280,
+     "at": 0,
+     "moods": [
+      {
+       "at": 0,
+       "him": "happy"
+      }
+     ],
+     "talk": "him"
+    }
+   ]
+  },
+  {
+   "title": "real *numbers*",
+   "text": "[excited] Will I actually stick to it? Follow along. I'll show you the real numbers in January.",
+   "elements": [
+    {
+     "type": "text",
+     "text": "Will I stick to it?",
+     "x": 540,
+     "y": 470,
+     "s": 80,
+     "w": "xb",
+     "col": "ink",
+     "at": 0
+    },
+    {
+     "type": "text",
+     "text": "Follow for the real results.",
+     "x": 540,
+     "y": 580,
+     "s": 54,
+     "w": "xb",
+     "col": "orange",
+     "at": "Follow"
+    },
+    {
+     "type": "chip",
+     "text": "Results in January",
+     "style": "soft",
+     "x": 540,
+     "y": 700,
+     "s": 36,
+     "at": "January"
+    },
+    {
+     "type": "text",
+     "text": "divvyupp.com",
+     "x": 540,
+     "y": 800,
+     "s": 34,
+     "w": "b",
+     "col": "grey",
+     "at": 0
+    },
+    {
+     "type": "couple",
+     "show": "him",
+     "x": 540,
+     "y": 1180,
+     "h": 280,
+     "at": 0,
+     "moods": [
+      {
+       "at": 0,
+       "him": "happy"
+      }
+     ],
+     "talk": "him"
+    }
+   ]
+  }
+ ]
+}
