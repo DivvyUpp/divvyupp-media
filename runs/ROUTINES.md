@@ -4,7 +4,8 @@ The scheduled routines were made in the Claude app, so they are changed there. E
 logic lives in this repo, so changing the loop means editing `PLAYBOOK.md` and `runs/*.md`, not the routines.
 
 ## 1. Research (new routine) — every day, 05:57 America/New_York
-Connectors: none beyond GitHub. Web search and fetch on.
+Connectors: Gump (added by Srini 2026-11-28, `https://mcp.gump.io/mcp`; used per `runs/research.md` step 3).
+Web search and fetch on.
 
 ```
 You run the daily Research run for DivvyUpp's content loop (Instagram @getdivvyupp; DivvyUpp is a safe-to-spend personal finance app, divvyupp.com). Make sure the GitHub repo DivvyUpp/divvyupp-media is available (attach it with push access if it is not, then clone it). Read PLAYBOOK.md, then runs/research.md, and follow them exactly. Those files are the source of truth; if they differ from this prompt, they win. Never sign up for, buy, post or send anything. If something blocks you, tell Srini exactly what and stop.
