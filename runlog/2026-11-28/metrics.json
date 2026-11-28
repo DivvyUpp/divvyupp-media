@@ -1,0 +1,31 @@
+{
+ "run": "metrics",
+ "date": "2026-11-28",
+ "attempts": [
+  {
+   "started_at": "2026-11-28T05:54:30-05:00",
+   "finished_at": "2026-11-28T05:56:18-05:00",
+   "status": "ok",
+   "trigger": "scheduled",
+   "summary": "Read 19 Reels from the last 8 days via Windsor. Followers: 4 (up from 3). Non-follower views yesterday: 630. Logged read_d1 for 2026-11-27-savings-tiers-30, 2026-11-26-s8-short, 2026-11-27-s10-answer (152 views, 1 share, 7.8 sends per 1,000 reached) and 2026-11-28-s10-v2 (282 views, the most of any Reel, 0 shares), read_72h for 2026-11-25-s4-lock, -s7-gym and -s8-minimum. Filled media_id by shortcode for 5 Postproxy posts in queue.json; 2026-11-28-real-numbers-01 has no experiment-log row, so only its queue entry got the id. age_h added from Windsor's publish timestamp. TikTok/YouTube are added by the 06:05 run.",
+   "outputs": [
+    {
+     "label": "Instagram numbers",
+     "path": "metrics/2026-11-28.json"
+    },
+    {
+     "label": "Experiment log",
+     "path": "experiment-log.csv"
+    },
+    {
+     "label": "Followers",
+     "path": "followers.csv"
+    },
+    {
+     "label": "Queue (media_id filled)",
+     "path": "queue.json"
+    }
+   ]
+  }
+ ]
+}
