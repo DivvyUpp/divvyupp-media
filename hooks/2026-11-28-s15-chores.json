@@ -9,7 +9,7 @@
   0,
   "themselves"
  ],
- "note": "V2 Study Reel from study bank S15 (Whillans et al., PNAS 2017). Hook = persona pick A3. Result in the first line; contrast = same person, two weekends, mood changes.",
+ "note": "V2 Study Reel from study bank S15 (Whillans et al., PNAS 2017). Hook = persona pick A3. Result in the first line; contrast = same person, two weekends, mood changes. | Revised 2026-11-28 (Srini): result replaces the hook in the same big type with one big person smiling; weekend 1 VS weekend 2; no late-appearing pictures.",
  "scenes": [
   {
    "title": "be *honest*",
@@ -20,63 +20,65 @@
      "text": "HATE FOLDING",
      "x": 540,
      "y": 390,
-     "s": 104,
+     "s": 110,
      "w": "d",
      "col": "ink",
      "at": 0,
-     "instant": true
+     "instant": true,
+     "until": "Paying"
     },
     {
      "type": "text",
      "text": "LAUNDRY?",
      "x": 540,
-     "y": 500,
-     "s": 104,
+     "y": 510,
+     "s": 110,
      "w": "d",
      "col": "orange",
      "at": 0,
-     "instant": true
+     "instant": true,
+     "until": "Paying"
     },
     {
-     "type": "chip",
-     "text": "bought a thing",
-     "x": 300,
-     "y": 660,
-     "s": 36,
-     "style": "soft",
+     "type": "text",
+     "text": "PAYING TO SKIP A CHORE",
+     "x": 540,
+     "y": 370,
+     "s": 84,
+     "w": "d",
+     "col": "ink",
+     "at": "skip",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "= BETTER MOOD",
+     "x": 540,
+     "y": 490,
+     "s": 116,
+     "w": "d",
+     "col": "orange",
+     "at": "better mood",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "than buying yourself a thing",
+     "x": 540,
+     "y": 590,
+     "s": 44,
+     "w": "b",
+     "col": "grey",
      "at": "buying"
     },
     {
-     "type": "chip",
-     "text": "paid to skip a chore",
-     "x": 770,
-     "y": 660,
-     "s": 36,
-     "style": "orange",
-     "at": "Paying"
-    },
-    {
      "type": "couple",
      "show": "her",
-     "x": 300,
-     "y": 900,
-     "h": 340,
+     "x": 540,
+     "y": 1010,
+     "h": 560,
      "at": 0,
-     "moods": [
-      {
-       "at": 0,
-       "her": "neutral"
-      }
-     ],
-     "instant": true
-    },
-    {
-     "type": "couple",
-     "show": "her",
-     "x": 770,
-     "y": 900,
-     "h": 340,
-     "at": 0,
+     "instant": true,
      "moods": [
       {
        "at": 0,
@@ -86,14 +88,13 @@
        "at": "better mood",
        "her": "happy"
       }
-     ],
-     "instant": true
+     ]
     },
     {
      "type": "chip",
      "text": "60 working adults \u00b7 modest effect",
      "x": 540,
-     "y": 1290,
+     "y": 1380,
      "s": 34,
      "style": "soft",
      "at": "thing"
@@ -106,66 +107,73 @@
    "elements": [
     {
      "type": "panel",
-     "x": 80,
-     "y": 400,
-     "w": 440,
-     "h": 680,
-     "at": 0
+     "x": 70,
+     "y": 440,
+     "w": 420,
+     "h": 860,
+     "at": 0,
+     "instant": true
     },
     {
      "type": "panel",
-     "x": 560,
-     "y": 400,
-     "w": 440,
-     "h": 680,
+     "x": 590,
+     "y": 440,
+     "w": 420,
+     "h": 860,
      "at": 0,
-     "accent": true
+     "accent": true,
+     "instant": true
     },
     {
      "type": "text",
      "text": "WEEKEND 1",
-     "x": 300,
-     "y": 460,
-     "s": 34,
-     "w": "xb",
+     "x": 280,
+     "y": 510,
+     "s": 56,
+     "w": "d",
      "col": "grey",
-     "at": 0
+     "at": 0,
+     "instant": true
     },
     {
      "type": "text",
      "text": "WEEKEND 2",
-     "x": 780,
-     "y": 460,
-     "s": 34,
-     "w": "xb",
-     "col": "grey",
-     "at": "two weekends"
+     "x": 800,
+     "y": 510,
+     "s": 56,
+     "w": "d",
+     "col": "ink",
+     "at": 0,
+     "instant": true
     },
     {
      "type": "chip",
      "text": "bought a thing",
-     "x": 300,
-     "y": 560,
-     "s": 32,
+     "x": 280,
+     "y": 610,
+     "s": 34,
      "style": "soft",
-     "at": "two weekends"
+     "at": 0,
+     "instant": true
     },
     {
      "type": "chip",
-     "text": "paid to save time",
-     "x": 780,
-     "y": 560,
-     "s": 32,
+     "text": "paid to skip a chore",
+     "x": 800,
+     "y": 610,
+     "s": 34,
      "style": "orange",
-     "at": "two weekends"
+     "at": 0,
+     "instant": true
     },
     {
      "type": "couple",
      "show": "her",
-     "x": 300,
-     "y": 760,
-     "h": 300,
+     "x": 280,
+     "y": 920,
+     "h": 400,
      "at": 0,
+     "instant": true,
      "moods": [
       {
        "at": 0,
@@ -176,10 +184,11 @@
     {
      "type": "couple",
      "show": "her",
-     "x": 780,
-     "y": 760,
-     "h": 300,
-     "at": "two weekends",
+     "x": 800,
+     "y": 920,
+     "h": 400,
+     "at": 0,
+     "instant": true,
      "moods": [
       {
        "at": 0,
@@ -194,23 +203,44 @@
     {
      "type": "text",
      "text": "BETTER MOOD",
-     "x": 780,
-     "y": 1010,
-     "s": 64,
+     "x": 800,
+     "y": 1200,
+     "s": 70,
      "w": "d",
      "col": "orange",
      "at": "paid to save",
      "pop": true
     },
     {
-     "type": "text",
-     "text": "same money each weekend",
+     "type": "dot",
      "x": 540,
-     "y": 1170,
-     "s": 36,
+     "y": 930,
+     "r": 70,
+     "col": "ink",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "VS",
+     "x": 540,
+     "y": 930,
+     "s": 72,
+     "w": "d",
+     "col": "white",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "same people \u00b7 same money",
+     "x": 540,
+     "y": 1380,
+     "s": 40,
      "w": "b",
      "col": "grey",
-     "at": "same money"
+     "at": 0,
+     "instant": true
     }
    ]
   },
@@ -248,7 +278,7 @@
      "x": 760,
      "y": 920,
      "r": 150,
-     "at": "the hour",
+     "at": 0,
      "dur": 1.0
     },
     {
@@ -276,7 +306,9 @@
      "s": 80,
      "w": "d",
      "col": "ink",
-     "at": "buy back"
+     "at": 0,
+     "pop": false,
+     "instant": true
     },
     {
      "type": "text",
@@ -286,8 +318,9 @@
      "s": 190,
      "w": "d",
      "col": "orange",
-     "at": "one hour",
-     "pop": true
+     "at": 0,
+     "pop": false,
+     "instant": true
     },
     {
      "type": "text",
@@ -380,7 +413,7 @@
      "h": 190,
      "title": "Buy back 1 hour",
      "sub": "this month",
-     "at": "folds"
+     "at": 0
     },
     {
      "type": "text",

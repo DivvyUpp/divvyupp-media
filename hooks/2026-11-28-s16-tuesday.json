@@ -9,7 +9,7 @@
   0,
   "Tuesday"
  ],
- "note": "V2 Study Reel from study bank S16 (Dai, Milkman & Riis, Management Science 2014). Hook = persona pick B6. Time-bound: only true until Mon Nov 30.",
+ "note": "V2 Study Reel from study bank S16 (Dai, Milkman & Riis, Management Science 2014). Hook = persona pick B6. Time-bound: only true until Mon Nov 30. | Revised 2026-11-28 (Srini): the answer 'NEXT MONTH IS TUESDAY.' replaces the question in the same size; no blank stretches (each scene's picture is up from its first frame).",
  "scenes": [
   {
    "title": "be *honest*",
@@ -24,7 +24,8 @@
      "w": "d",
      "col": "ink",
      "at": 0,
-     "instant": true
+     "instant": true,
+     "until": "Next"
     },
     {
      "type": "text",
@@ -35,7 +36,8 @@
      "w": "d",
      "col": "ink",
      "at": 0,
-     "instant": true
+     "instant": true,
+     "until": "Next"
     },
     {
      "type": "text",
@@ -46,13 +48,36 @@
      "w": "d",
      "col": "orange",
      "at": 0,
-     "instant": true
+     "instant": true,
+     "until": "Next"
+    },
+    {
+     "type": "text",
+     "text": "NEXT MONTH",
+     "x": 540,
+     "y": 400,
+     "s": 120,
+     "w": "d",
+     "col": "ink",
+     "at": "Next",
+     "pop": true
+    },
+    {
+     "type": "text",
+     "text": "IS TUESDAY.",
+     "x": 540,
+     "y": 540,
+     "s": 120,
+     "w": "d",
+     "col": "orange",
+     "at": "Tuesday",
+     "pop": true
     },
     {
      "type": "couple",
      "show": "him",
      "x": 240,
-     "y": 700,
+     "y": 760,
      "h": 300,
      "at": 0,
      "moods": [
@@ -70,7 +95,7 @@
     {
      "type": "bubble",
      "x": 690,
-     "y": 720,
+     "y": 760,
      "w": 460,
      "s": 40,
      "text": "I'll start\nnext month.",
@@ -327,6 +352,15 @@
      "col": "ink",
      "at": 0,
      "instant": true
+    },
+    {
+     "type": "chip",
+     "text": "TUE, DEC 1",
+     "x": 322,
+     "y": 1360,
+     "s": 44,
+     "style": "orange",
+     "at": "Tuesday"
     }
    ]
   },
@@ -335,6 +369,57 @@
    "text": "And that's when people actually start. Gym visits, diet searches and goal sign-ups all jump after a new month, a Monday or a birthday.",
    "elements": [
     {
+     "type": "line",
+     "pts": [
+      [
+       530,
+       648
+      ],
+      [
+       870,
+       648
+      ]
+     ],
+     "col": "muted",
+     "width": 8,
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "line",
+     "pts": [
+      [
+       530,
+       828
+      ],
+      [
+       870,
+       828
+      ]
+     ],
+     "col": "muted",
+     "width": 8,
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "line",
+     "pts": [
+      [
+       530,
+       1008
+      ],
+      [
+       870,
+       1008
+      ]
+     ],
+     "col": "muted",
+     "width": 8,
+     "at": 0,
+     "instant": true
+    },
+    {
      "type": "text",
      "text": "THAT'S WHEN PEOPLE START",
      "x": 540,
@@ -342,7 +427,8 @@
      "s": 72,
      "w": "d",
      "col": "ink",
-     "at": 0
+     "at": 0,
+     "instant": true
     },
     {
      "type": "text",
@@ -352,8 +438,9 @@
      "s": 46,
      "w": "xb",
      "col": "ink",
-     "at": "Gym visits",
-     "align": "l"
+     "at": 0,
+     "align": "l",
+     "instant": true
     },
     {
      "type": "line",
@@ -378,7 +465,7 @@
      "col": "orange",
      "width": 10,
      "dur": 0.6,
-     "at": "jump"
+     "at": "Gym visits"
     },
     {
      "type": "text",
@@ -388,8 +475,9 @@
      "s": 46,
      "w": "xb",
      "col": "ink",
-     "at": "diet searches",
-     "align": "l"
+     "at": 0,
+     "align": "l",
+     "instant": true
     },
     {
      "type": "line",
@@ -414,7 +502,7 @@
      "col": "orange",
      "width": 10,
      "dur": 0.6,
-     "at": "jump"
+     "at": "diet searches"
     },
     {
      "type": "text",
@@ -424,8 +512,9 @@
      "s": 46,
      "w": "xb",
      "col": "ink",
-     "at": "goal sign-ups",
-     "align": "l"
+     "at": 0,
+     "align": "l",
+     "instant": true
     },
     {
      "type": "line",
@@ -450,7 +539,7 @@
      "col": "orange",
      "width": 10,
      "dur": 0.6,
-     "at": "jump"
+     "at": "goal sign-ups"
     },
     {
      "type": "chip",
@@ -459,7 +548,7 @@
      "y": 1150,
      "s": 38,
      "style": "orange",
-     "at": "new month"
+     "at": 0
     },
     {
      "type": "chip",
@@ -468,7 +557,7 @@
      "y": 1150,
      "s": 38,
      "style": "orange",
-     "at": "Monday"
+     "at": 0
     },
     {
      "type": "chip",
@@ -477,7 +566,7 @@
      "y": 1150,
      "s": 38,
      "style": "orange",
-     "at": "birthday"
+     "at": 0
     },
     {
      "type": "chip",
@@ -489,7 +578,7 @@
      "at": "birthday"
     }
    ],
-   "gap_before": 0.5
+   "gap_before": 0.8
   },
   {
    "title": "the *why*",
@@ -503,8 +592,9 @@
      "s": 110,
      "w": "d",
      "col": "orange",
-     "at": "fresh start",
-     "pop": true
+     "at": 0,
+     "pop": false,
+     "instant": true
     },
     {
      "type": "couple",
@@ -512,7 +602,7 @@
      "x": 300,
      "y": 800,
      "h": 340,
-     "at": "slip-ups",
+     "at": 0,
      "moods": [
       {
        "at": 0,
@@ -528,7 +618,7 @@
      "x": 780,
      "y": 800,
      "h": 340,
-     "at": "new date",
+     "at": 0,
      "moods": [
       {
        "at": 0,
@@ -571,7 +661,7 @@
      "s": 80,
      "w": "d",
      "col": "orange",
-     "at": "Tuesday"
+     "at": 0
     },
     {
      "type": "text",
@@ -581,7 +671,7 @@
      "s": 52,
      "w": "xb",
      "col": "ink",
-     "at": "write down"
+     "at": 0
     },
     {
      "type": "text",
@@ -591,7 +681,7 @@
      "s": 40,
      "w": "b",
      "col": "grey",
-     "at": "each month"
+     "at": 0
     },
     {
      "type": "chip",
@@ -655,7 +745,7 @@
      "h": 190,
      "title": "Next month",
      "sub": "starts Tuesday",
-     "at": "keeps saying"
+     "at": 0
     },
     {
      "type": "text",
