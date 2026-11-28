@@ -687,5 +687,21 @@
   "youtube_id": "jDb1eZyqk8I",
   "tiktok_url": "https://www.tiktok.com/@getdivvyupp/video/7713066109154512158",
   "tiktok_id": "7713066109154512158"
+ },
+ {
+  "id": "2026-11-28-paycheck-jar",
+  "kind": "main",
+  "status": "approved",
+  "post_date": "2026-11-28",
+  "not_before": "09:00",
+  "file": "reels/2026-11-28-paycheck-jar.mp4",
+  "cover": "reels/2026-11-28-paycheck-jar_cover.jpg",
+  "format": "metaphor",
+  "spec": "pipeline/make_metaphor_reel.py",
+  "hook": "Money in: once. Money out: all month. (wordless paycheck jar, exploration)",
+  "caption": "Money in: once. Money out: all month.\n\nSame paycheck, two ways:\n1) Spend first, save what's left → empty 3 days before payday.\n2) Save first, then spend an even amount each day → it lasts to payday, and the savings stay put.\n\nIllustrative numbers: $2,400 left after bills, paid every 2 weeks, $500 saved first = about $136 a day.\n\nWhich jar is your checking account? Send this to the person you split the bills with.\n\nKnow what you can safely spend — before you spend it. DivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #budgeting #moneytips #savingmoney #paycheck",
+  "tiktok_caption": "Money in: once. Money out: all month.\n\nSame paycheck, two ways:\n1) Spend first, save what's left → empty 3 days before payday.\n2) Save first, then spend an even amount each day → it lasts to payday, and the savings stay put.\n\nIllustrative numbers: $2,400 left after bills, paid every 2 weeks, $500 saved first = about $136 a day.\n\nWhich jar is your checking account? Send this to the person you split the bills with.\n\nKnow what you can safely spend — before you spend it. DivvyUpp is free while we're in beta. Get started at divvyupp.com\n\n#personalfinance #budgeting #moneytips #savingmoney #paycheck",
+  "hypothesis": "research/2026-11-28-gump-eval.md",
+  "note": "Exploration slot: wordless 15 s visual metaphor (mechanism from @neuronvisuals via Gump). Srini approved in chat 2026-11-28 ~01:20 ET with this caption, to post at 9:00 ET (scheduled from the chat session). No end line on purpose: a twin with the site line is the follow-up test if this beats the median."
  }
 ]
