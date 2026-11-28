@@ -1,0 +1,20 @@
+{
+  "run": "research",
+  "date": "2026-11-28",
+  "attempts": [
+    {
+      "started_at": "2026-11-28T05:58:00-05:00",
+      "finished_at": "2026-11-28T06:25:00-05:00",
+      "status": "partial",
+      "trigger": "scheduled",
+      "summary": "Wordless/animated money-metaphor Reels (today's paycheck jar) have huge single winners in Gump but only 1 of 17 YouTube Shorts on 1,000+ median channels hit 3x+, so the format stays needs-proof (new backlog #23). One outlier teaches our exact mechanism as a two-person animated story (explore idea #25). Pitched S35-S37 for Srini's send/no. s10-v2 reached 235 in ~7 h; 630 non-follower views yesterday; followers 4.",
+      "blocker": "Partial: www.nber.org, news.st-andrews.ac.uk and Reddit are blocked by the network settings, so S35/S36 figures come from search summaries. Allow them under Settings > Capabilities > Allowed websites to check the papers.",
+      "outputs": [
+        {"label": "Research brief", "path": "research/2026-11-28.md"},
+        {"label": "Backlog", "path": "backlog.md"},
+        {"label": "Study bank (S35-S37 pitched)", "path": "research/study-bank.md"},
+        {"label": "Shorts pull", "path": "research/shorts-2026-11-28.csv"}
+      ]
+    }
+  ]
+}
