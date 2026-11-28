@@ -8,6 +8,13 @@ own data backs them.
 None yet (maturity levels in `PLAYBOOK.md` noise rules).
 
 ## Promising signals (2026-11-28; not rules, each from one or two Reels)
+- **V2 removed the mid-reel cliff; the loss is now all in the first 3 s.** 2026-11-28-s10-v2 (same study as
+  2026-11-26-s10-joint): ~22% still watching at 10 s (v3 ~18%), smooth curve after 4 s, but ~62% gone by 3 s.
+  First Reel past the ~150-view test batch (282 views at 7 h, 360 at ~10 h, 80% from the Reels tab). One Reel.
+  Next lever: the first frame and first line, not the middle.
+- **Wrong audience even when reach grows.** Same Reel: India 42.5% / US 26.5%; 13-24 = 63%, 35-44 = 3.6%; 0 shares.
+  Couples topics without US household cues travel to young non-US viewers (as 2026-11-26). Test US + household
+  cues in the first frame (mortgage, kids, $ amounts, payday).
 - **Empty or static screens lose people.** Both Study Reels with a "tip #N" bridge dropped at 4.5–9 s, exactly on
   that screen; the tier list, with something new every 1.5–3 s and an open S row, had no cliff
   (`research/2026-11-27-retention.md`; 2026-11-26-s10-joint, 2026-11-26-s11-fights, 2026-11-27-savings-tiers).
