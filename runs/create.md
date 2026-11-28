@@ -62,13 +62,16 @@ Today's Reels come from `backlog.md` and nowhere else. Take bets from the top: *
 **supported**; never one marked needs proof or blocked. One Reel per bet, up to 3. Where a bet's row cites a
 research brief, read that part of the brief for its numbers and sources. An idea that is in a brief but not yet in
 the backlog isn't ready: leave it. If fewer than 3 bets qualify, make fewer and say why. Each Reel has its own card in
-`hypotheses/<today>.md`; the variable is the format, the control is the median of our last 5 Reels. Lengths 30–50 s
-unless the card says otherwise.
+`hypotheses/<today>.md`; the variable is the format, the control is the median of our last 5 Reels. Lengths 23–30 s for Study
+Reels (V2), others 30–50 s unless the card says otherwise.
 **Until ~1,000 followers, build at least 2 of the day's Reels as Study Reels** (PLAYBOOK "Study Reel format"),
-each from a `research/study-bank.md` row with status **approved** and no `built` date yet, oldest approval first.
+each from a `research/study-bank.md` row with status **approved**: a row with no `built` date yet (oldest approval
+first), or a **follow-up** on a built row whose Reel was at least "promising" (PLAYBOOK "Topic families"), with a
+different treatment and `parent_id` set. Build to the **V2 Study Reel standard** (PLAYBOOK). One slot a day may be the
+**exploration slot** (PLAYBOOK).
 Only ideas Srini said he would send are ever built (PLAYBOOK "Srini judges send-worthiness"). Use the row's numbers,
-caveat and move exactly; never round a number up. The caveat goes in the written caption only, never in the video
-(PLAYBOOK, Srini 2026-11-26); Study Reels use the karaoke captions and Style C characters by default. Set the row's `built` date. Name the recipient
+caveat and move exactly; never round a number up. The full caveat goes in the caption; an essential qualifier goes
+on screen as a short evidence label (PLAYBOOK V2 item 5, 2026-11-28); Study Reels use the karaoke captions and Style C characters by default. Set the row's `built` date. Name the recipient
 on the card before scripting, put the send prompt on screen, and keep the product out of the video. If no approved
 row is left, say so in the note to Srini and build no Study Reel that day. The persona
 reviewers each answer "Who would you send this to, and why?"; a script where either can't name someone is rewritten.
@@ -79,16 +82,14 @@ reviewers each answer "Who would you send this to, and why?"; a script where eit
    SCROLL with the question it raises. Keep a hook only if both stop. What stops viewers so far: a moment they're in,
    or something they can check against themselves tonight (`research/hook-review-2026-11-20.md`). Score each against the script checklist in `PLAYBOOK.md`. Drop any
    that repeat the last 5 Reels.
-   Then build the opening on the **four-layer gate** (PLAYBOOK checklist item 11). Layer 1 is one person in one
-   painful moment that Research has backed (PLAYBOOK "Messaging rule"), worded from `research/pain-language.md` where
-   it has a fitting phrase: problem in their words, the stakes,
-   something new, a clear promise. Each persona reviewer also answers, for the full opening: who is this for, what's
-   it costing them, what did I learn that I didn't believe before, and what am I staying for? Any "don't know" is a
-   fail: rewrite that layer.
+   Then build the **V2 opening** (PLAYBOOK checklist item 11): one sentence and one visual that make sense muted, the
+   first reveal by 5 s, worded from `research/pain-language.md` where it has a fitting phrase. Each persona reviewer
+   also answers: what is this about at 2 s, what changed on screen by 5 s, and who would I send it to? Any "don't
+   know" is a fail: rewrite the opening.
 2. Write the **best 2 as full scripts**.
 3. Run a **cold review**: start a subagent that sees only the script and the `--check` stills (not the card or
    this playbook). Ask it, as a scrolling viewer in the target audience: what did you understand at 2 seconds,
-   where would you scroll away, would you share it, and why, and whether each of the four opening layers landed. Revise. Pick one. Record the 10 hooks, the scores, the
+   where would you scroll away, would you share it, and why, and what they saw change on screen by 5 s. Revise. Pick one. Record the 10 hooks, the scores, the
    review and the changes in `hypotheses/<today>.md`.
 4. No trial variants until 200 followers (Trial Reels need it).
 

@@ -56,7 +56,7 @@ who want to save more and know what they can safely spend. Single, coupled or ra
 Srini is a dad and husband on one income; don't assume two incomes or marriage in scripts.
 
 **Messaging rule (Srini, 2026-11-23).** Every Reel talks to **one person in one painful moment, in their own words**,
-then follows the four-layer opening (script checklist item 11). *Which* moments, words and formats we use is decided
+then follows the V2 opening (script checklist item 11). *Which* moments, words and formats we use is decided
 by research, not by a fixed list: a pain moment is used only when Research has shown it resonates (the proof bar in
 `runs/research.md`, or our own data), and the viewer's words come from `research/pain-language.md`. Candidate
 moments waiting for proof sit in `backlog.md` under "Pain moments needing proof".
@@ -164,14 +164,44 @@ Mogilko): until ~1,000 followers, every Reel is built to be forwarded (see "Send
 verdicts: surprising, data-backed, with a fun or concrete move = send; generic advice everyone knows, or a fact with
 no clear "so what do I do", = no. Hot takes without a study behind them didn't pass.
 
+### V2 Study Reel standard (Srini approved 2026-11-28; supersedes the older Study Reel rules below where they differ)
+Why: every Reel stalls in Instagram's first test batch (~120–150 views), and the retention curves
+(`research/2026-11-27-retention.md`) drop exactly where the screen goes empty or static (the "tip #N" bridge, the
+citation card, a flat chart). The tier list, the only Reel with something new on screen every 1.5–3 s, had no cliff.
+Reference build: `hooks/2026-11-28-s10-v2.json` (S10 rebuilt: result first, two lines split by 4.6 s, 20 s).
+1. **First frame makes sense with the sound off:** the question or the result is big on screen from frame 0
+   (`"instant": true`), never a blank or a title card.
+2. **First reveal by 5 s.** Open on the result or the decision, not on setup. No "research-backed money tip #N"
+   screen, no warm-up line.
+3. **Show the contrast as a state change, big:** a line splitting (`diverge`), a balance dropping, bars growing, a
+   cart filling. Both sides visible and labelled at the ends. Something meaningful changes every ~2–3 s; decoration
+   doesn't count.
+4. **Proof after the payoff:** who was studied goes in a short evidence label next to the result
+   ("randomized · 230 couples · 2 years", "UK lab study"). Researcher names and journal at the end, small.
+5. **Evidence label replaces the no-caveat rule.** When dropping a qualifier would change what the result means
+   (one bank, lab study, correlational, a population), it goes on screen as a ≤6-word label. Never a spoken caveat
+   paragraph. The full caveat stays in the caption.
+6. **Readable on a phone:** nothing under ~30 px; people take 20–35% of the frame when they matter; no empty
+   lower 40% unless captions sit there.
+7. **23–30 s, no recap.** The move, then the send line, then stop.
+8. Dialogue (`bubble`) is allowed for the "why" or as a cold open; illustrative lines are never presented as study
+   quotes.
+
+**Topic families (Srini, 2026-11-28):** a study that has already been built may be built again as a follow-up with a
+genuinely different treatment (different hook family or visual), logged with `parent_id` and `topic_family` in
+`experiment-log.csv`. Not a re-caption of the same video.
+**Exploration slot (Srini, 2026-11-28):** one Reel a day may test an original hook, visual or format that has not met
+the 3-accounts proof bar. It still needs approved facts (or a clearly labelled illustrative example) and Srini's yes
+on the video. Mark it `lane: explore`. If quality slips, drop the exploration slot first.
+
 ### Study Reel format (the default Send Reel; Srini, 2026-11-24)
 A real study, its real number, and a move you can copy, the way evidence-based fitness channels cite papers.
 20–40 s:
 1. **The hook is the move plus the result** ("Naming your savings goal raised savings 16%. 'Remember to save'
    did nothing."). Never a bare instruction without the payoff.
 2. **The study:** who was studied, how many, what they did. Researcher names and journal on screen.
-3. **The result:** the exact number from the bank, worded no stronger than the source. **No caveat line in the video
-   (Srini, 2026-11-26):** not in the voice-over, not on screen. The caveat stays in the written caption only.
+3. **The result:** the exact number from the bank, worded no stronger than the source. No spoken caveat; an essential
+   qualifier goes on screen as a short evidence label (V2 item 5, 2026-11-28; replaces the 2026-11-26 no-caveat rule).
 4. **The move:** the one concrete thing to do today, from the bank.
 5. **Send prompt** naming who to send it to, on screen at the payoff and as the last line. No product pitch.
 
@@ -179,7 +209,7 @@ A real study, its real number, and a move you can copy, the way evidence-based f
 - **Screen 1 = the hook: a question to the viewer about their own habit**, big on screen and the same words in the
   voice ("Are you only making the minimum payment on your card?"). It must relate to them. Any visual there must look
   like the real thing people would recognise (a real-looking card statement, app screen, bill), never a generic box.
-- **Screen 2 = "research-backed money tip #N" + the RESULT they want, never the fix or the mechanism** ("In a UK
+- **Superseded 2026-11-28 by V2 (no "tip #N" screen; the result comes right after the hook):** ~~Screen 2 = "research-backed money tip #N" + the RESULT they want, never the fix or the mechanism** ("In a UK
   experiment, one change nearly doubled what people paid off"). If a viewer could act on screen 2 alone, it gives
   the payoff away: rewrite it. This holds even when screen 2 is the cover frame (Srini, 2026-11-26: S10 v2 named the
   joint account there and had to be redone): the cover teases the result ("couples who made this one change stayed
@@ -255,6 +285,11 @@ If it loses:   what we do next
 - Fewer than 100 views at the 72h read: **inconclusive**. Log it, change no rule.
 - One variable per main Reel. If two things changed, the verdict is inconclusive.
 - A rule enters `learnings.md` after two supporting Reels, and leaves it after two contradicting ones.
+- Evidence maturity (2026-11-28): **exploratory** (<100 reached), **promising** (100+ reached, better than our median),
+  **repeatable** (several comparable Reels, ~1,000 reached pooled, same direction), **established** (only then a rule).
+  Compare Reels at the same post age (`age_h`). Average watch time can't say where people left; only a retention curve can.
+- Reach jumped for every Reel posted from 2026-11-26, whatever the topic: account-level distribution changed at the
+  same time as the switch to Study Reels, so don't credit the format alone.
 - Attribution to the site is by day, not by Reel (older Reels also drive visits). Say so when reading sign-ups.
 - Windsor limits: per-Reel follows and profile visits are not reported for Reels; daily new-follower counts need 100+
   followers. Record `followers_count` every day instead and read the change.
@@ -274,14 +309,9 @@ Start from this list. Research may propose changes; Create applies a change only
    the top 255 px (raised after the first live post: the Reels/Friends header reaches ~230 px), the bottom 260 px (from y=1660), the right rail (x>=905 from y=1150 down), or 55 px at each side (cropped
    on tall phones). Backgrounds and people may run
    there. Check with `make_split_reel.py --check --zones` (red = covered) before sending a Reel for review.
-11. **Four-layer opening gate (Srini, 2026-11-23; from @hilzuckerman, see `research/2026-11-23-hook-layers.md`).**
-   Within the first ~6 seconds the script must pass all four, or it doesn't render:
-   1. **One person, their problem in their words** ("Went in for milk, came out with $140?").
-   2. **The stakes:** what it's costing them ("That's how the month runs out by the 20th").
-   3. **Something new:** a reframe that makes them question what they believe ("It's not willpower: your balance is lying").
-   4. **A clear promise:** exactly what they'll get by staying ("Three rules fix it").
-   Mark each layer's line in the script. Until backlog #28 has a verdict, one Reel a day may use our usual one-line
-   hook as the control; all others must pass the gate.
+11. **V2 opening (Srini, 2026-11-28; replaces the four-layer gate of 2026-11-23, which overloaded the first seconds).**
+   One sentence and one visual that make sense muted; the first reveal (result, answer or contrast) by 5 s; see
+   "V2 Study Reel standard". The cold review must say what the viewer understood at 2 s and what they saw change by 5 s.
 9. **Hook and payoff (Srini, 2026-11-20).** Write down four things before the script: the hook (0–2 s, one specific
    question, same words on screen and in the voice), what the viewer stays for (that question in one line), a
    rehook at about 40% using a retention device (result first; not A or B but C; common belief then contradict

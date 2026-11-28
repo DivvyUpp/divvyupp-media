@@ -5,7 +5,17 @@ in `PLAYBOOK.md`). Each rule cites Reel ids from `experiment-log.csv`. Outside i
 own data backs them.
 
 ## Confirmed rules
-None yet. No Reel has reached 100 views, so every result so far is inconclusive.
+None yet (maturity levels in `PLAYBOOK.md` noise rules).
+
+## Promising signals (2026-11-28; not rules, each from one or two Reels)
+- **Empty or static screens lose people.** Both Study Reels with a "tip #N" bridge dropped at 4.5–9 s, exactly on
+  that screen; the tier list, with something new every 1.5–3 s and an open S row, had no cliff
+  (`research/2026-11-27-retention.md`; 2026-11-26-s10-joint, 2026-11-26-s11-fights, 2026-11-27-savings-tiers).
+  Built into the V2 standard; the V2 Reels test it.
+- **Couples and savings-rate topics reached 100+** (S10 146 views, 1 share, 1 save; tier list 132), but every Reel
+  posted from 2026-11-26 rose at once, so topic and account-level distribution are confounded.
+- **Zero follows from ~900 views** (followers 3 since 2026-11-20): nothing yet gives a stranger a reason to come back.
+- **Audience skews 18–34 (76–82%)**; our buyer is 35–44 (2.6–9.5%). US nouns (named banks) gave 83% US.
 
 ## What the data says so far (2026-11-20)
 - **Reach is the bottleneck.** The two Reels with stats got 16 and 21 views (2026-11-14-a, 2026-11-15-a).

@@ -11,7 +11,9 @@ connectors) can read them from the repo. Data only: no postmortem, no verdicts, 
 3. Write `metrics/<today>.json`:
    `{"date": "<today>", "pulled_at": "<ISO time ET>", "followers_count": N, "views_non_followers_yesterday": N,
    "reels": [{"media_id": "...", "permalink": "...", "posted": "<date>", "views": N, "reach": N, "skip_rate": N,
-   "avg_watch_s": N, "shares": N, "saves": N, "likes": N, "interactions": N, "sends_per_1k": N}]}`.
+   "avg_watch_s": N, "shares": N, "saves": N, "likes": N, "interactions": N, "sends_per_1k": N, "age_h": N}]}`.
+   `age_h` (2026-11-28) = hours from the post's publish time to `pulled_at`, so Reels are compared at the same age
+   (`null` if the publish time is unknown).
    (`tiktok`, `youtube` and `combined` are added by step 3b.)
    `sends_per_1k` = shares ÷ reach × 1000, rounded to 1 decimal (`null` when reach is 0 or missing). It is the
    primary metric (PLAYBOOK "Primary metric").

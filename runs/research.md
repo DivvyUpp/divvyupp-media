@@ -61,6 +61,13 @@ our own data. Until then it is a candidate bet in `backlog.md`.
    a proxy for Reels (audiences may differ), so Shorts-only evidence is graded B until one of our Reels confirms it.
    Prefer formats where the payoff is held until the end and differs by viewer (e.g. a number per age or income
    bracket), since they hold watch time and get sent to the friend it fits.
+   **Exploration lane (Srini, 2026-11-28):** the proof bar decides what ranks as a *bet*; it does not stop one
+   exploration Reel a day (PLAYBOOK "Exploration slot"). Each run may list up to 2 exploration ideas, marked
+   "explore", each with the one thing it tests and why it might work. Never rank them above proven bets.
+   **Creative teardown (2026-11-28), for 3 outliers and 2 ordinary posts from the same accounts where viewable:** the
+   first frame (what is on screen), the first spoken line, seconds until the first reveal, what changes on screen,
+   the narrative device (comparison, ranking, experiment, prediction, dialogue), likely recipient, and length. Write
+   "not viewable" rather than guessing from the title. Copy the mechanism, never the creator's script or look.
 5. **Write `research/<YYYY-MM-DD>.md`**: the question, 3–6 findings (each with link, grade, one line on how it
    applies to DivvyUpp), and what you could not access.
 6. **Add 1–3 bets to `backlog.md`** in hypothesis-card shape (see `PLAYBOOK.md`), each citing today's brief. Score

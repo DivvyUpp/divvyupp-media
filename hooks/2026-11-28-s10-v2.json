@@ -1,0 +1,333 @@
+{
+ "id": "2026-11-28-s10-v2",
+ "format": "diagram",
+ "voice": "elevenlabs:cgSgspJ2msm6clMCkdW9:eleven_v3",
+ "speed": 1.15,
+ "max_gap": 0.3,
+ "cap_style": "karaoke",
+ "cover_at": [
+  0,
+  "just as happy"
+ ],
+ "note": "V2 standard example (2026-11-28): result first (no hook question, no 'tip #N' bridge), the contrast as two thick lines that split by ~4 s, people at readable size, dialogue for the why, the move, send line, citation last as a label. Same study as 2026-11-26-s10-joint (S10).",
+ "scenes": [
+  {
+   "title": "*joint* or separate?",
+   "text": "[curious] Couples given a joint bank account stayed just as happy. Separate accounts? Less happy, two years later.",
+   "elements": [
+    {
+     "type": "text",
+     "text": "Joint bank account",
+     "x": 540,
+     "y": 410,
+     "s": 76,
+     "w": "xb",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "text",
+     "text": "or separate?",
+     "x": 540,
+     "y": 500,
+     "s": 76,
+     "w": "xb",
+     "col": "orange",
+     "at": 0,
+     "instant": true
+    },
+    {
+     "type": "diverge",
+     "x0": 120,
+     "x1": 700,
+     "y": 700,
+     "base": 930,
+     "at": 0,
+     "dur": 1.1,
+     "labels": [
+      "start",
+      "1 yr",
+      "2 yrs"
+     ],
+     "label": "Relationship quality",
+     "label_y": 615,
+     "label_s": 36,
+     "series": [
+      {
+       "name": "joint",
+       "col": "orange",
+       "dy": 0
+      },
+      {
+       "name": "separate",
+       "col": "ink",
+       "dy": 175,
+       "split_at": "Separate accounts"
+      }
+     ]
+    },
+    {
+     "type": "chip",
+     "text": "randomized \u00b7 230 couples \u00b7 2 years",
+     "style": "soft",
+     "x": 540,
+     "y": 1035,
+     "s": 34,
+     "at": "Separate accounts"
+    },
+    {
+     "type": "couple",
+     "x": 300,
+     "y": 1160,
+     "h": 210,
+     "gap": 125,
+     "at": 0,
+     "instant": true,
+     "moods": [
+      {
+       "at": 0,
+       "him": "happy",
+       "her": "happy"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "text": "joint account",
+     "x": 300,
+     "y": 1310,
+     "s": 36,
+     "w": "xb",
+     "col": "orange",
+     "at": 0,
+     "instant": true,
+     "moods": [
+      {
+       "at": 0,
+       "him": "neutral",
+       "her": "neutral"
+      },
+      {
+       "at": "Less happy",
+       "him": "frustrated",
+       "her": "sad"
+      }
+     ]
+    },
+    {
+     "type": "couple",
+     "x": 770,
+     "y": 1160,
+     "h": 210,
+     "gap": 125,
+     "at": 0,
+     "instant": true,
+     "moods": [
+      {
+       "at": 0,
+       "him": "neutral",
+       "her": "neutral"
+      },
+      {
+       "at": "Less happy",
+       "him": "frustrated",
+       "her": "sad"
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "text": "separate",
+     "x": 770,
+     "y": 1310,
+     "s": 36,
+     "w": "xb",
+     "col": "grey",
+     "at": 0,
+     "instant": true
+    }
+   ]
+  },
+  {
+   "title": "*why*",
+   "text": "They also fought less about money. The researchers think one shared account makes it feel like our money.",
+   "elements": [
+    {
+     "type": "chip",
+     "text": "fewer money fights",
+     "style": "orange",
+     "x": 540,
+     "y": 430,
+     "s": 44,
+     "at": 0
+    },
+    {
+     "type": "bubble",
+     "x": 770,
+     "y": 720,
+     "w": 440,
+     "s": 40,
+     "text": "Wait, who paid\nfor groceries?",
+     "tail": "r",
+     "style": "white",
+     "at": "fought less"
+    },
+    {
+     "type": "bubble",
+     "x": 310,
+     "y": 720,
+     "w": 440,
+     "s": 40,
+     "text": "It all comes out\nof our account.",
+     "tail": "l",
+     "style": "orange",
+     "at": "our money"
+    },
+    {
+     "type": "couple",
+     "x": 300,
+     "y": 1130,
+     "h": 300,
+     "gap": 150,
+     "at": 0,
+     "moods": [
+      {
+       "at": 0,
+       "him": "happy",
+       "her": "happy"
+      }
+     ]
+    },
+    {
+     "type": "couple",
+     "x": 770,
+     "y": 1130,
+     "h": 300,
+     "gap": 150,
+     "at": 0,
+     "moods": [
+      {
+       "at": 0,
+       "him": "frustrated",
+       "her": "confused"
+      }
+     ],
+     "q": true
+    },
+    {
+     "type": "text",
+     "text": "joint",
+     "x": 300,
+     "y": 1335,
+     "s": 36,
+     "w": "xb",
+     "col": "orange",
+     "at": 0
+    },
+    {
+     "type": "text",
+     "text": "separate",
+     "x": 770,
+     "y": 1335,
+     "s": 36,
+     "w": "xb",
+     "col": "grey",
+     "at": 0
+    }
+   ]
+  },
+  {
+   "title": "do *this*",
+   "text": "You don't have to merge everything. Try one shared account, just for shared bills.",
+   "elements": [
+    {
+     "type": "accounts",
+     "x": 210,
+     "y": 400,
+     "w": 660,
+     "h": 840,
+     "title": "Accounts",
+     "at": 0,
+     "rows": [
+      {
+       "label": "YOURS",
+       "from": "Your own spending",
+       "icon": "$",
+       "s": 40
+      },
+      {
+       "label": "THEIRS",
+       "from": "Their own spending",
+       "icon": "$",
+       "s": 40
+      },
+      {
+       "label": "SHARED",
+       "from": "New account",
+       "to": "Rent, groceries, bills",
+       "swap": "one shared account",
+       "icon": "+",
+       "s": 40
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "send *it*",
+   "text": "[warm] Send this to your partner.",
+   "elements": [
+    {
+     "type": "couple",
+     "x": 540,
+     "y": 760,
+     "h": 300,
+     "gap": 460,
+     "at": 0,
+     "instant": true,
+     "labels": [
+      "you",
+      "your partner"
+     ],
+     "moods": [
+      {
+       "at": 0,
+       "him": "happy",
+       "her": "happy"
+      }
+     ]
+    },
+    {
+     "type": "ticket",
+     "x": 540,
+     "y": 1080,
+     "w": 760,
+     "h": 190,
+     "title": "Shared account",
+     "sub": "for shared bills",
+     "at": 0
+    },
+    {
+     "type": "text",
+     "text": "Olson, Rick, Small & Finkel",
+     "x": 540,
+     "y": 1290,
+     "s": 30,
+     "w": "b",
+     "col": "grey",
+     "at": 0
+    },
+    {
+     "type": "text",
+     "text": "Journal of Consumer Research, 2023",
+     "x": 540,
+     "y": 1335,
+     "s": 30,
+     "w": "m",
+     "col": "grey",
+     "at": 0
+    }
+   ]
+  }
+ ]
+}

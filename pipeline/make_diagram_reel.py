@@ -48,6 +48,9 @@ Element types (coordinates are 1080x1920 frame pixels):
           words; happy/neutral moods only, sprites *_m1/_m2) [talk_from] [talk_until]
   tiers   x0 x1 y0 rh [gap] rows:[{tier col}] [bin] [slots] [bin_slots] [note]   tier-list board (2026-11-27): coloured
           tier labels, empty rows, an optional red "bin" row below (e.g. "NOT SAVINGS"); rows pop in one by one
+  diverge x0 x1 y base series:[{name col dy split_at}] [labels] [label] [gap:{text at}] [width] [name_s]   two thick lines
+          that start level and split on a phrase, names at the line ends (V2 Study Reels, 2026-11-28)
+  bubble  x y text [w] [s] [tail: l|r|none] [style: white|orange|ink]   speech bubble for dialogue beats (2026-11-28)
   tierhl  row slot [span] at [until]                          spotlight one slot with a breathing orange glow
   tieritem row slot name chip rate [sub] [value value_fmt] focus:[x y w h] at land   one ranked item: a big card pops in
           at the focus box on "at" (value counts up), then flies into its row/slot on "land" and stays as a chip
@@ -252,6 +255,65 @@ def e_chart(cv, e, t, T):
         hx, hy = p[-1]; ph = ((t - T.t_in(e)) % 1.3) / 1.3
         cv.circle(hx, hy, 18 + 30 * ph, fill=ORANGE, k=k * 0.28 * (1 - ph)); cv.circle(hx, hy, 15, fill=ORANGE, k=k)
         cv.circle(hx, hy, 6, fill=WHITE, k=k)
+
+def diverge_points(x0, x1, y, dy, frac, split):
+    """Points of one diverge series: level from x0, then bending down (dy > 0) or up toward x1 by dy * split."""
+    n = 40; pts = []
+    for i in range(int(round(n * clamp(frac))) + 1):
+        f = i / n; bend = 0.0 if f < 0.18 else ((f - 0.18) / 0.82) ** 1.4
+        pts.append((x0 + (x1 - x0) * f, y + dy * split * bend))
+    return pts
+
+def e_diverge(cv, e, t, T):
+    """Two (or more) series that start level and visibly split on a phrase: the contrast a study found, shown big.
+    Each series: name, col (orange|ink|grey), dy (end offset in px, + = down), split_at (phrase/seconds; default
+    = the element's at). Names sit at the line ends. Optional gap: {text, at} draws a bracket between the first two
+    ends with a label. Built 2026-11-28 for V2 Study Reels (the old chart's faint dashed 'others' line hid the result)."""
+    k = T.fade(e, t)
+    if k <= 0: return
+    x0, x1, y, base = e["x0"], e["x1"], e["y"], e["base"]
+    cv.line([(x0, base), (x1, base)], MUTED, 3, k, caps=False)
+    labels = e.get("labels", []); n = len(labels)
+    for i, l in enumerate(labels):
+        x = x0 + (x1 - x0) * i / max(n - 1, 1); cv.text(x, base + 40, l, F("b", 32), GREY, k)
+    if e.get("label"): cv.text(x0, e.get("label_y", y - 150), e["label"], F("xb", e.get("label_s", 40)), INK, k, anchor="lm")
+    frac = ease(T.u(e, t, e.get("dur", 1.0))); ends = [None] * len(e["series"])
+    # Drawn last-to-first so the first series sits on top while the lines still overlap; a series that splits later
+    # shows its name only once it has visibly moved away (so the two names never print on top of each other).
+    for j in reversed(range(len(e["series"]))):
+        s = e["series"][j]
+        ts = T.anchor(s["split_at"]) if s.get("split_at") is not None else T.t_in(e)
+        split = ease(clamp((t - ts) / s.get("split_dur", 1.2))) if t >= ts else 0.0
+        pts = diverge_points(x0, x1, y, s.get("dy", 0), frac, split); col = COLS.get(s.get("col", "orange"), ORANGE)
+        if len(pts) > 1:
+            cv.line(pts, col, e.get("width", 14), k)
+            hx, hy = pts[-1]; cv.circle(hx, hy, 17, fill=col, k=k); cv.circle(hx, hy, 7, fill=WHITE, k=k)
+            ends[j] = (hx, hy)
+            nk = clamp((t - T.t_in(e) - 0.6) / 0.3) if s.get("split_at") is None else clamp((split - 0.25) / 0.3)
+            if frac >= 0.98 and nk > 0:
+                cv.text(hx + 34, hy, s["name"], F("xb", e.get("name_s", 40)), col, k * nk, anchor="lm")
+    ends = [p for p in ends if p]
+    g = e.get("gap")
+    if g and len(ends) >= 2 and t >= T.anchor(g["at"]):
+        u = ease((t - T.anchor(g["at"])) / 0.45); xg = x1 - 60; ya, yb = ends[0][1], ends[1][1]
+        cv.line([(xg, ya + 26), (xg, ya + 26 + (yb - ya - 52) * u)], GREY, 5, k)
+        cv.text(xg - 24, (ya + yb) / 2, g["text"], F("xb", g.get("s", 36)), GREY, k * u, anchor="rm")
+
+def e_bubble(cv, e, t, T):
+    """A speech bubble that pops in: x, y = centre, w width, text (wraps on '\\n'), s size, tail l|r|none,
+    style white|orange|ink. For dialogue beats above the couple figures."""
+    u = T.u(e, t, 0.4); k = T.fade(e, t) * clamp(u * 3)
+    if k <= 0: return
+    sc = 0.7 + 0.3 * back(u); lines = e["text"].split("\n"); s = e.get("s", 44) * sc; f = F("xb", s)
+    w = e.get("w", 520) * sc; lh = s * 1.25; h = lh * len(lines) + 56 * sc; x, y = e["x"], e["y"]
+    fill, col = {"white": (WHITE, INK), "orange": (ORANGE, WHITE), "ink": (INK, WHITE)}[e.get("style", "white")]
+    cv.shadow([x - w / 2, y - h / 2, x + w / 2, y + h / 2], 28, k)
+    cv.rect([x - w / 2, y - h / 2, x + w / 2, y + h / 2], 28 * sc, fill=fill, k=k)
+    tail = e.get("tail", "l")
+    if tail in ("l", "r"):
+        bx = x - w * 0.22 if tail == "l" else x + w * 0.22; d = -1 if tail == "l" else 1
+        cv.poly([(bx - 22, y + h / 2 - 2), (bx + 22, y + h / 2 - 2), (bx + d * 30, y + h / 2 + 40 * sc)], fill, k)
+    for i, l in enumerate(lines): cv.text(x, y - (len(lines) - 1) * lh / 2 + i * lh, l, f, col, k)
 
 def e_card(cv, e, t, T):
     u = T.u(e, t, 0.5); k = T.fade(e, t) * clamp(u * 2.5)
@@ -756,7 +818,7 @@ def e_tierhl(cv, e, t, T):
         p = 14 - i * 5; cv.rect([b[0] - p, b[1] - p, b[2] + p, b[3] + p], 18 + p, outline=ORANGE, w=5, k=k * a * pulse)
     cv.rect(b, 16, outline=ORANGE, w=4, k=k)
 
-DRAW = {"tierhl": e_tierhl, "tiers": e_tiers, "tieritem": e_tieritem, "research": e_research, "crowd": e_crowd, "couple": e_couple, "text": e_text, "chip": e_chip, "chart": e_chart, "card": e_card, "panel": e_panel, "bars": e_bars, "lock": e_lock,
+DRAW = {"diverge": e_diverge, "bubble": e_bubble, "tierhl": e_tierhl, "tiers": e_tiers, "tieritem": e_tieritem, "research": e_research, "crowd": e_crowd, "couple": e_couple, "text": e_text, "chip": e_chip, "chart": e_chart, "card": e_card, "panel": e_panel, "bars": e_bars, "lock": e_lock,
         "target": e_target, "qring": e_qring, "accounts": e_accounts, "avatar": e_avatar, "curve": e_curve,
         "ticket": e_ticket, "tag": e_tag, "clock": e_clock, "line": e_line, "dot": e_dot, "statement": e_statement}
 
