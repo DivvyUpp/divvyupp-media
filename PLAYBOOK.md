@@ -181,7 +181,9 @@ Reference build: `hooks/2026-11-28-s10-v2.json` (S10 rebuilt: result first, two 
    cart filling. Both sides visible and labelled at the ends. Something meaningful changes every ~2–3 s; decoration
    doesn't count.
 4. **Proof after the payoff:** who was studied goes in a short evidence label next to the result
-   ("randomized · 230 couples · 2 years", "UK lab study"). Researcher names and journal at the end, small.
+   ("randomized · 230 couples · 2 years", "UK lab study"). Researcher names and journal at the end, small, with a readable
+   **"Full study in the caption"** chip under them (Srini, 2026-11-28; the caption names the study and Instagram's
+   first comment carries the link).
 5. **Evidence label replaces the no-caveat rule.** When dropping a qualifier would change what the result means
    (one bank, lab study, correlational, a population), it goes on screen as a ≤6-word label. Never a spoken caveat
    paragraph. The full caveat stays in the caption.
