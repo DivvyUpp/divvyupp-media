@@ -22,10 +22,10 @@ from make_diagram_reel import F, Canvas, clamp, ease, back, INK, ORANGE, GREY, W
 from music_upbeat import upbeat_bed
 
 ID = "2026-11-28-paycheck-jar"; W, H, FPS = D.W, D.H, 30; DUR = 15.0
-GREEN = (46, 139, 87); WATER = (232, 96, 48)
+GREEN = INK; WATER = (232, 96, 48)                 # v3: brand palette only (orange = spending, ink = kept)
 PAY, SAVE, DAYS = 2400, 500, 14                     # one paycheck after fixed bills, savings, days to the next payday
 PER_DAY = (PAY - SAVE) / DAYS                        # ~ $136
-JX, JY0, JY1, JW = 540, 660, 1150, 500               # main jar: centre x, top, bottom, width
+JX, JY0, JY1, JW = 540, 690, 1150, 500               # main jar: centre x, top, bottom, width
 SPOUT_Y = JY1 + 6
 SPENDS = [("takeout", 64), ("groceries", 210), ("online order", 89), ("kids' soccer", 120), ("gas", 70),
           ("dinner out", 140), ("home stuff", 95), ("birthday gift", 60), ("streaming", 23)]
@@ -34,7 +34,7 @@ SPENDS = [("takeout", 64), ("groceries", 210), ("online order", 89), ("kids' soc
 def headline(cv, t, line1, hl1, line2, hl2, col1, col2):
     """Two lines; the key words (hl1, hl2) sit on a colour pill that pops in, so the eye lands on them.
     A line whose colour is None is plain text (no pill)."""
-    for i, (pre, hl, col, ts, y) in enumerate(((line1, hl1, col1, 0.0, 330), (line2, hl2, col2, 1.0, 430))):
+    for i, (pre, hl, col, ts, y) in enumerate(((line1, hl1, col1, 0.0, 300), (line2, hl2, col2, 1.0, 435))):
         k = clamp((t - ts) / 0.2) if i else 1.0
         if k <= 0: continue
         f = F("xb", 74); gap = 34
@@ -51,8 +51,8 @@ def day_pill(cv, x, day, k=1.0):
     left = DAYS - day
     txt = f"Day {day} of {DAYS}  ·  payday in {left} day{'s' if left != 1 else ''}" if left else "Day 14  ·  payday tomorrow"
     f = F("b", 36); w = cv.tl(txt, f) + 60
-    cv.rect([x - w / 2, 525 - 32, x + w / 2, 525 + 32], 32, fill=WHITE, outline=(226, 219, 211), w=3, k=k)
-    cv.text(x, 525, txt, f, GREY, k)
+    cv.rect([x - w / 2, 565 - 32, x + w / 2, 565 + 32], 32, fill=WHITE, outline=(226, 219, 211), w=3, k=k)
+    cv.text(x, 565, txt, f, GREY, k)
 
 
 def jar(cv, x, y0, y1, w, level, col, label, k=1.0, label_col=INK, spout=False):
@@ -73,15 +73,40 @@ def amount(cv, x, y, v, k=1.0):
 
 
 def stream(cv, x, t, rate):
-    """Water drops falling from the spout; rate 0..1 sets how many and how fast."""
+    """Water leaving the spout. Low rate: scattered drops. High rate: a solid column that widens into a torrent."""
     if rate <= 0: return
-    n = int(6 + 26 * rate)
+    L = 240; top = SPOUT_Y + 8
+    if rate > 0.35:                                                             # the solid column (gush)
+        g = (rate - 0.35) / 0.65; w0 = 10 + 46 * g; w1 = 16 + 170 * g ** 1.3
+        pts = [(x - w0 / 2, top)]
+        for j in range(1, 13):                                                  # wobbling edges
+            yy = top + L * j / 12; ww = w0 + (w1 - w0) * (j / 12) ** 1.5; wob = 5 * g * math.sin(t * 18 + j * 1.7)
+            pts.append((x - ww / 2 + wob, yy))
+        right = [(x + w0 / 2, top)]
+        for j in range(1, 13):
+            yy = top + L * j / 12; ww = w0 + (w1 - w0) * (j / 12) ** 1.5; wob = 5 * g * math.sin(t * 18 + j * 1.7 + 1)
+            right.append((x + ww / 2 + wob, yy))
+        cv.poly(pts + right[::-1], WATER, 0.55 + 0.4 * g)
+    n = int(6 + 34 * rate)                                                      # drops / spray around it
     for j in range(n):
-        ph = (t * (1.2 + 2.2 * rate) + j / n) % 1.0
-        dx = math.sin(j * 12.9898) * 14 * ph; y = SPOUT_Y + 12 + 230 * ph ** 1.6
-        r = (7 + 6 * rate) * (1 - 0.35 * ph); cv.circle(x + dx, y, r, fill=WATER, k=0.9 * (1 - ph ** 3))
-    sp = 30 + 120 * rate                                                        # puddle at the bottom
-    cv.rect([x - sp, SPOUT_Y + 236, x + sp, SPOUT_Y + 252], 8, fill=WATER, k=0.35 + 0.4 * rate)
+        ph = (t * (1.2 + 2.6 * rate) + j / n) % 1.0
+        spread = 14 + 70 * rate ** 2
+        dx = math.sin(j * 12.9898) * spread * ph; y = top + 4 + L * ph ** 1.6
+        rr = (7 + 9 * rate) * (1 - 0.35 * ph); cv.circle(x + dx, y, rr, fill=WATER, k=0.9 * (1 - ph ** 3))
+    sp = 30 + 190 * rate ** 1.5                                                 # puddle grows with the flow
+    cv.rect([x - sp, top + L - 4, x + sp, top + L + 14], 9, fill=WATER, k=0.35 + 0.45 * rate)
+
+
+def drip(cv, x, a):
+    """One drop per day (a = 0..1 through the day): it forms, falls, and splashes once."""
+    top = SPOUT_Y + 8; L = 240
+    if a < 0.25:                                                                # drop forming at the spout
+        cv.circle(x, top + 10, 6 + 10 * (a / 0.25), fill=WATER, k=0.95)
+    elif a < 0.6:                                                               # falling
+        f = (a - 0.25) / 0.35; cv.circle(x, top + 10 + (L - 10) * f * f, 16, fill=WATER, k=0.95)
+    elif a < 0.85:                                                              # small splash
+        f = (a - 0.6) / 0.25; cv.rect([x - 22 - 40 * f, top + L - 3, x + 22 + 40 * f, top + L + 9], 6, fill=WATER, k=0.7 * (1 - f))
+    cv.rect([x - 26, top + L - 2, x + 26, top + L + 8], 5, fill=WATER, k=0.3)
 
 
 def chip(cv, x, y, txt, k, col=ORANGE):
@@ -113,7 +138,7 @@ def part_a(cv, t):
                 sd = -1 if i % 2 else 1
                 chip(cv, JX + sd * 255, JY1 + 70 + 70 * a, f"{name}  -${amt}", clamp(a / 0.15) * (1 - clamp((a - 0.75) / 0.25)))
     if t >= 6.4:
-        e = ease(clamp((t - 6.4) / 0.35)); cv.text(JX, JY1 + 330, "Empty, 3 days before payday.", F("xb", 54), RED, e)
+        e = ease(clamp((t - 6.4) / 0.35)); cv.text(JX, JY1 + 330, "Empty, 3 days before payday.", F("xb", 54), ORANGE, e)
 
 
 def part_b(cv, t):
@@ -145,8 +170,8 @@ def part_b(cv, t):
         dk = ease(clamp((tb - 2.3) / 0.35)); txt = f"${PER_DAY:,.0f} a day is safe"; f = F("xb", 42); w = cv.tl(txt, f) + 60
         cv.rect([mx - w / 2, JY0 + 30, mx + w / 2, JY0 + 118], 44, fill=INK, k=dk); cv.text(mx, JY0 + 74, txt, f, WHITE, dk)
     if 2.6 <= tb < 6.8:                                                         # a calm, even trickle: one step a day
-        stream(cv, mx, t, 0.18)
         a = (u * DAYS) % 1.0
+        drip(cv, mx, a)
         chip(cv, mx - 255, JY1 + 80 + 40 * a, f"-${PER_DAY:,.0f}", clamp(a / 0.12) * (1 - clamp((a - 0.65) / 0.2)))
     if tb >= 6.8:
         e = ease(clamp((tb - 6.8) / 0.35)); cv.text(540, JY1 + 330, "Lasts to payday. Savings kept.", F("xb", 54), GREEN, e)
