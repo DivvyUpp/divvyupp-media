@@ -26,6 +26,14 @@ our own data. Until then it is a candidate bet in `backlog.md`.
      can copy today. Prefer surprising results with a fun or concrete move; skip advice everyone already knows.
      Ask Srini in the run's note to mark each "send" or "no"; when he answers in this chat, set the status to
      **approved** or **declined** and record his reason. Never mark anything approved yourself.
+   - **Gump (Srini signed up 2026-11-28; MCP connector "Gump", if the routine has it):** its library of 50K+ view
+     TikTok/Instagram videos. Free tools only unless Srini OKs spending: `search_library` / `top_hooks` /
+     `analyze_niche` on the day's question, then `get_video_analysis` on up to 3 relevant outliers to fill the
+     creative-teardown fields (hook said/on screen/visual, beats with timestamps, why it worked). Mark Gump's per-beat
+     "intrigue" as a Gump estimate, never as retention data; it gives no creator baseline, so check the 3x-own-median
+     bar separately. Analyses may come back in French: translate. If the Gump tools are missing, say so in the brief
+     and carry on. Never use `adapt_script`, `analyze_account` or anything that spends credits or Super Searches.
+     See `research/2026-11-28-gump-eval.md`.
    - **the audience's own words (Srini, 2026-11-23):** how people who earn well but have nothing to show for it
      describe that pain, in comments under finance Reels/Shorts and in public forums (e.g. Reddit personal-finance
      threads). Add phrases to `research/pain-language.md` (phrase, where, link, date, how many times seen).
